@@ -1,5 +1,7 @@
 package ai.chalk.client;
 
+import ai.chalk.ai.chalk.exceptions.ChalkException;
+
 import java.net.http.HttpClient;
 
 public class BuilderImpl implements Builder {
@@ -49,7 +51,7 @@ public class BuilderImpl implements Builder {
         return this;
     }
 
-    public ChalkClient build() {
+    public ChalkClient build() throws ChalkException {
         return new ChalkClientImpl(this);
     }
 

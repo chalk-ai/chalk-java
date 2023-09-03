@@ -1,6 +1,8 @@
 package ai.chalk.client;
 
 
+import ai.chalk.ai.chalk.exceptions.ChalkException;
+import ai.chalk.ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.config.JWT;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.ProjectToken;
@@ -20,16 +22,20 @@ public class ChalkClientImpl implements ChalkClient {
     private JWT jwt;
     private HttpClient httpClient;
 
-    public ChalkClientImpl() {
+    public ChalkClientImpl() throws ChalkException {
         this(null);
     }
 
-    public ChalkClientImpl(BuilderImpl config) {
+    public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         this.resolveConfig(config);
+        // this.refreshJwt();
+        // if error:
+        //   throw ClientException
     }
 
 
-    private void resolveConfig(BuilderImpl builder) {
+
+    private void resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         Exception chalkYamlConfigErr = null;
         try {
@@ -67,6 +73,7 @@ public class ChalkClientImpl implements ChalkClient {
 
         if (chalkYamlConfigErr != null && this.clientId.getValue().isEmpty() && this.clientSecret.getValue().isEmpty()) {
             this.displayConfigError();
+            throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
         }
     }
 

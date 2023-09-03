@@ -1,9 +1,11 @@
 package ai.chalk.client;
 
+import ai.chalk.ai.chalk.exceptions.ChalkException;
+
 import java.net.http.HttpClient;
 
 public interface Builder {
-    ChalkClient build();
+    ChalkClient build() throws ChalkException;
     public Builder setClientId(String clientId);
     public Builder setClientSecret(String clientSecret);
     public Builder setApiServer(String apiServer);
