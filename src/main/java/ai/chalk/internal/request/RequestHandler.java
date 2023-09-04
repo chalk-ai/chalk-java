@@ -2,11 +2,14 @@ package ai.chalk.internal.request;
 
 import ai.chalk.ai.chalk.exceptions.ChalkException;
 import ai.chalk.ai.chalk.exceptions.ClientException;
+import ai.chalk.ai.chalk.exceptions.HttpException;
 import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.models.SourcedConfig;
+import ai.chalk.internal.request.models.ChalkHttpException;
 import ai.chalk.internal.request.models.SendRequestParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -81,7 +84,7 @@ public class RequestHandler {
         return bodyBytes;
     }
 
-    public void sendRequest(SendRequestParams args) throws ChalkException {
+    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = this.getBodyBytes(args.getBody());
@@ -91,7 +94,7 @@ public class RequestHandler {
 
         URI uri;
         try {
-            uri = new URI(args.getUrl());
+            uri = new URI(args.getURL());
         } catch (Exception e) {
             throw new ClientException("Error parsing request URL: ", e);
         }
@@ -104,13 +107,13 @@ public class RequestHandler {
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
                         .toArray(String[]::new));
 
-        if (!args.isDontRefresh()) {
-            try {
-                refreshJwt();
-            } catch (ChalkException e) {
-                throw new ClientException("Error refreshing access token: ", e);
-            }
-        }
+//        if (!args.isDontRefresh()) {
+//            try {
+//                refreshJwt();
+//            } catch (ChalkException e) {
+//                throw new ClientException("Error refreshing access token: ", e);
+//            }
+//        }
 
         if (this.jwt != null && this.jwt.getValue() != null && !this.jwt.getValue().isEmpty()) {
             requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
@@ -126,8 +129,10 @@ public class RequestHandler {
             }
         }
 
+        var request = requestBuilder.uri(url).build();
+        HttpResponse<byte[]> response = null;
         try {
-            HttpResponse<String> response = this.httpClient.send(requestBuilder.uri(url).build(), HttpResponse.BodyHandlers.ofString());
+            response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
         } catch (Exception e) {
             throw new ClientException("Error with sending of request", e);
         }
@@ -140,16 +145,17 @@ public class RequestHandler {
 //        }
 
         if (response.statusCode() != 200) {
-            ClientError clientError = getHttpError(c.getLogger(), response, requestBuilder.build());
-            throw clientError;
+            throw getHttpException(response, request.uri().toString());
         }
 
-        String responseBody = response.body();
-        Object castResponse = args.getResponse();
-        if (castResponse instanceof OnlineQueryBulkResponse) {
-            castResponse = ((OnlineQueryBulkResponse) castResponse).unmarshal(responseBody);
-        } else {
-            castResponse = new Gson().fromJson(responseBody, args.getResponse().getClass());
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(response.body(), args.getResponse());
+        } catch (IOException e) {
+            throw new ClientException(
+                    "Exception occurred while unmarshalling response",
+                    e
+            );
         }
     }
 
@@ -184,72 +190,65 @@ public class RequestHandler {
 //    }
 
 
-    private void refreshJwt() throws ChalkException {
+//    private void refreshJwt() throws ChalkException {
+//
+//    }
+//
+//    private JWT getJwt() throws ChalkException {
+//        GetTokenRequest body = new GetTokenRequest(c.getClientId().getValue(), c.getClientSecret().getValue(), "client_credentials");
+//        GetTokenResponse response = new GetTokenResponse();
+//        try {
+//            SendRequestParams params = new SendRequestParams("POST", "v1/oauth/token", body, response, true);
+//            c.sendRequest(params);
+//        } catch (Exception e) {
+//            throw new ChalkException(String.format(
+//                    "Error obtaining access token: %s.\n" +
+//                            "  Auth config:\n" +
+//                            "    api_server=%s (source: %s),\n" +
+//                            "    client_id=%s (source: %s),\n" +
+//                            "    client_secret=*** (source: %s),\n" +
+//                            "    environment_id=%s (source: %s)\n",
+//                    e.getMessage(),
+//                    c.getApiServer().getValue(),
+//                    c.getApiServer().getSource(),
+//                    c.getClientId().getValue(),
+//                    c.getClientId().getSource(),
+//                    c.getClientSecret().getSource(),
+//                    c.getEnvironmentId().getValue(),
+//                    c.getEnvironmentId().getSource()
+//            ));
+//        }
+//
+//        if (c.getInitialEnvironment().getValue().isEmpty()) {
+//            c.setEnvironmentId(new SourcedConfig(response.getPrimaryEnvironment(), "Primary Environment from credentials exchange response"));
+//        } else {
+//            c.setEnvironmentId(c.getInitialEnvironment());
+//        }
+//
+//        LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
+//        JWT jwt = new JWT(response.getAccessToken(), expiry);
+//        return jwt;
+//    }
 
-    }
+    public static ChalkException getHttpException(HttpResponse<byte[]> res, String URL) {
+        ChalkHttpException chalkException;
 
-    private JWT getJwt() throws ChalkException {
-        GetTokenRequest body = new GetTokenRequest(c.getClientId().getValue(), c.getClientSecret().getValue(), "client_credentials");
-        GetTokenResponse response = new GetTokenResponse();
-        try {
-            SendRequestParams params = new SendRequestParams("POST", "v1/oauth/token", body, response, true);
-            c.sendRequest(params);
-        } catch (Exception e) {
-            throw new ChalkException(String.format(
-                    "Error obtaining access token: %s.\n" +
-                            "  Auth config:\n" +
-                            "    api_server=%s (source: %s),\n" +
-                            "    client_id=%s (source: %s),\n" +
-                            "    client_secret=*** (source: %s),\n" +
-                            "    environment_id=%s (source: %s)\n",
-                    e.getMessage(),
-                    c.getApiServer().getValue(),
-                    c.getApiServer().getSource(),
-                    c.getClientId().getValue(),
-                    c.getClientId().getSource(),
-                    c.getClientSecret().getSource(),
-                    c.getEnvironmentId().getValue(),
-                    c.getEnvironmentId().getSource()
-            ));
-        }
-
-        if (c.getInitialEnvironment().getValue().isEmpty()) {
-            c.setEnvironmentId(new SourcedConfig(response.getPrimaryEnvironment(), "Primary Environment from credentials exchange response"));
-        } else {
-            c.setEnvironmentId(c.getInitialEnvironment());
-        }
-
-        LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
-        JWT jwt = new JWT(response.getAccessToken(), expiry);
-        return jwt;
-    }
-
-    public static HTTPError getHttpException(LeveledLogger logger, HttpResponse<String> res, HttpRequest req) HttpException {
-        ChalkHttpException errorResponse;
-
-        String responseBody = res.body();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            errorResponse = objectMapper.readValue(responseBody, ChalkHttpException.class);
-            logger.error("API error response", errorResponse, responseBody);
+            chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
-            logger.error("Error while unmarshalling the response", e);
-            errorResponse = new ChalkHttpException();
+            return new ClientException(
+                    "Exception occurred while parsing error response",
+                    e
+            );
         }
 
-        HTTPError clientError = new HTTPError(
-                "Unknown Chalk Server Error",
-                req.uri().toString(),
+        return new HttpException(
+                chalkException,
                 res.statusCode(),
-                responseBody.length(),
-                errorResponse.getTrace()
-        );
-
-        if (errorResponse.getDetail() != null) {
-            clientError.setMessage(errorResponse.getDetail());
-        }
-
-        return clientError;
+                res.body().length,
+                URL
+            );
     }
 
 }

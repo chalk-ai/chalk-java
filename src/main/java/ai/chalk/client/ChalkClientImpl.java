@@ -36,10 +36,8 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
 
-    public void sendRequest(SendRequestParams args) throws ChalkException {
-        Map<String, String> headers = this.getHeaders(args.getEnvironmentOverride(), args.getPreviewDeploymentId(), args.getBranch());
-        args.setHeaders(headers);
-        this.r.sendRequest(args);
+    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
+        return this.r.sendRequest(args);
     }
 
 
