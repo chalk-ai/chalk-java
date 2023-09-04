@@ -1,5 +1,7 @@
 package ai.chalk.internal.config;
 
+import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.internal.config.models.ProjectTokens;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;

@@ -1,4 +1,6 @@
-package ai.chalk.internal.config;
+package ai.chalk.internal.config.models;
+
+import ai.chalk.internal.config.Loader;
 
 import java.util.Collections;
 import java.util.Map;
@@ -41,7 +43,9 @@ public class SourcedConfig {
     }
 
 
-    public static void displayConfigs(Map<String, SourcedConfig> configMap) {
+    public static String getConfigTableStr(Map<String, SourcedConfig> configMap) {
+        StringBuilder result = new StringBuilder();
+
         String configHeader = "Config";
         String sourceHeader = "Source";
         String valueHeader = "Value";
@@ -59,27 +63,31 @@ public class SourcedConfig {
         maxValueWidth += buffer;
 
         // Print separator
-        System.err.println(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append("\n");
 
         // Print column header
-        System.err.printf(
-                "%-" + maxConfigNameWidth + "s %-" + maxSourceWidth + "s %-" + maxValueWidth + "s%n",
-                configHeader, sourceHeader, valueHeader
-        );
+        result.append(String.format(
+                "%-" + maxConfigNameWidth + "s %-" + maxValueWidth + "s %-" + maxSourceWidth + "s%n",
+                configHeader, valueHeader, sourceHeader
+        ));
         // Print separator
-        System.err.println(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append("\n");
 
         // Print each config
         for (Map.Entry<String, SourcedConfig> entry : configMap.entrySet()) {
-            System.err.printf(
-                    "%-" + maxConfigNameWidth + "s %-" + maxSourceWidth + "s %-" + maxValueWidth + "s%n",
-                    entry.getKey(), entry.getValue().getSource(), entry.getValue().getValue()
-            );
+            result.append(String.format(
+                    "%-" + maxConfigNameWidth + "s %-" + maxValueWidth + "s %-" + maxSourceWidth + "s%n",
+                    entry.getKey(), entry.getValue().getValue(), entry.getValue().getSource()
+            ));
         }
 
         // Print separator
-        System.err.println(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append(String.join("", Collections.nCopies(maxConfigNameWidth + maxSourceWidth + maxValueWidth + 6, "-")));
+        result.append("\n");
 
+        return result.toString();
     }
 
     public String getSource() {

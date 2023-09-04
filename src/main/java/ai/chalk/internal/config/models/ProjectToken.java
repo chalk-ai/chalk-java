@@ -1,4 +1,7 @@
-package ai.chalk.internal.config;
+package ai.chalk.internal.config.models;
+
+import ai.chalk.internal.config.models.DeserializableLocalDateTime;
+import ai.chalk.internal.config.models.JWT;
 
 // ProjectToken class
 public class ProjectToken {

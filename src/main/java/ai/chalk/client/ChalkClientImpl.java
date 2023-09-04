@@ -3,10 +3,13 @@ package ai.chalk.client;
 
 import ai.chalk.ai.chalk.exceptions.ChalkException;
 import ai.chalk.ai.chalk.exceptions.ClientException;
-import ai.chalk.internal.config.JWT;
+import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.Loader;
-import ai.chalk.internal.config.ProjectToken;
-import ai.chalk.internal.config.SourcedConfig;
+import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.internal.config.models.SourcedConfig;
+import ai.chalk.internal.request.RequestHandler;
+import ai.chalk.internal.request.models.SendRequestParams;
+import com.sun.net.httpserver.Request;
 
 import java.net.http.HttpClient;
 import java.util.HashMap;
@@ -19,20 +22,25 @@ public class ChalkClientImpl implements ChalkClient {
     private SourcedConfig initialEnvironment;
     private SourcedConfig clientSecret;
     private String branch;
-    private JWT jwt;
-    private HttpClient httpClient;
+
+    private RequestHandler r;
 
     public ChalkClientImpl() throws ChalkException {
         this(null);
     }
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
+        // Side-effect of populating instance config variables
         this.resolveConfig(config);
-        // this.refreshJwt();
-        // if error:
-        //   throw ClientException
+        this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.clientId, this.branch);
     }
 
+
+    public void sendRequest(SendRequestParams args) throws ChalkException {
+        Map<String, String> headers = this.getHeaders(args.getEnvironmentOverride(), args.getPreviewDeploymentId(), args.getBranch());
+        args.setHeaders(headers);
+        this.r.sendRequest(args);
+    }
 
 
     private void resolveConfig(BuilderImpl builder) throws ClientException {
@@ -77,7 +85,7 @@ public class ChalkClientImpl implements ChalkClient {
         }
     }
 
-    private void displayConfigError() {
+    private String getConfigErrorStr() {
         String preTable = """
 ChalkClient's config variables and the source of these variables are displayed in the following table.
 """;
@@ -88,17 +96,20 @@ For each variable, we take the first non-empty value, in order, from the followi
   2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
   3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
 """;
-        System.err.println(preTable);
 
         Map<String, SourcedConfig> configMap = new HashMap<>();
         configMap.put("Api Server", this.apiServer);
         configMap.put("Client ID", this.clientId);
-
         configMap.put("Client Secret", new SourcedConfig(this.clientSecret.getSource(), this.clientSecret.getValue().replaceAll(".", "*")));
         configMap.put("Environment ID", this.environmentId);
 
-        SourcedConfig.displayConfigs(configMap);
+        String configTable = SourcedConfig.getConfigTableStr(configMap);
 
-        System.err.println(postTable);
+        return preTable + configTable + postTable;
     }
+
+    private void displayConfigError() {
+        System.err.println(this.getConfigErrorStr());
+    }
+
 }

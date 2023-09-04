@@ -1,4 +1,4 @@
-package ai.chalk.internal.config;
+package ai.chalk.internal.config.models;
 
 import java.util.HashMap;
 

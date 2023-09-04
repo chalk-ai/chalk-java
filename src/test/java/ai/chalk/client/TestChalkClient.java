@@ -11,6 +11,12 @@ public class TestChalkClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(">>> CLIENT CONFIG: ");
+
+
+
+
     }
 
 }

@@ -1,4 +1,7 @@
-apply plugin: 'java'
+plugins {
+    id "java"
+    id "io.freefair.lombok" version "8.3"
+}
 
 group 'ai.chalk'
 version '0.0'
@@ -11,6 +14,7 @@ dependencies {
     // Add your dependencies here
     implementation 'org.yaml:snakeyaml:2.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
 
 test {

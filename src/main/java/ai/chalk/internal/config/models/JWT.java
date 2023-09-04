@@ -1,4 +1,6 @@
-package ai.chalk.internal.config;
+package ai.chalk.internal.config.models;
+
+import ai.chalk.internal.config.models.DeserializableLocalDateTime;
 
 // JWT class
 public class JWT {
