@@ -120,25 +120,26 @@ public class RequestHandler {
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
                         .toArray(String[]::new));
 
-//        if (!args.isDontRefresh()) {
-//            try {
-//                refreshJwt();
-//            } catch (ChalkException e) {
-//                throw new ClientException("Error refreshing access token: ", e);
-//            }
-//        }
+        if (!args.isDontRefresh()) {
+            try {
+                this.jwt = this.refreshJwt(false);
+            } catch (ChalkException e) {
+                throw new ClientException("error refreshing access token", e);
+            }
+        }
 
         if (this.jwt != null && this.jwt.getValue() != null && !this.jwt.getValue().isEmpty()) {
             requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
         }
 
 
+        // TODO: Move this to before requestBuilder build
         URI url = requestBuilder.build().uri();
         if (!url.toString().startsWith("http:") && !url.toString().startsWith("https:")) {
             try {
                 url = new URI(this.apiServer + "/" + url.toString());
             } catch (Exception e) {
-                throw new ClientException("Error constructing request URL: ", e);
+                throw new ClientException("error constructing request URL: ", e);
             }
         }
 
@@ -147,7 +148,7 @@ public class RequestHandler {
         try {
             response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
         } catch (Exception e) {
-            throw new ClientException("Error with sending of request", e);
+            throw new ClientException("error with sending of request", e);
         }
 //
 //        if (response.statusCode() == 401 && !args.isDontRefresh() && requestBuilder != null) {
@@ -227,6 +228,15 @@ public class RequestHandler {
 
         LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
         return new JWT(response.getAccessToken(), expiry);
+    }
+
+    public JWT refreshJwt(boolean forceRefresh) throws ChalkException {
+        if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
+                && !jwt.getValidUntil().equals(LocalDateTime.MIN)
+                && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
+            return null;
+        }
+        return getJwt();
     }
 
     public static ChalkException getHttpException(HttpResponse<byte[]> res, String URL) {
