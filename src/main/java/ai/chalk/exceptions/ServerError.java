@@ -1,4 +1,4 @@
-package ai.chalk.ai.chalk.exceptions;
+package ai.chalk.exceptions;
 
 public class ServerError {
     // TODO

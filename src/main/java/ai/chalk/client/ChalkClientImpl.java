@@ -1,8 +1,8 @@
 package ai.chalk.client;
 
 
-import ai.chalk.ai.chalk.exceptions.ChalkException;
-import ai.chalk.ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;

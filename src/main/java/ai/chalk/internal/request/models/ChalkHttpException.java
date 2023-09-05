@@ -1,6 +1,6 @@
 package ai.chalk.internal.request.models;
 
-import ai.chalk.ai.chalk.exceptions.ServerError;
+import ai.chalk.exceptions.ServerError;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package ai.chalk.ai.chalk.exceptions;
+package ai.chalk.exceptions;
 
 import ai.chalk.internal.request.models.ChalkHttpException;
 import lombok.Getter;
