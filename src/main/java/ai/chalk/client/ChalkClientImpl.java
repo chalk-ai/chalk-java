@@ -3,7 +3,6 @@ package ai.chalk.client;
 
 import ai.chalk.ai.chalk.exceptions.ChalkException;
 import ai.chalk.ai.chalk.exceptions.ClientException;
-import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
@@ -11,7 +10,6 @@ import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
 import com.sun.net.httpserver.Request;
 
-import java.net.http.HttpClient;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,16 +21,20 @@ public class ChalkClientImpl implements ChalkClient {
     private SourcedConfig clientSecret;
     private String branch;
 
-    private RequestHandler r;
+    public RequestHandler r;
 
     public ChalkClientImpl() throws ChalkException {
         this(null);
     }
 
+    public RequestHandler handler() {
+        return this.r;
+    }
+
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         // Side-effect of populating instance config variables
         this.resolveConfig(config);
-        this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.clientId, this.branch);
+        this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
     }
 
 

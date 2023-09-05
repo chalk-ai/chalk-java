@@ -1,12 +1,13 @@
 package ai.chalk.internal.request.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.net.http.HttpRequest;
 
 @Data
+@AllArgsConstructor
 public class SendRequestParams<T> {
-    private HttpRequest request;
     private Object body;
     private String method;
     private String URL;
@@ -15,4 +16,15 @@ public class SendRequestParams<T> {
     private String environmentOverride;
     private String previewDeploymentId;
     private String branch;
+
+
+    public SendRequestParams(Object body, String method, String URL, Class<T> response) {
+        this.body = body;
+        this.method = method;
+        this.URL = URL;
+        this.response = response;
+        this.dontRefresh = true;
+    }
 }
+
+

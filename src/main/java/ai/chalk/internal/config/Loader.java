@@ -2,9 +2,10 @@ package ai.chalk.internal.config;
 
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.ProjectTokens;
-import org.yaml.snakeyaml.LoaderOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class Loader {
-    public static String loadProjectDirectory() throws Exception {
+    private static String loadProjectDirectory() throws Exception {
         Path currentDirectory = Paths.get(".").toAbsolutePath().normalize();
         boolean rootChecked = false;
         while (!currentDirectory.toString().equals("/") && !rootChecked) {
@@ -86,11 +87,11 @@ public class Loader {
             throw new IOException(String.format("Error reading auth config file from path '%s': %s", path, e.getMessage()), e);
         }
 
-        LoaderOptions options = new LoaderOptions();
-        Yaml yaml = new Yaml(new Constructor(ProjectTokens.class, options));
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        mapper.registerModule(new JavaTimeModule());
         ProjectTokens config;
         try {
-            config = yaml.load(new String(data));
+             config = mapper.readValue(new String(data), ProjectTokens.class);
         } catch (Exception e) {
             throw new IOException(String.format("Error parsing auth config file at path '%s'. Please make sure you have run 'chalk login' successfully. Error details: %s", path, e.getMessage()), e);
         }

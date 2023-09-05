@@ -1,5 +1,7 @@
 package ai.chalk.client;
 
+import ai.chalk.internal.request.RequestHandler;
+
 public interface ChalkClient {
 //    OnlineQueryResult onlineQuery(OnlineQueryParamsComplete args, Object resultHolder) throws ErrorResponse;
 
@@ -8,6 +10,8 @@ public interface ChalkClient {
     static Builder builder() {
         return new BuilderImpl();
     }
+
+    RequestHandler handler();
 }
 
 
