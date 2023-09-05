@@ -31,7 +31,6 @@ public class RequestHandler {
     private SourcedConfig environmentId;
     private final SourcedConfig initialEnvironment;
     private final SourcedConfig clientId;
-
     private final SourcedConfig clientSecret;
     private final String branch;
 

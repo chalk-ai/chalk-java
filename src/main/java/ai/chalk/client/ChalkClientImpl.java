@@ -8,7 +8,6 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
-import com.sun.net.httpserver.Request;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,12 +79,12 @@ public class ChalkClientImpl implements ChalkClient {
         this.initialEnvironment = environmentId;
 
         if (chalkYamlConfigErr != null && this.clientId.getValue().isEmpty() && this.clientSecret.getValue().isEmpty()) {
-            this.displayConfigError();
+            System.err.println(this.getConfigStr());
             throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
         }
     }
 
-    private String getConfigErrorStr() {
+    public String getConfigStr() {
         String preTable = """
 ChalkClient's config variables and the source of these variables are displayed in the following table.
 """;
@@ -107,9 +106,4 @@ For each variable, we take the first non-empty value, in order, from the followi
 
         return preTable + configTable + postTable;
     }
-
-    private void displayConfigError() {
-        System.err.println(this.getConfigErrorStr());
-    }
-
 }
