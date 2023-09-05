@@ -25,34 +25,25 @@ public class BuilderImpl implements Builder {
         this.clientId = clientId;
         return this;
     }
-
     public BuilderImpl setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
-
     public BuilderImpl setApiServer(String apiServer) {
         this.apiServer = apiServer;
         return this;
     }
-
     public BuilderImpl setEnvironmentId(String environmentId) {
         this.environmentId = environmentId;
         return this;
     }
-
     public BuilderImpl setBranch(String branch) {
         this.branch = branch;
         return this;
     }
-
     public BuilderImpl setHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
-    }
-
-    public ChalkClient build() throws ChalkException {
-        return new ChalkClientImpl(this);
     }
 
     public String getClientId() { return clientId; }
@@ -61,4 +52,8 @@ public class BuilderImpl implements Builder {
     public String getEnvironmentId() { return environmentId; }
     public String getBranch() { return branch; }
     public HttpClient getHttpClient() { return httpClient; }
+
+    public ChalkClient build() throws ChalkException {
+        return new ChalkClientImpl(this);
+    }
 }
