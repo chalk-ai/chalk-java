@@ -105,11 +105,16 @@ public class RequestHandler {
         }
 
         URI uri;
+        String urlArg = args.getURL();
         try {
-            var base = new URI(this.apiServer.getValue());
-            uri = base.resolve(args.getURL());
+            if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
+                var base = new URI(this.apiServer.getValue());
+                uri = base.resolve(urlArg);
+            } else {
+                uri = new URI(urlArg);
+            }
         } catch (Exception e) {
-            throw new ClientException("error parsing request URL", e);
+            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
         }
 
         Map<String, String> headers = this.getHeaders(args.getEnvironmentOverride(), args.getPreviewDeploymentId(), args.getBranch());
@@ -132,31 +137,25 @@ public class RequestHandler {
             requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
         }
 
-
-        // TODO: Move this to before requestBuilder build
-        URI url = requestBuilder.build().uri();
-        if (!url.toString().startsWith("http:") && !url.toString().startsWith("https:")) {
-            try {
-                url = new URI(this.apiServer + "/" + url.toString());
-            } catch (Exception e) {
-                throw new ClientException("error constructing request URL: ", e);
-            }
-        }
-
-        var request = requestBuilder.uri(url).build();
+        var request = requestBuilder.build();
         HttpResponse<byte[]> response = null;
         try {
             response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
         } catch (Exception e) {
             throw new ClientException("error with sending of request", e);
         }
-//
-//        if (response.statusCode() == 401 && !args.isDontRefresh() && requestBuilder != null) {
-//            HttpResponse<String> retryResponse = retryRequest(requestBuilder.build(), args.getBody(), response, null);
-//            if (retryResponse != null) {
-//                response = retryResponse;
-//            }
-//        }
+
+        if (response.statusCode() == 401 && !args.isDontRefresh()) {
+            HttpResponse<byte[]> retryResponse;
+            try {
+                retryResponse = this.retryRequest(request, args.getBody(), response);
+            } catch (Exception e) {
+                throw new ClientException("error retrying request upon 401", e);
+            }
+            if (retryResponse != null) {
+                response = retryResponse;
+            }
+        }
 
         if (response.statusCode() != 200) {
             throw getHttpException(response, request.uri().toString());
@@ -175,35 +174,36 @@ public class RequestHandler {
         }
     }
 
-//    public HttpResponse<String> retryRequest(
-//            HttpRequest originalRequest, Object originalBody,
-//            HttpResponse<String> originalResponse, Exception originalError
-//    ) throws Exception {
-//        Exception refreshJwtError = refreshJwt(true);
-//        if (refreshJwtError != null) {
-//            c.getLogger().debug("Error refreshing access token upon 401: ", refreshJwtError);
-//            return originalResponse;
-//        }
-//
-//        BodyBuffer originalBodyBuffer = getBodyBuffer(originalBody);
-//        if (originalBodyBuffer.getError() != null) {
-//            throw originalBodyBuffer.getError();
-//        }
-//
-//        HttpRequest newRequest = HttpRequest.newBuilder(originalRequest.uri())
-//                .method(originalRequest.method(), HttpRequest.BodyPublishers.ofByteArray(originalBodyBuffer.getBody()))
-//                .headers(originalRequest.headers().map())
-//                .build();
-//
-//        if (c.getJwt() != null && c.getJwt().getToken() != null && !c.getJwt().getToken().isEmpty()) {
-//            newRequest.headers().map().put("Authorization", List.of("Bearer " + c.getJwt().getToken()));
-//        }
-//
-//        HttpResponse<String> response = c.getHttpClient().send(newRequest, HttpResponse.BodyHandlers.ofString());
-//        c.getLogger().debug("Response Status for retried request: " + response.statusCode());
-//
-//        return response;
-//    }
+    public HttpResponse<byte[]> retryRequest(
+        HttpRequest originalRequest,
+        Object originalBody,
+        HttpResponse<byte[]> originalResponse
+    ) throws Exception {
+        try {
+            this.jwt = refreshJwt(true);
+        } catch (ChalkException e) {
+            // TODO: Log error here when we have logging
+            System.err.println("error refreshing JWT upon 401");
+            e.printStackTrace();
+            return originalResponse;
+        }
+
+        byte[] originalBodyBytes = getBodyBytes(originalBody);
+
+        HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
+                .method(originalRequest.method(), HttpRequest.BodyPublishers.ofByteArray(originalBodyBytes))
+                .uri(originalRequest.uri())
+                .headers(originalRequest.headers().map().entrySet().stream()
+                        .flatMap(e -> Stream.of(e.getKey(), e.getValue().get(0)))
+                        .toArray(String[]::new));
+
+        if (this.jwt != null && this.jwt.getValue() != null && !this.jwt.getValue().isEmpty()) {
+            requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
+        }
+
+        var newRequest = requestBuilder.build();
+        return this.httpClient.send(newRequest, HttpResponse.BodyHandlers.ofByteArray());
+    }
 
 
 //    private void refreshJwt() throws ChalkException {

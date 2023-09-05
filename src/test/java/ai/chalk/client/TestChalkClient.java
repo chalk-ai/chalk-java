@@ -22,6 +22,7 @@ public class TestChalkClient {
             System.out.println(">>> JWT: " + jwt.getValue());
         } catch (Exception e) {
             System.out.println(">>> OOPS");
+            e.printStackTrace();
         }
 
 
