@@ -228,7 +228,6 @@ public class RequestHandler {
 
     public JWT refreshJwt(boolean forceRefresh) throws ChalkException {
         if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
-                && !jwt.getValidUntil().equals(LocalDateTime.MIN)
                 && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
             return null;
         }
