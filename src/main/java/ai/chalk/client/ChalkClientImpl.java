@@ -19,7 +19,7 @@ public class ChalkClientImpl implements ChalkClient {
     private SourcedConfig initialEnvironment;
     private SourcedConfig clientSecret;
     private String branch;
-    private RequestHandler r;
+    private final RequestHandler r;
 
     public ChalkClientImpl() throws ChalkException {
         this(null);

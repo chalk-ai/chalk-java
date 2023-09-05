@@ -3,8 +3,6 @@ package ai.chalk.internal.request.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.net.http.HttpRequest;
-
 @Data
 @AllArgsConstructor
 public class SendRequestParams<T> {
