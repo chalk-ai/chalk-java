@@ -9,14 +9,3 @@ public abstract class ChalkException extends Exception {
         super(message, cause);
     }
 }
-
-
-
-
-
-
-//
-//
-//public class ServerException implements ChalkException {
-//
-//}

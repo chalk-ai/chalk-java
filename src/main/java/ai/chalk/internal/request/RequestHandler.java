@@ -77,7 +77,7 @@ public class RequestHandler {
     }
 
 
-    public byte[] getBodyBytes(Object body) throws Exception {
+    private byte[] getBodyBytes(Object body) throws Exception {
         if (body == null) {
             return null;
         }
@@ -173,7 +173,7 @@ public class RequestHandler {
         }
     }
 
-    public HttpResponse<byte[]> retryRequest(
+    private HttpResponse<byte[]> retryRequest(
         HttpRequest originalRequest,
         Object originalBody,
         HttpResponse<byte[]> originalResponse
@@ -205,7 +205,7 @@ public class RequestHandler {
     }
 
 
-    public JWT getJwt() throws ChalkException {
+    private JWT getJwt() throws ChalkException {
         GetTokenRequest body = new GetTokenRequest(this.clientId.getValue(), this.clientSecret.getValue(), "client_credentials");
         GetTokenResponse response = null;
         try {
@@ -225,7 +225,7 @@ public class RequestHandler {
         return new JWT(response.getAccessToken(), expiry);
     }
 
-    public void refreshJwt(boolean forceRefresh) throws ChalkException {
+    private void refreshJwt(boolean forceRefresh) throws ChalkException {
         if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
                 && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
             return;
