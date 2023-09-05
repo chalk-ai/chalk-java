@@ -206,10 +206,6 @@ public class RequestHandler {
     }
 
 
-//    private void refreshJwt() throws ChalkException {
-//
-//    }
-//
     public JWT getJwt() throws ChalkException {
         GetTokenRequest body = new GetTokenRequest(this.clientId.getValue(), this.clientSecret.getValue(), "client_credentials");
         GetTokenResponse response = null;
