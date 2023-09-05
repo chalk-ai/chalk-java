@@ -127,7 +127,7 @@ public class RequestHandler {
 
         if (!args.isDontRefresh()) {
             try {
-                this.jwt = this.refreshJwt(false);
+                this.refreshJwt(false);
             } catch (ChalkException e) {
                 throw new ClientException("error refreshing access token", e);
             }
@@ -180,7 +180,7 @@ public class RequestHandler {
         HttpResponse<byte[]> originalResponse
     ) throws Exception {
         try {
-            this.jwt = refreshJwt(true);
+            this.refreshJwt(true);
         } catch (ChalkException e) {
             // TODO: Log error here when we have logging
             System.err.println("error refreshing JWT upon 401");
@@ -226,12 +226,12 @@ public class RequestHandler {
         return new JWT(response.getAccessToken(), expiry);
     }
 
-    public JWT refreshJwt(boolean forceRefresh) throws ChalkException {
+    public void refreshJwt(boolean forceRefresh) throws ChalkException {
         if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
                 && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
-            return null;
+            return;
         }
-        return getJwt();
+        this.jwt = getJwt();
     }
 
     public static ChalkException getHttpException(HttpResponse<byte[]> res, String URL) {
