@@ -53,9 +53,7 @@ public class BytesProcessor {
 
         Map<String, Object> jsonBodyRaw = new HashMap<>();
         if (lengthResult.getResult() > 0) {
-            byte[] lengthInBytes = new byte[lengthResult.getResult().intValue()];
-            System.arraycopy(bytes, lengthResult.getIndex(), lengthInBytes, 0, lengthInBytes.length);
-            jsonBodyRaw = mapper.readValue(lengthInBytes, new TypeReference<Map<String, Object>>() {
+            jsonBodyRaw = mapper.readValue(bytes, startIdx, lengthResult.getResult().intValue(), new TypeReference<Map<String, Object>>() {
             });
         }
         return new ConsumptionResult<>(lengthResult.getIndex() + lengthResult.getResult().intValue(), jsonBody);
