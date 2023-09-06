@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
@@ -14,10 +15,23 @@ public class BytesProcessor {
     private static final String MAGIC_STR = "CHALK_BYTE_TRANSMISSION";
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private static ConsumptionResult<Integer> consume8ByteLen(int startIdx, byte[] bytes) throws Exception {
+    public static byte[] intToEightBytes(int value) {
+        return new byte[] {
+                0, // padding
+                0, // padding
+                0, // padding
+                0, // padding
+                (byte) (value >> 24),
+                (byte) (value >> 16),
+                (byte) (value >> 8),
+                (byte) value
+        };
+    }
+
+    public static ConsumptionResult<Long> consume8ByteLen(int startIdx, byte[] bytes) throws Exception {
         int numBytesThatRepresentsLength = 8;
         checkLen(startIdx, bytes, numBytesThatRepresentsLength);
-        int length = ByteBuffer.wrap(bytes, startIdx, numBytesThatRepresentsLength).order(ByteOrder.BIG_ENDIAN).getInt();
+        long length = ByteBuffer.wrap(bytes, startIdx, numBytesThatRepresentsLength).order(ByteOrder.BIG_ENDIAN).getLong();
         return new ConsumptionResult<>(startIdx + numBytesThatRepresentsLength, length);
     }
 
@@ -34,11 +48,17 @@ public class BytesProcessor {
     }
 
     private static ConsumptionResult<Map<String, Object>> consumeJsonAttrs(int startIdx, byte[] bytes) throws Exception {
-        ConsumptionResult<Integer> lengthResult = consume8ByteLen(startIdx, bytes);
+        ConsumptionResult<Long> lengthResult = consume8ByteLen(startIdx, bytes);
         Map<String, Object> jsonBody = new HashMap<>();
 
-        Map<String, Object> jsonBodyRaw = mapper.readValue(bytes, lengthResult.getIndex(), lengthResult.getResult(), new TypeReference<Map<String, Object>>() {});
-        return new ConsumptionResult<>(lengthResult.getIndex() + lengthResult.getResult(), jsonBody);
+        Map<String, Object> jsonBodyRaw = new HashMap<>();
+        if (lengthResult.getResult() > 0) {
+            byte[] lengthInBytes = new byte[lengthResult.getResult().intValue()];
+            System.arraycopy(bytes, lengthResult.getIndex(), lengthInBytes, 0, lengthInBytes.length);
+            jsonBodyRaw = mapper.readValue(lengthInBytes, new TypeReference<Map<String, Object>>() {
+            });
+        }
+        return new ConsumptionResult<>(lengthResult.getIndex() + lengthResult.getResult().intValue(), jsonBody);
     }
 
     private static ConsumptionResult<Map<String, Object>> consumePydanticAttrs(int startIdx, byte[] bytes) throws Exception {
@@ -116,7 +136,7 @@ public class BytesProcessor {
 
     @Getter
     @AllArgsConstructor
-    static class ConsumptionResult<T> {
+    public static class ConsumptionResult<T> {
         private final int index;
         private final T result;
     }
