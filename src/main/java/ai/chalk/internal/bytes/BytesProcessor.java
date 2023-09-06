@@ -1,4 +1,4 @@
-package ai.chalk.internal.feather;
+package ai.chalk.internal.bytes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,18 +10,18 @@ import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Processor {
+public class BytesProcessor {
     private static final String MAGIC_STR = "CHALK_BYTE_TRANSMISSION";
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private ConsumptionResult<Integer> consume8ByteLen(int startIdx, byte[] bytes) throws Exception {
+    private static ConsumptionResult<Integer> consume8ByteLen(int startIdx, byte[] bytes) throws Exception {
         int numBytesThatRepresentsLength = 8;
         checkLen(startIdx, bytes, numBytesThatRepresentsLength);
         int length = ByteBuffer.wrap(bytes, startIdx, numBytesThatRepresentsLength).order(ByteOrder.BIG_ENDIAN).getInt();
         return new ConsumptionResult<>(startIdx + numBytesThatRepresentsLength, length);
     }
 
-    private int consumeMagicStr(int startIdx, byte[] bytes) throws Exception {
+    private static int consumeMagicStr(int startIdx, byte[] bytes) throws Exception {
         byte[] magicBytes = MAGIC_STR.getBytes();
         checkLen(startIdx, bytes, magicBytes.length);
 
@@ -33,7 +33,7 @@ public class Processor {
         return startIdx;
     }
 
-    private ConsumptionResult<Map<String, Object>> consumeJsonAttrs(int startIdx, byte[] bytes) throws Exception {
+    private static ConsumptionResult<Map<String, Object>> consumeJsonAttrs(int startIdx, byte[] bytes) throws Exception {
         ConsumptionResult<Integer> lengthResult = consume8ByteLen(startIdx, bytes);
         Map<String, Object> jsonBody = new HashMap<>();
 
@@ -41,11 +41,11 @@ public class Processor {
         return new ConsumptionResult<>(lengthResult.getIndex() + lengthResult.getResult(), jsonBody);
     }
 
-    private ConsumptionResult<Map<String, Object>> consumePydanticAttrs(int startIdx, byte[] bytes) throws Exception {
+    private static ConsumptionResult<Map<String, Object>> consumePydanticAttrs(int startIdx, byte[] bytes) throws Exception {
         return consumeJsonAttrs(startIdx, bytes); // same behavior as described
     }
 
-    private ConsumptionResult<Map<String, byte[]>> consumeByteItemsData(int startIdx, byte[] bytes, Map<String, Integer> byteItemsMap) throws Exception {
+    private static ConsumptionResult<Map<String, byte[]>> consumeByteItemsData(int startIdx, byte[] bytes, Map<String, Integer> byteItemsMap) throws Exception {
         Map<String, byte[]> byteItems = new HashMap<>();
         int idx = startIdx;
 
@@ -63,7 +63,7 @@ public class Processor {
         return new ConsumptionResult<>(idx, byteItems);
     }
 
-    private ConsumptionResult<Map<String, byte[]>> consumeByteItems(int startIdx, byte[] bytes) throws Exception {
+    private static ConsumptionResult<Map<String, byte[]>> consumeByteItems(int startIdx, byte[] bytes) throws Exception {
         ConsumptionResult<Map<String, Object>> byteItemsMapResult = consumeJsonAttrs(startIdx, bytes);
         Map<String, Integer> byteItemsMapInt = new HashMap<>();
 
@@ -75,13 +75,13 @@ public class Processor {
         return consumeByteItemsData(byteItemsMapResult.getIndex(), bytes, byteItemsMapInt);
     }
 
-    private void checkLen(int startIdx, byte[] bytes, int length) throws Exception {
+    private static void checkLen(int startIdx, byte[] bytes, int length) throws Exception {
         if (bytes.length < startIdx + length) {
             throw new Exception("Failed to find enough bytes to consume");
         }
     }
 
-    public Map<String, Object> unmarshal(byte[] body) throws Exception {
+    public static Map<String, Object> unmarshal(byte[] body) throws Exception {
         int idx;
         Map<String, Object> result = new HashMap<>();
 
@@ -116,7 +116,7 @@ public class Processor {
 
     @Getter
     @AllArgsConstructor
-    class ConsumptionResult<T> {
+    static class ConsumptionResult<T> {
         private final int index;
         private final T result;
     }
