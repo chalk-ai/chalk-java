@@ -9,6 +9,7 @@ import ai.chalk.internal.request.models.ChalkHttpException;
 import ai.chalk.internal.request.models.GetTokenRequest;
 import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -88,6 +89,7 @@ public class RequestHandler {
             bodyBytes = (byte[]) body;
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
             bodyBytes = objectMapper.writeValueAsBytes(body);
         }
@@ -162,6 +164,7 @@ public class RequestHandler {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
             return objectMapper.readValue(response.body(), args.getResponse());
@@ -237,6 +240,7 @@ public class RequestHandler {
         ChalkHttpException chalkException;
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
