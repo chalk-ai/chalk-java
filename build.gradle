@@ -17,8 +17,12 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
     implementation 'org.apache.arrow:arrow-vector:13.0.0'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    implementation 'org.apache.arrow:arrow-memory-netty:13.0.0'
+    implementation 'org.apache.arrow:arrow-compression:13.0.0'
 }
 
 test {
     useJUnitPlatform()
+    jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
 }

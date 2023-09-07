@@ -49,7 +49,7 @@ public class BytesProcessor {
 
     private static ConsumptionResult<Map<String, Object>> consumeJsonAttrs(int startIdx, byte[] bytes) throws Exception {
         ConsumptionResult<Long> lengthResult = consume8ByteLen(startIdx, bytes);
-        Map<String, Object> jsonBody = mapper.readValue(bytes, startIdx, lengthResult.getResult().intValue(), new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> jsonBody = mapper.readValue(bytes, lengthResult.getIndex(), lengthResult.getResult().intValue(), new TypeReference<Map<String, Object>>() {});
         return new ConsumptionResult<>(lengthResult.getIndex() + lengthResult.getResult().intValue(), jsonBody);
     }
 

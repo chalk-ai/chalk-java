@@ -34,17 +34,17 @@ public class OnlineQueryResultFeather {
 
         Boolean hasDataBool = (Boolean) hasDataObj;
         if (hasDataBool) {
-            var scalarDataBytesObj = res.get("scalar_data_bytes");
+            var scalarDataBytesObj = res.get("scalar_data");
             if (scalarDataBytesObj == null) {
                 throw new ClientException("missing key 'scalar_data_bytes' in unmarshalled bytes");
             }
             if (!(scalarDataBytesObj instanceof byte[])) {
-                throw new ClientException("malformed value 'scalar_data_bytes' in unmarshalled bytes");
+                throw new ClientException("malformed value 'scalar_data' in unmarshalled bytes");
             }
             byte[] scalarDataBytes = (byte[]) scalarDataBytesObj;
             VectorSchemaRoot scalarData = null;
             try {
-                VectorSchemaRoot scalarDataRoot = FeatherProcessor.convertBytesToVectorSchemaRoot(scalarDataBytes);
+                scalarData = FeatherProcessor.convertBytesToVectorSchemaRoot(scalarDataBytes);
             } catch (Exception e) {
                 throw new ClientException("failed to convert scalar data bytes to VectorSchemaRoot", e);
             }
