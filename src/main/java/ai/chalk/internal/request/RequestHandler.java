@@ -251,7 +251,6 @@ public class RequestHandler {
                     res.body().length,
                     URL
             );
-            )
         }
 
         return new HttpException(

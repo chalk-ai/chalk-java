@@ -10,7 +10,11 @@ public class ChalkHttpException {
     private String trace;
 
     public String toString() {
+        String message = "Please contact Chalk Support with the Trace ID";
+        if (this.detail.contains(message)) {
+            return this.detail;
+        }
         return this.detail +
-                String.format(" - Please contact Chalk Support with the Trace ID: %s", this.trace);
+                String.format(" - %s: %s", message, this.trace);
     }
 }
