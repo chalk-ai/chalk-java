@@ -55,7 +55,7 @@ public class RequestHandler {
 
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json");
-        headers.put("User-Agent", "chalk-go-0.0");
+        headers.put("User-Agent", "chalk-java");
         headers.put("X-Chalk-Client-Id", this.clientId.getValue());
 
         if (branchOverride != null && !branchOverride.isEmpty()) {
@@ -245,10 +245,13 @@ public class RequestHandler {
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
-            return new ClientException(
-                    "Exception occurred while parsing error response",
-                    e
+            // TODO: Log error here when we have logging
+            return new HttpException(
+                    res.statusCode(),
+                    res.body().length,
+                    URL
             );
+            )
         }
 
         return new HttpException(
