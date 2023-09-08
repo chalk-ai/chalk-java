@@ -2,7 +2,7 @@ package ai.chalk.models;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
-import ai.chalk.internal.bytes.BytesProcessor;
+import ai.chalk.internal.bytes.BytesConsumer;
 import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class OnlineQueryBulkResponse {
         Map<String, Object> res;
         try {
 
-            res = BytesProcessor.unmarshal(bytes);
+            res = BytesConsumer.unmarshal(bytes);
         } catch (Exception e) {
             throw new ClientException("failed to unmarshal bytes into OnlineQueryBulkResponse", e);
         }
@@ -28,7 +28,7 @@ public class OnlineQueryBulkResponse {
             byte[] queryResultsBytes = (byte[]) res.get("query_results_bytes");
             try {
 
-                Map<String, Object> resultBytesMap = BytesProcessor.unmarshal(queryResultsBytes);
+                Map<String, Object> resultBytesMap = BytesConsumer.unmarshal(queryResultsBytes);
                 for (Map.Entry<String, Object> entry : resultBytesMap.entrySet()) {
                     String key = entry.getKey();
                     byte[] value = (byte[]) entry.getValue();
@@ -43,8 +43,18 @@ public class OnlineQueryBulkResponse {
         }
 
         return new OnlineQueryBulkResponse(resultFeatherMap);
-
     }
 
-
+    public OnlineQueryBulkResult toResult() throws ChalkException {
+        if (!(this.queryResults.containsKey("0"))) {
+            throw new ClientException("malformed online query bulk response");
+        }
+        OnlineQueryResultFeather internalResult = this.queryResults.get("0");
+        return new OnlineQueryBulkResult(
+                internalResult.getScalarData(),
+                internalResult.getGroupsData(),
+                internalResult.getErrors(),
+                internalResult.getMeta()
+        );
+    }
 }

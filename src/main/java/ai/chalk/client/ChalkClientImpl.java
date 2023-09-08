@@ -8,6 +8,8 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.models.OnlineQueryBulkResult;
+import ai.chalk.models.OnlineQueryParams;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +28,21 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
-        // Side-effect of populating instance config variables
+        // Side effect of populating instance config variables
         this.resolveConfig(config);
         this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
+    }
+
+    public OnlineQueryBulkResult OnlineQueryBulk(OnlineQueryParams params) throws ChalkException {
+        // Serialize
+
+
+        // Send request
+
+
+        // Deserialize
+
+        return null;
     }
 
 

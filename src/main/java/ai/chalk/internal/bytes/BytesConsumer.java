@@ -5,13 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BytesProcessor {
+public class BytesConsumer {
     private static final String MAGIC_STR = "CHALK_BYTE_TRANSMISSION";
     private static final ObjectMapper mapper = new ObjectMapper();
 
