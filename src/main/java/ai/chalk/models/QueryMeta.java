@@ -1,12 +1,15 @@
 package ai.chalk.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 /**
  * QueryMeta represents metadata about a Chalk query.
  */
 @Data
+@NoArgsConstructor
 public class QueryMeta {
 
     /**

@@ -241,6 +241,7 @@ public class RequestHandler {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {

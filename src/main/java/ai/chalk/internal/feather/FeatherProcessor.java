@@ -1,6 +1,7 @@
 package ai.chalk.internal.feather;
 
 import org.apache.arrow.compression.CommonsCompressionFactory;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
@@ -10,12 +11,12 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.util.ByteArrayReadableSeekableByteChannel;
+import org.apache.arrow.vector.table.Table;
+import org.apache.arrow.vector.util.VectorSchemaRootAppender;
+
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FeatherProcessor {
     private static Map<Class<?>, ArrowType> javaToArrowType = new HashMap<>();
@@ -148,11 +149,18 @@ public class FeatherProcessor {
         return root;
     }
 
-
-    public static VectorSchemaRoot convertBytesToVectorSchemaRoot(byte[] bytes) throws Exception {
+    public static Table convertBytesToTable(byte[] bytes) throws Exception {
         SeekableReadChannel seekableReadChannel = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
         ArrowFileReader arrowFileReader = new ArrowFileReader(seekableReadChannel, new RootAllocator(Long.MAX_VALUE), new CommonsCompressionFactory());
-        return arrowFileReader.getVectorSchemaRoot();
-    }
 
+        VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
+        VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE));
+        while (arrowFileReader.loadNextBatch()) {
+              VectorSchemaRootAppender.append(collectorRoot, readerRoot);
+        }
+
+        Table table = new Table(collectorRoot);
+        arrowFileReader.close();
+        return table;
+    }
 }

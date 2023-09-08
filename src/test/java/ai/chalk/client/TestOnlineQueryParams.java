@@ -5,7 +5,6 @@ import ai.chalk.models.OnlineQueryParams;
 import org.apache.arrow.vector.VectorSchemaRoot;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class TestOnlineQueryParams {

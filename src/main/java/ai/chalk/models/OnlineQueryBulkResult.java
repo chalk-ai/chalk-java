@@ -2,9 +2,8 @@ package ai.chalk.models;
 
 import ai.chalk.exceptions.ServerError;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.apache.arrow.vector.VectorSchemaRoot;
+import org.apache.arrow.vector.table.Table;
 
 import java.util.Map;
 
@@ -16,19 +15,19 @@ import java.util.Map;
 public class OnlineQueryBulkResult {
 
     /**
-     * ScalarsDF is an Arrow Record containing
+     * scalarsTable is an Arrow Record containing
      * scalar features of the target feature class.
      */
-    private final VectorSchemaRoot scalarsRoot;
+    private final Table scalarsTable;
 
     /**
-     * GroupsDF is a map from a has-many feature to its
+     * groupsTable is a map from a has-many feature to its
      * corresponding ArrowRecord.
      */
-    private final Map<String, VectorSchemaRoot> groupsRoot;
+    private final Map<String, Table> groupsTable;
 
     /**
-     * Errors is a list of errors that occurred during the query.
+     * errors is a list of errors that occurred during the query.
      */
     private final ServerError[] errors;
 
