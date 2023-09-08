@@ -4,10 +4,8 @@ import ai.chalk.internal.feather.FeatherProcessor;
 import ai.chalk.models.OnlineQueryParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
