@@ -108,6 +108,8 @@ public class ChalkClientImpl implements ChalkClient {
 
     private String getConfigStr() {
         String preTable = """
+
+
 ChalkClient's config variables and the source of these variables are displayed in the following table.
 """;
         String postTable = """
@@ -116,6 +118,8 @@ For each variable, we take the first non-empty value, in order, from the followi
   1. The value passed to ChalkClient's Builder
   2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
   3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+  
+  
 """;
 
         Map<String, SourcedConfig> configMap = new HashMap<>();
