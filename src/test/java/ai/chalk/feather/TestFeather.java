@@ -1,4 +1,4 @@
-package ai.chalk.client.feather;
+package ai.chalk.feather;
 
 
 import ai.chalk.internal.bytes.BytesConsumer;
@@ -14,7 +14,7 @@ public class TestFeather {
     @Test
     public void testConvertBytesResponseToResult() {
         try {
-            String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/client/feather/", "bulk_query_response.txt")), "UTF-8");
+            String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "bulk_query_response.txt")), "UTF-8");
             byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
             OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
             OnlineQueryBulkResult result = response.toResult();
