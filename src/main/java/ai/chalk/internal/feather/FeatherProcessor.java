@@ -11,6 +11,7 @@ import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.util.ByteArrayReadableSeekableByteChannel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,20 +31,46 @@ public class FeatherProcessor {
         javaToArrowType.put(Boolean.class, ArrowType.Bool.INSTANCE);
     }
 
-    public VectorSchemaRoot inputsToArrow(Map<String, Object[]> inputs) throws Exception {
+    private static Object[] convertArrayElementsToObject(Object array) throws Exception {
+        if (!(array.getClass().isArray())) {
+            throw new Exception("Value is not an array");
+        }
+        if (Array.getLength(array) == 0) {
+            throw new Exception("Array is empty");
+        }
+
+        Object[] result = new Object[Array.getLength(array)];
+        for (int i = 0; i < Array.getLength(array); i++) {
+            Object element = Array.get(array, i);
+            result[i] = element;
+        }
+
+        return result;
+    }
+
+    public static VectorSchemaRoot inputsToArrow(Map<String, Object> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
+        Map<String, Object[]> fqnToArray = new HashMap<>();
 
-        for (Map.Entry<String, Object[]> entry : inputs.entrySet()) {
-            Object[] values = entry.getValue();
-            if (values.length == 0) {
-                throw new Exception("Array for " + entry.getKey() + " is empty");
+        for (Map.Entry<String, Object> entry : inputs.entrySet()) {
+            Object value = entry.getValue();
+            Object[] array;
+            try {
+                array = convertArrayElementsToObject(value);
+            } catch (Exception e) {
+                throw new Exception(String.format("error converting '%s' value to array: %s", entry.getKey(), e.getMessage()));
             }
+            fqnToArray.put(entry.getKey(), array);
+        }
 
-            ArrowType arrowType = javaToArrowType.get(values[0].getClass());
+
+        for (Map.Entry<String, Object[]> entry : fqnToArray.entrySet()) {
+            ArrowType arrowType = javaToArrowType.get(Array.get(entry.getValue(), 0).getClass());
             if (arrowType == null) {
-                throw new Exception("Unsupported data type: " + values[0].getClass().getName());
+                throw new Exception("Unsupported data type: " + Array.get(entry.getValue(), 0).getClass().getSimpleName());
             }
+
             Field field = new Field(entry.getKey(), FieldType.nullable(arrowType), null);
             fields.add(field);
 
@@ -68,13 +95,14 @@ public class FeatherProcessor {
         VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, inputs.size());
 
         for (Field field : fields) {
-            Object[] values = inputs.get(field.getName());
+            Object[] values = fqnToArray.get(field.getName());
             FieldVector vector = root.getVector(field.getName());
 
             // Populate the vector with data
             switch (field.getType().getTypeID()) {
                 case Int -> {
                     IntVector intVector = (IntVector) vector;
+                    intVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
                         intVector.set(i, (int) values[i]);
                     }
@@ -84,12 +112,14 @@ public class FeatherProcessor {
                     ArrowType.FloatingPoint fpType = (ArrowType.FloatingPoint) field.getType();
                     if (fpType.getPrecision() == FloatingPointPrecision.SINGLE) {
                         Float4Vector floatVector = (Float4Vector) vector;
+                        floatVector.allocateNew(values.length);
                         for (int i = 0; i < values.length; i++) {
                             floatVector.set(i, (float) values[i]);
                         }
                         floatVector.setValueCount(values.length);
                     } else {
                         Float8Vector doubleVector = (Float8Vector) vector;
+                        doubleVector.allocateNew(values.length);
                         for (int i = 0; i < values.length; i++) {
                             doubleVector.set(i, (double) values[i]);
                         }
@@ -98,6 +128,7 @@ public class FeatherProcessor {
                 }
                 case Utf8 -> {
                     VarCharVector varcharVector = (VarCharVector) vector;
+                    varcharVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
                         varcharVector.set(i, ((String) values[i]).getBytes());
                     }
@@ -105,6 +136,7 @@ public class FeatherProcessor {
                 }
                 case Bool -> {
                     BitVector boolVector = (BitVector) vector;
+                    boolVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
                         boolVector.set(i, (boolean) values[i] ? 1 : 0);
                     }
