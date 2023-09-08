@@ -5,6 +5,7 @@ import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
+import org.apache.arrow.vector.ipc.ArrowFileWriter;
 import org.apache.arrow.vector.ipc.SeekableReadChannel;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
@@ -15,7 +16,9 @@ import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.util.VectorSchemaRootAppender;
 
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
+import java.nio.channels.Channels;
 import java.util.*;
 
 public class FeatherProcessor {
@@ -49,7 +52,7 @@ public class FeatherProcessor {
         return result;
     }
 
-    public static VectorSchemaRoot inputsToArrow(Map<String, Object> inputs) throws Exception {
+    public static byte[] inputsToArrowBytes(Map<String, Object> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
         Map<String, Object[]> fqnToArray = new HashMap<>();
@@ -146,7 +149,16 @@ public class FeatherProcessor {
             }
         }
 
-        return root;
+        try (
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ArrowFileWriter writer = new ArrowFileWriter(root, null, Channels.newChannel(out));
+        ) {
+            writer.start();
+            writer.writeBatch();
+            writer.end();
+            writer.close();
+            return out.toByteArray();
+        }
     }
 
     public static Table convertBytesToTable(byte[] bytes) throws Exception {
