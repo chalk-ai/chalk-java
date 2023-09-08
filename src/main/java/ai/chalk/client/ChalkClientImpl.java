@@ -25,8 +25,8 @@ public class ChalkClientImpl implements ChalkClient {
     private String branch;
     private final RequestHandler r;
 
-    public ChalkClientImpl() throws ChalkException {
-        this(null);
+    public ChalkClient ChalkClient() throws ChalkException {
+        return ChalkClient.builder().build();
     }
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
@@ -106,7 +106,7 @@ public class ChalkClientImpl implements ChalkClient {
         }
     }
 
-    public String getConfigStr() {
+    private String getConfigStr() {
         String preTable = """
 ChalkClient's config variables and the source of these variables are displayed in the following table.
 """;
@@ -127,5 +127,9 @@ For each variable, we take the first non-empty value, in order, from the followi
         String configTable = SourcedConfig.getConfigTableStr(configMap);
 
         return preTable + configTable + postTable;
+    }
+
+    public void printConfig() {
+        System.out.println(this.getConfigStr());
     }
 }

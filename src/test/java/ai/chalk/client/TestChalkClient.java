@@ -7,7 +7,8 @@ public class TestChalkClient {
     public void test() {
         ChalkClient client = null;
         try {
-            client = ChalkClient.builder().build();
+            client = ChalkClient.create();
+            client.printConfig();
         } catch (Exception e) {
             e.printStackTrace();
             return;
