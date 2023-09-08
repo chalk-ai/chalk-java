@@ -113,7 +113,7 @@ ChalkClient's config variables and the source of these variables are displayed i
         String postTable = """
 
 For each variable, we take the first non-empty value, in order, from the following sources:
-  1. The value passed to the ChalkClient's Builder
+  1. The value passed to ChalkClient's Builder
   2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
   3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
 """;
