@@ -97,7 +97,7 @@ public class RequestHandler {
         return bodyBytes;
     }
 
-    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
+    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = this.getBodyBytes(args.getBody());
@@ -167,7 +167,7 @@ public class RequestHandler {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
-            return objectMapper.readValue(response.body(), args.getResponse());
+            return objectMapper.readValue(response.body(), args.getResponseClass());
         } catch (IOException e) {
             throw new ClientException(
                     "Exception occurred while unmarshalling response",

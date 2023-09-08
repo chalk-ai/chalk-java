@@ -22,4 +22,5 @@ public class OnlineQueryParams {
     private String previewDeploymentId;
     private String queryName;
     private String correlationId;
+    private String branch;
 }

@@ -3,11 +3,13 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryBulkResult;
 import ai.chalk.models.OnlineQueryParams;
 
@@ -34,19 +36,30 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     public OnlineQueryBulkResult OnlineQueryBulk(OnlineQueryParams params) throws ChalkException {
-        // Serialize
+        byte[] bodyBytes;
+        try {
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        }
+
+        SendRequestParams.Builder<OnlineQueryBulkResponse> builder = new SendRequestParams.Builder<>();
+        SendRequestParams<OnlineQueryBulkResponse> request = builder.URL("/v1/query/feather")
+                .responseClass(OnlineQueryBulkResponse.class)
+                .body(bodyBytes)
+                .method("POST")
+                .branch(params.getBranch())
+                .previewDeploymentId(params.getPreviewDeploymentId())
+                .environmentOverride(params.getEnvironmentId())
+                .build();
 
 
-        // Send request
-
-
-        // Deserialize
-
-        return null;
+        OnlineQueryBulkResponse response = this.sendRequest(request);
+        return response.toResult();
     }
 
 
-    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
+    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
         return this.r.sendRequest(args);
     }
 

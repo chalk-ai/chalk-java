@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
-
     @Test
     public void test() {
         try {
