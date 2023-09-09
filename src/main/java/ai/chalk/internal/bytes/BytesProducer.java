@@ -8,11 +8,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class BytesProducer {
     public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParams params) throws Exception {
         byte[] arrowBytes;
+        if (params.getInputs() == null) {
+            throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");
+        }
+        if (params.getOutputs() == null) {
+            throw new Exception("`outputs` cannot be null - please use OnlineQueryParams.builder().outputs(...).build()");
+        }
         try {
             arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
         } catch (Exception e) {
@@ -24,8 +31,8 @@ public class BytesProducer {
 
         // Magic string header
         String magicString = "chal1";
-        ioWriter.writeUTF(magicString);
-        ioWriter.flush();
+        byte[] magicStringBytes = magicString.getBytes(StandardCharsets.UTF_8);
+        ioWriter.write(magicStringBytes);
 
         // Placeholder for the sizes
         byte[] placeholder = new byte[8];
@@ -35,21 +42,22 @@ public class BytesProducer {
         byte[] jsonBytes = new ObjectMapper().writeValueAsBytes(jsonHeader);
 
         // Write json header
-        result.write(placeholder);
-        result.write(jsonBytes);
+        ioWriter.write(placeholder);
+        ioWriter.write(jsonBytes);
 
         // Write arrow
-        result.write(placeholder);
-        result.write(arrowBytes);
+        ioWriter.write(placeholder);
+        ioWriter.write(arrowBytes);
 
         // Fill in the sizes
+        ioWriter.flush();
         byte[] resultBytes = result.toByteArray();
-        int nonBodyLength = magicString.length() + 8 + jsonBytes.length + 8;
+        int nonBodyLength = magicStringBytes.length + 8 + jsonBytes.length + 8;
         int bodyLength = resultBytes.length - nonBodyLength;
         ByteBuffer wrapped = ByteBuffer.wrap(resultBytes).order(ByteOrder.BIG_ENDIAN);
-        wrapped.putLong(magicString.length(), jsonBytes.length);
-        wrapped.putLong(magicString.length() + 8 + jsonBytes.length, bodyLength);
+        wrapped.putLong(magicStringBytes.length, jsonBytes.length);
+        wrapped.putLong(magicStringBytes.length + 8 + jsonBytes.length, bodyLength);
 
-        return resultBytes;
+        return wrapped.array();
     }
 }
