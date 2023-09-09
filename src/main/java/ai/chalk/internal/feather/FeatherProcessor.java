@@ -80,7 +80,7 @@ public class FeatherProcessor {
 
             FieldVector vector;
             switch (field.getType().getTypeID()) {
-                case Int -> vector = new IntVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                case Int -> vector = new BigIntVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 case FloatingPoint -> {
                     ArrowType.FloatingPoint fpType = (ArrowType.FloatingPoint) field.getType();
                     if (fpType.getPrecision() == FloatingPointPrecision.SINGLE) {
@@ -106,7 +106,7 @@ public class FeatherProcessor {
             // Populate the vector with data
             switch (field.getType().getTypeID()) {
                 case Int -> {
-                    IntVector intVector = (IntVector) vector;
+                    BigIntVector intVector = (BigIntVector) vector;
                     intVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
                         intVector.set(i, (int) values[i]);
