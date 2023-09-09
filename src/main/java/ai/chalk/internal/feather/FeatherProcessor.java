@@ -96,7 +96,13 @@ public class FeatherProcessor {
             fieldVectors.add(vector);
         }
 
-        VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, inputs.size());
+        int rowCount;
+        try {
+            rowCount = fieldVectors.get(0).getValueCount();
+        } catch (Exception e) {
+            throw new Exception("All input arrays must be of the same length");
+        }
+        VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, rowCount);
 
         for (Field field : fields) {
             Object[] values = fqnToArray.get(field.getName());
