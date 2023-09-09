@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * QueryMeta represents metadata about a Chalk query.
@@ -44,7 +45,7 @@ public class QueryMeta {
      * At the start of query execution, Chalk computes 'datetime.now()'. This value is used
      * to timestamp computed features.
      */
-    private LocalDateTime queryTimestamp;
+    private ZonedDateTime queryTimestamp;
 
     /**
      * Deterministic hash of the 'structure' of the query. Queries that have the same

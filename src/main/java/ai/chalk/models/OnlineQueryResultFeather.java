@@ -8,6 +8,7 @@ import ai.chalk.internal.bytes.BytesConsumer;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.arrow.vector.table.Table;
@@ -30,6 +31,7 @@ public class OnlineQueryResultFeather {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        mapper.registerModule(new JavaTimeModule());
 
         Map<String, Object> res;
         try {
@@ -63,9 +65,6 @@ public class OnlineQueryResultFeather {
             } catch (Exception e) {
                 throw new ClientException("failed to convert scalar data bytes to VectorSchemaRoot", e);
             }
-
-            System.out.println(">>> SCALAR DATA BYTES");
-
 
             var groupsDataBytesObj = res.get("groups_data");
             if (groupsDataBytesObj == null) {
@@ -135,7 +134,7 @@ public class OnlineQueryResultFeather {
             try {
                 meta = mapper.readValue(metaStr, QueryMeta.class);
             } catch (Exception e) {
-                throw new ClientException(String.format("failed to unmarshal an individual query meta string: %s", metaStr), e);
+                throw new ClientException(String.format("failed to unmarshal query meta: %s", metaStr), e);
             }
         }
 

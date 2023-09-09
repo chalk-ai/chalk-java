@@ -25,9 +25,9 @@ public class FeatherProcessor {
     private static Map<Class<?>, ArrowType> javaToArrowType = new HashMap<>();
 
     static {
-        javaToArrowType.put(Byte.class, new ArrowType.Int(8, true));
-        javaToArrowType.put(Short.class, new ArrowType.Int(16, true));
-        javaToArrowType.put(Integer.class, new ArrowType.Int(32, true));
+        javaToArrowType.put(Byte.class, new ArrowType.Int(64, true));
+        javaToArrowType.put(Short.class, new ArrowType.Int(64, true));
+        javaToArrowType.put(Integer.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Long.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Float.class, new ArrowType.FloatingPoint(FloatingPointPrecision.SINGLE));
         javaToArrowType.put(Double.class, new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE));
@@ -96,18 +96,13 @@ public class FeatherProcessor {
             fieldVectors.add(vector);
         }
 
-        int rowCount = 0;
-        try {
-            rowCount = fieldVectors.get(0).getValueCount();
-        } catch (Exception e) {
-            throw new Exception("All input arrays must be of the same length");
-        }
-        VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, rowCount);
+        VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, 0);
 
+        int lastLength = 0;
         for (Field field : fields) {
             Object[] values = fqnToArray.get(field.getName());
             FieldVector vector = root.getVector(field.getName());
-
+            lastLength = values.length;
             // Populate the vector with data
             switch (field.getType().getTypeID()) {
                 case Int -> {
@@ -154,6 +149,8 @@ public class FeatherProcessor {
                 }
             }
         }
+
+        root.setRowCount(lastLength);
 
         try (
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
