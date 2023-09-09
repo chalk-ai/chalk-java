@@ -96,7 +96,7 @@ public class FeatherProcessor {
             fieldVectors.add(vector);
         }
 
-        int rowCount;
+        int rowCount = 0;
         try {
             rowCount = fieldVectors.get(0).getValueCount();
         } catch (Exception e) {
