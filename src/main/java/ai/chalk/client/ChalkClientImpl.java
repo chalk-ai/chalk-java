@@ -10,7 +10,7 @@ import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryBulkResponse;
-import ai.chalk.models.OnlineQueryBulkResult;
+import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.OnlineQueryParams;
 
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class ChalkClientImpl implements ChalkClient {
         this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
     }
 
-    public OnlineQueryBulkResult OnlineQueryBulk(OnlineQueryParams params) throws ChalkException {
+    public OnlineQueryResult OnlineQuery(OnlineQueryParams params) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);

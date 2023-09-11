@@ -4,7 +4,7 @@ import ai.chalk.exceptions.ChalkException;
 
 import java.net.http.HttpClient;
 
-public class BuilderImpl implements Builder {
+public class BuilderImpl implements ChalkClient.Builder {
     private String clientId;
     private String clientSecret;
     private String apiServer;

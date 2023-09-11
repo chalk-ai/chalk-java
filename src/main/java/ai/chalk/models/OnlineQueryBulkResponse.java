@@ -45,12 +45,12 @@ public class OnlineQueryBulkResponse {
         return new OnlineQueryBulkResponse(resultFeatherMap);
     }
 
-    public OnlineQueryBulkResult toResult() throws ChalkException {
+    public OnlineQueryResult toResult() throws ChalkException {
         if (!(this.queryResults.containsKey("0"))) {
             throw new ClientException("malformed online query bulk response");
         }
         OnlineQueryResultFeather internalResult = this.queryResults.get("0");
-        return new OnlineQueryBulkResult(
+        return new OnlineQueryResult(
                 internalResult.getScalarData(),
                 internalResult.getGroupsData(),
                 internalResult.getErrors(),

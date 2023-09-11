@@ -9,18 +9,14 @@ import java.util.Map;
 
 public class TestOnlineQueryParams {
     @Test
-    public void test() {
-        try {
-            OnlineQueryParams params = OnlineQueryParams.builder().input("user.id", new int[]{1, 2, 3}).output("user.today").output("user.socure_score").build();
-            assert params.getInputs().get("user.id").getClass().isArray();
-            assert params.getOutputs().get(0).equals("user.today");
-            assert params.getOutputs().get(1).equals("user.socure_score");
+    public void test() throws Exception {
+        OnlineQueryParams params = OnlineQueryParams.builder().withInput("user.id", new int[]{1, 2, 3}).withOutputs("user.today", "user.socure_score").build();
+        assert params.getInputs().get("user.id").getClass().isArray();
+        assert params.getOutputs().get(0).equals("user.today");
+        assert params.getOutputs().get(1).equals("user.socure_score");
 
-            Map<String, Object> inputs = params.getInputs();
-            byte[] rootBytes = FeatherProcessor.inputsToArrowBytes(inputs);
-            byte[] requestBodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
-        } catch (Exception e) {
-            assert false;
-        }
+        Map<String, Object> inputs = params.getInputs();
+        byte[] rootBytes = FeatherProcessor.inputsToArrowBytes(inputs);
+        byte[] requestBodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 }

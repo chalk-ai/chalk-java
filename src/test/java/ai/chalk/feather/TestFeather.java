@@ -3,12 +3,13 @@ package ai.chalk.feather;
 
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.models.OnlineQueryBulkResponse;
-import ai.chalk.models.OnlineQueryBulkResult;
+import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +21,7 @@ public class TestFeather {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "bulk_query_response.txt")), "UTF-8");
         byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
-        OnlineQueryBulkResult result = response.toResult();
+        OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         Table groupsTable = result.getGroupsTables().get("user.cups");
         assert scalarsTable.getRowCount() == 5;
@@ -66,12 +67,24 @@ public class TestFeather {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "million_scalar_rows.bin"));
             OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
-            OnlineQueryBulkResult result = response.toResult();
+            OnlineQueryResult result = response.toResult();
             Table scalarsTable = result.getScalarsTable();
             assert scalarsTable.getRowCount() == 1_000_000;
         } catch (Exception e) {
             assert false;
         }
+    }
+
+
+    @Disabled("Fails upon VectorSchemaRootAppender appending. Suspicion is it misjudges " +
+            "the size of the contents since it's not a primitive type. TODO: investigate.")
+    @Test
+    public void testListsInScalarTable() throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "lists_in_scalar_table.bin"));
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryResult result = response.toResult();
+        Table scalarsTable = result.getScalarsTable();
+        assert scalarsTable.getRowCount() == 5;
     }
 
     @Test
@@ -81,4 +94,6 @@ public class TestFeather {
         assert result.getIndex() == 8;
         assert result.getResult() == 123;
     }
+
+
 }
