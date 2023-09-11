@@ -15,16 +15,16 @@ import java.util.Map;
 public class OnlineQueryBulkResult {
 
     /**
-     * scalarsTable is an Arrow Record containing
+     * scalarsTable is an Arrow Table containing
      * scalar features of the target feature class.
      */
     private final Table scalarsTable;
 
     /**
-     * groupsTable is a map from a has-many feature to its
-     * corresponding ArrowRecord.
+     * groupsTables is a map from a has-many feature to its
+     * corresponding Arrow Table.
      */
-    private final Map<String, Table> groupsTable;
+    private final Map<String, Table> groupsTables;
 
     /**
      * errors is a list of errors that occurred during the query.
