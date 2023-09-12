@@ -35,7 +35,7 @@ public class ChalkClientImpl implements ChalkClient {
         this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
     }
 
-    public OnlineQueryResult OnlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
+    public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);

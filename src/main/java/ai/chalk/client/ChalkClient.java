@@ -16,12 +16,14 @@ public interface ChalkClient {
      * <p> Example:
      *
      * <pre>
+     *    {@code
      *    client = ChalkClient.builder()
      *            .withApiServer("https://api.chalk.ai")
      *            .withEnvironmentId("socmc8beyufew")
      *            .withClientId("98wrasfg7dge7wdasg709")
      *            .withClientSecret("h23lkj4h23lkj4z9s78fg908as7fkjh324klj23")
      *            .build();
+     *    }
      * </pre>
      *
      * @return a new ChalkClient builder
@@ -52,24 +54,26 @@ public interface ChalkClient {
      * OnlineQuery computes features values using online resolvers.
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
      *
-     * <p> Example:
+     * <p>
+     *     Example usage:
+     *     <pre>
+     *         {@code
+     *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+     *         .withInput("user.id", new int[] {1, 2, 3})
+     *         .withOutputs("user.email", "user.transactions")
+     *         .build();
      *
-     * <pre>
-     * client = ChalkClient.create();
-     * result = client.OnlineQuery(OnlineQueryParams.builder()
-     *         .input("user.id", new int[] {1, 2, 3})
-     *         .outputs("user.socure_score", "user.email", "user.transactions")
-     *         .build()
-     *         );
-     *
-     * </pre>
+     *         result = client.onlineQuery(params);
+     *         }
+     *     </pre>
+     * </p>
      *
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      *
      * @return {@link OnlineQueryResult}
      * @throws ChalkException
      */
-    OnlineQueryResult OnlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
+    OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
 
     /**
      * Prints the current ChalkClient configuration and its sources to stdout.

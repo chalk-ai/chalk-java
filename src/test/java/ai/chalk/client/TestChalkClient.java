@@ -20,7 +20,7 @@ public class TestChalkClient {
 
             client.printConfig();
 
-            var result = client.OnlineQuery(
+            var result = client.onlineQuery(
                 OnlineQueryParams.builder()
                     .withInput("user.id", userIds)
                     .withOutput("user.socure_score")

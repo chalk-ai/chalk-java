@@ -10,12 +10,58 @@ import java.util.List;
 import java.time.Duration;
 import java.util.Map;
 
+
+/**
+ * OnlineQueryParams holds the parameters for an online query.
+ * It is the starting point for constructing an instance of
+ * OnlineQueryParamsComplete. Both `withInputs` and `withOutputs`
+ * must be called at least once.
+ *
+ * <p>
+ *     Example usage:
+ *     <pre>
+ *         {@code
+ *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+ *         .withInput("user.id", new int[] {1, 2, 3})
+ *         .withOutputs("user.email", "user.transactions")
+ *         .build();
+ *
+ *         result = client.onlineQuery(params);
+ *         }
+ *     </pre>
+ * </p>
+ */
 @Getter @AllArgsConstructor
 public class OnlineQueryParams {
+    // The features for which there are known values, mapped
+    // to those values. Set by `OnlineQueryParams.builder().withInputs`.
+
+    /**
+     * The features for which there are known values, mapped
+     * to those values. Set by
+     * `OnlineQueryParams.builder().withInputs`.
+    **/
     private Map<String, Object> inputs;
+
+    /**
+     * The features that you'd like to compute from the inputs.
+     * Set by `OnlineQueryParams.builder().withOutputs`.
+     */
     private List<String> outputs;
+
+    /**
+     * Maximum staleness overrides for any output features or intermediate features.
+     * Set by `OnlineQueryParams.builder().withStaleness`.
+     */
     private Map<String, Duration> staleness;
+
+    /**
+     * Metadata to attach to the query. Set by `OnlineQueryParams.builder().withMeta`.
+     */
     private Map<String, String> meta;
+
+    // tags is a list of tags to apply to the query.
+
     private List<String> tags;
     private boolean includeMeta;
     private boolean includeMetrics;
@@ -27,7 +73,7 @@ public class OnlineQueryParams {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class MagicBuilder {
+    public static class Builder {
         protected Map<String, Object> inputs;
         protected List<String> outputs;
         protected Map<String, Duration> staleness;
@@ -42,7 +88,7 @@ public class OnlineQueryParams {
         protected String branch;
 
         // withInputs take alternating key, value pairs and adds them to the inputs map
-        public MagicBuilder withInputs(Object... inputs) {
+        public Builder withInputs(Object... inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -59,7 +105,7 @@ public class OnlineQueryParams {
         }
 
         // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
-        public MagicBuilder withOutputs(Object... outputs) {
+        public Builder withOutputs(Object... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
             }
@@ -75,12 +121,12 @@ public class OnlineQueryParams {
 
 
         // withOutput adds a single output to the outputs list
-        public MagicBuilder withOutput(String output) {
+        public Builder withOutput(String output) {
             return this.withOutputs(output);
         }
 
         // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public MagicBuilder withStaleness(Object... staleness) {
+        public Builder withStaleness(Object... staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
@@ -97,7 +143,7 @@ public class OnlineQueryParams {
         }
 
         // withMeta adds a single key, value pair to the meta map
-        public MagicBuilder withMeta(String key, String value) {
+        public Builder withMeta(String key, String value) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
@@ -106,7 +152,7 @@ public class OnlineQueryParams {
         }
 
         // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public MagicBuilder withTags(Object... tags) {
+        public Builder withTags(Object... tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
@@ -121,48 +167,48 @@ public class OnlineQueryParams {
         }
 
         // withTag adds a single tag to the tags list
-        public MagicBuilder withTag(String tag) {
+        public Builder withTag(String tag) {
             return this.withTags(tag);
         }
 
         // withIncludeMeta sets the includeMeta flag
-        public MagicBuilder withIncludeMeta(boolean includeMeta) {
+        public Builder withIncludeMeta(boolean includeMeta) {
             this.includeMeta = includeMeta;
             return this;
         }
 
         // withIncludeMetrics sets the includeMetrics flag
-        public MagicBuilder withIncludeMetrics(boolean includeMetrics) {
+        public Builder withIncludeMetrics(boolean includeMetrics) {
             this.includeMetrics = includeMetrics;
             return this;
         }
 
         // withEnvironmentId sets the environmentId
-        public MagicBuilder withEnvironmentId(String environmentId) {
+        public Builder withEnvironmentId(String environmentId) {
             this.environmentId = environmentId;
             return this;
         }
 
         // withPreviewDeploymentId sets the previewDeploymentId
-        public MagicBuilder withPreviewDeploymentId(String previewDeploymentId) {
+        public Builder withPreviewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
             return this;
         }
 
         // withQueryName sets the queryName
-        public MagicBuilder withQueryName(String queryName) {
+        public Builder withQueryName(String queryName) {
             this.queryName = queryName;
             return this;
         }
 
         // withCorrelationId sets the correlationId
-        public MagicBuilder withCorrelationId(String correlationId) {
+        public Builder withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
             return this;
         }
 
         // withBranch sets the branch
-        public MagicBuilder withBranch(String branch) {
+        public Builder withBranch(String branch) {
             this.branch = branch;
             return this;
         }
@@ -173,7 +219,7 @@ public class OnlineQueryParams {
 
     }
 
-    public static class BuilderComplete extends MagicBuilder {
+    public static class BuilderComplete extends Builder {
         public BuilderComplete(
             Map<String, Object> inputs,
             List<String> outputs,
@@ -196,7 +242,7 @@ public class OnlineQueryParams {
         }
     }
 
-    public static class BuilderWithInputs extends MagicBuilder {
+    public static class BuilderWithInputs extends Builder {
         public BuilderWithInputs(
             Map<String, Object> inputs,
             List<String> outputs,
@@ -225,7 +271,7 @@ public class OnlineQueryParams {
         }
     }
 
-    public static class BuilderWithOutputs extends MagicBuilder {
+    public static class BuilderWithOutputs extends Builder {
         public BuilderWithOutputs(
                 Map<String, Object> inputs,
                 List<String> outputs,
@@ -255,8 +301,8 @@ public class OnlineQueryParams {
     }
 
     @NoArgsConstructor
-    public static class Builder extends MagicBuilder {
-        public Builder(
+    public static class BuilderSeed extends Builder {
+        public BuilderSeed(
                 Map<String, Object> inputs,
                 List<String> outputs,
                 Map<String, Duration> staleness,
@@ -297,8 +343,8 @@ public class OnlineQueryParams {
         }
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static BuilderSeed builder() {
+        return new BuilderSeed();
     }
 }
 

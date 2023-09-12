@@ -19,7 +19,8 @@ public class OnlineQueryResult {
      * features of the target feature class. For example, if
      * the target feature class "User" has the attributes
      * "email" and "name", then the scalarsTable will contain
-     * these two columns.
+     * these two columns. Each row in the table corresponds to
+     * a single User in the query.
      */
     private final Table scalarsTable;
 
@@ -28,7 +29,7 @@ public class OnlineQueryResult {
      * corresponding Arrow Table. For example, if the target
      * feature class "User" has an attribute "transactions"
      * which is a has-many feature, then all transactions
-     * associated with any of the users in the query will be
+     * associated with any of the Users in the query will be
      * returned in the groupsTables map, under the key
      * "user.transactions".
      */
