@@ -174,7 +174,20 @@ public class OnlineQueryParams {
     }
 
     public static class BuilderComplete extends MagicBuilder {
-        public BuilderComplete(Map<String, Object> inputs, List<String> outputs, Map<String, Duration> staleness, Map<String, String> meta, List<String> tags, boolean includeMeta, boolean includeMetrics, String environmentId, String previewDeploymentId, String queryName, String correlationId, String branch) {
+        public BuilderComplete(
+            Map<String, Object> inputs,
+            List<String> outputs,
+            Map<String, Duration> staleness,
+            Map<String, String> meta,
+            List<String> tags,
+            boolean includeMeta,
+            boolean includeMetrics,
+            String environmentId,
+            String previewDeploymentId,
+            String queryName,
+            String correlationId,
+            String branch
+        ) {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
@@ -184,7 +197,20 @@ public class OnlineQueryParams {
     }
 
     public static class BuilderWithInputs extends MagicBuilder {
-        public BuilderWithInputs(Map<String, Object> inputs, List<String> outputs, Map<String, Duration> staleness, Map<String, String> meta, List<String> tags, boolean includeMeta, boolean includeMetrics, String environmentId, String previewDeploymentId, String queryName, String correlationId, String branch) {
+        public BuilderWithInputs(
+            Map<String, Object> inputs,
+            List<String> outputs,
+            Map<String, Duration> staleness,
+            Map<String, String> meta,
+            List<String> tags,
+            boolean includeMeta,
+            boolean includeMetrics,
+            String environmentId,
+            String previewDeploymentId,
+            String queryName,
+            String correlationId,
+            String branch
+        ) {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
@@ -200,7 +226,20 @@ public class OnlineQueryParams {
     }
 
     public static class BuilderWithOutputs extends MagicBuilder {
-        public BuilderWithOutputs(Map<String, Object> inputs, List<String> outputs, Map<String, Duration> staleness, Map<String, String> meta, List<String> tags, boolean includeMeta, boolean includeMetrics, String environmentId, String previewDeploymentId, String queryName, String correlationId, String branch) {
+        public BuilderWithOutputs(
+                Map<String, Object> inputs,
+                List<String> outputs,
+                Map<String, Duration> staleness,
+                Map<String, String> meta,
+                List<String> tags,
+                boolean includeMeta,
+                boolean includeMetrics,
+                String environmentId,
+                String previewDeploymentId,
+                String queryName,
+                String correlationId,
+                String branch
+        ) {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
@@ -217,7 +256,20 @@ public class OnlineQueryParams {
 
     @NoArgsConstructor
     public static class Builder extends MagicBuilder {
-        public Builder(Map<String, Object> inputs, List<String> outputs, Map<String, Duration> staleness, Map<String, String> meta, List<String> tags, boolean includeMeta, boolean includeMetrics, String environmentId, String previewDeploymentId, String queryName, String correlationId, String branch) {
+        public Builder(
+                Map<String, Object> inputs,
+                List<String> outputs,
+                Map<String, Duration> staleness,
+                Map<String, String> meta,
+                List<String> tags,
+                boolean includeMeta,
+                boolean includeMetrics,
+                String environmentId,
+                String previewDeploymentId,
+                String queryName,
+                String correlationId,
+                String branch
+        ) {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
