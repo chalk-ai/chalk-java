@@ -1,13 +1,17 @@
 package ai.chalk.client;
 
 
-import ai.chalk.ai.chalk.exceptions.ChalkException;
-import ai.chalk.ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
+import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.models.OnlineQueryResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,18 +25,41 @@ public class ChalkClientImpl implements ChalkClient {
     private String branch;
     private final RequestHandler r;
 
-    public ChalkClientImpl() throws ChalkException {
-        this(null);
+    public ChalkClient ChalkClient() throws ChalkException {
+        return ChalkClient.builder().build();
     }
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
-        // Side-effect of populating instance config variables
+        // Side effect of populating instance config variables
         this.resolveConfig(config);
         this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
     }
 
+    public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
+        byte[] bodyBytes;
+        try {
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        }
 
-    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
+        SendRequestParams.Builder<OnlineQueryBulkResponse> builder = new SendRequestParams.Builder<>();
+        SendRequestParams<OnlineQueryBulkResponse> request = builder.URL("/v1/query/feather")
+                .responseClass(OnlineQueryBulkResponse.class)
+                .body(bodyBytes)
+                .method("POST")
+                .branch(params.getBranch())
+                .previewDeploymentId(params.getPreviewDeploymentId())
+                .environmentOverride(params.getEnvironmentId())
+                .build();
+
+
+        OnlineQueryBulkResponse response = this.sendRequest(request);
+        return response.toResult();
+    }
+
+
+    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
         return this.r.sendRequest(args);
     }
 
@@ -79,16 +106,20 @@ public class ChalkClientImpl implements ChalkClient {
         }
     }
 
-    public String getConfigStr() {
+    private String getConfigStr() {
         String preTable = """
+
+
 ChalkClient's config variables and the source of these variables are displayed in the following table.
 """;
         String postTable = """
 
 For each variable, we take the first non-empty value, in order, from the following sources:
-  1. The value passed to the ChalkClient's Builder
+  1. The value passed to ChalkClient's Builder
   2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
   3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+  
+  
 """;
 
         Map<String, SourcedConfig> configMap = new HashMap<>();
@@ -100,5 +131,9 @@ For each variable, we take the first non-empty value, in order, from the followi
         String configTable = SourcedConfig.getConfigTableStr(configMap);
 
         return preTable + configTable + postTable;
+    }
+
+    public void printConfig() {
+        System.out.println(this.getConfigStr());
     }
 }

@@ -1,14 +1,16 @@
 package ai.chalk.internal.request;
 
-import ai.chalk.ai.chalk.exceptions.ChalkException;
-import ai.chalk.ai.chalk.exceptions.ClientException;
-import ai.chalk.ai.chalk.exceptions.HttpException;
+import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ServerException;
 import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.models.ChalkHttpException;
 import ai.chalk.internal.request.models.GetTokenRequest;
 import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -54,7 +56,7 @@ public class RequestHandler {
 
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json");
-        headers.put("User-Agent", "chalk-go-0.0");
+        headers.put("User-Agent", "chalk-java");
         headers.put("X-Chalk-Client-Id", this.clientId.getValue());
 
         if (branchOverride != null && !branchOverride.isEmpty()) {
@@ -88,6 +90,7 @@ public class RequestHandler {
             bodyBytes = (byte[]) body;
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
             bodyBytes = objectMapper.writeValueAsBytes(body);
         }
@@ -95,7 +98,7 @@ public class RequestHandler {
         return bodyBytes;
     }
 
-    public Object sendRequest(SendRequestParams<?> args) throws ChalkException {
+    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = this.getBodyBytes(args.getBody());
@@ -160,16 +163,31 @@ public class RequestHandler {
             throw getHttpException(response, request.uri().toString());
         }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        try {
-            return objectMapper.readValue(response.body(), args.getResponse());
-        } catch (IOException e) {
-            throw new ClientException(
-                    "Exception occurred while unmarshalling response",
-                    e
-            );
+
+        if (args.getResponseClass() == OnlineQueryBulkResponse.class) {
+            // Custom Chalk byte-packing deserialization
+            try {
+                return (T) OnlineQueryBulkResponse.fromBytes(response.body());
+            } catch (Exception e) {
+                throw new ClientException(
+                        "Exception occurred while unmarshalling response",
+                        e
+                );
+            }
+        } else {
+            // JSON deserialization
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            try {
+                return objectMapper.readValue(response.body(), args.getResponseClass());
+            } catch (IOException e) {
+                throw new ClientException(
+                        "Exception occurred while unmarshalling response",
+                        e
+                );
+            }
         }
     }
 
@@ -210,7 +228,7 @@ public class RequestHandler {
         GetTokenResponse response = null;
         try {
             SendRequestParams<GetTokenResponse> params = new SendRequestParams<GetTokenResponse>(body, "POST", "v1/oauth/token", GetTokenResponse.class, true, null, null, null);
-            response = (GetTokenResponse) this.sendRequest(params);
+            response = this.sendRequest(params);
         } catch (Exception e) {
             throw new ClientException("Error getting access token", e);
         }
@@ -237,16 +255,20 @@ public class RequestHandler {
         ChalkHttpException chalkException;
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
-            return new ClientException(
-                    "Exception occurred while parsing error response",
-                    e
+            // TODO: Log error here when we have logging
+            return new ServerException(
+                    res.statusCode(),
+                    res.body().length,
+                    URL
             );
         }
 
-        return new HttpException(
+        return new ServerException(
                 chalkException,
                 res.statusCode(),
                 res.body().length,
