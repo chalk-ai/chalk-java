@@ -2,13 +2,17 @@ package ai.chalk.feather;
 
 
 import ai.chalk.internal.bytes.BytesConsumer;
+import ai.chalk.internal.bytes.BytesProducer;
+import ai.chalk.internal.feather.FeatherProcessor;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.apache.arrow.vector.util.JsonStringHashMap;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
@@ -63,7 +67,7 @@ public class TestFeather {
     }
 
     @Test
-    public void testMillionRows() {
+    public void testMillionRowsInOutput() {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "million_scalar_rows.bin"));
             OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
@@ -75,9 +79,25 @@ public class TestFeather {
         }
     }
 
+    @Disabled("Should theoretically work but doesn't. But we successfully " +
+            "get a response back when tested end-to-end locally.")
+    @Test
+    public void testMillionRowsInInput() throws Exception {
+        // Failing because 'Cannot invoke "org.apache.arrow.flatbuf.RecordBatch.nodesLength()"
+        // because "recordBatchFB" is null'
+        int[] intArray = new int[1_000_000];
+        for (int i = 0; i < 1_000_000; i++) {
+            intArray[i] = i;
+        }
+        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInputs("user.id", intArray).withOutput("doesntmatter").build());
+        try (
+            Table table = FeatherProcessor.convertBytesToTable(bytes);
+        ) {
+            assert table.getRowCount() == 1_000_000;
+        }
+    }
 
-    @Disabled("Fails upon VectorSchemaRootAppender appending. Suspicion is it misjudges " +
-            "the size of the contents since it's not a primitive type. TODO: investigate.")
+
     @Test
     public void testListsInScalarTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "lists_in_scalar_table.bin"));
@@ -88,12 +108,28 @@ public class TestFeather {
     }
 
     @Test
+    public void testStructsInScalarTable() throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "structs_in_scalar_table.bin"));
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryResult result = response.toResult();
+        Table scalarsTable = result.getScalarsTable();
+        assert scalarsTable.getRowCount() == 5;
+        assert scalarsTable.getSchema().findField("user.lat_lng").getType() instanceof ArrowType.Struct;
+        var structVector = scalarsTable.getVectorCopy("user.lat_lng");
+        var sampleObject = structVector.getObject(0);
+        assert sampleObject instanceof JsonStringHashMap;
+        assert ((JsonStringHashMap) sampleObject).get("lat") instanceof Double;
+        assert ((JsonStringHashMap) sampleObject).get("lng") instanceof Double;
+        assert ((JsonStringHashMap) sampleObject).get("lat").equals(41.9);
+        assert ((JsonStringHashMap) sampleObject).get("lng").equals(71.9);
+    }
+
+
+    @Test
     public void testLengthConsumption() throws Exception {
         byte[] intBytes = BytesConsumer.intToEightBytes(123);
         BytesConsumer.ConsumptionResult<Long> result = BytesConsumer.consume8ByteLen(0, intBytes);
         assert result.getIndex() == 8;
         assert result.getResult() == 123;
     }
-
-
 }

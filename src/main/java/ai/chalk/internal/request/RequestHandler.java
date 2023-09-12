@@ -123,6 +123,7 @@ public class RequestHandler {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
                 .uri(uri)
+                .version(HttpClient.Version.HTTP_1_1)
                 .headers(headers.entrySet().stream()
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
                         .toArray(String[]::new));
@@ -210,6 +211,7 @@ public class RequestHandler {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(originalRequest.method(), HttpRequest.BodyPublishers.ofByteArray(originalBodyBytes))
                 .uri(originalRequest.uri())
+                .version(HttpClient.Version.HTTP_1_1)
                 .headers(originalRequest.headers().map().entrySet().stream()
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue().get(0)))
                         .toArray(String[]::new));

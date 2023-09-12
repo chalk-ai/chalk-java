@@ -165,11 +165,12 @@ public class FeatherProcessor {
     }
 
     public static Table convertBytesToTable(byte[] bytes) throws Exception {
-       SeekableReadChannel seekableReadChannel = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
+        SeekableReadChannel seekableReadChannel = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
         ArrowFileReader arrowFileReader = new ArrowFileReader(seekableReadChannel, new RootAllocator(Long.MAX_VALUE), new CommonsCompressionFactory());
 
         VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
         VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE));
+        collectorRoot.allocateNew();
         while (arrowFileReader.loadNextBatch()) {
               VectorSchemaRootAppender.append(collectorRoot, readerRoot);
         }
