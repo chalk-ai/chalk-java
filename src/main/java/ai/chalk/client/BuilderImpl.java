@@ -1,9 +1,11 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
+import lombok.Getter;
 
 import java.net.http.HttpClient;
 
+@Getter
 public class BuilderImpl implements ChalkClient.Builder {
     private String clientId;
     private String clientSecret;
@@ -21,37 +23,30 @@ public class BuilderImpl implements ChalkClient.Builder {
         this.httpClient = null;
     }
 
-    public BuilderImpl setClientId(String clientId) {
+    public BuilderImpl withClientId(String clientId) {
         this.clientId = clientId;
         return this;
     }
-    public BuilderImpl setClientSecret(String clientSecret) {
+    public BuilderImpl withClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
-    public BuilderImpl setApiServer(String apiServer) {
+    public BuilderImpl withApiServer(String apiServer) {
         this.apiServer = apiServer;
         return this;
     }
-    public BuilderImpl setEnvironmentId(String environmentId) {
+    public BuilderImpl withEnvironmentId(String environmentId) {
         this.environmentId = environmentId;
         return this;
     }
-    public BuilderImpl setBranch(String branch) {
+    public BuilderImpl withBranch(String branch) {
         this.branch = branch;
         return this;
     }
-    public BuilderImpl setHttpClient(HttpClient httpClient) {
+    public BuilderImpl withHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
-
-    public String getClientId() { return clientId; }
-    public String getClientSecret() { return clientSecret; }
-    public String getApiServer() { return apiServer; }
-    public String getEnvironmentId() { return environmentId; }
-    public String getBranch() { return branch; }
-    public HttpClient getHttpClient() { return httpClient; }
 
     public ChalkClient build() throws ChalkException {
         return new ChalkClientImpl(this);

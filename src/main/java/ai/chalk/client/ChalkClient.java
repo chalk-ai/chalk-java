@@ -1,6 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
+import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.OnlineQueryParams;
 
@@ -42,7 +43,7 @@ public interface ChalkClient {
      *
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      */
-    OnlineQueryResult OnlineQuery(OnlineQueryParams params) throws ChalkException;
+    OnlineQueryResult OnlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
 
     /**
      * Prints the current ChalkClient configuration and its sources to stdout.
@@ -51,12 +52,12 @@ public interface ChalkClient {
 
 
     public interface Builder {
-        public Builder setClientId(String clientId);
-        public Builder setClientSecret(String clientSecret);
-        public Builder setApiServer(String apiServer);
-        public Builder setEnvironmentId(String environmentId);
-        public Builder setBranch(String branch);
-        public Builder setHttpClient(HttpClient httpClient);
+        public Builder withClientId(String clientId);
+        public Builder withClientSecret(String clientSecret);
+        public Builder withApiServer(String apiServer);
+        public Builder withEnvironmentId(String environmentId);
+        public Builder withBranch(String branch);
+        public Builder withHttpClient(HttpClient httpClient);
 
         public String getClientId();
         public String getClientSecret();
