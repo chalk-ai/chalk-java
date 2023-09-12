@@ -8,7 +8,7 @@ public class TestChalkClient {
     public void test() throws Exception {
         ChalkClient client = ChalkClient.create();
         client.printConfig();
-        int[] userIds = new int[] {1};
+        int[] userIds = new int[] {1, 2, 3, 4, 5};
 
         var result = client.onlineQuery(
             OnlineQueryParams.builder()
