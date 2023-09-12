@@ -19,8 +19,9 @@ public class ServerError {
     private ErrorCode code;
 
     /**
-     * The category of the error, given in the type field for the error codes.
-     * This will be one of "REQUEST", "NETWORK", and "FIELD".
+     * The category of the error, given in the type field for
+     * the error codes. This will be one of "REQUEST", "NETWORK",
+     * and "FIELD".
      */
     private ErrorCodeCategory category;
 
@@ -35,12 +36,14 @@ public class ServerError {
     private ResolverException exception;
 
     /**
-     * The fully qualified name of the failing feature, e.g. `user.identity.has_voip_phone`.
+     * The fully qualified name of the failing feature, e.g.
+     * `user.identity.has_voip_phone`.
      */
     private String feature;
 
     /**
-     * The fully qualified name of the failing resolver, e.g. `my.project.get_fraud_score`.
+     * The fully qualified name of the failing resolver, e.g.
+     * `my.project.get_fraud_score`.
      */
     private String resolver;
 }

@@ -9,7 +9,7 @@ import ai.chalk.internal.request.models.ChalkHttpException;
 import ai.chalk.internal.request.models.GetTokenRequest;
 import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
-import ai.chalk.models.OnlineQueryBulkResponse;
+import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

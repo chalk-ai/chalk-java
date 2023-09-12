@@ -1,8 +1,9 @@
-package ai.chalk.models;
+package ai.chalk.internal.request.models;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.bytes.BytesConsumer;
+import ai.chalk.models.OnlineQueryResult;
 import lombok.AllArgsConstructor;
 
 import java.util.HashMap;

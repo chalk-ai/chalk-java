@@ -1,10 +1,11 @@
-package ai.chalk.models;
+package ai.chalk.internal.request.models;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.feather.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesConsumer;
+import ai.chalk.models.QueryMeta;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

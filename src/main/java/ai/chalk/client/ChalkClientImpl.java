@@ -9,7 +9,7 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.SendRequestParams;
-import ai.chalk.models.OnlineQueryBulkResponse;
+import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 

@@ -2,7 +2,7 @@ package ai.chalk.feather;
 
 
 import ai.chalk.internal.bytes.BytesConsumer;
-import ai.chalk.models.OnlineQueryBulkResponse;
+import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;

@@ -7,10 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ResolverException {
+    // The name of the class of the exception.
+    private String kind;
 
-    private String kind;        // Equivalent to Kind in the Go struct
-    private String message;     // Equivalent to Message in the Go struct
-    private String stacktrace;  // Equivalent to Stacktrace in the Go struct
+    // The message taken from the exception.
+    private String message;
+
+    // The stacktrace produced by the code.
+    private String stacktrace;
 
     @Override
     public String toString() {
