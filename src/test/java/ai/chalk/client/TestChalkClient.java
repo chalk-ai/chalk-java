@@ -10,6 +10,14 @@ public class TestChalkClient {
         int[] userIds = new int[] {1};
         try {
             client = ChalkClient.create();
+
+            client = ChalkClient.builder()
+                    .withApiServer("https://api.chalk.ai")
+                    .withEnvironmentId("tmnmc8beyujew")
+                    .withClientId("98wrasfg7dge7wdasg709")
+                    .withClientSecret("h23lkj4h23lkj4z9s78fg908as7fkjh324klj23")
+                    .build();
+
             client.printConfig();
 
             var result = client.OnlineQuery(

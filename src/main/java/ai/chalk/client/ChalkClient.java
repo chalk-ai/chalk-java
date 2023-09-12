@@ -9,6 +9,23 @@ import java.net.http.HttpClient;
 
 public interface ChalkClient {
 
+    /**
+     * Creates a new ChalkClient builder that can be used
+     * to create a ChalkClient instance with custom configuration.
+     *
+     * <p> Example:
+     *
+     * <pre>
+     *    client = ChalkClient.builder()
+     *            .withApiServer("https://api.chalk.ai")
+     *            .withEnvironmentId("socmc8beyufew")
+     *            .withClientId("98wrasfg7dge7wdasg709")
+     *            .withClientSecret("h23lkj4h23lkj4z9s78fg908as7fkjh324klj23")
+     *            .build();
+     * </pre>
+     *
+     * @return a new ChalkClient builder
+     */
     static Builder builder() {
         return new BuilderImpl();
     }
@@ -16,6 +33,13 @@ public interface ChalkClient {
 
     /**
      * <p> Creates a new default ChalkClient instance.
+     * The default ChalkClient instance is configured with config variables sourced as such:
+     *
+     * <p> For each variable, we take the first non-empty value, in order, from the following sources:
+     * <p>  1. The value of the config's corresponding environment variable (see {@link ConfigEnvVars}).
+     * <p>  2. The value in the project root's 'chalk.yaml' or 'chalk.yml' file.
+     *
+     * <p> To override the settings above with custom configuration, use {@link ChalkClient#builder()}.
      *
      * @return a new default ChalkClient instance
      * @throws ChalkException
@@ -27,21 +51,23 @@ public interface ChalkClient {
     /**
      * OnlineQuery computes features values using online resolvers.
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
-     * <p> See {@link OnlineQueryResult} for more details on the result.
      *
      * <p> Example:
      *
      * <pre>
      * client = ChalkClient.create();
      * result = client.OnlineQuery(OnlineQueryParams.builder()
-     *    .input("user.id", new int[] {1, 2, 3})
-     *    .outputs("user.socure_score", "user.email", "user.age")
-     *    .build()
-     * );
+     *         .input("user.id", new int[] {1, 2, 3})
+     *         .outputs("user.socure_score", "user.email", "user.transactions")
+     *         .build()
+     *         );
      *
      * </pre>
      *
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
+     *
+     * @return {@link OnlineQueryResult}
+     * @throws ChalkException
      */
     OnlineQueryResult OnlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
 
@@ -52,11 +78,41 @@ public interface ChalkClient {
 
 
     public interface Builder {
+
+        /**
+         * Sets the client ID. Used for authentication.
+         */
         public Builder withClientId(String clientId);
+
+        /**
+         * Sets the client secret. Used for authentication.
+         */
         public Builder withClientSecret(String clientSecret);
+
+        /**
+         * Sets the API server URL. Typically set to
+         * 'https://api.chalk.ai'.
+         */
         public Builder withApiServer(String apiServer);
+
+        /**
+         * Sets the environment ID. This is the identifier
+         * that distinguishes between different environments
+         * in your Chalk project.
+         */
         public Builder withEnvironmentId(String environmentId);
+
+        /**
+         * Sets the branch name. This is the identifier
+         * that distinguishes between different branches
+         * of a particular environment.
+         */
         public Builder withBranch(String branch);
+
+        /**
+         * Sets the HTTP client. This is useful for setting
+         * custom timeouts, etc.
+         */
         public Builder withHttpClient(HttpClient httpClient);
 
         public String getClientId();
