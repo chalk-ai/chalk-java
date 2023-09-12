@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 public class TestChalkClient {
     @Test
     public void test() throws Exception {
-        ChalkClient client = null;
-        int[] userIds = new int[] {1};
-        client = ChalkClient.create();
+        ChalkClient client = ChalkClient.create();
         client.printConfig();
+        int[] userIds = new int[] {1};
 
         var result = client.onlineQuery(
             OnlineQueryParams.builder()
