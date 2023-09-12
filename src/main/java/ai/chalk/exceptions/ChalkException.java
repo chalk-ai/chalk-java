@@ -1,5 +1,8 @@
 package ai.chalk.exceptions;
 
+/**
+ * Base class for all Chalk exceptions.
+ */
 public abstract class ChalkException extends Exception {
     public ChalkException(String message) {
         super(message);

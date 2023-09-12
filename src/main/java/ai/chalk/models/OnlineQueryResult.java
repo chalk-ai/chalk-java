@@ -41,7 +41,7 @@ public class OnlineQueryResult {
     private final ServerError[] errors;
 
     /**
-     * Execution metadata for the query. See QueryMeta for
+     * meta contains execution metadata for the query. See QueryMeta for
      * details.
      */
     private final QueryMeta meta;

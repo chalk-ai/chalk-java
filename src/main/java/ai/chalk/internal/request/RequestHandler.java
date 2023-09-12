@@ -2,7 +2,7 @@ package ai.chalk.internal.request;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
-import ai.chalk.exceptions.HttpException;
+import ai.chalk.exceptions.ServerException;
 import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.models.ChalkHttpException;
@@ -261,14 +261,14 @@ public class RequestHandler {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
             // TODO: Log error here when we have logging
-            return new HttpException(
+            return new ServerException(
                     res.statusCode(),
                     res.body().length,
                     URL
             );
         }
 
-        return new HttpException(
+        return new ServerException(
                 chalkException,
                 res.statusCode(),
                 res.body().length,

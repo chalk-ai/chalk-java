@@ -3,8 +3,13 @@ package ai.chalk.exceptions;
 import ai.chalk.internal.request.models.ChalkHttpException;
 import lombok.Getter;
 
+
+/**
+ * Exception thrown when the server errors out from a cause
+ * that is not directly related to the Chalk query itself.
+ */
 @Getter
-public class HttpException extends ChalkException {
+public class ServerException extends ChalkException {
     public String detail;
     public String trace;
     public ServerError[] errors;
@@ -12,7 +17,7 @@ public class HttpException extends ChalkException {
     public int contentLength;
     public String URL;
 
-    public HttpException(ChalkHttpException e, int statusCode, int contentLength, String URL) {
+    public ServerException(ChalkHttpException e, int statusCode, int contentLength, String URL) {
         super(e.toString());
         this.detail = e.getDetail();
         this.trace = e.getTrace();
@@ -22,8 +27,8 @@ public class HttpException extends ChalkException {
         this.URL = URL;
     }
 
-    public HttpException(int statusCode, int contentLength, String URL) {
-        super(String.format("HTTP Error: %d", statusCode));
+    public ServerException(int statusCode, int contentLength, String URL) {
+        super(String.format("Server Exception with status code: %d", statusCode));
         this.statusCode = statusCode;
         this.contentLength = contentLength;
         this.URL = URL;
