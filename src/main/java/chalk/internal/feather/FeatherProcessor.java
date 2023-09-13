@@ -160,6 +160,7 @@ public class FeatherProcessor {
             writer.writeBatch();
             writer.end();
             writer.close();
+            root.close();
             return out.toByteArray();
         }
     }
@@ -168,15 +169,18 @@ public class FeatherProcessor {
         SeekableReadChannel seekableReadChannel = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
         ArrowFileReader arrowFileReader = new ArrowFileReader(seekableReadChannel, new RootAllocator(Long.MAX_VALUE), new CommonsCompressionFactory());
 
-        VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
-        VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE));
-        collectorRoot.allocateNew();
-        while (arrowFileReader.loadNextBatch()) {
-              VectorSchemaRootAppender.append(collectorRoot, readerRoot);
-        }
+        try (
+            VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
+            VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE))
+        ) {
+            collectorRoot.allocateNew();
+            while (arrowFileReader.loadNextBatch()) {
+                VectorSchemaRootAppender.append(collectorRoot, readerRoot);
+            }
 
-        Table table = new Table(collectorRoot);
-        arrowFileReader.close();
-        return table;
+            Table table = new Table(collectorRoot);
+            arrowFileReader.close();
+            return table;
+        }
     }
 }
