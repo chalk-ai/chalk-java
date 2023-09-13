@@ -3,7 +3,7 @@ plugins {
     id "io.freefair.lombok" version "8.3"
 }
 
-group 'ai.chalk'
+group 'chalk'
 version '0.0'
 
 repositories {
