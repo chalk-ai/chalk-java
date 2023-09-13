@@ -249,38 +249,6 @@ public class TestFeather {
         assert ((JsonStringHashMap) sampleObject).get("lng") instanceof Double;
         assert ((JsonStringHashMap) sampleObject).get("lat").equals(41.9);
         assert ((JsonStringHashMap) sampleObject).get("lng").equals(71.9);
-
-
-        StructVector expectedVector = StructVector.empty("user.lat_lng", new RootAllocator(Long.MAX_VALUE));
-        List<Field> fields = new ArrayList<>();
-        var latField = new Field("lat", FieldType.nullable(new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE)), null);
-        var lngField = new Field("lng", FieldType.nullable(new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE)), null);
-        fields.add(latField);
-        fields.add(lngField);
-        structVector.initializeChildrenFromFields(fields);
-        structVector.allocateNew();
-        var fieldVectors = structVector.getChildrenFromFields();
-        FloatingPointVector latVector = (FloatingPointVector) fieldVectors.get(0);
-        FloatingPointVector lngVector = (FloatingPointVector) fieldVectors.get(1);
-        latVector.allocateNew();
-        lngVector.allocateNew();
-        latVector.setValueCount(5);
-        lngVector.setValueCount(5);
-        for (int i = 0; i < 5; i++) {
-            latVector.setSafeWithPossibleTruncate(i, 41.9);
-            lngVector.setSafeWithPossibleTruncate(i, 71.9);
-        }
-
-        System.out.println(">>> HI");
-
-
-
-
-//        var newStruct =
-//
-//        StructVector expectedVector = StructVector.empty("user.lat_lng", new RootAllocator(Long.MAX_VALUE));
-//        expectedVector.allocateNew();
-
     }
 
 
