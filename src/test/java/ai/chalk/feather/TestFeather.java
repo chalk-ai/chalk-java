@@ -7,17 +7,27 @@ import ai.chalk.internal.feather.FeatherProcessor;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
+import org.apache.arrow.memory.RootAllocator;
+import org.apache.arrow.vector.*;
+import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.complex.impl.*;
+import org.apache.arrow.vector.complex.writer.*;
+import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.apache.arrow.vector.types.pojo.Field;
+import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.util.JsonStringHashMap;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 public class TestFeather {
     @Test
@@ -108,6 +118,123 @@ public class TestFeather {
     }
 
     @Test
+    public void testPrimitiveTypesInOutputTable() throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "all_types_in_scalar_table.bin"));
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryResult result = response.toResult();
+        Table scalarsTable = result.getScalarsTable();
+        assert scalarsTable.getRowCount() == 3;
+
+        try (
+            BigIntVector expected = new BigIntVector("int_vector", new RootAllocator(Long.MAX_VALUE));
+            BigIntWriter writer = new BigIntWriterImpl(expected);
+        ) {
+            expected.allocateNew(4032);
+            writer.setPosition(0);
+            writer.writeBigInt(1);
+            writer.setPosition(1);
+            writer.writeBigInt(2);
+            writer.setPosition(2);
+            writer.writeBigInt(3);
+            BigIntVector actual = (BigIntVector) scalarsTable.getVectorCopy("user.int");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+
+        try (
+                BitVector expected = new BitVector("bool_vector", new RootAllocator(Long.MAX_VALUE));
+        ) {
+            expected.allocateNew(3);
+            expected.set(0, 1);
+            expected.set(1, 0);
+            expected.set(2, 1);
+            BitVector actual = (BitVector) scalarsTable.getVectorCopy("user.bool");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+
+        try (
+                Float8Vector expected = new Float8Vector("float_vector", new RootAllocator(Long.MAX_VALUE));
+                Float8Writer writer = new Float8WriterImpl(expected);
+        ) {
+            expected.allocateNew(3);
+            writer.setPosition(0);
+            writer.writeFloat8(1.0);
+            writer.setPosition(1);
+            writer.writeFloat8(2.0);
+            writer.setPosition(2);
+            writer.writeFloat8(3.0);
+            Float8Vector actual = (Float8Vector) scalarsTable.getVectorCopy("user.float");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+
+        try (
+            LargeVarCharVector expected = new LargeVarCharVector("str_vector", new RootAllocator(Long.MAX_VALUE));
+        ) {
+            expected.allocateNew(3);
+            expected.set(0, "string1".getBytes());
+            expected.set(1, "string2".getBytes());
+            expected.set(2, "string3".getBytes());
+            LargeVarCharVector actual = (LargeVarCharVector) scalarsTable.getVectorCopy("user.str");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+
+        try (
+                DateMilliVector expected = new DateMilliVector("date_vector", new RootAllocator(Long.MAX_VALUE));
+                DateMilliWriter writer = new DateMilliWriterImpl(expected);
+        ) {
+            expected.allocateNew(3);
+            writer.setPosition(0);
+            writer.writeDateMilli(1577836800000L);
+            writer.setPosition(1);
+            writer.writeDateMilli(1577923200000L);
+            writer.setPosition(2);
+            writer.writeDateMilli(1578009600000L);
+            DateMilliVector actual = (DateMilliVector) scalarsTable.getVectorCopy("user.date");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+
+        // Timestamp
+        try (
+                TimeStampMicroTZVector expected = new TimeStampMicroTZVector("datetime_vector", new RootAllocator(Long.MAX_VALUE), "UTC");
+                TimeStampMicroTZWriter writer = new TimeStampMicroTZWriterImpl(expected);
+        ) {
+            expected.allocateNew(3);
+            TimeStampMicroTZHolder holder = new TimeStampMicroTZHolder();
+            holder.value = 1577836801000000L;
+            holder.timezone = "UTC";
+            writer.setPosition(0);
+            writer.write(holder);
+
+            holder = new TimeStampMicroTZHolder();
+            holder.value = 1577836802000000L;
+            holder.timezone = "UTC";
+            writer.setPosition(1);
+            writer.write(holder);
+
+            holder = new TimeStampMicroTZHolder();
+            holder.value = 1577836803000000L;
+            holder.timezone = "UTC";
+            writer.setPosition(2);
+            writer.write(holder);
+
+            TimeStampMicroTZVector actual = (TimeStampMicroTZVector) scalarsTable.getVectorCopy("user.datetime");
+            for (int i = 0; i < 3; i++) {
+                assert actual.getObject(i).equals(expected.getObject(i));
+            }
+        }
+    }
+
+
+    @Test
     public void testStructsInScalarTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "structs_in_scalar_table.bin"));
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
@@ -122,6 +249,38 @@ public class TestFeather {
         assert ((JsonStringHashMap) sampleObject).get("lng") instanceof Double;
         assert ((JsonStringHashMap) sampleObject).get("lat").equals(41.9);
         assert ((JsonStringHashMap) sampleObject).get("lng").equals(71.9);
+
+
+        StructVector expectedVector = StructVector.empty("user.lat_lng", new RootAllocator(Long.MAX_VALUE));
+        List<Field> fields = new ArrayList<>();
+        var latField = new Field("lat", FieldType.nullable(new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE)), null);
+        var lngField = new Field("lng", FieldType.nullable(new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE)), null);
+        fields.add(latField);
+        fields.add(lngField);
+        structVector.initializeChildrenFromFields(fields);
+        structVector.allocateNew();
+        var fieldVectors = structVector.getChildrenFromFields();
+        FloatingPointVector latVector = (FloatingPointVector) fieldVectors.get(0);
+        FloatingPointVector lngVector = (FloatingPointVector) fieldVectors.get(1);
+        latVector.allocateNew();
+        lngVector.allocateNew();
+        latVector.setValueCount(5);
+        lngVector.setValueCount(5);
+        for (int i = 0; i < 5; i++) {
+            latVector.setSafeWithPossibleTruncate(i, 41.9);
+            lngVector.setSafeWithPossibleTruncate(i, 71.9);
+        }
+
+        System.out.println(">>> HI");
+
+
+
+
+//        var newStruct =
+//
+//        StructVector expectedVector = StructVector.empty("user.lat_lng", new RootAllocator(Long.MAX_VALUE));
+//        expectedVector.allocateNew();
+
     }
 
 
