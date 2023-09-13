@@ -41,7 +41,7 @@ variables and their sources to `stdout`.
 
 
 ### Online Query
-Example querying for both a scalar feature (`user.amount_spent_mean_30d`) and a has-many feature (`user.transactions`): 
+Example querying for both a scalar feature (`user.spending_mean_30d`) and a has-many feature (`user.transactions`): 
 ```java
 import chalk.client.ChalkClient;
 import chalk.models.OnlineQueryParams;
@@ -57,21 +57,24 @@ public class Main {
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
                     .withInputs("user.id", userIds)
-                    .withOutputs("user.amount_spent_mean_30d", "user.transactions")
+                    .withOutputs("user.spending_mean_30d", "user.transactions")
                     .build();
         
-        try {
-            OnlineQueryResult result = client.onlineQuery(params);
+        try (OnlineQueryResult result = client.onlineQuery(params)) {
+            var row = result.getScalarsTable().immutableRow();
+            while (row.hasNext()) {
+                row.next();
+                long userId = row.getInt64("user.id");
+                double meanSpent = row.getFloat8("user.spending_mean_30d");
+                System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
+            }
+                
+            Table txnTable = result.getGroupsTables().get("user.transactions");
+            FieldVector txnAmountVector = txnTable.getColumn("amount");
+            // Do something with the transaction amount vector
         } catch (ChalkException e) {
             e.printStackTrace();
         }
-
-        Table userTable = result.getScalarsTable();
-        FieldVector meanAmounts = userTable.getVectorCopy("user.amount_spent_mean_30d");
-
-        Table txnTable = result.getGroupsTables().get("user.transactions");
-        FieldReader txnReader = txnTable.getReader("transaction.amount");
-        Double firstTxnAmount = txnReader.readDouble();
     }
 }
 ```
