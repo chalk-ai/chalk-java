@@ -17,9 +17,16 @@ Create a client using the `ChalkClient.create()` method.  The returned client ge
 1. From environment variables
 2. From a ~/.chalk.yml file if neither (1) is not available
 
+```java
+import chalk.ChalkClient;
+
+
+ChalkClient client = ChalkClient.create();
+```
+
 Alternatively, create a client using specific overrides:
 ```java
-import chalk.ChalkClient
+import chalk.ChalkClient;
 
         
 ChalkClient client = ChalkClient.builder()
