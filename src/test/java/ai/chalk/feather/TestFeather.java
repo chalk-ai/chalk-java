@@ -9,7 +9,6 @@ import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
-import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.complex.impl.*;
 import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
@@ -18,16 +17,12 @@ import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
-import org.apache.arrow.vector.types.pojo.Field;
-import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.util.JsonStringHashMap;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 public class TestFeather {
     @Test
@@ -89,8 +84,8 @@ public class TestFeather {
         }
     }
 
-    @Disabled("Should theoretically work but doesn't. But we successfully " +
-            "get a response back when tested end-to-end locally.")
+    @Disabled("Should theoretically work but doesn't. Oddly - successfully " +
+            "gets a response back when tested end-to-end locally.")
     @Test
     public void testMillionRowsInInput() throws Exception {
         // Failing because 'Cannot invoke "org.apache.arrow.flatbuf.RecordBatch.nodesLength()"
