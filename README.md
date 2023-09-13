@@ -39,8 +39,18 @@ ChalkClient client = ChalkClient.builder()
 #### Debug client configuration
 
 Use the method `ChalkClient.printConfig` to debug a connection or authentication issue. This method prints all config
-variables and their sources to `stdout`.
+variables and their sources to `stdout`. See the list of environment variables in `chalk.client.ConfigEnvVars`.
 
+```bash
+---------------------------------------------------------------------------------------------------------------------------
+Config             Value                                                 Source                                        
+---------------------------------------------------------------------------------------------------------------------------
+Environment ID     prod                                                  ChalkClient builder argument                  
+Client ID          client-4b8c614111f93f8255127e89d154a8a6               environment variable 'CHALK_CLIENT_ID'        
+Api Server         http://127.0.0.1:8000                                 config file /Users/papan/.chalk.yml           
+Client Secret      *************************************************     environment variable 'CHALK_CLIENT_SECRET'    
+---------------------------------------------------------------------------------------------------------------------------
+```
 
 
 ### Online Query
