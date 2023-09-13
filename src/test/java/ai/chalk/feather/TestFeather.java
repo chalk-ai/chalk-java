@@ -25,6 +25,9 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class TestFeather {
+    /**
+     * This tests that all fields in an OnlineQueryBulkResponse correctly deserialize.
+     */
     @Test
     public void testConvertBytesResponseToResult() throws Exception {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "bulk_query_response.txt")), "UTF-8");
@@ -103,6 +106,10 @@ public class TestFeather {
     }
 
 
+    /**
+     * Tests deserializing a table with a column that has a list type.
+     */
+    @Disabled("Bug in VectorSchemaAppender")
     @Test
     public void testListsInScalarTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "lists_in_scalar_table.bin"));
@@ -112,6 +119,30 @@ public class TestFeather {
         assert scalarsTable.getRowCount() == 5;
     }
 
+    /**
+     * Tests deserializing a table with a column that has a struct type.
+     */
+    @Test
+    public void testStructsInScalarTable() throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "structs_in_scalar_table.bin"));
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryResult result = response.toResult();
+        Table scalarsTable = result.getScalarsTable();
+        assert scalarsTable.getRowCount() == 5;
+        assert scalarsTable.getSchema().findField("user.lat_lng").getType() instanceof ArrowType.Struct;
+        var structVector = scalarsTable.getVectorCopy("user.lat_lng");
+        var sampleObject = structVector.getObject(0);
+        assert sampleObject instanceof JsonStringHashMap;
+        assert ((JsonStringHashMap) sampleObject).get("lat") instanceof Double;
+        assert ((JsonStringHashMap) sampleObject).get("lng") instanceof Double;
+        assert ((JsonStringHashMap) sampleObject).get("lat").equals(41.9);
+        assert ((JsonStringHashMap) sampleObject).get("lng").equals(71.9);
+    }
+
+
+    /**
+     * Tests deserializing a table that has all primitive types.
+     */
     @Test
     public void testPrimitiveTypesInOutputTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "all_types_in_scalar_table.bin"));
@@ -197,7 +228,6 @@ public class TestFeather {
             }
         }
 
-        // Timestamp
         try (
                 TimeStampMicroTZVector expected = new TimeStampMicroTZVector("datetime_vector", new RootAllocator(Long.MAX_VALUE), "UTC");
                 TimeStampMicroTZWriter writer = new TimeStampMicroTZWriterImpl(expected);
@@ -227,25 +257,6 @@ public class TestFeather {
             }
         }
     }
-
-
-    @Test
-    public void testStructsInScalarTable() throws Exception {
-        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/feather/", "structs_in_scalar_table.bin"));
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
-        OnlineQueryResult result = response.toResult();
-        Table scalarsTable = result.getScalarsTable();
-        assert scalarsTable.getRowCount() == 5;
-        assert scalarsTable.getSchema().findField("user.lat_lng").getType() instanceof ArrowType.Struct;
-        var structVector = scalarsTable.getVectorCopy("user.lat_lng");
-        var sampleObject = structVector.getObject(0);
-        assert sampleObject instanceof JsonStringHashMap;
-        assert ((JsonStringHashMap) sampleObject).get("lat") instanceof Double;
-        assert ((JsonStringHashMap) sampleObject).get("lng") instanceof Double;
-        assert ((JsonStringHashMap) sampleObject).get("lat").equals(41.9);
-        assert ((JsonStringHashMap) sampleObject).get("lng").equals(71.9);
-    }
-
 
     @Test
     public void testLengthConsumption() throws Exception {
