@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Data
 @AllArgsConstructor
-public class OnlineQueryResult {
+public class OnlineQueryResult implements AutoCloseable {
 
     /**
      * scalarsTable is an Arrow Table containing scalar
@@ -46,4 +46,14 @@ public class OnlineQueryResult {
      * details.
      */
     private final QueryMeta meta;
+
+    /**
+     * close releases resources associated with the result.
+     */
+    public void close() {
+        scalarsTable.close();
+        for (Table table : groupsTables.values()) {
+            table.close();
+        }
+    }
 }
