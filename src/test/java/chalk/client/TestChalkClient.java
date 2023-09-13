@@ -2,6 +2,7 @@ package chalk.client;
 
 import chalk.client.ChalkClient;
 import chalk.models.OnlineQueryParams;
+import chalk.models.OnlineQueryResult;
 import org.junit.jupiter.api.Test;
 
 public class TestChalkClient {
@@ -13,14 +14,13 @@ public class TestChalkClient {
         for (int i = 0; i < userIds.length; i++) {
             userIds[i] = i;
         }
-
-        var result = client.onlineQuery(
-            OnlineQueryParams.builder()
+        var params = OnlineQueryParams.builder()
                 .withInput("user.id", userIds)
                 .withOutput("user.socure_score")
-                .build()
-        );
-        assert result.getScalarsTable().getRowCount() == userIds.length;
+                .build();
+        try (OnlineQueryResult result = client.onlineQuery(params)) {
+            assert result.getScalarsTable().getRowCount() == userIds.length;
+        };
     }
 }
 

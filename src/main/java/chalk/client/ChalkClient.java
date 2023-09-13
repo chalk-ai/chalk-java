@@ -63,7 +63,8 @@ public interface ChalkClient {
      *         .withOutputs("user.email", "user.transactions")
      *         .build();
      *
-     *         result = client.onlineQuery(params);
+     *         try (OnlineQueryResult result = client.onlineQuery(params)) {
+     *             // do something with the result
      *         }
      *     </pre>
      * </p>
