@@ -1,4 +1,5 @@
 plugins {
+    id "maven-publish"
     id "java"
     id "io.freefair.lombok" version "8.3"
 }
@@ -25,4 +26,67 @@ dependencies {
 test {
     useJUnitPlatform()
     jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
+}
+
+
+task compileJava17(type: JavaCompile) {
+    source = sourceSets.main.java
+    classpath = sourceSets.main.compileClasspath
+    getDestinationDirectory().set(layout.buildDirectory.dir("classes/java17"))
+    options.fork = true
+    options.forkOptions.javaHome = file("/opt/homebrew/Cellar/openjdk@17/17.0.8.1")
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.annotationProcessorPath = configurations.annotationProcessor
+}
+
+task jarJava17(type: Jar) {
+    from sourceSets.main.output.classesDirs
+    archiveClassifier.set('jdk17')
+    archiveVersion.set("1.0.0-jdk17")
+}
+
+task compileJava20(type: JavaCompile) {
+    source = sourceSets.main.java
+    classpath = sourceSets.main.compileClasspath
+    getDestinationDirectory().set(layout.buildDirectory.dir("classes/java20"))
+    options.fork = true
+    options.forkOptions.javaHome = file("/opt/homebrew/Cellar/openjdk/20.0.1")
+    sourceCompatibility = '20'
+    targetCompatibility = '20'
+    options.annotationProcessorPath = configurations.annotationProcessor
+}
+
+task jarJava20(type: Jar) {
+    from sourceSets.main.output.classesDirs
+    archiveClassifier.set('jdk20')
+    archiveVersion.set("1.0.0-jdk20")
+}
+
+publishing {
+    publications {
+        jdk17(MavenPublication) {
+            artifactId = 'chalk-java-jdk17'
+            from components.java
+            artifact jarJava17
+        }
+
+        jdk20(MavenPublication) {
+            artifactId = 'chalk-java-jdk20'
+            from components.java
+            artifact jarJava20
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri("https://maven.pkg.github.com/chalk-ai/chalk-java")
+
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME_GITHUB")
+                password = project.findProperty("gpr.token") ?: System.getenv("TOKEN_GITHUB")
+            }
+        }
+    }
 }
