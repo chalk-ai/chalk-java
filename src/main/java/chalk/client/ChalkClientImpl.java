@@ -67,8 +67,15 @@ public class ChalkClientImpl implements ChalkClient {
     private void resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         Exception chalkYamlConfigErr = null;
+
+        String projectRoot;
         try {
-            chalkYamlConfig = Loader.GetChalkYamlConfig();
+            projectRoot = Loader.loadProjectDirectory();
+        } catch (Exception e) {
+            throw new ClientException(e.getMessage());
+        }
+        try {
+            chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
         } catch (Exception e) {
             chalkYamlConfigErr = e;
         }

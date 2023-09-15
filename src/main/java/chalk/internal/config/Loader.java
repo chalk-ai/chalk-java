@@ -15,8 +15,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class Loader {
-    private static String loadProjectDirectory() throws Exception {
+    public static String loadProjectDirectory() throws Exception {
         Path currentDirectory = Paths.get(".").toAbsolutePath().normalize();
+        String ogDirectory = currentDirectory.toString();
         boolean rootChecked = false;
         while (!currentDirectory.toString().equals("/") && !rootChecked) {
             for (String filename : new String[]{"chalk.yaml", "chalk.yml"}) {
@@ -32,7 +33,7 @@ public class Loader {
             }
         }
         throw new Exception("Cannot determine project root directory: failed to find chalk.yml in the working directory '"
-                + currentDirectory.toString() + "' or any of its parent directories");
+                + ogDirectory + "' or any of its parent directories");
     }
 
     public static Path getConfigPath() throws Exception {
@@ -47,9 +48,7 @@ public class Loader {
         return path;
     }
 
-    private static ProjectToken getProjectToken(ProjectTokens config, String configPath) throws Exception {
-        String projectRoot = loadProjectDirectory();
-
+    private static ProjectToken getProjectToken(ProjectTokens config, String configPath, String projectRoot) throws Exception {
         if (config.getTokens() == null) {
             throw new Exception(String.format("'tokens' collection does not exist or is empty in the auth config file '%s' -- please try to 'chalk login' again", configPath));
         }
@@ -99,8 +98,8 @@ public class Loader {
         return config;
     }
 
-    public static ProjectToken GetChalkYamlConfig() throws Exception {
+    public static ProjectToken getChalkYamlConfig(String projectRoot) throws Exception {
         ProjectTokens config = loadAllTokens();
-        return getProjectToken(config, getConfigPath().toString());
+        return getProjectToken(config, getConfigPath().toString(), projectRoot);
     }
 }
