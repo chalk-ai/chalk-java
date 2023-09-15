@@ -71,7 +71,12 @@ import org.apache.arrow.vector.complex.reader.FieldReader;
 
 public class Main {
     public static void main(String[] args) {
-        ChalkClient client = ChalkClient.create();
+        try {
+            ChalkClient client = ChalkClient.create();
+        } catch (ChalkException e) {
+            e.printStackTrace();
+            return;
+        }
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
                     .withInputs("user.id", userIds)
