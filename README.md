@@ -8,7 +8,10 @@ The official [Chalk](https://chalk.ai) client library for Java.
 - JDK 17 or JDK 20
 
 ### Installation
-(Instructions to be released)
+In your build.gradle, add this line under `dependencies`, substituting VERSION with your intended Chalk version:
+```java
+implementation 'chalk:chalk-java:VERSION'
+```
 
 ### Connect to Chalk
 
