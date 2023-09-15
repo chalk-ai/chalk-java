@@ -33,7 +33,7 @@ import java.util.Map;
  *     </pre>
  * </p>
  */
-@Getter @AllArgsConstructor
+@AllArgsConstructor @Getter
 public class OnlineQueryParams {
     // The features for which there are known values, mapped
     // to those values. Set by `OnlineQueryParams.builder().withInputs`.
@@ -72,6 +72,7 @@ public class OnlineQueryParams {
     private String queryName;
     private String correlationId;
     private String branch;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -343,6 +344,8 @@ public class OnlineQueryParams {
             builder.withOutputs(outputs);
             return builder;
         }
+
+
     }
 
     public static BuilderSeed builder() {
