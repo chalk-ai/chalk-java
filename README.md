@@ -8,10 +8,12 @@ The official [Chalk](https://chalk.ai) client library for Java.
 - JDK 17 or JDK 20
 
 ### Installation
-In your build.gradle, add this line under `dependencies`, substituting VERSION with your intended Chalk version:
+In your build.gradle, add these line under `dependencies`, substituting VERSION with your intended Chalk version:
 ```java
 implementation 'chalk:chalk-java:VERSION'
+implementation 'org.apache.arrow:arrow-vector:13.0.0'
 ```
+Chalk-java specifies the `arrow-vector` library as a `compileOnly` dependency, allowing you to have control over which Arrow version to use (>10.0.1)
 
 ### Connect to Chalk
 
