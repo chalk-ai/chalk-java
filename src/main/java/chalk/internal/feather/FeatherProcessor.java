@@ -109,7 +109,7 @@ public class FeatherProcessor {
                     BigIntVector intVector = (BigIntVector) vector;
                     intVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
-                        intVector.set(i, (int) values[i]);
+                        intVector.set(i, (long) values[i]);
                     }
                     intVector.setValueCount(values.length);
                 }
