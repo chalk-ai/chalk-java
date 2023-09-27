@@ -11,7 +11,7 @@ import java.util.Set;
 public class Initializer {
     private static Set<String> seen = new HashSet<>();
 
-    public static Exception initRoot(Class<?> cls) {
+    public static Exception initFeatures(Class<?> cls) {
         Field[] fields = cls.getDeclaredFields();
         for (Field field : fields) {
             if (!FeaturesClass.class.isAssignableFrom(field.getType())) {
