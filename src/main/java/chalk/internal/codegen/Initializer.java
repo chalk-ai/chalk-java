@@ -2,6 +2,7 @@ package chalk.internal.codegen;
 
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
+import chalk.internal.Utils;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -27,10 +28,11 @@ public class Initializer {
 
     public static void init(Field f, String parentFqn, Object obj) throws Exception {
         String fqn = parentFqn;
+        String snakeName = Utils.toSnakeCase(f.getName());
         if (fqn.length() > 0) {
-            fqn = fqn + "." + f.getName();
+            fqn = fqn + "." + snakeName;
         } else {
-            fqn = f.getName();
+            fqn = snakeName;
         }
         if (FeaturesClass.class.isAssignableFrom(f.getType())) {
             // RECURSIVE CASE
