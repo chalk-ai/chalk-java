@@ -112,6 +112,9 @@ public class OnlineQueryParams {
 
         // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
         public Builder withOutputs(String... outputs) {
+            if (this.outputs == null) {
+                this.outputs = new ArrayList<>();
+            }
             this.outputs.addAll(Arrays.asList(outputs));
             return this;
         }
