@@ -5,11 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.time.Duration;
-import java.util.Map;
 
 
 /**
@@ -114,23 +111,27 @@ public class OnlineQueryParams {
         }
 
         // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
-        public Builder withOutputs(Object... outputs) {
-            if (this.outputs == null) {
-                this.outputs = new ArrayList<>();
-            }
-            if (outputs.length == 1 && outputs[0] instanceof List) {
-                this.outputs.addAll((List<String>) outputs[0]);
-            } else {
-                for (Object output : outputs) {
-                    this.outputs.add((String) output);
-                }
-            }
+        public Builder withOutputs(String... outputs) {
+            this.outputs.addAll(Arrays.asList(outputs));
             return this;
         }
 
-
         // withOutput adds a single output to the outputs list
         public Builder withOutput(String output) {
+            return this.withOutputs(output);
+        }
+
+        // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
+        public Builder withOutputs(Feature<?>... outputs) {
+            var outputFqns = new String[outputs.length];
+            for (int i = 0; i < outputs.length; i++) {
+                outputFqns[i] = outputs[i].getFqn();
+            }
+            return this.withOutputs(outputFqns);
+        }
+
+        // withOutput adds a single output to the outputs list
+        public Builder withOutput(Feature<?> output) {
             return this.withOutputs(output);
         }
 
@@ -269,13 +270,25 @@ public class OnlineQueryParams {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withOutputs(Object... outputs) {
+        public BuilderComplete withOutputs(String... outputs) {
             BuilderComplete builder = new BuilderComplete(inputs, this.outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
             builder.withOutputs(outputs);
             return builder;
         }
 
         public BuilderComplete withOutput(String output) {
+            return this.withOutputs(output);
+        }
+
+        public BuilderComplete withOutputs(Feature<?>... outputs) {
+            var outputFqns = new String[outputs.length];
+            for (int i = 0; i < outputs.length; i++) {
+                outputFqns[i] = outputs[i].getFqn();
+            }
+            return this.withOutputs(outputFqns);
+        }
+
+        public BuilderComplete withOutput(Feature<?> output) {
             return this.withOutputs(output);
         }
     }
@@ -337,12 +350,9 @@ public class OnlineQueryParams {
             return this.withInputs(fqn, value);
         }
 
-
-
-        /*
+        /**
          * withInput adds either a single feature value, or a list of feature
-         * values as input. Use this method along with codegen-ed feature
-         * classes to ensure feature values are provided in the correct type.
+         * values as input.
          */
         public <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
             return this.withInputs(feature, value);
@@ -354,19 +364,30 @@ public class OnlineQueryParams {
             return builder;
         }
 
-        // withOutput adds a single output to the outputs list
-        public BuilderWithOutputs withOutput(String output) {
-            return this.withOutputs(output);
-        }
-
-        // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
-        public BuilderWithOutputs withOutputs(Object... outputs) {
+        // withOutputs takes either one output or a list of outputs and adds them to the outputs list
+        public BuilderWithOutputs withOutputs(String... outputs) {
             BuilderWithOutputs builder = new BuilderWithOutputs(inputs, this.outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
             builder.withOutputs(outputs);
             return builder;
         }
 
+        public BuilderWithOutputs withOutputs(Feature<?>... outputs) {
+            var outputFqns = new String[outputs.length];
+            for (int i = 0; i < outputs.length; i++) {
+                outputFqns[i] = outputs[i].getFqn();
+            }
+            return this.withOutputs(outputFqns);
+        }
 
+        // withOutput adds a single output to the outputs list
+        public BuilderWithOutputs withOutput(String output) {
+            return this.withOutputs(output);
+        }
+
+        // withOutput adds a single output to the outputs list
+        public BuilderWithOutputs withOutput(Feature<?> output) {
+            return this.withOutputs(output);
+        }
     }
 
     public static BuilderSeed builder() {
