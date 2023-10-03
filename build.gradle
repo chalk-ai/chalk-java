@@ -5,21 +5,20 @@ plugins {
 }
 
 group 'chalk'
-version '0.1.0'
+version '0.2.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // Add your dependencies here
+    api 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+    api 'org.apache.arrow:arrow-memory-netty:13.0.0'
+    api 'org.apache.arrow:arrow-compression:13.0.0'
     compileOnly 'org.apache.arrow:arrow-vector:13.0.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
     implementation 'org.slf4j:slf4j-simple:2.0.9'
-    implementation 'org.apache.arrow:arrow-memory-netty:13.0.0'
-    implementation 'org.apache.arrow:arrow-compression:13.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
 }
 
@@ -43,7 +42,7 @@ task compileJava17(type: JavaCompile) {
 task jarJava17(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk17')
-    archiveVersion.set("0.1.0-jdk17")
+    archiveVersion.set("0.2.0-jdk17")
 }
 
 task compileJava20(type: JavaCompile) {
@@ -60,7 +59,7 @@ task compileJava20(type: JavaCompile) {
 task jarJava20(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk20')
-    archiveVersion.set("0.1.0-jdk20")
+    archiveVersion.set("0.2.0-jdk20")
 }
 
 publishing {
