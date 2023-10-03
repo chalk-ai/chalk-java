@@ -1,7 +1,7 @@
 package chalk.internal.codegen;
 
 import chalk.features.Feature;
-import chalk.features.FeaturesClass;
+import chalk.features.FeaturesBase;
 import chalk.internal.Utils;
 
 import java.lang.reflect.Field;
@@ -14,7 +14,7 @@ public class Initializer {
     public static Exception initFeatures(Class<?> cls) {
         Field[] fields = cls.getDeclaredFields();
         for (Field field : fields) {
-            if (!FeaturesClass.class.isAssignableFrom(field.getType())) {
+            if (!FeaturesBase.class.isAssignableFrom(field.getType())) {
                 continue;
             }
             try {
@@ -34,9 +34,9 @@ public class Initializer {
         } else {
             fqn = snakeName;
         }
-        if (FeaturesClass.class.isAssignableFrom(f.getType())) {
+        if (FeaturesBase.class.isAssignableFrom(f.getType())) {
             // RECURSIVE CASE
-            FeaturesClass fc = (FeaturesClass) f.getType().getConstructor().newInstance();
+            FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             f.set(obj, fc);
             fc.setFqn(fqn);
             for (Field ff : f.getType().getFields()) {
