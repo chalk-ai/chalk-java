@@ -4,7 +4,7 @@ import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 
 public class BurrysInjury extends FeaturesClass {
-    public Feature<String> Id;
-    public Feature<Boolean> IsPursingClaim;
+    public Feature<String> id;
+    public Feature<Boolean> isPursingClaim;
 
 }

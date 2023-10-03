@@ -5,4 +5,5 @@ import chalk.features.StructFeature;
 
 public class BurrysBranchDataclass extends StructFeature {
     public Feature<Float> averageInjuriesPerMonth;
+    public CityDataclass city;
 }

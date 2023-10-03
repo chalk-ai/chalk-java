@@ -3,9 +3,15 @@ package chalk.client.features;
 
 // `Features` helps us test `initFeatures`.
 public class Features {
-    public BurrysInstructor BurrysInstructor;
-    public BurrysMembership BurrysMembership;
-    public BurrysInjury BurrysInjury;
+    public static BurrysInstructor burrysInstructor;
+    public static BurrysMembership burrysMembership;
+    public static BurrysInjury burrysInjury;
 
-    public User user;
+    public static User user;
+
+    public static Exception initException = chalk.internal.codegen.Initializer.initFeatures(Features.class);
+
+    public static Exception getInitException() {
+        return Features.initException;
+    }
 }

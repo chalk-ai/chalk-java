@@ -5,6 +5,7 @@ import chalk.features.FeaturesClass;
 import org.apache.arrow.vector.table.Table;
 
 public class User extends FeaturesClass {
-    public BurrysMembership BurrysMembership;
-    public Feature<Table> BurrysInjuries;
+    public Feature<String> id;
+    public BurrysMembership burrysMembership;
+    public Feature<Table> injuries;
 }
