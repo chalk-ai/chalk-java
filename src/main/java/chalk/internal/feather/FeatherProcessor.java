@@ -109,7 +109,9 @@ public class FeatherProcessor {
                     BigIntVector intVector = (BigIntVector) vector;
                     intVector.allocateNew(values.length);
                     for (int i = 0; i < values.length; i++) {
-                        intVector.set(i, (int) values[i]);
+                        // Ignore "redundant boxing" warning. `Long.valueOf`
+                        // needed for casting int to long.
+                        intVector.set(i, Long.valueOf(values[i].toString()));
                     }
                     intVector.setValueCount(values.length);
                 }
