@@ -1,6 +1,5 @@
 package chalk.client;
 
-import chalk.client.ChalkClient;
 import chalk.models.OnlineQueryParams;
 import chalk.models.OnlineQueryResult;
 import org.junit.jupiter.api.Test;
