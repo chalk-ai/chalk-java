@@ -89,7 +89,7 @@ public class OnlineQueryParams {
         protected String branch;
 
 
-        // withInputs take alternating key, value pairs and adds them to the inputs map
+        // Deprecated: use withInput instead
         protected Builder withInputs(Object... inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
@@ -322,6 +322,7 @@ public class OnlineQueryParams {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
+        // Deprecated: use withInput instead
         protected BuilderComplete withInputs(Object... inputs) {
             BuilderComplete builder = new BuilderComplete(this.inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
             builder.withInputs(inputs);
@@ -371,7 +372,8 @@ public class OnlineQueryParams {
             return this.withInputs(feature, value);
         }
 
-        protected BuilderWithInputs withInputs(Object... inputs) {
+        // Deprecated: use withInput instead
+        public BuilderWithInputs withInputs(Object... inputs) {
             BuilderWithInputs builder = new BuilderWithInputs(this.inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
             builder.withInputs(inputs);
             return builder;
