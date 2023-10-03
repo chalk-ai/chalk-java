@@ -4,11 +4,9 @@ import chalk.internal.bytes.BytesProducer;
 import chalk.internal.feather.FeatherProcessor;
 import chalk.models.OnlineQueryParams;
 import chalk.client.features.Features;
-import chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
@@ -55,11 +53,8 @@ public class TestOnlineQueryParams {
 
 
         var allParams = new OnlineQueryParams[]{p1, p2, p3, p4};
-        for (var i = 0; i < allParams.length; i ++) {
-            var p = allParams[i];
-            Map<String, Object> inputs = p.getInputs();
-            assert Arrays.equals((String[]) inputs.get("user.id"), expectedInputs);
-
+        for (OnlineQueryParams p : allParams) {
+            assert Arrays.equals((String[]) p.getInputs().get("user.id"), expectedInputs);
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
         }
@@ -70,7 +65,41 @@ public class TestOnlineQueryParams {
      */
     @Test
     public void testOutputsWithCodegenClass() throws Exception {
+        var p1 = OnlineQueryParams
+                .builder()
+                .withInput(Features.user.id, "1", "2", "3")
+                .withOutputs(Features.user.id, Features.user.burrysMembership.membershipId)
+                .build();
+        var p2 = OnlineQueryParams
+                .builder()
+                .withOutputs(Features.user.id, Features.user.burrysMembership.membershipId)
+                .withInput(Features.user.id, "1", "2", "3")
+                .build();
+        var p3 = OnlineQueryParams
+                .builder()
+                .withInput(Features.user.id, "1", "2", "3")
+                .withOutput(Features.user.id)
+                .withOutput(Features.user.burrysMembership.membershipId)
+                .build();
+        var p4 = OnlineQueryParams
+                .builder()
+                .withOutput(Features.user.id)
+                .withOutput(Features.user.burrysMembership.membershipId)
+                .withInput(Features.user.id, "1", "2", "3")
+                .build();
+        var p5 = OnlineQueryParams
+                .builder()
+                .withOutput(Features.user.id)
+                .withInput(Features.user.id, "1", "2", "3")
+                .withOutput(Features.user.burrysMembership.membershipId)
+                .build();
 
+        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4, p5};
+        for (OnlineQueryParams p : allParams) {
+            assert Arrays.equals(p.getOutputs().toArray(), new String[]{"user.id", "user.burrys_membership.membership_id"});
+            // Test serialization is OK.
+            BytesProducer.convertOnlineQueryParamsToBytes(p);
+        }
     }
 
 
