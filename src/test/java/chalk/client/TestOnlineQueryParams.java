@@ -44,12 +44,17 @@ public class TestOnlineQueryParams {
         assert Features.user.injuries.getFqn().equals("user.injuries");
         assert Features.user.burrysMembership.getFqn().equals("user.burrys_membership");
         assert Features.user.burrysMembership.isFreeMonthlyBurrytoClaimed.getFqn().equals("user.burrys_membership.is_free_monthly_burryto_claimed");
+
+        // Test has ones
         assert Features.user.burrysMembership.instructor.id.getFqn().equals("user.burrys_membership.instructor.id");
         assert Features.user.burrysMembership.instructor.rating.getFqn().equals("user.burrys_membership.instructor.rating");
+
+        // Test has many
+        assert Features.user.burrysMembership.injuries.getFqn().equals("user.burrys_membership.injuries");
 
         // Test dataclasses and nested dataclasses. They should have
         // their FQN truncated until the first feature is reached.
         assert Features.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("user.burrys_membership.branch");
-        assert Features.user.burrysMembership.branch.city.name.getFqn().equals("user.burrys_membership.branch");
+        assert Features.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("user.burrys_membership.branch");
     }
 }
