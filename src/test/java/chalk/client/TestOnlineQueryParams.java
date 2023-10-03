@@ -4,8 +4,11 @@ import chalk.internal.bytes.BytesProducer;
 import chalk.internal.feather.FeatherProcessor;
 import chalk.models.OnlineQueryParams;
 import chalk.client.features.Features;
+import chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
@@ -21,16 +24,68 @@ public class TestOnlineQueryParams {
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 
-    @Test
-    public void testParamsWithCodegen() throws Exception {
-        OnlineQueryParams params = OnlineQueryParams.builder().withInput(Features.user.id, "1", "2", "3").withOutputs("user.today", "user.socure_score").build();
-        assert params.getInputs().get("user.id").getClass().isArray();
-        assert params.getOutputs().get(0).equals("user.today");
-        assert params.getOutputs().get(1).equals("user.socure_score");
 
-        Map<String, Object> inputs = params.getInputs();
-        FeatherProcessor.inputsToArrowBytes(inputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    /**
+     * Aims to test all methods that take `Feature` as keys to the inputs map.
+     */
+    @Test
+    public void testInputsWithCodegenClass() throws Exception {
+        String[] expectedInputs = new String[]{"1", "2", "3"};
+        var p1 = OnlineQueryParams
+                .builder()
+                .withInput(Features.user.id, expectedInputs)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+        var p2 = OnlineQueryParams
+                .builder()
+                .withInput(Features.user.burrysMembership.membershipId, "abc", "def")
+                .withInput(Features.user.id, "1", "2", "3")
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+        var p3 = OnlineQueryParams
+                .builder()
+                .withInputs(Features.user.burrysMembership.membershipId, new String[]{"abc"}, Features.user.id, expectedInputs)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+        var p4 = OnlineQueryParams
+                .builder()
+                .withOutputs("user.today", "user.socure_score")
+                .withInput(Features.user.id, expectedInputs)
+                .build();
+        var p5 = OnlineQueryParams
+                .builder()
+                .withOutputs("user.today", "user.socure_score")
+                .withInputs(Features.user.id, expectedInputs, Features.user.burrysMembership.membershipId, new String[]{"abc"})
+                .build();
+        var p6 = OnlineQueryParams
+                .builder()
+                .withOutput("user.today")
+                .withInput(Features.user.id, expectedInputs)
+                .build();
+        var p7 = OnlineQueryParams
+                .builder()
+                .withOutput("user.socure_score")
+                .withInputs(Features.user.id, expectedInputs, Features.user.burrysMembership.membershipId, new String[]{"abc"})
+                .build();
+
+
+        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4, p5, p6, p7};
+        for (var i = 0; i < allParams.length; i ++) {
+            var p = allParams[i];
+            Map<String, Object> inputs = p.getInputs();
+            assert Arrays.equals((String[]) inputs.get("user.id"), expectedInputs);
+
+            // Test serialization is OK.
+            BytesProducer.convertOnlineQueryParamsToBytes(p);
+        }
+    }
+
+    /**
+     * Aims to test all methods that take `Feature` as outputs.
+     */
+    @Test
+    public void testOutputsWithCodegenClass() throws Exception {
+
     }
 
 

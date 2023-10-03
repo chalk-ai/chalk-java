@@ -110,6 +110,14 @@ public class OnlineQueryParams {
             return this;
         }
 
+        public <T> Builder withInput(Feature<T> feature, T... values) {
+            return this.withInputs(feature.getFqn(), values);
+        }
+
+        public Builder withInput(String fqn, Object... value) {
+            return this.withInputs(fqn, value);
+        }
+
         // withOutputs takes either multiple arguments or a single list of outputs and adds them to the outputs list
         public Builder withOutputs(String... outputs) {
             if (this.outputs == null) {
@@ -320,12 +328,13 @@ public class OnlineQueryParams {
             return builder;
         }
 
-        public BuilderComplete withInput(String key, Object value) {
-            return this.withInputs(key, value);
+        public BuilderComplete withInput(String fqn, Object value) {
+            return this.withInputs(fqn, value);
         }
 
-        public <T> BuilderComplete withInput(Feature<T> features, T... values) {
-            return this.withInputs(features, values);
+        @SafeVarargs
+        public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
+            return this.withInputs(feature, values);
         }
     }
 
@@ -357,7 +366,8 @@ public class OnlineQueryParams {
          * withInput adds either a single feature value, or a list of feature
          * values as input.
          */
-        public <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
+        @SafeVarargs
+        public final <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
             return this.withInputs(feature, value);
         }
 

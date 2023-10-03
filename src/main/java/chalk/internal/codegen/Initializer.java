@@ -2,7 +2,7 @@ package chalk.internal.codegen;
 
 import chalk.features.Feature;
 import chalk.features.FeaturesBase;
-import chalk.features.StructFeature;
+import chalk.features.StructFeaturesClass;
 import chalk.internal.Utils;
 
 import java.lang.reflect.Field;
@@ -44,7 +44,7 @@ public class Initializer {
             f.set(obj, fc);
             fc.setFqn(fqn);
             for (Field ff : f.getType().getFields()) {
-                if (StructFeature.class.isAssignableFrom(f.getType())) {
+                if (StructFeaturesClass.class.isAssignableFrom(f.getType())) {
                     fqnOverride = fqn;
                 }
                 init(ff, fqn, fc, fqnOverride);
