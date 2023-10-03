@@ -44,32 +44,17 @@ public class TestOnlineQueryParams {
                 .build();
         var p3 = OnlineQueryParams
                 .builder()
-                .withInputs(Features.user.burrysMembership.membershipId, new String[]{"abc"}, Features.user.id, expectedInputs)
-                .withOutputs("user.today", "user.socure_score")
-                .build();
-        var p4 = OnlineQueryParams
-                .builder()
                 .withOutputs("user.today", "user.socure_score")
                 .withInput(Features.user.id, expectedInputs)
                 .build();
-        var p5 = OnlineQueryParams
-                .builder()
-                .withOutputs("user.today", "user.socure_score")
-                .withInputs(Features.user.id, expectedInputs, Features.user.burrysMembership.membershipId, new String[]{"abc"})
-                .build();
-        var p6 = OnlineQueryParams
+        var p4 = OnlineQueryParams
                 .builder()
                 .withOutput("user.today")
                 .withInput(Features.user.id, expectedInputs)
                 .build();
-        var p7 = OnlineQueryParams
-                .builder()
-                .withOutput("user.socure_score")
-                .withInputs(Features.user.id, expectedInputs, Features.user.burrysMembership.membershipId, new String[]{"abc"})
-                .build();
 
 
-        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4, p5, p6, p7};
+        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4};
         for (var i = 0; i < allParams.length; i ++) {
             var p = allParams[i];
             Map<String, Object> inputs = p.getInputs();

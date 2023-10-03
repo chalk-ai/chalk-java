@@ -97,7 +97,7 @@ public class TestFeather {
         for (int i = 0; i < 1_000_000; i++) {
             intArray[i] = i;
         }
-        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInputs("user.id", intArray).withOutput("doesntmatter").build());
+        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInput("user.id", intArray).withOutput("doesntmatter").build());
         try (
             Table table = FeatherProcessor.convertBytesToTable(bytes);
         ) {
