@@ -1,7 +1,7 @@
 package chalk.client;
 
 import chalk.internal.bytes.BytesProducer;
-import chalk.internal.feather.FeatherProcessor;
+import chalk.internal.arrow.FeatherProcessor;
 import chalk.models.OnlineQueryParams;
 import chalk.client.features.Features;
 import org.junit.jupiter.api.Test;

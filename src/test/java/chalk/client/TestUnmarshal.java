@@ -6,9 +6,12 @@ import chalk.internal.codegen.Initializer;
 import chalk.models.OnlineQueryParams;
 import chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Row;
+import org.apache.arrow.vector.types.FloatingPointPrecision;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+
 
 public class TestUnmarshal {
     @Test
@@ -47,15 +50,44 @@ public class TestUnmarshal {
 
                     switch (arrowField.getType().getTypeID()) {
                         case Int:
-                            long val = row.getBigInt(fqn);
-                            var feature = featureMap.get(fqn);
-                            feature.setValue(val);
+                            var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());
+                            var bitWidth = castInt.getBitWidth();
+                            if (bitWidth == 32) {
+                                int val = row.getInt(fqn);
+                                var feature = featureMap.get(fqn);
+                                feature.setValue(val);
+                            } else if (bitWidth == 64) {
+                                long val = row.getBigInt(fqn);
+                                var feature = featureMap.get(fqn);
+                                feature.setValue(val);
+                            } else if (bitWidth == 16) {
+                                short val = row.getSmallInt(fqn);
+                                var feature = featureMap.get(fqn);
+                                feature.setValue(val);
+                            } else if (bitWidth == 8) {
+                                byte val = row.getTinyInt(fqn);
+                                var feature = featureMap.get(fqn);
+                                feature.setValue(val);
+                            } else {
+                                throw new Exception("Unsupported bitwidth found while converting from Arrow to Java: " + bitWidth);
+                            }
                             break;
                         case FloatingPoint:
-                            double val2 = row.getFloat8(fqn);
-                            var feature2 = featureMap.get(fqn);
-                            feature2.setValue(val2);
+                            var castFloatingPoint = (ArrowType.FloatingPoint) (arrowField.getFieldType().getType());
+                            var precision = castFloatingPoint.getPrecision();
+                            if (precision == FloatingPointPrecision.SINGLE) {
+                                var val2 = row.getFloat4(fqn);
+                                var feature2 = featureMap.get(fqn);
+                                feature2.setValue(val2);
+                            } else if (precision == FloatingPointPrecision.DOUBLE) {
+                                var val2 = row.getFloat8(fqn);
+                                var feature2 = featureMap.get(fqn);
+                                feature2.setValue(val2);
+                            } else {
+                                throw new Exception("Unsupported precision found while converting from Arrow to Java: " + precision);
+                            }
                             break;
+
                     }
 
                 }
@@ -70,6 +102,5 @@ public class TestUnmarshal {
         for (User user: users) {
             System.out.println(user);
         }
-
     }
 }

@@ -1,7 +1,6 @@
-package chalk.internal.feather;
+package chalk.internal.arrow;
 
 import org.apache.arrow.compression.CommonsCompressionFactory;
-import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
