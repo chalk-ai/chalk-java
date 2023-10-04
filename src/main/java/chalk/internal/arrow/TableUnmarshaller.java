@@ -3,6 +3,7 @@ package chalk.internal.arrow;
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 import chalk.internal.codegen.Initializer;
+import chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
@@ -20,6 +21,9 @@ import java.util.Map;
 import static chalk.internal.Utils.listToArray;
 
 public class TableUnmarshaller {
+    public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws Exception {
+        return unmarshal(result.getScalarsTable(), target);
+    }
 
     public static <T extends FeaturesClass> T[] unmarshal(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
@@ -145,7 +149,7 @@ public class TableUnmarshaller {
                                     throw new Exception("Unsupported timestamp unit found while converting from Arrow to Java: " + cast.getUnit());
                         }
                     }
-                    case List, Struct, LargeBinary, Binary, Time, Duration ->
+                    case List, Struct, LargeBinary, Binary, Time, Duration, Decimal ->
                             throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                 }
 

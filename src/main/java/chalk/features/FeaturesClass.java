@@ -1,4 +1,6 @@
 package chalk.features;
 
-public class FeaturesClass extends FeaturesBase {
-}
+import chalk.internal.arrow.TableUnmarshaller;
+import chalk.models.OnlineQueryResult;
+
+public class FeaturesClass extends FeaturesBase {}
