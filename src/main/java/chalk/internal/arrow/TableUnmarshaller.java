@@ -5,9 +5,13 @@ import chalk.features.FeaturesClass;
 import chalk.internal.codegen.Initializer;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
+import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +73,31 @@ public class TableUnmarshaller {
                             throw new Exception("Unsupported precision found while converting from Arrow to Java: " + precision);
                         }
                         break;
-
+                    case Bool:
+                        boolean boolVal = row.getBit(fqn) == 1;
+                        var boolFeature = featureMap.get(fqn);
+                        boolFeature.setValue(boolVal);
+                        break;
+                    case Utf8:
+                        String strVal = row.getVarCharObj(fqn);
+                        var strFeature = featureMap.get(fqn);
+                        strFeature.setValue(strVal);
+                        break;
+                    case Date:
+                        var castDate = (ArrowType.Date) (arrowField.getFieldType().getType());
+                        if (castDate.getUnit() == DateUnit.DAY) {
+                            int epochDays = row.getDateDay(fqn);
+                            var dateFeature = featureMap.get(fqn);
+                            dateFeature.setValue(LocalDate.ofEpochDay(epochDays));
+                        } else if (castDate.getUnit() == DateUnit.MILLISECOND) {
+                            long epochSeconds = row.getDateMilli(fqn);
+                            var dateMillisFeature = featureMap.get(fqn);
+                            LocalDate localDate = Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDate();
+                            dateMillisFeature.setValue(localDate);
+                        } else {
+                            throw new Exception("Unsupported date unit found while converting from Arrow to Java: " + castDate.getUnit());
+                        }
+                        break;
                 }
 
             }

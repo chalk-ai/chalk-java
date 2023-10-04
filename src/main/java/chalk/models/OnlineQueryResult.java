@@ -56,14 +56,4 @@ public class OnlineQueryResult implements AutoCloseable {
             table.close();
         }
     }
-
-    /**
-     * UnmarshalInto unmarshals the result into the provided
-     * object. The object must be a FeaturesClass instance.
-     */
-//    public <T> T getUnmarshaled() {
-    // validate that the schema of scalartable maps successfully to the schema of the target class
-    // validate that the schema of each groupstable maps successfully to the schema of the target class within the root target class.
-    // start unmarshalling.
-//    }
 }
