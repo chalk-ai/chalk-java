@@ -17,11 +17,7 @@ import java.util.Map;
 public class TestUnmarshal {
     @Test
     public void testUnmarshalIntoUser() throws Exception {
-        String[] expectedInputs = new String[]{"1", "2", "3"};
-        var T = User.class;
         ChalkClient client = ChalkClient.create();
-
-        client.printConfig();
         int[] userIds = new int[10];
         for (int i = 0; i < userIds.length; i++) {
             userIds[i] = i;
@@ -34,14 +30,11 @@ public class TestUnmarshal {
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             var scalarsTable = result.getScalarsTable();
             assert result.getScalarsTable().getRowCount() == userIds.length;
-            users = TableUnmarshaller.unmarshal(scalarsTable, T);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println(">>> THIS OUR RESULT FRINEDS: ");
-        for (User user: users) {
-            System.out.println(user);
+            users = TableUnmarshaller.unmarshal(scalarsTable, User.class);
+        };
+        for (User user : users) {
+            assert user != null;
+            assert user.socureScore != null;
         }
     }
 }
