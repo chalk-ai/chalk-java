@@ -8,4 +8,6 @@ public class User extends FeaturesClass {
     public Feature<String> id;
     public BurrysMembership burrysMembership;
     public Feature<Table> injuries;
+
+    public Feature<Double> socureScore;
 }

@@ -56,4 +56,21 @@ public class OnlineQueryResult implements AutoCloseable {
             table.close();
         }
     }
+
+//    /**
+//     * UnmarshalInto unmarshals the result into the provided
+//     * object. The object must be a FeaturesClass instance.
+//     */
+//    public <T> T getUnmarshaled() {
+//        // Let's do a simple one. User ID.
+//        // Find out what this T class has as attributes,
+//        // say it has a String ID, and a String name.
+//        // we take the ID and say hey let's look for this FQN.
+//        // Also we gotta keep track of a pkey to root class map.
+//        // How do we know which the pkey is?
+//        // Nah, let's just do row by row, construct the object,
+//        // and then add it to the result list.
+//        // What are our inputs? The result OnlineQueryResult, and the class T.
+//        // Let's try to do this on a user id class.
+//    }
 }
