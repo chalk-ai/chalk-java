@@ -1,17 +1,10 @@
 package chalk.client;
 
 import chalk.client.features.User;
-import chalk.features.Feature;
 import chalk.internal.arrow.TableUnmarshaller;
-import chalk.internal.codegen.Initializer;
 import chalk.models.OnlineQueryParams;
 import chalk.models.OnlineQueryResult;
-import org.apache.arrow.vector.table.Row;
-import org.apache.arrow.vector.types.FloatingPointPrecision;
-import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 
 public class TestUnmarshal {

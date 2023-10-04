@@ -11,6 +11,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,62 +34,58 @@ public class TableUnmarshaller {
 
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
-
+                var feature = featureMap.get(fqn);
+                if (feature == null) {
+                    // TODO: Handle `namespace.__chalk_observed_at__` field.
+                    continue;
+                }
                 switch (arrowField.getType().getTypeID()) {
-                    case Int:
+                    case Int -> {
                         var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());
                         var bitWidth = castInt.getBitWidth();
                         if (bitWidth == 32) {
                             int val = row.getInt(fqn);
-                            var feature = featureMap.get(fqn);
+
                             feature.setValue(val);
                         } else if (bitWidth == 64) {
                             long val = row.getBigInt(fqn);
-                            var feature = featureMap.get(fqn);
                             feature.setValue(val);
                         } else if (bitWidth == 16) {
                             short val = row.getSmallInt(fqn);
-                            var feature = featureMap.get(fqn);
                             feature.setValue(val);
                         } else if (bitWidth == 8) {
                             byte val = row.getTinyInt(fqn);
-                            var feature = featureMap.get(fqn);
                             feature.setValue(val);
                         } else {
                             throw new Exception("Unsupported bitwidth found while converting from Arrow to Java: " + bitWidth);
                         }
-                        break;
-                    case FloatingPoint:
+                    }
+                    case FloatingPoint -> {
                         var castFloatingPoint = (ArrowType.FloatingPoint) (arrowField.getFieldType().getType());
                         var precision = castFloatingPoint.getPrecision();
                         if (precision == FloatingPointPrecision.SINGLE) {
                             var val2 = row.getFloat4(fqn);
-                            var feature2 = featureMap.get(fqn);
-                            feature2.setValue(val2);
+                            feature.setValue(val2);
                         } else if (precision == FloatingPointPrecision.DOUBLE) {
                             var val2 = row.getFloat8(fqn);
-                            var feature2 = featureMap.get(fqn);
-                            feature2.setValue(val2);
+                            feature.setValue(val2);
                         } else {
                             throw new Exception("Unsupported precision found while converting from Arrow to Java: " + precision);
                         }
-                        break;
-                    case Bool:
+                    }
+                    case Bool -> {
                         boolean boolVal = row.getBit(fqn) == 1;
-                        var boolFeature = featureMap.get(fqn);
-                        boolFeature.setValue(boolVal);
-                        break;
-                    case Utf8:
+                        feature.setValue(boolVal);
+                    }
+                    case LargeUtf8, Utf8 -> {
                         String strVal = row.getVarCharObj(fqn);
-                        var strFeature = featureMap.get(fqn);
-                        strFeature.setValue(strVal);
-                        break;
-                    case Date:
+                        feature.setValue(strVal);
+                    }
+                    case Date -> {
                         var castDate = (ArrowType.Date) (arrowField.getFieldType().getType());
                         if (castDate.getUnit() == DateUnit.DAY) {
                             int epochDays = row.getDateDay(fqn);
-                            var dateFeature = featureMap.get(fqn);
-                            dateFeature.setValue(LocalDate.ofEpochDay(epochDays));
+                            feature.setValue(LocalDate.ofEpochDay(epochDays));
                         } else if (castDate.getUnit() == DateUnit.MILLISECOND) {
                             long epochSeconds = row.getDateMilli(fqn);
                             var dateMillisFeature = featureMap.get(fqn);
@@ -97,7 +94,59 @@ public class TableUnmarshaller {
                         } else {
                             throw new Exception("Unsupported date unit found while converting from Arrow to Java: " + castDate.getUnit());
                         }
-                        break;
+                    }
+                    case Timestamp -> {
+                        var cast = (ArrowType.Timestamp) (arrowField.getFieldType().getType());
+                        var timezone = cast.getTimezone();
+                        ZoneId zoneId = null;
+                        if (timezone != null) {
+                            zoneId = ZoneId.of(timezone);
+                        }
+                        boolean hasTimezone = zoneId != null;
+                        switch (cast.getUnit()) {
+                            case SECOND -> {
+                                if (hasTimezone) {
+                                    long epochSeconds = row.getTimeStampSecTZ(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                } else {
+                                    long epochSeconds = row.getTimeStampSec(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                }
+                            }
+                            case MILLISECOND -> {
+                                if (hasTimezone) {
+                                    long epochSeconds = row.getTimeStampMilliTZ(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                } else {
+                                    long epochSeconds = row.getTimeStampMilli(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                }
+                            }
+                            case MICROSECOND -> {
+                                if (hasTimezone) {
+                                    long epochSeconds = row.getTimeStampMicroTZ(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                } else {
+                                    long epochSeconds = row.getTimeStampMicro(fqn);
+                                    var timestampFeature = featureMap.get(fqn);
+                                    timestampFeature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                }
+                            }
+                            case NANOSECOND -> {
+                                if (hasTimezone) {
+                                    long epochSeconds = row.getTimeStampNanoTZ(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                } else {
+                                    long epochSeconds = row.getTimeStampNano(fqn);
+                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                }
+                            }
+                            default ->
+                                    throw new Exception("Unsupported timestamp unit found while converting from Arrow to Java: " + cast.getUnit());
+                        }
+                    }
+                    case List, Struct, LargeBinary, Binary, Time, Duration ->
+                            throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                 }
 
             }

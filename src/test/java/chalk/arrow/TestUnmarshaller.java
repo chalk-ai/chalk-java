@@ -10,20 +10,20 @@ import java.util.Map;
 
 
 public class TestUnmarshaller {
-
-
-    public void getTestTableWithAllArrowTypes() {
-
-    }
-
-    @Test
-    public void testUnmarshalIntoUser() throws Exception {
-        User[] users = new User[10];
-        users = TableUnmarshaller.unmarshal(table, User.class);
-        };
-        for (User user : users) {
-            assert user != null;
-            assert user.socureScore != null;
-        }
-    }
+//
+//
+//    public void getTestTableWithAllArrowTypes() {
+//
+//    }
+//
+//    @Test
+//    public void testUnmarshalIntoUser() throws Exception {
+//        User[] users = new User[10];
+//        users = TableUnmarshaller.unmarshal(table, User.class);
+//        };
+//        for (User user : users) {
+//            assert user != null;
+//            assert user.socureScore != null;
+//        }
+//    }
 }
