@@ -34,8 +34,10 @@ public class Initializer {
     public static Map<String, Feature<?>> initResult(FeaturesClass fc) throws Exception {
         Field[] fields = fc.getClass().getDeclaredFields();
         Map<String, Feature<?>> featureMap = new java.util.HashMap<>();
+        var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
-            var feature = Initializer.init(field, Utils.toSnakeCase(fc.getClass().getSimpleName()), featureMap);
+            var childFqn = rootFeatureFqn + "." + Utils.toSnakeCase(field.getName());
+            var feature = Initializer.init(field, childFqn, featureMap);
             field.set(fc, feature);
         }
         return featureMap;
