@@ -7,7 +7,7 @@ public class InitFeaturesTestFeatures {
     public static BurrysMembership burrysMembership;
     public static BurrysInjury burrysInjury;
 
-    public static User user;
+    public static TestUser user;
 
     public static Exception initException = chalk.internal.codegen.Initializer.initFeatures(InitFeaturesTestFeatures.class);
 

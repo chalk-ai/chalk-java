@@ -20,8 +20,9 @@ public class Initializer {
             if (!FeaturesBase.class.isAssignableFrom(field.getType())) {
                 continue;
             }
+            var rootFeatureFqn = Utils.toSnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, "", null, null);
+                var featureClass = Initializer.init(field, rootFeatureFqn, null);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -34,32 +35,24 @@ public class Initializer {
         Field[] fields = fc.getClass().getDeclaredFields();
         Map<String, Feature<?>> featureMap = new java.util.HashMap<>();
         for (Field field : fields) {
-            var feature = Initializer.init(field, Utils.toSnakeCase(fc.getClass().getSimpleName()),null, featureMap);
+            var feature = Initializer.init(field, Utils.toSnakeCase(fc.getClass().getSimpleName()), featureMap);
             field.set(fc, feature);
         }
         return featureMap;
     }
 
-    public static Object init(Field f, String parentFqn, String fqnOverride, Map<String, Feature<?>> featureMap) throws Exception {
-        String fqn = parentFqn;
-        String snakeName = Utils.toSnakeCase(f.getName());
-        if (fqn.length() > 0) {
-            fqn = fqn + "." + snakeName;
-        } else {
-            fqn = snakeName;
-        }
-        if (fqnOverride != null) {
-            fqn = fqnOverride;
-        }
+    public static Object init(Field f, String fqn, Map<String, Feature<?>> featureMap) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(f.getType())) {
             // RECURSIVE CASE
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
             for (Field ff : f.getType().getFields()) {
+                String snakeName = Utils.toSnakeCase(ff.getName());
+                var childFqn = fqn + "." + snakeName;
                 if (StructFeaturesClass.class.isAssignableFrom(f.getType())) {
-                    fqnOverride = fqn;
+                    childFqn = fqn;  // Struct feature classes' FQN end with the last actual feature in the chain.
                 }
-                var obj = init(ff, fqn, fqnOverride, featureMap);
+                var obj = init(ff, childFqn, featureMap);
                 ff.set(fc, obj);
             }
             return fc;

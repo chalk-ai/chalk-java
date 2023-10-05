@@ -109,21 +109,21 @@ public class TestOnlineQueryParams {
      */
     @Test
     public void testInitFeaturesFqn() throws Exception {
-        assert InitFeaturesTestFeatures.user.id.getFqn().equals("user.id");
-        assert InitFeaturesTestFeatures.user.injuries.getFqn().equals("user.injuries");
-        assert InitFeaturesTestFeatures.user.burrysMembership.getFqn().equals("user.burrys_membership");
-        assert InitFeaturesTestFeatures.user.burrysMembership.isFreeMonthlyBurrytoClaimed.getFqn().equals("user.burrys_membership.is_free_monthly_burryto_claimed");
+        assert InitFeaturesTestFeatures.user.id.getFqn().equals("test_user.id");
+        assert InitFeaturesTestFeatures.user.injuries.getFqn().equals("test_user.injuries");
+        assert InitFeaturesTestFeatures.user.burrysMembership.getFqn().equals("test_user.burrys_membership");
+        assert InitFeaturesTestFeatures.user.burrysMembership.isFreeMonthlyBurrytoClaimed.getFqn().equals("test_user.burrys_membership.is_free_monthly_burryto_claimed");
 
         // Test has ones
-        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.id.getFqn().equals("user.burrys_membership.instructor.id");
-        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.rating.getFqn().equals("user.burrys_membership.instructor.rating");
+        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.id.getFqn().equals("test_user.burrys_membership.instructor.id");
+        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.rating.getFqn().equals("test_user.burrys_membership.instructor.rating");
 
         // Test has many
-        assert InitFeaturesTestFeatures.user.burrysMembership.injuries.getFqn().equals("user.burrys_membership.injuries");
+        assert InitFeaturesTestFeatures.user.burrysMembership.injuries.getFqn().equals("test_user.burrys_membership.injuries");
 
         // Test dataclasses and nested dataclasses. They should have
         // their FQN truncated until the first feature is reached.
-        assert InitFeaturesTestFeatures.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("user.burrys_membership.branch");
-        assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("test_user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
     }
 }

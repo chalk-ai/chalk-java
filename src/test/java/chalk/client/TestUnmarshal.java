@@ -1,6 +1,6 @@
 package chalk.client;
 
-import chalk.client.features.User;
+import chalk.client.features.TestUser;
 import chalk.internal.arrow.TableUnmarshaller;
 import chalk.models.OnlineQueryParams;
 import chalk.models.OnlineQueryResult;
@@ -19,13 +19,13 @@ public class TestUnmarshal {
                 .withInput("user.id", userIds)
                 .withOutput("user.socure_score")
                 .build();
-        User[] users = new User[userIds.length];
+        TestUser[] users = new TestUser[userIds.length];
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             var scalarsTable = result.getScalarsTable();
             assert result.getScalarsTable().getRowCount() == userIds.length;
-            users = TableUnmarshaller.unmarshal(scalarsTable, User.class);
+            users = TableUnmarshaller.unmarshal(scalarsTable, TestUser.class);
         };
-        for (User user : users) {
+        for (TestUser user : users) {
             assert user != null;
             assert user.socureScore != null;
         }
