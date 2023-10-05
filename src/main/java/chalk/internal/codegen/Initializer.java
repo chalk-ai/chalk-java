@@ -52,7 +52,7 @@ public class Initializer {
                 String snakeName = Utils.toSnakeCase(ff.getName());
                 var childFqn = fqn + "." + snakeName;
                 if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
-                    // For input features, struct feature classes' FQN end with the last actual feature in the chain.
+                    // For input features, struct field FQNs end at the last actual feature in the chain.
                     // Only override the fqn for StructFeaturesClass children for initing features that are
                     // used to specify query inputs. For features that are used to store query outputs, we
                     // want a fake FQN (fake being struct fields should not have an FQN).
