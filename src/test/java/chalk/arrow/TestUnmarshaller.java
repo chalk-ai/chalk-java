@@ -301,11 +301,14 @@ public class TestUnmarshaller {
         var structVector = StructVector.empty(ArrowFeatures.user.favoriteStruct.getFqn(), allocator);
         structVector.setValueCount(3);
         structVector.allocateNew();
-        long[] niceNumberValues = {1L, 2L, 3L};
-        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
+
         var structWriter = structVector.getWriter();
-        var longWriter = structWriter.bigInt(ArrowFeatures.user.favoriteStruct.niceNumber.getFqn());
-        var datetimeWriter = structWriter.timeStampSec(ArrowFeatures.user.favoriteStruct.niceDatetime.getFqn());
+
+        long[] niceNumberValues = {1L, 2L, 3L};
+        var longWriter = structWriter.bigInt("nice_number");
+
+        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
+        var datetimeWriter = structWriter.timeStampSec("nice_datetime");
         for (var i = 0; i < niceNumberValues.length; i++) {
             structWriter.start();
             longWriter.writeBigInt(niceNumberValues[i]);

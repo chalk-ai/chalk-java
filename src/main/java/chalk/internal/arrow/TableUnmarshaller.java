@@ -165,7 +165,7 @@ public class TableUnmarshaller {
                         System.out.println(structObj);
 
                         // TODO: We have not added a test for a struct with a struct inside it.
-                        unmarshalStruct((HashMap<String, Object>) structObj, featureMap);
+                        unmarshalStruct((HashMap<String, Object>) structObj, featureMap, fqn);
                     }
                     case List, LargeBinary, Binary, Time, Duration, Decimal -> {
                         continue;
@@ -179,14 +179,14 @@ public class TableUnmarshaller {
     }
 
 
-    private static void unmarshalStruct(Map<String, Object> struct, Map<String, Feature<?>> featureMap) {
+    private static void unmarshalStruct(Map<String, Object> struct, Map<String, Feature<?>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {
-            var fqn = entry.getKey();
+            var childFqn = fqn + "." + entry.getKey();
             var value = entry.getValue();
             if (value instanceof Map) {
-                unmarshalStruct((Map<String, Object>) value, featureMap);
+                unmarshalStruct((Map<String, Object>) value, featureMap, childFqn);
             } else {
-                var childFeature = featureMap.get(fqn);
+                var childFeature = featureMap.get(childFqn);
                 childFeature.setValue(value);
             }
         }
