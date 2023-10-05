@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,17 +40,12 @@ public class TableUnmarshaller {
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
                 var feature = featureMap.get(fqn);
-                if (feature == null) {
-                    // TODO: Handle `namespace.__chalk_observed_at__` field.
-                    continue;
-                }
                 switch (arrowField.getType().getTypeID()) {
                     case Int -> {
                         var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());
                         var bitWidth = castInt.getBitWidth();
                         if (bitWidth == 32) {
                             int val = row.getInt(fqn);
-
                             feature.setValue(val);
                         } else if (bitWidth == 64) {
                             long val = row.getBigInt(fqn);
@@ -161,7 +157,17 @@ public class TableUnmarshaller {
                                     throw new Exception("Unsupported timestamp unit found while converting from Arrow to Java: " + cast.getUnit());
                         }
                     }
-                    case List, Struct, LargeBinary, Binary, Time, Duration, Decimal -> {
+                    case Struct -> {
+                        // It shoulddddd be a struct. All we need is take each element and map to an actual instance of the StructFeatureClass.
+                        // Need some reflection here to get the constructor for the struct feature class.
+                        var structObj = row.getStruct(fqn);
+                        System.out.println(">>> GET STRUCT: ");
+                        System.out.println(structObj);
+
+                        // TODO: We have not added a test for a struct with a struct inside it.
+                        unmarshalStruct((HashMap<String, Object>) structObj, featureMap);
+                    }
+                    case List, LargeBinary, Binary, Time, Duration, Decimal -> {
                         continue;
 //                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                     }
@@ -170,5 +176,19 @@ public class TableUnmarshaller {
             result.add(obj);
         }
         return listToArray(result, target);
+    }
+
+
+    private static void unmarshalStruct(Map<String, Object> struct, Map<String, Feature<?>> featureMap) {
+        for (Map.Entry<String, Object> entry : struct.entrySet()) {
+            var fqn = entry.getKey();
+            var value = entry.getValue();
+            if (value instanceof Map) {
+                unmarshalStruct((Map<String, Object>) value, featureMap);
+            } else {
+                var childFeature = featureMap.get(fqn);
+                childFeature.setValue(value);
+            }
+        }
     }
 }

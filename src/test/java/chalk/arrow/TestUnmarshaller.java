@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 
 public class TestUnmarshaller {
@@ -301,7 +302,7 @@ public class TestUnmarshaller {
         structVector.setValueCount(3);
         structVector.allocateNew();
         long[] niceNumberValues = {1L, 2L, 3L};
-        long[] niceDatetimeValues = new long[]{36840000000000L, 36841000000000L, 36842000000000L};  // 10:14:00, 10:14:01, 10:14:02
+        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
         var structWriter = structVector.getWriter();
         var longWriter = structWriter.bigInt(ArrowFeatures.user.favoriteStruct.niceNumber.getFqn());
         var datetimeWriter = structWriter.timeStampSec(ArrowFeatures.user.favoriteStruct.niceDatetime.getFqn());
@@ -412,13 +413,11 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2);
         assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3);
 
-
-
-
-
-
-
-
-
+        assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
     }
 }

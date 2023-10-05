@@ -51,8 +51,12 @@ public class Initializer {
             for (Field ff : f.getType().getFields()) {
                 String snakeName = Utils.toSnakeCase(ff.getName());
                 var childFqn = fqn + "." + snakeName;
-                if (StructFeaturesClass.class.isAssignableFrom(f.getType())) {
-                    childFqn = fqn;  // Struct feature classes' FQN end with the last actual feature in the chain.
+                if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
+                    // For input features, struct feature classes' FQN end with the last actual feature in the chain.
+                    // Only override the fqn for StructFeaturesClass children for initing features that are
+                    // used to specify query inputs. For features that are used to store query outputs, we
+                    // want a fake FQN (fake being struct fields should not have an FQN).
+                    childFqn = fqn;
                 }
                 var obj = init(ff, childFqn, featureMap);
                 ff.set(fc, obj);

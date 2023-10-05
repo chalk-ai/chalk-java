@@ -46,6 +46,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<Table> favoriteHasMany;
     public Feature<List<String>> favoriteStrings;
 
-    // TODO: Add support for Decimal
+    // TODO: Add support for these data types
     //    public Feature<BigDecimal> favoriteDecimal;
+    //    public WindowedFeatureAbc windowedFeatureAbc;
 }
