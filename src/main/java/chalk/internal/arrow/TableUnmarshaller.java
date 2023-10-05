@@ -158,13 +158,7 @@ public class TableUnmarshaller {
                         }
                     }
                     case Struct -> {
-                        // It shoulddddd be a struct. All we need is take each element and map to an actual instance of the StructFeatureClass.
-                        // Need some reflection here to get the constructor for the struct feature class.
                         var structObj = row.getStruct(fqn);
-                        System.out.println(">>> GET STRUCT: ");
-                        System.out.println(structObj);
-
-                        // TODO: We have not added a test for a struct with a struct inside it.
                         unmarshalStruct((HashMap<String, Object>) structObj, featureMap, fqn);
                     }
                     case List, LargeBinary, Binary, Time, Duration, Decimal -> {
