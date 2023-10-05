@@ -4,34 +4,39 @@ import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 import org.apache.arrow.vector.table.Table;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ArrowUser extends FeaturesClass {
     // Create one field for every possible data type
     public Feature<String> id;
-    public Feature<String> favoriteString;
-    public Feature<String> favoriteLargeString;
+    public Feature<String> favoriteUtf8;
+    public Feature<String> favoriteLargeUtf8;
     public Feature<Byte> favoriteByte;
     public Feature<Short> favoriteShort;
     public Feature<Integer> favoriteInteger;
     public Feature<Long> favoriteBigInteger;
-    public Feature<Double> favoriteDouble;
-    public Feature<Float> favoriteFloat;
-    public Feature<Boolean> favoriteBool;
+    public Feature<Double> favoriteFloat8;
+    public Feature<Float> favoriteFloat4;
+    public Feature<Boolean> favoriteBoolean;
     public Feature<java.time.LocalDate> favoriteDateMilli;
     public Feature<java.time.LocalDate> favoriteDateSec;
     public Feature<java.time.LocalDateTime> favoriteTimestampSec;
-    public Feature<java.time.ZonedDateTime> favoriteTimestampSecTZ;
+    public Feature<java.time.ZonedDateTime> favoriteTimestampSecTz;
     public Feature<java.time.LocalDateTime> favoriteTimestampMilli;
-    public Feature<java.time.ZonedDateTime> favoriteTimestampMilliTZ;
+    public Feature<java.time.ZonedDateTime> favoriteTimestampMilliTz;
     public Feature<java.time.LocalDateTime> favoriteTimestampMicro;
-    public Feature<java.time.ZonedDateTime> favoriteTimestampMicroTZ;
+    public Feature<java.time.ZonedDateTime> favoriteTimestampMicroTz;
     public Feature<java.time.LocalDateTime> favoriteTimestampNano;
-    public Feature<java.time.ZonedDateTime> favoriteTimestampNanoTZ;
-    public Feature<java.time.LocalTime> favoriteLocalTime;
-    public Feature<java.time.Duration> favoriteDuration;
-    public Feature<Double> favoriteDecimal;
-    public Feature<List<String>> favoriteStrings;
+    public Feature<java.time.ZonedDateTime> favoriteTimestampNanoTz;
+    public Feature<java.time.LocalTime> favoriteTimeSec;
+    public Feature<java.time.LocalTime> favoriteTimeMilli;
+    public Feature<java.time.LocalTime> favoriteTimeMicro;
+    public Feature<java.time.LocalTime> favoriteTimeNano;
+    public Feature<java.time.Duration> favoriteDurationSec;
+    public Feature<java.time.Duration> favoriteDurationMilli;
+    public Feature<java.time.Duration> favoriteDurationMicro;
+    public Feature<java.time.Duration> favoriteDurationNano;
     public VanillaDataclass favoriteStruct;
     public Feature<List<VanillaDataclass>> favoriteStructList;
     public DataclassWithComplexFeatures favoriteStructComplex;
@@ -40,4 +45,8 @@ public class ArrowUser extends FeaturesClass {
     public Feature<String> leastFavoriteHasOneId;
     public MyTail leastFavoriteHasOne;
     public Feature<Table> favoriteHasMany;
+    public Feature<List<String>> favoriteStrings;
+
+    // TODO: Add support for Decimal
+    //    public Feature<BigDecimal> favoriteDecimal;
 }
