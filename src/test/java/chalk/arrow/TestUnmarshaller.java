@@ -265,8 +265,9 @@ public class TestUnmarshaller {
         durationNanoVector.setValueCount(durationNanoValues.length);
         fieldVectors.add(durationNanoVector);
 
-        // Create struct vector for the following dataclass
         /*
+        Create struct vector for the following dataclass
+
             public class VanillaDataclass extends FeaturesClass {
                 public Feature<Long> niceNumber;
                 public Feature<java.time.LocalDateTime> niceDatetime;
@@ -278,8 +279,8 @@ public class TestUnmarshaller {
         long[] niceNumberValues = {1L, 2L, 3L};
         long[] niceDatetimeValues = new long[]{36840000000000L, 36841000000000L, 36842000000000L};  // 10:14:00, 10:14:01, 10:14:02
         var structWriter = structVector.getWriter();
-        var longWriter = structWriter.bigInt("arrow_user.favorite_struct.nice_number");
-        var datetimeWriter = structWriter.timeStampSec("arrow_user.favorite_struct.nice_datetime");
+        var longWriter = structWriter.bigInt(ArrowFeatures.user.favoriteStruct.niceNumber.getFqn());
+        var datetimeWriter = structWriter.timeStampSec(ArrowFeatures.user.favoriteStruct.niceDatetime.getFqn());
         for (var i = 0; i < niceNumberValues.length; i++) {
             structWriter.start();
             longWriter.writeBigInt(niceNumberValues[i]);
@@ -288,79 +289,10 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVector);
 
-
-
-
-
-
-
-
-
-
-
-
         // TODO: Support Decimal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
         return table;
-
-
-
-
-
-//        case Int -> {
-//
-//        case FloatingPoint -> {
-//
-//        case Bool -> {
-//
-//        case LargeUtf8, Utf8 -> {
-//
-//        case Date -> {
-//
-//        case Timestamp -> {
-
     }
 
     @Test
@@ -372,16 +304,12 @@ public class TestUnmarshaller {
         assert users[1].favoriteBigInteger.getValue() == 2L;
         assert users[2].favoriteBigInteger.getValue() == 3L;
 
+        assert users[0].favoriteUtf8.getValue().equals("a");
+        assert users[1].favoriteUtf8.getValue().equals("b");
+        assert users[2].favoriteUtf8.getValue().equals("c");
 
-
-
-
-
-        // All types
-        // Has one features??
-
-        // Has-many
-
-        System.out.println(">>> FANCY PANTS");
+        assert users[0].favoriteLargeUtf8.getValue().equals("a");
+        assert users[1].favoriteLargeUtf8.getValue().equals("b");
+        assert users[2].favoriteLargeUtf8.getValue().equals("c");
     }
 }

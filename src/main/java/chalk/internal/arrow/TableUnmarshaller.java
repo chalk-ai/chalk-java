@@ -123,40 +123,49 @@ public class TableUnmarshaller {
                             }
                             case MILLISECOND -> {
                                 if (hasTimezone) {
-                                    long epochSeconds = row.getTimeStampMilliTZ(fqn);
-                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                    long epochMilli = row.getTimeStampMilliTZ(fqn);
+                                    feature.setValue(Instant.ofEpochMilli(epochMilli).atZone(zoneId));
                                 } else {
-                                    long epochSeconds = row.getTimeStampMilli(fqn);
-                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                    long epochMilli = row.getTimeStampMilli(fqn);
+                                    feature.setValue(Instant.ofEpochMilli(epochMilli).atZone(ZoneOffset.UTC).toLocalDateTime());
                                 }
                             }
                             case MICROSECOND -> {
                                 if (hasTimezone) {
-                                    long epochSeconds = row.getTimeStampMicroTZ(fqn);
-                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                    long epochMicro = row.getTimeStampMicroTZ(fqn);
+                                    long epochSecondsTruncated = epochMicro / 1_000_000;
+                                    long epochNanoRemainder = (epochMicro % 1_000_000) * 1_000;
+                                    feature.setValue(Instant.ofEpochSecond(epochMicro).atZone(zoneId));
                                 } else {
-                                    long epochSeconds = row.getTimeStampMicro(fqn);
+                                    long epochMicro = row.getTimeStampMicro(fqn);
+                                    long epochSecondsTruncated = epochMicro / 1_000_000;
+                                    long epochNanoRemainder = (epochMicro % 1_000_000) * 1_000;
                                     var timestampFeature = featureMap.get(fqn);
-                                    timestampFeature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                    timestampFeature.setValue(Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(ZoneOffset.UTC).toLocalDateTime());
                                 }
                             }
                             case NANOSECOND -> {
                                 if (hasTimezone) {
-                                    long epochSeconds = row.getTimeStampNanoTZ(fqn);
-                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(zoneId));
+                                    long epochNano = row.getTimeStampNanoTZ(fqn);
+                                    long epochSecondsTruncated = epochNano / 1_000_000_000;
+                                    long epochNanoRemainder = epochNano % 1_000_000_000;
+                                    feature.setValue(Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId));
                                 } else {
-                                    long epochSeconds = row.getTimeStampNano(fqn);
-                                    feature.setValue(Instant.ofEpochSecond(epochSeconds).atZone(ZoneOffset.UTC).toLocalDateTime());
+                                    long epochNano = row.getTimeStampNano(fqn);
+                                    long epochSecondsTruncated = epochNano / 1_000_000_000;
+                                    long epochNanoRemainder = epochNano % 1_000_000_000;
+                                    feature.setValue(Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(ZoneOffset.UTC).toLocalDateTime());
                                 }
                             }
                             default ->
                                     throw new Exception("Unsupported timestamp unit found while converting from Arrow to Java: " + cast.getUnit());
                         }
                     }
-                    case List, Struct, LargeBinary, Binary, Time, Duration, Decimal ->
-                            throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
+                    case List, Struct, LargeBinary, Binary, Time, Duration, Decimal -> {
+                        continue;
+//                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
+                    }
                 }
-
             }
             result.add(obj);
         }
