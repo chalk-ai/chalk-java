@@ -11,10 +11,10 @@ public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
     public Feature<String> favoriteUtf8;
     public Feature<String> favoriteLargeUtf8;
-    public Feature<Byte> favoriteByte;
-    public Feature<Short> favoriteShort;
-    public Feature<Integer> favoriteInteger;
-    public Feature<Long> favoriteBigInteger;
+    public Feature<Byte> favoriteTinyInt;
+    public Feature<Short> favoriteSmallInt;
+    public Feature<Integer> favoriteInt;
+    public Feature<Long> favoriteBigInt;
     public Feature<Double> favoriteFloat8;
     public Feature<Float> favoriteFloat4;
     public Feature<Boolean> favoriteBoolean;

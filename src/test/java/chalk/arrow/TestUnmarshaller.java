@@ -22,7 +22,7 @@ public class TestUnmarshaller {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
 
-        var bigIntVector = new BigIntVector(ArrowFeatures.user.favoriteBigInteger.getFqn(), allocator);
+        var bigIntVector = new BigIntVector(ArrowFeatures.user.favoriteBigInt.getFqn(), allocator);
         bigIntVector.allocateNew();
         long[] values = {1, 2, 3};
         for (int i = 0; i < values.length; i++) {
@@ -31,7 +31,7 @@ public class TestUnmarshaller {
         bigIntVector.setValueCount(values.length);
         fieldVectors.add(bigIntVector);
 
-        var intVector = new IntVector(ArrowFeatures.user.favoriteInteger.getFqn(), allocator);
+        var intVector = new IntVector(ArrowFeatures.user.favoriteInt.getFqn(), allocator);
         intVector.allocateNew();
         int[] intValues = {1, 2, 3};
         for (int i = 0; i < intValues.length; i++) {
@@ -39,6 +39,24 @@ public class TestUnmarshaller {
         }
         intVector.setValueCount(intValues.length);
         fieldVectors.add(intVector);
+
+        var smallIntVector = new SmallIntVector(ArrowFeatures.user.favoriteSmallInt.getFqn(), allocator);
+        smallIntVector.allocateNew();
+        short[] smallIntValues = {1, 2, 3};
+        for (int i = 0; i < smallIntValues.length; i++) {
+            smallIntVector.set(i, smallIntValues[i]);
+        }
+        smallIntVector.setValueCount(smallIntValues.length);
+        fieldVectors.add(smallIntVector);
+
+        var tinyIntVector = new TinyIntVector(ArrowFeatures.user.favoriteTinyInt.getFqn(), allocator);
+        tinyIntVector.allocateNew();
+        byte[] tinyIntValues = {1, 2, 3};
+        for (int i = 0; i < tinyIntValues.length; i++) {
+            tinyIntVector.set(i, tinyIntValues[i]);
+        }
+        tinyIntVector.setValueCount(tinyIntValues.length);
+        fieldVectors.add(tinyIntVector);
 
         var floatVector = new Float4Vector(ArrowFeatures.user.favoriteFloat4.getFqn(), allocator);
         floatVector.allocateNew();
@@ -306,13 +324,21 @@ public class TestUnmarshaller {
         Table table = getTestTableWithAllArrowTypes();
         var users = TableUnmarshaller.unmarshal(table, ArrowUser.class);
         assert users.length == 3;
-        assert users[0].favoriteBigInteger.getValue() == 1L;
-        assert users[1].favoriteBigInteger.getValue() == 2L;
-        assert users[2].favoriteBigInteger.getValue() == 3L;
+        assert users[0].favoriteBigInt.getValue() == 1L;
+        assert users[1].favoriteBigInt.getValue() == 2L;
+        assert users[2].favoriteBigInt.getValue() == 3L;
 
-        assert users[0].favoriteInteger.getValue() == 1;
-        assert users[1].favoriteInteger.getValue() == 2;
-        assert users[2].favoriteInteger.getValue() == 3;
+        assert users[0].favoriteInt.getValue() == 1;
+        assert users[1].favoriteInt.getValue() == 2;
+        assert users[2].favoriteInt.getValue() == 3;
+
+        assert users[0].favoriteSmallInt.getValue() == 1;
+        assert users[1].favoriteSmallInt.getValue() == 2;
+        assert users[2].favoriteSmallInt.getValue() == 3;
+
+        assert users[0].favoriteTinyInt.getValue() == 1;
+        assert users[1].favoriteTinyInt.getValue() == 2;
+        assert users[2].favoriteTinyInt.getValue() == 3;
 
         assert users[0].favoriteUtf8.getValue().equals("a");
         assert users[1].favoriteUtf8.getValue().equals("b");
