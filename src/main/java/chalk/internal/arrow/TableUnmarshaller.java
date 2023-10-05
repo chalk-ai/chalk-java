@@ -81,8 +81,12 @@ public class TableUnmarshaller {
                         boolean boolVal = row.getBit(fqn) == 1;
                         feature.setValue(boolVal);
                     }
-                    case LargeUtf8, Utf8 -> {
+                    case Utf8 -> {
                         String strVal = row.getVarCharObj(fqn);
+                        feature.setValue(strVal);
+                    }
+                    case LargeUtf8 -> {
+                        String strVal = row.getLargeVarCharObj(fqn);
                         feature.setValue(strVal);
                     }
                     case Date -> {

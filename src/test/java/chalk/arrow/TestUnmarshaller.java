@@ -2,6 +2,7 @@ package chalk.arrow;
 
 import chalk.arrow.test_features.ArrowFeatures;
 import chalk.arrow.test_features.ArrowUser;
+import chalk.internal.Utils;
 import chalk.internal.arrow.TableUnmarshaller;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -181,7 +182,7 @@ public class TestUnmarshaller {
 
         var timeSecVector = new TimeSecVector(ArrowFeatures.user.favoriteTimeSec.getFqn(), allocator);
         timeSecVector.allocateNew();
-        int[] timeSecValues = {36900, 36901, 36902};  // 10:14:00, 10:14:01, 10:14:02
+        int[] timeSecValues = {36840, 36841, 36842};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeSecValues.length; i++) {
             timeSecVector.set(i, timeSecValues[i]);
         }
@@ -190,7 +191,7 @@ public class TestUnmarshaller {
 
         var timeMilliVector = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilli.getFqn(), allocator);
         timeMilliVector.allocateNew();
-        int[] timeMilliValues = {36900000, 36901000, 36902000};  // 10:14:00, 10:14:01, 10:14:02
+        int[] timeMilliValues = {36840000, 36841000, 36842000};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeMilliValues.length; i++) {
             timeMilliVector.set(i, timeMilliValues[i]);
         }
@@ -199,7 +200,7 @@ public class TestUnmarshaller {
 
         var timeMicroVector = new TimeMicroVector(ArrowFeatures.user.favoriteTimeMicro.getFqn(), allocator);
         timeMicroVector.allocateNew();
-        long[] timeMicroValues = {36900000000L, 36901000000L, 36902000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] timeMicroValues = {36840000000L, 36841000000L, 36842000000L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeMicroValues.length; i++) {
             timeMicroVector.set(i, timeMicroValues[i]);
         }
@@ -233,7 +234,7 @@ public class TestUnmarshaller {
         );
         var durationMilliVector = new DurationVector(ArrowFeatures.user.favoriteDurationMilli.getFqn(), durationMilliType, allocator);
         durationMilliVector.allocateNew();
-        int[] durationMilliValues = {36900000, 36901000, 36902000};  // 10:14:00, 10:14:01, 10:14:02
+        int[] durationMilliValues = {36840000, 36841000, 36842000};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMilliValues.length; i++) {
             durationMilliVector.set(i, durationMilliValues[i]);
         }
@@ -245,7 +246,7 @@ public class TestUnmarshaller {
         );
         var durationMicroVector = new DurationVector(ArrowFeatures.user.favoriteDurationMicro.getFqn(), durationMicroType, allocator);
         durationMicroVector.allocateNew();
-        long[] durationMicroValues = {36900000000L, 36901000000L, 36902000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] durationMicroValues = {36840000000L, 36841000000L, 36842000000L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMicroValues.length; i++) {
             durationMicroVector.set(i, durationMicroValues[i]);
         }
@@ -257,7 +258,7 @@ public class TestUnmarshaller {
         );
         var durationNanoVector = new DurationVector(ArrowFeatures.user.favoriteDurationNano.getFqn(), durationNanoType, allocator);
         durationNanoVector.allocateNew();
-        long[] durationNanoValues = {36900000000000L, 36901000000000L, 36902000000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] durationNanoValues = {36840000000000L, 36841000000000L, 36842000000000L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationNanoValues.length; i++) {
             durationNanoVector.set(i, durationNanoValues[i]);
         }
@@ -272,21 +273,19 @@ public class TestUnmarshaller {
             }
          */
         var structVector = StructVector.empty(ArrowFeatures.user.favoriteStruct.getFqn(), allocator);
+        structVector.setValueCount(3);
         structVector.allocateNew();
         long[] niceNumberValues = {1L, 2L, 3L};
+        long[] niceDatetimeValues = new long[]{36840000000000L, 36841000000000L, 36842000000000L};  // 10:14:00, 10:14:01, 10:14:02
         var structWriter = structVector.getWriter();
-        var longWriter = structWriter.bigInt("niceNumber");
-        for (int i = 0; i < niceNumberValues.length; i++) {
-            structWriter.setPosition(i);
+        var longWriter = structWriter.bigInt("arrow_user.favorite_struct.nice_number");
+        var datetimeWriter = structWriter.timeStampSec("arrow_user.favorite_struct.nice_datetime");
+        for (var i = 0; i < niceNumberValues.length; i++) {
+            structWriter.start();
             longWriter.writeBigInt(niceNumberValues[i]);
-        }
-        long[] niceDatetimeValues = new long[]{36900000000000L, 36901000000000L, 36902000000000L};  // 10:14:00, 10:14:01, 10:14:02
-        var datetimeWriter = structWriter.timeStampSec("niceDatetime");
-        for (int i = 0; i < niceDatetimeValues.length; i++) {
-            structWriter.setPosition(i);
             datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
+            structWriter.end();
         }
-        structVector.setValueCount(niceNumberValues.length);
         fieldVectors.add(structVector);
 
 
@@ -342,7 +341,7 @@ public class TestUnmarshaller {
 
 
 
-        VectorSchemaRoot root = VectorSchemaRoot.of(bigIntVector);
+        VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
         return table;
 
@@ -366,11 +365,14 @@ public class TestUnmarshaller {
 
     @Test
     public void testUnmarshalScalar() throws Exception {
-        var users = TableUnmarshaller.unmarshal(getTestTableWithAllArrowTypes(), ArrowUser.class);
+        Table table = getTestTableWithAllArrowTypes();
+        var users = TableUnmarshaller.unmarshal(table, ArrowUser.class);
         assert users.length == 3;
         assert users[0].favoriteBigInteger.getValue() == 1L;
         assert users[1].favoriteBigInteger.getValue() == 2L;
         assert users[2].favoriteBigInteger.getValue() == 3L;
+
+
 
 
 
