@@ -4,7 +4,6 @@ import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 import org.apache.arrow.vector.table.Table;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ArrowUser extends FeaturesClass {
@@ -20,7 +19,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<Float> favoriteFloat4;
     public Feature<Boolean> favoriteBoolean;
     public Feature<java.time.LocalDate> favoriteDateMilli;
-    public Feature<java.time.LocalDate> favoriteDateSec;
+    public Feature<java.time.LocalDate> favoriteDateDay;
     public Feature<java.time.LocalDateTime> favoriteTimestampSec;
     public Feature<java.time.ZonedDateTime> favoriteTimestampSecTz;
     public Feature<java.time.LocalDateTime> favoriteTimestampMilli;

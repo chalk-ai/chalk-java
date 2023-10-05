@@ -12,6 +12,7 @@ import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.Test;
 
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class TestUnmarshaller {
         for (int i = 0; i < boolValues.length; i++) {
             boolVector.set(i, boolValues[i] ? 1 : 0);
         }
+        fieldVectors.add(boolVector);
 
         var utf8Vector = new VarCharVector(ArrowFeatures.user.favoriteUtf8.getFqn(), allocator);
         utf8Vector.allocateNew();
@@ -82,7 +84,7 @@ public class TestUnmarshaller {
         largeUtf8Vector.setValueCount(largeUtf8Values.length);
         fieldVectors.add(largeUtf8Vector);
 
-        var dateVector = new DateDayVector(ArrowFeatures.user.favoriteDateSec.getFqn(), allocator);
+        var dateVector = new DateDayVector(ArrowFeatures.user.favoriteDateDay.getFqn(), allocator);
         dateVector.allocateNew();
         int[] dateValues = {18839, 18840, 18841};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < dateValues.length; i++) {
@@ -93,7 +95,8 @@ public class TestUnmarshaller {
 
         var dateMilliVector = new DateMilliVector(ArrowFeatures.user.favoriteDateMilli.getFqn(), allocator);
         dateMilliVector.allocateNew();
-        long[] dateMilliValues = {1627689600000L, 1627776000000L, 1627862400000L};  // Thursday, July 31, 2021, ..., ...
+        // Thursday, July 31, 2021, ..., ... For some reason has to be epoch seconds instead of epoch milliseconds.
+        long[] dateMilliValues = {1627689600, 1627776000, 1627862400};
         for (int i = 0; i < dateMilliValues.length; i++) {
             dateMilliVector.set(i, dateMilliValues[i]);
         }
@@ -139,6 +142,7 @@ public class TestUnmarshaller {
             timestampMilliTzVector.set(i, timestampMilliValues[i]);
         }
         timestampMilliTzVector.setValueCount(timestampMilliValues.length);
+        fieldVectors.add(timestampMilliTzVector);
 
         var timestampMicroVector = new TimeStampMicroVector(ArrowFeatures.user.favoriteTimestampMicro.getFqn(), allocator);
         timestampMicroVector.allocateNew();
@@ -154,10 +158,12 @@ public class TestUnmarshaller {
         );
         var timestampMicroTzVector = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTz.getFqn(), microTzType, allocator);
         timestampMicroTzVector.allocateNew();
-        for (int i = 0; i < timestampMicroValues.length; i++) {
-            timestampMicroTzVector.set(i, timestampMicroValues[i]);
+        // Thursday, July 31, 2021, ..., ... Oddly needs to be in epoch seconds instead of epoch microseconds.
+        long[] timestampMicroTzValues = {1627689600, 1627776000, 1627862400};
+        for (int i = 0; i < timestampMicroTzValues.length; i++) {
+            timestampMicroTzVector.set(i, timestampMicroTzValues[i]);
         }
-        timestampMicroTzVector.setValueCount(timestampMicroValues.length);
+        timestampMicroTzVector.setValueCount(timestampMicroTzValues.length);
         fieldVectors.add(timestampMicroTzVector);
 
         var timestampNanoVector = new TimeStampNanoVector(ArrowFeatures.user.favoriteTimestampNano.getFqn(), allocator);
@@ -304,6 +310,10 @@ public class TestUnmarshaller {
         assert users[1].favoriteBigInteger.getValue() == 2L;
         assert users[2].favoriteBigInteger.getValue() == 3L;
 
+        assert users[0].favoriteInteger.getValue() == 1;
+        assert users[1].favoriteInteger.getValue() == 2;
+        assert users[2].favoriteInteger.getValue() == 3;
+
         assert users[0].favoriteUtf8.getValue().equals("a");
         assert users[1].favoriteUtf8.getValue().equals("b");
         assert users[2].favoriteUtf8.getValue().equals("c");
@@ -311,5 +321,78 @@ public class TestUnmarshaller {
         assert users[0].favoriteLargeUtf8.getValue().equals("a");
         assert users[1].favoriteLargeUtf8.getValue().equals("b");
         assert users[2].favoriteLargeUtf8.getValue().equals("c");
+
+        assert users[0].favoriteBoolean.getValue();
+        assert !users[1].favoriteBoolean.getValue();
+        assert users[2].favoriteBoolean.getValue();
+
+        assert users[0].favoriteFloat4.getValue() == 1.0f;
+        assert users[1].favoriteFloat4.getValue() == 2.0f;
+        assert users[2].favoriteFloat4.getValue() == 3.0f;
+
+        assert users[0].favoriteFloat8.getValue() == 1.0;
+        assert users[1].favoriteFloat8.getValue() == 2.0;
+        assert users[2].favoriteFloat8.getValue() == 3.0;
+
+        var expectedDatetime1 = LocalDateTime.of(2021, 7, 31, 0, 0, 0);
+        var expectedDatetime2 = LocalDateTime.of(2021, 8, 1, 0, 0, 0);
+        var expectedDatetime3 = LocalDateTime.of(2021, 8, 2, 0, 0, 0);
+
+        var expectedZonedDatetime1 = ZonedDateTime.of(expectedDatetime1, ZoneId.of("UTC"));
+        var expectedZonedDatetime2 = ZonedDateTime.of(expectedDatetime2, ZoneId.of("UTC"));
+        var expectedZonedDatetime3 = ZonedDateTime.of(expectedDatetime3, ZoneId.of("UTC"));
+        expectedZonedDatetime1 = expectedZonedDatetime1.withZoneSameInstant(ZoneId.of("US/Pacific"));
+        expectedZonedDatetime2 = expectedZonedDatetime2.withZoneSameInstant(ZoneId.of("US/Pacific"));
+        expectedZonedDatetime3 = expectedZonedDatetime3.withZoneSameInstant(ZoneId.of("US/Pacific"));
+
+
+        assert users[0].favoriteDateMilli.getValue().equals(LocalDate.of(2021, 7, 31));
+        assert users[1].favoriteDateMilli.getValue().equals(LocalDate.of(2021, 8, 1));
+        assert users[2].favoriteDateMilli.getValue().equals(LocalDate.of(2021, 8, 2));
+
+        assert users[0].favoriteDateDay.getValue().equals(LocalDate.of(2021, 7, 31));
+        assert users[1].favoriteDateDay.getValue().equals(LocalDate.of(2021, 8, 1));
+        assert users[2].favoriteDateDay.getValue().equals(LocalDate.of(2021, 8, 2));
+
+        assert users[0].favoriteTimestampSec.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteTimestampSec.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteTimestampSec.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteTimestampMilli.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteTimestampMilli.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteTimestampMilli.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteTimestampMicro.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteTimestampMicro.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteTimestampMicro.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteTimestampNano.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteTimestampNano.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteTimestampNano.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteTimestampSecTz.getValue().equals(expectedZonedDatetime1);
+        assert users[1].favoriteTimestampSecTz.getValue().equals(expectedZonedDatetime2);
+        assert users[2].favoriteTimestampSecTz.getValue().equals(expectedZonedDatetime3);
+
+        assert users[0].favoriteTimestampMilliTz.getValue().equals(expectedZonedDatetime1);
+        assert users[1].favoriteTimestampMilliTz.getValue().equals(expectedZonedDatetime2);
+        assert users[2].favoriteTimestampMilliTz.getValue().equals(expectedZonedDatetime3);
+
+        assert users[0].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime1);
+        assert users[1].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime2);
+        assert users[2].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime3);
+
+        assert users[0].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime1);
+        assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2);
+        assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3);
+
+
+
+
+
+
+
+
+
     }
 }
