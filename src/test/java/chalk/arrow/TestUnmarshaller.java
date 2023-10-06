@@ -337,6 +337,67 @@ public class TestUnmarshaller {
         listVector.setValueCount(3);
         fieldVectors.add(listVector);
 
+        var boolListVector = ListVector.empty(ArrowFeatures.user.favoriteBooleanList.getFqn(), allocator);
+        var boolListWriter = boolListVector.getWriter();
+        var boolListValues = new boolean[]{false, true, true, true, false, true, true, true, false};
+        for (var i = 0; i < 3; i++) {
+            boolListWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var bool = boolListValues[idx];
+                boolListWriter.writeBit(bool ? 1 : 0);
+            }
+            boolListWriter.endList();
+        }
+        boolListVector.setValueCount(3);
+        fieldVectors.add(boolListVector);
+
+        var longListVector = ListVector.empty(ArrowFeatures.user.favoriteLongList.getFqn(), allocator);
+        var longListWriter = longListVector.getWriter();
+        var longListValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
+        for (var i = 0; i < 3; i++) {
+            longListWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var longValue = longListValues[idx];
+                longListWriter.writeBigInt(longValue);
+            }
+            longListWriter.endList();
+        }
+        longListVector.setValueCount(3);
+        fieldVectors.add(longListVector);
+
+        var doubleListvector = ListVector.empty(ArrowFeatures.user.favoriteDoubleList.getFqn(), allocator);
+        var doubleListWriter = doubleListvector.getWriter();
+        var doubleListValues = new double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
+        for (var i = 0; i < 3; i++) {
+            doubleListWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var doubleValue = doubleListValues[idx];
+                doubleListWriter.writeFloat8(doubleValue);
+            }
+            doubleListWriter.endList();
+        }
+        doubleListvector.setValueCount(3);
+        fieldVectors.add(doubleListvector);
+
+        var timestampSecListVector = ListVector.empty(ArrowFeatures.user.favoriteTimestampSecList.getFqn(), allocator);
+        var timestampSecListWriter = timestampSecListVector.getWriter();
+        var timestampSecListValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
+        for (var i = 0; i < 3; i++) {
+            timestampSecListWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var timestampSecValue = timestampSecListValues[idx];
+                timestampSecListWriter.writeTimeStampSec(timestampSecValue);
+            }
+            timestampSecListWriter.endList();
+        }
+        timestampSecListVector.setValueCount(3);
+        fieldVectors.add(timestampSecListVector);
+
+
         // TODO: Support Decimal
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
@@ -446,5 +507,21 @@ public class TestUnmarshaller {
         assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
         assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));
         assert users[2].favoriteStringList.getValue().equals(Arrays.asList("g", "h", "i"));
+
+        assert users[0].favoriteBooleanList.getValue().equals(Arrays.asList(false, true, true));
+        assert users[1].favoriteBooleanList.getValue().equals(Arrays.asList(true, false, true));
+        assert users[2].favoriteBooleanList.getValue().equals(Arrays.asList(true, true, false));
+
+        assert users[0].favoriteLongList.getValue().equals(Arrays.asList(1L, 2L, 3L));
+        assert users[1].favoriteLongList.getValue().equals(Arrays.asList(4L, 5L, 6L));
+        assert users[2].favoriteLongList.getValue().equals(Arrays.asList(7L, 8L, 9L));
+
+        assert users[0].favoriteDoubleList.getValue().equals(Arrays.asList(1.0, 2.0, 3.0));
+        assert users[1].favoriteDoubleList.getValue().equals(Arrays.asList(4.0, 5.0, 6.0));
+        assert users[2].favoriteDoubleList.getValue().equals(Arrays.asList(7.0, 8.0, 9.0));
+
+        assert users[0].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime1, expectedDatetime2, expectedDatetime3));
+        assert users[1].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime3, expectedDatetime1, expectedDatetime2));
+        assert users[2].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime2, expectedDatetime3, expectedDatetime1));
     }
 }
