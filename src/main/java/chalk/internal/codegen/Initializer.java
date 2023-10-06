@@ -31,7 +31,7 @@ public class Initializer {
         return null;
     }
 
-    public static Map<String, Feature<?>> initResult(FeaturesClass fc) throws Exception {
+    public static Map<String, Feature<?>> initResult(FeaturesBase fc) throws Exception {
         Field[] fields = fc.getClass().getDeclaredFields();
         Map<String, Feature<?>> featureMap = new java.util.HashMap<>();
         var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
