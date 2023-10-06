@@ -54,7 +54,7 @@ public class TestOnlineQueryParams {
 
         var allParams = new OnlineQueryParams[]{p1, p2, p3, p4};
         for (OnlineQueryParams p : allParams) {
-            assert Arrays.equals((String[]) p.getInputs().get("user.id"), expectedInputs);
+            assert Arrays.equals((String[]) p.getInputs().get("test_user.id"), expectedInputs);
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
         }
@@ -96,7 +96,7 @@ public class TestOnlineQueryParams {
 
         var allParams = new OnlineQueryParams[]{p1, p2, p3, p4, p5};
         for (OnlineQueryParams p : allParams) {
-            assert Arrays.equals(p.getOutputs().toArray(), new String[]{"user.id", "user.burrys_membership.membership_id"});
+            assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.id", "test_user.burrys_membership.membership_id"});
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
         }
