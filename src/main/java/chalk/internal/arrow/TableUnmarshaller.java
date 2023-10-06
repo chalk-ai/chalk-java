@@ -231,9 +231,7 @@ public class TableUnmarshaller {
                         }
                     }
                     case LargeBinary, Binary, Decimal -> {
-
-                        continue;
-//                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
+                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                     }
                 }
             }
