@@ -176,7 +176,7 @@ public class TableUnmarshaller {
                                 // Converting from arrow `Map` to Java `Map`
                                 Class<?> dataclass;
                                 try {
-                                    dataclass = TypeGetter.getListFeatureInnerType(target, fieldName);
+                                    dataclass = Utils.getListFeatureInnerType(target, fieldName);
                                 } catch (Exception e) {
                                     throw new Exception("Could not get the inner type of a list feature: " + fieldName, e);
                                 }
