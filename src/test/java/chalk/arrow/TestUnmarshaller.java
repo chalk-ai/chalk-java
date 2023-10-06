@@ -417,6 +417,16 @@ public class TestUnmarshaller {
         structListVector.setValueCount(3);
         fieldVectors.add(structListVector);
 
+
+        var hasOneDoubleVector = new Float8Vector(ArrowFeatures.user.favoriteHasOne.length.getFqn(), allocator);
+        hasOneDoubleVector.allocateNew();
+        double[] hasOneDoubleValues = {1.0, 2.0, 3.0};
+        for (int i = 0; i < hasOneDoubleValues.length; i++) {
+            hasOneDoubleVector.set(i, hasOneDoubleValues[i]);
+        }
+        hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
+        fieldVectors.add(hasOneDoubleVector);
+
         // TODO: Support Decimal
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
@@ -594,5 +604,9 @@ public class TestUnmarshaller {
         assert users[0].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 0, 1));
         assert users[1].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 1, 1));
         assert users[2].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 2, 1));
+
+        assert users[0].favoriteHasOne.length.getValue().equals(1.0);
+        assert users[1].favoriteHasOne.length.getValue().equals(2.0);
+        assert users[2].favoriteHasOne.length.getValue().equals(3.0);
     }
 }

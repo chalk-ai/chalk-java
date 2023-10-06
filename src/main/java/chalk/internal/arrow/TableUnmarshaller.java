@@ -242,7 +242,6 @@ public class TableUnmarshaller {
         return listToArray(result, target);
     }
 
-
     private static void unmarshalNested(Map<String, Object> struct, Map<String, Feature<?>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {
             var childFqn = fqn + "." + entry.getKey();
