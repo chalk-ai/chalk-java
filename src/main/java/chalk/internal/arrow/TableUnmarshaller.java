@@ -207,7 +207,30 @@ public class TableUnmarshaller {
                         var duration = row.getDurationObj(fqn);
                         feature.setValue(Duration.ofSeconds(duration.getSeconds(), duration.getNano()));
                     }
-                    case LargeBinary, Binary, Time, Decimal -> {
+                    case Time -> {
+                        var cast = (ArrowType.Time) (arrowField.getFieldType().getType());
+                        switch(cast.getUnit()) {
+                            case SECOND -> {
+                                var time = row.getTimeSec(fqn);
+                                feature.setValue(LocalTime.ofSecondOfDay(time));
+                            }
+                            case MILLISECOND -> {
+                                var time = row.getTimeMilli(fqn);
+                                feature.setValue(LocalTime.ofNanoOfDay(time * 1_000_000L));
+                            }
+                            case MICROSECOND -> {
+                                var time = row.getTimeMicro(fqn);
+                                feature.setValue(LocalTime.ofNanoOfDay(time * 1_000L));
+                            }
+                            case NANOSECOND -> {
+                                var time = row.getTimeNano(fqn);
+                                feature.setValue(LocalTime.ofNanoOfDay(time));
+                            }
+                            default ->
+                                    throw new Exception("Unsupported time unit found while converting from Arrow to Java: " + cast.getUnit());
+                        }
+                    }
+                    case LargeBinary, Binary, Decimal -> {
 
                         continue;
 //                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());

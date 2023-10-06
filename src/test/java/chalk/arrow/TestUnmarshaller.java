@@ -579,5 +579,7 @@ public class TestUnmarshaller {
         assert users[0].favoriteDurationNano.getValue().equals(Duration.ofNanos(36840000000001L));
         assert users[1].favoriteDurationNano.getValue().equals(Duration.ofNanos(36841000000001L));
         assert users[2].favoriteDurationNano.getValue().equals(Duration.ofNanos(36842000000001L));
+
+        assert users[0].favoriteTimeSec.getValue().equals(LocalTime.of(10, 14, 0));
     }
 }
