@@ -167,7 +167,7 @@ public class TestUnmarshaller {
 
         var timestampMicroVector = new TimeStampMicroVector(ArrowFeatures.user.favoriteTimestampMicro.getFqn(), allocator);
         timestampMicroVector.allocateNew();
-        long[] timestampMicroValues = {1627689600000000L, 1627776000000000L, 1627862400000000L};  // Thursday, July 31, 2021, ..., ...
+        long[] timestampMicroValues = {1627689600000001L, 1627776000000001L, 1627862400000001L};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampMicroValues.length; i++) {
             timestampMicroVector.set(i, timestampMicroValues[i]);
         }
@@ -179,16 +179,16 @@ public class TestUnmarshaller {
         );
         var timestampMicroTzVector = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTz.getFqn(), microTzType, allocator);
         timestampMicroTzVector.allocateNew();
-        long[] timestampMicroTzValues = {1627689600000001L, 1627776000000001L, 1627862400000001L};
-        for (int i = 0; i < timestampMicroTzValues.length; i++) {
-            timestampMicroTzVector.set(i, timestampMicroTzValues[i]);
+
+        for (int i = 0; i < timestampMicroValues.length; i++) {
+            timestampMicroTzVector.set(i, timestampMicroValues[i]);
         }
-        timestampMicroTzVector.setValueCount(timestampMicroTzValues.length);
+        timestampMicroTzVector.setValueCount(timestampMicroValues.length);
         fieldVectors.add(timestampMicroTzVector);
 
         var timestampNanoVector = new TimeStampNanoVector(ArrowFeatures.user.favoriteTimestampNano.getFqn(), allocator);
         timestampNanoVector.allocateNew();
-        long[] timestampNanoValues = {1627689600000000000L, 1627776000000000000L, 1627862400000000000L};  // Thursday, July 31, 2021, ..., ...
+        long[] timestampNanoValues = {1627689600000000001L, 1627776000000000001L, 1627862400000000001L};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampNanoValues.length; i++) {
             timestampNanoVector.set(i, timestampNanoValues[i]);
         }
@@ -492,13 +492,13 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampMilli.getValue().equals(expectedDatetime2);
         assert users[2].favoriteTimestampMilli.getValue().equals(expectedDatetime3);
 
-        assert users[0].favoriteTimestampMicro.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteTimestampMicro.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteTimestampMicro.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteTimestampMicro.getValue().equals(expectedDatetime1.plusNanos(1000));
+        assert users[1].favoriteTimestampMicro.getValue().equals(expectedDatetime2.plusNanos(1000));
+        assert users[2].favoriteTimestampMicro.getValue().equals(expectedDatetime3.plusNanos(1000));
 
-        assert users[0].favoriteTimestampNano.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteTimestampNano.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteTimestampNano.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteTimestampNano.getValue().equals(expectedDatetime1.plusNanos(1));
+        assert users[1].favoriteTimestampNano.getValue().equals(expectedDatetime2.plusNanos(1));
+        assert users[2].favoriteTimestampNano.getValue().equals(expectedDatetime3.plusNanos(1));
 
         assert users[0].favoriteTimestampSecTz.getValue().equals(expectedZonedDatetime1);
         assert users[1].favoriteTimestampSecTz.getValue().equals(expectedZonedDatetime2);
@@ -512,9 +512,9 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime2.plusNanos(1000));
         assert users[2].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime3.plusNanos(1000));
 
-        assert users[0].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime1);
-        assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2);
-        assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3);
+        assert users[0].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime1.plusNanos(1));
+        assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2.plusNanos(1));
+        assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3.plusNanos(1));
 
         assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
         assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
