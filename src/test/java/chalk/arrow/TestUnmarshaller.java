@@ -3,7 +3,7 @@ package chalk.arrow;
 import chalk.arrow.test_features.ArrowFeatures;
 import chalk.arrow.test_features.ArrowUser;
 import chalk.internal.Utils;
-import chalk.internal.arrow.TableUnmarshaller;
+import chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -436,7 +436,7 @@ public class TestUnmarshaller {
     @Test
     public void testUnmarshalScalar() throws Exception {
         Table table = getTestTableWithAllArrowTypes();
-        var users = TableUnmarshaller.unmarshal(table, ArrowUser.class);
+        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;

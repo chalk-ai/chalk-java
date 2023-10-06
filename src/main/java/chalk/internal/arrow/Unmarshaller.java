@@ -21,12 +21,12 @@ import java.util.Map;
 
 import static chalk.internal.Utils.listToArray;
 
-public class TableUnmarshaller {
+public class Unmarshaller {
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws Exception {
-        return unmarshal(result.getScalarsTable(), target);
+        return unmarshalTable(result.getScalarsTable(), target);
     }
 
-    public static <T extends FeaturesClass> T[] unmarshal(Table table, Class<T> target) throws Exception {
+    public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
         for (Row row: table) {
             T obj = target.getDeclaredConstructor().newInstance();
