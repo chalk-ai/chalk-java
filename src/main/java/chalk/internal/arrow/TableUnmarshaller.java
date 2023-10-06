@@ -2,6 +2,7 @@ package chalk.internal.arrow;
 
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
+import chalk.features.StructFeaturesClass;
 import chalk.internal.codegen.Initializer;
 import chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.table.Row;
@@ -163,6 +164,7 @@ public class TableUnmarshaller {
                         unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
                     }
                     case List -> {
+                        feature = featureMap.get(fqn);
                         var testStringList = new ArrayList<String>();
                         testStringList.add("test1");
                         testStringList.add("test2");
@@ -170,14 +172,26 @@ public class TableUnmarshaller {
                         var fieldName = "favoriteStringList";
                         var stuffList = row.getList(fqn);
                         var someList = new ArrayList();
+
+                        // If stuffList is a list of maps, we want a list of dataclasses.
+                        // What we might be able to do is create a table out of the list of maps, and then call unmarshal on that table. But is it possible???
+
+
+
                         for (Object stuff: stuffList) {
                             if (stuff instanceof Text) {
                                 // Converting from arrow `Text` to Java `String`
                                 stuff = stuff.toString();
+                            } else if (stuff instanceof Map) {
+                                // Converting from arrow `Map` to Java `Map`
+                                unmarshalNested((Map<String, Object>) stuff, featureMap, fqn);
+//                                convertMapToStructFeaturesClass((Map<String, Object>) stuff, feature.getClass().getTypeParameters());
+
+                                // create a schema by looping through each field.
+                                // do we have the arrow type of each field? We don't :(
                             }
                             someList.add(stuff);
                         }
-                        feature = featureMap.get(fqn);
                         feature.setValue(someList);
                     }
                     case LargeBinary, Binary, Time, Duration, Decimal -> {
@@ -204,4 +218,19 @@ public class TableUnmarshaller {
             }
         }
     }
+
+//    private static <T extends StructFeaturesClass> T convertMapToStructFeaturesClass(Map<String, Object> map, Class<T> target) {
+//        for (Map.Entry<String, Object> entry : map.entrySet()) {
+//            var key = entry.getKey();
+//            var value = entry.getValue();
+//            if (value instanceof Map) {
+//                var childMap = (Map<String, Object>) value;
+//                var childStruct = convertMapToStructFeaturesClass(childMap);
+//                map.put(key, childStruct);
+//            } else {
+//
+//            }
+//        }
+//
+//    }
 }

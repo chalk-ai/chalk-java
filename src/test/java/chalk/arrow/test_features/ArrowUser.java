@@ -7,7 +7,6 @@ import org.apache.arrow.vector.table.Table;
 import java.util.List;
 
 public class ArrowUser extends FeaturesClass {
-    // Create one field for every possible data type
     public Feature<String> id;
     public Feature<String> favoriteUtf8;
     public Feature<String> favoriteLargeUtf8;
