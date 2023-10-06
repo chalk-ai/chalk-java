@@ -608,5 +608,11 @@ public class TestUnmarshaller {
         assert users[0].favoriteHasOne.length.getValue().equals(1.0);
         assert users[1].favoriteHasOne.length.getValue().equals(2.0);
         assert users[2].favoriteHasOne.length.getValue().equals(3.0);
+
+        // TODO: Support complex structs and lists
+        // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
+        // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+
+
     }
 }
