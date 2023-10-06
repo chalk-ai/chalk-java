@@ -179,8 +179,7 @@ public class TestUnmarshaller {
         );
         var timestampMicroTzVector = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTz.getFqn(), microTzType, allocator);
         timestampMicroTzVector.allocateNew();
-        // Thursday, July 31, 2021, ..., ... Oddly needs to be in epoch seconds instead of epoch microseconds.
-        long[] timestampMicroTzValues = {1627689600, 1627776000, 1627862400};
+        long[] timestampMicroTzValues = {1627689600000001L, 1627776000000001L, 1627862400000001L};
         for (int i = 0; i < timestampMicroTzValues.length; i++) {
             timestampMicroTzVector.set(i, timestampMicroTzValues[i]);
         }
@@ -509,9 +508,9 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampMilliTz.getValue().equals(expectedZonedDatetime2);
         assert users[2].favoriteTimestampMilliTz.getValue().equals(expectedZonedDatetime3);
 
-        assert users[0].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime1);
-        assert users[1].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime2);
-        assert users[2].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime3);
+        assert users[0].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime1.plusNanos(1000));
+        assert users[1].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime2.plusNanos(1000));
+        assert users[2].favoriteTimestampMicroTz.getValue().equals(expectedZonedDatetime3.plusNanos(1000));
 
         assert users[0].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime1);
         assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2);

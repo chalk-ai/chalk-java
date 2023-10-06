@@ -131,7 +131,7 @@ public class TableUnmarshaller {
                                     long epochMicro = row.getTimeStampMicroTZ(fqn);
                                     long epochSecondsTruncated = epochMicro / 1_000_000;
                                     long epochNanoRemainder = (epochMicro % 1_000_000) * 1_000;
-                                    feature.setValue(Instant.ofEpochSecond(epochMicro).atZone(zoneId));
+                                    feature.setValue(Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId));
                                 } else {
                                     long epochMicro = row.getTimeStampMicro(fqn);
                                     long epochSecondsTruncated = epochMicro / 1_000_000;
