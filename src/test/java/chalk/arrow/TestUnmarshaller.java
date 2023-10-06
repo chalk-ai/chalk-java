@@ -218,7 +218,7 @@ public class TestUnmarshaller {
 
         var timeMilliVector = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilli.getFqn(), allocator);
         timeMilliVector.allocateNew();
-        int[] timeMilliValues = {36840000, 36841000, 36842000};  // 10:14:00, 10:14:01, 10:14:02
+        int[] timeMilliValues = {36840001, 36841001, 36842001};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeMilliValues.length; i++) {
             timeMilliVector.set(i, timeMilliValues[i]);
         }
@@ -261,7 +261,7 @@ public class TestUnmarshaller {
         );
         var durationMilliVector = new DurationVector(ArrowFeatures.user.favoriteDurationMilli.getFqn(), durationMilliType, allocator);
         durationMilliVector.allocateNew();
-        int[] durationMilliValues = {36840000, 36841000, 36842000};  // 10:14:00, 10:14:01, 10:14:02
+        int[] durationMilliValues = {36840001, 36841001, 36842001};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMilliValues.length; i++) {
             durationMilliVector.set(i, durationMilliValues[i]);
         }
@@ -273,7 +273,7 @@ public class TestUnmarshaller {
         );
         var durationMicroVector = new DurationVector(ArrowFeatures.user.favoriteDurationMicro.getFqn(), durationMicroType, allocator);
         durationMicroVector.allocateNew();
-        long[] durationMicroValues = {36840000000L, 36841000000L, 36842000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] durationMicroValues = {36840000001L, 36841000001L, 36842000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMicroValues.length; i++) {
             durationMicroVector.set(i, durationMicroValues[i]);
         }
@@ -285,7 +285,7 @@ public class TestUnmarshaller {
         );
         var durationNanoVector = new DurationVector(ArrowFeatures.user.favoriteDurationNano.getFqn(), durationNanoType, allocator);
         durationNanoVector.allocateNew();
-        long[] durationNanoValues = {36840000000000L, 36841000000000L, 36842000000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] durationNanoValues = {36840000000001L, 36841000000001L, 36842000000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationNanoValues.length; i++) {
             durationNanoVector.set(i, durationNanoValues[i]);
         }
@@ -563,5 +563,21 @@ public class TestUnmarshaller {
         assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
         assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
         assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
+
+        assert users[0].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36900));
+        assert users[1].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36901));
+        assert users[2].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36902));
+
+        assert users[0].favoriteDurationMilli.getValue().equals(Duration.ofMillis(36840001));
+        assert users[1].favoriteDurationMilli.getValue().equals(Duration.ofMillis(36841001));
+        assert users[2].favoriteDurationMilli.getValue().equals(Duration.ofMillis(36842001));
+
+        assert users[0].favoriteDurationMicro.getValue().equals(Duration.ofNanos(36840000001000L));
+        assert users[1].favoriteDurationMicro.getValue().equals(Duration.ofNanos(36841000001000L));
+        assert users[2].favoriteDurationMicro.getValue().equals(Duration.ofNanos(36842000001000L));
+
+        assert users[0].favoriteDurationNano.getValue().equals(Duration.ofNanos(36840000000001L));
+        assert users[1].favoriteDurationNano.getValue().equals(Duration.ofNanos(36841000000001L));
+        assert users[2].favoriteDurationNano.getValue().equals(Duration.ofNanos(36842000000001L));
     }
 }

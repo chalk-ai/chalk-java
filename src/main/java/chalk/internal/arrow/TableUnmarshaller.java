@@ -13,10 +13,7 @@ import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.util.Text;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -206,7 +203,12 @@ public class TableUnmarshaller {
                         }
                         feature.setValue(someList);
                     }
-                    case LargeBinary, Binary, Time, Duration, Decimal -> {
+                    case Duration -> {
+                        var duration = row.getDurationObj(fqn);
+                        feature.setValue(Duration.ofSeconds(duration.getSeconds(), duration.getNano()));
+                    }
+                    case LargeBinary, Binary, Time, Decimal -> {
+
                         continue;
 //                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                     }
