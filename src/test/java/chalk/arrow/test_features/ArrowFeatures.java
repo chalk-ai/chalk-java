@@ -5,7 +5,7 @@ import chalk.internal.codegen.Initializer;
 
 public class ArrowFeatures {
     public static MyTail myTail;
-    public static Transactions transactions;
+    public static Transaction transactions;
     public static ArrowUser user;
 
 

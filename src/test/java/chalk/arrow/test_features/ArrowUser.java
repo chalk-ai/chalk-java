@@ -47,7 +47,7 @@ public class ArrowUser extends FeaturesClass {
     public MyTail favoriteHasOne;
     public Feature<String> leastFavoriteHasOneId;
     public MyTail leastFavoriteHasOne;
-    public Feature<Table> favoriteHasMany;
+    public Feature<List<Transaction>> favoriteHasMany;
 
 
     // TODO: Add support for these data types

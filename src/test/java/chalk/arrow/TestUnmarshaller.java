@@ -15,9 +15,7 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class TestUnmarshaller {
@@ -436,6 +434,7 @@ public class TestUnmarshaller {
     @Test
     public void testUnmarshalScalar() throws Exception {
         Table table = getTestTableWithAllArrowTypes();
+
         var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
         assert users[0].favoriteBigInt.getValue() == 1L;
@@ -613,6 +612,16 @@ public class TestUnmarshaller {
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
 
+
+
+
+
+    }
+
+    @Test
+    public void TestUnmarshalHasMany() {
+        Map<String, Table> hasManyTable = new HashMap<>();
+        hasManyTable.put("arrow_user.favorite_has_many", new Table("favoriteDoubleList", "double", "double", "double", "double"));
 
     }
 }

@@ -165,14 +165,13 @@ public class Unmarshaller {
                         feature = featureMap.get(fqn);
                         var lastSection = Utils.getDotDelimitedLastSection(fqn);
                         var fieldName = Utils.firstLetterToLower(Utils.fqnCamelCase(lastSection));
-                        var stuffList = row.getList(fqn);
-                        var someList = new ArrayList();
-                        for (Object stuff: stuffList) {
-                            if (stuff instanceof Text) {
+                        var originalList = row.getList(fqn);
+                        var resultList = new ArrayList();
+                        for (Object rawObj: originalList) {
+                            if (rawObj instanceof Text) {
                                 // Converting from arrow `Text` to Java `String`
-                                stuff = stuff.toString();
-                                someList.add(stuff);
-                            } else if (stuff instanceof Map) {
+                                resultList.add(rawObj.toString());
+                            } else if (rawObj instanceof Map) {
                                 // Converting from arrow `Map` to Java `Map`
                                 Class<?> dataclass;
                                 try {
@@ -184,7 +183,7 @@ public class Unmarshaller {
                                 var dataclassInstance = (StructFeaturesClass) dataclass.getDeclaredConstructor().newInstance();
                                 var dataclassFeatureMap = Initializer.initResult(dataclassInstance);
 
-                                for (Map.Entry<String, Object> entry : ((Map<String, Object>) stuff).entrySet()) {
+                                for (Map.Entry<String, Object> entry : ((Map<String, Object>) rawObj).entrySet()) {
                                     var dataclassRootFqn = Utils.toSnakeCase(dataclass.getSimpleName());
                                     var childFqn = dataclassRootFqn + "." + entry.getKey();
                                     var value = entry.getValue();
@@ -195,13 +194,13 @@ public class Unmarshaller {
                                         childFeature.setValue(value);
                                     }
                                 }
-                                someList.add(dataclassInstance);
+                                resultList.add(dataclassInstance);
                             } else {
-                                someList.add(stuff);
+                                resultList.add(rawObj);
                             }
 
                         }
-                        feature.setValue(someList);
+                        feature.setValue(resultList);
                     }
                     case Duration -> {
                         var duration = row.getDurationObj(fqn);
