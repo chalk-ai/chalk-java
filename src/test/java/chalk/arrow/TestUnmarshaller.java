@@ -217,7 +217,7 @@ public class TestUnmarshaller {
 
         var timeMilliVector = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilli.getFqn(), allocator);
         timeMilliVector.allocateNew();
-        int[] timeMilliValues = {36840001, 36841001, 36842001};  // 10:14:00, 10:14:01, 10:14:02
+        int[] timeMilliValues = {36840001, 36841001, 36842001};  // 10:14:00.000, 10:14:00.001, 10:14:00.002
         for (int i = 0; i < timeMilliValues.length; i++) {
             timeMilliVector.set(i, timeMilliValues[i]);
         }
@@ -226,7 +226,7 @@ public class TestUnmarshaller {
 
         var timeMicroVector = new TimeMicroVector(ArrowFeatures.user.favoriteTimeMicro.getFqn(), allocator);
         timeMicroVector.allocateNew();
-        long[] timeMicroValues = {36840000000L, 36841000000L, 36842000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] timeMicroValues = {36840000001L, 36841000001L, 36842000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeMicroValues.length; i++) {
             timeMicroVector.set(i, timeMicroValues[i]);
         }
@@ -236,7 +236,7 @@ public class TestUnmarshaller {
 
         var timeNanoVector = new TimeNanoVector(ArrowFeatures.user.favoriteTimeNano.getFqn(), allocator);
         timeNanoVector.allocateNew();
-        long[] timeNanoValues = {36900000000000L, 36901000000000L, 36902000000000L};  // 10:14:00, 10:14:01, 10:14:02
+        long[] timeNanoValues = {36840000000001L, 36841000000001L, 36842000000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeNanoValues.length; i++) {
             timeNanoVector.set(i, timeNanoValues[i]);
         }
@@ -580,5 +580,19 @@ public class TestUnmarshaller {
         assert users[2].favoriteDurationNano.getValue().equals(Duration.ofNanos(36842000000001L));
 
         assert users[0].favoriteTimeSec.getValue().equals(LocalTime.of(10, 14, 0));
+        assert users[1].favoriteTimeSec.getValue().equals(LocalTime.of(10, 14, 1));
+        assert users[2].favoriteTimeSec.getValue().equals(LocalTime.of(10, 14, 2));
+
+        assert users[0].favoriteTimeMilli.getValue().equals(LocalTime.of(10, 14, 0, 1_000_000));
+        assert users[1].favoriteTimeMilli.getValue().equals(LocalTime.of(10, 14, 1, 1_000_000));
+        assert users[2].favoriteTimeMilli.getValue().equals(LocalTime.of(10, 14, 2, 1_000_000));
+
+        assert users[0].favoriteTimeMicro.getValue().equals(LocalTime.of(10, 14, 0, 1_000));
+        assert users[1].favoriteTimeMicro.getValue().equals(LocalTime.of(10, 14, 1, 1_000));
+        assert users[2].favoriteTimeMicro.getValue().equals(LocalTime.of(10, 14, 2, 1_000));
+
+        assert users[0].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 0, 1));
+        assert users[1].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 1, 1));
+        assert users[2].favoriteTimeNano.getValue().equals(LocalTime.of(10, 14, 2, 1));
     }
 }
