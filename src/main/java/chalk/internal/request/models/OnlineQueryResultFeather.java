@@ -3,7 +3,7 @@ package chalk.internal.request.models;
 import chalk.exceptions.ChalkException;
 import chalk.exceptions.ClientException;
 import chalk.exceptions.ServerError;
-import chalk.internal.feather.FeatherProcessor;
+import chalk.internal.arrow.FeatherProcessor;
 import chalk.internal.bytes.BytesConsumer;
 import chalk.models.QueryMeta;
 import com.fasterxml.jackson.databind.DeserializationFeature;

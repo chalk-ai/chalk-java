@@ -1,4 +1,3 @@
 package chalk.features;
 
-public class FeaturesClass extends FeaturesBase {
-}
+public class FeaturesClass extends FeaturesBase {}

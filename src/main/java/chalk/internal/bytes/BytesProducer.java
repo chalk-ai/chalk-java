@@ -1,6 +1,6 @@
 package chalk.internal.bytes;
 
-import chalk.internal.feather.FeatherProcessor;
+import chalk.internal.arrow.FeatherProcessor;
 import chalk.models.OnlineQueryParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

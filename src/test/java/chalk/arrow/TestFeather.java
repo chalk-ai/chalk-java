@@ -1,9 +1,9 @@
-package chalk.feather;
+package chalk.arrow;
 
 
 import chalk.internal.bytes.BytesConsumer;
 import chalk.internal.bytes.BytesProducer;
-import chalk.internal.feather.FeatherProcessor;
+import chalk.internal.arrow.FeatherProcessor;
 import chalk.internal.request.models.OnlineQueryBulkResponse;
 import chalk.models.OnlineQueryParams;
 import chalk.models.OnlineQueryResult;
@@ -30,7 +30,7 @@ public class TestFeather {
      */
     @Test
     public void testConvertBytesResponseToResult() throws Exception {
-        String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/feather/", "bulk_query_response.txt")), "UTF-8");
+        String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "bulk_query_response.txt")), "UTF-8");
         byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
         OnlineQueryResult result = response.toResult();
@@ -77,7 +77,7 @@ public class TestFeather {
     @Test
     public void testMillionRowsInOutput() {
         try {
-            byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/feather/", "million_scalar_rows.bin"));
+            byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "million_scalar_rows.bin"));
             OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
             OnlineQueryResult result = response.toResult();
             Table scalarsTable = result.getScalarsTable();
@@ -112,7 +112,7 @@ public class TestFeather {
     @Disabled("Bug in VectorSchemaAppender")
     @Test
     public void testListsInScalarTable() throws Exception {
-        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/feather/", "lists_in_scalar_table.bin"));
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "lists_in_scalar_table.bin"));
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
@@ -124,7 +124,7 @@ public class TestFeather {
      */
     @Test
     public void testStructsInScalarTable() throws Exception {
-        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/feather/", "structs_in_scalar_table.bin"));
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "structs_in_scalar_table.bin"));
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
@@ -145,7 +145,7 @@ public class TestFeather {
      */
     @Test
     public void testPrimitiveTypesInOutputTable() throws Exception {
-        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/feather/", "all_types_in_scalar_table.bin"));
+        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "all_types_in_scalar_table.bin"));
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
