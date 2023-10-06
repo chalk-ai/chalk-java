@@ -9,6 +9,7 @@ import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.apache.arrow.vector.util.Text;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -159,9 +160,27 @@ public class TableUnmarshaller {
                     }
                     case Struct -> {
                         var structObj = row.getStruct(fqn);
-                        unmarshalStruct((HashMap<String, Object>) structObj, featureMap, fqn);
+                        unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
                     }
-                    case List, LargeBinary, Binary, Time, Duration, Decimal -> {
+                    case List -> {
+                        var testStringList = new ArrayList<String>();
+                        testStringList.add("test1");
+                        testStringList.add("test2");
+                        testStringList.add("test3");
+                        var fieldName = "favoriteStringList";
+                        var stuffList = row.getList(fqn);
+                        var someList = new ArrayList();
+                        for (Object stuff: stuffList) {
+                            if (stuff instanceof Text) {
+                                // Converting from arrow `Text` to Java `String`
+                                stuff = stuff.toString();
+                            }
+                            someList.add(stuff);
+                        }
+                        feature = featureMap.get(fqn);
+                        feature.setValue(someList);
+                    }
+                    case LargeBinary, Binary, Time, Duration, Decimal -> {
                         continue;
 //                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                     }
@@ -173,12 +192,12 @@ public class TableUnmarshaller {
     }
 
 
-    private static void unmarshalStruct(Map<String, Object> struct, Map<String, Feature<?>> featureMap, String fqn) {
+    private static void unmarshalNested(Map<String, Object> struct, Map<String, Feature<?>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {
             var childFqn = fqn + "." + entry.getKey();
             var value = entry.getValue();
             if (value instanceof Map) {
-                unmarshalStruct((Map<String, Object>) value, featureMap, childFqn);
+                unmarshalNested((Map<String, Object>) value, featureMap, childFqn);
             } else {
                 var childFeature = featureMap.get(childFqn);
                 childFeature.setValue(value);

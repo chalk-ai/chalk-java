@@ -37,6 +37,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<java.time.Duration> favoriteDurationMicro;
     public Feature<java.time.Duration> favoriteDurationNano;
     public VanillaDataclass favoriteStruct;
+    public Feature<List<String>> favoriteStringList;
     public Feature<List<VanillaDataclass>> favoriteStructList;
     public DataclassWithComplexFeatures favoriteStructComplex;
     public Feature<String> favoriteHasOneId;
@@ -44,7 +45,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<String> leastFavoriteHasOneId;
     public MyTail leastFavoriteHasOne;
     public Feature<Table> favoriteHasMany;
-    public Feature<List<String>> favoriteStrings;
+
 
     // TODO: Add support for these data types
     //    public Feature<BigDecimal> favoriteDecimal;

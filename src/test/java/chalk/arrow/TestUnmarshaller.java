@@ -4,8 +4,10 @@ import chalk.arrow.test_features.ArrowFeatures;
 import chalk.arrow.test_features.ArrowUser;
 import chalk.internal.Utils;
 import chalk.internal.arrow.TableUnmarshaller;
+import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
+import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -316,6 +319,24 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVector);
 
+        var listVector = ListVector.empty(ArrowFeatures.user.favoriteStringList.getFqn(), allocator);
+        var listWriter = listVector.getWriter();
+        var varCharValues = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+        for (var i = 0; i < 3; i++) {
+            listWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var character = varCharValues[idx];
+                var bytes = character.getBytes();
+                ArrowBuf tempBuf = allocator.buffer(bytes.length);
+                tempBuf.setBytes(0, bytes);
+                listWriter.writeVarChar(0, bytes.length, tempBuf);
+            }
+            listWriter.endList();
+        }
+        listVector.setValueCount(3);
+        fieldVectors.add(listVector);
+
         // TODO: Support Decimal
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
@@ -421,5 +442,9 @@ public class TestUnmarshaller {
         assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
         assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
         assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
+
+        assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
+        assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));
+        assert users[2].favoriteStringList.getValue().equals(Arrays.asList("g", "h", "i"));
     }
 }
