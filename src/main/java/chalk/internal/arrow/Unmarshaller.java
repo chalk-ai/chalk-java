@@ -2,6 +2,7 @@ package chalk.internal.arrow;
 
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
+import chalk.features.HasMany;
 import chalk.features.StructFeaturesClass;
 import chalk.internal.Utils;
 import chalk.internal.codegen.Initializer;
@@ -13,17 +14,70 @@ import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.util.Text;
 
+import java.lang.reflect.Field;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static chalk.internal.Utils.listToArray;
+import static chalk.internal.Utils.*;
 
 public class Unmarshaller {
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws Exception {
         return unmarshalTable(result.getScalarsTable(), target);
+    }
+
+    public static void unmarshalHasManys(Map<String, Table> tables, FeaturesClass[] targets) throws Exception {
+        if (targets.length == 0) {
+            return;
+        }
+        for (var entry: tables.entrySet()) {
+            Class<?> localClass = targets[0].getClass();
+            String fqn = entry.getKey();
+            Table table = entry.getValue();
+            Field hasManyField = getFieldFromFqn(targets[0].getClass(), fqn);
+            Class<?> hasManyClass = getListFeatureInnerType(hasManyField);
+            if (!hasManyField.isAnnotationPresent(HasMany.class)) {
+                throw new Exception("Field " + fqn + " is not annotated as a has-many field");
+            }
+            HasMany hm = hasManyField.getAnnotation(HasMany.class);
+            String localFqn = Utils.toSnakeCase(localClass.getSimpleName()) + "." + hm.localKey();
+            String foreignFqn = Utils.toSnakeCase(hasManyClass.getSimpleName()) + "." + hm.foreignKey();
+
+            FeaturesClass[] objects = unmarshalTable(table, hasManyClass.asSubclass(FeaturesClass.class));
+            Map<String, List<FeaturesClass>> grouped = new HashMap<>();
+            for (FeaturesClass obj: objects) {
+                Field foreignField = getFieldFromFqn(hasManyClass, foreignFqn);
+                Object foreignKeyValue = foreignField.get(obj);
+                if (foreignKeyValue == null) {
+                    throw new Exception("Error while grouping has-many result: foreign join key is null");
+                }
+                String v = foreignKeyValue.toString();
+                if (grouped.containsKey(v)) {
+                    grouped.get(v).add(obj);
+                } else {
+                    grouped.put(v, new ArrayList<>());
+                }
+            }
+
+            for (FeaturesClass target: targets) {
+                Field localField = getFieldFromFqn(localClass, localFqn);
+                Object localKeyValue = localField.get(target);
+                if (localKeyValue == null) {
+                    throw new Exception("Error while grouping has-many result: local join key is null");
+                }
+                Field hmField = getFieldFromFqn(target.getClass(), fqn);
+                String v = localKeyValue.toString();
+                if (grouped.containsKey(v)) {
+                    List<FeaturesClass> group = grouped.get(v);
+                    hmField.set(target, group);
+                } else {
+                    hmField.set(target, new ArrayList<>());
+                }
+            }
+
+        }
     }
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
@@ -163,8 +217,6 @@ public class Unmarshaller {
                     }
                     case List -> {
                         feature = featureMap.get(fqn);
-                        var lastSection = Utils.getDotDelimitedLastSection(fqn);
-                        var fieldName = Utils.firstLetterToLower(Utils.fqnCamelCase(lastSection));
                         var originalList = row.getList(fqn);
                         var resultList = new ArrayList();
                         for (Object rawObj: originalList) {
@@ -175,9 +227,10 @@ public class Unmarshaller {
                                 // Converting from arrow `Map` to Java `Map`
                                 Class<?> dataclass;
                                 try {
-                                    dataclass = Utils.getListFeatureInnerType(target, fieldName);
+                                    Field field = Utils.getFieldFromFqn(target, fqn);
+                                    dataclass = Utils.getListFeatureInnerType(field);
                                 } catch (Exception e) {
-                                    throw new Exception("Could not get the inner type of a list feature: " + fieldName, e);
+                                    throw new Exception("Could not get the inner type of list feature: " + fqn, e);
                                 }
 
                                 var dataclassInstance = (StructFeaturesClass) dataclass.getDeclaredConstructor().newInstance();

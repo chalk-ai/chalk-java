@@ -66,29 +66,35 @@ public class Utils {
         return c >= 'a' && c <= 'z';
     }
 
-    public static Class<?> getListFeatureInnerType(Class<?> clazz, String fieldName) throws Exception {
-        for (Field field : clazz.getDeclaredFields()) {
-            if (field.getType() == Feature.class && field.getName().equals(fieldName)) {
-                Type genericType = field.getGenericType();
 
-                if (genericType instanceof ParameterizedType) {
-                    ParameterizedType paramType = (ParameterizedType) genericType;
-                    Type[] typeArgs = paramType.getActualTypeArguments();
-                    for (Type arg : typeArgs) {
-                        if (arg instanceof ParameterizedType) {
-                            ParameterizedType innerParamType = (ParameterizedType) arg;
-                            Type[] innerTypeArgs = innerParamType.getActualTypeArguments();
-                            for (Type innerArg : innerTypeArgs) {
-                                if (innerArg instanceof Class<?>) {
-                                    return (Class<?>) innerArg;
-                                }
-                            }
-                        }
-                    }
-                }
-                throw new Exception("Expected field '" + fieldName + "' to be a list of dataclasses, but found '" + genericType.getTypeName() + "' instead");
+    public static Field getFieldFromFqn(Class<?> clazz, String fqn) throws Exception {
+        String featureName = Utils.getDotDelimitedLastSection(fqn);
+        String fieldName = Utils.firstLetterToLower(Utils.fqnCamelCase(featureName));
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.getName().equals(fieldName)) {
+                return field;
             }
         }
         throw new IllegalArgumentException("Field " + fieldName + " does not exist in class " + clazz.getName());
+    }
+
+    public static Class<?> getListFeatureInnerType(Field field) throws Exception {
+        Type genericType = field.getGenericType();
+        if (genericType instanceof ParameterizedType) {
+            ParameterizedType paramType = (ParameterizedType) genericType;
+            Type[] typeArgs = paramType.getActualTypeArguments();
+            for (Type arg : typeArgs) {
+                if (arg instanceof ParameterizedType) {
+                    ParameterizedType innerParamType = (ParameterizedType) arg;
+                    Type[] innerTypeArgs = innerParamType.getActualTypeArguments();
+                    for (Type innerArg : innerTypeArgs) {
+                        if (innerArg instanceof Class<?>) {
+                            return (Class<?>) innerArg;
+                        }
+                    }
+                }
+            }
+        }
+        throw new Exception("Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName());
     }
 }

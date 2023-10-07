@@ -7,6 +7,7 @@ import lombok.Data;
 public class Feature<T> {
     private String fqn;
     private T value;
+    private HasMany join;
 
     public Feature() {
     }
