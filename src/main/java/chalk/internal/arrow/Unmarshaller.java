@@ -1,5 +1,6 @@
 package chalk.internal.arrow;
 
+import chalk.exceptions.ClientException;
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 import chalk.features.HasMany;
@@ -24,10 +25,14 @@ import java.util.Map;
 import static chalk.internal.Utils.*;
 
 public class Unmarshaller {
-    public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws Exception {
-        var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
-        unmarshalHasMany(result.getGroupsTables(), rootFeatureClasses);
-        return rootFeatureClasses;
+    public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
+        try {
+            var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
+            unmarshalHasMany(result.getGroupsTables(), rootFeatureClasses);
+            return rootFeatureClasses;
+        } catch (Exception e) {
+            throw new ClientException("Failed to unmarshal online query result into Java classes", e);
+        }
     }
 
     public static void unmarshalHasMany(Map<String, Table> tables, FeaturesClass[] targets) throws Exception {

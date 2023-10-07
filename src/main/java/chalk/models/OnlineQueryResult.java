@@ -1,5 +1,6 @@
 package chalk.models;
 
+import chalk.exceptions.ClientException;
 import chalk.exceptions.ServerError;
 import chalk.features.FeaturesClass;
 import chalk.internal.arrow.Unmarshaller;
@@ -59,7 +60,7 @@ public class OnlineQueryResult implements AutoCloseable {
         }
     }
 
-    public <T extends FeaturesClass> T[] unmarshal(Class<T> clazz) throws Exception {
+    public <T extends FeaturesClass> T[] unmarshal(Class<T> clazz) throws ClientException {
         return Unmarshaller.unmarshalOnlineQueryResult(this, clazz);
     }
 }
