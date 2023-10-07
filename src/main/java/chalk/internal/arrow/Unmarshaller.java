@@ -25,7 +25,9 @@ import static chalk.internal.Utils.*;
 
 public class Unmarshaller {
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws Exception {
-        return unmarshalTable(result.getScalarsTable(), target);
+        var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
+        unmarshalHasMany(result.getGroupsTables(), rootFeatureClasses);
+        return rootFeatureClasses;
     }
 
     public static void unmarshalHasMany(Map<String, Table> tables, FeaturesClass[] targets) throws Exception {

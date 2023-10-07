@@ -1,7 +1,6 @@
 package chalk.arrow;
 
 import chalk.arrow.test_features.ArrowFeatures;
-import chalk.arrow.test_features.ArrowTransaction;
 import chalk.arrow.test_features.ArrowUser;
 import chalk.internal.Utils;
 import chalk.internal.arrow.Unmarshaller;
