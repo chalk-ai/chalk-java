@@ -28,7 +28,7 @@ public class Unmarshaller {
         return unmarshalTable(result.getScalarsTable(), target);
     }
 
-    public static void unmarshalHasManys(Map<String, Table> tables, FeaturesClass[] targets) throws Exception {
+    public static void unmarshalHasMany(Map<String, Table> tables, FeaturesClass[] targets) throws Exception {
         if (targets.length == 0) {
             return;
         }
@@ -49,31 +49,31 @@ public class Unmarshaller {
             Map<String, List<FeaturesClass>> grouped = new HashMap<>();
             for (FeaturesClass obj: objects) {
                 Field foreignField = getFieldFromFqn(hasManyClass, foreignFqn);
-                Object foreignKeyValue = foreignField.get(obj);
-                if (foreignKeyValue == null) {
+                Feature<?> foreignKeyFeature = (Feature<?>) foreignField.get(obj);
+                if (foreignKeyFeature == null) {
                     throw new Exception("Error while grouping has-many result: foreign join key is null");
                 }
-                String v = foreignKeyValue.toString();
-                if (grouped.containsKey(v)) {
-                    grouped.get(v).add(obj);
-                } else {
+                String v = foreignKeyFeature.getValue().toString();
+                if (!grouped.containsKey(v)) {
                     grouped.put(v, new ArrayList<>());
                 }
+                grouped.get(v).add(obj);
             }
 
             for (FeaturesClass target: targets) {
                 Field localField = getFieldFromFqn(localClass, localFqn);
-                Object localKeyValue = localField.get(target);
-                if (localKeyValue == null) {
+                Feature<?> localKeyFeature = (Feature<?>) localField.get(target);
+                if (localKeyFeature == null) {
                     throw new Exception("Error while grouping has-many result: local join key is null");
                 }
                 Field hmField = getFieldFromFqn(target.getClass(), fqn);
-                String v = localKeyValue.toString();
+                Feature<?> hmFieldFeature = (Feature<?>) hmField.get(target);
+                String v = localKeyFeature.getValue().toString();
                 if (grouped.containsKey(v)) {
                     List<FeaturesClass> group = grouped.get(v);
-                    hmField.set(target, group);
+                    hmFieldFeature.setValue(group);
                 } else {
-                    hmField.set(target, new ArrayList<>());
+                    hmFieldFeature.setValue(new ArrayList<>());
                 }
             }
 
