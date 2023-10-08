@@ -3,7 +3,7 @@ package chalk.arrow;
 import chalk.arrow.test_features.ArrowFeatures;
 import chalk.arrow.test_features.ArrowUser;
 import chalk.internal.Utils;
-import chalk.internal.arrow.TableUnmarshaller;
+import chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -15,15 +15,58 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class TestUnmarshaller {
+    public Table getHasManyTable() {
+        // Transactions class
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var idVector = new VarCharVector(ArrowFeatures.transaction.id.getFqn(), allocator);
+        idVector.allocateNew();
+        String[] idValues = {"1", "2", "3"};
+        for (int i = 0; i < idValues.length; i++) {
+            idVector.set(i, idValues[i].getBytes());
+        }
+        idVector.setValueCount(idValues.length);
+        fieldVectors.add(idVector);
+
+        var amountVector = new Float8Vector(ArrowFeatures.transaction.amount.getFqn(), allocator);
+        amountVector.allocateNew();
+        double[] amountValues = {1.0, 2.0, 3.0};
+        for (int i = 0; i < amountValues.length; i++) {
+            amountVector.set(i, amountValues[i]);
+        }
+        amountVector.setValueCount(amountValues.length);
+        fieldVectors.add(amountVector);
+
+        var userIdVector = new VarCharVector(ArrowFeatures.transaction.userId.getFqn(), allocator);
+        userIdVector.allocateNew();
+        String[] userIdValues = {"1", "1", "2"};
+        for (int i = 0; i < userIdValues.length; i++) {
+            userIdVector.set(i, userIdValues[i].getBytes());
+        }
+        userIdVector.setValueCount(userIdValues.length);
+        fieldVectors.add(userIdVector);
+
+        var transactions = new Table(fieldVectors);
+        return transactions;
+    }
+
     public Table getTestTableWithAllArrowTypes() {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var idVector = new VarCharVector(ArrowFeatures.user.id.getFqn(), allocator);
+        idVector.allocateNew();
+        String[] idValues = {"1", "2", "3"};
+        for (int i = 0; i < idValues.length; i++) {
+            idVector.set(i, idValues[i].getBytes());
+        }
+        idVector.setValueCount(idValues.length);
+        fieldVectors.add(idVector);
 
         var bigIntVector = new BigIntVector(ArrowFeatures.user.favoriteBigInt.getFqn(), allocator);
         bigIntVector.allocateNew();
@@ -436,7 +479,8 @@ public class TestUnmarshaller {
     @Test
     public void testUnmarshalScalar() throws Exception {
         Table table = getTestTableWithAllArrowTypes();
-        var users = TableUnmarshaller.unmarshal(table, ArrowUser.class);
+
+        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;
@@ -608,5 +652,27 @@ public class TestUnmarshaller {
         assert users[0].favoriteHasOne.length.getValue().equals(1.0);
         assert users[1].favoriteHasOne.length.getValue().equals(2.0);
         assert users[2].favoriteHasOne.length.getValue().equals(3.0);
+
+        // TODO: Support complex structs and lists
+        // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
+        // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+    }
+
+    @Test
+    public void TestUnmarshalHasMany() throws Exception {
+        Table scalarsTable = getTestTableWithAllArrowTypes();
+        var users = Unmarshaller.unmarshalTable(scalarsTable, ArrowUser.class);
+        Map<String, Table> hasManyTables = new HashMap<>();
+        hasManyTables.put("user.small_transactions", getHasManyTable());
+        Unmarshaller.unmarshalHasMany(hasManyTables, users);
+
+        assert users[0].smallTransactions.getValue().size() == 2;
+        assert users[0].smallTransactions.getValue().get(0).amount.getValue().equals(1.0);
+        assert users[0].smallTransactions.getValue().get(1).amount.getValue().equals(2.0);
+
+        assert users[1].smallTransactions.getValue().size() == 1;
+        assert users[1].smallTransactions.getValue().get(0).amount.getValue().equals(3.0);
+
+        assert users[2].smallTransactions.getValue().size() == 0;
     }
 }

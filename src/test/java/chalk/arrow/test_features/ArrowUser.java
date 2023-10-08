@@ -2,7 +2,7 @@ package chalk.arrow.test_features;
 
 import chalk.features.Feature;
 import chalk.features.FeaturesClass;
-import org.apache.arrow.vector.table.Table;
+import chalk.features.HasMany;
 
 import java.util.List;
 
@@ -47,7 +47,9 @@ public class ArrowUser extends FeaturesClass {
     public MyTail favoriteHasOne;
     public Feature<String> leastFavoriteHasOneId;
     public MyTail leastFavoriteHasOne;
-    public Feature<Table> favoriteHasMany;
+
+    @HasMany(localKey = "id", foreignKey = "user_id")
+    public Feature<List<Transaction>> smallTransactions;
 
 
     // TODO: Add support for these data types

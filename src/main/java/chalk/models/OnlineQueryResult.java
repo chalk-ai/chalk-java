@@ -1,8 +1,9 @@
 package chalk.models;
 
+import chalk.exceptions.ClientException;
 import chalk.exceptions.ServerError;
 import chalk.features.FeaturesClass;
-import chalk.internal.arrow.TableUnmarshaller;
+import chalk.internal.arrow.Unmarshaller;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import org.apache.arrow.vector.table.Table;
@@ -59,7 +60,7 @@ public class OnlineQueryResult implements AutoCloseable {
         }
     }
 
-    public <T extends FeaturesClass> T[] unmarshal(Class<T> clazz) throws Exception {
-        return TableUnmarshaller.unmarshalOnlineQueryResult(this, clazz);
+    public <T extends FeaturesClass> T[] unmarshal(Class<T> clazz) throws ClientException {
+        return Unmarshaller.unmarshalOnlineQueryResult(this, clazz);
     }
 }
