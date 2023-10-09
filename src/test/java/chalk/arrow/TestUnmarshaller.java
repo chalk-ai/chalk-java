@@ -468,7 +468,7 @@ public class TestUnmarshaller {
         hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
         fieldVectors.add(hasOneDoubleVector);
 
-        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed._86400s", allocator);
+        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed__86400s__", allocator);
         windowedDoubleVector__1d__.allocateNew();
         double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
         for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
@@ -477,7 +477,7 @@ public class TestUnmarshaller {
         windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
         fieldVectors.add(windowedDoubleVector__1d__);
 
-        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed._601s", allocator);
+        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed__601s__", allocator);
         windowedDoubleVector__601s__.allocateNew();
         double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
         for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {

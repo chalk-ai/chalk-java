@@ -119,6 +119,19 @@ public class Utils {
         return String.format("%d%s", duration, units[units.length - 1]);
     }
 
+    public static int convertBucketDurationToSeconds(String duration) {
+        String[] units = {"s", "m", "h", "d", "w"};
+        int[] multipliers = {1, 60, 3600, 86400, 604800};
+
+        for (int i = 0; i < units.length; i++) {
+            if (duration.endsWith(units[i])) {
+                return Integer.parseInt(duration.substring(0, duration.length() - units[i].length())) * multipliers[i];
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid bucket duration: " + duration);
+    }
+
     public static String normalizeIfWindowedFeatureFqn(String fqn) {
         var featureName = Utils.getDotDelimitedLastSection(fqn);
 

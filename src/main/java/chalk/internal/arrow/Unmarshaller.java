@@ -101,12 +101,7 @@ public class Unmarshaller {
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
 
-                // Use the normalized FQN *only* to look up the feature.
-                // Retain the original FQN so that we can use it to look
-                // the vector up in the table.
-                String lookupFqn = Utils.normalizeIfWindowedFeatureFqn(fqn);
-
-                var feature = featureMap.get(lookupFqn);
+                var feature = featureMap.get(fqn);
                 if (feature == null) {
                     // We are faking the attributes of a struct as features,
                     // instead of having the struct itself be a feature.
