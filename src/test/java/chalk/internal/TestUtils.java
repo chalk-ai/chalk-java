@@ -14,12 +14,4 @@ public class TestUtils {
         assert Utils.formatBucketDuration(1).equals("1s");
         assert Utils.formatBucketDuration(86400 * 14).equals("2w");
     }
-
-    @Test
-    public void testNormalizeWindowedFeatureFqn() throws Exception {
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature__600s__").equals("simple.feature._10m");
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.has_one.feature__600s__").equals("simple.has_one.feature._10m");
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature__601s__").equals("simple.feature._601s");
-        assert Utils.normalizeIfWindowedFeatureFqn("malformed.feature__601s").equals("malformed.feature__601s");
-    }
 }

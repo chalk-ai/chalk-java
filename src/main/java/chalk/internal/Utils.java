@@ -131,24 +131,4 @@ public class Utils {
 
         throw new IllegalArgumentException("Invalid bucket duration: " + duration);
     }
-
-    public static String normalizeIfWindowedFeatureFqn(String fqn) {
-        var featureName = Utils.getDotDelimitedLastSection(fqn);
-
-        var split = featureName.split("__");
-        if (split.length == 2 && featureName.endsWith("s__")) {
-            String secondsStr = split[1].substring(0, split[1].length() - 1);
-            if (isInteger(secondsStr)) {
-                int seconds = Integer.parseInt(secondsStr);
-                var formattedDuration = formatBucketDuration(seconds);
-
-                var originalDuration = "__" + secondsStr + "s__";
-                var finalDuration = "._" + formattedDuration;
-                return fqn.replace(originalDuration, finalDuration);
-            }
-        }
-        return fqn;
-    }
-
-
 }
