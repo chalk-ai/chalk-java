@@ -1,9 +1,6 @@
 package chalk.internal.codegen;
 
-import chalk.features.Feature;
-import chalk.features.FeaturesBase;
-import chalk.features.FeaturesClass;
-import chalk.features.StructFeaturesClass;
+import chalk.features.*;
 import chalk.internal.Utils;
 
 import java.lang.reflect.Field;
@@ -57,6 +54,18 @@ public class Initializer {
                     // used to specify query inputs. For features that are used to store query outputs, we
                     // want a fake FQN (fake being struct fields should not have an FQN).
                     childFqn = fqn;
+                } else if (WindowedFeaturesClass.class.isAssignableFrom(f.getType())) {
+                    // Convert user.average_transactions._1h to user.average_transactions__3600s__
+                    String lastPart = Utils.getDotDelimitedLastSection(childFqn);
+                    String durationNumberStr = lastPart.substring(2, lastPart.length() - 3);
+                    if (!Utils.isInteger(durationNumberStr)) {
+                        throw new Exception("Expected windowed feature to end with a duration in integer with a single unit (`_65m`), found: " + lastPart);
+                    }
+                    String durationWithUnitStr = lastPart.substring(2, lastPart.length() - 2);
+                    int durationSec = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
+                    String replacementPart = String.format("__%ds__", durationSec);
+                    String partToReplace = "." + lastPart;
+                    childFqn = childFqn.replace(partToReplace, replacementPart);
                 }
                 var obj = init(ff, childFqn, featureMap);
                 ff.set(fc, obj);

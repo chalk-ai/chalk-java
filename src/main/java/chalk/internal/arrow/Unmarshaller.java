@@ -100,7 +100,16 @@ public class Unmarshaller {
 
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
+
                 var feature = featureMap.get(fqn);
+                if (feature == null) {
+                    // We are faking the attributes of a struct as features,
+                    // instead of having the struct itself be a feature.
+                    if (arrowField.getType().getTypeID() != ArrowType.ArrowTypeID.Struct) {
+                        throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+                    }
+                }
+
                 switch (arrowField.getType().getTypeID()) {
                     case Int -> {
                         var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());

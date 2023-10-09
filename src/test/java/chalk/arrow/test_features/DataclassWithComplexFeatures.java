@@ -8,6 +8,6 @@ import java.util.List;
 
 public class DataclassWithComplexFeatures extends StructFeaturesClass {
     public Feature<Long> goodNumber;
-    public Dataclass6036 goodDataclass;
-    public Feature<List<Dataclass6036>> goodDataclasses;
+    public _Dataclass6036 goodDataclass;
+    public Feature<List<_Dataclass6036>> goodDataclasses;
 }

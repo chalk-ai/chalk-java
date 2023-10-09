@@ -1,7 +1,5 @@
 package chalk.internal;
 
-import chalk.features.Feature;
-
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -96,5 +94,41 @@ public class Utils {
             }
         }
         throw new Exception("Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName());
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static String formatBucketDuration(int duration) {
+        String[] units = {"s", "m", "h", "d", "w"};
+        int[] divisors = {60, 60, 24, 7};
+
+        for (int i = 0; i < divisors.length; i++) {
+            if (duration % divisors[i] != 0) {
+                return String.format("%d%s", duration, units[i]);
+            }
+            duration = duration / divisors[i];
+        }
+
+        return String.format("%d%s", duration, units[units.length - 1]);
+    }
+
+    public static int convertBucketDurationToSeconds(String duration) {
+        String[] units = {"s", "m", "h", "d", "w"};
+        int[] multipliers = {1, 60, 3600, 86400, 604800};
+
+        for (int i = 0; i < units.length; i++) {
+            if (duration.endsWith(units[i])) {
+                return Integer.parseInt(duration.substring(0, duration.length() - units[i].length())) * multipliers[i];
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid bucket duration: " + duration);
     }
 }
