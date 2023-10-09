@@ -1,7 +1,5 @@
 package chalk.internal;
 
-import chalk.features.Feature;
-
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -121,7 +119,7 @@ public class Utils {
         return String.format("%d%s", duration, units[units.length - 1]);
     }
 
-    public static String normalizeWindowedFeatureFqn(String fqn) {
+    public static String normalizeIfWindowedFeatureFqn(String fqn) {
         var featureName = Utils.getDotDelimitedLastSection(fqn);
         if (featureName.startsWith("__") && featureName.endsWith("s__")) {
             String secondsStr = featureName.substring(2, featureName.length() - 3);

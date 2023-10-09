@@ -442,7 +442,6 @@ public class TestUnmarshaller {
         // Create a list of structs
         var structListVector = ListVector.empty(ArrowFeatures.user.favoriteStructList.getFqn(), allocator);
         var structListWriter = structListVector.getWriter();
-
         var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
         var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
         for (var i = 0; i < 3; i++) {
@@ -460,7 +459,6 @@ public class TestUnmarshaller {
         structListVector.setValueCount(3);
         fieldVectors.add(structListVector);
 
-
         var hasOneDoubleVector = new Float8Vector(ArrowFeatures.user.favoriteHasOne.length.getFqn(), allocator);
         hasOneDoubleVector.allocateNew();
         double[] hasOneDoubleValues = {1.0, 2.0, 3.0};
@@ -469,6 +467,26 @@ public class TestUnmarshaller {
         }
         hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
         fieldVectors.add(hasOneDoubleVector);
+
+        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed.__86400s__", allocator);
+        windowedDoubleVector__1d__.allocateNew();
+        double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
+        for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
+            windowedDoubleVector__1d__.set(i, windowedDoubleValues__1d__[i]);
+        }
+        windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
+        fieldVectors.add(windowedDoubleVector__1d__);
+
+        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed.__601s__", allocator);
+        windowedDoubleVector__601s__.allocateNew();
+        double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
+        for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
+            windowedDoubleVector__601s__.set(i, windowedDoubleValues__601s__[i]);
+        }
+        windowedDoubleVector__601s__.setValueCount(windowedDoubleValues__601s__.length);
+        fieldVectors.add(windowedDoubleVector__601s__);
+
+
 
         // TODO: Support Decimal
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
@@ -653,6 +671,13 @@ public class TestUnmarshaller {
         assert users[1].favoriteHasOne.length.getValue().equals(2.0);
         assert users[2].favoriteHasOne.length.getValue().equals(3.0);
 
+        assert users[0].favoriteWindowed.__1d__.getValue().equals(1.0);
+        assert users[1].favoriteWindowed.__1d__.getValue().equals(2.0);
+        assert users[2].favoriteWindowed.__1d__.getValue().equals(3.0);
+
+        assert users[0].favoriteWindowed.__601s__.getValue().equals(4.0);
+        assert users[1].favoriteWindowed.__601s__.getValue().equals(5.0);
+        assert users[2].favoriteWindowed.__601s__.getValue().equals(6.0);
         // TODO: Support complex structs and lists
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);

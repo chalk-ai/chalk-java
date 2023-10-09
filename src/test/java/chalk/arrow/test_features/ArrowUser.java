@@ -51,7 +51,7 @@ public class ArrowUser extends FeaturesClass {
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> smallTransactions;
 
-    public Feature<MeanTransactionAmount> meanAmount;
+    public MeanTransactionAmount favoriteWindowed;
 
 
     // TODO: Add support for these data types

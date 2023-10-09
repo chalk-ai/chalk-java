@@ -2,9 +2,9 @@ package chalk.arrow.test_features;
 
 
 import chalk.features.Feature;
-import chalk.features.WindowedFeaturesClass;
+import chalk.features.FeaturesClass;
 
-public class MeanTransactionAmount extends WindowedFeaturesClass {
-    public Feature<Float> __1d__;
-    public Feature<Float> __601s__;
+public class MeanTransactionAmount extends FeaturesClass {
+    public Feature<Double> __1d__;
+    public Feature<Double> __601s__;
 }
