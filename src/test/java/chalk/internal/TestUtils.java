@@ -17,9 +17,9 @@ public class TestUtils {
 
     @Test
     public void testNormalizeWindowedFeatureFqn() throws Exception {
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature.__600s__").equals("simple.feature.__10m__");
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.has_one.feature.__600s__").equals("simple.has_one.feature.__10m__");
-        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature.__601s__").equals("simple.feature.__601s__");
-        assert Utils.normalizeIfWindowedFeatureFqn("malformed.feature.__601s").equals("malformed.feature.__601s");
+        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature__600s__").equals("simple.feature._10m");
+        assert Utils.normalizeIfWindowedFeatureFqn("simple.has_one.feature__600s__").equals("simple.has_one.feature._10m");
+        assert Utils.normalizeIfWindowedFeatureFqn("simple.feature__601s__").equals("simple.feature._601s");
+        assert Utils.normalizeIfWindowedFeatureFqn("malformed.feature__601s").equals("malformed.feature__601s");
     }
 }

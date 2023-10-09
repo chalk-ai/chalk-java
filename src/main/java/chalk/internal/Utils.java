@@ -121,14 +121,17 @@ public class Utils {
 
     public static String normalizeIfWindowedFeatureFqn(String fqn) {
         var featureName = Utils.getDotDelimitedLastSection(fqn);
-        if (featureName.startsWith("__") && featureName.endsWith("s__")) {
-            String secondsStr = featureName.substring(2, featureName.length() - 3);
+
+        var split = featureName.split("__");
+        if (split.length == 2 && featureName.endsWith("s__")) {
+            String secondsStr = split[1].substring(0, split[1].length() - 1);
             if (isInteger(secondsStr)) {
                 int seconds = Integer.parseInt(secondsStr);
                 var formattedDuration = formatBucketDuration(seconds);
 
-                var originalDuration = secondsStr + "s";
-                return fqn.replace(originalDuration, formattedDuration);
+                var originalDuration = "__" + secondsStr + "s__";
+                var finalDuration = "._" + formattedDuration;
+                return fqn.replace(originalDuration, finalDuration);
             }
         }
         return fqn;
