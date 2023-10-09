@@ -125,5 +125,8 @@ public class TestOnlineQueryParams {
         // their FQN truncated until the first feature is reached.
         assert InitFeaturesTestFeatures.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("test_user.burrys_membership.branch");
         assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
+
+        // TODO: Test windowed feature types
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount._1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
     }
 }

@@ -12,4 +12,8 @@ public class BurrysMembership extends FeaturesClass {
 
     public BurrysBranchDataclass branch;
     public BurrysInstructor instructor;
+
+    // Test we avoid infinite looping when there are
+    // two-way has-one relationships
+    public TestUser user;
 }

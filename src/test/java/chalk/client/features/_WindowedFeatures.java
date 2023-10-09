@@ -1,10 +1,9 @@
-package chalk.arrow.test_features;
-
+package chalk.client.features;
 
 import chalk.features.Feature;
 import chalk.features.WindowedFeaturesClass;
 
 public class _WindowedFeatures extends WindowedFeaturesClass {
-    public Feature<Double> _1d;
-    public Feature<Double> _601s;
+    public Feature<Double> _1w;
+    public Feature<Double> _4w;
 }

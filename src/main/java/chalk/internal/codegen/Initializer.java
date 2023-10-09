@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class Initializer {
-    private static Set<String> seen = new HashSet<>();
-
     public static Exception initFeatures(Class<?> cls) {
         Field[] fields = cls.getDeclaredFields();
         for (Field field : fields) {
@@ -19,7 +17,7 @@ public class Initializer {
             }
             var rootFeatureFqn = Utils.toSnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, rootFeatureFqn, null);
+                var featureClass = Initializer.init(field, rootFeatureFqn, null, new HashSet<>());
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -34,14 +32,19 @@ public class Initializer {
         var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
             var childFqn = rootFeatureFqn + "." + Utils.toSnakeCase(field.getName());
-            var feature = Initializer.init(field, childFqn, featureMap);
+            var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>());
             field.set(fc, feature);
         }
         return featureMap;
     }
 
-    public static Object init(Field f, String fqn, Map<String, Feature<?>> featureMap) throws Exception {
+    public static Object init(Field f, String fqn, Map<String, Feature<?>> featureMap, Set<Class<?>> seenClassesInChain) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(f.getType())) {
+            if (seenClassesInChain.contains(f.getType())) {
+                // We simply stop initing
+                return null;
+            }
+            seenClassesInChain.add(f.getType());
             // RECURSIVE CASE
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
@@ -57,19 +60,20 @@ public class Initializer {
                 } else if (WindowedFeaturesClass.class.isAssignableFrom(f.getType())) {
                     // Convert user.average_transactions._1h to user.average_transactions__3600s__
                     String lastPart = Utils.getDotDelimitedLastSection(childFqn);
-                    String durationNumberStr = lastPart.substring(2, lastPart.length() - 3);
+                    String durationNumberStr = lastPart.substring(1, lastPart.length() - 1);
                     if (!Utils.isInteger(durationNumberStr)) {
                         throw new Exception("Expected windowed feature to end with a duration in integer with a single unit (`_65m`), found: " + lastPart);
                     }
-                    String durationWithUnitStr = lastPart.substring(2, lastPart.length() - 2);
+                    String durationWithUnitStr = lastPart.substring(1);
                     int durationSec = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
                     String replacementPart = String.format("__%ds__", durationSec);
                     String partToReplace = "." + lastPart;
                     childFqn = childFqn.replace(partToReplace, replacementPart);
                 }
-                var obj = init(ff, childFqn, featureMap);
+                var obj = init(ff, childFqn, featureMap, seenClassesInChain);
                 ff.set(fc, obj);
             }
+            seenClassesInChain.remove(f.getType());
             return fc;
         } else if (f.getType() == Feature.class) {
             // BASE CASE
