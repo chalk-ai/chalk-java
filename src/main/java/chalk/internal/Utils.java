@@ -97,4 +97,44 @@ public class Utils {
         }
         throw new Exception("Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName());
     }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static String formatBucketDuration(int duration) {
+        String[] units = {"s", "m", "h", "d", "w"};
+        int[] divisors = {60, 60, 24, 7};
+
+        for (int i = 0; i < divisors.length; i++) {
+            if (duration % divisors[i] != 0) {
+                return String.format("%d%s", duration, units[i]);
+            }
+            duration = duration / divisors[i];
+        }
+
+        return String.format("%d%s", duration, units[units.length - 1]);
+    }
+
+    public static String normalizeWindowedFeatureFqn(String fqn) {
+        var featureName = Utils.getDotDelimitedLastSection(fqn);
+        if (featureName.startsWith("__") && featureName.endsWith("s__")) {
+            String secondsStr = featureName.substring(2, featureName.length() - 3);
+            if (isInteger(secondsStr)) {
+                int seconds = Integer.parseInt(secondsStr);
+                var formattedDuration = formatBucketDuration(seconds);
+
+                var originalDuration = secondsStr + "s";
+                return fqn.replace(originalDuration, formattedDuration);
+            }
+        }
+        return fqn;
+    }
+
+
 }

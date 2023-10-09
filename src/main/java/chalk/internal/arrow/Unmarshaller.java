@@ -100,7 +100,13 @@ public class Unmarshaller {
 
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
+
                 var feature = featureMap.get(fqn);
+
+                if (feature == null) {
+                    throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+                }
+
                 switch (arrowField.getType().getTypeID()) {
                     case Int -> {
                         var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());
