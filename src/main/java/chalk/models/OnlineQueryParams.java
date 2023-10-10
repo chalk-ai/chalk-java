@@ -1,10 +1,13 @@
 package chalk.models;
 
 import chalk.features.Feature;
+import chalk.features.StructFeaturesClass;
+import chalk.features.WindowedFeaturesClass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.sql.Struct;
 import java.util.*;
 import java.time.Duration;
 
@@ -144,6 +147,16 @@ public class OnlineQueryParams {
         // withOutput adds a single output to the outputs list
         public Builder withOutput(Feature<?> output) {
             return this.withOutputs(output);
+        }
+
+        // Add a windowed feature to the outputs list. All buckets within the WindowedFeaturesClass will be returned.
+        public Builder withOutput(WindowedFeaturesClass output) {
+            return this.withOutputs(output.getFqn());
+        }
+
+        // Add a struct feature to the outputs list. All fields within the StructFeaturesClass will be returned.
+        public Builder withOutput(StructFeaturesClass output) {
+            return this.withOutputs(output.getFqn());
         }
 
         // withStaleness takes alternating key, value pairs and adds them to the staleness map
@@ -301,6 +314,14 @@ public class OnlineQueryParams {
 
         public BuilderComplete withOutput(Feature<?> output) {
             return this.withOutputs(output);
+        }
+
+        public BuilderComplete withOutput(WindowedFeaturesClass output) {
+            return this.withOutputs(output.getFqn());
+        }
+
+        public BuilderComplete withOutput(StructFeaturesClass output) {
+            return this.withOutputs(output.getFqn());
         }
     }
 
