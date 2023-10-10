@@ -127,6 +127,6 @@ public class TestOnlineQueryParams {
         assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
 
         // TODO: Test windowed feature types
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount._1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
     }
 }
