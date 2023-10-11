@@ -32,7 +32,7 @@ Once authenticated ([Authenticating to Github Packages](https://docs.github.com/
 Create a client using the `ChalkClient.create()` method.  The returned client gets its configuration:
 
 1. From environment variables
-2. From a ~/.chalk.yml file if neither (1) is not available
+2. From a ~/.chalk.yml file if (1) is not available
 
 ```java
 import chalk.ChalkClient;
@@ -41,7 +41,7 @@ import chalk.ChalkClient;
 ChalkClient client = ChalkClient.create();
 ```
 
-Alternatively, create a client using specific overrides:
+Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
 import chalk.ChalkClient;
 
