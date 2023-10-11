@@ -102,6 +102,22 @@ public class TestOnlineQueryParams {
         }
     }
 
+    /**
+     * Test special output objects like `WindowedFeaturesClass` and `StructFeaturesClass`
+     */
+    @Test
+    public void testSpecialOutputFeatures() throws Exception {
+        var p = OnlineQueryParams
+                .builder()
+                .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
+                .withOutput(InitFeaturesTestFeatures.user.meanAttendanceCount)        // WindowedFeaturesClass
+                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.branch)    // StructFeaturesClass
+                .build();
+        assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
+        // Test serialization is OK.
+        BytesProducer.convertOnlineQueryParamsToBytes(p);
+    }
+
 
     /**
      * Tests that `initFeatures` correctly initialized FQNs for all features
@@ -125,8 +141,11 @@ public class TestOnlineQueryParams {
         // their FQN truncated until the first feature is reached.
         assert InitFeaturesTestFeatures.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("test_user.burrys_membership.branch");
         assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrysMembership.branch.getFqn().equals("test_user.burrys_membership.branch");
 
-        // TODO: Test windowed feature types
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount._1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
+        // Windowed feature classes
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount.getFqn().equals("test_user.mean_attendance_count");
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_all.getFqn().equals("test_user.mean_attendance_count__all__");
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
     }
 }

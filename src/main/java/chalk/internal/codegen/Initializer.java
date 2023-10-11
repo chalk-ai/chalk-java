@@ -58,15 +58,11 @@ public class Initializer {
                     // want a fake FQN (fake being struct fields should not have an FQN).
                     childFqn = fqn;
                 } else if (WindowedFeaturesClass.class.isAssignableFrom(f.getType())) {
-                    // Convert user.average_transactions._1h to user.average_transactions__3600s__
+                    // Convert user.average_transactions.bucket_1h to user.average_transactions__3600s__
                     String lastPart = Utils.getDotDelimitedLastSection(childFqn);
-                    String durationNumberStr = lastPart.substring(1, lastPart.length() - 1);
-                    if (!Utils.isInteger(durationNumberStr)) {
-                        throw new Exception("Expected windowed feature to end with a duration in integer with a single unit (`_65m`), found: " + lastPart);
-                    }
-                    String durationWithUnitStr = lastPart.substring(1);
-                    int durationSec = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
-                    String replacementPart = String.format("__%ds__", durationSec);
+                    String durationWithUnitStr = lastPart.substring("bucket_".length());
+                    String convertedDurationStr = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
+                    String replacementPart = String.format("__%s__", convertedDurationStr);
                     String partToReplace = "." + lastPart;
                     childFqn = childFqn.replace(partToReplace, replacementPart);
                 }
