@@ -15,7 +15,7 @@ import java.time.Duration;
 /**
  * OnlineQueryParams holds the parameters for an online query.
  * It is the starting point for constructing an instance of
- * OnlineQueryParamsComplete. Both `withInputs` and `withOutputs`
+ * OnlineQueryParamsComplete. Both `withInput` and `withOutput`
  * must be called at least once.
  *
  * <p>
@@ -37,12 +37,12 @@ import java.time.Duration;
 @AllArgsConstructor @Getter
 public class OnlineQueryParams {
     // The features for which there are known values, mapped
-    // to those values. Set by `OnlineQueryParams.builder().withInputs`.
+    // to those values. Set by `OnlineQueryParams.builder().withInput`.
 
     /**
      * The features for which there are known values, mapped
      * to those values. Set by
-     * `OnlineQueryParams.builder().withInputs`.
+     * `OnlineQueryParams.builder().withInput`.
     **/
     private Map<String, Object> inputs;
 

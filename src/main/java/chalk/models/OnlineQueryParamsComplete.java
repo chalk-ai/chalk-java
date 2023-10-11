@@ -11,7 +11,7 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
      * indicate that all required online query params have been
      * provided.
      *
-     * <p> Constructed by calling `withInputs` and `withOutputs`
+     * <p> Constructed by calling `withInput` and `withOutput`
      * at least once in {@link OnlineQueryParams.Builder}.
      *
      * <p>
