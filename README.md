@@ -183,8 +183,8 @@ public class Features {
 
 // _WindowedFeatures13.java
 public class _WindowedFeatures13 extends WindowedFeaturesClass {
-    public Feature<Integer> window_1m;
-    public Feature<Integer> window_5m;
+    public Feature<Integer> bucket_1m;
+    public Feature<Integer> bucket_5m;
 }
 
 // Address.java
