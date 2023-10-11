@@ -102,6 +102,22 @@ public class TestOnlineQueryParams {
         }
     }
 
+    /**
+     * Test special output objects like `WindowedFeaturesClass` and `StructFeaturesClass`
+     */
+    @Test
+    public void testSpecialOutputFeatures() throws Exception {
+        var p = OnlineQueryParams
+                .builder()
+                .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
+                .withOutput(InitFeaturesTestFeatures.user.meanAttendanceCount)        // WindowedFeaturesClass
+                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.branch)    // StructFeaturesClass
+                .build();
+        assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
+        // Test serialization is OK.
+        BytesProducer.convertOnlineQueryParamsToBytes(p);
+    }
+
 
     /**
      * Tests that `initFeatures` correctly initialized FQNs for all features
