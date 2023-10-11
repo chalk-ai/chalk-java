@@ -93,14 +93,14 @@ public class Main {
         }
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
-                    .withInput("user.id", userIds)
-                    .withOutput("user.full_name")
+                    .withInput("card_user.id", userIds)
+                    .withOutput("card_user.full_name")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             for (Row row : result.getScalarsTable()) {
-                long userId = row.getInt64("user.id");
-                double meanSpent = row.getFloat8("user.spending_mean_30d");
+                long userId = row.getInt64("card_user.id");
+                double meanSpent = row.getFloat8("card_user.spending_mean_30d");
                 System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
             }
         } catch (ChalkException e) {
@@ -152,8 +152,8 @@ class Transaction:
 @features
 class Account:
     id: Primary[str]
-    transactions: DataFrame[Transaction] = has_many(lambda: Transaction.account_id == Account.id)
-
+    balance: float
+    
 @features
 class User:
     id: Primary[str]
@@ -161,6 +161,8 @@ class User:
     account_id: str
     account: Account = has_one(lambda: Account.id == User.account_id)
     count_payments: Windowed[int] = windowed("1m", "5m")
+    spending_mean_30d: float
+    transactions: DataFrame[Transaction] = has_many(lambda: Transaction.user_id == User.id)
     
 @dataclasses.dataclass
 class Address:
@@ -176,16 +178,13 @@ public class Transaction extends FeaturesClass {
     public Feature<Double> amount;
     public Feature<java.time.LocalDateTime> ts;
     public Feature<List<String>> tags;
-    
-    public Feature<String> accountId;
-    public Account account;
+    public CardUser user;
 }
 
 // Account.java
 public class Account extends FeaturesClass {
     public Feature<String> id;
     public Feature<Double> balance;
-    
     @HasMany(localKey = "id", foreignKey = "account_id")
     public Feature<List<Transaction>> transactions; 
 }
@@ -196,7 +195,9 @@ public class CardUser extends FeaturesClass {
     public Feature<String> name;
     public Feature<String> accountId;
     public Account account;
-    public _WindowedFeatures13 countPayments;
+    public _WindowedFeatures_1m_5m countPayments;
+    public Feature<Double> spendingMean30d;
+    public Feature<List<Transaction>> transactions;
 }
 
 // Features.java. This is the root class that contains all features
@@ -211,8 +212,8 @@ public class Features {
     }
 }
 
-// _WindowedFeatures13.java
-public class _WindowedFeatures13 extends WindowedFeaturesClass {
+// _WindowedFeatures_1m_5m.java
+public class _WindowedFeatures_1m_5m extends WindowedFeaturesClass {
     public Feature<Integer> bucket_1m;
     public Feature<Integer> bucket_5m;
 }
@@ -224,19 +225,19 @@ public class Address extends StructFeaturesClass {
 }
 ```
 #### Type-checked queries
-With these classes, we can now confidently write type-checked queries. 
+With these classes, we can now write type-checked queries. 
 
 ```java
 import com.example.my_project.codegen_output_folder.Features;
 
 var userIds = new str[] {"user_1"};
 var params = OnlineQueryParams.builder()
-            .withInput(Features.card_user.id, userIds)
-            .withOutputs(Features.card_user.id, Feature.card_user.name)  // Scalar features
-            .withOutput(Features.card_user.account.balance)              // Has-one feature
-            .withOutput(Features.card_user.account.transactions)         // Has-many feature
-            .withOutput(Features.card_user.countPayments.window_5m)      // Windowed feature
-            .withOutput(Features.card_user.address)                      // Struct-like feature
+            .withInput(Features.user.id, userIds)
+            .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
+            .withOutput(Features.user.account.balance)              // Has-one feature
+            .withOutput(Features.user.transactions)                 // Has-many feature
+            .withOutput(Features.user.countPayments.bucket_5m)      // Windowed feature
+            .withOutput(Features.user.address)                      // Struct-like feature
             .build();
 ```
 
@@ -257,7 +258,7 @@ We can also unmarshal the result of a query from its Arrow representation into t
         for (CardUser user : users) {
             String name = user.id.name.getValue();                              // Scalar features
             Double balance = user.account.balance.getValue();                   // Has-one feature
-            List<Transaction> txns = user.account.transactions.getValue();      // Has-many feature
+            List<Transaction> txns = user.transactions.getValue();              // Has-many feature
             Integer countPayments = user.countPayments.window_5m.getValue();    // Windowed feature
             String street = user.address.street.getValue();                     // Struct-like feature
         }
@@ -289,18 +290,18 @@ public class Main {
         }
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
-                    .withInput("user.id", userIds)
-                    .withOutputs("user.spending_mean_30d", "user.transactions")
+                    .withInput("card_user.id", userIds)
+                    .withOutputs("card_user.spending_mean_30d", "card_user.transactions")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             for (Row row : result.getScalarsTable()) {
-                long userId = row.getInt64("user.id");
-                double meanSpent = row.getFloat8("user.spending_mean_30d");
+                long userId = row.getInt64("card_user.id");
+                double meanSpent = row.getFloat8("card_user.spending_mean_30d");
                 System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
             }
                 
-            Table txnTable = result.getGroupsTables().get("user.transactions");
+            Table txnTable = result.getGroupsTables().get("card_user.transactions");
             FieldVector txnAmountVector = txnTable.getColumn("amount");
             // Do something with the transaction amount vector
             
