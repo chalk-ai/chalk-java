@@ -60,7 +60,7 @@ public class Initializer {
                 } else if (WindowedFeaturesClass.class.isAssignableFrom(f.getType())) {
                     // Convert user.average_transactions.bucket_1h to user.average_transactions__3600s__
                     String lastPart = Utils.getDotDelimitedLastSection(childFqn);
-                    String durationWithUnitStr = lastPart.substring("bucket".length() + 1);
+                    String durationWithUnitStr = lastPart.substring("bucket_".length());
                     String convertedDurationStr = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
                     String replacementPart = String.format("__%s__", convertedDurationStr);
                     String partToReplace = "." + lastPart;
