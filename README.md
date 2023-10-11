@@ -203,7 +203,9 @@ public class CardUser extends FeaturesClass {
 // Features.java. This is the root class that contains all features
 // that can be used when specifying inputs.
 public class Features {
-    public static User user;
+    public static CardUser user;
+    public static Account account;
+    public static Transaction transaction;
 
     private static Exception initException = Initializer.initFeatures(Features.class);
 
