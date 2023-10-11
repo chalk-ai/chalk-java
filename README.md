@@ -169,9 +169,16 @@ public class CardUser extends FeaturesClass {
     public _WindowedFeatures13 countPayments;
 }
 
-// Features.java
+// Features.java. This is the root class that contains all features
+// that can be used when specifying inputs.
 public class Features {
     public static User user;
+
+    private static Exception initException = Initializer.initFeatures(Features.class);
+
+    public static Exception getInitException() {
+        return Features.initException;
+    }
 }
 
 // _WindowedFeatures13.java
@@ -185,24 +192,30 @@ public class Address extends StructFeaturesClass {
     public Feature<String> street;
     public Feature<String> city;
 }
-
-// 
 ```
 #### Type-checked queries
 With these classes, we can now confidently write type-checked queries. 
 
 ```java
-import com.example.my_project.codegen.Features;
+import com.example.my_project.codegen_output_folder.Features;
 
 var userIds = new str[] {"user_1"};
 var params = OnlineQueryParams.builder()
-            .withInput(Feature.card_user.id, userIds)
+            .withInput(Features.card_user.id, userIds)
             .withOutputs(Features.card_user.id, Feature.card_user.name)  // Scalar features
             .withOutput(Features.card_user.account.balance)              // Has-one feature
             .withOutput(Features.card_user.account.transactions)         // Has-many feature
             .withOutput(Features.card_user.countPayments.window_5m)      // Windowed feature
             .withOutput(Features.card_user.address)                      // Struct-like feature
             .build();
+```
+
+Make sure to first check whether the feature classes in `Feature` has been initialized successfully:
+```java
+if (Features.getInitException() != null) {
+    Features.getInitException().printStackTrace();
+    return;
+}
 ```
 
 #### Object-oriented results
@@ -222,6 +235,3 @@ We can also unmarshal the result of a query from its Arrow representation into t
         e.printStackTrace();
     }
 ```
-
-
-
