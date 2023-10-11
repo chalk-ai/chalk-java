@@ -10,5 +10,5 @@ public class TestUser extends FeaturesClass {
     public BurrysMembership burrysMembership;
     public Feature<List<BurrysInjury>> injuries;
     public Feature<Double> socureScore;
-    public _WindowedFeatures meanAttendanceCount;
+    public _WindowedFeatures_1w_4w_all meanAttendanceCount;
 }

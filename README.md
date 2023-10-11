@@ -32,7 +32,7 @@ Once authenticated ([Authenticating to Github Packages](https://docs.github.com/
 Create a client using the `ChalkClient.create()` method.  The returned client gets its configuration:
 
 1. From environment variables
-2. From a ~/.chalk.yml file if neither (1) is not available
+2. From a ~/.chalk.yml file if (1) is not available
 
 ```java
 import chalk.ChalkClient;
@@ -41,7 +41,7 @@ import chalk.ChalkClient;
 ChalkClient client = ChalkClient.create();
 ```
 
-Alternatively, create a client using specific overrides:
+Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
 import chalk.ChalkClient;
 
@@ -143,7 +143,7 @@ For instance, given these Python features and dataclasses:
 @features
 class Transaction:
     id: Primary[str]
-    user_id: int
+    user_id: str
     amount: float
     ts: datetime = feature_time()
     tags: List[str]
@@ -174,7 +174,7 @@ Chalk CLI will generate:
 // Transaction.java
 public class Transaction extends FeaturesClass {
     public Feature<String> id;
-    public Feature<Long> userId;
+    public Feature<String> userId;
     public Feature<Double> amount;
     public Feature<java.time.LocalDateTime> ts;
     public Feature<List<String>> tags;
@@ -185,8 +185,6 @@ public class Transaction extends FeaturesClass {
 public class Account extends FeaturesClass {
     public Feature<String> id;
     public Feature<Double> balance;
-    @HasMany(localKey = "id", foreignKey = "account_id")
-    public Feature<List<Transaction>> transactions; 
 }
 
 // User.java
@@ -197,13 +195,16 @@ public class CardUser extends FeaturesClass {
     public Account account;
     public _WindowedFeatures_1m_5m countPayments;
     public Feature<Double> spendingMean30d;
+    @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> transactions;
 }
 
 // Features.java. This is the root class that contains all features
 // that can be used when specifying inputs.
 public class Features {
-    public static User user;
+    public static CardUser user;
+    public static Account account;
+    public static Transaction transaction;
 
     private static Exception initException = Initializer.initFeatures(Features.class);
 
@@ -296,7 +297,7 @@ public class Main {
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             for (Row row : result.getScalarsTable()) {
-                long userId = row.getInt64("card_user.id");
+                long userId = row.getVarCharObj("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
                 System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
             }
