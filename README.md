@@ -57,10 +57,8 @@ Client Secret      *************************************************     environ
 
 
 ## Online Query
-
-### Without codegen
-You can make online queries with or without codegen, and while codegen is recommended, querying without codegen allows you
-to access the underlying Arrow data structures directly. Here's an example querying for both a scalar feature (`user.spending_mean_30d`) and a has-many feature (`user.transactions`): 
+### Getting started
+If you're just getting started, here's an example query with minimal prerequisite setup steps:
 ```java
 import chalk.client.ChalkClient;
 import chalk.models.OnlineQueryParams;
@@ -82,7 +80,7 @@ public class Main {
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
                     .withInput("user.id", userIds)
-                    .withOutputs("user.spending_mean_30d", "user.transactions")
+                    .withOutput("user.full_name")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
@@ -91,24 +89,42 @@ public class Main {
                 double meanSpent = row.getFloat8("user.spending_mean_30d");
                 System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
             }
-                
-            Table txnTable = result.getGroupsTables().get("user.transactions");
-            FieldVector txnAmountVector = txnTable.getColumn("amount");
-            // Do something with the transaction amount vector
-            
-            
         } catch (ChalkException e) {
             e.printStackTrace();
         }
     }
 }
 ```
+The same example, with codegen set up, would look like this:
+```java
+try {
+    ChalkClient client = ChalkClient.create();
+} catch (ChalkException e) {
+    e.printStackTrace();
+    return;
+}
+var userIds = new int[] {1, 2, 3};
+var params = OnlineQueryParams.builder()
+            .withInput(Features.user.id, userIds)
+            .withOutput(Features.user.fullName)
+            .build();
+
+try (OnlineQueryResult result = client.onlineQuery(params)) {
+    CardUser[] users = result.unmarshal(CardUser.class);
+    for (CardUser user : users) {
+        long userId = user.id.getValue();
+        double meanSpent = user.spendingMean30d.getValue();
+        System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
+    }
+} catch (ChalkException e) {
+    e.printStackTrace();
+}
+```
 
 ### Codegen enhanced queries
 For the best query experience, we recommend using the [codegen](https://docs.chalk.ai/cli/codegen) feature of Chalk CLI.
-With codegen, you can
-generate Java classes that are exactly equivalent to the features that you have defined in Python. For instance, given
-these Python features and dataclasses:
+With codegen, you can generate Java classes that are exactly equivalent to the features that you have defined in Python.
+For instance, given these Python features and dataclasses:
 ```python
 @features
 class Transaction:
@@ -169,15 +185,22 @@ public class CardUser extends FeaturesClass {
     public _WindowedFeatures13 countPayments;
 }
 
-// Features.java
+// Features.java. This is the root class that contains all features
+// that can be used when specifying inputs.
 public class Features {
     public static User user;
+
+    private static Exception initException = Initializer.initFeatures(Features.class);
+
+    public static Exception getInitException() {
+        return Features.initException;
+    }
 }
 
 // _WindowedFeatures13.java
 public class _WindowedFeatures13 extends WindowedFeaturesClass {
-    public Feature<Integer> window_1m;
-    public Feature<Integer> window_5m;
+    public Feature<Integer> bucket_1m;
+    public Feature<Integer> bucket_5m;
 }
 
 // Address.java
@@ -185,24 +208,30 @@ public class Address extends StructFeaturesClass {
     public Feature<String> street;
     public Feature<String> city;
 }
-
-// 
 ```
 #### Type-checked queries
 With these classes, we can now confidently write type-checked queries. 
 
 ```java
-import com.example.my_project.codegen.Features;
+import com.example.my_project.codegen_output_folder.Features;
 
 var userIds = new str[] {"user_1"};
 var params = OnlineQueryParams.builder()
-            .withInput(Feature.card_user.id, userIds)
+            .withInput(Features.card_user.id, userIds)
             .withOutputs(Features.card_user.id, Feature.card_user.name)  // Scalar features
             .withOutput(Features.card_user.account.balance)              // Has-one feature
             .withOutput(Features.card_user.account.transactions)         // Has-many feature
             .withOutput(Features.card_user.countPayments.window_5m)      // Windowed feature
             .withOutput(Features.card_user.address)                      // Struct-like feature
             .build();
+```
+
+Make sure to first check whether the feature classes in `Features` have been initialized successfully:
+```java
+if (Features.getInitException() != null) {
+    Features.getInitException().printStackTrace();
+    return;
+}
 ```
 
 #### Object-oriented results
@@ -223,5 +252,48 @@ We can also unmarshal the result of a query from its Arrow representation into t
     }
 ```
 
+### Without codegen
+Querying without codegen means accessing the underlying Arrow data structures directly. Here's an example querying
+for both a scalar feature (`user.spending_mean_30d`) and a has-many feature (`user.transactions`):
+```java
+import chalk.client.ChalkClient;
+import chalk.models.OnlineQueryParams;
+import chalk.models.OnlineQueryResult;
+import org.apache.arrow.vector.table.Table;
+import org.apache.arrow.vector.table.Row;
+import org.apache.arrow.vector.FieldVector;
+import org.apache.arrow.vector.complex.reader.FieldReader;
 
 
+public class Main {
+    public static void main(String[] args) {
+        try {
+            ChalkClient client = ChalkClient.create();
+        } catch (ChalkException e) {
+            e.printStackTrace();
+            return;
+        }
+        var userIds = new int[] {1, 2, 3};
+        var params = OnlineQueryParams.builder()
+                    .withInput("user.id", userIds)
+                    .withOutputs("user.spending_mean_30d", "user.transactions")
+                    .build();
+        
+        try (OnlineQueryResult result = client.onlineQuery(params)) {
+            for (Row row : result.getScalarsTable()) {
+                long userId = row.getInt64("user.id");
+                double meanSpent = row.getFloat8("user.spending_mean_30d");
+                System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
+            }
+                
+            Table txnTable = result.getGroupsTables().get("user.transactions");
+            FieldVector txnAmountVector = txnTable.getColumn("amount");
+            // Do something with the transaction amount vector
+            
+            
+        } catch (ChalkException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
