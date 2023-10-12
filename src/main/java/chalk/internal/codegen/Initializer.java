@@ -4,9 +4,11 @@ import chalk.features.*;
 import chalk.internal.Utils;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Initializer {
     public static Exception initFeatures(Class<?> cls) {
@@ -27,7 +29,10 @@ public class Initializer {
     }
 
     public static Map<String, Feature<?>> initResult(FeaturesBase fc) throws Exception {
-        Field[] fields = fc.getClass().getDeclaredFields();
+        Field[] myFields = fc.getClass().getDeclaredFields();
+        Field[] parentFields = fc.getClass().getSuperclass().getDeclaredFields();
+        Field[] fields = Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
+
         Map<String, Feature<?>> featureMap = new java.util.HashMap<>();
         var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {

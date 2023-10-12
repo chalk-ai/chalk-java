@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'chalk'
-version '0.3.0'
+version '0.3.1'
 
 repositories {
     mavenCentral()
@@ -42,7 +42,7 @@ task compileJava17(type: JavaCompile) {
 task jarJava17(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk17')
-    archiveVersion.set("0.3.0-jdk17")
+    archiveVersion.set("0.3.1-jdk17")
 }
 
 task compileJava20(type: JavaCompile) {
@@ -59,7 +59,7 @@ task compileJava20(type: JavaCompile) {
 task jarJava20(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk20')
-    archiveVersion.set("0.3.0-jdk20")
+    archiveVersion.set("0.3.1-jdk20")
 }
 
 publishing {

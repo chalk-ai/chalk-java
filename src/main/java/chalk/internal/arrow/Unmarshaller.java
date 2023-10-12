@@ -5,6 +5,7 @@ import chalk.features.Feature;
 import chalk.features.FeaturesClass;
 import chalk.features.HasMany;
 import chalk.features.StructFeaturesClass;
+import chalk.internal.Constants;
 import chalk.internal.Utils;
 import chalk.internal.codegen.Initializer;
 import chalk.models.OnlineQueryResult;
@@ -17,10 +18,7 @@ import org.apache.arrow.vector.util.Text;
 
 import java.lang.reflect.Field;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static chalk.internal.Utils.*;
 
@@ -100,6 +98,12 @@ public class Unmarshaller {
 
             for (var arrowField: table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
+                String[] fqnsToSkip = new String[] {
+                    Constants.tsFeatureFqn,
+                };
+                if (Arrays.asList(fqnsToSkip).contains(fqn)) {
+                    continue;
+                }
 
                 var feature = featureMap.get(fqn);
                 if (feature == null) {

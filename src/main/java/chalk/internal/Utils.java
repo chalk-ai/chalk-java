@@ -4,7 +4,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Utils {
     public static String toSnakeCase(String s) {
@@ -130,7 +132,7 @@ public class Utils {
         for (int i = 0; i < units.length; i++) {
             if (duration.endsWith(units[i])) {
                 var secondsInt = Integer.parseInt(duration.substring(0, duration.length() - units[i].length())) * multipliers[i];
-                return String.format("%ds", secondsInt);
+                return String.format("%d", secondsInt);
             }
         }
 
