@@ -1,3 +1,3 @@
 package chalk.features;
 
-public class WindowedFeaturesClass extends FeaturesClass {}
+public class WindowedFeaturesClass extends FeaturesBase {}
