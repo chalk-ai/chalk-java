@@ -253,7 +253,7 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), (Object) values);
+            return this._withInput(feature.getFqn(), values);
         }
 
         public BuilderComplete withOutputs(String... outputs) {
@@ -306,7 +306,7 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), (Object) values);
+            return this._withInput(feature.getFqn(), values);
         }
 
         public BuilderComplete withOutputs(String... outputs) {
