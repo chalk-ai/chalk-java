@@ -1,7 +1,7 @@
 package chalk.internal.bytes;
 
 import chalk.internal.arrow.FeatherProcessor;
-import chalk.models.OnlineQueryParams;
+import chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.ByteArrayOutputStream;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class BytesProducer {
-    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParams params) throws Exception {
+    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params) throws Exception {
         byte[] arrowBytes;
         if (params.getInputs() == null) {
             throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");

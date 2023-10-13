@@ -9,13 +9,13 @@ public class TestChalkClient {
     public void test() throws Exception {
         ChalkClient client = ChalkClient.create();
         client.printConfig();
-        int[] userIds = new int[10];
+        String[] userIds = new String[10];
         for (int i = 0; i < userIds.length; i++) {
-            userIds[i] = i;
+            userIds[i] = String.format("%d", i);
         }
         var params = OnlineQueryParams.builder()
                 .withInput("user.id", userIds)
-                .withOutput("user.socure_score")
+                .withOutputs("user.socure_score")
                 .build();
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             assert result.getScalarsTable().getRowCount() == userIds.length;

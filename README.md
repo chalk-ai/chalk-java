@@ -94,7 +94,7 @@ public class Main {
         var userIds = new int[] {1, 2, 3};
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
-                    .withOutput("card_user.full_name")
+                    .withOutputs("card_user.full_name")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
@@ -120,7 +120,7 @@ try {
 var userIds = new int[] {1, 2, 3};
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
-            .withOutput(Features.user.fullName)
+            .withOutputs(Features.user.fullName)
             .build();
 
 try (OnlineQueryResult result = client.onlineQuery(params)) {
@@ -235,10 +235,10 @@ var userIds = new str[] {"user_1"};
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
-            .withOutput(Features.user.account.balance)              // Has-one feature
-            .withOutput(Features.user.transactions)                 // Has-many feature
-            .withOutput(Features.user.countPayments.bucket_5m)      // Windowed feature
-            .withOutput(Features.user.address)                      // Struct-like feature
+            .withOutputs(Features.user.account.balance)              // Has-one feature
+            .withOutputs(Features.user.transactions)                 // Has-many feature
+            .withOutputs(Features.user.countPayments.bucket_5m)      // Windowed feature
+            .withOutputs(Features.user.address)                      // Struct-like feature
             .build();
 ```
 

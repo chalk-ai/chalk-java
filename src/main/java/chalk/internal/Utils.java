@@ -138,4 +138,19 @@ public class Utils {
 
         throw new IllegalArgumentException("Invalid bucket duration: " + duration);
     }
+
+    public static Object[] convertToArrayOfObjects(Object array) {
+        if (!array.getClass().isArray()) {
+            throw new IllegalArgumentException("Provided object is not an array");
+        }
+
+        int length = Array.getLength(array);
+        Object[] outputArray = new Object[length];
+
+        for (int i = 0; i < length; i++) {
+            outputArray[i] = Array.get(array, i);
+        }
+
+        return outputArray;
+    }
 }
