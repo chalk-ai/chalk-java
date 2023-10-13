@@ -405,7 +405,7 @@ public class OnlineQueryParams {
         public BuilderWithInputs withInput(String fqn, Object... value) {
             return newBuilderWithInputs().withInput(fqn, value);
         }
-Ob
+
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
             return newBuilderWithInputs().withInput(feature, value);
