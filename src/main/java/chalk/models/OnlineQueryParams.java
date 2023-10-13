@@ -313,7 +313,7 @@ public class OnlineQueryParams {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
 
-        public <T> BuilderComplete withOutputs(Feature<T>... outputs) {
+        public BuilderComplete withOutputs(Feature<?>... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
 
@@ -352,6 +352,7 @@ public class OnlineQueryParams {
             return newBuilderComplete()._withInput(fqn, value);
         }
 
+        @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
             return newBuilderComplete()._withInput(feature.getFqn(), values);
         }
@@ -360,7 +361,7 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
-        public <T> BuilderWithOutputs withOutputs(Feature<T>... outputs) {
+        public BuilderWithOutputs withOutputs(Feature<?>... outputs) {
             return this._withOutputs(outputs);
         }
 
@@ -415,7 +416,7 @@ public class OnlineQueryParams {
             return newBuilderWithOutputs().withOutputs(outputs);
         }
 
-        public <T> BuilderWithOutputs withOutputs(Feature<T>... outputs) {
+        public BuilderWithOutputs withOutputs(Feature<?>... outputs) {
             return newBuilderWithOutputs().withOutputs(outputs);
         }
 
