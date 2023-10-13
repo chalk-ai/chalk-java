@@ -3,6 +3,7 @@ package chalk.models;
 import chalk.features.Feature;
 import chalk.features.StructFeaturesClass;
 import chalk.features.WindowedFeaturesClass;
+import chalk.internal.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -91,11 +92,15 @@ public class OnlineQueryParams {
         protected String correlationId;
         protected String branch;
 
-        protected <T extends Builder> T _withInput(String fqn, Object... value) {
+        protected <T extends Builder> T _withInput(String fqn, Object... values) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
-            this.inputs.put(fqn, value);
+            if (values.length == 1 && values[0].getClass().isArray()) {
+                // Cast and use the inner array as the actual argument
+                values = Utils.convertToArrayOfObjects(values[0]);
+            }
+            this.inputs.put(fqn, values);
             return (T) this;
         }
 
@@ -247,8 +252,8 @@ public class OnlineQueryParams {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object... value) {
-            return this._withInput(fqn, value);
+        public BuilderComplete withInput(String fqn, Object... values) {
+            return this._withInput(fqn, values);
         }
 
         @SafeVarargs
@@ -300,8 +305,8 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderWithInputs withInput(String fqn, Object... value) {
-            return this._withInput(fqn, value);
+        public BuilderWithInputs withInput(String fqn, Object... values) {
+            return this._withInput(fqn, values);
         }
 
         @SafeVarargs
@@ -348,8 +353,8 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object... value) {
-            return newBuilderComplete()._withInput(fqn, value);
+        public BuilderComplete withInput(String fqn, Object... values) {
+            return newBuilderComplete()._withInput(fqn, values);
         }
 
         @SafeVarargs
@@ -402,8 +407,8 @@ public class OnlineQueryParams {
         }
 
         // withInput adds a single feature FQN, value pair to the inputs map
-        public BuilderWithInputs withInput(String fqn, Object... value) {
-            return newBuilderWithInputs().withInput(fqn, value);
+        public BuilderWithInputs withInput(String fqn, Object... values) {
+            return newBuilderWithInputs().withInput(fqn, values);
         }
 
         @SafeVarargs

@@ -147,6 +147,6 @@ public class TestOnlineQueryParams {
         // Windowed feature classes
         assert InitFeaturesTestFeatures.user.meanAttendanceCount.getFqn().equals("test_user.mean_attendance_count");
         assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_all.getFqn().equals("test_user.mean_attendance_count__all__");
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800s__");
+        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800__");
     }
 }
