@@ -247,7 +247,7 @@ public class OnlineQueryParams {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object value) {
+        public BuilderComplete withInput(String fqn, Object... value) {
             return this._withInput(fqn, value);
         }
 
@@ -300,7 +300,7 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderWithInputs withInput(String fqn, Object value) {
+        public BuilderWithInputs withInput(String fqn, Object... value) {
             return this._withInput(fqn, value);
         }
 
@@ -348,7 +348,7 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object value) {
+        public BuilderComplete withInput(String fqn, Object... value) {
             return newBuilderComplete()._withInput(fqn, value);
         }
 
@@ -402,10 +402,10 @@ public class OnlineQueryParams {
         }
 
         // withInput adds a single feature FQN, value pair to the inputs map
-        public BuilderWithInputs withInput(String fqn, Object value) {
+        public BuilderWithInputs withInput(String fqn, Object... value) {
             return newBuilderWithInputs().withInput(fqn, value);
         }
-
+Ob
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
             return newBuilderWithInputs().withInput(feature, value);
