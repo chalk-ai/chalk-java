@@ -4,6 +4,7 @@ import chalk.internal.bytes.BytesProducer;
 import chalk.internal.arrow.FeatherProcessor;
 import chalk.models.OnlineQueryParams;
 import chalk.client.features.InitFeaturesTestFeatures;
+import chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class TestOnlineQueryParams {
     @Test
     public void test() throws Exception {
-        OnlineQueryParams params = OnlineQueryParams.builder().withInput("user.id", new int[]{1, 2, 3}).withOutputs("user.today", "user.socure_score").build();
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInput("user.id", new int[]{1, 2, 3}).withOutputs("user.today", "user.socure_score").build();
         assert params.getInputs().get("user.id").getClass().isArray();
         assert params.getOutputs().get(0).equals("user.today");
         assert params.getOutputs().get(1).equals("user.socure_score");
@@ -47,13 +48,13 @@ public class TestOnlineQueryParams {
                 .build();
         var p4 = OnlineQueryParams
                 .builder()
-                .withOutput("user.today")
+                .withOutputs("user.today")
                 .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
                 .build();
 
 
-        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4};
-        for (OnlineQueryParams p : allParams) {
+        var allParams = new OnlineQueryParamsComplete[]{p1, p2, p3, p4};
+        for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals((String[]) p.getInputs().get("test_user.id"), expectedInputs);
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
@@ -78,24 +79,24 @@ public class TestOnlineQueryParams {
         var p3 = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutput(InitFeaturesTestFeatures.user.id)
-                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.id)
+                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
                 .build();
         var p4 = OnlineQueryParams
                 .builder()
-                .withOutput(InitFeaturesTestFeatures.user.id)
-                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.id)
+                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .build();
         var p5 = OnlineQueryParams
                 .builder()
-                .withOutput(InitFeaturesTestFeatures.user.id)
+                .withOutputs(InitFeaturesTestFeatures.user.id)
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
                 .build();
 
-        var allParams = new OnlineQueryParams[]{p1, p2, p3, p4, p5};
-        for (OnlineQueryParams p : allParams) {
+        var allParams = new OnlineQueryParamsComplete[]{p1, p2, p3, p4, p5};
+        for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.id", "test_user.burrys_membership.membership_id"});
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
@@ -110,8 +111,8 @@ public class TestOnlineQueryParams {
         var p = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutput(InitFeaturesTestFeatures.user.meanAttendanceCount)        // WindowedFeaturesClass
-                .withOutput(InitFeaturesTestFeatures.user.burrysMembership.branch)    // StructFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.meanAttendanceCount)        // WindowedFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.branch)    // StructFeaturesClass
                 .build();
         assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
         // Test serialization is OK.

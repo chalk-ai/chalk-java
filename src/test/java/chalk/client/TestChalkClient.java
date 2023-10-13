@@ -15,7 +15,7 @@ public class TestChalkClient {
         }
         var params = OnlineQueryParams.builder()
                 .withInput("user.id", userIds)
-                .withOutput("user.socure_score")
+                .withOutputs("user.socure_score")
                 .build();
         try (OnlineQueryResult result = client.onlineQuery(params)) {
             assert result.getScalarsTable().getRowCount() == userIds.length;
