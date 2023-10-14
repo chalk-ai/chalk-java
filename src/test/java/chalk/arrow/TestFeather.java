@@ -109,14 +109,14 @@ public class TestFeather {
     /**
      * Tests deserializing a table with a column that has a list type.
      */
-    @Disabled("Bug in VectorSchemaAppender")
     @Test
     public void testListsInScalarTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "lists_in_scalar_table.bin"));
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
-        assert scalarsTable.getRowCount() == 5;
+        assert scalarsTable.getRowCount() == 1;
+        assert scalarsTable.getSchema().getFields().size() == 5;
     }
 
     /**
