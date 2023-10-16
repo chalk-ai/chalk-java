@@ -9,6 +9,7 @@ import chalk.internal.Constants;
 import chalk.internal.Utils;
 import chalk.internal.codegen.Initializer;
 import chalk.models.OnlineQueryResult;
+import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
@@ -21,6 +22,7 @@ import java.time.*;
 import java.util.*;
 
 import static chalk.internal.Utils.*;
+import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList;
 
 public class Unmarshaller {
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
@@ -235,9 +237,14 @@ public class Unmarshaller {
                         var structObj = row.getStruct(fqn);
                         unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
                     }
-                    case List -> {
-                        feature = featureMap.get(fqn);
-                        var originalList = row.getList(fqn);
+                    case List, LargeList -> {
+                        List<?> originalList;
+                        if (arrowField.getType().getTypeID() == LargeList) {
+                            var largeListVector = (LargeListVector) table.getVectorCopy(fqn);
+                            originalList = largeListVector.getObject(row.getRowNumber());
+                        } else {
+                            originalList = row.getList(fqn);
+                        }
                         var resultList = new ArrayList();
                         for (Object rawObj: originalList) {
                             if (rawObj instanceof Text) {
@@ -302,7 +309,7 @@ public class Unmarshaller {
                                     throw new Exception("Unsupported time unit found while converting from Arrow to Java: " + cast.getUnit());
                         }
                     }
-                    case LargeBinary, Binary, Decimal -> {
+                    default -> {
                         throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowField.getType().getTypeID());
                     }
                 }
