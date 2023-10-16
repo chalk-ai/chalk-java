@@ -37,7 +37,7 @@ public class TestOnlineQueryParams {
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withInput(InitFeaturesTestFeatures.user.burrysMembership.membershipId, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .withOutputs("user.today", "user.socure_score")
                 .build();
@@ -69,30 +69,30 @@ public class TestOnlineQueryParams {
         var p1 = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutputs(InitFeaturesTestFeatures.user.id, InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.id, InitFeaturesTestFeatures.user.burrys_membership.membership_id)
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withOutputs(InitFeaturesTestFeatures.user.id, InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.id, InitFeaturesTestFeatures.user.burrys_membership.membership_id)
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .build();
         var p3 = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .withOutputs(InitFeaturesTestFeatures.user.id)
-                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.membership_id)
                 .build();
         var p4 = OnlineQueryParams
                 .builder()
                 .withOutputs(InitFeaturesTestFeatures.user.id)
-                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.membership_id)
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .build();
         var p5 = OnlineQueryParams
                 .builder()
                 .withOutputs(InitFeaturesTestFeatures.user.id)
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.membershipId)
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.membership_id)
                 .build();
 
         var allParams = new OnlineQueryParamsComplete[]{p1, p2, p3, p4, p5};
@@ -111,8 +111,8 @@ public class TestOnlineQueryParams {
         var p = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
-                .withOutputs(InitFeaturesTestFeatures.user.meanAttendanceCount)        // WindowedFeaturesClass
-                .withOutputs(InitFeaturesTestFeatures.user.burrysMembership.branch)    // StructFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.mean_attendance_count)        // WindowedFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.branch)    // StructFeaturesClass
                 .build();
         assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
         // Test serialization is OK.
@@ -128,25 +128,25 @@ public class TestOnlineQueryParams {
     public void testInitFeaturesFqn() throws Exception {
         assert InitFeaturesTestFeatures.user.id.getFqn().equals("test_user.id");
         assert InitFeaturesTestFeatures.user.injuries.getFqn().equals("test_user.injuries");
-        assert InitFeaturesTestFeatures.user.burrysMembership.getFqn().equals("test_user.burrys_membership");
-        assert InitFeaturesTestFeatures.user.burrysMembership.isFreeMonthlyBurrytoClaimed.getFqn().equals("test_user.burrys_membership.is_free_monthly_burryto_claimed");
+        assert InitFeaturesTestFeatures.user.burrys_membership.getFqn().equals("test_user.burrys_membership");
+        assert InitFeaturesTestFeatures.user.burrys_membership.is_free_monthly_burryto_claimed.getFqn().equals("test_user.burrys_membership.is_free_monthly_burryto_claimed");
 
         // Test has ones
-        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.id.getFqn().equals("test_user.burrys_membership.instructor.id");
-        assert InitFeaturesTestFeatures.user.burrysMembership.instructor.rating.getFqn().equals("test_user.burrys_membership.instructor.rating");
+        assert InitFeaturesTestFeatures.user.burrys_membership.instructor.id.getFqn().equals("test_user.burrys_membership.instructor.id");
+        assert InitFeaturesTestFeatures.user.burrys_membership.instructor.rating.getFqn().equals("test_user.burrys_membership.instructor.rating");
 
         // Test has many
-        assert InitFeaturesTestFeatures.user.burrysMembership.injuries.getFqn().equals("test_user.burrys_membership.injuries");
+        assert InitFeaturesTestFeatures.user.burrys_membership.injuries.getFqn().equals("test_user.burrys_membership.injuries");
 
         // Test dataclasses and nested dataclasses. They should have
         // their FQN truncated until the first feature is reached.
-        assert InitFeaturesTestFeatures.user.burrysMembership.branch.averageInjuriesPerMonth.getFqn().equals("test_user.burrys_membership.branch");
-        assert InitFeaturesTestFeatures.user.burrysMembership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
-        assert InitFeaturesTestFeatures.user.burrysMembership.branch.getFqn().equals("test_user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrys_membership.branch.averageInjuriesPerMonth.getFqn().equals("test_user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrys_membership.branch.city.isItSanFrancisco.getFqn().equals("test_user.burrys_membership.branch");
+        assert InitFeaturesTestFeatures.user.burrys_membership.branch.getFqn().equals("test_user.burrys_membership.branch");
 
         // Windowed feature classes
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount.getFqn().equals("test_user.mean_attendance_count");
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_all.getFqn().equals("test_user.mean_attendance_count__all__");
-        assert InitFeaturesTestFeatures.user.meanAttendanceCount.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800__");
+        assert InitFeaturesTestFeatures.user.mean_attendance_count.getFqn().equals("test_user.mean_attendance_count");
+        assert InitFeaturesTestFeatures.user.mean_attendance_count.bucket_all.getFqn().equals("test_user.mean_attendance_count__all__");
+        assert InitFeaturesTestFeatures.user.mean_attendance_count.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800__");
     }
 }

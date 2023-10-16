@@ -468,7 +468,7 @@ public class TestUnmarshaller {
         hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
         fieldVectors.add(hasOneDoubleVector);
 
-        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed__86400__", allocator);
+        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favoriteWindowed__86400__", allocator);
         windowedDoubleVector__1d__.allocateNew();
         double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
         for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
@@ -477,7 +477,7 @@ public class TestUnmarshaller {
         windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
         fieldVectors.add(windowedDoubleVector__1d__);
 
-        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed__601__", allocator);
+        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favoriteWindowed__601__", allocator);
         windowedDoubleVector__601s__.allocateNew();
         double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
         for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
@@ -588,12 +588,12 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2.plusNanos(1));
         assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3.plusNanos(1));
 
-        assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime3);
-        assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
-        assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
-        assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
+        assert users[0].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteStruct.nice_number.getValue().equals(1L);
+        assert users[1].favoriteStruct.nice_number.getValue().equals(2L);
+        assert users[2].favoriteStruct.nice_number.getValue().equals(3L);
 
         assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
         assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));
@@ -615,25 +615,25 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime3, expectedDatetime1, expectedDatetime2));
         assert users[2].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime2, expectedDatetime3, expectedDatetime1));
 
-        assert users[0].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(1L);
-        assert users[0].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(2L);
-        assert users[0].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(3L);
-        assert users[1].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(4L);
-        assert users[1].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(5L);
-        assert users[1].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(6L);
-        assert users[2].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(7L);
-        assert users[2].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(8L);
-        assert users[2].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(9L);
+        assert users[0].favoriteStructList.getValue().get(0).nice_number.getValue().equals(1L);
+        assert users[0].favoriteStructList.getValue().get(1).nice_number.getValue().equals(2L);
+        assert users[0].favoriteStructList.getValue().get(2).nice_number.getValue().equals(3L);
+        assert users[1].favoriteStructList.getValue().get(0).nice_number.getValue().equals(4L);
+        assert users[1].favoriteStructList.getValue().get(1).nice_number.getValue().equals(5L);
+        assert users[1].favoriteStructList.getValue().get(2).nice_number.getValue().equals(6L);
+        assert users[2].favoriteStructList.getValue().get(0).nice_number.getValue().equals(7L);
+        assert users[2].favoriteStructList.getValue().get(1).nice_number.getValue().equals(8L);
+        assert users[2].favoriteStructList.getValue().get(2).nice_number.getValue().equals(9L);
 
-        assert users[0].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
-        assert users[0].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime2);
-        assert users[0].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime3);
-        assert users[1].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime3);
-        assert users[1].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
-        assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[0].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime3);
+        assert users[2].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime1);
 
         assert users[0].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36900));
         assert users[1].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36901));

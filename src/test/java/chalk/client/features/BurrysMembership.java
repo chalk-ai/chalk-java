@@ -5,9 +5,9 @@ import chalk.features.FeaturesClass;
 import org.apache.arrow.vector.table.Table;
 
 public class BurrysMembership extends FeaturesClass {
-    public Feature<String> membershipId;
-    public Feature<java.time.LocalDate> startDate;
-    public Feature<Boolean> isFreeMonthlyBurrytoClaimed;
+    public Feature<String> membership_id;
+    public Feature<java.time.LocalDate> start_date;
+    public Feature<Boolean> is_free_monthly_burryto_claimed;
     public Feature<Table> injuries;
 
     public BurrysBranchDataclass branch;

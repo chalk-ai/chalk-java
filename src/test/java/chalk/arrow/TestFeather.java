@@ -121,7 +121,7 @@ public class TestFeather {
         assert scalarsTable.getRowCount() == 5;
         User[] users = result.unmarshal(User.class);
         for (User user : users) {
-            assert Arrays.equals(user.favoriteNumbers.getValue().toArray(), new Long[]{1L, 2L, 3L});
+            assert Arrays.equals(user.favorite_numbers.getValue().toArray(), new Long[]{1L, 2L, 3L});
         }
     }
 
