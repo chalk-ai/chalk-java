@@ -7,5 +7,5 @@ import java.util.List;
 
 public class User extends FeaturesClass {
     public Feature<String> id;
-    public Feature<List<Long>> favoriteNumbers;
+    public Feature<List<Long>> favorite_numbers;
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class TestUser extends FeaturesClass {
     public Feature<String> id;
-    public BurrysMembership burrysMembership;
+    public BurrysMembership burrys_membership;
     public Feature<List<BurrysInjury>> injuries;
-    public Feature<Double> socureScore;
-    public _WindowedFeatures_1w_4w_all meanAttendanceCount;
+    public Feature<Double> socure_score;
+    public _WindowedFeatures_1w_4w_all mean_attendance_count;
 }

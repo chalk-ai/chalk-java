@@ -3,9 +3,9 @@ package chalk.client.features;
 
 // `InitFeaturesTestFeatures` helps us test `initFeatures`.
 public class InitFeaturesTestFeatures {
-    public static BurrysInstructor burrysInstructor;
-    public static BurrysMembership burrysMembership;
-    public static BurrysInjury burrysInjury;
+    public static BurrysInstructor burrys_instructor;
+    public static BurrysMembership burrys_membership;
+    public static BurrysInjury burrys_injury;
 
     public static TestUser user;
 
