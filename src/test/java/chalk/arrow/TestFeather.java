@@ -13,7 +13,6 @@ import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.impl.*;
 import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
-import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
