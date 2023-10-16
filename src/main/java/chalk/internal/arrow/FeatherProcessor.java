@@ -166,7 +166,47 @@ public class FeatherProcessor {
         }
     }
 
+    /*
+    getTableIfBatchSizeOne exists only because we want to skip using VectorSchemaRootAppender
+    (when there are multiple batches, we use VectorSchemaRootAppender to concatenate the batches)
+    because VectorSchemaRootAppender does not work with LargeLists (fails with:
+        ```
+        class org.apache.arrow.vector.complex.LargeListVector cannot
+        be cast to class org.apache.arrow.vector.complex.ListVector
+        ```
+    ).
+     */
+    public static Table getTableIfBatchSizeOne(byte[] bytes) throws Exception {
+        SeekableReadChannel seekableReadChannelBatchCounter = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
+        ArrowFileReader arrowFileReaderBatchCounter = new ArrowFileReader(seekableReadChannelBatchCounter, new RootAllocator(Long.MAX_VALUE), new CommonsCompressionFactory());
+
+        var numBatches = 0;
+        try (
+                VectorSchemaRoot readerRootBatchCounter = arrowFileReaderBatchCounter.getVectorSchemaRoot();
+        ) {
+            Table firstTable = null;
+            while (arrowFileReaderBatchCounter.loadNextBatch()) {
+                if (firstTable == null) {
+                    firstTable = new Table(readerRootBatchCounter);
+                }
+                numBatches += 1;
+            }
+            if (numBatches == 1) {
+                return firstTable;
+            } else if (firstTable != null) {
+                firstTable.close();
+            }
+        }
+        arrowFileReaderBatchCounter.close();
+        return null;
+    }
+
     public static Table convertBytesToTable(byte[] bytes) throws Exception {
+        var maybeSingleBatchTable = getTableIfBatchSizeOne(bytes);
+        if (maybeSingleBatchTable != null) {
+            return maybeSingleBatchTable;
+        }
+
         SeekableReadChannel seekableReadChannel = new SeekableReadChannel(new ByteArrayReadableSeekableByteChannel(bytes));
         ArrowFileReader arrowFileReader = new ArrowFileReader(seekableReadChannel, new RootAllocator(Long.MAX_VALUE), new CommonsCompressionFactory());
 
@@ -178,7 +218,6 @@ public class FeatherProcessor {
             while (arrowFileReader.loadNextBatch()) {
                 VectorSchemaRootAppender.append(collectorRoot, readerRoot);
             }
-
             Table table = new Table(collectorRoot);
             arrowFileReader.close();
             return table;

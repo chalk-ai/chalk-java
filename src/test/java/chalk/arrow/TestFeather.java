@@ -1,6 +1,7 @@
 package chalk.arrow;
 
 
+import chalk.arrow.test_features.User;
 import chalk.internal.bytes.BytesConsumer;
 import chalk.internal.bytes.BytesProducer;
 import chalk.internal.arrow.FeatherProcessor;
@@ -12,6 +13,7 @@ import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.impl.*;
 import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
+import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class TestFeather {
@@ -109,14 +112,18 @@ public class TestFeather {
     /**
      * Tests deserializing a table with a column that has a list type.
      */
-    @Disabled("Bug in VectorSchemaAppender")
     @Test
     public void testListsInScalarTable() throws Exception {
-        byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "lists_in_scalar_table.bin"));
+        String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/chalk/arrow/test_data", "list_feature_in_scalar_table.txt")), "UTF-8");
+        byte[] bytes = Base64.getDecoder().decode(encodedString.trim());
         OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         assert scalarsTable.getRowCount() == 5;
+        User[] users = result.unmarshal(User.class);
+        for (User user : users) {
+            assert Arrays.equals(user.favoriteNumbers.getValue().toArray(), new Long[]{1L, 2L, 3L});
+        }
     }
 
     /**
