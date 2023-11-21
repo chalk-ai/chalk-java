@@ -2,6 +2,7 @@ plugins {
     id "maven-publish"
     id "java-library"
     id "io.freefair.lombok" version "8.3"
+    id "signing"
 }
 
 group 'ai.chalk'
@@ -62,22 +63,82 @@ task jarJava20(type: Jar) {
     archiveVersion.set("0.3.3-jdk20")
 }
 
+
+// Required for OSSRH publishing
+task javadocJar(type: Jar) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+// Required for OSSRH publishing
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+def configurePom = { pom ->
+    pom.name = 'Chalk Java'
+    pom.description = 'The Java client for Chalk'
+    pom.url = 'https://github.com/chalk-ai/chalk-java'
+
+    pom.licenses {
+        license {
+            name = 'The Apache License, Version 2.0'
+            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+
+    pom.developers {
+        developer {
+            id = 'chalk-ai'
+            name = 'Chalk'
+            email = 'support@chalk.ai'
+        }
+    }
+
+    pom.scm {
+        connection = 'scm:git:git://github.com/chalk-ai/chalk-java.git'
+        developerConnection = 'scm:git:ssh://github.com:chalk-ai/chalk-java.git'
+        url = 'https://github.com/chalk-ai/chalk-java/'
+    }
+}
+
 publishing {
     publications {
         jdk17(MavenPublication) {
             artifactId = 'chalk-java-jdk17'
             from components.java
             artifact jarJava17
+
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom.with configurePom
         }
 
         jdk20(MavenPublication) {
             artifactId = 'chalk-java-jdk20'
             from components.java
             artifact jarJava20
+
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom.with configurePom
         }
     }
 
     repositories {
+        maven {
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+
+            credentials {
+                username = project.findProperty("ossrh.username")
+                password = project.findProperty("ossrh.password")
+            }
+        }
+
         maven {
             name = 'GitHubPackages'
             url = uri("https://maven.pkg.github.com/chalk-ai/chalk-java")
@@ -88,4 +149,13 @@ publishing {
             }
         }
     }
+}
+
+tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
+tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
+tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
+tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
+
+signing {
+    sign publishing.publications
 }

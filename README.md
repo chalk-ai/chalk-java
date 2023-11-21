@@ -8,21 +8,21 @@ The official [Chalk](https://chalk.ai) client library for Java.
 - JDK 17 or JDK 20
 
 ### Installation
-The Java client is hosted on Github Packages. 
+The Java client is hosted on Maven Central.
 #### Gradle
-Once authenticated ([Authenticating to Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages)), add the following dependency block to your `build.gradle`. 
+Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'chalk:chalk-java-jdk{JDK_VERSION}:{CHALK_VERSION}'
+implementation 'chalk:chalk-java-jdk{JDK_VERSION}:0.3.3'
 ```
 
 #### Maven
-Once authenticated ([Authenticating to Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages)), add the following dependency block to your `pom.xml`. 
+Add the following dependency block to your `pom.xml`. 
 ```xml
 <dependencies>
     <dependency>
         <groupId>chalk</groupId>
         <artifactId>chalk-java-jdk{JDK_VERSION}</artifactId>
-        <version>{CHALK_VERSION}</version>
+        <version>0.3.3</version>
     </dependency>
 </dependencies>
 ```
@@ -174,7 +174,7 @@ Chalk CLI will generate:
 // Transaction.java
 public class Transaction extends FeaturesClass {
     public Feature<String> id;
-    public Feature<String> userId;
+    public Feature<String> user_id;
     public Feature<Double> amount;
     public Feature<java.time.LocalDateTime> ts;
     public Feature<List<String>> tags;
@@ -191,9 +191,9 @@ public class Account extends FeaturesClass {
 public class CardUser extends FeaturesClass {
     public Feature<String> id;
     public Feature<String> name;
-    public Feature<String> accountId;
+    public Feature<String> account_id;
     public Account account;
-    public _WindowedFeatures_1m_5m countPayments;
+    public _WindowedFeatures_1m_5m count_payments;
     public Feature<Double> spendingMean30d;
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> transactions;
@@ -237,7 +237,7 @@ var params = OnlineQueryParams.builder()
             .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
             .withOutputs(Features.user.account.balance)              // Has-one feature
             .withOutputs(Features.user.transactions)                 // Has-many feature
-            .withOutputs(Features.user.countPayments.bucket_5m)      // Windowed feature
+            .withOutputs(Features.user.count_payments.bucket_5m)      // Windowed feature
             .withOutputs(Features.user.address)                      // Struct-like feature
             .build();
 ```
@@ -260,7 +260,7 @@ We can also unmarshal the result of a query from its Arrow representation into t
             String name = user.id.name.getValue();                              // Scalar features
             Double balance = user.account.balance.getValue();                   // Has-one feature
             List<Transaction> txns = user.transactions.getValue();              // Has-many feature
-            Integer countPayments = user.countPayments.window_5m.getValue();    // Windowed feature
+            Integer countPayments = user.count_payments.window_5m.getValue();    // Windowed feature
             String street = user.address.street.getValue();                     // Struct-like feature
         }
     } catch (ChalkException e) {
