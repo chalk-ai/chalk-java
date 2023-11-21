@@ -2,6 +2,7 @@ plugins {
     id "maven-publish"
     id "java-library"
     id "io.freefair.lombok" version "8.3"
+    id "signing"
 }
 
 group 'ai.chalk'
@@ -62,6 +63,19 @@ task jarJava20(type: Jar) {
     archiveVersion.set("0.3.3-jdk20")
 }
 
+
+// Required for OSSRH publishing
+task javadocJar(type: Jar) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+// Required for OSSRH publishing
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
 def configurePom = { pom ->
     pom.name = 'Chalk Java'
     pom.description = 'The Java client for Chalk'
@@ -95,24 +109,47 @@ publishing {
             artifactId = 'chalk-java-jdk17'
             from components.java
             artifact jarJava17
+
+            artifact sourcesJar
+            artifact javadocJar
         }
 
         jdk20(MavenPublication) {
             artifactId = 'chalk-java-jdk20'
             from components.java
             artifact jarJava20
+
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 
     repositories {
         maven {
-            name = 'GitHubPackages'
-            url = uri("https://maven.pkg.github.com/chalk-ai/chalk-java")
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
 
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME_GITHUB")
-                password = project.findProperty("gpr.token") ?: System.getenv("TOKEN_GITHUB")
+                username = project.findProperty("ossrh.username")
+                password = project.findProperty("ossrh.password")
             }
         }
+
+//        maven {
+//            name = 'GitHubPackages'
+//            url = uri("https://maven.pkg.github.com/chalk-ai/chalk-java")
+//
+//            credentials {
+//                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME_GITHUB")
+//                password = project.findProperty("gpr.token") ?: System.getenv("TOKEN_GITHUB")
+//            }
+//        }
+    }
+}
+
+signing {
+    if (gradle.taskGraph.hasTask("publish")) {
+        useInMemoryPgpKeys(findProperty("signing.keyId"), findProperty("signing.secretKeyRingFile"), findProperty("signing.password"))
+        sign publishing.publications
     }
 }
