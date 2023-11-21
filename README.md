@@ -235,10 +235,10 @@ var userIds = new str[] {"user_1"};
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
-            .withOutputs(Features.user.account.balance)              // Has-one feature
-            .withOutputs(Features.user.transactions)                 // Has-many feature
-            .withOutputs(Features.user.count_payments.bucket_5m)      // Windowed feature
-            .withOutputs(Features.user.address)                      // Struct-like feature
+            .withOutputs(Features.user.account.balance)             // Has-one feature
+            .withOutputs(Features.user.transactions)                // Has-many feature
+            .withOutputs(Features.user.count_payments.bucket_5m)    // Windowed feature
+            .withOutputs(Features.user.address)                     // Struct-like feature
             .build();
 ```
 
@@ -260,7 +260,7 @@ We can also unmarshal the result of a query from its Arrow representation into t
             String name = user.id.name.getValue();                              // Scalar features
             Double balance = user.account.balance.getValue();                   // Has-one feature
             List<Transaction> txns = user.transactions.getValue();              // Has-many feature
-            Integer countPayments = user.count_payments.window_5m.getValue();    // Windowed feature
+            Integer countPayments = user.count_payments.window_5m.getValue();   // Windowed feature
             String street = user.address.street.getValue();                     // Struct-like feature
         }
     } catch (ChalkException e) {
