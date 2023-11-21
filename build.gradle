@@ -112,6 +112,8 @@ publishing {
 
             artifact sourcesJar
             artifact javadocJar
+
+            pom.with configurePom
         }
 
         jdk20(MavenPublication) {
@@ -121,6 +123,8 @@ publishing {
 
             artifact sourcesJar
             artifact javadocJar
+
+            pom.with configurePom
         }
     }
 
@@ -147,9 +151,11 @@ publishing {
     }
 }
 
+tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
+tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
+tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
+tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
+
 signing {
-    if (gradle.taskGraph.hasTask("publish")) {
-        useInMemoryPgpKeys(findProperty("signing.keyId"), findProperty("signing.secretKeyRingFile"), findProperty("signing.password"))
-        sign publishing.publications
-    }
+    sign publishing.publications
 }
