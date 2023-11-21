@@ -35,7 +35,7 @@ Create a client using the `ChalkClient.create()` method.  The returned client ge
 2. From a ~/.chalk.yml file if (1) is not available
 
 ```java
-import chalk.ChalkClient;
+import ai.chalk.ChalkClient;
 
 
 ChalkClient client = ChalkClient.create();
@@ -43,7 +43,7 @@ ChalkClient client = ChalkClient.create();
 
 Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
-import chalk.ChalkClient;
+import ai.chalk.ChalkClient;
 
         
 ChalkClient client = ChalkClient.builder()
@@ -56,7 +56,7 @@ ChalkClient client = ChalkClient.builder()
 #### Debug client configuration
 
 Use the method `ChalkClient.printConfig` to debug a connection or authentication issue. This method prints all config
-variables and their sources to `stdout`. See the list of environment variables in `chalk.client.ConfigEnvVars`.
+variables and their sources to `stdout`. See the list of environment variables in `ai.client.chalk.ConfigEnvVars`.
 
 ```bash
 ---------------------------------------------------------------------------------------------------------------------------
@@ -74,9 +74,9 @@ Client Secret      *************************************************     environ
 ### Getting started
 If you're just getting started, here's an example query with minimal prerequisite setup steps:
 ```java
-import chalk.client.ChalkClient;
-import chalk.models.OnlineQueryParams;
-import chalk.models.OnlineQueryResult;
+import ai.client.chalk.ChalkClient;
+import ai.models.chalk.OnlineQueryParams;
+import ai.models.chalk.OnlineQueryResult;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.FieldVector;
@@ -272,9 +272,9 @@ We can also unmarshal the result of a query from its Arrow representation into t
 Querying without codegen means accessing the underlying Arrow data structures directly. Here's an example querying
 for both a scalar feature (`user.spending_mean_30d`) and a has-many feature (`user.transactions`):
 ```java
-import chalk.client.ChalkClient;
-import chalk.models.OnlineQueryParams;
-import chalk.models.OnlineQueryResult;
+import ai.client.chalk.ChalkClient;
+import ai.models.chalk.OnlineQueryParams;
+import ai.models.chalk.OnlineQueryResult;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.FieldVector;
