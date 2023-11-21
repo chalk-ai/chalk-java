@@ -8,21 +8,21 @@ The official [Chalk](https://chalk.ai) client library for Java.
 - JDK 17 or JDK 20
 
 ### Installation
-The Java client is hosted on Github Packages. 
+The Java client is hosted on Maven Central.
 #### Gradle
-Once authenticated ([Authenticating to Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages)), add the following dependency block to your `build.gradle`. 
+Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'chalk:chalk-java-jdk{JDK_VERSION}:{CHALK_VERSION}'
+implementation 'chalk:chalk-java-jdk{JDK_VERSION}:0.3.3'
 ```
 
 #### Maven
-Once authenticated ([Authenticating to Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages)), add the following dependency block to your `pom.xml`. 
+Add the following dependency block to your `pom.xml`. 
 ```xml
 <dependencies>
     <dependency>
         <groupId>chalk</groupId>
         <artifactId>chalk-java-jdk{JDK_VERSION}</artifactId>
-        <version>{CHALK_VERSION}</version>
+        <version>0.3.3</version>
     </dependency>
 </dependencies>
 ```
