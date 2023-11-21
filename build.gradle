@@ -62,6 +62,33 @@ task jarJava20(type: Jar) {
     archiveVersion.set("0.3.3-jdk20")
 }
 
+def configurePom = { pom ->
+    pom.name = 'Chalk Java'
+    pom.description = 'The Java client for Chalk'
+    pom.url = 'https://github.com/chalk-ai/chalk-java'
+
+    pom.licenses {
+        license {
+            name = 'The Apache License, Version 2.0'
+            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+
+    pom.developers {
+        developer {
+            id = 'chalk-ai'
+            name = 'Chalk'
+            email = 'support@chalk.ai'
+        }
+    }
+
+    pom.scm {
+        connection = 'scm:git:git://github.com/chalk-ai/chalk-java.git'
+        developerConnection = 'scm:git:ssh://github.com:chalk-ai/chalk-java.git'
+        url = 'https://github.com/chalk-ai/chalk-java/'
+    }
+}
+
 publishing {
     publications {
         jdk17(MavenPublication) {
