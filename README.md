@@ -127,7 +127,7 @@ try (OnlineQueryResult result = client.onlineQuery(params)) {
     CardUser[] users = result.unmarshal(CardUser.class);
     for (CardUser user : users) {
         long userId = user.id.getValue();
-        double meanSpent = user.spendingMean30d.getValue();
+        double meanSpent = user.spending_mean_30d.getValue();
         System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
     }
 } catch (ChalkException e) {
@@ -194,7 +194,7 @@ public class CardUser extends FeaturesClass {
     public Feature<String> account_id;
     public Account account;
     public _WindowedFeatures_1m_5m count_payments;
-    public Feature<Double> spendingMean30d;
+    public Feature<Double> spending_mean_30d;
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> transactions;
 }
