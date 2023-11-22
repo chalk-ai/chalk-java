@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ai.chalk'
-version '0.3.3'
+version '0.3.4'
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ task compileJava17(type: JavaCompile) {
 task jarJava17(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk17')
-    archiveVersion.set("0.3.3-jdk17")
+    archiveVersion.set("0.3.4-jdk17")
 }
 
 task compileJava20(type: JavaCompile) {
@@ -60,7 +60,7 @@ task compileJava20(type: JavaCompile) {
 task jarJava20(type: Jar) {
     from sourceSets.main.output.classesDirs
     archiveClassifier.set('jdk20')
-    archiveVersion.set("0.3.3-jdk20")
+    archiveVersion.set("0.3.4-jdk20")
 }
 
 
