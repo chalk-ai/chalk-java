@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ai.chalk'
-version '0.3.4'
+version '0.3.5'
 
 repositories {
     mavenCentral()
@@ -28,41 +28,10 @@ test {
     jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
 }
 
-
-task compileJava17(type: JavaCompile) {
-    source = sourceSets.main.java
-    classpath = sourceSets.main.compileClasspath
-    getDestinationDirectory().set(layout.buildDirectory.dir("classes/java17"))
-    options.fork = true
-    options.forkOptions.javaHome = file("/opt/homebrew/Cellar/openjdk@17/17.0.8.1")
-    sourceCompatibility = '17'
-    targetCompatibility = '17'
-    options.annotationProcessorPath = configurations.annotationProcessor
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
-
-task jarJava17(type: Jar) {
-    from sourceSets.main.output.classesDirs
-    archiveClassifier.set('jdk17')
-    archiveVersion.set("0.3.4-jdk17")
-}
-
-task compileJava20(type: JavaCompile) {
-    source = sourceSets.main.java
-    classpath = sourceSets.main.compileClasspath
-    getDestinationDirectory().set(layout.buildDirectory.dir("classes/java20"))
-    options.fork = true
-    options.forkOptions.javaHome = file("/opt/homebrew/Cellar/openjdk/20.0.1")
-    sourceCompatibility = '20'
-    targetCompatibility = '20'
-    options.annotationProcessorPath = configurations.annotationProcessor
-}
-
-task jarJava20(type: Jar) {
-    from sourceSets.main.output.classesDirs
-    archiveClassifier.set('jdk20')
-    archiveVersion.set("0.3.4-jdk20")
-}
-
 
 // Required for OSSRH publishing
 task javadocJar(type: Jar) {
@@ -105,21 +74,8 @@ def configurePom = { pom ->
 
 publishing {
     publications {
-        jdk17(MavenPublication) {
-            artifactId = 'chalk-java-jdk17'
+        mavenJava(MavenPublication) {
             from components.java
-            artifact jarJava17
-
-            artifact sourcesJar
-            artifact javadocJar
-
-            pom.with configurePom
-        }
-
-        jdk20(MavenPublication) {
-            artifactId = 'chalk-java-jdk20'
-            from components.java
-            artifact jarJava20
 
             artifact sourcesJar
             artifact javadocJar
@@ -150,11 +106,6 @@ publishing {
         }
     }
 }
-
-tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
-tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk17Publication')
-tasks.getByName('publishJdk20PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
-tasks.getByName('publishJdk17PublicationToOSSRHRepository').dependsOn(':signJdk20Publication')
 
 signing {
     sign publishing.publications
