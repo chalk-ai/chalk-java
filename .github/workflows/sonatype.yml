@@ -21,5 +21,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
+      - uses: actions/checkout@v4
+
       - name: Publish to Sonatype
         run: ./gradlew publish
