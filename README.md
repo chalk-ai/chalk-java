@@ -35,7 +35,7 @@ Create a client using the `ChalkClient.create()` method.  The returned client ge
 2. From a ~/.chalk.yml file if (1) is not available
 
 ```java
-import ai.chalk.ChalkClient;
+import ai.chalk.client.ChalkClient;
 
 
 ChalkClient client = ChalkClient.create();
@@ -43,7 +43,7 @@ ChalkClient client = ChalkClient.create();
 
 Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
-import ai.chalk.ChalkClient;
+import ai.chalk.client.ChalkClient;
 
         
 ChalkClient client = ChalkClient.builder()
