@@ -5,7 +5,7 @@ The official [Chalk](https://chalk.ai) client library for Java.
 ## Usage
 ### Requirements
 
-- JDK 17 or JDK 20
+- at least JDK 17
 
 ### Installation
 The Java client is hosted on Maven Central.
