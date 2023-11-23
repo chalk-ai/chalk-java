@@ -34,12 +34,21 @@ public class TestOnlineQueryParams {
         inputs.put("user.email", emails);
         inputs.put("user.socure_score", socureScores);
 
-        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs("user.today", "user.socure_score").build();
+        var outputs = new String[]{"user.today", "user.socure_score"};
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
         assert params.getInputs().get("user.id").equals(userIds);
         assert params.getInputs().get("user.email").equals(emails);
         assert params.getInputs().get("user.socure_score").equals(socureScores);
         assert params.getOutputs().get(0).equals("user.today");
         assert params.getOutputs().get(1).equals("user.socure_score");
+
+        var params2 = OnlineQueryParams.builder().withOutputs(outputs).withInputs(inputs).withInputs(new HashMap<>(){}).build();
+        assert params2.getInputs().get("user.id").equals(userIds);
+        assert params2.getInputs().get("user.email").equals(emails);
+        assert params2.getInputs().get("user.socure_score").equals(socureScores);
+        assert params2.getOutputs().get(0).equals("user.today");
+        assert params2.getOutputs().get(1).equals("user.socure_score");
     }
 
 
