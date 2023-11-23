@@ -90,13 +90,16 @@ publishing {
             url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
 
             credentials {
-                username = System.getenv("SONATYPE_USERNAME") ?: project.findProperty("ossrh.username")
-                password = System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("ossrh.password")
+                username = System.getenv("SONATYPE_USERNAME") ?: project.findProperty("sonatypeUsername")
+                password = System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("sonatypePassword")
             }
         }
     }
 }
 
 signing {
+    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
+    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign publishing.publications
 }
