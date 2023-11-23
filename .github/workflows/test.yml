@@ -20,7 +20,7 @@ jobs:
           distribution: 'oracle'
 
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew test --stacktrace
         env:
           CHALK_API_SERVER: ${{ secrets.CHALK_API_SERVER }}
           CHALK_CLIENT_ID: ${{ secrets.CHALK_CLIENT_ID }}
