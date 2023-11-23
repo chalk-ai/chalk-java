@@ -1,4 +1,4 @@
-name: Publish to Sonatype
+name: Publish to Maven Central
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: "Publish to Sonatype"
+    name: "Publish to Maven Central"
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +22,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Publish to Sonatype
-        run: ./gradlew publish
+        run: ./gradlew publish closeAndReleaseRepository
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-
