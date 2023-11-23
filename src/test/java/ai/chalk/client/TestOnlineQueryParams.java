@@ -8,6 +8,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
@@ -22,6 +23,45 @@ public class TestOnlineQueryParams {
         FeatherProcessor.inputsToArrowBytes(inputs);
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
+
+    @Test
+    public void testWithInputs() throws Exception {
+        Map<String, Object> inputs = new HashMap<>();
+        var userIds = new int[]{1, 2, 3};
+        var emails = new String[]{"a", "b", "c"};
+        var socureScores = new double[]{1.0, 2.0, 3.0};
+        inputs.put("user.id", userIds);
+        inputs.put("user.email", emails);
+        inputs.put("user.socure_score", socureScores);
+
+        var outputs = new String[]{"user.today", "user.socure_score"};
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
+        assert params.getInputs().get("user.id").equals(userIds);
+        assert params.getInputs().get("user.email").equals(emails);
+        assert params.getInputs().get("user.socure_score").equals(socureScores);
+        assert params.getOutputs().get(0).equals("user.today");
+        assert params.getOutputs().get(1).equals("user.socure_score");
+
+        var params2 = OnlineQueryParams.builder().withOutputs(outputs).withInputs(inputs).build();
+        assert params2.getInputs().get("user.id").equals(userIds);
+        assert params2.getInputs().get("user.email").equals(emails);
+        assert params2.getInputs().get("user.socure_score").equals(socureScores);
+        assert params2.getOutputs().get(0).equals("user.today");
+        assert params2.getOutputs().get(1).equals("user.socure_score");
+
+        var abcs = new String[]{"a", "b", "c"};
+        var cbd = new String[]{"c", "b", "d"};
+        var params3 = OnlineQueryParams.builder().withOutputs(outputs).withInput("user.abc", abcs).withInputs(inputs).withInput("user.cbd", cbd).build();
+        assert params3.getInputs().get("user.id").equals(userIds);
+        assert params3.getInputs().get("user.email").equals(emails);
+        assert params3.getInputs().get("user.socure_score").equals(socureScores);
+        assert params3.getInputs().get("user.abc").equals(abcs);
+        assert params3.getInputs().get("user.cbd").equals(cbd);
+        assert params3.getOutputs().get(0).equals("user.today");
+        assert params3.getOutputs().get(1).equals("user.socure_score");
+    }
+
 
 
     /**

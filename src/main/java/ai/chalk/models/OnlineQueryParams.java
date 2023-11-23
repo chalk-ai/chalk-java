@@ -107,6 +107,14 @@ public class OnlineQueryParams {
             return this._withInput(feature.getFqn(), value);
         }
 
+        protected <T extends Builder> T _withInputs(Map<String, Object> inputs) {
+            if (this.inputs == null) {
+                this.inputs = new HashMap<>();
+            }
+            this.inputs.putAll(inputs);
+            return (T) this;
+        }
+
         protected <T extends Builder> T _withOutputs(String... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
@@ -255,6 +263,10 @@ public class OnlineQueryParams {
             return this._withInput(fqn, values);
         }
 
+        public BuilderComplete withInputs(Map<String, Object> inputs) {
+            return this._withInputs(inputs);
+        }
+
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
             return this._withInput(feature.getFqn(), values);
@@ -306,6 +318,10 @@ public class OnlineQueryParams {
 
         public BuilderWithInputs withInput(String fqn, Object... values) {
             return this._withInput(fqn, values);
+        }
+
+        public BuilderWithInputs withInputs(Map<String, Object> inputs) {
+            return this._withInputs(inputs);
         }
 
         @SafeVarargs
@@ -361,6 +377,11 @@ public class OnlineQueryParams {
             return newBuilderComplete()._withInput(feature.getFqn(), values);
         }
 
+
+        public final <T> BuilderComplete withInputs(Map<String, Object> inputs) {
+            return newBuilderComplete()._withInputs(inputs);
+        }
+
         public BuilderWithOutputs withOutputs(String... outputs) {
             return this._withOutputs(outputs);
         }
@@ -408,6 +429,10 @@ public class OnlineQueryParams {
         // withInput adds a single feature FQN, value pair to the inputs map
         public BuilderWithInputs withInput(String fqn, Object... values) {
             return newBuilderWithInputs().withInput(fqn, values);
+        }
+
+        public BuilderWithInputs withInputs(Map<String, Object> inputs) {
+            return newBuilderWithInputs().withInputs(inputs);
         }
 
         @SafeVarargs
