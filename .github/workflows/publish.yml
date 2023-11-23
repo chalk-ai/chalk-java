@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Publish to Sonatype
-        run: ./gradlew publish closeAndReleaseRepository
+        run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
