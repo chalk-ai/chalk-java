@@ -8,6 +8,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
@@ -22,6 +23,25 @@ public class TestOnlineQueryParams {
         FeatherProcessor.inputsToArrowBytes(inputs);
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
+
+    @Test
+    public void testWithInputs() throws Exception {
+        Map<String, Object> inputs = new HashMap<>();
+        var userIds = new int[]{1, 2, 3};
+        var emails = new String[]{"a", "b", "c"};
+        var socureScores = new double[]{1.0, 2.0, 3.0};
+        inputs.put("user.id", userIds);
+        inputs.put("user.email", emails);
+        inputs.put("user.socure_score", socureScores);
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs("user.today", "user.socure_score").build();
+        assert params.getInputs().get("user.id").equals(userIds);
+        assert params.getInputs().get("user.email").equals(emails);
+        assert params.getInputs().get("user.socure_score").equals(socureScores);
+        assert params.getOutputs().get(0).equals("user.today");
+        assert params.getOutputs().get(1).equals("user.socure_score");
+    }
+
 
 
     /**
