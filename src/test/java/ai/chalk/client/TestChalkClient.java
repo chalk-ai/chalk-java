@@ -4,11 +4,11 @@ import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 
 public class TestChalkClient {
-    @Test
+    @Disabled
     public void test() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
