@@ -15,7 +15,6 @@ public class TestChalkClient {
         }
 
         ChalkClient client = ChalkClient.create();
-        client.printConfig();
         String[] userIds = new String[10];
         for (int i = 0; i < userIds.length; i++) {
             userIds[i] = String.format("%d", i);
