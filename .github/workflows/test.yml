@@ -19,9 +19,6 @@ jobs:
           java-version: '17'
           distribution: 'oracle'
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
       - name: Run tests
         run: ./gradlew test
         env:
