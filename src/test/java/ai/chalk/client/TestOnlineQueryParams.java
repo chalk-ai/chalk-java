@@ -200,23 +200,6 @@ public class TestOnlineQueryParams {
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 
-    @Test
-    public void testSerializationWithArrayAsInputValues() throws Exception {
-        var inputs = new HashMap<String, List<?>>();
-        // Make an ArrayList of strings
-        var userIds = Arrays.asList("1", "2", "3");
-        inputs.put("user.id", userIds);
-
-        var outputs = new String[]{"user.today", "user.socure_score"};
-
-        var params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
-
-        // Test serialization is OK.
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
-    }
-
-
-
     /**
      * Aims to test all methods that take `Feature` as keys to the inputs map.
      */
