@@ -12,7 +12,7 @@ The Java client is hosted on Maven Central.
 #### Gradle
 Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'ai.chalk:chalk-java:0.3.6'
+implementation 'ai.chalk:chalk-java:0.3.7'
 ```
 
 #### Maven
@@ -22,7 +22,7 @@ Add the following dependency block to your `pom.xml`.
     <dependency>
         <groupId>ai.chalk</groupId>
         <artifactId>chalk-java</artifactId>
-        <version>0.3.6</version>
+        <version>0.3.7</version>
     </dependency>
 </dependencies>
 ```
@@ -91,7 +91,7 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        var userIds = new int[] {1, 2, 3};
+        var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
                     .withOutputs("card_user.full_name")
@@ -117,7 +117,7 @@ try {
     e.printStackTrace();
     return;
 }
-var userIds = new int[] {1, 2, 3};
+var userIds = Arrays.asList(1, 2, 3);
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.fullName)
@@ -231,7 +231,7 @@ With these classes, we can now write type-checked queries.
 ```java
 import com.example.my_project.codegen_output_folder.Features;
 
-var userIds = new str[] {"user_1"};
+var userIds = Arrays.asList("user_1");
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
@@ -289,7 +289,7 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        var userIds = new int[] {1, 2, 3};
+        var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
                     .withOutputs("card_user.spending_mean_30d", "card_user.transactions")

@@ -19,7 +19,7 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
      *     <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-     *         .withInput("user.id", new int[] {1, 2, 3})
+     *         .withInput("user.id", Arrays.asList(1, 2, 3))
      *         .withOutputs("user.email", "user.transactions")
      *         .build();
      *
@@ -31,7 +31,7 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
      * </p>
      */
     public OnlineQueryParamsComplete(
-            Map<String, Object> inputs,
+            Map<String, List<?>> inputs,
             List<String> outputs,
             Map<String, Duration> staleness,
             Map<String, String> meta,

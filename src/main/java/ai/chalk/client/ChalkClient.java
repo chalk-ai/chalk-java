@@ -59,7 +59,7 @@ public interface ChalkClient {
      *     <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-     *         .withInput("user.id", new int[] {1, 2, 3})
+     *         .withInput("user.id", Arrays.asList(1, 2, 3))
      *         .withOutputs("user.email", "user.transactions")
      *         .build();
      *
