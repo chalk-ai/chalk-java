@@ -77,7 +77,7 @@ public class OnlineQueryParams {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Builder<Child extends Builder<Child>> {
+    public static class Builder<T extends Builder<T>> {
         protected Map<String, Object> inputs;
         protected List<String> outputs;
         protected Map<String, Duration> staleness;
@@ -91,7 +91,7 @@ public class OnlineQueryParams {
         protected String correlationId;
         protected String branch;
 
-        protected <T extends Builder<Child>> T _withInput(String fqn, Object... values) {
+        protected T _withInput(String fqn, Object... values) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -103,11 +103,11 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder<Child>, K> T _withInput(Feature<K> feature, K... value) {
+        public <K> T _withInput(Feature<K> feature, K... value) {
             return this._withInput(feature.getFqn(), value);
         }
 
-        protected <T extends Builder<Child>> T _withInputs(Map<String, Object> inputs) {
+        protected T _withInputs(Map<String, Object> inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -115,7 +115,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        protected <T extends Builder<Child>> T _withOutputs(String... outputs) {
+        protected T _withOutputs(String... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
             }
@@ -123,7 +123,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder<Child>> T _withOutputs(Feature<?>... outputs) {
+        public T _withOutputs(Feature<?>... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -131,15 +131,15 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder<Child>> T _withOutputs(WindowedFeaturesClass... outputs) {
+        public T _withOutputs(WindowedFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
             }
-            return (T) this._withOutputs(outputFqns);
+            return this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder<Child>> T _withOutputs(StructFeaturesClass... outputs) {
+        public T _withOutputs(StructFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -148,7 +148,7 @@ public class OnlineQueryParams {
         }
 
         // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public Child withStaleness(Object... staleness) {
+        public T withStaleness(Object... staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
@@ -161,20 +161,20 @@ public class OnlineQueryParams {
                 }
                 this.staleness.put((String) staleness[i], (Duration) staleness[i + 1]);
             }
-            return (Child) this;
+            return (T) this;
         }
 
         // withMeta adds a single key, value pair to the meta map
-        public Child withMeta(String key, String value) {
+        public T withMeta(String key, String value) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
             this.meta.put(key, value);
-            return (Child) this;
+            return (T) this;
         }
 
         // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public Child withTags(Object... tags) {
+        public T withTags(Object... tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
@@ -185,60 +185,59 @@ public class OnlineQueryParams {
                     this.tags.add((String) tag);
                 }
             }
-            return (Child) this;
+            return (T) this;
         }
 
         // withTag adds a single tag to the tags list
-        public Child withTag(String tag) {
+        public T withTag(String tag) {
             return this.withTags(tag);
         }
 
         // withIncludeMeta sets the includeMeta flag
-        public Child withIncludeMeta(boolean includeMeta) {
+        public T withIncludeMeta(boolean includeMeta) {
             this.includeMeta = includeMeta;
-            return (Child) this;
+            return (T) this;
         }
 
         // withIncludeMetrics sets the includeMetrics flag
-        public Child withIncludeMetrics(boolean includeMetrics) {
+        public T withIncludeMetrics(boolean includeMetrics) {
             this.includeMetrics = includeMetrics;
-            return (Child) this;
+            return (T) this;
         }
 
         // withEnvironmentId sets the environmentId
-        public Child withEnvironmentId(String environmentId) {
+        public T withEnvironmentId(String environmentId) {
             this.environmentId = environmentId;
-            return (Child) this;
+            return (T) this;
         }
 
         // withPreviewDeploymentId sets the previewDeploymentId
-        public Child withPreviewDeploymentId(String previewDeploymentId) {
+        public T withPreviewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
-            return (Child) this;
+            return (T) this;
         }
 
         // withQueryName sets the queryName
-        public Child withQueryName(String queryName) {
+        public T withQueryName(String queryName) {
             this.queryName = queryName;
-            return (Child) this;
+            return (T) this;
         }
 
         // withCorrelationId sets the correlationId
-        public Child withCorrelationId(String correlationId) {
+        public T withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
-            return (Child) this;
+            return (T) this;
         }
 
         // withBranch sets the branch
-        public Child withBranch(String branch) {
+        public T withBranch(String branch) {
             this.branch = branch;
-            return (Child) this;
+            return (T) this;
         }
 
         public OnlineQueryParams build() {
             return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
-
     }
 
     public static class BuilderComplete extends Builder<BuilderComplete> {
