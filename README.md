@@ -91,7 +91,7 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        var userIds = new int[] {1, 2, 3};
+        var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
                     .withOutputs("card_user.full_name")
@@ -117,7 +117,7 @@ try {
     e.printStackTrace();
     return;
 }
-var userIds = new int[] {1, 2, 3};
+var userIds = Arrays.asList(1, 2, 3);
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.fullName)
@@ -231,7 +231,7 @@ With these classes, we can now write type-checked queries.
 ```java
 import com.example.my_project.codegen_output_folder.Features;
 
-var userIds = new str[] {"user_1"};
+var userIds = Arrays.asList("user_1");
 var params = OnlineQueryParams.builder()
             .withInput(Features.user.id, userIds)
             .withOutputs(Features.user.id, Feature.card_user.name)  // Scalar features
@@ -289,7 +289,7 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        var userIds = new int[] {1, 2, 3};
+        var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
                     .withOutputs("card_user.spending_mean_30d", "card_user.transactions")
