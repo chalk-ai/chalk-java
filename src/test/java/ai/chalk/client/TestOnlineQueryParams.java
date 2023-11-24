@@ -7,6 +7,7 @@ import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +61,117 @@ public class TestOnlineQueryParams {
         assert params3.getInputs().get("user.cbd").equals(cbd);
         assert params3.getOutputs().get(0).equals("user.today");
         assert params3.getOutputs().get(1).equals("user.socure_score");
+    }
+    /*
+        public OnlineQueryParamsComplete(
+            Map<String, Object> inputs,
+            List<String> outputs,
+            Map<String, Duration> staleness,
+            Map<String, String> meta,
+            List<String> tags,
+            boolean includeMeta,
+            boolean includeMetrics,
+            String environmentId,
+            String previewDeploymentId,
+            String queryName,
+            String correlationId,
+            String branch
+    ) {
+     */
+    @Test
+    public void testWithOptionalParams() throws Exception {
+        Map<String, Object> inputs = new HashMap<>();
+        var userIds = new int[]{1, 2, 3};
+        var emails = new String[]{"a", "b", "c"};
+        var socureScores = new double[]{1.0, 2.0, 3.0};
+        inputs.put("user.id", userIds);
+        inputs.put("user.email", emails);
+        inputs.put("user.socure_score", socureScores);
+
+        var outputs = new String[]{"user.today", "user.socure_score"};
+
+        // Replace repeated .withInputs and .withOutputs calls when we
+        // make the underlying builder state immutable.
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .build();
+        assert params.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+
+        OnlineQueryParamsComplete params2 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withMeta("user.id", "abc")
+                .build();
+        assert params2.getMeta().get("user.id").equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params2);
+
+        OnlineQueryParamsComplete params3 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withTags("user.id", "abc")
+                .build();
+        assert params3.getTags().get(0).equals("user.id");
+        assert params3.getTags().get(1).equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params3);
+
+        OnlineQueryParamsComplete params4 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withIncludeMeta(true)
+                .build();
+        assert params4.isIncludeMeta();
+        BytesProducer.convertOnlineQueryParamsToBytes(params4);
+
+        OnlineQueryParamsComplete params5 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withIncludeMetrics(true)
+                .build();
+        assert params5.isIncludeMetrics();
+        BytesProducer.convertOnlineQueryParamsToBytes(params5);
+
+        OnlineQueryParamsComplete params6 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withEnvironmentId("abc")
+                .build();
+        assert params6.getEnvironmentId().equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params6);
+
+        OnlineQueryParamsComplete params7 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withPreviewDeploymentId("abc")
+                .build();
+        assert params7.getPreviewDeploymentId().equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params7);
+
+        OnlineQueryParamsComplete params8 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withQueryName("abc")
+                .build();
+        assert params8.getQueryName().equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params8);
+
+        OnlineQueryParamsComplete params9 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withCorrelationId("abc")
+                .build();
+        assert params9.getCorrelationId().equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params9);
+
+        OnlineQueryParamsComplete params10 = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withBranch("abc")
+                .build();
+        assert params10.getBranch().equals("abc");
+        BytesProducer.convertOnlineQueryParamsToBytes(params10);
     }
 
 

@@ -148,7 +148,7 @@ public class OnlineQueryParams {
         }
 
         // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public Builder withStaleness(Object... staleness) {
+        public <T extends Builder> T _withStaleness(Object... staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
@@ -161,20 +161,20 @@ public class OnlineQueryParams {
                 }
                 this.staleness.put((String) staleness[i], (Duration) staleness[i + 1]);
             }
-            return this;
+            return (T) this;
         }
 
         // withMeta adds a single key, value pair to the meta map
-        public Builder withMeta(String key, String value) {
+        public <T extends Builder> T _withMeta(String key, String value) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
             this.meta.put(key, value);
-            return this;
+            return (T) this;
         }
 
         // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public Builder withTags(Object... tags) {
+        public <T extends Builder> T _withTags(Object... tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
@@ -185,54 +185,54 @@ public class OnlineQueryParams {
                     this.tags.add((String) tag);
                 }
             }
-            return this;
+            return (T) this;
         }
 
         // withTag adds a single tag to the tags list
-        public Builder withTag(String tag) {
-            return this.withTags(tag);
+        public <T extends Builder> T _withTag(String tag) {
+            return this._withTags(tag);
         }
 
         // withIncludeMeta sets the includeMeta flag
-        public Builder withIncludeMeta(boolean includeMeta) {
+        public <T extends Builder> T _withIncludeMeta(boolean includeMeta) {
             this.includeMeta = includeMeta;
-            return this;
+            return (T) this;
         }
 
         // withIncludeMetrics sets the includeMetrics flag
-        public Builder withIncludeMetrics(boolean includeMetrics) {
+        public <T extends Builder> T _withIncludeMetrics(boolean includeMetrics) {
             this.includeMetrics = includeMetrics;
-            return this;
+            return (T) this;
         }
 
         // withEnvironmentId sets the environmentId
-        public Builder withEnvironmentId(String environmentId) {
+        public <T extends Builder> T _withEnvironmentId(String environmentId) {
             this.environmentId = environmentId;
-            return this;
+            return (T) this;
         }
 
         // withPreviewDeploymentId sets the previewDeploymentId
-        public Builder withPreviewDeploymentId(String previewDeploymentId) {
+        public <T extends Builder> T _withPreviewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
-            return this;
+            return (T) this;
         }
 
         // withQueryName sets the queryName
-        public Builder withQueryName(String queryName) {
+        public <T extends Builder> T _withQueryName(String queryName) {
             this.queryName = queryName;
-            return this;
+            return (T) this;
         }
 
         // withCorrelationId sets the correlationId
-        public Builder withCorrelationId(String correlationId) {
+        public <T extends Builder> T _withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
-            return this;
+            return (T) this;
         }
 
         // withBranch sets the branch
-        public Builder withBranch(String branch) {
+        public <T extends Builder> T _withBranch(String branch) {
             this.branch = branch;
-            return this;
+            return (T) this;
         }
 
         public OnlineQueryParams build() {
@@ -288,6 +288,49 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
+        public BuilderComplete withStaleness(Object... staleness) {
+            return this._withStaleness(staleness);
+        }
+
+        public BuilderComplete withMeta(String key, String value) {
+            return this._withMeta(key, value);
+        }
+
+        public BuilderComplete withTags(Object... tags) {
+            return this._withTags(tags);
+        }
+
+        public BuilderComplete withTag(String tag) {
+            return this._withTag(tag);
+        }
+
+        public BuilderComplete withIncludeMeta(boolean includeMeta) {
+            return this._withIncludeMeta(includeMeta);
+        }
+
+        public BuilderComplete withIncludeMetrics(boolean includeMetrics) {
+            return this._withIncludeMetrics(includeMetrics);
+        }
+
+        public BuilderComplete withEnvironmentId(String environmentId) {
+            return this._withEnvironmentId(environmentId);
+        }
+
+        public BuilderComplete withPreviewDeploymentId(String previewDeploymentId) {
+            return this._withPreviewDeploymentId(previewDeploymentId);
+        }
+
+        public BuilderComplete withQueryName(String queryName) {
+            return this._withQueryName(queryName);
+        }
+
+        public BuilderComplete withCorrelationId(String correlationId) {
+            return this._withCorrelationId(correlationId);
+        }
+
+        public BuilderComplete withBranch(String branch) {
+            return this._withBranch(branch);
+        }
 
         public OnlineQueryParamsComplete build() {
             return new OnlineQueryParamsComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
@@ -344,6 +387,50 @@ public class OnlineQueryParams {
         public BuilderComplete withOutputs(StructFeaturesClass... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
+
+        public BuilderWithInputs withStaleness(Object... staleness) {
+            return this._withStaleness(staleness);
+        }
+
+        public BuilderWithInputs withMeta(String key, String value) {
+            return this._withMeta(key, value);
+        }
+
+        public BuilderWithInputs withTags(Object... tags) {
+            return this._withTags(tags);
+        }
+
+        public BuilderWithInputs withTag(String tag) {
+            return this._withTag(tag);
+        }
+
+        public BuilderWithInputs withIncludeMeta(boolean includeMeta) {
+            return this._withIncludeMeta(includeMeta);
+        }
+
+        public BuilderWithInputs withIncludeMetrics(boolean includeMetrics) {
+            return this._withIncludeMetrics(includeMetrics);
+        }
+
+        public BuilderWithInputs withEnvironmentId(String environmentId) {
+            return this._withEnvironmentId(environmentId);
+        }
+
+        public BuilderWithInputs withPreviewDeploymentId(String previewDeploymentId) {
+            return this._withPreviewDeploymentId(previewDeploymentId);
+        }
+
+        public BuilderWithInputs withQueryName(String queryName) {
+            return this._withQueryName(queryName);
+        }
+
+        public BuilderWithInputs withCorrelationId(String correlationId) {
+            return this._withCorrelationId(correlationId);
+        }
+
+        public BuilderWithInputs withBranch(String branch) {
+            return this._withBranch(branch);
+        }
     }
 
     public static class BuilderWithOutputs extends Builder {
@@ -396,6 +483,50 @@ public class OnlineQueryParams {
 
         public BuilderWithOutputs withOutputs(StructFeaturesClass... outputs) {
             return this._withOutputs(outputs);
+        }
+
+        public BuilderWithOutputs withStaleness(Object... staleness) {
+            return this._withStaleness(staleness);
+        }
+
+        public BuilderWithOutputs withMeta(String key, String value) {
+            return this._withMeta(key, value);
+        }
+
+        public BuilderWithOutputs withTags(Object... tags) {
+            return this._withTags(tags);
+        }
+
+        public BuilderWithOutputs withTag(String tag) {
+            return this._withTag(tag);
+        }
+
+        public BuilderWithOutputs withIncludeMeta(boolean includeMeta) {
+            return this._withIncludeMeta(includeMeta);
+        }
+
+        public BuilderWithOutputs withIncludeMetrics(boolean includeMetrics) {
+            return this._withIncludeMetrics(includeMetrics);
+        }
+
+        public BuilderWithOutputs withEnvironmentId(String environmentId) {
+            return this._withEnvironmentId(environmentId);
+        }
+
+        public BuilderWithOutputs withPreviewDeploymentId(String previewDeploymentId) {
+            return this._withPreviewDeploymentId(previewDeploymentId);
+        }
+
+        public BuilderWithOutputs withQueryName(String queryName) {
+            return this._withQueryName(queryName);
+        }
+
+        public BuilderWithOutputs withCorrelationId(String correlationId) {
+            return this._withCorrelationId(correlationId);
+        }
+
+        public BuilderWithOutputs withBranch(String branch) {
+            return this._withBranch(branch);
         }
     }
 
