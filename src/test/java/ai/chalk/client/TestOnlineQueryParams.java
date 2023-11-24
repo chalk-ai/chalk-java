@@ -62,22 +62,7 @@ public class TestOnlineQueryParams {
         assert params3.getOutputs().get(0).equals("user.today");
         assert params3.getOutputs().get(1).equals("user.socure_score");
     }
-    /*
-        public OnlineQueryParamsComplete(
-            Map<String, Object> inputs,
-            List<String> outputs,
-            Map<String, Duration> staleness,
-            Map<String, String> meta,
-            List<String> tags,
-            boolean includeMeta,
-            boolean includeMetrics,
-            String environmentId,
-            String previewDeploymentId,
-            String queryName,
-            String correlationId,
-            String branch
-    ) {
-     */
+
     @Test
     public void testWithOptionalParams() throws Exception {
         Map<String, Object> inputs = new HashMap<>();

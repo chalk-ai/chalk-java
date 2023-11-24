@@ -587,6 +587,50 @@ public class OnlineQueryParams {
         public BuilderWithOutputs withOutputs(StructFeaturesClass... outputs) {
             return newBuilderWithOutputs().withOutputs(outputs);
         }
+
+        public BuilderSeed withStaleness(Object... staleness) {
+            return this._withStaleness(staleness);
+        }
+
+        public BuilderSeed withMeta(String key, String value) {
+            return this._withMeta(key, value);
+        }
+
+        public BuilderSeed withTags(Object... tags) {
+            return this._withTags(tags);
+        }
+
+        public BuilderSeed withTag(String tag) {
+            return this._withTag(tag);
+        }
+
+        public BuilderSeed withIncludeMeta(boolean includeMeta) {
+            return this._withIncludeMeta(includeMeta);
+        }
+
+        public BuilderSeed withIncludeMetrics(boolean includeMetrics) {
+            return this._withIncludeMetrics(includeMetrics);
+        }
+
+        public BuilderSeed withEnvironmentId(String environmentId) {
+            return this._withEnvironmentId(environmentId);
+        }
+
+        public BuilderSeed withPreviewDeploymentId(String previewDeploymentId) {
+            return this._withPreviewDeploymentId(previewDeploymentId);
+        }
+
+        public BuilderSeed withQueryName(String queryName) {
+            return this._withQueryName(queryName);
+        }
+
+        public BuilderSeed withCorrelationId(String correlationId) {
+            return this._withCorrelationId(correlationId);
+        }
+
+        public BuilderSeed withBranch(String branch) {
+            return this._withBranch(branch);
+        }
     }
 
     public static BuilderSeed builder() {
