@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 public class TestFeather {
     /**
@@ -95,11 +96,12 @@ public class TestFeather {
     public void testMillionRowsInInput() throws Exception {
         // Failing because 'Cannot invoke "org.apache.arrow.flatbuf.RecordBatch.nodesLength()"
         // because "recordBatchFB" is null'
-        int[] intArray = new int[1_000_000];
+        Integer[] intArray = new Integer[1_000_000];
+        List<Integer> list = Arrays.asList(intArray);
         for (int i = 0; i < 1_000_000; i++) {
             intArray[i] = i;
         }
-        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInput("user.id", intArray).withOutputs("doesntmatter").build());
+        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build());
         try (
             Table table = FeatherProcessor.convertBytesToTable(bytes);
         ) {

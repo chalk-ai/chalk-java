@@ -31,7 +31,7 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
      * </p>
      */
     public OnlineQueryParamsComplete(
-            Map<String, Object> inputs,
+            Map<String, List<?>> inputs,
             List<String> outputs,
             Map<String, Duration> staleness,
             Map<String, String> meta,

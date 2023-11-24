@@ -34,40 +34,21 @@ public class FeatherProcessor {
         javaToArrowType.put(Boolean.class, ArrowType.Bool.INSTANCE);
     }
 
-    private static List<Object> convertListElementsToObject(Object values) throws Exception {
-        List<Object> result = new ArrayList<>();
-        var inputValuesClass = values.getClass();
-
-        if (inputValuesClass.isArray()) {
-            for (int i = 0; i < Array.getLength(values); i++) {
-                Object element = Array.get(values, i);
-                result.add(element);
-            }
-        } else if (values instanceof List) {
-            result.addAll((List<Object>) values);
-        } else {
-            throw new Exception("Input values should be an `Array` or a `List`, found: " + inputValuesClass.getSimpleName());
-        }
-
-        if (result.size() == 0) {
-            throw new Exception("Input values is an `Array` or a `List` of length 0");
-        }
-
-        return result;
-    }
-
-    public static byte[] inputsToArrowBytes(Map<String, Object> inputs) throws Exception {
+    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
         Map<String, List<Object>> fqnToList = new HashMap<>();
 
-        for (Map.Entry<String, Object> entry : inputs.entrySet()) {
-            Object value = entry.getValue();
+        for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
+            List<?> value = entry.getValue();
             List<Object> list;
             try {
-                list = convertListElementsToObject(value);
+                list = new ArrayList<>(value);
             } catch (Exception e) {
-                throw new Exception(String.format("error converting '%s' value to array: %s", entry.getKey(), e.getMessage()));
+                throw new Exception(String.format("error converting '%s' value to a `List<Object>`: %s", entry.getKey(), e.getMessage()));
+            }
+            if (list.size() == 0) {
+                throw new Exception("Input values is an `Array` or a `List` of length 0");
             }
             fqnToList.put(entry.getKey(), list);
         }

@@ -1,7 +1,6 @@
 package ai.chalk.client;
 
 import ai.chalk.internal.bytes.BytesProducer;
-import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
@@ -15,23 +14,11 @@ import java.util.Map;
 
 public class TestOnlineQueryParams {
     @Test
-    public void test() throws Exception {
-        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInput("user.id", new int[]{1, 2, 3}).withOutputs("user.today", "user.socure_score").build();
-        assert params.getInputs().get("user.id").getClass().isArray();
-        assert params.getOutputs().get(0).equals("user.today");
-        assert params.getOutputs().get(1).equals("user.socure_score");
-
-        Map<String, Object> inputs = params.getInputs();
-        FeatherProcessor.inputsToArrowBytes(inputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
-    }
-
-    @Test
     public void testWithInputs() throws Exception {
-        Map<String, Object> inputs = new HashMap<>();
-        var userIds = new int[]{1, 2, 3};
-        var emails = new String[]{"a", "b", "c"};
-        var socureScores = new double[]{1.0, 2.0, 3.0};
+        Map<String, List<?>> inputs = new HashMap<>();
+        var userIds = Arrays.asList(1, 2, 3);
+        var emails = Arrays.asList("a", "b", "c");
+        var socureScores = Arrays.asList(1.0, 2.0, 3.0);
         inputs.put("user.id", userIds);
         inputs.put("user.email", emails);
         inputs.put("user.socure_score", socureScores);
@@ -52,8 +39,8 @@ public class TestOnlineQueryParams {
         assert params2.getOutputs().get(0).equals("user.today");
         assert params2.getOutputs().get(1).equals("user.socure_score");
 
-        var abcs = new String[]{"a", "b", "c"};
-        var cbd = new String[]{"c", "b", "d"};
+        var abcs = Arrays.asList("a", "b", "c");
+        var cbd = Arrays.asList("c", "b", "d");
         var params3 = OnlineQueryParams.builder().withOutputs(outputs).withInput("user.abc", abcs).withInputs(inputs).withInput("user.cbd", cbd).build();
         assert params3.getInputs().get("user.id").equals(userIds);
         assert params3.getInputs().get("user.email").equals(emails);
@@ -66,10 +53,10 @@ public class TestOnlineQueryParams {
 
     @Test
     public void testWithOptionalParams() throws Exception {
-        Map<String, Object> inputs = new HashMap<>();
-        var userIds = new int[]{1, 2, 3};
-        var emails = new String[]{"a", "b", "c"};
-        var socureScores = new double[]{1.0, 2.0, 3.0};
+        Map<String, List<?>> inputs = new HashMap<>();
+        var userIds = Arrays.asList(1, 2, 3);
+        var emails = Arrays.asList("a", "b", "c");
+        var socureScores = Arrays.asList(1.0, 2.0, 3.0);
         inputs.put("user.id", userIds);
         inputs.put("user.email", emails);
         inputs.put("user.socure_score", socureScores);
@@ -197,7 +184,7 @@ public class TestOnlineQueryParams {
 
     @Test
     public void testSerializationWithListAsInputValuesBatch() throws Exception {
-        var inputs = new HashMap<String, Object>();
+        var inputs = new HashMap<String, List<?>>();
         var userIds = Arrays.asList("1", "2", "3");
         inputs.put("user.id", userIds);
         var outputs = new String[]{"user.today", "user.socure_score"};
@@ -215,9 +202,9 @@ public class TestOnlineQueryParams {
 
     @Test
     public void testSerializationWithArrayAsInputValues() throws Exception {
-        var inputs = new HashMap<String, Object>();
+        var inputs = new HashMap<String, List<?>>();
         // Make an ArrayList of strings
-        var userIds = new String[]{"1", "2", "3"};
+        var userIds = Arrays.asList("1", "2", "3");
         inputs.put("user.id", userIds);
 
         var outputs = new String[]{"user.today", "user.socure_score"};
@@ -261,7 +248,7 @@ public class TestOnlineQueryParams {
 
         var allParams = new OnlineQueryParamsComplete[]{p1, p2, p3, p4};
         for (OnlineQueryParamsComplete p : allParams) {
-            assert Arrays.equals((String[]) p.getInputs().get("test_user.id"), expectedInputs);
+            assert Arrays.equals(p.getInputs().get("test_user.id").toArray(), expectedInputs);
             // Test serialization is OK.
             BytesProducer.convertOnlineQueryParamsToBytes(p);
         }
