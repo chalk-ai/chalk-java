@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
@@ -64,17 +65,20 @@ public class TestOnlineQueryParams {
 
 
     @Test
-    public void testSerializationWithListAsInputValues() throws Exception {
+    public void testSerializationWithListAsInputValuesBatch() throws Exception {
         var inputs = new HashMap<String, Object>();
-        // Make an ArrayList of strings
         var userIds = Arrays.asList("1", "2", "3");
         inputs.put("user.id", userIds);
-
         var outputs = new String[]{"user.today", "user.socure_score"};
-
         var params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
 
-        // Test serialization is OK.
+    @Test
+    public void testSerializationWithListAsInputValuesSingular() throws Exception {
+        var userIds = Arrays.asList("1", "2", "3");
+        var params = OnlineQueryParams.builder().withInput("user.id", userIds).withOutputs("user.today", "user.socure_score").build();
+        assert params.getInputs().get("user.id").equals(userIds);
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 
