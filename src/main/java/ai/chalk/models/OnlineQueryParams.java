@@ -77,7 +77,7 @@ public class OnlineQueryParams {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Builder {
+    public static class Builder<T extends Builder<T>> {
         protected Map<String, Object> inputs;
         protected List<String> outputs;
         protected Map<String, Duration> staleness;
@@ -91,7 +91,7 @@ public class OnlineQueryParams {
         protected String correlationId;
         protected String branch;
 
-        protected <T extends Builder> T _withInput(String fqn, Object... values) {
+        protected T _withInput(String fqn, Object... values) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -103,11 +103,11 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder, K> T _withInput(Feature<K> feature, K... value) {
+        public <K> T _withInput(Feature<K> feature, K... value) {
             return this._withInput(feature.getFqn(), value);
         }
 
-        protected <T extends Builder> T _withInputs(Map<String, Object> inputs) {
+        protected T _withInputs(Map<String, Object> inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -115,7 +115,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        protected <T extends Builder> T _withOutputs(String... outputs) {
+        protected T _withOutputs(String... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
             }
@@ -123,7 +123,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder> T _withOutputs(Feature<?>... outputs) {
+        public T _withOutputs(Feature<?>... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -131,15 +131,15 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder> T _withOutputs(WindowedFeaturesClass... outputs) {
+        public T _withOutputs(WindowedFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
             }
-            return (T) this._withOutputs(outputFqns);
+            return this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder> T _withOutputs(StructFeaturesClass... outputs) {
+        public T _withOutputs(StructFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -148,7 +148,7 @@ public class OnlineQueryParams {
         }
 
         // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public Builder withStaleness(Object... staleness) {
+        public T withStaleness(Object... staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
@@ -161,20 +161,20 @@ public class OnlineQueryParams {
                 }
                 this.staleness.put((String) staleness[i], (Duration) staleness[i + 1]);
             }
-            return this;
+            return (T) this;
         }
 
         // withMeta adds a single key, value pair to the meta map
-        public Builder withMeta(String key, String value) {
+        public T withMeta(String key, String value) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
             this.meta.put(key, value);
-            return this;
+            return (T) this;
         }
 
         // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public Builder withTags(Object... tags) {
+        public T withTags(Object... tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
@@ -185,63 +185,62 @@ public class OnlineQueryParams {
                     this.tags.add((String) tag);
                 }
             }
-            return this;
+            return (T) this;
         }
 
         // withTag adds a single tag to the tags list
-        public Builder withTag(String tag) {
+        public T withTag(String tag) {
             return this.withTags(tag);
         }
 
         // withIncludeMeta sets the includeMeta flag
-        public Builder withIncludeMeta(boolean includeMeta) {
+        public T withIncludeMeta(boolean includeMeta) {
             this.includeMeta = includeMeta;
-            return this;
+            return (T) this;
         }
 
         // withIncludeMetrics sets the includeMetrics flag
-        public Builder withIncludeMetrics(boolean includeMetrics) {
+        public T withIncludeMetrics(boolean includeMetrics) {
             this.includeMetrics = includeMetrics;
-            return this;
+            return (T) this;
         }
 
         // withEnvironmentId sets the environmentId
-        public Builder withEnvironmentId(String environmentId) {
+        public T withEnvironmentId(String environmentId) {
             this.environmentId = environmentId;
-            return this;
+            return (T) this;
         }
 
         // withPreviewDeploymentId sets the previewDeploymentId
-        public Builder withPreviewDeploymentId(String previewDeploymentId) {
+        public T withPreviewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
-            return this;
+            return (T) this;
         }
 
         // withQueryName sets the queryName
-        public Builder withQueryName(String queryName) {
+        public T withQueryName(String queryName) {
             this.queryName = queryName;
-            return this;
+            return (T) this;
         }
 
         // withCorrelationId sets the correlationId
-        public Builder withCorrelationId(String correlationId) {
+        public T withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
-            return this;
+            return (T) this;
         }
 
         // withBranch sets the branch
-        public Builder withBranch(String branch) {
+        public T withBranch(String branch) {
             this.branch = branch;
-            return this;
+            return (T) this;
         }
 
         public OnlineQueryParams build() {
             return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
-
     }
 
-    public static class BuilderComplete extends Builder {
+    public static class BuilderComplete extends Builder<BuilderComplete> {
         public BuilderComplete(
             Map<String, Object> inputs,
             List<String> outputs,
@@ -288,13 +287,12 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
-
         public OnlineQueryParamsComplete build() {
             return new OnlineQueryParamsComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
     }
 
-    public static class BuilderWithInputs extends Builder {
+    public static class BuilderWithInputs extends Builder<BuilderWithInputs> {
         public BuilderWithInputs(
             Map<String, Object> inputs,
             List<String> outputs,
@@ -346,7 +344,7 @@ public class OnlineQueryParams {
         }
     }
 
-    public static class BuilderWithOutputs extends Builder {
+    public static class BuilderWithOutputs extends Builder<BuilderWithOutputs> {
         public BuilderWithOutputs(
                 Map<String, Object> inputs,
                 List<String> outputs,
@@ -400,7 +398,7 @@ public class OnlineQueryParams {
     }
 
     @NoArgsConstructor
-    public static class BuilderSeed extends Builder {
+    public static class BuilderSeed extends Builder<BuilderSeed> {
         public BuilderSeed(
                 Map<String, Object> inputs,
                 List<String> outputs,
