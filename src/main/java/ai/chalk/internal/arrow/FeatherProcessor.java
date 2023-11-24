@@ -39,7 +39,10 @@ public class FeatherProcessor {
         var inputValuesClass = values.getClass();
 
         if (inputValuesClass.isArray()) {
-            result.addAll(Arrays.asList((Object[]) values));
+            for (int i = 0; i < Array.getLength(values); i++) {
+                Object element = Array.get(values, i);
+                result.add(element);
+            }
         } else if (values instanceof List) {
             result.addAll((List<Object>) values);
         } else {
