@@ -7,6 +7,7 @@ import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,136 @@ public class TestOnlineQueryParams {
         assert params3.getInputs().get("user.cbd").equals(cbd);
         assert params3.getOutputs().get(0).equals("user.today");
         assert params3.getOutputs().get(1).equals("user.socure_score");
+    }
+
+    @Test
+    public void testWithOptionalParams() throws Exception {
+        Map<String, Object> inputs = new HashMap<>();
+        var userIds = new int[]{1, 2, 3};
+        var emails = new String[]{"a", "b", "c"};
+        var socureScores = new double[]{1.0, 2.0, 3.0};
+        inputs.put("user.id", userIds);
+        inputs.put("user.email", emails);
+        inputs.put("user.socure_score", socureScores);
+
+        var outputs = new String[]{"user.today", "user.socure_score"};
+
+        // Test BuilderSeed with optional params
+        OnlineQueryParams.BuilderSeed builderSeed = OnlineQueryParams.builder()
+                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withMeta("user.id", "abc")
+                .withTags("user.id", "abc")
+                .withIncludeMeta(true)
+                .withIncludeMetrics(true)
+                .withEnvironmentId("abc")
+                .withPreviewDeploymentId("abc")
+                .withQueryName("abc")
+                .withCorrelationId("abc")
+                .withBranch("abc");
+        OnlineQueryParams paramsSeed = builderSeed.build();
+        assert paramsSeed.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
+        assert paramsSeed.getMeta().get("user.id").equals("abc");
+        assert paramsSeed.getTags().get(0).equals("user.id");
+        assert paramsSeed.getTags().get(1).equals("abc");
+        assert paramsSeed.isIncludeMeta();
+        assert paramsSeed.isIncludeMetrics();
+        assert paramsSeed.getEnvironmentId().equals("abc");
+        assert paramsSeed.getPreviewDeploymentId().equals("abc");
+        assert paramsSeed.getQueryName().equals("abc");
+        assert paramsSeed.getCorrelationId().equals("abc");
+        assert paramsSeed.getBranch().equals("abc");
+
+        // Test BuilderWithInputs with optional params
+        OnlineQueryParams.BuilderWithInputs builderWithInputs = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withMeta("user.id", "abc")
+                .withTags("user.id", "abc")
+                .withIncludeMeta(true)
+                .withIncludeMetrics(true)
+                .withEnvironmentId("abc")
+                .withPreviewDeploymentId("abc")
+                .withQueryName("abc")
+                .withCorrelationId("abc")
+                .withBranch("abc");
+
+        OnlineQueryParams paramsWithInputs = builderWithInputs.build();
+        assert paramsWithInputs.getInputs().get("user.id").equals(userIds);
+        assert paramsWithInputs.getInputs().get("user.email").equals(emails);
+        assert paramsWithInputs.getInputs().get("user.socure_score").equals(socureScores);
+        assert paramsWithInputs.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
+        assert paramsWithInputs.getMeta().get("user.id").equals("abc");
+        assert paramsWithInputs.getTags().get(0).equals("user.id");
+        assert paramsWithInputs.getTags().get(1).equals("abc");
+        assert paramsWithInputs.isIncludeMeta();
+        assert paramsWithInputs.isIncludeMetrics();
+        assert paramsWithInputs.getEnvironmentId().equals("abc");
+        assert paramsWithInputs.getPreviewDeploymentId().equals("abc");
+        assert paramsWithInputs.getQueryName().equals("abc");
+        assert paramsWithInputs.getCorrelationId().equals("abc");
+
+        // Test BuilderWithOutputs with optional params
+        OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
+                .withOutputs(outputs)
+                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withMeta("user.id", "abc")
+                .withTags("user.id", "abc")
+                .withIncludeMeta(true)
+                .withIncludeMetrics(true)
+                .withEnvironmentId("abc")
+                .withPreviewDeploymentId("abc")
+                .withQueryName("abc")
+                .withCorrelationId("abc")
+                .withBranch("abc");
+
+        OnlineQueryParams paramsWithOutputs = builderWithOutputs.build();
+        assert paramsWithOutputs.getOutputs().get(0).equals("user.today");
+        assert paramsWithOutputs.getOutputs().get(1).equals("user.socure_score");
+        assert paramsWithOutputs.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
+        assert paramsWithOutputs.getMeta().get("user.id").equals("abc");
+        assert paramsWithOutputs.getTags().get(0).equals("user.id");
+        assert paramsWithOutputs.getTags().get(1).equals("abc");
+        assert paramsWithOutputs.isIncludeMeta();
+        assert paramsWithOutputs.isIncludeMetrics();
+        assert paramsWithOutputs.getEnvironmentId().equals("abc");
+        assert paramsWithOutputs.getPreviewDeploymentId().equals("abc");
+        assert paramsWithOutputs.getQueryName().equals("abc");
+        assert paramsWithOutputs.getCorrelationId().equals("abc");
+
+        // Test BuilderComplete with optional params
+        OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withMeta("user.id", "abc")
+                .withTags("user.id", "abc")
+                .withIncludeMeta(true)
+                .withIncludeMetrics(true)
+                .withEnvironmentId("abc")
+                .withPreviewDeploymentId("abc")
+                .withQueryName("abc")
+                .withCorrelationId("abc")
+                .withBranch("abc");
+
+        OnlineQueryParamsComplete paramsComplete = builderComplete.build();
+        assert paramsComplete.getInputs().get("user.id").equals(userIds);
+        assert paramsComplete.getInputs().get("user.email").equals(emails);
+        assert paramsComplete.getInputs().get("user.socure_score").equals(socureScores);
+        assert paramsComplete.getOutputs().get(0).equals("user.today");
+        assert paramsComplete.getOutputs().get(1).equals("user.socure_score");
+        assert paramsComplete.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
+        assert paramsComplete.getMeta().get("user.id").equals("abc");
+        assert paramsComplete.getTags().get(0).equals("user.id");
+        assert paramsComplete.getTags().get(1).equals("abc");
+        assert paramsComplete.isIncludeMeta();
+        assert paramsComplete.isIncludeMetrics();
+        assert paramsComplete.getEnvironmentId().equals("abc");
+        assert paramsComplete.getPreviewDeploymentId().equals("abc");
+        assert paramsComplete.getQueryName().equals("abc");
+        assert paramsComplete.getCorrelationId().equals("abc");
+
+        // Test serialization
+        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete);
     }
 
 
