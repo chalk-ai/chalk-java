@@ -77,7 +77,7 @@ public class OnlineQueryParams {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Builder {
+    public static class Builder<T extends Builder<T>> {
         protected Map<String, Object> inputs;
         protected List<String> outputs;
         protected Map<String, Duration> staleness;
@@ -91,7 +91,7 @@ public class OnlineQueryParams {
         protected String correlationId;
         protected String branch;
 
-        protected <T extends Builder> T _withInput(String fqn, Object... values) {
+        protected T _withInput(String fqn, Object... values) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -103,11 +103,11 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder, K> T _withInput(Feature<K> feature, K... value) {
+        public <K> T _withInput(Feature<K> feature, K... value) {
             return this._withInput(feature.getFqn(), value);
         }
 
-        protected <T extends Builder> T _withOutputs(String... outputs) {
+        protected T _withOutputs(String... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
             }
@@ -115,7 +115,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        public <T extends Builder> T _withOutputs(Feature<?>... outputs) {
+        public T _withOutputs(Feature<?>... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -123,7 +123,7 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder> T _withOutputs(WindowedFeaturesClass... outputs) {
+        public T _withOutputs(WindowedFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -131,7 +131,7 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        public <T extends Builder> T _withOutputs(StructFeaturesClass... outputs) {
+        public T _withOutputs(StructFeaturesClass... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -204,27 +204,27 @@ public class OnlineQueryParams {
         }
 
         // withPreviewDeploymentId sets the previewDeploymentId
-        public Builder withPreviewDeploymentId(String previewDeploymentId) {
+        public T withPreviewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
-            return this;
+            return (T) this;
         }
 
         // withQueryName sets the queryName
-        public Builder withQueryName(String queryName) {
+        public T withQueryName(String queryName) {
             this.queryName = queryName;
-            return this;
+            return (T) this;
         }
 
         // withCorrelationId sets the correlationId
-        public Builder withCorrelationId(String correlationId) {
+        public T withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
-            return this;
+            return (T) this;
         }
 
         // withBranch sets the branch
-        public Builder withBranch(String branch) {
+        public T withBranch(String branch) {
             this.branch = branch;
-            return this;
+            return (T) this;
         }
 
         public OnlineQueryParams build() {
@@ -233,7 +233,7 @@ public class OnlineQueryParams {
 
     }
 
-    public static class BuilderComplete extends Builder {
+    public static class BuilderComplete extends Builder<BuilderComplete> {
         public BuilderComplete(
             Map<String, Object> inputs,
             List<String> outputs,
