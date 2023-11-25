@@ -200,6 +200,22 @@ public class TestOnlineQueryParams {
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 
+    @Test
+    public void testSerializationWithListAsOutputs() throws Exception {
+        var outputs = Arrays.asList("user.today", "user.socure_score");
+        var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
+        assert params.getOutputs().equals(outputs);
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
+
+    @Test
+    public void testSerializationWithArrayAsOutputs() throws Exception {
+        var outputs = new String[]{"user.today", "user.socure_score"};
+        var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
+        assert Arrays.equals(params.getOutputs().toArray(), outputs);
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
+
     /**
      * Aims to test all methods that take `Feature` as keys to the inputs map.
      */

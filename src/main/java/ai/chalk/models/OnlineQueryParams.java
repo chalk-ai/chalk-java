@@ -119,6 +119,14 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        protected T _withOutputs(List<String> outputs) {
+            if (this.outputs == null) {
+                this.outputs = new ArrayList<>();
+            }
+            this.outputs.addAll(outputs);
+            return (T) this;
+        }
+
         public T _withOutputs(Feature<?>... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
@@ -271,6 +279,10 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
+        public BuilderComplete withOutputs(List<String> outputs) {
+            return this._withOutputs(outputs);
+        }
+
         public BuilderComplete withOutputs(Feature<?>... outputs) {
             return this._withOutputs(outputs);
         }
@@ -327,6 +339,10 @@ public class OnlineQueryParams {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
 
+        public BuilderComplete withOutputs(List<String> outputs) {
+            return this.newBuilderComplete()._withOutputs(outputs);
+        }
+
         public BuilderComplete withOutputs(Feature<?>... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
@@ -377,6 +393,10 @@ public class OnlineQueryParams {
         }
 
         public BuilderWithOutputs withOutputs(String... outputs) {
+            return this._withOutputs(outputs);
+        }
+
+        public BuilderWithOutputs withOutputs(List<String> outputs) {
             return this._withOutputs(outputs);
         }
 
@@ -435,6 +455,10 @@ public class OnlineQueryParams {
 
         // withOutputs takes either one output or a list of outputs and adds them to the outputs list
         public BuilderWithOutputs withOutputs(String... outputs) {
+            return newBuilderWithOutputs().withOutputs(outputs);
+        }
+
+        public BuilderWithOutputs withOutputs(List<String> outputs) {
             return newBuilderWithOutputs().withOutputs(outputs);
         }
 
