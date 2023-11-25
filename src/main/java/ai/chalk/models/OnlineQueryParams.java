@@ -23,7 +23,7 @@ import java.time.Duration;
  *     <pre>
  *         {@code
  *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
- *         .withInput("user.id", new int[] {1, 2, 3})
+ *         .withInput("user.id", Arrays.asList(1, 2, 3))
  *         .withOutputs("user.email", "user.transactions")
  *         .build();
  *
@@ -44,7 +44,7 @@ public class OnlineQueryParams {
      * to those values. Set by
      * `OnlineQueryParams.builder().withInput`.
     **/
-    private Map<String, Object> inputs;
+    private Map<String, List<?>> inputs;
 
     /**
      * The features that you'd like to compute from the inputs.
@@ -78,7 +78,7 @@ public class OnlineQueryParams {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Builder<T extends Builder<T>> {
-        protected Map<String, Object> inputs;
+        protected Map<String, List<?>> inputs;
         protected List<String> outputs;
         protected Map<String, Duration> staleness;
         protected Map<String, String> meta;
@@ -91,23 +91,19 @@ public class OnlineQueryParams {
         protected String correlationId;
         protected String branch;
 
-        protected T _withInput(String fqn, Object... values) {
+        protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
-            }
-            if (values.length == 1 && values[0].getClass().isArray()) {
-                // Cast and use the inner array as the actual argument
-                values = Utils.convertToArrayOfObjects(values[0]);
             }
             this.inputs.put(fqn, values);
             return (T) this;
         }
 
         public <K> T _withInput(Feature<K> feature, K... value) {
-            return this._withInput(feature.getFqn(), value);
+            return this._withInput(feature.getFqn(), Arrays.asList(value));
         }
 
-        protected T _withInputs(Map<String, Object> inputs) {
+        protected T _withInputs(Map<String, List<?>> inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
             }
@@ -242,7 +238,7 @@ public class OnlineQueryParams {
 
     public static class BuilderComplete extends Builder<BuilderComplete> {
         public BuilderComplete(
-            Map<String, Object> inputs,
+            Map<String, List<?>> inputs,
             List<String> outputs,
             Map<String, Duration> staleness,
             Map<String, String> meta,
@@ -258,17 +254,17 @@ public class OnlineQueryParams {
             super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object... values) {
+        public BuilderComplete withInput(String fqn, List<?> values) {
             return this._withInput(fqn, values);
         }
 
-        public BuilderComplete withInputs(Map<String, Object> inputs) {
+        public BuilderComplete withInputs(Map<String, List<?>> inputs) {
             return this._withInputs(inputs);
         }
 
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), values);
+            return this._withInput(feature.getFqn(), Arrays.asList(values));
         }
 
         public BuilderComplete withOutputs(String... outputs) {
@@ -294,7 +290,7 @@ public class OnlineQueryParams {
 
     public static class BuilderWithInputs extends Builder<BuilderWithInputs> {
         public BuilderWithInputs(
-            Map<String, Object> inputs,
+            Map<String, List<?>> inputs,
             List<String> outputs,
             Map<String, Duration> staleness,
             Map<String, String> meta,
@@ -314,17 +310,17 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderWithInputs withInput(String fqn, Object... values) {
+        public BuilderWithInputs withInput(String fqn, List<?> values) {
             return this._withInput(fqn, values);
         }
 
-        public BuilderWithInputs withInputs(Map<String, Object> inputs) {
+        public BuilderWithInputs withInputs(Map<String, List<?>> inputs) {
             return this._withInputs(inputs);
         }
 
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), values);
+            return this._withInput(feature.getFqn(), Arrays.asList(values));
         }
 
         public BuilderComplete withOutputs(String... outputs) {
@@ -346,7 +342,7 @@ public class OnlineQueryParams {
 
     public static class BuilderWithOutputs extends Builder<BuilderWithOutputs> {
         public BuilderWithOutputs(
-                Map<String, Object> inputs,
+                Map<String, List<?>> inputs,
                 List<String> outputs,
                 Map<String, Duration> staleness,
                 Map<String, String> meta,
@@ -366,17 +362,17 @@ public class OnlineQueryParams {
             return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        public BuilderComplete withInput(String fqn, Object... values) {
+        public BuilderComplete withInput(String fqn, List<?> values) {
             return newBuilderComplete()._withInput(fqn, values);
         }
 
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
-            return newBuilderComplete()._withInput(feature.getFqn(), values);
+            return newBuilderComplete().withInput(feature, values);
         }
 
 
-        public final <T> BuilderComplete withInputs(Map<String, Object> inputs) {
+        public final <T> BuilderComplete withInputs(Map<String, List<?>> inputs) {
             return newBuilderComplete()._withInputs(inputs);
         }
 
@@ -400,7 +396,7 @@ public class OnlineQueryParams {
     @NoArgsConstructor
     public static class BuilderSeed extends Builder<BuilderSeed> {
         public BuilderSeed(
-                Map<String, Object> inputs,
+                Map<String, List<?>> inputs,
                 List<String> outputs,
                 Map<String, Duration> staleness,
                 Map<String, String> meta,
@@ -424,12 +420,11 @@ public class OnlineQueryParams {
             return new BuilderWithOutputs(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
-        // withInput adds a single feature FQN, value pair to the inputs map
-        public BuilderWithInputs withInput(String fqn, Object... values) {
+        public BuilderWithInputs withInput(String fqn, List<?> values) {
             return newBuilderWithInputs().withInput(fqn, values);
         }
 
-        public BuilderWithInputs withInputs(Map<String, Object> inputs) {
+        public BuilderWithInputs withInputs(Map<String, List<?>> inputs) {
             return newBuilderWithInputs().withInputs(inputs);
         }
 

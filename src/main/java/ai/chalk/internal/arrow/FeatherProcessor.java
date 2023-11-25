@@ -34,42 +34,28 @@ public class FeatherProcessor {
         javaToArrowType.put(Boolean.class, ArrowType.Bool.INSTANCE);
     }
 
-    private static Object[] convertArrayElementsToObject(Object array) throws Exception {
-        if (!(array.getClass().isArray())) {
-            throw new Exception("Value is not an array");
-        }
-        if (Array.getLength(array) == 0) {
-            throw new Exception("Array is empty");
-        }
-
-        Object[] result = new Object[Array.getLength(array)];
-        for (int i = 0; i < Array.getLength(array); i++) {
-            Object element = Array.get(array, i);
-            result[i] = element;
-        }
-
-        return result;
-    }
-
-    public static byte[] inputsToArrowBytes(Map<String, Object> inputs) throws Exception {
+    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
-        Map<String, Object[]> fqnToArray = new HashMap<>();
+        Map<String, List<Object>> fqnToList = new HashMap<>();
 
-        for (Map.Entry<String, Object> entry : inputs.entrySet()) {
-            Object value = entry.getValue();
-            Object[] array;
+        for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
+            List<?> value = entry.getValue();
+            List<Object> list;
             try {
-                array = convertArrayElementsToObject(value);
+                list = new ArrayList<>(value);
             } catch (Exception e) {
-                throw new Exception(String.format("error converting '%s' value to array: %s", entry.getKey(), e.getMessage()));
+                throw new Exception(String.format("error converting '%s' value to a `List<Object>`: %s", entry.getKey(), e.getMessage()));
             }
-            fqnToArray.put(entry.getKey(), array);
+            if (list.size() == 0) {
+                throw new Exception("Input values is an `Array` or a `List` of length 0");
+            }
+            fqnToList.put(entry.getKey(), list);
         }
 
 
-        for (Map.Entry<String, Object[]> entry : fqnToArray.entrySet()) {
-            ArrowType arrowType = javaToArrowType.get(Array.get(entry.getValue(), 0).getClass());
+        for (Map.Entry<String, List<Object>> entry : fqnToList.entrySet()) {
+            ArrowType arrowType = javaToArrowType.get(entry.getValue().get(0).getClass());
             if (arrowType == null) {
                 throw new Exception("Unsupported data type: " + Array.get(entry.getValue(), 0).getClass().getSimpleName());
             }
@@ -99,54 +85,52 @@ public class FeatherProcessor {
 
         int lastLength = 0;
         for (Field field : fields) {
-            Object[] values = fqnToArray.get(field.getName());
+            List<Object> values = fqnToList.get(field.getName());
             FieldVector vector = root.getVector(field.getName());
-            lastLength = values.length;
+            lastLength = values.size();
             // Populate the vector with data
             switch (field.getType().getTypeID()) {
                 case Int -> {
                     BigIntVector intVector = (BigIntVector) vector;
-                    intVector.allocateNew(values.length);
-                    for (int i = 0; i < values.length; i++) {
-                        // Ignore "redundant boxing" warning. `Long.valueOf`
-                        // needed for casting int to long.
-                        intVector.set(i, Long.valueOf(values[i].toString()));
+                    intVector.allocateNew(values.size());
+                    for (int i = 0; i < values.size(); i++) {
+                        intVector.set(i, Long.parseLong(values.get(i).toString()));
                     }
-                    intVector.setValueCount(values.length);
+                    intVector.setValueCount(values.size());
                 }
                 case FloatingPoint -> {
                     ArrowType.FloatingPoint fpType = (ArrowType.FloatingPoint) field.getType();
                     if (fpType.getPrecision() == FloatingPointPrecision.SINGLE) {
                         Float4Vector floatVector = (Float4Vector) vector;
-                        floatVector.allocateNew(values.length);
-                        for (int i = 0; i < values.length; i++) {
-                            floatVector.set(i, (float) values[i]);
+                        floatVector.allocateNew(values.size());
+                        for (int i = 0; i < values.size(); i++) {
+                            floatVector.set(i, (float) values.get(i));
                         }
-                        floatVector.setValueCount(values.length);
+                        floatVector.setValueCount(values.size());
                     } else {
                         Float8Vector doubleVector = (Float8Vector) vector;
-                        doubleVector.allocateNew(values.length);
-                        for (int i = 0; i < values.length; i++) {
-                            doubleVector.set(i, (double) values[i]);
+                        doubleVector.allocateNew(values.size());
+                        for (int i = 0; i < values.size(); i++) {
+                            doubleVector.set(i, (double) values.get(i));
                         }
-                        doubleVector.setValueCount(values.length);
+                        doubleVector.setValueCount(values.size());
                     }
                 }
                 case Utf8 -> {
                     VarCharVector varcharVector = (VarCharVector) vector;
-                    varcharVector.allocateNew(values.length);
-                    for (int i = 0; i < values.length; i++) {
-                        varcharVector.set(i, ((String) values[i]).getBytes());
+                    varcharVector.allocateNew(values.size());
+                    for (int i = 0; i < values.size(); i++) {
+                        varcharVector.set(i, ((String) values.get(i)).getBytes());
                     }
-                    varcharVector.setValueCount(values.length);
+                    varcharVector.setValueCount(values.size());
                 }
                 case Bool -> {
                     BitVector boolVector = (BitVector) vector;
-                    boolVector.allocateNew(values.length);
-                    for (int i = 0; i < values.length; i++) {
-                        boolVector.set(i, (boolean) values[i] ? 1 : 0);
+                    boolVector.allocateNew(values.size());
+                    for (int i = 0; i < values.size(); i++) {
+                        boolVector.set(i, (boolean) values.get(i) ? 1 : 0);
                     }
-                    boolVector.setValueCount(values.length);
+                    boolVector.setValueCount(values.size());
                 }
             }
         }
