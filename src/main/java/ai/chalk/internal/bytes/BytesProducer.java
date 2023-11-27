@@ -3,7 +3,6 @@ package ai.chalk.internal.bytes;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

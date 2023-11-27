@@ -169,6 +169,7 @@ public class Utils {
         long hours = seconds / (60 * 60);
         seconds %= (60 * 60);
         long minutes = seconds / 60;
+        seconds %= 60;
         long milliseconds = nanoseconds / 1_000_000;
         nanoseconds %= 1_000_000;
         long microseconds = nanoseconds / 1_000;
@@ -203,6 +204,10 @@ public class Utils {
             builder.append(nanoseconds).append("ns ");
         }
 
-        return builder.toString().trim();
+        var res = builder.toString().trim();
+        if (res.isEmpty()) {
+            return "0s";
+        }
+        return res;
     }
 }
