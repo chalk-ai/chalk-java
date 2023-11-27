@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Utils {
@@ -150,5 +152,57 @@ public class Utils {
         }
 
         return outputArray;
+    }
+
+    public static String toChalkDuration(Duration duration) {
+        if (ChronoUnit.FOREVER.getDuration().equals(duration)) {
+            return "all";
+        }
+
+        long seconds = duration.getSeconds();
+        long nanoseconds = duration.getNano();
+
+        long weeks = seconds / (7 * 24 * 60 * 60);
+        seconds %= (7 * 24 * 60 * 60);
+        long days = seconds / (24 * 60 * 60);
+        seconds %= (24 * 60 * 60);
+        long hours = seconds / (60 * 60);
+        seconds %= (60 * 60);
+        long minutes = seconds / 60;
+        long milliseconds = nanoseconds / 1_000_000;
+        nanoseconds %= 1_000_000;
+        long microseconds = nanoseconds / 1_000;
+        nanoseconds %= 1_000;
+
+        StringBuilder builder = new StringBuilder();
+        if (weeks > 0) {
+            builder.append(weeks).append("w ");
+        }
+        if (days > 0) {
+            builder.append(days).append("d ");
+        }
+        if (hours > 0) {
+            builder.append(hours).append("h ");
+        }
+        if (minutes > 0) {
+            builder.append(minutes).append("m ");
+        }
+        if (seconds > 0) {
+            builder.append(seconds).append("s ");
+        }
+        if (milliseconds > 0) {
+            builder.append(milliseconds).append("ms ");
+        }
+
+        // Sub milliseconds not supported, but let's
+        // have the server do the validation.
+        if (microseconds > 0) {
+            builder.append(microseconds).append("us ");
+        }
+        if (nanoseconds > 0) {
+            builder.append(nanoseconds).append("ns ");
+        }
+
+        return builder.toString().trim();
     }
 }

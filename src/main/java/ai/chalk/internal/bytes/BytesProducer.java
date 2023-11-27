@@ -9,7 +9,10 @@ import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
+
+import static ai.chalk.internal.Utils.toChalkDuration;
 
 public class BytesProducer {
     public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params) throws Exception {
@@ -26,6 +29,39 @@ public class BytesProducer {
             throw new Exception("failed to convert inputs to Arrow bytes", e);
         }
 
+        Map<String, Object> jsonHeader = new HashMap<>();
+        jsonHeader.put("outputs", params.getOutputs());
+        jsonHeader.put("includeMeta", params.isIncludeMeta());
+        jsonHeader.put("includeMetrics", params.isIncludeMetrics());
+        if (params.getBranch() != null) {
+            jsonHeader.put("branch", params.getBranch());
+        }
+        if (params.getCorrelationId() != null) {
+            jsonHeader.put("correlationId", params.getCorrelationId());
+        }
+        if (params.getEnvironmentId() != null) {
+            jsonHeader.put("environmentId", params.getEnvironmentId());
+        }
+        if (params.getMeta() != null) {
+            jsonHeader.put("meta", params.getMeta());
+        }
+        if (params.getPreviewDeploymentId() != null) {
+            jsonHeader.put("previewDeploymentId", params.getPreviewDeploymentId());
+        }
+        if (params.getQueryName() != null) {
+            jsonHeader.put("queryName", params.getQueryName());
+        }
+        if (params.getStaleness() != null) {
+            var staleness = new HashMap<String, String>();
+            for (var entry : params.getStaleness().entrySet()) {
+                staleness.put(entry.getKey(), toChalkDuration(entry.getValue()));
+            }
+            jsonHeader.put("staleness", staleness);
+        }
+        if (params.getTags() != null) {
+            jsonHeader.put("tags", params.getTags());
+        }
+
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         DataOutputStream ioWriter = new DataOutputStream(result);
 
@@ -36,9 +72,6 @@ public class BytesProducer {
 
         // Placeholder for the sizes
         byte[] placeholder = new byte[8];
-        Map<String, Object> jsonHeader = Map.of(
-                "outputs", params.getOutputs()
-        );
         byte[] jsonBytes = new ObjectMapper().writeValueAsBytes(jsonHeader);
 
         // Write json header
