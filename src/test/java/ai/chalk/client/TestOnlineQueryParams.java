@@ -105,6 +105,7 @@ public class TestOnlineQueryParams {
                 }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
+                .withTag("ghi")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -122,6 +123,7 @@ public class TestOnlineQueryParams {
         assert paramsWithInputs.getTags().get(0).equals("user.id");
         assert paramsWithInputs.getTags().get(1).equals("abc");
         assert paramsWithInputs.getTags().get(2).equals("def");
+        assert paramsWithInputs.getTags().get(3).equals("ghi");
         assert paramsWithInputs.isIncludeMeta();
         assert paramsWithInputs.isIncludeMetrics();
         assert paramsWithInputs.getEnvironmentId().equals("abc");
@@ -140,6 +142,7 @@ public class TestOnlineQueryParams {
                 }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
+                .withTag("ghi")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -156,6 +159,7 @@ public class TestOnlineQueryParams {
         assert paramsWithOutputs.getTags().get(0).equals("user.id");
         assert paramsWithOutputs.getTags().get(1).equals("abc");
         assert paramsWithOutputs.getTags().get(2).equals("def");
+        assert paramsWithOutputs.getTags().get(3).equals("ghi");
         assert paramsWithOutputs.isIncludeMeta();
         assert paramsWithOutputs.isIncludeMetrics();
         assert paramsWithOutputs.getEnvironmentId().equals("abc");
@@ -175,6 +179,7 @@ public class TestOnlineQueryParams {
                 }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
+                .withTag("ghi")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -194,6 +199,7 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getTags().get(0).equals("user.id");
         assert paramsComplete.getTags().get(1).equals("abc");
         assert paramsComplete.getTags().get(2).equals("def");
+        assert paramsComplete.getTags().get(3).equals("ghi");
         assert paramsComplete.isIncludeMeta();
         assert paramsComplete.isIncludeMetrics();
         assert paramsComplete.getEnvironmentId().equals("abc");

@@ -132,7 +132,7 @@ public class OnlineQueryParams {
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
             }
-            return (T) this._withOutputs(outputFqns);
+            return this._withOutputs(outputFqns);
         }
 
         public T _withOutputs(WindowedFeaturesClass... outputs) {
@@ -148,7 +148,7 @@ public class OnlineQueryParams {
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
             }
-            return (T) this._withOutputs(outputFqns);
+            return this._withOutputs(outputFqns);
         }
 
         // withStaleness takes a map of feature FQN to duration and adds them to the staleness map
@@ -263,7 +263,7 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), Arrays.asList(values));
+            return this._withInput(feature, values);
         }
 
         public BuilderComplete withOutputs(String... outputs) {
@@ -323,7 +323,7 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... values) {
-            return this._withInput(feature.getFqn(), Arrays.asList(values));
+            return this._withInput(feature, values);
         }
 
         public BuilderComplete withOutputs(String... outputs) {
