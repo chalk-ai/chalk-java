@@ -65,7 +65,9 @@ public class TestOnlineQueryParams {
 
         // Test BuilderSeed with optional params
         OnlineQueryParams.BuilderSeed builderSeed = OnlineQueryParams.builder()
-                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
                 .withMeta("user.id", "abc")
                 .withTags("user.id", "abc")
                 .withIncludeMeta(true)
@@ -91,7 +93,9 @@ public class TestOnlineQueryParams {
         // Test BuilderWithInputs with optional params
         OnlineQueryParams.BuilderWithInputs builderWithInputs = OnlineQueryParams.builder()
                 .withInputs(inputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
                 .withMeta("user.id", "abc")
                 .withTags("user.id", "abc")
                 .withIncludeMeta(true)
@@ -120,7 +124,9 @@ public class TestOnlineQueryParams {
         // Test BuilderWithOutputs with optional params
         OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
                 .withOutputs(outputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
                 .withMeta("user.id", "abc")
                 .withTags("user.id", "abc")
                 .withIncludeMeta(true)
@@ -149,7 +155,9 @@ public class TestOnlineQueryParams {
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
                 .withInputs(inputs)
                 .withOutputs(outputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
                 .withMeta("user.id", "abc")
                 .withTags("user.id", "abc")
                 .withIncludeMeta(true)

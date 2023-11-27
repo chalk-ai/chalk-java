@@ -151,20 +151,11 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public T withStaleness(Object... staleness) {
+        public T withStaleness(Map<String, Duration> staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
-            if (staleness.length % 2 != 0) {
-                throw new IllegalArgumentException("staleness must be an even number of alternating keys and values");
-            }
-            for (int i = 0; i < staleness.length; i += 2) {
-                if (!(staleness[i] instanceof String)) {
-                    throw new IllegalArgumentException("staleness must be an even number of alternating keys and values");
-                }
-                this.staleness.put((String) staleness[i], (Duration) staleness[i + 1]);
-            }
+            this.staleness.putAll(staleness);
             return (T) this;
         }
 
