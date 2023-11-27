@@ -74,7 +74,7 @@ public class TestOnlineQueryParams {
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
                 .withIncludeMeta(true)
-                .withIncludeMetrics(true)
+                .withStorePlanStages(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
@@ -87,7 +87,7 @@ public class TestOnlineQueryParams {
         assert paramsSeed.getTags().get(1).equals("abc");
         assert paramsSeed.getTags().get(2).equals("def");
         assert paramsSeed.isIncludeMeta();
-        assert paramsSeed.isIncludeMetrics();
+        assert paramsSeed.isStorePlanStages();
         assert paramsSeed.getEnvironmentId().equals("abc");
         assert paramsSeed.getPreviewDeploymentId().equals("abc");
         assert paramsSeed.getQueryName().equals("abc");
@@ -107,7 +107,7 @@ public class TestOnlineQueryParams {
                 .withTags("def")
                 .withTag("ghi")
                 .withIncludeMeta(true)
-                .withIncludeMetrics(true)
+                .withStorePlanStages(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
@@ -125,7 +125,7 @@ public class TestOnlineQueryParams {
         assert paramsWithInputs.getTags().get(2).equals("def");
         assert paramsWithInputs.getTags().get(3).equals("ghi");
         assert paramsWithInputs.isIncludeMeta();
-        assert paramsWithInputs.isIncludeMetrics();
+        assert paramsWithInputs.isStorePlanStages();
         assert paramsWithInputs.getEnvironmentId().equals("abc");
         assert paramsWithInputs.getPreviewDeploymentId().equals("abc");
         assert paramsWithInputs.getQueryName().equals("abc");
@@ -144,7 +144,7 @@ public class TestOnlineQueryParams {
                 .withTags("def")
                 .withTag("ghi")
                 .withIncludeMeta(true)
-                .withIncludeMetrics(true)
+                .withStorePlanStages(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
@@ -161,7 +161,7 @@ public class TestOnlineQueryParams {
         assert paramsWithOutputs.getTags().get(2).equals("def");
         assert paramsWithOutputs.getTags().get(3).equals("ghi");
         assert paramsWithOutputs.isIncludeMeta();
-        assert paramsWithOutputs.isIncludeMetrics();
+        assert paramsWithOutputs.isStorePlanStages();
         assert paramsWithOutputs.getEnvironmentId().equals("abc");
         assert paramsWithOutputs.getPreviewDeploymentId().equals("abc");
         assert paramsWithOutputs.getQueryName().equals("abc");
@@ -181,7 +181,7 @@ public class TestOnlineQueryParams {
                 .withTags("def")
                 .withTag("ghi")
                 .withIncludeMeta(true)
-                .withIncludeMetrics(true)
+                .withStorePlanStages(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
@@ -201,7 +201,7 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getTags().get(2).equals("def");
         assert paramsComplete.getTags().get(3).equals("ghi");
         assert paramsComplete.isIncludeMeta();
-        assert paramsComplete.isIncludeMetrics();
+        assert paramsComplete.isStorePlanStages();
         assert paramsComplete.getEnvironmentId().equals("abc");
         assert paramsComplete.getPreviewDeploymentId().equals("abc");
         assert paramsComplete.getQueryName().equals("abc");

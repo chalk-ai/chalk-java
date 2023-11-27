@@ -3,7 +3,6 @@ package ai.chalk.models;
 import ai.chalk.features.Feature;
 import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.features.WindowedFeaturesClass;
-import ai.chalk.internal.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -67,7 +66,8 @@ public class OnlineQueryParams {
 
     private List<String> tags;
     private boolean includeMeta;
-    private boolean includeMetrics;
+    private boolean storePlanStages;
+    private boolean explain;
     private String environmentId;
     private String previewDeploymentId;
     private String queryName;
@@ -84,7 +84,8 @@ public class OnlineQueryParams {
         protected Map<String, String> meta;
         protected List<String> tags;
         protected boolean includeMeta;
-        protected boolean includeMetrics;
+        protected boolean storePlanStages;
+        protected boolean explain;
         protected String environmentId;
         protected String previewDeploymentId;
         protected String queryName;
@@ -194,9 +195,15 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        // withIncludeMetrics sets the includeMetrics flag
-        public T withIncludeMetrics(boolean includeMetrics) {
-            this.includeMetrics = includeMetrics;
+        // withStorePlanStages sets the storePlanStages flag
+        public T withStorePlanStages(boolean storePlanStages) {
+            this.storePlanStages = storePlanStages;
+            return (T) this;
+        }
+
+        // withExplain sets the explain flag
+        public T withExplain(boolean explain) {
+            this.explain = explain;
             return (T) this;
         }
 
@@ -231,7 +238,7 @@ public class OnlineQueryParams {
         }
 
         public OnlineQueryParams build() {
-            return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
     }
 
@@ -243,14 +250,15 @@ public class OnlineQueryParams {
             Map<String, String> meta,
             List<String> tags,
             boolean includeMeta,
-            boolean includeMetrics,
+            boolean storePlanStages,
+            boolean explain,
             String environmentId,
             String previewDeploymentId,
             String queryName,
             String correlationId,
             String branch
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderComplete withInput(String fqn, List<?> values) {
@@ -287,7 +295,7 @@ public class OnlineQueryParams {
         }
 
         public OnlineQueryParamsComplete build() {
-            return new OnlineQueryParamsComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new OnlineQueryParamsComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
     }
 
@@ -299,18 +307,19 @@ public class OnlineQueryParams {
             Map<String, String> meta,
             List<String> tags,
             boolean includeMeta,
-            boolean includeMetrics,
+            boolean storePlanStages,
+            boolean explain,
             String environmentId,
             String previewDeploymentId,
             String queryName,
             String correlationId,
             String branch
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         private BuilderComplete newBuilderComplete() {
-            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderWithInputs withInput(String fqn, List<?> values) {
@@ -355,18 +364,19 @@ public class OnlineQueryParams {
                 Map<String, String> meta,
                 List<String> tags,
                 boolean includeMeta,
-                boolean includeMetrics,
+                boolean storePlanStages,
+                boolean explain,
                 String environmentId,
                 String previewDeploymentId,
                 String queryName,
                 String correlationId,
                 String branch
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderComplete newBuilderComplete() {
-            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderComplete withInput(String fqn, List<?> values) {
@@ -413,22 +423,23 @@ public class OnlineQueryParams {
                 Map<String, String> meta,
                 List<String> tags,
                 boolean includeMeta,
-                boolean includeMetrics,
+                boolean storePlanStages,
+                boolean explain,
                 String environmentId,
                 String previewDeploymentId,
                 String queryName,
                 String correlationId,
                 String branch
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderWithInputs newBuilderWithInputs() {
-            return new BuilderWithInputs(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderWithInputs(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderWithOutputs newBuilderWithOutputs() {
-            return new BuilderWithOutputs(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderWithOutputs(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
         }
 
         public BuilderWithInputs withInput(String fqn, List<?> values) {

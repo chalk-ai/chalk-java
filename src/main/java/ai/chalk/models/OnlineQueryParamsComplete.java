@@ -37,13 +37,14 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             Map<String, String> meta,
             List<String> tags,
             boolean includeMeta,
-            boolean includeMetrics,
+            boolean storePlanStages,
+            boolean explain,
             String environmentId,
             String previewDeploymentId,
             String queryName,
             String correlationId,
             String branch
     ) {
-        super(inputs, outputs, staleness, meta, tags, includeMeta, includeMetrics, environmentId, previewDeploymentId, queryName, correlationId, branch);
+        super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
     }
 }

@@ -32,7 +32,8 @@ public class BytesProducer {
         Map<String, Object> jsonHeader = new HashMap<>();
         jsonHeader.put("outputs", params.getOutputs());
         jsonHeader.put("include_meta", params.isIncludeMeta());
-        jsonHeader.put("include_metrics", params.isIncludeMetrics());
+        jsonHeader.put("store_plan_stages", params.isStorePlanStages());
+        jsonHeader.put("explain", params.isExplain());
         if (params.getBranch() != null) {
             jsonHeader.put("branch", params.getBranch());
         }
