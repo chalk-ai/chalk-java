@@ -151,50 +151,41 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
-        // withStaleness takes alternating key, value pairs and adds them to the staleness map
-        public T withStaleness(Object... staleness) {
+        // withStaleness takes a map of feature FQN to duration and adds them to the staleness map
+        public T withStaleness(Map<String, Duration> staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
             }
-            if (staleness.length % 2 != 0) {
-                throw new IllegalArgumentException("staleness must be an even number of alternating keys and values");
-            }
-            for (int i = 0; i < staleness.length; i += 2) {
-                if (!(staleness[i] instanceof String)) {
-                    throw new IllegalArgumentException("staleness must be an even number of alternating keys and values");
-                }
-                this.staleness.put((String) staleness[i], (Duration) staleness[i + 1]);
-            }
+            this.staleness.putAll(staleness);
             return (T) this;
         }
 
-        // withMeta adds a single key, value pair to the meta map
-        public T withMeta(String key, String value) {
+        // withMeta takes a map of meta key to meta value and adds them to the meta map
+        public T withMeta(Map<String, String> meta) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
-            this.meta.put(key, value);
+            this.meta.putAll(meta);
             return (T) this;
         }
 
-        // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public T withTags(Object... tags) {
+        // withTags takes a List of tags and adds them to the tags list
+        public T withTags(List<String> tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
-            if (tags.length == 1 && tags[0] instanceof List) {
-                this.tags.addAll((List<String>) tags[0]);
-            } else {
-                for (Object tag : tags) {
-                    this.tags.add((String) tag);
-                }
-            }
+            this.tags.addAll(tags);
             return (T) this;
+        }
+
+        // withTags takes a one or more tags and adds them to the tags list
+        public T withTags(String... tags) {
+            return this.withTags(Arrays.asList(tags));
         }
 
         // withTag adds a single tag to the tags list
         public T withTag(String tag) {
-            return this.withTags(tag);
+            return this.withTags(Arrays.asList(tag));
         }
 
         // withIncludeMeta sets the includeMeta flag

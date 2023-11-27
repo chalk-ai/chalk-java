@@ -65,9 +65,14 @@ public class TestOnlineQueryParams {
 
         // Test BuilderSeed with optional params
         OnlineQueryParams.BuilderSeed builderSeed = OnlineQueryParams.builder()
-                .withStaleness("user.id", Duration.ofSeconds(1000))
-                .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
+                .withTags(Arrays.asList("user.id", "abc"))
+                .withTags("def")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -80,6 +85,7 @@ public class TestOnlineQueryParams {
         assert paramsSeed.getMeta().get("user.id").equals("abc");
         assert paramsSeed.getTags().get(0).equals("user.id");
         assert paramsSeed.getTags().get(1).equals("abc");
+        assert paramsSeed.getTags().get(2).equals("def");
         assert paramsSeed.isIncludeMeta();
         assert paramsSeed.isIncludeMetrics();
         assert paramsSeed.getEnvironmentId().equals("abc");
@@ -91,9 +97,14 @@ public class TestOnlineQueryParams {
         // Test BuilderWithInputs with optional params
         OnlineQueryParams.BuilderWithInputs builderWithInputs = OnlineQueryParams.builder()
                 .withInputs(inputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
-                .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
+                .withTags(Arrays.asList("user.id", "abc"))
+                .withTags("def")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -110,6 +121,7 @@ public class TestOnlineQueryParams {
         assert paramsWithInputs.getMeta().get("user.id").equals("abc");
         assert paramsWithInputs.getTags().get(0).equals("user.id");
         assert paramsWithInputs.getTags().get(1).equals("abc");
+        assert paramsWithInputs.getTags().get(2).equals("def");
         assert paramsWithInputs.isIncludeMeta();
         assert paramsWithInputs.isIncludeMetrics();
         assert paramsWithInputs.getEnvironmentId().equals("abc");
@@ -120,9 +132,14 @@ public class TestOnlineQueryParams {
         // Test BuilderWithOutputs with optional params
         OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
                 .withOutputs(outputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
-                .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
+                .withTags(Arrays.asList("user.id", "abc"))
+                .withTags("def")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -138,6 +155,7 @@ public class TestOnlineQueryParams {
         assert paramsWithOutputs.getMeta().get("user.id").equals("abc");
         assert paramsWithOutputs.getTags().get(0).equals("user.id");
         assert paramsWithOutputs.getTags().get(1).equals("abc");
+        assert paramsWithOutputs.getTags().get(2).equals("def");
         assert paramsWithOutputs.isIncludeMeta();
         assert paramsWithOutputs.isIncludeMetrics();
         assert paramsWithOutputs.getEnvironmentId().equals("abc");
@@ -149,9 +167,14 @@ public class TestOnlineQueryParams {
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
                 .withInputs(inputs)
                 .withOutputs(outputs)
-                .withStaleness("user.id", Duration.ofSeconds(1000))
-                .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
+                .withTags(Arrays.asList("user.id", "abc"))
+                .withTags("def")
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -170,6 +193,7 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getMeta().get("user.id").equals("abc");
         assert paramsComplete.getTags().get(0).equals("user.id");
         assert paramsComplete.getTags().get(1).equals("abc");
+        assert paramsComplete.getTags().get(2).equals("def");
         assert paramsComplete.isIncludeMeta();
         assert paramsComplete.isIncludeMetrics();
         assert paramsComplete.getEnvironmentId().equals("abc");
