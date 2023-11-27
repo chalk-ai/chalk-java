@@ -35,9 +35,6 @@ import java.time.Duration;
  */
 @AllArgsConstructor @Getter
 public class OnlineQueryParams {
-    // The features for which there are known values, mapped
-    // to those values. Set by `OnlineQueryParams.builder().withInput`.
-
     /**
      * The features for which there are known values, mapped
      * to those values. Set by
@@ -62,16 +59,54 @@ public class OnlineQueryParams {
      */
     private Map<String, String> meta;
 
-    // tags is a list of tags to apply to the query.
 
     private List<String> tags;
     private boolean includeMeta;
+
+    /**
+     * If true, the output of each of the query plan stages will be stored
+     * in S3/GCS. This will dramatically impact the performance of the query,
+     * so it should only be used for debugging.
+     * These files will be visible in the web dashboard's query detail view, and
+     * can be downloaded in full by clicking on a plan node in the query plan visualizer.
+     */
     private boolean storePlanStages;
+
+    /**
+     * Log the query execution plan. Requests using `explain` will be slower
+     * than requests not using `explain`.
+     *
+     * If true, 'include_meta' will be set to true as well.
+     */
     private boolean explain;
+
+    /**
+     * The environment under which to run the resolvers.
+     */
     private String environmentId;
+
+    /**
+     * If specified, Chalk will route your request to the relevant preview deployment.
+     */
     private String previewDeploymentId;
+
+    /**
+     * The semantic name for the query you're making, for example, `"loan_application_model"`.
+     * Typically, each query that you make from your application should have a name.
+     * Chalk will present metrics and dashboard functionality grouped by 'query_name'.
+     */
     private String queryName;
+
+    /**
+     * You can specify a correlation ID to be used in logs and web interfaces.
+     * This should be globally unique, i.e. a `uuid` or similar. Logs generated
+     * during the execution of your query will be tagged with this correlation id.
+     */
     private String correlationId;
+
+    /**
+     * If specified, Chalk will route your request to the relevant branch.
+     */
     private String branch;
 
 
