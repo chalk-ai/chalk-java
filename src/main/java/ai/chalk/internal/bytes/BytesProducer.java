@@ -3,6 +3,7 @@ package ai.chalk.internal.bytes;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -31,25 +32,25 @@ public class BytesProducer {
 
         Map<String, Object> jsonHeader = new HashMap<>();
         jsonHeader.put("outputs", params.getOutputs());
-        jsonHeader.put("includeMeta", params.isIncludeMeta());
-        jsonHeader.put("includeMetrics", params.isIncludeMetrics());
+        jsonHeader.put("include_meta", params.isIncludeMeta());
+        jsonHeader.put("include_metrics", params.isIncludeMetrics());
         if (params.getBranch() != null) {
             jsonHeader.put("branch", params.getBranch());
         }
         if (params.getCorrelationId() != null) {
-            jsonHeader.put("correlationId", params.getCorrelationId());
+            jsonHeader.put("correlation_id", params.getCorrelationId());
         }
         if (params.getEnvironmentId() != null) {
-            jsonHeader.put("environmentId", params.getEnvironmentId());
+            jsonHeader.put("environment_id", params.getEnvironmentId());
         }
         if (params.getMeta() != null) {
             jsonHeader.put("meta", params.getMeta());
         }
         if (params.getPreviewDeploymentId() != null) {
-            jsonHeader.put("previewDeploymentId", params.getPreviewDeploymentId());
+            jsonHeader.put("deployment_id", params.getPreviewDeploymentId());
         }
         if (params.getQueryName() != null) {
-            jsonHeader.put("queryName", params.getQueryName());
+            jsonHeader.put("query_name", params.getQueryName());
         }
         if (params.getStaleness() != null) {
             var staleness = new HashMap<String, String>();
