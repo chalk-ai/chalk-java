@@ -151,6 +151,7 @@ public class OnlineQueryParams {
             return (T) this._withOutputs(outputFqns);
         }
 
+        // withStaleness takes a map of feature FQN to duration and adds them to the staleness map
         public T withStaleness(Map<String, Duration> staleness) {
             if (this.staleness == null) {
                 this.staleness = new HashMap<>();
@@ -168,7 +169,7 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
+        // withTags takes a List of tags and adds them to the tags list
         public T withTags(List<String> tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
@@ -177,9 +178,14 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        // withTags takes a one or more tags and adds them to the tags list
+        public T withTags(String... tags) {
+            return this.withTags(Arrays.asList(tags));
+        }
+
         // withTag adds a single tag to the tags list
         public T withTag(String tag) {
-            return this.withTags(tag);
+            return this.withTags(Arrays.asList(tag));
         }
 
         // withIncludeMeta sets the includeMeta flag
