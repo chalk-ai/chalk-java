@@ -169,17 +169,11 @@ public class OnlineQueryParams {
         }
 
         // withTags takes either multiple arguments or a single list of tags and adds them to the tags list
-        public T withTags(Object... tags) {
+        public T withTags(List<String> tags) {
             if (this.tags == null) {
                 this.tags = new ArrayList<>();
             }
-            if (tags.length == 1 && tags[0] instanceof List) {
-                this.tags.addAll((List<String>) tags[0]);
-            } else {
-                for (Object tag : tags) {
-                    this.tags.add((String) tag);
-                }
-            }
+            this.tags.addAll(tags);
             return (T) this;
         }
 

@@ -69,7 +69,7 @@ public class TestOnlineQueryParams {
                     put("user.id", Duration.ofSeconds(1000));
                 }})
                 .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withTags(Arrays.asList("user.id", "abc"))
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -97,7 +97,7 @@ public class TestOnlineQueryParams {
                     put("user.id", Duration.ofSeconds(1000));
                 }})
                 .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withTags(Arrays.asList("user.id", "abc"))
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -128,7 +128,7 @@ public class TestOnlineQueryParams {
                     put("user.id", Duration.ofSeconds(1000));
                 }})
                 .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withTags(Arrays.asList("user.id", "abc"))
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
@@ -159,7 +159,7 @@ public class TestOnlineQueryParams {
                     put("user.id", Duration.ofSeconds(1000));
                 }})
                 .withMeta("user.id", "abc")
-                .withTags("user.id", "abc")
+                .withTags(Arrays.asList("user.id", "abc"))
                 .withIncludeMeta(true)
                 .withIncludeMetrics(true)
                 .withEnvironmentId("abc")
