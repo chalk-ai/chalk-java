@@ -160,12 +160,12 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
-        // withMeta adds a single key, value pair to the meta map
-        public T withMeta(String key, String value) {
+        // withMeta takes a map of meta key to meta value and adds them to the meta map
+        public T withMeta(Map<String, String> meta) {
             if (this.meta == null) {
                 this.meta = new HashMap<>();
             }
-            this.meta.put(key, value);
+            this.meta.putAll(meta);
             return (T) this;
         }
 

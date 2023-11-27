@@ -68,7 +68,9 @@ public class TestOnlineQueryParams {
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
                 }})
-                .withMeta("user.id", "abc")
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
                 .withIncludeMeta(true)
@@ -98,7 +100,9 @@ public class TestOnlineQueryParams {
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
                 }})
-                .withMeta("user.id", "abc")
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
                 .withIncludeMeta(true)
@@ -131,7 +135,9 @@ public class TestOnlineQueryParams {
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
                 }})
-                .withMeta("user.id", "abc")
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
                 .withIncludeMeta(true)
@@ -164,7 +170,9 @@ public class TestOnlineQueryParams {
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
                 }})
-                .withMeta("user.id", "abc")
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
                 .withTags(Arrays.asList("user.id", "abc"))
                 .withTags("def")
                 .withIncludeMeta(true)
