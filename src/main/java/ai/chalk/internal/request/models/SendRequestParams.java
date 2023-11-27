@@ -17,6 +17,7 @@ public class SendRequestParams<T> {
     private String environmentOverride;
     private String previewDeploymentId;
     private String branch;
+    private String queryName;
 
     public static class Builder<T> {
         private Object body;
@@ -27,6 +28,8 @@ public class SendRequestParams<T> {
         private String environmentOverride;
         private String previewDeploymentId;
         private String branch;
+
+        private String queryName;
 
         public Builder<T> body(Object body) {
             this.body = body;
@@ -63,6 +66,11 @@ public class SendRequestParams<T> {
             return this;
         }
 
+        public Builder<T> queryName(String queryName) {
+            this.queryName = queryName;
+            return this;
+        }
+
         public Builder<T> branch(String branch) {
             this.branch = branch;
             return this;
@@ -70,7 +78,7 @@ public class SendRequestParams<T> {
 
         public SendRequestParams<T> build() {
             return new SendRequestParams<>(body, method, URL, responseClass, dontRefresh,
-                    environmentOverride, previewDeploymentId, branch);
+                    environmentOverride, previewDeploymentId, branch, queryName);
         }
     }
 }
