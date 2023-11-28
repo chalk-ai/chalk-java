@@ -51,6 +51,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .branch(params.getBranch())
                 .previewDeploymentId(params.getPreviewDeploymentId())
                 .environmentOverride(params.getEnvironmentId())
+                .queryName(params.getQueryName())
                 .build();
 
 

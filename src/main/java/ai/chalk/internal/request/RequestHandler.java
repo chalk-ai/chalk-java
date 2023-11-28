@@ -51,7 +51,7 @@ public class RequestHandler {
         this.branch = branch;
     }
 
-    private Map<String, String> getHeaders(String environmentOverride, String previewDeploymentId, String branchOverride) {
+    private Map<String, String> getHeaders(String environmentOverride, String previewDeploymentId, String branchOverride, String queryName) {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Accept", "application/json");
@@ -73,6 +73,10 @@ public class RequestHandler {
 
         if (previewDeploymentId != null && !previewDeploymentId.isEmpty()) {
             headers.put("X-Chalk-Preview-Deployment", previewDeploymentId);
+        }
+
+        if (queryName != null && !queryName.isEmpty()) {
+            headers.put("X-Chalk-Query-Name", queryName);
         }
 
         return headers;
@@ -119,7 +123,11 @@ public class RequestHandler {
             throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
         }
 
-        Map<String, String> headers = this.getHeaders(args.getEnvironmentOverride(), args.getPreviewDeploymentId(), args.getBranch());
+        Map<String, String> headers = this.getHeaders(
+                args.getEnvironmentOverride(),
+                args.getPreviewDeploymentId(),
+                args.getBranch(),
+                args.getQueryName());
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
                 .uri(uri)
@@ -229,7 +237,7 @@ public class RequestHandler {
         GetTokenRequest body = new GetTokenRequest(this.clientId.getValue(), this.clientSecret.getValue(), "client_credentials");
         GetTokenResponse response = null;
         try {
-            SendRequestParams<GetTokenResponse> params = new SendRequestParams<GetTokenResponse>(body, "POST", "v1/oauth/token", GetTokenResponse.class, true, null, null, null);
+            SendRequestParams<GetTokenResponse> params = new SendRequestParams<GetTokenResponse>(body, "POST", "v1/oauth/token", GetTokenResponse.class, true, null, null, null, null);
             response = this.sendRequest(params);
         } catch (Exception e) {
             throw new ClientException("Error getting access token", e);
