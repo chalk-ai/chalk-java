@@ -149,11 +149,19 @@ public class RequestHandler {
         }
 
         var request = requestBuilder.build();
-        HttpResponse<byte[]> response = null;
-        try {
-            response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
-        } catch (Exception e) {
-            throw new ClientException("error with sending of request", e);
+        HttpResponse<byte[]> response;
+        var retries = 1;
+        while (true) {
+            try {
+                response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
+                break;
+            } catch (Exception e) {
+                if (e instanceof IOException && retries > 0) {
+                    retries--;
+                    continue;
+                }
+                throw new ClientException("error with sending of request", e);
+            }
         }
 
         if (response.statusCode() == 401 && !args.isDontRefresh()) {
