@@ -13,7 +13,6 @@ import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class RequestHandler {
     private final HttpClient httpClient;
     private final SourcedConfig apiServer;
     private SourcedConfig environmentId;
-    private Map<String, String> engines;
+    private Map<String, URI> engines;
     private final SourcedConfig initialEnvironment;
     private final SourcedConfig clientId;
     private final SourcedConfig clientSecret;
@@ -59,6 +58,13 @@ public class RequestHandler {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.branch = branch;
+    }
+
+    private String getResolvedEnvironment(String environmentOverride) {
+        if (environmentOverride != null && !environmentOverride.isEmpty()) {
+            return environmentOverride;
+        }
+        return this.environmentId.getValue();
     }
 
     private Map<String, String> getHeaders(
@@ -131,7 +137,8 @@ public class RequestHandler {
                 args.getEnvironmentOverride(),
                 args.getPreviewDeploymentId(),
                 args.getBranch(),
-                args.getQueryName());
+                args.getQueryName()
+        );
 
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
@@ -214,8 +221,18 @@ public class RequestHandler {
     }
 
     private <T> URI getUri(SendRequestParams<T> args) throws ClientException {
+        if (args.getUseDirectEngine()) {
+            String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
+            if (resolved != null &&
+                    !resolved.isEmpty() &&
+                    this.engines.containsKey(resolved)
+            ) {
+                return this.engines.get(resolved).resolve(args.getPath());
+            }
+        }
+
         URI uri;
-        String urlArg = args.getURL();
+        String urlArg = args.getPath();
         try {
             if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
                 var base = new URI(this.apiServer.getValue());
@@ -224,7 +241,7 @@ public class RequestHandler {
                 uri = new URI(urlArg);
             }
         } catch (Exception e) {
-            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
+            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getPath()), e);
         }
         return uri;
     }
@@ -276,7 +293,8 @@ public class RequestHandler {
                 null,
                 null,
                 null,
-                null
+                null,
+                false
         );
         GetTokenResponse response;
         try {
@@ -293,7 +311,13 @@ public class RequestHandler {
         } else {
             this.environmentId = this.initialEnvironment;
         }
-        this.engines = response.getEngines();
+        this.engines = new HashMap<>();
+        for (Map.Entry<String, String> entry : response.getEngines().entrySet()) {
+            try {
+                this.engines.put(entry.getKey(), URI.create(entry.getValue()));
+            } catch (Exception ignored) {}
+        }
+
         LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
         return new JWT(response.getAccessToken(), expiry);
     }

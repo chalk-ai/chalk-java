@@ -11,13 +11,14 @@ import lombok.Data;
 public class SendRequestParams<T> {
     private Object body;
     private String method;
-    private String URL;
+    private String path;
     private Class<T> responseClass;
     private boolean dontRefresh;
     private String environmentOverride;
     private String previewDeploymentId;
     private String branch;
     private String queryName;
+    private Boolean useDirectEngine;
 
     public static class Builder<T> {
         private Object body;
@@ -28,8 +29,8 @@ public class SendRequestParams<T> {
         private String environmentOverride;
         private String previewDeploymentId;
         private String branch;
-
         private String queryName;
+        private Boolean useDirectEngine;
 
         public Builder<T> body(Object body) {
             this.body = body;
@@ -76,9 +77,16 @@ public class SendRequestParams<T> {
             return this;
         }
 
+        public Builder<T> useDirectEngine(Boolean useDirectEngine) {
+            this.useDirectEngine = useDirectEngine;
+            return this;
+        }
+
         public SendRequestParams<T> build() {
-            return new SendRequestParams<>(body, method, URL, responseClass, dontRefresh,
-                    environmentOverride, previewDeploymentId, branch, queryName);
+            return new SendRequestParams<>(
+                    body, method, URL, responseClass, dontRefresh,
+                    environmentOverride, previewDeploymentId, branch, queryName, useDirectEngine
+            );
         }
     }
 }

@@ -57,6 +57,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
+                .useDirectEngine(true)
                 .previewDeploymentId(params.getPreviewDeploymentId())
                 .environmentOverride(params.getEnvironmentId())
                 .queryName(params.getQueryName())
