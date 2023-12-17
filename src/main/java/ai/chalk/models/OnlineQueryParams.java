@@ -75,7 +75,6 @@ public class OnlineQueryParams {
     /**
      * Log the query execution plan. Requests using `explain` will be slower
      * than requests not using `explain`.
-     *
      * If true, 'include_meta' will be set to true as well.
      */
     private boolean explain;

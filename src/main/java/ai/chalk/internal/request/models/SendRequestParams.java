@@ -18,19 +18,19 @@ public class SendRequestParams<T> {
     private String previewDeploymentId;
     private String branch;
     private String queryName;
-    private Boolean useDirectEngine;
+    private Boolean isEngineRequest;
 
     public static class Builder<T> {
         private Object body;
         private String method;
-        private String URL;
+        private String path;
         private Class<T> responseClass;
         private boolean dontRefresh;
         private String environmentOverride;
         private String previewDeploymentId;
         private String branch;
         private String queryName;
-        private Boolean useDirectEngine;
+        private Boolean isEngineRequest;
 
         public Builder<T> body(Object body) {
             this.body = body;
@@ -42,8 +42,8 @@ public class SendRequestParams<T> {
             return this;
         }
 
-        public Builder<T> URL(String URL) {
-            this.URL = URL;
+        public Builder<T> path(String path) {
+            this.path = path;
             return this;
         }
 
@@ -77,15 +77,16 @@ public class SendRequestParams<T> {
             return this;
         }
 
-        public Builder<T> useDirectEngine(Boolean useDirectEngine) {
-            this.useDirectEngine = useDirectEngine;
+        public Builder<T> isEngineRequest(Boolean isEngineRequest) {
+            this.isEngineRequest = isEngineRequest;
             return this;
         }
 
         public SendRequestParams<T> build() {
             return new SendRequestParams<>(
-                    body, method, URL, responseClass, dontRefresh,
-                    environmentOverride, previewDeploymentId, branch, queryName, useDirectEngine
+                    body, method, path, responseClass, dontRefresh,
+                    environmentOverride, previewDeploymentId, branch, queryName,
+                    isEngineRequest
             );
         }
     }

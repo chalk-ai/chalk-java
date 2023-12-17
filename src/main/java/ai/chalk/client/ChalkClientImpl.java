@@ -52,12 +52,12 @@ public class ChalkClientImpl implements ChalkClient {
         }
 
         SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
-                .URL("/v1/query/feather")
+                .path("/v1/query/feather")
                 .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
-                .useDirectEngine(true)
+                .isEngineRequest(true)
                 .previewDeploymentId(params.getPreviewDeploymentId())
                 .environmentOverride(params.getEnvironmentId())
                 .queryName(params.getQueryName())

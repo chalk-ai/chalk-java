@@ -17,7 +17,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -74,6 +73,7 @@ public class RequestHandler {
             String branchOverride,
             String queryName
     ) {
+
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Accept", "application/json");
@@ -161,6 +161,7 @@ public class RequestHandler {
 
         var request = requestBuilder.build();
         HttpResponse<byte[]> response;
+
         var retries = 1;
         while (true) {
             try {
@@ -221,7 +222,7 @@ public class RequestHandler {
     }
 
     private <T> URI getUri(SendRequestParams<T> args) {
-        if (args.getUseDirectEngine()) {
+        if (args.getIsEngineRequest()) {
             String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
             if (resolved != null &&
                     !resolved.isEmpty() &&
@@ -275,7 +276,7 @@ public class RequestHandler {
                         "client_credentials"
                 ),
                 "POST",
-                "v1/oauth/token",
+                "/v1/oauth/token",
                 GetTokenResponse.class,
                 true,
                 null,
