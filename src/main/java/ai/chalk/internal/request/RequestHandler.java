@@ -12,7 +12,7 @@ import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
@@ -29,21 +29,30 @@ import java.util.stream.Stream;
 public class RequestHandler {
     private JWT jwt;
     private final HttpClient httpClient;
-    private final SourcedConfig apiServer;
+    private final URI apiServer;
     private SourcedConfig environmentId;
+    private Map<String, URI> engines;
     private final SourcedConfig initialEnvironment;
     private final SourcedConfig clientId;
     private final SourcedConfig clientSecret;
     private final String branch;
 
-    public RequestHandler(HttpClient httpClient, SourcedConfig apiServer, SourcedConfig initialEnvironment, SourcedConfig environmentId, SourcedConfig clientId, SourcedConfig clientSecret, String branch) {
+    public RequestHandler(
+            HttpClient httpClient,
+            SourcedConfig apiServer,
+            SourcedConfig initialEnvironment,
+            SourcedConfig environmentId,
+            SourcedConfig clientId,
+            SourcedConfig clientSecret,
+            String branch
+    ) {
         if (httpClient == null) {
             this.httpClient = HttpClient.newHttpClient();
         } else {
             this.httpClient = httpClient;
         }
 
-        this.apiServer = apiServer;
+        this.apiServer = URI.create(apiServer.getValue());
         this.environmentId = environmentId;
         this.initialEnvironment = initialEnvironment;
         this.clientId = clientId;
@@ -51,7 +60,20 @@ public class RequestHandler {
         this.branch = branch;
     }
 
-    private Map<String, String> getHeaders(String environmentOverride, String previewDeploymentId, String branchOverride, String queryName) {
+    private String getResolvedEnvironment(String environmentOverride) {
+        if (environmentOverride != null && !environmentOverride.isEmpty()) {
+            return environmentOverride;
+        }
+        return this.environmentId.getValue();
+    }
+
+    private Map<String, String> getHeaders(
+            String environmentOverride,
+            String previewDeploymentId,
+            String branchOverride,
+            String queryName
+    ) {
+
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Accept", "application/json");
@@ -95,7 +117,7 @@ public class RequestHandler {
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             bodyBytes = objectMapper.writeValueAsBytes(body);
         }
 
@@ -110,27 +132,16 @@ public class RequestHandler {
             throw new ClientException("error marshalling request body", e);
         }
 
-        URI uri;
-        String urlArg = args.getURL();
-        try {
-            if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
-                var base = new URI(this.apiServer.getValue());
-                uri = base.resolve(urlArg);
-            } else {
-                uri = new URI(urlArg);
-            }
-        } catch (Exception e) {
-            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
-        }
-
         Map<String, String> headers = this.getHeaders(
                 args.getEnvironmentOverride(),
                 args.getPreviewDeploymentId(),
                 args.getBranch(),
-                args.getQueryName());
+                args.getQueryName()
+        );
+
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
-                .uri(uri)
+                .uri(getUri(args))
                 .version(HttpClient.Version.HTTP_1_1)
                 .headers(headers.entrySet().stream()
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
@@ -150,16 +161,18 @@ public class RequestHandler {
 
         var request = requestBuilder.build();
         HttpResponse<byte[]> response;
+
         var retries = 1;
         while (true) {
             try {
                 response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
                 break;
-            } catch (Exception e) {
-                if (e instanceof IOException && retries > 0) {
-                    retries--;
-                    continue;
+            } catch (IOException ioexception) {
+                if (retries == 0) {
+                    throw new ClientException("error with sending of request", ioexception);
                 }
+                retries--;
+            } catch (Exception e) {
                 throw new ClientException("error with sending of request", e);
             }
         }
@@ -196,7 +209,7 @@ public class RequestHandler {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             try {
                 return objectMapper.readValue(response.body(), args.getResponseClass());
             } catch (IOException e) {
@@ -208,10 +221,24 @@ public class RequestHandler {
         }
     }
 
+    private <T> URI getUri(SendRequestParams<T> args) {
+        if (args.getIsEngineRequest()) {
+            String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
+            if (resolved != null &&
+                    !resolved.isEmpty() &&
+                    this.engines.containsKey(resolved)
+            ) {
+                return this.engines.get(resolved).resolve(args.getPath());
+            }
+        }
+
+        return this.apiServer.resolve(args.getPath());
+    }
+
     private HttpResponse<byte[]> retryRequest(
-        HttpRequest originalRequest,
-        Object originalBody,
-        HttpResponse<byte[]> originalResponse
+            HttpRequest originalRequest,
+            Object originalBody,
+            HttpResponse<byte[]> originalResponse
     ) throws Exception {
         try {
             this.refreshJwt(true);
@@ -242,19 +269,43 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        GetTokenRequest body = new GetTokenRequest(this.clientId.getValue(), this.clientSecret.getValue(), "client_credentials");
-        GetTokenResponse response = null;
+        SendRequestParams<GetTokenResponse> params = new SendRequestParams<>(
+                new GetTokenRequest(
+                        this.clientId.getValue(),
+                        this.clientSecret.getValue(),
+                        "client_credentials"
+                ),
+                "POST",
+                "/v1/oauth/token",
+                GetTokenResponse.class,
+                true,
+                null,
+                null,
+                null,
+                null,
+                false
+        );
+        GetTokenResponse response;
         try {
-            SendRequestParams<GetTokenResponse> params = new SendRequestParams<GetTokenResponse>(body, "POST", "v1/oauth/token", GetTokenResponse.class, true, null, null, null, null);
             response = this.sendRequest(params);
         } catch (Exception e) {
             throw new ClientException("Error getting access token", e);
         }
 
         if (this.initialEnvironment.getValue().isEmpty()) {
-            this.environmentId = new SourcedConfig(response.getPrimaryEnvironment(), "Primary Environment from credentials exchange response");
+            this.environmentId = new SourcedConfig(
+                    response.getPrimaryEnvironment(),
+                    "Primary environment from credentials exchange response"
+            );
         } else {
             this.environmentId = this.initialEnvironment;
+        }
+        this.engines = new HashMap<>();
+        for (Map.Entry<String, String> entry : response.getEngines().entrySet()) {
+            try {
+                this.engines.put(entry.getKey(), URI.create(entry.getValue()));
+            } catch (Exception ignored) {
+            }
         }
 
         LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
@@ -262,11 +313,14 @@ public class RequestHandler {
     }
 
     private void refreshJwt(boolean forceRefresh) throws ChalkException {
-        if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
-                && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
-            return;
+        if (
+                forceRefresh ||
+                        jwt == null ||
+                        jwt.getValidUntil() == null ||
+                        jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))
+        ) {
+            this.jwt = getJwt();
         }
-        this.jwt = getJwt();
     }
 
     public static ChalkException getHttpException(HttpResponse<byte[]> res, String URL) {
@@ -274,7 +328,7 @@ public class RequestHandler {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
@@ -291,7 +345,7 @@ public class RequestHandler {
                 res.statusCode(),
                 res.body().length,
                 URL
-            );
+        );
     }
 
 }

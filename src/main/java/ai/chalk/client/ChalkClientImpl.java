@@ -23,7 +23,7 @@ public class ChalkClientImpl implements ChalkClient {
     private SourcedConfig initialEnvironment;
     private SourcedConfig clientSecret;
     private String branch;
-    private final RequestHandler r;
+    private final RequestHandler handler;
 
     public ChalkClient ChalkClient() throws ChalkException {
         return ChalkClient.builder().build();
@@ -32,7 +32,15 @@ public class ChalkClientImpl implements ChalkClient {
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         // Side effect of populating instance config variables
         this.resolveConfig(config);
-        this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
+        this.handler = new RequestHandler(
+                config.getHttpClient(),
+                this.apiServer,
+                this.environmentId,
+                this.initialEnvironment,
+                this.clientId,
+                this.clientSecret,
+                this.branch
+        );
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -43,27 +51,20 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams.Builder<OnlineQueryBulkResponse> builder = new SendRequestParams.Builder<>();
-        SendRequestParams<OnlineQueryBulkResponse> request = builder.URL("/v1/query/feather")
+        SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+                .path("/v1/query/feather")
                 .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
+                .isEngineRequest(true)
                 .previewDeploymentId(params.getPreviewDeploymentId())
                 .environmentOverride(params.getEnvironmentId())
                 .queryName(params.getQueryName())
                 .build();
 
-
-        OnlineQueryBulkResponse response = this.sendRequest(request);
-        return response.toResult();
+        return this.handler.sendRequest(request).toResult();
     }
-
-
-    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
-        return this.r.sendRequest(args);
-    }
-
 
     private void resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
@@ -73,14 +74,13 @@ public class ChalkClientImpl implements ChalkClient {
             projectRoot = Loader.loadProjectDirectory();
             chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
         } catch (Exception ignored) {
-            ;
+            // TODO: Add some logging here
         }
 
         SourcedConfig apiServerBuilder = SourcedConfig.fromBuilder(builder.getApiServer());
         SourcedConfig clientIdBuilder = SourcedConfig.fromBuilder(builder.getClientId());
         SourcedConfig clientSecretBuilder = SourcedConfig.fromBuilder(builder.getClientSecret());
         SourcedConfig environmentIdBuilder = SourcedConfig.fromBuilder(builder.getEnvironmentId());
-
 
         SourcedConfig apiServerEnvVar = SourcedConfig.fromEnvVar(ConfigEnvVars.apiServerKey);
         SourcedConfig clientIdEnvVar = SourcedConfig.fromEnvVar(ConfigEnvVars.clientIdKey);
@@ -92,7 +92,7 @@ public class ChalkClientImpl implements ChalkClient {
         SourcedConfig clientSecretChalkYaml = SourcedConfig.fromConfigFile(chalkYamlConfig.getClientSecret());
         SourcedConfig environmentIdChalkYaml = SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment());
 
-        SourcedConfig apiServer = SourcedConfig.firstNonEmpty(apiServerBuilder, apiServerEnvVar, apiServerChalkYaml);
+        SourcedConfig apiServer = SourcedConfig.firstNonEmpty(apiServerBuilder, apiServerEnvVar, apiServerChalkYaml, new SourcedConfig("default", "https://api.chalk.ai"));
         SourcedConfig clientId = SourcedConfig.firstNonEmpty(clientIdBuilder, clientIdEnvVar, clientIdChalkYaml);
         SourcedConfig clientSecret = SourcedConfig.firstNonEmpty(clientSecretBuilder, clientSecretEnvVar, clientSecretChalkYaml);
         SourcedConfig environmentId = SourcedConfig.firstNonEmpty(environmentIdBuilder, environmentIdEnvVar, environmentIdChalkYaml);
