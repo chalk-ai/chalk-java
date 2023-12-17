@@ -12,6 +12,7 @@ import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -95,7 +96,7 @@ public class RequestHandler {
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             bodyBytes = objectMapper.writeValueAsBytes(body);
         }
 
@@ -110,24 +111,14 @@ public class RequestHandler {
             throw new ClientException("error marshalling request body", e);
         }
 
-        URI uri;
-        String urlArg = args.getURL();
-        try {
-            if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
-                var base = new URI(this.apiServer.getValue());
-                uri = base.resolve(urlArg);
-            } else {
-                uri = new URI(urlArg);
-            }
-        } catch (Exception e) {
-            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
-        }
+        URI uri = getUri(args);
 
         Map<String, String> headers = this.getHeaders(
                 args.getEnvironmentOverride(),
                 args.getPreviewDeploymentId(),
                 args.getBranch(),
                 args.getQueryName());
+
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
                 .uri(uri)
@@ -196,7 +187,7 @@ public class RequestHandler {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             try {
                 return objectMapper.readValue(response.body(), args.getResponseClass());
             } catch (IOException e) {
@@ -206,6 +197,22 @@ public class RequestHandler {
                 );
             }
         }
+    }
+
+    private <T> URI getUri(SendRequestParams<T> args) throws ClientException {
+        URI uri;
+        String urlArg = args.getURL();
+        try {
+            if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
+                var base = new URI(this.apiServer.getValue());
+                uri = base.resolve(urlArg);
+            } else {
+                uri = new URI(urlArg);
+            }
+        } catch (Exception e) {
+            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getURL()), e);
+        }
+        return uri;
     }
 
     private HttpResponse<byte[]> retryRequest(
@@ -293,7 +300,7 @@ public class RequestHandler {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
         try {
             chalkException = objectMapper.readValue(res.body(), ChalkHttpException.class);
         } catch (IOException e) {
