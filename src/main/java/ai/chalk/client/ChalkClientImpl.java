@@ -32,7 +32,15 @@ public class ChalkClientImpl implements ChalkClient {
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         // Side effect of populating instance config variables
         this.resolveConfig(config);
-        this.r = new RequestHandler(config.getHttpClient(), this.apiServer, this.environmentId, this.initialEnvironment, this.clientId, this.clientSecret, this.branch);
+        this.r = new RequestHandler(
+                config.getHttpClient(),
+                this.apiServer,
+                this.environmentId,
+                this.initialEnvironment,
+                this.clientId,
+                this.clientSecret,
+                this.branch
+        );
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -54,8 +62,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        OnlineQueryBulkResponse response = this.r.sendRequest(request);
-        return response.toResult();
+        return this.r.sendRequest(request).toResult();
     }
 
     private void resolveConfig(BuilderImpl builder) throws ClientException {
