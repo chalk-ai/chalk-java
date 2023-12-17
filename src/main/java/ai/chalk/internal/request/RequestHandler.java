@@ -38,7 +38,15 @@ public class RequestHandler {
     private final SourcedConfig clientSecret;
     private final String branch;
 
-    public RequestHandler(HttpClient httpClient, SourcedConfig apiServer, SourcedConfig initialEnvironment, SourcedConfig environmentId, SourcedConfig clientId, SourcedConfig clientSecret, String branch) {
+    public RequestHandler(
+            HttpClient httpClient,
+            SourcedConfig apiServer,
+            SourcedConfig initialEnvironment,
+            SourcedConfig environmentId,
+            SourcedConfig clientId,
+            SourcedConfig clientSecret,
+            String branch
+    ) {
         if (httpClient == null) {
             this.httpClient = HttpClient.newHttpClient();
         } else {

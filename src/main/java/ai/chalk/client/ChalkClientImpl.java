@@ -23,7 +23,7 @@ public class ChalkClientImpl implements ChalkClient {
     private SourcedConfig initialEnvironment;
     private SourcedConfig clientSecret;
     private String branch;
-    private final RequestHandler r;
+    private final RequestHandler handler;
 
     public ChalkClient ChalkClient() throws ChalkException {
         return ChalkClient.builder().build();
@@ -32,7 +32,7 @@ public class ChalkClientImpl implements ChalkClient {
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         // Side effect of populating instance config variables
         this.resolveConfig(config);
-        this.r = new RequestHandler(
+        this.handler = new RequestHandler(
                 config.getHttpClient(),
                 this.apiServer,
                 this.environmentId,
@@ -51,8 +51,8 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams.Builder<OnlineQueryBulkResponse> builder = new SendRequestParams.Builder<>();
-        SendRequestParams<OnlineQueryBulkResponse> request = builder.URL("/v1/query/feather")
+        SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+                .URL("/v1/query/feather")
                 .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
@@ -62,7 +62,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        return this.r.sendRequest(request).toResult();
+        return this.handler.sendRequest(request).toResult();
     }
 
     private void resolveConfig(BuilderImpl builder) throws ClientException {
