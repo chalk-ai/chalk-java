@@ -32,6 +32,7 @@ public class RequestHandler {
     private final HttpClient httpClient;
     private final SourcedConfig apiServer;
     private SourcedConfig environmentId;
+    private Map<String, String> engines;
     private final SourcedConfig initialEnvironment;
     private final SourcedConfig clientId;
     private final SourcedConfig clientSecret;
@@ -52,7 +53,12 @@ public class RequestHandler {
         this.branch = branch;
     }
 
-    private Map<String, String> getHeaders(String environmentOverride, String previewDeploymentId, String branchOverride, String queryName) {
+    private Map<String, String> getHeaders(
+            String environmentOverride,
+            String previewDeploymentId,
+            String branchOverride,
+            String queryName
+    ) {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Accept", "application/json");
@@ -279,7 +285,7 @@ public class RequestHandler {
         } else {
             this.environmentId = this.initialEnvironment;
         }
-
+        this.engines = response.getEngines();
         LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
         return new JWT(response.getAccessToken(), expiry);
     }

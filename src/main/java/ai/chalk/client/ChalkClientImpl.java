@@ -54,16 +54,9 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-
-        OnlineQueryBulkResponse response = this.sendRequest(request);
+        OnlineQueryBulkResponse response = this.r.sendRequest(request);
         return response.toResult();
     }
-
-
-    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
-        return this.r.sendRequest(args);
-    }
-
 
     private void resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
@@ -73,7 +66,7 @@ public class ChalkClientImpl implements ChalkClient {
             projectRoot = Loader.loadProjectDirectory();
             chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
         } catch (Exception ignored) {
-            ;
+            // TODO: Add some logging here
         }
 
         SourcedConfig apiServerBuilder = SourcedConfig.fromBuilder(builder.getApiServer());
