@@ -17,6 +17,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -29,7 +30,7 @@ import java.util.stream.Stream;
 public class RequestHandler {
     private JWT jwt;
     private final HttpClient httpClient;
-    private final SourcedConfig apiServer;
+    private final URI apiServer;
     private SourcedConfig environmentId;
     private Map<String, URI> engines;
     private final SourcedConfig initialEnvironment;
@@ -52,7 +53,7 @@ public class RequestHandler {
             this.httpClient = httpClient;
         }
 
-        this.apiServer = apiServer;
+        this.apiServer = URI.create(apiServer.getValue());
         this.environmentId = environmentId;
         this.initialEnvironment = initialEnvironment;
         this.clientId = clientId;
@@ -131,8 +132,6 @@ public class RequestHandler {
             throw new ClientException("error marshalling request body", e);
         }
 
-        URI uri = getUri(args);
-
         Map<String, String> headers = this.getHeaders(
                 args.getEnvironmentOverride(),
                 args.getPreviewDeploymentId(),
@@ -142,7 +141,7 @@ public class RequestHandler {
 
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
-                .uri(uri)
+                .uri(getUri(args))
                 .version(HttpClient.Version.HTTP_1_1)
                 .headers(headers.entrySet().stream()
                         .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
@@ -167,11 +166,12 @@ public class RequestHandler {
             try {
                 response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
                 break;
-            } catch (Exception e) {
-                if (e instanceof IOException && retries > 0) {
-                    retries--;
-                    continue;
+            } catch (IOException ioexception) {
+                if (retries == 0) {
+                    throw new ClientException("error with sending of request", ioexception);
                 }
+                retries--;
+            } catch (Exception e) {
                 throw new ClientException("error with sending of request", e);
             }
         }
@@ -220,7 +220,7 @@ public class RequestHandler {
         }
     }
 
-    private <T> URI getUri(SendRequestParams<T> args) throws ClientException {
+    private <T> URI getUri(SendRequestParams<T> args) {
         if (args.getUseDirectEngine()) {
             String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
             if (resolved != null &&
@@ -231,19 +231,7 @@ public class RequestHandler {
             }
         }
 
-        URI uri;
-        String urlArg = args.getPath();
-        try {
-            if (!urlArg.startsWith("http:") && !urlArg.startsWith("https:")) {
-                var base = new URI(this.apiServer.getValue());
-                uri = base.resolve(urlArg);
-            } else {
-                uri = new URI(urlArg);
-            }
-        } catch (Exception e) {
-            throw new ClientException(String.format("error building request URL with base URL '%s' and relative URL '%s'", apiServer.getValue(), args.getPath()), e);
-        }
-        return uri;
+        return this.apiServer.resolve(args.getPath());
     }
 
     private HttpResponse<byte[]> retryRequest(
@@ -315,7 +303,8 @@ public class RequestHandler {
         for (Map.Entry<String, String> entry : response.getEngines().entrySet()) {
             try {
                 this.engines.put(entry.getKey(), URI.create(entry.getValue()));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());

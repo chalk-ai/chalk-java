@@ -1,10 +1,12 @@
 package ai.chalk.internal.config.models;
 
 import ai.chalk.internal.config.Loader;
+import lombok.Getter;
 
 import java.util.Collections;
 import java.util.Map;
 
+@Getter
 public class SourcedConfig {
     private final String source;
     private final String value;
@@ -90,13 +92,6 @@ public class SourcedConfig {
         return result.toString();
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public String getValue() {
-        return value;
-    }
 }
 
 

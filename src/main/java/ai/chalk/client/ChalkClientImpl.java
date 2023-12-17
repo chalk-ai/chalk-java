@@ -82,7 +82,6 @@ public class ChalkClientImpl implements ChalkClient {
         SourcedConfig clientSecretBuilder = SourcedConfig.fromBuilder(builder.getClientSecret());
         SourcedConfig environmentIdBuilder = SourcedConfig.fromBuilder(builder.getEnvironmentId());
 
-
         SourcedConfig apiServerEnvVar = SourcedConfig.fromEnvVar(ConfigEnvVars.apiServerKey);
         SourcedConfig clientIdEnvVar = SourcedConfig.fromEnvVar(ConfigEnvVars.clientIdKey);
         SourcedConfig clientSecretEnvVar = SourcedConfig.fromEnvVar(ConfigEnvVars.clientSecretKey);
@@ -93,7 +92,7 @@ public class ChalkClientImpl implements ChalkClient {
         SourcedConfig clientSecretChalkYaml = SourcedConfig.fromConfigFile(chalkYamlConfig.getClientSecret());
         SourcedConfig environmentIdChalkYaml = SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment());
 
-        SourcedConfig apiServer = SourcedConfig.firstNonEmpty(apiServerBuilder, apiServerEnvVar, apiServerChalkYaml);
+        SourcedConfig apiServer = SourcedConfig.firstNonEmpty(apiServerBuilder, apiServerEnvVar, apiServerChalkYaml, new SourcedConfig("default", "https://api.chalk.ai"));
         SourcedConfig clientId = SourcedConfig.firstNonEmpty(clientIdBuilder, clientIdEnvVar, clientIdChalkYaml);
         SourcedConfig clientSecret = SourcedConfig.firstNonEmpty(clientSecretBuilder, clientSecretEnvVar, clientSecretChalkYaml);
         SourcedConfig environmentId = SourcedConfig.firstNonEmpty(environmentIdBuilder, environmentIdEnvVar, environmentIdChalkYaml);
