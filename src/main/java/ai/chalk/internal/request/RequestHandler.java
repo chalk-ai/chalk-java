@@ -209,9 +209,9 @@ public class RequestHandler {
     }
 
     private HttpResponse<byte[]> retryRequest(
-        HttpRequest originalRequest,
-        Object originalBody,
-        HttpResponse<byte[]> originalResponse
+            HttpRequest originalRequest,
+            Object originalBody,
+            HttpResponse<byte[]> originalResponse
     ) throws Exception {
         try {
             this.refreshJwt(true);
@@ -242,17 +242,33 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        GetTokenRequest body = new GetTokenRequest(this.clientId.getValue(), this.clientSecret.getValue(), "client_credentials");
-        GetTokenResponse response = null;
+        SendRequestParams<GetTokenResponse> params = new SendRequestParams<>(
+                new GetTokenRequest(
+                        this.clientId.getValue(),
+                        this.clientSecret.getValue(),
+                        "client_credentials"
+                ),
+                "POST",
+                "v1/oauth/token",
+                GetTokenResponse.class,
+                true,
+                null,
+                null,
+                null,
+                null
+        );
+        GetTokenResponse response;
         try {
-            SendRequestParams<GetTokenResponse> params = new SendRequestParams<GetTokenResponse>(body, "POST", "v1/oauth/token", GetTokenResponse.class, true, null, null, null, null);
             response = this.sendRequest(params);
         } catch (Exception e) {
             throw new ClientException("Error getting access token", e);
         }
 
         if (this.initialEnvironment.getValue().isEmpty()) {
-            this.environmentId = new SourcedConfig(response.getPrimaryEnvironment(), "Primary Environment from credentials exchange response");
+            this.environmentId = new SourcedConfig(
+                    response.getPrimaryEnvironment(),
+                    "Primary environment from credentials exchange response"
+            );
         } else {
             this.environmentId = this.initialEnvironment;
         }
@@ -262,11 +278,14 @@ public class RequestHandler {
     }
 
     private void refreshJwt(boolean forceRefresh) throws ChalkException {
-        if (!forceRefresh && jwt != null && jwt.getValidUntil() != null
-                && jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))) {
-            return;
+        if (
+                forceRefresh ||
+                        jwt == null ||
+                        jwt.getValidUntil() == null ||
+                        jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))
+        ) {
+            this.jwt = getJwt();
         }
-        this.jwt = getJwt();
     }
 
     public static ChalkException getHttpException(HttpResponse<byte[]> res, String URL) {
@@ -291,7 +310,7 @@ public class RequestHandler {
                 res.statusCode(),
                 res.body().length,
                 URL
-            );
+        );
     }
 
 }
