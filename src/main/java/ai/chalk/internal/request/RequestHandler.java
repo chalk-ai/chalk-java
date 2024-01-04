@@ -59,6 +59,7 @@ public class RequestHandler {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.branch = branch;
+        this.engines = new HashMap<>();
     }
 
     private String getResolvedEnvironment(String environmentOverride) {
