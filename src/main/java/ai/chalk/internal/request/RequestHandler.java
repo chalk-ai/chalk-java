@@ -47,6 +47,7 @@ public class RequestHandler {
             String branch
     ) {
         if (httpClient == null) {
+            System.setProperty("jdk.httpclient.keepalive.timeout", "300");
             this.httpClient = HttpClient.newHttpClient();
         } else {
             this.httpClient = httpClient;
