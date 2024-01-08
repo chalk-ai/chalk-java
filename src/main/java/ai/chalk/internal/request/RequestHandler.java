@@ -319,7 +319,7 @@ public class RequestHandler {
                 forceRefresh ||
                         jwt == null ||
                         jwt.getValidUntil() == null ||
-                        jwt.getValidUntil().isAfter(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10))
+                        LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10).isAfter(jwt.getValidUntil())
         ) {
             this.jwt = getJwt();
         }
