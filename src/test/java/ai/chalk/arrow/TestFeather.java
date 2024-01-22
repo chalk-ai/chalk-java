@@ -78,6 +78,17 @@ public class TestFeather {
     }
 
     @Test
+    public void testConvertMultipleHasManyResultToBytes() throws Exception {
+        String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "multi_has_many_base64.txt")), "UTF-8");
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
+        OnlineQueryResult result = response.toResult();
+        assert result.getGroupsTables().size() == 2;
+        assert result.getGroupsTables().get("series.investors").getRowCount() == 52;
+        assert result.getGroupsTables().get("series.haters").getRowCount() == 2;
+    }
+
+    @Test
     public void testMillionRowsInOutput() {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "million_scalar_rows.bin"));

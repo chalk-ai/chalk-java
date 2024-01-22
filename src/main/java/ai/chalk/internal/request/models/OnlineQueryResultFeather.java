@@ -93,7 +93,7 @@ public class OnlineQueryResultFeather {
                 try {
                     table = FeatherProcessor.convertBytesToTable(value);
                 } catch (Exception e) {
-                    throw new ClientException("failed to convert groups data bytes to VectorSchemaRoot", e);
+                    throw new ClientException(String.format("failed to convert data for has-many feature '%s' bytes to VectorSchemaRoot", key), e);
                 }
                 groupsData.put(key, table);
             }

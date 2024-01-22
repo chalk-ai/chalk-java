@@ -8,6 +8,7 @@ import lombok.Getter;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BytesConsumer {
@@ -76,7 +77,7 @@ public class BytesConsumer {
 
     private static ConsumptionResult<Map<String, byte[]>> consumeByteItems(int startIdx, byte[] bytes) throws Exception {
         ConsumptionResult<Map<String, Object>> byteItemsMapResult = consumeJsonAttrs(startIdx, bytes);
-        Map<String, Integer> byteItemsMapInt = new HashMap<>();
+        Map<String, Integer> byteItemsMapInt = new LinkedHashMap<>();
 
         Map<String, Object> byteItemsMap = byteItemsMapResult.getResult();
         for (Map.Entry<String, Object> entry : byteItemsMap.entrySet()) {
