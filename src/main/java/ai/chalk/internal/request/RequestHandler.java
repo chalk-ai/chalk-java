@@ -83,10 +83,17 @@ public class RequestHandler {
         headers.put("User-Agent", "chalk-java");
         headers.put("X-Chalk-Client-Id", this.clientId.getValue());
 
+        String branchResolved = null;
         if (branchOverride != null && !branchOverride.isEmpty()) {
-            headers.put("X-Chalk-Branch-Id", branchOverride);
+            branchResolved = branchOverride;
         } else if (this.branch != null && !this.branch.isEmpty()) {
-            headers.put("X-Chalk-Branch-Id", this.branch);
+            branchResolved = this.branch;
+        }
+        if (branchResolved != null) {
+            headers.put("X-Chalk-Branch-Id", branchResolved);
+            headers.put("X-Chalk-Deployment-Type", "branch");
+        } else {
+            headers.put("X-Chalk-Deployment-Type", "engine");
         }
 
         if (environmentOverride != null && !environmentOverride.isEmpty()) {
