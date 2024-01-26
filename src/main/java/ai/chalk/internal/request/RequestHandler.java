@@ -321,7 +321,7 @@ public class RequestHandler {
         return new JWT(response.getAccessToken(), expiry);
     }
 
-    private void refreshJwt(boolean forceRefresh) throws ChalkException {
+    public void refreshJwt(boolean forceRefresh) throws ChalkException {
         if (
                 forceRefresh ||
                         jwt == null ||
