@@ -12,6 +12,7 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +30,16 @@ public class ChalkClientImpl implements ChalkClient {
         return ChalkClient.builder().build();
     }
 
+
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
-        // Side effect of populating instance config variables
-        this.resolveConfig(config);
+        ResolvedConfig resolvedConfig = this.resolveConfig(config);
+        this.apiServer = resolvedConfig.apiServer;
+        this.clientId = resolvedConfig.clientId;
+        this.clientSecret = resolvedConfig.clientSecret;
+        this.environmentId = resolvedConfig.environmentId;
+        this.initialEnvironment = resolvedConfig.environmentId;
+        this.branch = config.getBranch();
+
         this.handler = new RequestHandler(
                 config.getHttpClient(),
                 this.apiServer,
@@ -66,7 +74,9 @@ public class ChalkClientImpl implements ChalkClient {
         return this.handler.sendRequest(request).toResult();
     }
 
-    private void resolveConfig(BuilderImpl builder) throws ClientException {
+    public record ResolvedConfig(SourcedConfig apiServer, SourcedConfig clientId, SourcedConfig clientSecret, SourcedConfig environmentId) {}
+
+    private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
 
         String projectRoot;
@@ -97,18 +107,13 @@ public class ChalkClientImpl implements ChalkClient {
         SourcedConfig clientSecret = SourcedConfig.firstNonEmpty(clientSecretBuilder, clientSecretEnvVar, clientSecretChalkYaml);
         SourcedConfig environmentId = SourcedConfig.firstNonEmpty(environmentIdBuilder, environmentIdEnvVar, environmentIdChalkYaml);
 
-        this.apiServer = apiServer;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.environmentId = environmentId;
-        this.initialEnvironment = environmentId;
 
-        if (this.clientId.getValue().isEmpty() || this.clientSecret.getValue().isEmpty() || this.apiServer.getValue().isEmpty() || this.environmentId.getValue().isEmpty()) {
+        if (clientId.getValue().isEmpty() || clientSecret.getValue().isEmpty() || apiServer.getValue().isEmpty() || environmentId.getValue().isEmpty()) {
             System.err.println(this.getConfigStr());
             throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
         }
 
-
+        return new ResolvedConfig(apiServer, clientId, clientSecret, environmentId);
     }
 
     private String getConfigStr() {
