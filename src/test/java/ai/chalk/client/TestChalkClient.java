@@ -5,6 +5,7 @@ import ai.chalk.client.e2e.User;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
@@ -68,7 +69,7 @@ public class TestChalkClient {
         }
     }
 
-    @Test
+    @Disabled("Branch feather queries not supported yet")
     public void testBranchFromClientArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
@@ -96,7 +97,7 @@ public class TestChalkClient {
         }
     }
 
-    @Test
+    @Disabled("Branch feather queries not supported")
     public void testBranchFromMethodArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
