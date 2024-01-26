@@ -27,6 +27,11 @@ dependencies {
 test {
     useJUnitPlatform()
     jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
+    testLogging {
+        // Ensure that the standard output from the tests is shown in CI logs
+        showStandardStreams = true
+        events "passed", "skipped", "failed"
+    }
 }
 
 java {

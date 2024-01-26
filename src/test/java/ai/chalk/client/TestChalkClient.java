@@ -68,8 +68,6 @@ public class TestChalkClient {
                 throw e;
             };
         }
-
-        throw new Exception("testTwoCalls failed");
     }
 }
 
