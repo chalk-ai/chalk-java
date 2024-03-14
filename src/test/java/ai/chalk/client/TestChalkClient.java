@@ -40,6 +40,7 @@ public class TestChalkClient {
                 .build();
 
         try (OnlineQueryResult result = client.onlineQuery(params)) {
+            assert result.getErrors().length == 0;
             var users = result.unmarshal(User.class);
             assert users.length == userIds.length;
             assert users[0].socure_score.getValue().equals(123.0);

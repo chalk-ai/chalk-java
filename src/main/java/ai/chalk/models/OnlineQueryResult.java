@@ -54,9 +54,13 @@ public class OnlineQueryResult implements AutoCloseable {
      * close releases resources associated with the result.
      */
     public void close() {
-        scalarsTable.close();
-        for (Table table : groupsTables.values()) {
-            table.close();
+        if (scalarsTable != null) {
+            scalarsTable.close();
+        }
+        if (groupsTables != null) {
+            for (Table table : groupsTables.values()) {
+                table.close();
+            }
         }
     }
 

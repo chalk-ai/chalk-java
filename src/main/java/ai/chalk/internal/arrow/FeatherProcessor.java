@@ -74,7 +74,7 @@ public class FeatherProcessor {
                         vector = new Float8Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                     }
                 }
-                case LargeUtf8 -> vector = new VarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                case LargeUtf8 -> vector = new LargeVarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 case Bool -> vector = new BitVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 case LargeBinary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 default -> throw new Exception("Unsupported arrow type: " + field.getType().getTypeID());
@@ -117,8 +117,8 @@ public class FeatherProcessor {
                         doubleVector.setValueCount(values.size());
                     }
                 }
-                case Utf8 -> {
-                    VarCharVector varcharVector = (VarCharVector) vector;
+                case LargeUtf8 -> {
+                    LargeVarCharVector varcharVector = (LargeVarCharVector) vector;
                     varcharVector.allocateNew(values.size());
                     for (int i = 0; i < values.size(); i++) {
                         varcharVector.set(i, ((String) values.get(i)).getBytes());
@@ -133,7 +133,7 @@ public class FeatherProcessor {
                     }
                     boolVector.setValueCount(values.size());
                 }
-                case Binary -> {
+                case LargeBinary -> {
                     LargeVarBinaryVector binaryVector = (LargeVarBinaryVector) vector;
                     binaryVector.allocateNew(values.size());
                     for (int i = 0; i < values.size(); i++) {
