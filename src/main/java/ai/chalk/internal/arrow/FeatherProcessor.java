@@ -29,9 +29,9 @@ public class FeatherProcessor {
         javaToArrowType.put(Long.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Float.class, new ArrowType.FloatingPoint(FloatingPointPrecision.SINGLE));
         javaToArrowType.put(Double.class, new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE));
-        javaToArrowType.put(String.class, ArrowType.Utf8.INSTANCE);
+        javaToArrowType.put(String.class, ArrowType.LargeUtf8.INSTANCE);
         javaToArrowType.put(Boolean.class, ArrowType.Bool.INSTANCE);
-        javaToArrowType.put(byte[].class, ArrowType.Binary.INSTANCE);
+        javaToArrowType.put(byte[].class, ArrowType.LargeBinary.INSTANCE);
     }
 
     public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
@@ -74,9 +74,9 @@ public class FeatherProcessor {
                         vector = new Float8Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                     }
                 }
-                case Utf8 -> vector = new VarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                case LargeUtf8 -> vector = new LargeVarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 case Bool -> vector = new BitVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                case Binary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                case LargeBinary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 default -> throw new Exception("Unsupported arrow type: " + field.getType().getTypeID());
             }
             fieldVectors.add(vector);
@@ -117,9 +117,12 @@ public class FeatherProcessor {
                         doubleVector.setValueCount(values.size());
                     }
                 }
-                case Utf8 -> {
-                    VarCharVector varcharVector = (VarCharVector) vector;
-                    varcharVector.allocateNew(values.size());
+                case LargeUtf8 -> {
+                    LargeVarCharVector varcharVector = (LargeVarCharVector) vector;
+                    long totalBytes = values.stream()
+                            .mapToLong(v -> ((String) v).getBytes().length)
+                            .sum();
+                    varcharVector.allocateNew(totalBytes, values.size());
                     for (int i = 0; i < values.size(); i++) {
                         varcharVector.set(i, ((String) values.get(i)).getBytes());
                     }
@@ -133,9 +136,12 @@ public class FeatherProcessor {
                     }
                     boolVector.setValueCount(values.size());
                 }
-                case Binary -> {
+                case LargeBinary -> {
                     LargeVarBinaryVector binaryVector = (LargeVarBinaryVector) vector;
-                    binaryVector.allocateNew(values.size());
+                    long totalBytes = values.stream()
+                            .mapToLong(v -> ((byte[]) v).length)
+                            .sum();
+                    binaryVector.allocateNew(totalBytes, values.size());
                     for (int i = 0; i < values.size(); i++) {
                         binaryVector.set(i, (byte[]) values.get(i));
                     }
