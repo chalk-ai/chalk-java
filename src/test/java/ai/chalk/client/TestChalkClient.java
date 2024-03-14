@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 public class TestChalkClient {
 
@@ -27,12 +29,15 @@ public class TestChalkClient {
             throw FraudTemplateFeatures.getInitException();
         }
 
-        String[] userIds = new String[10];
+        String[] userIds = new String[3];
         for (int i = 0; i < userIds.length; i++) {
             userIds[i] = String.format("%d", i);
         }
+
+        var myBytes = new byte[]{1, 2, 3};
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
+                .withInput("user.binary_data", Arrays.asList(myBytes, myBytes, myBytes))
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 .build();
 
@@ -43,6 +48,32 @@ public class TestChalkClient {
         }
         ;
     }
+
+    @Test
+    public void testBinaryInput() throws Exception {
+        if (FraudTemplateFeatures.getInitException() != null) {
+            throw FraudTemplateFeatures.getInitException();
+        }
+
+        String[] userIds = new String[10];
+        for (int i = 0; i < userIds.length; i++) {
+            userIds[i] = String.format("%d", i);
+        }
+
+        var myBytes = new byte[10];
+        var params = OnlineQueryParams.builder()
+                .withInput(FraudTemplateFeatures.user.id, userIds)
+                .withInput("user.binary_data", Arrays.asList(myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes))
+                .withOutputs(FraudTemplateFeatures.user.socure_score)
+                .build();
+
+        try (OnlineQueryResult result = client.onlineQuery(params)) {
+            var users = result.unmarshal(User.class);
+            assert users.length == userIds.length;
+            assert users[0].socure_score.getValue().equals(123.0);
+        }
+    }
+
 
     @Test
     public void testTwoCalls() throws Exception {
