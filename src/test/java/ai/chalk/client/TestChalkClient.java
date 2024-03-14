@@ -34,10 +34,8 @@ public class TestChalkClient {
             userIds[i] = String.format("%d", i);
         }
 
-        var myBytes = new byte[]{1, 2, 3};
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
-                .withInput("user.binary_data", Arrays.asList(myBytes, myBytes, myBytes))
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 .build();
 
@@ -46,7 +44,6 @@ public class TestChalkClient {
             assert users.length == userIds.length;
             assert users[0].socure_score.getValue().equals(123.0);
         }
-        ;
     }
 
     @Test
@@ -60,10 +57,10 @@ public class TestChalkClient {
             userIds[i] = String.format("%d", i);
         }
 
-        var myBytes = new byte[10];
+        var myBytes = new byte[]{1, 2, 3};
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
-                .withInput("user.binary_data", Arrays.asList(myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes, myBytes))
+                .withInput("user.binary_data", Arrays.asList(myBytes, myBytes, myBytes))
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 .build();
 
