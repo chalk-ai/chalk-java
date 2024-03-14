@@ -52,7 +52,7 @@ public class TestChalkClient {
             throw FraudTemplateFeatures.getInitException();
         }
 
-        String[] userIds = new String[10];
+        String[] userIds = new String[3];
         for (int i = 0; i < userIds.length; i++) {
             userIds[i] = String.format("%d", i);
         }
