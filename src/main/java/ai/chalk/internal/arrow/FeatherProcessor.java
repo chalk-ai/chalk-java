@@ -24,7 +24,6 @@ public class FeatherProcessor {
     private static Map<Class<?>, ArrowType> javaToArrowType = new HashMap<>();
 
     static {
-        javaToArrowType.put(Byte.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Short.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Integer.class, new ArrowType.Int(64, true));
         javaToArrowType.put(Long.class, new ArrowType.Int(64, true));
@@ -32,6 +31,7 @@ public class FeatherProcessor {
         javaToArrowType.put(Double.class, new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE));
         javaToArrowType.put(String.class, ArrowType.Utf8.INSTANCE);
         javaToArrowType.put(Boolean.class, ArrowType.Bool.INSTANCE);
+        javaToArrowType.put(byte[].class, ArrowType.Binary.INSTANCE);
     }
 
     public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
@@ -76,6 +76,7 @@ public class FeatherProcessor {
                 }
                 case Utf8 -> vector = new VarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 case Bool -> vector = new BitVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                case Binary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
                 default -> throw new Exception("Unsupported arrow type: " + field.getType().getTypeID());
             }
             fieldVectors.add(vector);
@@ -131,6 +132,14 @@ public class FeatherProcessor {
                         boolVector.set(i, (boolean) values.get(i) ? 1 : 0);
                     }
                     boolVector.setValueCount(values.size());
+                }
+                case Binary -> {
+                    LargeVarBinaryVector binaryVector = (LargeVarBinaryVector) vector;
+                    binaryVector.allocateNew(values.size());
+                    for (int i = 0; i < values.size(); i++) {
+                        binaryVector.set(i, (byte[]) values.get(i));
+                    }
+                    binaryVector.setValueCount(values.size());
                 }
             }
         }
