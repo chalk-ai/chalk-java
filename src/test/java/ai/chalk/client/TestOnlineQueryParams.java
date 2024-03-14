@@ -219,6 +219,13 @@ public class TestOnlineQueryParams {
         BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete);
     }
 
+    @Test
+    public void testLargeUtf8AsInput() throws Exception {
+        var largeString = "a".repeat(100000);
+        var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString)).withOutputs("user.today", "user.socure_score").build();
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
+
 
     @Test
     public void testSerializationWithListAsInputValuesBatch() throws Exception {
