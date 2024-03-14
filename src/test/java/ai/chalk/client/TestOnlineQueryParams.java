@@ -222,7 +222,14 @@ public class TestOnlineQueryParams {
     @Test
     public void testLargeUtf8AsInput() throws Exception {
         var largeString = "a".repeat(100000);
-        var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString)).withOutputs("user.today", "user.socure_score").build();
+        var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
+
+    @Test
+    public void testLargeBinaryAsInput() throws Exception {
+        var largeBinary = "a".repeat(100000).getBytes();
+        var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
         BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 

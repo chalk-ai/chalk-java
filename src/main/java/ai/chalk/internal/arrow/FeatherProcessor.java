@@ -119,7 +119,10 @@ public class FeatherProcessor {
                 }
                 case LargeUtf8 -> {
                     LargeVarCharVector varcharVector = (LargeVarCharVector) vector;
-                    varcharVector.allocateNew(values.size());
+                    long totalBytes = values.stream()
+                            .mapToLong(v -> ((String) v).getBytes().length)
+                            .sum();
+                    varcharVector.allocateNew(totalBytes, values.size());
                     for (int i = 0; i < values.size(); i++) {
                         varcharVector.set(i, ((String) values.get(i)).getBytes());
                     }
@@ -135,7 +138,10 @@ public class FeatherProcessor {
                 }
                 case LargeBinary -> {
                     LargeVarBinaryVector binaryVector = (LargeVarBinaryVector) vector;
-                    binaryVector.allocateNew(values.size());
+                    long totalBytes = values.stream()
+                            .mapToLong(v -> ((byte[]) v).length)
+                            .sum();
+                    binaryVector.allocateNew(totalBytes, values.size());
                     for (int i = 0; i < values.size(); i++) {
                         binaryVector.set(i, (byte[]) values.get(i));
                     }
