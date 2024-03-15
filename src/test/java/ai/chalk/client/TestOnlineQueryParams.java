@@ -321,7 +321,7 @@ public class TestOnlineQueryParams {
         var p2 = OnlineQueryParams
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
-                .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
+                .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
                 .withOutputs("user.today", "user.socure_score")
                 .build();
         var p3 = OnlineQueryParams
