@@ -47,9 +47,9 @@ import ai.chalk.client.ChalkClient;
 
         
 ChalkClient client = ChalkClient.builder()
-                    .setEnvironmentId("tmnma7wesandrsn")
-                    .setClientId("kjhsfd43kjhfd8fdjk")
-                    .setClientSecret("mnxcvuyqwmj7cnwe4mgfnuywe6jnas9sdn")
+                    .withEnvironmentId("tmnma7wesandrsn")
+                    .withClientId("kjhsfd43kjhfd8fdjk")
+                    .withClientSecret("mnxcvuyqwmj7cnwe4mgfnuywe6jnas9sdn")
                     .build();
 ```
 
