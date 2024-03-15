@@ -272,7 +272,7 @@ public class TestOnlineQueryParams {
      * Aims to test all methods that take `Feature` as keys to the inputs map.
      */
     @Test
-    public void testInputsWithCodegenClass() throws Exception {
+    public void testArrayInputsWithCodegenClass() throws Exception {
         String[] expectedInputs = new String[]{"1", "2", "3"};
         var p1 = OnlineQueryParams
                 .builder()
@@ -304,6 +304,47 @@ public class TestOnlineQueryParams {
             BytesProducer.convertOnlineQueryParamsToBytes(p);
         }
     }
+
+    /**
+     * Aims to test all methods that take `Feature` as keys to the inputs map.
+     * This tests the case where the inputs passed in are lists instead of arrays.
+     */
+    @Test
+    public void testListInputsWithCodegenClass() throws Exception {
+        String[] arrInputs = new String[]{"1", "2", "3"};
+        List<String> expectedInputs = Arrays.asList(arrInputs);
+        var p1 = OnlineQueryParams
+                .builder()
+                .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+        var p2 = OnlineQueryParams
+                .builder()
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+        var p3 = OnlineQueryParams
+                .builder()
+                .withOutputs("user.today", "user.socure_score")
+                .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
+                .build();
+        var p4 = OnlineQueryParams
+                .builder()
+                .withOutputs("user.today")
+                .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
+                .build();
+
+
+        var allParams = new OnlineQueryParamsComplete[]{p1, p2, p3, p4};
+        for (OnlineQueryParamsComplete p : allParams) {
+            assert p.getInputs().get("test_user.id").equals(expectedInputs);
+            // Test serialization is OK.
+            BytesProducer.convertOnlineQueryParamsToBytes(p);
+        }
+    }
+
+
 
     /**
      * Aims to test all methods that take `Feature` as outputs.
