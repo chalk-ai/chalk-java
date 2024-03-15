@@ -138,6 +138,10 @@ public class OnlineQueryParams {
             return this._withInput(feature.getFqn(), Arrays.asList(value));
         }
 
+        public <K> T _withInput(Feature<K> feature, List<K> value) {
+            return this._withInput(feature.getFqn(), value);
+        }
+
         protected T _withInputs(Map<String, List<?>> inputs) {
             if (this.inputs == null) {
                 this.inputs = new HashMap<>();
@@ -308,6 +312,10 @@ public class OnlineQueryParams {
             return this._withInput(feature, values);
         }
 
+        public final <T> BuilderComplete withInput(Feature<T> feature, List<T> values) {
+            return this._withInput(feature, values);
+        }
+
         public BuilderComplete withOutputs(String... outputs) {
             return this._withOutputs(outputs);
         }
@@ -369,6 +377,10 @@ public class OnlineQueryParams {
             return this._withInput(feature, values);
         }
 
+        public final <T> BuilderWithInputs withInput(Feature<T> feature, List<T> values) {
+            return this._withInput(feature, values);
+        }
+
         public BuilderComplete withOutputs(String... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
@@ -419,6 +431,10 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
+            return newBuilderComplete().withInput(feature, values);
+        }
+
+        public final <T> BuilderComplete withInput(Feature<T> feature, List<T> values) {
             return newBuilderComplete().withInput(feature, values);
         }
 
@@ -486,6 +502,10 @@ public class OnlineQueryParams {
 
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
+            return newBuilderWithInputs().withInput(feature, value);
+        }
+
+        public final <T> BuilderWithInputs withInput(Feature<T> feature, List<T> value) {
             return newBuilderWithInputs().withInput(feature, value);
         }
 
