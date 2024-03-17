@@ -10,10 +10,15 @@ import java.util.Optional;
 public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
     public Feature<String> favoriteUtf8;
+    public Feature<String> favoriteUtf8Nullable;
     public Feature<String> favoriteLargeUtf8;
+    public Feature<String> favoriteLargeUtf8Nullable;
     public Feature<Byte> favoriteTinyInt;
+    public Feature<Byte> favoriteTinyIntNullable;
     public Feature<Short> favoriteSmallInt;
+    public Feature<Short> favoriteSmallIntNullable;
     public Feature<Integer> favoriteInt;
+    public Feature<Integer> favoriteIntNullable;
     public Feature<Long> favoriteBigInt;
     public Feature<Long> favoriteBigIntNullable;
     public Feature<Double> favoriteFloat8;
@@ -23,7 +28,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<Boolean> favoriteBoolean;
     public Feature<Boolean> favoriteBooleanNullable;
     public Feature<java.time.LocalDate> favoriteDateMilli;
-    public Feature<java.time.LocalDate> getFavoriteDateMilliNullable;
+    public Feature<java.time.LocalDate> favoriteDateMilliNullable;
     public Feature<java.time.LocalDate> favoriteDateDay;
     public Feature<java.time.LocalDate> favoriteDateDayNullable;
     public Feature<java.time.LocalDateTime> favoriteTimestampSec;
