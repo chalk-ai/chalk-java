@@ -114,6 +114,12 @@ public class Unmarshaller {
                     // instead of having the struct itself be a feature.
                     if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
                         var structObj = row.getStruct(fqn);
+                        if (structObj == null) {
+                            if (!arrowField.isNullable()) {
+                                throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
+                            }
+                            continue;
+                        }
                         unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
                     } else {
                         throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
@@ -292,6 +298,9 @@ public class Unmarshaller {
                                 originalList = largeListVector.getObject(row.getRowNumber());
                             } else {
                                 originalList = row.getList(fqn);
+                            }
+                            if (originalList == null) {
+                                break;
                             }
                             var resultList = new ArrayList();
                             for (Object rawObj: originalList) {

@@ -520,12 +520,6 @@ public class TestUnmarshaller {
         var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
 
-        // Nullable features start
-        assert users[0].favoriteBigIntNullable.getValue() == 1L;
-        assert users[1].favoriteBigIntNullable.getValue() == 2L;
-        assert users[2].favoriteBigIntNullable.getValue() == null;
-        // Nullable features end
-
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;
         assert users[2].favoriteBigInt.getValue() == 3L;
@@ -704,9 +698,16 @@ public class TestUnmarshaller {
         assert users[0].favoriteWindowed.bucket_601s.getValue().equals(4.0);
         assert users[1].favoriteWindowed.bucket_601s.getValue().equals(5.0);
         assert users[2].favoriteWindowed.bucket_601s.getValue().equals(6.0);
+
         // TODO: Support complex structs and lists
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+
+        // Nullable features start
+        assert users[0].favoriteBigIntNullable.getValue() == 1L;
+        assert users[1].favoriteBigIntNullable.getValue() == 2L;
+        assert users[2].favoriteBigIntNullable.getValue() == null;
+        // Nullable features end
     }
 
     @Test
