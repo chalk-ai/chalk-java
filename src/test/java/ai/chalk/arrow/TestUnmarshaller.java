@@ -77,6 +77,15 @@ public class TestUnmarshaller {
         bigIntVector.setValueCount(values.length);
         fieldVectors.add(bigIntVector);
 
+        var optionalBigIntVector = new BigIntVector(ArrowFeatures.user.favoriteOptionalBigInt.getFqn(), allocator);
+        bigIntVector.allocateNew();
+        long[] optionalLongValues = {1, 2, null};
+        for (int i = 0; i < optionalLongValues.length; i++) {
+            optionalBigIntVector.set(i, optionalLongValues[i]);
+        }
+        optionalBigIntVector.setValueCount(optionalLongValues.length);
+        fieldVectors.add(optionalBigIntVector);
+
         var intVector = new IntVector(ArrowFeatures.user.favoriteInt.getFqn(), allocator);
         intVector.allocateNew();
         int[] intValues = {1, 2, 3};
@@ -503,6 +512,10 @@ public class TestUnmarshaller {
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;
         assert users[2].favoriteBigInt.getValue() == 3L;
+
+        assert users[0].favoriteOptionalBigInt.getValue().get() == 1L;
+        assert users[1].favoriteOptionalBigInt.getValue().get() == 2L;
+        assert users[2].favoriteOptionalBigInt.getValue().isEmpty();
 
         assert users[0].favoriteInt.getValue() == 1;
         assert users[1].favoriteInt.getValue() == 2;
