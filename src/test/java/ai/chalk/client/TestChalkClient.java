@@ -36,7 +36,7 @@ public class TestChalkClient {
 
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
-                .withOutputs(FraudTemplateFeatures.user.socure_score)
+                .withOutputs("user.full_name_optional")
                 .build();
 
         try (OnlineQueryResult result = client.onlineQuery(params)) {

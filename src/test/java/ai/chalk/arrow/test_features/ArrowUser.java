@@ -5,6 +5,7 @@ import ai.chalk.features.FeaturesClass;
 import ai.chalk.features.HasMany;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
@@ -14,6 +15,8 @@ public class ArrowUser extends FeaturesClass {
     public Feature<Short> favoriteSmallInt;
     public Feature<Integer> favoriteInt;
     public Feature<Long> favoriteBigInt;
+
+    public Feature<Long> favoriteBigIntNullable;
     public Feature<Double> favoriteFloat8;
     public Feature<Float> favoriteFloat4;
     public Feature<Boolean> favoriteBoolean;

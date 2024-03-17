@@ -9,6 +9,7 @@ import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.holders.NullableBigIntHolder;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
@@ -58,6 +59,24 @@ public class TestUnmarshaller {
     public Table getTestTableWithAllArrowTypes() {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        // Nullable feature start
+        var bigIntVectorNullable = new BigIntVector(ArrowFeatures.user.favoriteBigIntNullable.getFqn(), allocator);
+        bigIntVectorNullable.allocateNew();
+        Long[] optionalLongValues = {1L, 2L, null};
+        for (int i = 0; i < optionalLongValues.length; i++) {
+            var holder = new NullableBigIntHolder();
+            if (optionalLongValues[i] != null) {
+                holder.value = optionalLongValues[i];
+                holder.isSet = 1;
+            } else {
+                holder.isSet = 0;
+            }
+            bigIntVectorNullable.set(i, holder);
+        }
+        bigIntVectorNullable.setValueCount(optionalLongValues.length);
+        fieldVectors.add(bigIntVectorNullable);
+        // Nullable feature end
 
         var idVector = new VarCharVector(ArrowFeatures.user.id.getFqn(), allocator);
         idVector.allocateNew();
@@ -487,7 +506,7 @@ public class TestUnmarshaller {
         fieldVectors.add(windowedDoubleVector__601s__);
 
 
-
+        // TODO: Suupport binary
         // TODO: Support Decimal
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
@@ -500,6 +519,13 @@ public class TestUnmarshaller {
 
         var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
+
+        // Nullable features start
+        assert users[0].favoriteBigIntNullable.getValue() == 1L;
+        assert users[1].favoriteBigIntNullable.getValue() == 2L;
+        assert users[2].favoriteBigIntNullable.getValue() == null;
+        // Nullable features end
+
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;
         assert users[2].favoriteBigInt.getValue() == 3L;
