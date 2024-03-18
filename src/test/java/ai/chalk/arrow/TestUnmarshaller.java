@@ -9,7 +9,6 @@ import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
-import org.apache.arrow.vector.holders.NullableBigIntHolder;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
