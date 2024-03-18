@@ -5,7 +5,6 @@ import ai.chalk.features.FeaturesClass;
 import ai.chalk.features.HasMany;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
