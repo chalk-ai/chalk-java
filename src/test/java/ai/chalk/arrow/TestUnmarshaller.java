@@ -344,7 +344,8 @@ public class TestUnmarshaller {
             }
          */
         var structVector = StructVector.empty(ArrowFeatures.user.favoriteStruct.getFqn(), allocator);
-        structVector.setValueCount(3);
+        var numRows = 3;
+        structVector.setValueCount(numRows);
         structVector.allocateNew();
 
         var structWriter = structVector.getWriter();
@@ -354,7 +355,7 @@ public class TestUnmarshaller {
 
         int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
         var datetimeWriter = structWriter.timeStampSec("nice_datetime");
-        for (var i = 0; i < niceNumberValues.length; i++) {
+        for (var i = 0; i < numRows; i++) {
             structWriter.start();
             longWriter.writeBigInt(niceNumberValues[i]);
             datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
@@ -784,14 +785,39 @@ public class TestUnmarshaller {
         fieldVectors.add(durationNanoVectorNullable);
 
         var structVectorNullable = StructVector.empty(ArrowFeatures.user.favoriteStructNullable.getFqn(), allocator);
-        structVectorNullable.setValueCount(3);
+        var numNullableRows = 3;
+        structVectorNullable.setValueCount(numNullableRows);
         structVectorNullable.allocateNew();
 
+        var structWriterNullable = structVectorNullable.getWriter();
+        var longWriterNullable = structWriterNullable.bigInt("nice_number");
+        var datetimeWriterNullable = structWriterNullable.timeStampSec("nice_datetime");
+        // Fill in every row but the last
+        for (var i = 0; i < numNullableRows - 1; i++) {
+            structWriterNullable.start();
+            longWriterNullable.writeBigInt(niceNumberValues[i]);
+            datetimeWriterNullable.writeTimeStampSec(niceDatetimeValues[i]);
+            structWriterNullable.end();
+        }
         fieldVectors.add(structVectorNullable);
 
         var listVectorNullable = ListVector.empty(ArrowFeatures.user.favoriteStringListNullable.getFqn(), allocator);
-        listVectorNullable.setValueCount(3);
+        listVectorNullable.setValueCount(numNullableRows);
         listVectorNullable.allocateNew();
+
+        var listWriterNullable = listVectorNullable.getWriter();
+        for (var i = 0; i < numNullableRows - 1; i++) {
+            listWriterNullable.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var character = varCharValues[idx];
+                var bytes = character.getBytes();
+                ArrowBuf tempBuf = allocator.buffer(bytes.length);
+                tempBuf.setBytes(0, bytes);
+                listWriterNullable.writeVarChar(0, bytes.length, tempBuf);
+            }
+            listWriterNullable.endList();
+        }
         fieldVectors.add(listVectorNullable);
 
         // TODO: Support binary
@@ -1069,9 +1095,17 @@ public class TestUnmarshaller {
         assert users[1].favoriteLargeUtf8Nullable.getValue() == null;
         assert users[2].favoriteLargeUtf8Nullable.getValue().equals("");
 
-        //        assert users[1].favoriteStructNullable == null;
-        //        assert users[1].favoriteStringListNullable == null;
+        // TODO: Maybe should not propogate nulls, i.e. make favoriteStructNullable null instead of its fields
+        assert users[0].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructNullable.nice_datetime.getValue() == null;
+        assert users[0].favoriteStructNullable.nice_number.getValue().equals(1L);
+        assert users[1].favoriteStructNullable.nice_number.getValue().equals(2L);
+        assert users[2].favoriteStructNullable.nice_number.getValue() == null;
 
+        assert users[0].favoriteStringListNullable.getValue().equals(Arrays.asList("a", "b", "c"));
+        assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
+        assert users[2].favoriteStringListNullable.getValue() == null;
         // Nullable features end
     }
 
