@@ -9,6 +9,7 @@ import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.holders.NullableBigIntHolder;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
@@ -343,7 +344,8 @@ public class TestUnmarshaller {
             }
          */
         var structVector = StructVector.empty(ArrowFeatures.user.favoriteStruct.getFqn(), allocator);
-        structVector.setValueCount(3);
+        var numRows = 3;
+        structVector.setValueCount(numRows);
         structVector.allocateNew();
 
         var structWriter = structVector.getWriter();
@@ -353,7 +355,7 @@ public class TestUnmarshaller {
 
         int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
         var datetimeWriter = structWriter.timeStampSec("nice_datetime");
-        for (var i = 0; i < niceNumberValues.length; i++) {
+        for (var i = 0; i < numRows; i++) {
             structWriter.start();
             longWriter.writeBigInt(niceNumberValues[i]);
             datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
@@ -486,9 +488,341 @@ public class TestUnmarshaller {
         windowedDoubleVector__601s__.setValueCount(windowedDoubleValues__601s__.length);
         fieldVectors.add(windowedDoubleVector__601s__);
 
+        // Add nullable versions of the above vectors
+
+        var bigIntVectorNullable = new BigIntVector(ArrowFeatures.user.favoriteBigIntNullable.getFqn(), allocator);
+        bigIntVectorNullable.allocateNew();
+        Long[] optionalLongValues = {1L, null, 3L};
+        for (int i = 0; i < optionalLongValues.length; i++) {
+            if (optionalLongValues[i] != null) {
+                bigIntVectorNullable.set(i, optionalLongValues[i]);
+            }
+        }
+        bigIntVectorNullable.setValueCount(optionalLongValues.length);
+        fieldVectors.add(bigIntVectorNullable);
+
+        var intVectorNullable = new IntVector(ArrowFeatures.user.favoriteIntNullable.getFqn(), allocator);
+        intVectorNullable.allocateNew();
+        Integer[] optionalIntValues = {1, null, 3};
+        for (int i = 0; i < optionalIntValues.length; i++) {
+            if (optionalIntValues[i] != null) {
+                intVectorNullable.set(i, optionalIntValues[i]);
+            }
+        }
+        intVectorNullable.setValueCount(optionalIntValues.length);
+        fieldVectors.add(intVectorNullable);
+
+        var smallIntVectorNullable = new SmallIntVector(ArrowFeatures.user.favoriteSmallIntNullable.getFqn(), allocator);
+        smallIntVectorNullable.allocateNew();
+        Short[] optionalSmallIntValues = {1, null, 3};
+        for (int i = 0; i < optionalSmallIntValues.length; i++) {
+            if (optionalSmallIntValues[i] != null) {
+                smallIntVectorNullable.set(i, optionalSmallIntValues[i]);
+            }
+        }
+        smallIntVectorNullable.setValueCount(optionalSmallIntValues.length);
+        fieldVectors.add(smallIntVectorNullable);
+
+        var tinyIntVectorNullable = new TinyIntVector(ArrowFeatures.user.favoriteTinyIntNullable.getFqn(), allocator);
+        tinyIntVectorNullable.allocateNew();
+        Byte[] optionalTinyIntValues = {1, null, 3};
+        for (int i = 0; i < optionalTinyIntValues.length; i++) {
+            if (optionalTinyIntValues[i] != null) {
+                tinyIntVectorNullable.set(i, optionalTinyIntValues[i]);
+            }
+        }
+        tinyIntVectorNullable.setValueCount(optionalTinyIntValues.length);
+        fieldVectors.add(tinyIntVectorNullable);
+
+        var floatVectorNullable = new Float4Vector(ArrowFeatures.user.favoriteFloat4Nullable.getFqn(), allocator);
+        floatVectorNullable.allocateNew();
+        Float[] optionalFloatValues = {1.0f, null, 3.0f};
+        for (int i = 0; i < optionalFloatValues.length; i++) {
+            if (optionalFloatValues[i] != null) {
+                floatVectorNullable.set(i, optionalFloatValues[i]);
+            }
+        }
+        floatVectorNullable.setValueCount(optionalFloatValues.length);
+        fieldVectors.add(floatVectorNullable);
+
+        var doubleVectorNullable = new Float8Vector(ArrowFeatures.user.favoriteFloat8Nullable.getFqn(), allocator);
+        doubleVectorNullable.allocateNew();
+        Double[] optionalDoubleValues = {1.0, null, 3.0};
+        for (int i = 0; i < optionalDoubleValues.length; i++) {
+            if (optionalDoubleValues[i] != null) {
+                doubleVectorNullable.set(i, optionalDoubleValues[i]);
+            }
+        }
+        doubleVectorNullable.setValueCount(optionalDoubleValues.length);
+        fieldVectors.add(doubleVectorNullable);
+
+        var utf8VectorNullable = new VarCharVector(ArrowFeatures.user.favoriteUtf8Nullable.getFqn(), allocator);
+        utf8VectorNullable.allocateNew();
+        String[] optionalUtf8Values = {"a", null, ""};
+        for (int i = 0; i < optionalUtf8Values.length; i++) {
+            if (optionalUtf8Values[i] != null) {
+                utf8VectorNullable.set(i, optionalUtf8Values[i].getBytes());
+            }
+        }
+        utf8VectorNullable.setValueCount(optionalUtf8Values.length);
+        fieldVectors.add(utf8VectorNullable);
 
 
+        var largeUtf8VectorNullable = new LargeVarCharVector(ArrowFeatures.user.favoriteLargeUtf8Nullable.getFqn(), allocator);
+        largeUtf8VectorNullable.allocateNew();
+        String[] optionalLargeUtf8Values = {"a", null, ""};
+        for (int i = 0; i < optionalLargeUtf8Values.length; i++) {
+            if (optionalLargeUtf8Values[i] != null) {
+                largeUtf8VectorNullable.set(i, optionalLargeUtf8Values[i].getBytes());
+            }
+        }
+        largeUtf8VectorNullable.setValueCount(optionalLargeUtf8Values.length);
+         fieldVectors.add(largeUtf8VectorNullable);
+
+        var booleanVectorNullable = new BitVector(ArrowFeatures.user.favoriteBooleanNullable.getFqn(), allocator);
+        booleanVectorNullable.allocateNew();
+        Boolean[] optionalBooleanValues = {true, null, false};
+        for (int i = 0; i < optionalBooleanValues.length; i++) {
+            if (optionalBooleanValues[i] != null) {
+                booleanVectorNullable.set(i, optionalBooleanValues[i] ? 1 : 0);
+            }
+        }
+        booleanVectorNullable.setValueCount(optionalBooleanValues.length);
+        fieldVectors.add(booleanVectorNullable);
+
+        var dateDayVectorNullable = new DateDayVector(ArrowFeatures.user.favoriteDateDayNullable.getFqn(), allocator);
+        dateDayVectorNullable.allocateNew();
+        Integer[] optionalDateDayValues = {18839, null, 18841};
+        for (int i = 0; i < optionalDateDayValues.length; i++) {
+            if (optionalDateDayValues[i] != null) {
+                dateDayVectorNullable.set(i, optionalDateDayValues[i]);
+            }
+        }
+        dateDayVectorNullable.setValueCount(optionalDateDayValues.length);
+        fieldVectors.add(dateDayVectorNullable);
+
+        var dateMilliVectorNullable = new DateMilliVector(ArrowFeatures.user.favoriteDateMilliNullable.getFqn(), allocator);
+        dateMilliVectorNullable.allocateNew();
+        Long[] optionalDateMilliValues = {1627689600L, null, 1627862400L};;
+        for (int i = 0; i < optionalDateMilliValues.length; i++) {
+            if (optionalDateMilliValues[i] != null) {
+                dateMilliVectorNullable.set(i, optionalDateMilliValues[i]);
+            }
+        }
+        dateMilliVectorNullable.setValueCount(optionalDateMilliValues.length);
+        fieldVectors.add(dateMilliVectorNullable);
+        
+        var timeSecVectorNullable = new TimeSecVector(ArrowFeatures.user.favoriteTimeSecNullable.getFqn(), allocator);
+        timeSecVectorNullable.allocateNew();
+        Integer[] optionalTimeSecValues = {36840, null, 36842};
+        for (int i = 0; i < optionalTimeSecValues.length; i++) {
+            if (optionalTimeSecValues[i] != null) {
+                timeSecVectorNullable.set(i, optionalTimeSecValues[i]);
+            }
+        }
+        timeSecVectorNullable.setValueCount(optionalTimeSecValues.length);
+        fieldVectors.add(timeSecVectorNullable);
+        
+        var timeMilliVectorNullable = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilliNullable.getFqn(), allocator);
+        timeMilliVectorNullable.allocateNew();
+        Integer[] optionalTimeMilliValues = {36840001, null, 36842001};
+        for (int i = 0; i < optionalTimeMilliValues.length; i++) {
+            if (optionalTimeMilliValues[i] != null) {
+                timeMilliVectorNullable.set(i, optionalTimeMilliValues[i]);
+            }
+        }
+        timeMilliVectorNullable.setValueCount(optionalTimeMilliValues.length);
+        fieldVectors.add(timeMilliVectorNullable);
+        
+        var timeMicroVectorNullable = new TimeMicroVector(ArrowFeatures.user.favoriteTimeMicroNullable.getFqn(), allocator);
+        timeMicroVectorNullable.allocateNew();
+        Long[] optionalTimeMicroValues = {36840000001L, null, 36842000001L};
+        for (int i = 0; i < optionalTimeMicroValues.length; i++) {
+            if (optionalTimeMicroValues[i] != null) {
+                timeMicroVectorNullable.set(i, optionalTimeMicroValues[i]);
+            }
+        }
+        timeMicroVectorNullable.setValueCount(optionalTimeMicroValues.length);
+        fieldVectors.add(timeMicroVectorNullable);
+        
+        var timeNanoVectorNullable = new TimeNanoVector(ArrowFeatures.user.favoriteTimeNanoNullable.getFqn(), allocator);
+        timeNanoVectorNullable.allocateNew();
+        Long[] optionalTimeNanoValues = {36840000000001L, null, 36842000000001L};
+        for (int i = 0; i < optionalTimeNanoValues.length; i++) {
+            if (optionalTimeNanoValues[i] != null) {
+                timeNanoVectorNullable.set(i, optionalTimeNanoValues[i]);
+            }
+        }
+        timeNanoVectorNullable.setValueCount(optionalTimeNanoValues.length);
+        fieldVectors.add(timeNanoVectorNullable);
+
+        var timestampSecVectorNullable = new TimeStampSecVector(ArrowFeatures.user.favoriteTimestampSecNullable.getFqn(), allocator);
+        timestampSecVectorNullable.allocateNew();
+        Integer[] optionalTimestampSecValues = {1627689600, null, 1627862400};
+        for (int i = 0; i < optionalTimestampSecValues.length; i++) {
+            if (optionalTimestampSecValues[i] != null) {
+                timestampSecVectorNullable.set(i, optionalTimestampSecValues[i]);
+            }
+        }
+        timestampSecVectorNullable.setValueCount(optionalTimestampSecValues.length);
+        fieldVectors.add(timestampSecVectorNullable);
+        
+        var timestampMilliVectorNullable = new TimeStampMilliVector(ArrowFeatures.user.favoriteTimestampMilliNullable.getFqn(), allocator);
+        timestampMilliVectorNullable.allocateNew();
+        Long[] optionalTimestampMilliValues = {1627689600001L, null, 1627862400001L};
+        for (int i = 0; i < optionalTimestampMilliValues.length; i++) {
+            if (optionalTimestampMilliValues[i] != null) {
+                timestampMilliVectorNullable.set(i, optionalTimestampMilliValues[i]);
+            }
+        }
+        timestampMilliVectorNullable.setValueCount(optionalTimestampMilliValues.length);
+        fieldVectors.add(timestampMilliVectorNullable);
+        
+        var timestampMicroVectorNullable = new TimeStampMicroVector(ArrowFeatures.user.favoriteTimestampMicroNullable.getFqn(), allocator);
+        timestampMicroVectorNullable.allocateNew();
+        Long[] optionalTimestampMicroValues = {1627689600000001L, null, 1627862400000001L};
+        for (int i = 0; i < optionalTimestampMicroValues.length; i++) {
+            if (optionalTimestampMicroValues[i] != null) {
+                timestampMicroVectorNullable.set(i, optionalTimestampMicroValues[i]);
+            }
+        }
+        timestampMicroVectorNullable.setValueCount(optionalTimestampMicroValues.length);
+        fieldVectors.add(timestampMicroVectorNullable);
+        
+        var timestampNanoVectorNullable = new TimeStampNanoVector(ArrowFeatures.user.favoriteTimestampNanoNullable.getFqn(), allocator);
+        timestampNanoVectorNullable.allocateNew();
+        Long[] optionalTimestampNanoValues = {1627689600000000001L, null, 1627862400000000001L};
+        for (int i = 0; i < optionalTimestampNanoValues.length; i++) {
+            if (optionalTimestampNanoValues[i] != null) {
+                timestampNanoVectorNullable.set(i, optionalTimestampNanoValues[i]);
+            }
+        }
+        timestampNanoVectorNullable.setValueCount(optionalTimestampNanoValues.length);
+        fieldVectors.add(timestampNanoVectorNullable);
+
+        var timestampSecTzVectorNullable = new TimeStampSecTZVector(ArrowFeatures.user.favoriteTimestampSecTzNullable.getFqn(), secTzType, allocator);
+        timestampSecTzVectorNullable.allocateNew();
+        Integer[] optionalTimestampSecTzValues = {1627689600, null, 1627862400};
+        for (int i = 0; i < optionalTimestampSecTzValues.length; i++) {
+            if (optionalTimestampSecTzValues[i] != null) {
+                timestampSecTzVectorNullable.set(i, optionalTimestampSecTzValues[i]);
+            }
+        }
+        timestampSecTzVectorNullable.setValueCount(optionalTimestampSecTzValues.length);
+        fieldVectors.add(timestampSecTzVectorNullable);
+
+        var timestampMilliTzVectorNullable = new TimeStampMilliTZVector(ArrowFeatures.user.favoriteTimestampMilliTzNullable.getFqn(), milliTzType, allocator);
+        timestampMilliTzVectorNullable.allocateNew();
+        Long[] optionalTimestampMilliTzValues = {1627689600001L, null, 1627862400001L};
+        for (int i = 0; i < optionalTimestampMilliTzValues.length; i++) {
+            if (optionalTimestampMilliTzValues[i] != null) {
+                timestampMilliTzVectorNullable.set(i, optionalTimestampMilliTzValues[i]);
+            }
+        }
+        timestampMilliTzVectorNullable.setValueCount(optionalTimestampMilliTzValues.length);
+        fieldVectors.add(timestampMilliTzVectorNullable);
+
+        var timestampMicroTzVectorNullable = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTzNullable.getFqn(), microTzType, allocator);
+        timestampMicroTzVectorNullable.allocateNew();
+        Long[] optionalTimestampMicroTzValues = {1627689600000001L, null, 1627862400000001L};
+        for (int i = 0; i < optionalTimestampMicroTzValues.length; i++) {
+            if (optionalTimestampMicroTzValues[i] != null) {
+                timestampMicroTzVectorNullable.set(i, optionalTimestampMicroTzValues[i]);
+            }
+        }
+        timestampMicroTzVectorNullable.setValueCount(optionalTimestampMicroTzValues.length);
+        fieldVectors.add(timestampMicroTzVectorNullable);
+
+        var timestampNanoTzVectorNullable = new TimeStampNanoTZVector(ArrowFeatures.user.favoriteTimestampNanoTzNullable.getFqn(), nanoTzType, allocator);
+        timestampNanoTzVectorNullable.allocateNew();
+        Long[] optionalTimestampNanoTzValues = {1627689600000000001L, null, 1627862400000000001L};
+        for (int i = 0; i < optionalTimestampNanoTzValues.length; i++) {
+            if (optionalTimestampNanoTzValues[i] != null) {
+                timestampNanoTzVectorNullable.set(i, optionalTimestampNanoTzValues[i]);
+            }
+        }
+        timestampNanoTzVectorNullable.setValueCount(optionalTimestampNanoTzValues.length);
+        fieldVectors.add(timestampNanoTzVectorNullable);
+
+        var durationSecVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationSecNullable.getFqn(), durationSecType, allocator);
+        durationSecVectorNullable.allocateNew();
+        Integer[] optionalDurationSecValues = {36900, null, 36902};
+        for (int i = 0; i < optionalDurationSecValues.length; i++) {
+            if (optionalDurationSecValues[i] != null) {
+                durationSecVectorNullable.set(i, optionalDurationSecValues[i]);
+            }
+        }
+        fieldVectors.add(durationSecVectorNullable);
+
+        var durationMilliVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationMilliNullable.getFqn(), durationMilliType, allocator);
+        durationMilliVectorNullable.allocateNew();
+        Integer[] optionalDurationMilliValues = {36840001, null, 36842001};
+        for (int i = 0; i < optionalDurationMilliValues.length; i++) {
+            if (optionalDurationMilliValues[i] != null) {
+                durationMilliVectorNullable.set(i, optionalDurationMilliValues[i]);
+            }
+        }
+        fieldVectors.add(durationMilliVectorNullable);
+
+        var durationMicroVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationMicroNullable.getFqn(), durationMicroType, allocator);
+        durationMicroVectorNullable.allocateNew();
+        Long[] optionalDurationMicroValues = {36840000001L, null, 36842000001L};
+        for (int i = 0; i < optionalDurationMicroValues.length; i++) {
+            if (optionalDurationMicroValues[i] != null) {
+                durationMicroVectorNullable.set(i, optionalDurationMicroValues[i]);
+            }
+        }
+        fieldVectors.add(durationMicroVectorNullable);
+
+        var durationNanoVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationNanoNullable.getFqn(), durationNanoType, allocator);
+        durationNanoVectorNullable.allocateNew();
+        Long[] optionalDurationNanoValues = {36840000000001L, null, 36842000000001L};
+        for (int i = 0; i < optionalDurationNanoValues.length; i++) {
+            if (optionalDurationNanoValues[i] != null) {
+                durationNanoVectorNullable.set(i, optionalDurationNanoValues[i]);
+            }
+        }
+        fieldVectors.add(durationNanoVectorNullable);
+
+        var structVectorNullable = StructVector.empty(ArrowFeatures.user.favoriteStructNullable.getFqn(), allocator);
+        var numNullableRows = 3;
+        structVectorNullable.setValueCount(numNullableRows);
+        structVectorNullable.allocateNew();
+
+        var structWriterNullable = structVectorNullable.getWriter();
+        var longWriterNullable = structWriterNullable.bigInt("nice_number");
+        var datetimeWriterNullable = structWriterNullable.timeStampSec("nice_datetime");
+        // Fill in every row but the last
+        for (var i = 0; i < numNullableRows - 1; i++) {
+            structWriterNullable.start();
+            longWriterNullable.writeBigInt(niceNumberValues[i]);
+            datetimeWriterNullable.writeTimeStampSec(niceDatetimeValues[i]);
+            structWriterNullable.end();
+        }
+        fieldVectors.add(structVectorNullable);
+
+        var listVectorNullable = ListVector.empty(ArrowFeatures.user.favoriteStringListNullable.getFqn(), allocator);
+        listVectorNullable.setValueCount(numNullableRows);
+        listVectorNullable.allocateNew();
+
+        var listWriterNullable = listVectorNullable.getWriter();
+        for (var i = 0; i < numNullableRows - 1; i++) {
+            listWriterNullable.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var character = varCharValues[idx];
+                var bytes = character.getBytes();
+                ArrowBuf tempBuf = allocator.buffer(bytes.length);
+                tempBuf.setBytes(0, bytes);
+                listWriterNullable.writeVarChar(0, bytes.length, tempBuf);
+            }
+            listWriterNullable.endList();
+        }
+        fieldVectors.add(listVectorNullable);
+
+        // TODO: Support binary
         // TODO: Support Decimal
+        // FIXME: Fix field type should not be nullable for non-nullable tests.
         VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
         var table = new Table(root);
         return table;
@@ -500,6 +834,7 @@ public class TestUnmarshaller {
 
         var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
+
         assert users[0].favoriteBigInt.getValue() == 1L;
         assert users[1].favoriteBigInt.getValue() == 2L;
         assert users[2].favoriteBigInt.getValue() == 3L;
@@ -678,9 +1013,100 @@ public class TestUnmarshaller {
         assert users[0].favoriteWindowed.bucket_601s.getValue().equals(4.0);
         assert users[1].favoriteWindowed.bucket_601s.getValue().equals(5.0);
         assert users[2].favoriteWindowed.bucket_601s.getValue().equals(6.0);
+
         // TODO: Support complex structs and lists
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+
+        // Nullable features start
+        assert users[0].favoriteBigIntNullable.getValue() == 1L;
+        assert users[1].favoriteBigIntNullable.getValue() == null;
+        assert users[2].favoriteBigIntNullable.getValue() == 3L;
+
+        assert users[0].favoriteIntNullable.getValue() == 1;
+        assert users[1].favoriteIntNullable.getValue() == null;
+        assert users[2].favoriteIntNullable.getValue() == 3;
+
+        assert users[0].favoriteSmallIntNullable.getValue() == 1;
+        assert users[1].favoriteSmallIntNullable.getValue() == null;
+        assert users[2].favoriteSmallIntNullable.getValue() == 3;
+
+        assert users[0].favoriteTinyIntNullable.getValue() == 1;
+        assert users[1].favoriteTinyIntNullable.getValue() == null;
+        assert users[2].favoriteTinyIntNullable.getValue() == 3;
+
+        assert users[0].favoriteFloat4Nullable.getValue() == 1.0f;
+        assert users[1].favoriteFloat4Nullable.getValue() == null;
+        assert users[2].favoriteFloat4Nullable.getValue() == 3.0f;
+
+        assert users[0].favoriteFloat8Nullable.getValue() == 1.0;
+        assert users[1].favoriteFloat8Nullable.getValue() == null;
+        assert users[2].favoriteFloat8Nullable.getValue() == 3.0;
+
+        assert users[0].favoriteBooleanNullable.getValue();
+        assert users[1].favoriteBooleanNullable.getValue() == null;
+        assert !users[2].favoriteBooleanNullable.getValue();
+
+        assert users[0].favoriteDateDayNullable.getValue().equals(LocalDate.of(2021, 7, 31));
+        assert users[1].favoriteDateDayNullable.getValue() == null;
+        assert users[2].favoriteDateDayNullable.getValue().equals(LocalDate.of(2021, 8, 2));
+
+        assert users[0].favoriteDateMilliNullable.getValue().equals(LocalDate.of(2021, 7, 31));
+        assert users[1].favoriteDateMilliNullable.getValue() == null;
+        assert users[2].favoriteDateMilliNullable.getValue().equals(LocalDate.of(2021, 8, 2));
+
+        assert users[0].favoriteTimestampSecNullable.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteTimestampSecNullable.getValue() == null;
+        assert users[2].favoriteTimestampSecNullable.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteTimestampMilliNullable.getValue().equals(expectedDatetime1.plusNanos(1_000_000));
+        assert users[1].favoriteTimestampMilliNullable.getValue() == null;
+        assert users[2].favoriteTimestampMilliNullable.getValue().equals(expectedDatetime3.plusNanos(1_000_000));
+
+        assert users[0].favoriteTimestampMicroNullable.getValue().equals(expectedDatetime1.plusNanos(1000));
+        assert users[1].favoriteTimestampMicroNullable.getValue() == null;
+        assert users[2].favoriteTimestampMicroNullable.getValue().equals(expectedDatetime3.plusNanos(1000));
+
+        assert users[0].favoriteTimestampNanoNullable.getValue().equals(expectedDatetime1.plusNanos(1));
+        assert users[1].favoriteTimestampNanoNullable.getValue() == null;
+        assert users[2].favoriteTimestampNanoNullable.getValue().equals(expectedDatetime3.plusNanos(1));
+
+        assert users[0].favoriteTimestampSecTzNullable.getValue().equals(expectedZonedDatetime1);
+        assert users[1].favoriteTimestampSecTzNullable.getValue() == null;
+        assert users[2].favoriteTimestampSecTzNullable.getValue().equals(expectedZonedDatetime3);
+
+        assert users[0].favoriteTimestampMilliTzNullable.getValue().equals(expectedZonedDatetime1.plusNanos(1_000_000));
+        assert users[1].favoriteTimestampMilliTzNullable.getValue() == null;
+        assert users[2].favoriteTimestampMilliTzNullable.getValue().equals(expectedZonedDatetime3.plusNanos(1_000_000));
+
+        assert users[0].favoriteTimestampMicroTzNullable.getValue().equals(expectedZonedDatetime1.plusNanos(1000));
+        assert users[1].favoriteTimestampMicroTzNullable.getValue() == null;
+        assert users[2].favoriteTimestampMicroTzNullable.getValue().equals(expectedZonedDatetime3.plusNanos(1000));
+
+        assert users[0].favoriteTimestampNanoTzNullable.getValue().equals(expectedZonedDatetime1.plusNanos(1));
+        assert users[1].favoriteTimestampNanoTzNullable.getValue() == null;
+        assert users[2].favoriteTimestampNanoTzNullable.getValue().equals(expectedZonedDatetime3.plusNanos(1));
+
+        assert users[0].favoriteUtf8Nullable.getValue().equals("a");
+        assert users[1].favoriteUtf8Nullable.getValue() == null;
+        assert users[2].favoriteUtf8Nullable.getValue().equals("");
+
+        assert users[0].favoriteLargeUtf8Nullable.getValue().equals("a");
+        assert users[1].favoriteLargeUtf8Nullable.getValue() == null;
+        assert users[2].favoriteLargeUtf8Nullable.getValue().equals("");
+
+        // TODO: Maybe should not propogate nulls, i.e. make favoriteStructNullable null instead of its fields
+        assert users[0].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructNullable.nice_datetime.getValue() == null;
+        assert users[0].favoriteStructNullable.nice_number.getValue().equals(1L);
+        assert users[1].favoriteStructNullable.nice_number.getValue().equals(2L);
+        assert users[2].favoriteStructNullable.nice_number.getValue() == null;
+
+        assert users[0].favoriteStringListNullable.getValue().equals(Arrays.asList("a", "b", "c"));
+        assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
+        assert users[2].favoriteStringListNullable.getValue() == null;
+        // Nullable features end
     }
 
     @Test
