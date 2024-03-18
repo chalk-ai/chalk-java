@@ -341,7 +341,9 @@ public class Unmarshaller {
                         }
                         case Duration -> {
                             var duration = row.getDurationObj(fqn);
-                            feature.setValue(Duration.ofSeconds(duration.getSeconds(), duration.getNano()));
+                            if (duration != null) {
+                                feature.setValue(Duration.ofSeconds(duration.getSeconds(), duration.getNano()));
+                            }
                         }
                         case Time -> {
                             var cast = (ArrowType.Time) (arrowField.getFieldType().getType());
