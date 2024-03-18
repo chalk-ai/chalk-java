@@ -9,6 +9,7 @@ import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.internal.Constants;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
+import org.apache.arrow.vector.VarCharVector;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;
@@ -184,12 +185,18 @@ public class Unmarshaller {
                             }
                         }
                         case Utf8 -> {
-                            String strVal = row.getVarCharObj(fqn);
-                            feature.setValue(strVal);
+                            byte[] bytes = row.getVarChar(fqn);
+                            if (bytes != null) {
+                                var strVal = new String(bytes);
+                                feature.setValue(strVal);
+                            }
                         }
                         case LargeUtf8 -> {
-                            String strVal = row.getLargeVarCharObj(fqn);
-                            feature.setValue(strVal);
+                            byte[] bytes = row.getLargeVarChar(fqn);
+                            if (bytes != null) {
+                                var strVal = new String(bytes);
+                                feature.setValue(strVal);
+                            }
                         }
                         case Date -> {
                             var castDate = (ArrowType.Date) (arrowField.getFieldType().getType());

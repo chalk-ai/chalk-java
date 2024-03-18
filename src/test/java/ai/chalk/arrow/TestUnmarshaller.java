@@ -557,38 +557,26 @@ public class TestUnmarshaller {
 
         var utf8VectorNullable = new VarCharVector(ArrowFeatures.user.favoriteUtf8Nullable.getFqn(), allocator);
         utf8VectorNullable.allocateNew();
-        String[] optionalUtf8Values = {"a", null, "c"};
+        String[] optionalUtf8Values = {"a", null, ""};
         for (int i = 0; i < optionalUtf8Values.length; i++) {
             if (optionalUtf8Values[i] != null) {
                 utf8VectorNullable.set(i, optionalUtf8Values[i].getBytes());
             }
         }
         utf8VectorNullable.setValueCount(optionalUtf8Values.length);
-        // FIXME: Getting the following sort of error
-        //
-        // java.lang.NullPointerException: Cannot read the array length because "bytes" is null
-        //	 at java.base/java.lang.String.<init>(String.java:1405)
-        //	 at org.apache.arrow.vector.table.Row.getLargeVarCharObj(Row.java:1839)
-        //
-        // fieldVectors.add(utf8VectorNullable);
+        fieldVectors.add(utf8VectorNullable);
 
 
         var largeUtf8VectorNullable = new LargeVarCharVector(ArrowFeatures.user.favoriteLargeUtf8Nullable.getFqn(), allocator);
         largeUtf8VectorNullable.allocateNew();
-        String[] optionalLargeUtf8Values = {"a", null, "c"};
+        String[] optionalLargeUtf8Values = {"a", null, ""};
         for (int i = 0; i < optionalLargeUtf8Values.length; i++) {
             if (optionalLargeUtf8Values[i] != null) {
                 largeUtf8VectorNullable.set(i, optionalLargeUtf8Values[i].getBytes());
             }
         }
         largeUtf8VectorNullable.setValueCount(optionalLargeUtf8Values.length);
-        // FIXME: Getting the following error
-        //
-        // java.lang.NullPointerException: Cannot read the array length because "bytes" is null
-        //	 at java.base/java.lang.String.<init>(String.java:1405)
-        //	 at org.apache.arrow.vector.table.Row.getLargeVarCharObj(Row.java:1839)
-        //
-        // fieldVectors.add(largeUtf8VectorNullable);
+         fieldVectors.add(largeUtf8VectorNullable);
 
         var booleanVectorNullable = new BitVector(ArrowFeatures.user.favoriteBooleanNullable.getFqn(), allocator);
         booleanVectorNullable.allocateNew();
@@ -1073,15 +1061,13 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampNanoTzNullable.getValue() == null;
         assert users[2].favoriteTimestampNanoTzNullable.getValue().equals(expectedZonedDatetime3.plusNanos(1));
 
-        // FIXME: These are failing
-        //
-        //        assert users[0].favoriteUtf8Nullable.getValue().equals("a");
-        //        assert users[1].favoriteUtf8Nullable.getValue() == null;
-        //        assert users[2].favoriteUtf8Nullable.getValue().equals("c");
+        assert users[0].favoriteUtf8Nullable.getValue().equals("a");
+        assert users[1].favoriteUtf8Nullable.getValue() == null;
+        assert users[2].favoriteUtf8Nullable.getValue().equals("");
 
-        //        assert users[0].favoriteLargeUtf8Nullable.getValue().equals("a");
-        //        assert users[1].favoriteLargeUtf8Nullable.getValue() == null;
-        //        assert users[2].favoriteLargeUtf8Nullable.getValue().equals("c");
+        assert users[0].favoriteLargeUtf8Nullable.getValue().equals("a");
+        assert users[1].favoriteLargeUtf8Nullable.getValue() == null;
+        assert users[2].favoriteLargeUtf8Nullable.getValue().equals("");
 
         //        assert users[1].favoriteStructNullable == null;
         //        assert users[1].favoriteStringListNullable == null;
