@@ -123,30 +123,23 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     private String getConfigStr() {
-        String preTable = """
-                ChalkClient's config variables and the source of these variables are displayed in the following table.
-                """;
-        String postTable = """
-
-                For each variable, we take the first non-empty value, in order, from the following sources:
-                  1. The value passed to ChalkClient's Builder
-                  2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
-                  3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
-                  4. A default value (if applicable)
-
-                """;
-
-        String configTable = SourcedConfig.getConfigTableStr(Map.of(
-                "Api Server", this.apiServer,
-                "Environment ID", this.environmentId,
-                "Client ID", this.clientId,
-                "Client Secret", new SourcedConfig(
-                        this.clientSecret.getSource(),
-                        this.clientSecret.getValue().replaceAll(".", "*")
-                )
-        ));
-
-        return preTable + configTable + postTable;
+        return "ChalkClient's config variables and the source of these variables are displayed in the following table.\n\n" +
+                SourcedConfig.getConfigTableStr(Map.of(
+                        "Api Server", this.apiServer,
+                        "Environment ID", this.environmentId,
+                        "Client ID", this.clientId,
+                        "Client Secret", new SourcedConfig(
+                                this.clientSecret.getSource(),
+                                this.clientSecret.getValue().replaceAll(".", "*")
+                        )
+                )) +
+                """
+                        For each variable, we take the first non-empty value, in order, from the following sources:
+                          1. The value passed to ChalkClient's Builder
+                          2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
+                          3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+                          4. A default value (if applicable)
+                        """;
     }
 
     public void printConfig() {
