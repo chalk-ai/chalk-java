@@ -1,18 +1,17 @@
 package ai.chalk.client;
 
 
-import ai.chalk.internal.request.RequestHandler;
-import ai.chalk.models.OnlineQueryParamsComplete;
-import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
-import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
-import lombok.Data;
+import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.models.OnlineQueryResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +73,9 @@ public class ChalkClientImpl implements ChalkClient {
         return this.handler.sendRequest(request).toResult();
     }
 
-    public record ResolvedConfig(SourcedConfig apiServer, SourcedConfig clientId, SourcedConfig clientSecret, SourcedConfig environmentId) {}
+    public record ResolvedConfig(SourcedConfig apiServer, SourcedConfig clientId, SourcedConfig clientSecret,
+                                 SourcedConfig environmentId) {
+    }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
@@ -120,17 +121,17 @@ public class ChalkClientImpl implements ChalkClient {
         String preTable = """
 
 
-ChalkClient's config variables and the source of these variables are displayed in the following table.
-""";
+                ChalkClient's config variables and the source of these variables are displayed in the following table.
+                """;
         String postTable = """
 
-For each variable, we take the first non-empty value, in order, from the following sources:
-  1. The value passed to ChalkClient's Builder
-  2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
-  3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
-  
-  
-""";
+                For each variable, we take the first non-empty value, in order, from the following sources:
+                  1. The value passed to ChalkClient's Builder
+                  2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
+                  3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+                  
+                  
+                """;
 
         Map<String, SourcedConfig> configMap = new HashMap<>();
         configMap.put("Api Server", this.apiServer);

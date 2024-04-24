@@ -20,7 +20,7 @@ dependencies {
     api 'org.apache.arrow:arrow-memory-netty:13.0.0'
     api 'org.apache.arrow:arrow-compression:13.0.0'
     api 'org.apache.arrow:arrow-vector:13.0.0'
-    api 'org.slf4j:slf4j-simple:2.0.9'
+//    api 'org.slf4j:slf4j-simple:2.0.9'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
 }
 
