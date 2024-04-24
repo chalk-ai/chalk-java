@@ -13,7 +13,6 @@ import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ChalkClientImpl implements ChalkClient {
@@ -125,8 +124,6 @@ public class ChalkClientImpl implements ChalkClient {
 
     private String getConfigStr() {
         String preTable = """
-
-
                 ChalkClient's config variables and the source of these variables are displayed in the following table.
                 """;
         String postTable = """
@@ -136,16 +133,18 @@ public class ChalkClientImpl implements ChalkClient {
                   2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
                   3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
                   4. A default value (if applicable)
-                  
+
                 """;
 
-        Map<String, SourcedConfig> configMap = new HashMap<>();
-        configMap.put("Api Server", this.apiServer);
-        configMap.put("Client ID", this.clientId);
-        configMap.put("Client Secret", new SourcedConfig(this.clientSecret.getSource(), this.clientSecret.getValue().replaceAll(".", "*")));
-        configMap.put("Environment ID", this.environmentId);
-
-        String configTable = SourcedConfig.getConfigTableStr(configMap);
+        String configTable = SourcedConfig.getConfigTableStr(Map.of(
+                "Api Server", this.apiServer,
+                "Environment ID", this.environmentId,
+                "Client ID", this.clientId,
+                "Client Secret", new SourcedConfig(
+                        this.clientSecret.getSource(),
+                        this.clientSecret.getValue().replaceAll(".", "*")
+                )
+        ));
 
         return preTable + configTable + postTable;
     }
