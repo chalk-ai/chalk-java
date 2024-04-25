@@ -1,9 +1,11 @@
 package ai.chalk.client;
 
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -14,9 +16,32 @@ import java.util.Map;
 
 public class TestOnlineQueryParams {
     @Test
+    public void testInputSerializationLossless() throws Exception {
+        var params = OnlineQueryParams.builder()
+                .withInput("user.float_feature", Arrays.asList(1.0, 2.0, 3.0))
+                .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
+                .withInput("user.int_feature", Arrays.asList(1, 2, 3))
+                .withInput("user.bool_feature", Arrays.asList(true, false, true))
+                .build();
+        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
+            var floatField = deserialized.getField("user.float_feature");
+            assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
+
+            var stringField = deserialized.getField("user.string_feature");
+            assert stringField.getType().getTypeID().equals(ArrowType.ArrowTypeID.LargeUtf8);
+
+            var intField = deserialized.getField("user.int_feature");
+            assert intField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Int);
+
+            var boolField = deserialized.getField("user.bool_feature");
+            assert boolField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Bool);
+        }
+    }
+
+    @Test
     public void testSerializingComplexInputs() throws Exception {
 
-//        var budgets = Arrays.asList(
 //            new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
 //            new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
 //            new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))

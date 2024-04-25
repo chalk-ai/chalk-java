@@ -5,6 +5,10 @@ import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.complex.impl.BigIntWriterImpl;
+import org.apache.arrow.vector.complex.impl.BitWriterImpl;
+import org.apache.arrow.vector.complex.impl.Float8WriterImpl;
+import org.apache.arrow.vector.complex.impl.LargeVarCharWriterImpl;
 import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
 import org.apache.arrow.vector.ipc.ArrowFileWriter;
@@ -37,7 +41,142 @@ public class FeatherProcessor {
         javaToArrowType.put(byte[].class, ArrowType.LargeBinary.INSTANCE);
     }
 
+
+
+    public static void powerWrite(BaseWriter writer, Object value) throws Exception {
+        var arrowType = javaToArrowType.get(value.getClass());
+        if (arrowType == null) {
+            throw new Exception("Unsupported data type: " + value.getClass().getSimpleName());
+        }
+        // FIXME: Gotta switch on the actual java type so that we can differentiate between int and long
+        switch (arrowType.getTypeID()) {
+            case Int -> {
+                BigIntWriter intWriter = (BigIntWriter) writer;
+                intWriter.writeBigInt((Integer) value);
+            }
+            case FloatingPoint -> {
+                Float8Writer floatWriter = (Float8Writer) writer;
+                floatWriter.writeFloat8((Double) value);
+            }
+            case LargeUtf8 -> {
+                LargeVarCharWriter stringWriter = (LargeVarCharWriter) writer;
+                String stringValue = (String) value;
+                var bytesValue = stringValue.getBytes();
+                ArrowBuf tempBuf = new RootAllocator(Long.MAX_VALUE).buffer(bytesValue.length);
+                tempBuf.setBytes(0, bytesValue);
+                stringWriter.writeLargeVarChar(0, bytesValue.length, tempBuf);
+            }
+            case Bool -> {
+                BitWriter boolWriter = (BitWriter) writer;
+                boolWriter.writeBit((Boolean) value ? 1 : 0);
+            }
+            case LargeBinary -> {
+                LargeVarBinaryWriter binaryWriter = (LargeVarBinaryWriter) writer;
+                byte[] binaryValue = (byte[]) value;
+                ArrowBuf tempBuf = new RootAllocator(Long.MAX_VALUE).buffer(binaryValue.length);
+                tempBuf.setBytes(0, binaryValue);
+                binaryWriter.writeLargeVarBinary(0, binaryValue.length, tempBuf);
+            }
+            case Struct -> {
+                // Loop through fields, recursively call write?
+                // How to determine which writer to use? go through same process, lol.
+            }
+        }
+    }
+
+
     public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
+        List<Field> fields = new ArrayList<>();
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        List<FieldMeta> fieldMetas = new ArrayList<>();
+
+        var uniformListLength = -1;
+        for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
+            List<?> value = entry.getValue();
+            List<Object> list;
+            try {
+                list = new ArrayList<>(value);
+            } catch (Exception e) {
+                throw new Exception(String.format("error converting '%s' value to a `List<Object>`: %s", entry.getKey(), e.getMessage()));
+            }
+            if (list.size() == 0) {
+                throw new Exception("Input values is an `Array` or a `List` of length 0");
+            } else if (uniformListLength == -1) {
+                uniformListLength = list.size();
+            } else if (uniformListLength != list.size()) {
+                throw new Exception("Input values have different lengths");
+            }
+
+            ArrowType arrowType = javaToArrowType.get(list.get(0).getClass());
+            if (arrowType == null) {
+                throw new Exception("Unsupported data type: " + list.get(0).getClass().getSimpleName());
+            }
+            fieldMetas.add(new FieldMeta(entry.getKey(), list, arrowType));
+        }
+
+        for (FieldMeta fieldMeta : fieldMetas) {
+            Field field = new Field(fieldMeta.getFqn(), FieldType.nullable(fieldMeta.getType()), null);
+            fields.add(field);
+
+            switch (fieldMeta.type.getTypeID()) {
+                case Int -> {
+                    BigIntVector intVector = new BigIntVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
+                    fieldVectors.add(intVector);
+                    var writer = new BigIntWriterImpl(intVector);
+                    for (Object value : fieldMeta.values) {
+                        powerWrite(writer, value);
+                    }
+                    intVector.setValueCount(fieldMeta.values.size());
+                }
+                case FloatingPoint -> {
+                    Float8Vector doubleVector = new Float8Vector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
+                    fieldVectors.add(doubleVector);
+                    var writer = new Float8WriterImpl(doubleVector);
+                    for (Object value : fieldMeta.values) {
+                        powerWrite(writer, value);
+                    }
+                    doubleVector.setValueCount(fieldMeta.values.size());
+                }
+                case LargeUtf8 -> {
+                    LargeVarCharVector stringVector = new LargeVarCharVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
+                    fieldVectors.add(stringVector);
+                    var writer = new LargeVarCharWriterImpl(stringVector);
+                    for (Object value : fieldMeta.values) {
+                        powerWrite(writer, value);
+                    }
+                    stringVector.setValueCount(fieldMeta.values.size());
+                }
+                case Bool -> {
+                    BitVector boolVector = new BitVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
+                    boolVector.allocateNew(fieldMeta.values.size());
+                    fieldVectors.add(boolVector);
+                    var writer = new BitWriterImpl(boolVector);
+                    for (int i = 0; i < fieldMeta.values.size(); i++) {
+                        boolean value = (boolean) fieldMeta.values.get(i);
+                        writer.setPosition(i);
+                        powerWrite(writer, value);
+                    }
+                    boolVector.setValueCount(fieldMeta.values.size());
+                }
+            }
+        }
+
+        VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, uniformListLength);
+
+        try (
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ArrowFileWriter writer = new ArrowFileWriter(root, null, Channels.newChannel(out));
+        ) {
+            writer.start();
+            writer.writeBatch();
+            writer.end();
+            writer.close();
+            root.close();
+            return out.toByteArray();
+        }
+    }
+
+    public static byte[] inputsToArrowBytesOld(Map<String, List<?>> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
         Map<String, List<Object>> fqnToList = new HashMap<>();
