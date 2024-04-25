@@ -27,22 +27,27 @@ public class BuilderImpl implements ChalkClient.Builder {
         this.clientId = clientId;
         return this;
     }
+
     public BuilderImpl withClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
+
     public BuilderImpl withApiServer(String apiServer) {
         this.apiServer = apiServer;
         return this;
     }
+
     public BuilderImpl withEnvironmentId(String environmentId) {
         this.environmentId = environmentId;
         return this;
     }
+
     public BuilderImpl withBranch(String branch) {
         this.branch = branch;
         return this;
     }
+
     public BuilderImpl withHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
