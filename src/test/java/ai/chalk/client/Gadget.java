@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Gadget {
     public String name;
-    public double amount;
-    public List<ChargeFlux> fluctuations;
+    public Double amount;
+//    public List<ChargeFlux> fluctuations;
 }

@@ -79,23 +79,23 @@ public class FeatherProcessor {
 
                     switch (innerType.getTypeID()) {
                         case Int -> {
-                            BaseWriter intWriter = structWriter.bigInt();
+                            BaseWriter intWriter = structWriter.bigInt(sf.getName());
                             fieldToWriter.put(sf.getName(), intWriter);
                         }
                         case FloatingPoint -> {
-                            BaseWriter floatWriter = structWriter.float8();
+                            BaseWriter floatWriter = structWriter.float8(sf.getName());
                             fieldToWriter.put(sf.getName(), floatWriter);
                         }
                         case LargeUtf8 -> {
-                            BaseWriter stringWriter = structWriter.largeVarChar();
+                            BaseWriter stringWriter = structWriter.largeVarChar(sf.getName());
                             fieldToWriter.put(sf.getName(), stringWriter);
                         }
                         case Bool -> {
-                            BaseWriter boolWriter = structWriter.bit();
+                            BaseWriter boolWriter = structWriter.bit(sf.getName());
                             fieldToWriter.put(sf.getName(), boolWriter);
                         }
                         case LargeBinary -> {
-                            BaseWriter binaryWriter = structWriter.largeVarBinary();
+                            BaseWriter binaryWriter = structWriter.largeVarBinary(sf.getName());
                             fieldToWriter.put(sf.getName(), binaryWriter);
                         }
                     }

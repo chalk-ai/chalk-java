@@ -16,10 +16,15 @@ public class TestOnlineQueryParams {
     @Test
     public void testSerializingComplexInputs() throws Exception {
 
+//        var budgets = Arrays.asList(
+//            new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
+//            new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
+//            new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
+//        );
         var budgets = Arrays.asList(
-            new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
-            new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
-            new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
+                new Gadget("a", 1.0),
+                new Gadget("b", 2.0),
+                new Gadget("c", 3.0)
         );
         // Tests that we support serializing lists and structs
         var params = OnlineQueryParams.builder()
