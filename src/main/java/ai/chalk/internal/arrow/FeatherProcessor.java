@@ -85,7 +85,7 @@ public class FeatherProcessor {
     }
 
 
-    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
+    public static byte[] inputsToArrowBytesNew(Map<String, List<?>> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
         List<FieldMeta> fieldMetas = new ArrayList<>();
@@ -123,40 +123,37 @@ public class FeatherProcessor {
                     BigIntVector intVector = new BigIntVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
                     fieldVectors.add(intVector);
                     var writer = new BigIntWriterImpl(intVector);
-                    for (Object value : fieldMeta.values) {
-                        powerWrite(writer, value);
+                    for (int i = 0; i < fieldMeta.values.size(); i++) {
+                        writer.setPosition(i);
+                        powerWrite(writer, fieldMeta.values.get(i));
                     }
-                    intVector.setValueCount(fieldMeta.values.size());
                 }
                 case FloatingPoint -> {
                     Float8Vector doubleVector = new Float8Vector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
                     fieldVectors.add(doubleVector);
                     var writer = new Float8WriterImpl(doubleVector);
-                    for (Object value : fieldMeta.values) {
-                        powerWrite(writer, value);
+                    for (int i = 0; i < fieldMeta.values.size(); i++) {
+                        writer.setPosition(i);
+                        powerWrite(writer, fieldMeta.values.get(i));
                     }
-                    doubleVector.setValueCount(fieldMeta.values.size());
                 }
                 case LargeUtf8 -> {
                     LargeVarCharVector stringVector = new LargeVarCharVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
                     fieldVectors.add(stringVector);
                     var writer = new LargeVarCharWriterImpl(stringVector);
-                    for (Object value : fieldMeta.values) {
-                        powerWrite(writer, value);
+                    for (int i = 0; i < fieldMeta.values.size(); i++) {
+                        writer.setPosition(i);
+                        powerWrite(writer, fieldMeta.values.get(i));
                     }
-                    stringVector.setValueCount(fieldMeta.values.size());
                 }
                 case Bool -> {
                     BitVector boolVector = new BitVector(fieldMeta.fqn, new RootAllocator(Long.MAX_VALUE));
-                    boolVector.allocateNew(fieldMeta.values.size());
                     fieldVectors.add(boolVector);
                     var writer = new BitWriterImpl(boolVector);
                     for (int i = 0; i < fieldMeta.values.size(); i++) {
-                        boolean value = (boolean) fieldMeta.values.get(i);
                         writer.setPosition(i);
-                        powerWrite(writer, value);
+                        powerWrite(writer, fieldMeta.values.get(i));
                     }
-                    boolVector.setValueCount(fieldMeta.values.size());
                 }
             }
         }
@@ -176,7 +173,7 @@ public class FeatherProcessor {
         }
     }
 
-    public static byte[] inputsToArrowBytesOld(Map<String, List<?>> inputs) throws Exception {
+    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
         List<Field> fields = new ArrayList<>();
         List<FieldVector> fieldVectors = new ArrayList<>();
         Map<String, List<Object>> fqnToList = new HashMap<>();
