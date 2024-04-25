@@ -14,6 +14,24 @@ import java.util.Map;
 
 public class TestOnlineQueryParams {
     @Test
+    public void testSerializingComplexInputs() throws Exception {
+
+        var budgets = Arrays.asList(
+            new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
+            new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
+            new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
+        );
+        // Tests that we support serializing lists and structs
+        var params = OnlineQueryParams.builder()
+                .withInput("user.id", Arrays.asList("1", "2", "3"))
+                .withInput("user.my_budget", budgets)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+
+        BytesProducer.convertOnlineQueryParamsToBytes(params);
+    }
+
+    @Test
     public void testWithInputs() throws Exception {
         Map<String, List<?>> inputs = new HashMap<>();
         var userIds = Arrays.asList(1, 2, 3);

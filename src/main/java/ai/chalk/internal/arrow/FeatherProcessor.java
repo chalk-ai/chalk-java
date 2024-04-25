@@ -1,8 +1,11 @@
 package ai.chalk.internal.arrow;
 
 import org.apache.arrow.compression.CommonsCompressionFactory;
+import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
+import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
 import org.apache.arrow.vector.ipc.ArrowFileWriter;
 import org.apache.arrow.vector.ipc.SeekableReadChannel;
@@ -56,30 +59,109 @@ public class FeatherProcessor {
 
         for (Map.Entry<String, List<Object>> entry : fqnToList.entrySet()) {
             ArrowType arrowType = javaToArrowType.get(entry.getValue().get(0).getClass());
+
             if (arrowType == null) {
-                throw new Exception("Unsupported data type: " + Array.get(entry.getValue(), 0).getClass().getSimpleName());
-            }
+                // throw new Exception("Unsupported data type: " + entry.getValue().get(0).getClass().getSimpleName());
+                Field field = new Field(entry.getKey(), FieldType.nullable(ArrowType.Struct.INSTANCE), null);
+                fields.add(field);
+                var structVector = StructVector.empty(entry.getKey(), new RootAllocator(Long.MAX_VALUE));
+                structVector.setValueCount(entry.getValue().size());
+                fieldVectors.add(structVector);
+                var structWriter = structVector.getWriter();
+                var structFields = entry.getValue().get(0).getClass().getDeclaredFields();
 
-            Field field = new Field(entry.getKey(), FieldType.nullable(arrowType), null);
-            fields.add(field);
+                var fieldToWriter = new HashMap<String, BaseWriter>();
+                for (java.lang.reflect.Field sf: structFields) {
+                    var innerType = javaToArrowType.get(sf.getType());
+                    if (innerType == null) {
+                        throw new Exception("Unsupported data type: " + sf.getType().getSimpleName());
+                    }
 
-            FieldVector vector;
-            switch (field.getType().getTypeID()) {
-                case Int -> vector = new BigIntVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                case FloatingPoint -> {
-                    ArrowType.FloatingPoint fpType = (ArrowType.FloatingPoint) field.getType();
-                    if (fpType.getPrecision() == FloatingPointPrecision.SINGLE) {
-                        vector = new Float4Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                    } else {
-                        vector = new Float8Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                    switch (innerType.getTypeID()) {
+                        case Int -> {
+                            BaseWriter intWriter = structWriter.bigInt();
+                            fieldToWriter.put(sf.getName(), intWriter);
+                        }
+                        case FloatingPoint -> {
+                            BaseWriter floatWriter = structWriter.float8();
+                            fieldToWriter.put(sf.getName(), floatWriter);
+                        }
+                        case LargeUtf8 -> {
+                            BaseWriter stringWriter = structWriter.largeVarChar();
+                            fieldToWriter.put(sf.getName(), stringWriter);
+                        }
+                        case Bool -> {
+                            BaseWriter boolWriter = structWriter.bit();
+                            fieldToWriter.put(sf.getName(), boolWriter);
+                        }
+                        case LargeBinary -> {
+                            BaseWriter binaryWriter = structWriter.largeVarBinary();
+                            fieldToWriter.put(sf.getName(), binaryWriter);
+                        }
                     }
                 }
-                case LargeUtf8 -> vector = new LargeVarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                case Bool -> vector = new BitVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                case LargeBinary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
-                default -> throw new Exception("Unsupported arrow type: " + field.getType().getTypeID());
+
+                for (Object item : entry.getValue()) {
+                    structWriter.start();
+                    for (java.lang.reflect.Field structField: structFields) {
+                        var structFieldValue = structField.get(item);
+                        var innerArrowType = javaToArrowType.get(structField.getType());
+                        if (innerArrowType == null) {
+                            throw new Exception("Unsupported data type: " + structField.getType().getSimpleName());
+                        }
+                        switch (innerArrowType.getTypeID()) {
+                            case Int -> {
+                                BigIntWriter intWriter = (BigIntWriter) fieldToWriter.get(structField.getName());
+                                intWriter.writeBigInt((Long) structFieldValue);
+                            }
+                            case FloatingPoint -> {
+                                Float8Writer floatWriter = (Float8Writer) fieldToWriter.get(structField.getName());
+                                floatWriter.writeFloat8((Double) structFieldValue);
+                            }
+                            case LargeUtf8 -> {
+                                LargeVarCharWriter stringWriter = (LargeVarCharWriter) fieldToWriter.get(structField.getName());
+                                String stringValue = (String) structFieldValue;
+                                var bytesValue = stringValue.getBytes();
+                                ArrowBuf tempBuf = new RootAllocator(Long.MAX_VALUE).buffer(bytesValue.length);
+                                tempBuf.setBytes(0, bytesValue);
+                                stringWriter.writeLargeVarChar(0, bytesValue.length, tempBuf);
+                            }
+                            case Bool -> {
+                                BitWriter boolWriter = (BitWriter) fieldToWriter.get(structField.getName());
+                                boolWriter.writeBit((Boolean) structFieldValue ? 1 : 0);
+                            }
+                            case LargeBinary -> {
+                                LargeVarBinaryWriter binaryWriter = (LargeVarBinaryWriter) fieldToWriter.get(structField.getName());
+                                byte[] binaryValue = (byte[]) structFieldValue;
+                                ArrowBuf tempBuf = new RootAllocator(Long.MAX_VALUE).buffer(binaryValue.length);
+                                tempBuf.setBytes(0, binaryValue);
+                                binaryWriter.writeLargeVarBinary(0, binaryValue.length, tempBuf);
+                            }
+                        }
+                    }
+                    structWriter.end();
+                }
+            } else {
+                Field field = new Field(entry.getKey(), FieldType.nullable(arrowType), null);
+                fields.add(field);
+                FieldVector vector;
+                switch (field.getType().getTypeID()) {
+                    case Int -> vector = new BigIntVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                    case FloatingPoint -> {
+                        ArrowType.FloatingPoint fpType = (ArrowType.FloatingPoint) field.getType();
+                        if (fpType.getPrecision() == FloatingPointPrecision.SINGLE) {
+                            vector = new Float4Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                        } else {
+                            vector = new Float8Vector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                        }
+                    }
+                    case LargeUtf8 -> vector = new LargeVarCharVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                    case Bool -> vector = new BitVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                    case LargeBinary -> vector = new LargeVarBinaryVector(field.getName(), new RootAllocator(Long.MAX_VALUE));
+                    default -> throw new Exception("Unsupported arrow type: " + field.getType().getTypeID());
+                }
+                fieldVectors.add(vector);
             }
-            fieldVectors.add(vector);
         }
 
         VectorSchemaRoot root = new VectorSchemaRoot(fields, fieldVectors, 0);
@@ -146,6 +228,9 @@ public class FeatherProcessor {
                         binaryVector.set(i, (byte[]) values.get(i));
                     }
                     binaryVector.setValueCount(values.size());
+                }
+                case Struct -> {
+                    // Already handled. TODO: Refactor to avoid awkwardness like this
                 }
             }
         }
