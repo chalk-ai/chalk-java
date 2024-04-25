@@ -1,5 +1,6 @@
 package ai.chalk.client;
 
+
 public class ConfigEnvVars {
     /**
      * Specifies the URL that all requests from ChalkClient will be sent to.
