@@ -1,6 +1,5 @@
 package ai.chalk.internal;
 
-import ai.chalk.internal.Utils;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;

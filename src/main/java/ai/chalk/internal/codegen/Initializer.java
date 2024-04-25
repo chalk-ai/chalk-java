@@ -4,7 +4,6 @@ import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesBase;
 import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.features.WindowedFeaturesClass;
-import ai.chalk.features.*;
 import ai.chalk.internal.Utils;
 
 import java.lang.reflect.Field;
