@@ -40,8 +40,8 @@ public class TestOnlineQueryParams {
                 .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
-//                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
-//                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
+                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
+                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
                 .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
                         new HashMap<String, Object>() {{
                             put("name", "a");
@@ -154,6 +154,27 @@ public class TestOnlineQueryParams {
             assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(1).toString(), structVal2);
             assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(2).toString(), structVal3);
 
+            var structWithIntListField = deserialized.getField("user.struct_with_int_list");
+            assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+
+            var localDateTimeField = deserialized.getField("user.local_datetime");
+            assert localDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(0).equals(dateTime1);
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(1).equals(dateTime2);
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(2).equals(dateTime3);
+
+            var zonedDateTimeField = deserialized.getField("user.zoned_datetime");
+            assert zonedDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
+            // Epoch micros were accurate here, but the format is all over the place. Why is it in microseconds (Long)
+            // instead of a ZonedDateTime?
+            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(0).equals(utcTime1);
+            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(1).equals(utcTime2);
+            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(2).equals(utcTime3);
+
+
             /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
             var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
             assert structFieldViaClasses.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
@@ -161,12 +182,6 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(1).toString().equals(structVal2);
             assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
             */
-
-            var structWithIntListField = deserialized.getField("user.struct_with_int_list");
-            assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
 
             /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
             var structWithStructField = deserialized.getField("user.struct_with_struct");

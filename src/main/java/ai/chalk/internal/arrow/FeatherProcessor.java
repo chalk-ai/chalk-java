@@ -9,6 +9,8 @@ import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.complex.impl.*;
 import org.apache.arrow.vector.complex.writer.*;
+import org.apache.arrow.vector.holders.TimeStampMicroHolder;
+import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
 import org.apache.arrow.vector.ipc.ArrowFileWriter;
 import org.apache.arrow.vector.ipc.SeekableReadChannel;
@@ -19,6 +21,9 @@ import org.apache.arrow.vector.util.VectorSchemaRootAppender;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.channels.Channels;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class FeatherProcessor {
@@ -95,6 +100,21 @@ public class FeatherProcessor {
             ArrowBuf tempBuf = new RootAllocator(Long.MAX_VALUE).buffer(binaryValue.length);
             tempBuf.setBytes(0, binaryValue);
             binaryWriter.writeLargeVarBinary(0, binaryValue.length, tempBuf);
+        } else if (value instanceof ZonedDateTime zonedDt) {
+            if (!(writer instanceof TimeStampMicroTZWriter timestampWriter)) {
+                throw new Exception(String.format("Have `ZonedDateTime` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
+            }
+            TimeStampMicroTZHolder holder = new TimeStampMicroTZHolder();
+            holder.value = zonedDt.toInstant().toEpochMilli() * 1000;
+            holder.timezone = zonedDt.getZone().toString();
+            timestampWriter.write(holder);
+        } else if (value instanceof LocalDateTime localDt) {
+            if (!(writer instanceof TimeStampMicroWriter timestampWriter)) {
+                throw new Exception(String.format("Have `LocalDateTime` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
+            }
+            TimeStampMicroHolder holder = new TimeStampMicroHolder();
+            holder.value = localDt.atZone(ZoneId.of("UTC")).toInstant().toEpochMilli() * 1000;
+            timestampWriter.write(holder);
         } else if (value instanceof List) {
             if (!(writer instanceof BaseWriter.ListWriter)) {
                 throw new Exception(String.format("Have `List` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
@@ -250,6 +270,23 @@ public class FeatherProcessor {
                 LargeVarBinaryVector binaryVector = new LargeVarBinaryVector(fqn, new RootAllocator(Long.MAX_VALUE));
                 fieldVectors.add(binaryVector);
                 var writer = new LargeVarBinaryWriterImpl(binaryVector);
+                for (int i = 0; i < values.size(); i++) {
+                    writer.setPosition(i);
+                    powerWrite(writer, values.get(i));
+                }
+            } else if (firstVal instanceof ZonedDateTime zonedDt) {
+                String tz = zonedDt.getZone().toString();
+                TimeStampMicroTZVector timestampVector = new TimeStampMicroTZVector(fqn, new RootAllocator(Long.MAX_VALUE), tz);
+                fieldVectors.add(timestampVector);
+                var writer = new TimeStampMicroTZWriterImpl(timestampVector);
+                for (int i = 0; i < values.size(); i++) {
+                    writer.setPosition(i);
+                    powerWrite(writer, values.get(i));
+                }
+            } else if (firstVal instanceof LocalDateTime localDt) {
+                TimeStampMicroVector timestampVector = new TimeStampMicroVector(fqn, new RootAllocator(Long.MAX_VALUE));
+                fieldVectors.add(timestampVector);
+                var writer = new TimeStampMicroWriterImpl(timestampVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
                     powerWrite(writer, values.get(i));
