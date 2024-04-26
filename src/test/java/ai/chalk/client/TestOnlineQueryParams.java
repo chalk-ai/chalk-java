@@ -22,7 +22,16 @@ public class TestOnlineQueryParams {
                 .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
-                .withInput("user.struct_feature", Arrays.asList(new Gadget("a", 1.0), new Gadget("b", 2.0), new Gadget("c", 3.0)))
+                .withInput("user.struct_feature", Arrays.asList(
+                        new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
+                        new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
+                        new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
+                ))
+                .withInput("user.struct_with_int_list", Arrays.asList(
+                        new StructWithIntList("a", Arrays.asList(1, 2, 3)),
+                        new StructWithIntList("b", Arrays.asList(4, 5, 6)),
+                        new StructWithIntList("c", Arrays.asList(7, 8, 9))
+                ))
                 .build();
         var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
         try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
@@ -50,30 +59,18 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.bool_feature").getObject(1).equals(false);
             assert deserialized.getVectorCopy("user.bool_feature").getObject(2).equals(true);
 
-            assert deserialized.getVectorCopy("user.struct_feature").getObject(2) != null;
+            var structField = deserialized.getField("user.struct_feature");
+            assert structField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_feature").getObject(0).toString().equals("{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}");
+            assert deserialized.getVectorCopy("user.struct_feature").getObject(1).toString().equals("{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}");
+            assert deserialized.getVectorCopy("user.struct_feature").getObject(2).toString().equals("{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}");
+
+            var structWithIntListField = deserialized.getField("user.struct_with_int_list");
+            assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString().equals("{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
+            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString().equals("{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
+            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString().equals("{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
         }
-    }
-
-    @Test
-    public void testSerializingComplexInputs() throws Exception {
-
-//            new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
-//            new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
-//            new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
-//        );
-        var budgets = Arrays.asList(
-                new Gadget("a", 1.0),
-                new Gadget("b", 2.0),
-                new Gadget("c", 3.0)
-        );
-        // Tests that we support serializing lists and structs
-        var params = OnlineQueryParams.builder()
-                .withInput("user.id", Arrays.asList("1", "2", "3"))
-                .withInput("user.my_budget", budgets)
-                .withOutputs("user.today", "user.socure_score")
-                .build();
-
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
     }
 
     @Test
@@ -286,14 +283,19 @@ public class TestOnlineQueryParams {
     public void testLargeUtf8AsInput() throws Exception {
         var largeString = "a".repeat(100000);
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        assert reconstructedInput.getVectorCopy("user.id").getObject(0).toString().equals(largeString);
     }
 
     @Test
     public void testLargeBinaryAsInput() throws Exception {
-        var largeBinary = "a".repeat(100000).getBytes();
+        var largeBinaryString = "acb".repeat(100000);
+        var largeBinary = largeBinaryString.getBytes();
         var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        assert new String((byte[]) reconstructedInput.getVectorCopy("user.binary_data").getObject(0)).equals(largeBinaryString);
     }
 
 
