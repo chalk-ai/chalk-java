@@ -28,19 +28,15 @@ import java.util.*;
 
 public class FeatherProcessor {
 
-    public static ArrayList<StructEntry> getEntriesFromHashMap(HashMap<?, ?> obj) throws Exception {
+    public static ArrayList<StructEntry> getEntriesFromMap(Map<String, ?> obj) {
         var entries = new ArrayList<StructEntry>();
         for (var entry : obj.entrySet()) {
-            var key = entry.getKey();
-            if (!(key instanceof String)) {
-                throw new Exception("Key in HashMap is not a String");
-            }
-            entries.add(new StructEntry((String) key, entry.getValue()));
+            entries.add(new StructEntry(entry.getKey(), entry.getValue()));
         }
         return entries;
     }
     public static ArrayList<StructEntry> getEntriesFromObject(Object obj) throws Exception {
-        /* Currently not supported since we limit to HashMap on the top level.
+        /* Currently not supported since we limit to Map on the top level.
             .withInput("user.struct_feature__via_classes__", Arrays.asList(
                 new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
                 new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
@@ -57,8 +53,8 @@ public class FeatherProcessor {
     }
 
     public static ArrayList<StructEntry> getEntries(Object obj) throws Exception {
-        if (obj instanceof HashMap) {
-            return getEntriesFromHashMap((HashMap<?, ?>) obj);
+        if (obj instanceof Map mapObj) {
+            return getEntriesFromMap(mapObj);
         } else {
             return getEntriesFromObject(obj);
         }

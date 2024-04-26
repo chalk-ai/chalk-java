@@ -10,11 +10,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TestOnlineQueryParams {
     public static boolean jsonCompare(String expected, String actual) throws Exception {
@@ -89,15 +88,15 @@ public class TestOnlineQueryParams {
                 .withInput(
                         "user.struct_with_int_list",
                         Arrays.asList(
-                                new HashMap<String, Object>() {{
+                                new TreeMap<String, Object>() {{
                                     put("name", "a");
                                     put("luckyNumbers", Arrays.asList(1, 2, 3));
                                 }},
-                                new HashMap<String, Object>() {{
+                                new TreeMap<String, Object>() {{
                                     put("name", "b");
                                     put("luckyNumbers", Arrays.asList(4, 5, 6));
                                 }},
-                                new HashMap<String, Object>() {{
+                                new TreeMap<String, Object>() {{
                                     put("name", "c");
                                     put("luckyNumbers", Arrays.asList(7, 8, 9));
                                 }}
