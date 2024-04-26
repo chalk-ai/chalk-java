@@ -9,7 +9,6 @@ import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.internal.Constants;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
-import org.apache.arrow.vector.VarCharVector;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;

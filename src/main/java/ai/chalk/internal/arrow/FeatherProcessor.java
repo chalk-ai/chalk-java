@@ -35,6 +35,13 @@ public class FeatherProcessor {
         return entries;
     }
     public static ArrayList<StructEntry> getEntriesFromObject(Object obj) throws Exception {
+        /* Currently not supported since we limit to HashMap on the top level.
+            .withInput("user.struct_feature__via_classes__", Arrays.asList(
+                new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+                new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+                new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
+            ))
+         */
         var pairs = new ArrayList<StructEntry>();
         var fields = obj.getClass().getDeclaredFields();
         for (var field : fields) {

@@ -42,11 +42,6 @@ public class TestOnlineQueryParams {
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
 //                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
 //                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
-//                .withInput("user.struct_feature__via_classes__", Arrays.asList(
-//                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
-//                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
-//                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
-//                ))
                 .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
                         new HashMap<String, Object>() {{
                             put("name", "a");
@@ -91,16 +86,35 @@ public class TestOnlineQueryParams {
                             ));
                         }}
                 ))
-//                .withInput("user.struct_with_int_list", Arrays.asList(
-//                        new StructWithIntList("a", Arrays.asList(1, 2, 3)),
-//                        new StructWithIntList("b", Arrays.asList(4, 5, 6)),
-//                        new StructWithIntList("c", Arrays.asList(7, 8, 9))
-//                ))
+                .withInput(
+                        "user.struct_with_int_list",
+                        Arrays.asList(
+                                new HashMap<String, Object>() {{
+                                    put("name", "a");
+                                    put("luckyNumbers", Arrays.asList(1, 2, 3));
+                                }},
+                                new HashMap<String, Object>() {{
+                                    put("name", "b");
+                                    put("luckyNumbers", Arrays.asList(4, 5, 6));
+                                }},
+                                new HashMap<String, Object>() {{
+                                    put("name", "c");
+                                    put("luckyNumbers", Arrays.asList(7, 8, 9));
+                                }}
+                        )
+                )
                 /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
                 .withInput("user.struct_with_struct", Arrays.asList(
                         new StructWithStruct("a", new InnerStruct("a", 1.0)),
                         new StructWithStruct("b", new InnerStruct("b", 2.0)),
                         new StructWithStruct("c", new InnerStruct("c", 3.0))
+                ))
+                */
+                /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
+                .withInput("user.struct_feature__via_classes__", Arrays.asList(
+                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
                 ))
                 */
                 .build();
@@ -148,13 +162,11 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
             */
 
-            /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
             var structWithIntListField = deserialized.getField("user.struct_with_int_list");
             assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString().equals("{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
-            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString().equals("{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
-            assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString().equals("{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
-            */
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
 
             /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
             var structWithStructField = deserialized.getField("user.struct_with_struct");
@@ -163,8 +175,6 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.struct_with_struct").getObject(1).toString().equals("{\"title\":\"b\",\"flux\":{\"description\":\"b\",\"amount\":2.0}}");
             assert deserialized.getVectorCopy("user.struct_with_struct").getObject(2).toString().equals("{\"title\":\"c\",\"flux\":{\"description\":\"c\",\"amount\":3.0}}");
             */
-
-
         }
     }
 
