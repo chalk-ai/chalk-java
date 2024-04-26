@@ -133,6 +133,10 @@ public class FeatherProcessor {
                 innerWriter = listWriter.bit();
             } else if (firstItem instanceof byte[]) {
                 innerWriter = listWriter.largeVarBinary();
+            } else if (firstItem instanceof ZonedDateTime) {
+                innerWriter = listWriter.timeStampMicroTZ();
+            } else if (firstItem instanceof LocalDateTime) {
+                innerWriter = listWriter.timeStampMicro();
             } else if (firstItem instanceof List) {
                 innerWriter = listWriter.list();
             } else {
@@ -161,6 +165,10 @@ public class FeatherProcessor {
                     powerWrite(structWriter.bit(fieldName), fieldVal);
                 } else if (fieldVal instanceof byte[]) {
                     powerWrite(structWriter.largeVarBinary(fieldName), fieldVal);
+                } else if (fieldVal instanceof ZonedDateTime) {
+                    powerWrite(structWriter.timeStampMicroTZ(fieldName), fieldVal);
+                } else if (fieldVal instanceof LocalDateTime) {
+                    powerWrite(structWriter.timeStampMicro(fieldName), fieldVal);
                 } else if (fieldVal instanceof List) {
                     powerWrite(structWriter.list(fieldName), fieldVal);
                 } else {
@@ -185,6 +193,10 @@ public class FeatherProcessor {
                     powerWrite(structWriter.largeVarChar(fieldName), fieldVal);
                 } else if (fieldVal instanceof Boolean) {
                     powerWrite(structWriter.bit(fieldName), fieldVal);
+                } else if (fieldVal instanceof ZonedDateTime) {
+                    powerWrite(structWriter.timeStampMicroTZ(fieldName), fieldVal);
+                } else if (fieldVal instanceof LocalDateTime) {
+                    powerWrite(structWriter.timeStampMicro(fieldName), fieldVal);
                 } else if (fieldVal instanceof byte[]) {
                     powerWrite(structWriter.largeVarBinary(fieldName), fieldVal);
                 } else if (fieldVal instanceof List) {
