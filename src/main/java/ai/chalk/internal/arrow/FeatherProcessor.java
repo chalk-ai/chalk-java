@@ -239,14 +239,6 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     powerWrite(writer, values.get(i));
                 }
-            } else if (firstClazz.equals(List.class)) {
-                var listVector = LargeListVector.empty(fqn, new RootAllocator(Long.MAX_VALUE));
-                fieldVectors.add(listVector);
-                var writer = listVector.getWriter();
-                for (Object o : values) {
-                    powerWrite(writer, o);
-                }
-                writer.setValueCount(values.size());
             } else if (firstClazz.equals(byte[].class)) {
                 LargeVarBinaryVector binaryVector = new LargeVarBinaryVector(fqn, new RootAllocator(Long.MAX_VALUE));
                 fieldVectors.add(binaryVector);
@@ -255,6 +247,14 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     powerWrite(writer, values.get(i));
                 }
+            } else if (firstClazz.equals(List.class)) {
+                var listVector = LargeListVector.empty(fqn, new RootAllocator(Long.MAX_VALUE));
+                fieldVectors.add(listVector);
+                var writer = listVector.getWriter();
+                for (Object o : values) {
+                    powerWrite(writer, o);
+                }
+                writer.setValueCount(values.size());
             } else {
                 var structVector = StructVector.empty(fqn, new RootAllocator(Long.MAX_VALUE));
                 fieldVectors.add(structVector);
