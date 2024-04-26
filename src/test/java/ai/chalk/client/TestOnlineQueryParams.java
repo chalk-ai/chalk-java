@@ -23,15 +23,22 @@ public class TestOnlineQueryParams {
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
                 .withInput("user.struct_feature", Arrays.asList(
-                        new Gadget("a", 1.0, Arrays.asList(new ChargeFlux("a", 1.0), new ChargeFlux("b", 2.0))),
-                        new Gadget("b", 2.0, Arrays.asList(new ChargeFlux("c", 3.0), new ChargeFlux("d", 4.0))),
-                        new Gadget("c", 3.0, Arrays.asList(new ChargeFlux("e", 5.0), new ChargeFlux("f", 6.0)))
+                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
                 ))
                 .withInput("user.struct_with_int_list", Arrays.asList(
                         new StructWithIntList("a", Arrays.asList(1, 2, 3)),
                         new StructWithIntList("b", Arrays.asList(4, 5, 6)),
                         new StructWithIntList("c", Arrays.asList(7, 8, 9))
                 ))
+                /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
+                .withInput("user.struct_with_struct", Arrays.asList(
+                        new StructWithStruct("a", new InnerStruct("a", 1.0)),
+                        new StructWithStruct("b", new InnerStruct("b", 2.0)),
+                        new StructWithStruct("c", new InnerStruct("c", 3.0))
+                ))
+                */
                 .build();
         var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
         try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
@@ -70,6 +77,14 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString().equals("{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString().equals("{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString().equals("{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+
+            /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
+            var structWithStructField = deserialized.getField("user.struct_with_struct");
+            assert structWithStructField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(0).toString().equals("{\"title\":\"a\",\"flux\":{\"description\":\"a\",\"amount\":1.0}}");
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(1).toString().equals("{\"title\":\"b\",\"flux\":{\"description\":\"b\",\"amount\":2.0}}");
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(2).toString().equals("{\"title\":\"c\",\"flux\":{\"description\":\"c\",\"amount\":3.0}}");
+            */
         }
     }
 

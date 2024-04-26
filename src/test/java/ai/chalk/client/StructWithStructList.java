@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Gadget {
+public class StructWithStructList {
     public String name;
     public Double amount;
-    public List<ChargeFlux> fluctuations;
+    public List<InnerStruct> fluctuations;
 }

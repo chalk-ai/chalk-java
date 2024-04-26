@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ChargeFlux {
+public class InnerStruct {
     public String description;
     public double amount;
 }

@@ -96,37 +96,53 @@ public class FeatherProcessor {
             }
             listWriter.endList();
         } else if (writer instanceof NullableStructWriter structWriter) {
+            // Yes, this is duplicated with `UnionListWriter` below.
             structWriter.start();
             var structFields = value.getClass().getDeclaredFields();
             for (java.lang.reflect.Field sf: structFields) {
-                // FIXME: Fill this out with all types
                 var structFieldValue = sf.get(value);
-                if (structFieldValue instanceof String) {
-                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
+                if (structFieldValue instanceof Integer) {
+                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof Long) {
+                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
                 } else if (structFieldValue instanceof Double) {
                     powerWrite(structWriter.float8(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof String) {
+                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof Boolean) {
+                    powerWrite(structWriter.bit(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof byte[]) {
+                    powerWrite(structWriter.largeVarBinary(sf.getName()), structFieldValue);
                 } else if (structFieldValue instanceof List) {
                     powerWrite(structWriter.list(sf.getName()), structFieldValue);
                 } else {
-                    throw new Exception("Unsupported data type: " + sf.getType().getSimpleName());
+                    throw new Exception("Unsupported data type: " + structFieldValue.getClass().getSimpleName());
                 }
             }
             structWriter.end();
         }  else if (writer instanceof UnionListWriter structWriter) {
-            // For some reason when we do `.struct()` we get a `UnionListWriter` instead of a `NullableStructWriter`
+            // The mystery of the century presents itself:
+            // when we do `.struct()` we get a `UnionListWriter` instead of a `NullableStructWriter`
             structWriter.start();
             var structFields = value.getClass().getDeclaredFields();
             for (java.lang.reflect.Field sf: structFields) {
-                // FIXME: Fill this out with all types
                 var structFieldValue = sf.get(value);
-                if (structFieldValue instanceof String) {
-                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
+                if (structFieldValue instanceof Integer) {
+                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof Long) {
+                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
                 } else if (structFieldValue instanceof Double) {
                     powerWrite(structWriter.float8(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof String) {
+                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof Boolean) {
+                    powerWrite(structWriter.bit(sf.getName()), structFieldValue);
+                } else if (structFieldValue instanceof byte[]) {
+                    powerWrite(structWriter.largeVarBinary(sf.getName()), structFieldValue);
                 } else if (structFieldValue instanceof List) {
                     powerWrite(structWriter.list(sf.getName()), structFieldValue);
                 } else {
-                    throw new Exception("Unsupported data type: " + sf.getType().getSimpleName());
+                    throw new Exception("Unsupported data type: " + structFieldValue.getClass().getSimpleName());
                 }
             }
             structWriter.end();
