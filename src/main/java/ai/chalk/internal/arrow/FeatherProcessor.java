@@ -60,7 +60,7 @@ public class FeatherProcessor {
         }
     }
 
-    public static void  powerWrite(BaseWriter writer, Object value) throws Exception {
+    public static void powerWrite(BaseWriter writer, Object value) throws Exception {
         if (value instanceof Integer) {
             if (!(writer instanceof BigIntWriter intWriter)) {
                 throw new Exception(String.format("Have `Integer` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
