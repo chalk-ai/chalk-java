@@ -12,21 +12,46 @@ import org.apache.arrow.vector.complex.writer.*;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
 import org.apache.arrow.vector.ipc.ArrowFileWriter;
 import org.apache.arrow.vector.ipc.SeekableReadChannel;
-import org.apache.arrow.vector.types.FloatingPointPrecision;
-import org.apache.arrow.vector.types.pojo.ArrowType;
-import org.apache.arrow.vector.types.pojo.Field;
-import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.util.ByteArrayReadableSeekableByteChannel;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.util.VectorSchemaRootAppender;
 
 
 import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Array;
 import java.nio.channels.Channels;
 import java.util.*;
 
 public class FeatherProcessor {
+
+    public static ArrayList<StructEntry> getEntriesFromHashMap(HashMap<?, ?> obj) throws Exception {
+        var entries = new ArrayList<StructEntry>();
+        for (var entry : obj.entrySet()) {
+            var key = entry.getKey();
+            if (!(key instanceof String)) {
+                throw new Exception("Key in HashMap is not a String");
+            }
+            entries.add(new StructEntry((String) key, entry.getValue()));
+        }
+        return entries;
+    }
+    public static ArrayList<StructEntry> getEntriesFromObject(Object obj) throws Exception {
+        var pairs = new ArrayList<StructEntry>();
+        var fields = obj.getClass().getDeclaredFields();
+        for (var field : fields) {
+            var value = field.get(obj);
+            pairs.add(new StructEntry(field.getName(), value));
+        }
+        return pairs;
+    }
+
+    public static ArrayList<StructEntry> getEntries(Object obj) throws Exception {
+        if (obj instanceof HashMap) {
+            return getEntriesFromHashMap((HashMap<?, ?>) obj);
+        } else {
+            return getEntriesFromObject(obj);
+        }
+    }
+
     public static void  powerWrite(BaseWriter writer, Object value) throws Exception {
         if (value instanceof Integer) {
             if (!(writer instanceof BigIntWriter intWriter)) {
@@ -98,25 +123,25 @@ public class FeatherProcessor {
         } else if (writer instanceof NullableStructWriter structWriter) {
             // Yes, this is duplicated with `UnionListWriter` below.
             structWriter.start();
-            var structFields = value.getClass().getDeclaredFields();
-            for (java.lang.reflect.Field sf: structFields) {
-                var structFieldValue = sf.get(value);
-                if (structFieldValue instanceof Integer) {
-                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Long) {
-                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Double) {
-                    powerWrite(structWriter.float8(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof String) {
-                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Boolean) {
-                    powerWrite(structWriter.bit(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof byte[]) {
-                    powerWrite(structWriter.largeVarBinary(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof List) {
-                    powerWrite(structWriter.list(sf.getName()), structFieldValue);
+            for (var pair: getEntries(value)) {
+                var fieldVal = pair.value();
+                var fieldName = pair.key();
+                if (fieldVal instanceof Integer) {
+                    powerWrite(structWriter.bigInt(fieldName), fieldVal);
+                } else if (fieldVal instanceof Long) {
+                    powerWrite(structWriter.bigInt(fieldName), fieldVal);
+                } else if (fieldVal instanceof Double) {
+                    powerWrite(structWriter.float8(fieldName), fieldVal);
+                } else if (fieldVal instanceof String) {
+                    powerWrite(structWriter.largeVarChar(fieldName), fieldVal);
+                } else if (fieldVal instanceof Boolean) {
+                    powerWrite(structWriter.bit(fieldName), fieldVal);
+                } else if (fieldVal instanceof byte[]) {
+                    powerWrite(structWriter.largeVarBinary(fieldName), fieldVal);
+                } else if (fieldVal instanceof List) {
+                    powerWrite(structWriter.list(fieldName), fieldVal);
                 } else {
-                    throw new Exception("Unsupported data type: " + structFieldValue.getClass().getSimpleName());
+                    throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
                 }
             }
             structWriter.end();
@@ -124,25 +149,25 @@ public class FeatherProcessor {
             // The mystery of the century presents itself:
             // when we do `.struct()` we get a `UnionListWriter` instead of a `NullableStructWriter`
             structWriter.start();
-            var structFields = value.getClass().getDeclaredFields();
-            for (java.lang.reflect.Field sf: structFields) {
-                var structFieldValue = sf.get(value);
-                if (structFieldValue instanceof Integer) {
-                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Long) {
-                    powerWrite(structWriter.bigInt(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Double) {
-                    powerWrite(structWriter.float8(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof String) {
-                    powerWrite(structWriter.largeVarChar(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof Boolean) {
-                    powerWrite(structWriter.bit(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof byte[]) {
-                    powerWrite(structWriter.largeVarBinary(sf.getName()), structFieldValue);
-                } else if (structFieldValue instanceof List) {
-                    powerWrite(structWriter.list(sf.getName()), structFieldValue);
+            for (var pair: getEntries(value)) {
+                var fieldVal = pair.value();
+                var fieldName = pair.key();
+                if (fieldVal instanceof Integer) {
+                    powerWrite(structWriter.bigInt(fieldName), fieldVal);
+                } else if (fieldVal instanceof Long) {
+                    powerWrite(structWriter.bigInt(fieldName), fieldVal);
+                } else if (fieldVal instanceof Double) {
+                    powerWrite(structWriter.float8(fieldName), fieldVal);
+                } else if (fieldVal instanceof String) {
+                    powerWrite(structWriter.largeVarChar(fieldName), fieldVal);
+                } else if (fieldVal instanceof Boolean) {
+                    powerWrite(structWriter.bit(fieldName), fieldVal);
+                } else if (fieldVal instanceof byte[]) {
+                    powerWrite(structWriter.largeVarBinary(fieldName), fieldVal);
+                } else if (fieldVal instanceof List) {
+                    powerWrite(structWriter.list(fieldName), fieldVal);
                 } else {
-                    throw new Exception("Unsupported data type: " + structFieldValue.getClass().getSimpleName());
+                    throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
                 }
             }
             structWriter.end();
@@ -154,8 +179,6 @@ public class FeatherProcessor {
 
     public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        List<FieldMeta> fieldMetas = new ArrayList<>();
-
         var uniformListLength = -1;
         for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
             List<?> value = entry.getValue();
@@ -180,6 +203,14 @@ public class FeatherProcessor {
                 BigIntVector intVector = new BigIntVector(fqn, new RootAllocator(Long.MAX_VALUE));
                 fieldVectors.add(intVector);
                 var writer = new BigIntWriterImpl(intVector);
+                for (int i = 0; i < values.size(); i++) {
+                    writer.setPosition(i);
+                    powerWrite(writer, values.get(i));
+                }
+            } else if (firstClazz.equals(Long.class)) {
+                BigIntVector longVector = new BigIntVector(fqn, new RootAllocator(Long.MAX_VALUE));
+                fieldVectors.add(longVector);
+                var writer = new BigIntWriterImpl(longVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
                     powerWrite(writer, values.get(i));

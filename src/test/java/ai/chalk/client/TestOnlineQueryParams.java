@@ -5,6 +5,8 @@ import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 public class TestOnlineQueryParams {
+    public static boolean jsonCompare(String expected, String actual) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode tree1 = mapper.readTree(expected);
+        JsonNode tree2 = mapper.readTree(actual);
+        return tree1.equals(tree2);
+    }
     @Test
     public void testInputSerializationLossless() throws Exception {
         var params = OnlineQueryParams.builder()
@@ -22,10 +30,54 @@ public class TestOnlineQueryParams {
                 .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
-                .withInput("user.struct_feature", Arrays.asList(
+                .withInput("user.struct_feature__via_classes__", Arrays.asList(
                         new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
                         new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
                         new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
+                ))
+                .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
+                        new HashMap<String, Object>() {{
+                            put("name", "a");
+                            put("amount", 1.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "a");
+                                        put("amount", 1.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "b");
+                                        put("amount", 2.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "b");
+                            put("amount", 2.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "c");
+                                        put("amount", 3.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "d");
+                                        put("amount", 4.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "c");
+                            put("amount", 3.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "e");
+                                        put("amount", 5.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "f");
+                                        put("amount", 6.0);
+                                    }}
+                            ));
+                        }}
                 ))
                 .withInput("user.struct_with_int_list", Arrays.asList(
                         new StructWithIntList("a", Arrays.asList(1, 2, 3)),
@@ -66,11 +118,20 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.bool_feature").getObject(1).equals(false);
             assert deserialized.getVectorCopy("user.bool_feature").getObject(2).equals(true);
 
-            var structField = deserialized.getField("user.struct_feature");
-            assert structField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert deserialized.getVectorCopy("user.struct_feature").getObject(0).toString().equals("{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}");
-            assert deserialized.getVectorCopy("user.struct_feature").getObject(1).toString().equals("{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}");
-            assert deserialized.getVectorCopy("user.struct_feature").getObject(2).toString().equals("{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}");
+
+            var structVal1 = "{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}";
+            var structVal2 = "{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}";
+            var structVal3 = "{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}";
+            var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
+            assert structFieldViaClasses.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(0).toString().equals(structVal1);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(1).toString().equals(structVal2);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
+            var structFieldViaHashMap = deserialized.getField("user.struct_feature__via_hashmap__");
+            assert structFieldViaHashMap.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(0).toString(), structVal1);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(1).toString(), structVal2);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(2).toString(), structVal3);
 
             var structWithIntListField = deserialized.getField("user.struct_with_int_list");
             assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
@@ -85,6 +146,8 @@ public class TestOnlineQueryParams {
             assert deserialized.getVectorCopy("user.struct_with_struct").getObject(1).toString().equals("{\"title\":\"b\",\"flux\":{\"description\":\"b\",\"amount\":2.0}}");
             assert deserialized.getVectorCopy("user.struct_with_struct").getObject(2).toString().equals("{\"title\":\"c\",\"flux\":{\"description\":\"c\",\"amount\":3.0}}");
             */
+
+
         }
     }
 
