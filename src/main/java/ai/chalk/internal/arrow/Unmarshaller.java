@@ -1,6 +1,5 @@
 package ai.chalk.internal.arrow;
 
-import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesClass;
@@ -9,6 +8,7 @@ import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.internal.Constants;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
+import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;
@@ -40,7 +40,7 @@ public class Unmarshaller {
         if (targets.length == 0) {
             return;
         }
-        for (var entry: tables.entrySet()) {
+        for (var entry : tables.entrySet()) {
             Class<?> localClass = targets[0].getClass();
             String fqn = entry.getKey();
             Table table = entry.getValue();
@@ -55,7 +55,7 @@ public class Unmarshaller {
 
             FeaturesClass[] objects = unmarshalTable(table, hasManyClass.asSubclass(FeaturesClass.class));
             Map<String, List<FeaturesClass>> grouped = new HashMap<>();
-            for (FeaturesClass obj: objects) {
+            for (FeaturesClass obj : objects) {
                 Field foreignField = getFieldFromFqn(hasManyClass, foreignFqn);
                 Feature<?> foreignKeyFeature = (Feature<?>) foreignField.get(obj);
                 if (foreignKeyFeature == null) {
@@ -68,7 +68,7 @@ public class Unmarshaller {
                 grouped.get(v).add(obj);
             }
 
-            for (FeaturesClass target: targets) {
+            for (FeaturesClass target : targets) {
                 Field localField = getFieldFromFqn(localClass, localFqn);
                 Feature<?> localKeyFeature = (Feature<?>) localField.get(target);
                 if (localKeyFeature == null) {
@@ -89,7 +89,7 @@ public class Unmarshaller {
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
-        for (Row row: table) {
+        for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
             Map<String, Feature<?>> featureMap;
             try {
@@ -99,10 +99,10 @@ public class Unmarshaller {
             }
             result.add(obj);
 
-            for (var arrowField: table.getSchema().getFields()) {
+            for (var arrowField : table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
-                String[] fqnsToSkip = new String[] {
-                    Constants.tsFeatureFqn,
+                String[] fqnsToSkip = new String[]{
+                        Constants.tsFeatureFqn,
                 };
                 if (Arrays.asList(fqnsToSkip).contains(fqn)) {
                     continue;
@@ -309,7 +309,7 @@ public class Unmarshaller {
                                 break;
                             }
                             var resultList = new ArrayList();
-                            for (Object rawObj: originalList) {
+                            for (Object rawObj : originalList) {
                                 if (rawObj instanceof Text) {
                                     // Converting from arrow `Text` to Java `String`
                                     resultList.add(rawObj.toString());
@@ -353,7 +353,7 @@ public class Unmarshaller {
                         }
                         case Time -> {
                             var cast = (ArrowType.Time) (arrowField.getFieldType().getType());
-                            switch(cast.getUnit()) {
+                            switch (cast.getUnit()) {
                                 case SECOND -> {
                                     var holder = new NullableTimeSecHolder();
                                     row.getTimeSec(fqn, holder);
