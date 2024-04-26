@@ -22,20 +22,35 @@ public class TestOnlineQueryParams {
                 .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
+                .withInput("user.struct_feature", Arrays.asList(new Gadget("a", 1.0), new Gadget("b", 2.0), new Gadget("c", 3.0)))
                 .build();
         var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
         try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
             var floatField = deserialized.getField("user.float_feature");
             assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(0).equals(1.0);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(1).equals(2.0);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(2).equals(3.0);
 
             var stringField = deserialized.getField("user.string_feature");
             assert stringField.getType().getTypeID().equals(ArrowType.ArrowTypeID.LargeUtf8);
+            assert deserialized.getVectorCopy("user.string_feature").getObject(0).toString().equals("a");
+            assert deserialized.getVectorCopy("user.string_feature").getObject(1).toString().equals("b");
+            assert deserialized.getVectorCopy("user.string_feature").getObject(2).toString().equals("c");
 
             var intField = deserialized.getField("user.int_feature");
             assert intField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Int);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(0).equals(1L);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(1).equals(2L);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(2).equals(3L);
 
             var boolField = deserialized.getField("user.bool_feature");
             assert boolField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Bool);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(0).equals(true);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(1).equals(false);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(2).equals(true);
+
+            assert deserialized.getVectorCopy("user.struct_feature").getObject(2) != null;
         }
     }
 
