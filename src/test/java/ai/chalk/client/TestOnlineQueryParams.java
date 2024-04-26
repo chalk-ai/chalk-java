@@ -424,7 +424,7 @@ public class TestOnlineQueryParams {
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def", "ghiRR")
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .withOutputs("user.today", "user.socure_score")
                 .build();
@@ -463,7 +463,7 @@ public class TestOnlineQueryParams {
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def", "ghi")
                 .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
                 .withOutputs("user.today", "user.socure_score")
                 .build();

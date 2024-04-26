@@ -193,7 +193,7 @@ public class FeatherProcessor {
             } else if (uniformListLength == -1) {
                 uniformListLength = values.size();
             } else if (uniformListLength != values.size()) {
-                throw new Exception("Input values have different lengths");
+                throw new Exception(String.format("Input values have different lengths - expected %d but got %d: %s", uniformListLength, values.size(), values));
             }
 
             var firstClazz = values.get(0).getClass();
