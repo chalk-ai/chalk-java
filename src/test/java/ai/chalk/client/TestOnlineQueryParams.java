@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
+import java.time.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,16 +25,28 @@ public class TestOnlineQueryParams {
     }
     @Test
     public void testInputSerializationLossless() throws Exception {
+        ZoneId zoneIdUTC = ZoneId.of("UTC");
+
+        LocalDateTime dateTime1 = LocalDateTime.of(2024, Month.APRIL, 25, 10, 0); // 10:00 AM
+        LocalDateTime dateTime2 = LocalDateTime.of(2024, Month.APRIL, 25, 14, 0); // 2:00 PM
+        LocalDateTime dateTime3 = LocalDateTime.of(2024, Month.APRIL, 25, 18, 0); // 6:00 PM
+
+        ZonedDateTime utcTime1 = ZonedDateTime.of(dateTime1, zoneIdUTC);
+        ZonedDateTime utcTime2 = ZonedDateTime.of(dateTime2, zoneIdUTC);
+        ZonedDateTime utcTime3 = ZonedDateTime.of(dateTime3, zoneIdUTC);
+
         var params = OnlineQueryParams.builder()
                 .withInput("user.float_feature", Arrays.asList(1.0, 2.0, 3.0))
                 .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
                 .withInput("user.int_feature", Arrays.asList(1, 2, 3))
                 .withInput("user.bool_feature", Arrays.asList(true, false, true))
-                .withInput("user.struct_feature__via_classes__", Arrays.asList(
-                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
-                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
-                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
-                ))
+//                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
+//                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
+//                .withInput("user.struct_feature__via_classes__", Arrays.asList(
+//                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+//                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+//                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
+//                ))
                 .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
                         new HashMap<String, Object>() {{
                             put("name", "a");
@@ -79,11 +91,11 @@ public class TestOnlineQueryParams {
                             ));
                         }}
                 ))
-                .withInput("user.struct_with_int_list", Arrays.asList(
-                        new StructWithIntList("a", Arrays.asList(1, 2, 3)),
-                        new StructWithIntList("b", Arrays.asList(4, 5, 6)),
-                        new StructWithIntList("c", Arrays.asList(7, 8, 9))
-                ))
+//                .withInput("user.struct_with_int_list", Arrays.asList(
+//                        new StructWithIntList("a", Arrays.asList(1, 2, 3)),
+//                        new StructWithIntList("b", Arrays.asList(4, 5, 6)),
+//                        new StructWithIntList("c", Arrays.asList(7, 8, 9))
+//                ))
                 /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
                 .withInput("user.struct_with_struct", Arrays.asList(
                         new StructWithStruct("a", new InnerStruct("a", 1.0)),
@@ -122,22 +134,27 @@ public class TestOnlineQueryParams {
             var structVal1 = "{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}";
             var structVal2 = "{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}";
             var structVal3 = "{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}";
-            var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
-            assert structFieldViaClasses.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(0).toString().equals(structVal1);
-            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(1).toString().equals(structVal2);
-            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
             var structFieldViaHashMap = deserialized.getField("user.struct_feature__via_hashmap__");
             assert structFieldViaHashMap.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
             assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(0).toString(), structVal1);
             assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(1).toString(), structVal2);
             assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(2).toString(), structVal3);
 
+            /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
+            var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
+            assert structFieldViaClasses.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(0).toString().equals(structVal1);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(1).toString().equals(structVal2);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
+            */
+
+            /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
             var structWithIntListField = deserialized.getField("user.struct_with_int_list");
             assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString().equals("{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString().equals("{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
             assert deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString().equals("{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+            */
 
             /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
             var structWithStructField = deserialized.getField("user.struct_with_struct");
