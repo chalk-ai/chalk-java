@@ -2,16 +2,23 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.net.http.HttpClient;
 
 @Getter
 public class BuilderImpl implements ChalkClient.Builder {
+    @Nullable
     private String clientId;
+    @Nullable
     private String clientSecret;
+    @Nullable
     private String apiServer;
+    @Nullable
     private String environmentId;
+    @Nullable
     private String branch;
+    @Nullable
     private HttpClient httpClient;
 
     public BuilderImpl() {
