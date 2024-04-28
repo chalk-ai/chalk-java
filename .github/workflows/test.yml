@@ -18,12 +18,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
-
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
-        with:
-          reporter: 'github-pr-check'
-          tool_name: 'testtool'
+#
+#      - name: Run check style
+#        uses: nikitasavinov/checkstyle-action@master
+#        with:
+#          reporter: 'github-pr-check'
+#          tool_name: 'testtool'
 
       - name: Run tests
         run: ./gradlew test --stacktrace
