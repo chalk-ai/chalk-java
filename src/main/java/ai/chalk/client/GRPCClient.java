@@ -1,21 +1,34 @@
 package ai.chalk.client;
 
+import ai.chalk.internal.config.Loader;
+import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import io.grpc.*;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class GRPCClient {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
 
     public GRPCClient(BuilderImpl builder) {
-        String grpcHost = builder.getApiServer().replaceFirst("^https?://", "");
+        ProjectToken chalkYamlConfig = new ProjectToken();
+        String projectRoot;
+        try {
+            projectRoot = Loader.loadProjectDirectory();
+            chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
+        } catch (Exception ignored) {
+        }
+
+        ResolvedConfig resolvedConfig = ResolvedConfig.fromBuilder(builder, chalkYamlConfig);
+        if (resolvedConfig.clientId().value().isEmpty() || resolvedConfig.clientSecret().value().isEmpty()) {
+            throw new IllegalArgumentException("Client ID and Client Secret are required");
+        }
+
+        String grpcHost = resolvedConfig.grpcHost();
         ChannelCredentials channelCreds = grpcHost.startsWith("localhost") || grpcHost.startsWith("127.0.0.1")
                 ? InsecureChannelCredentials.create()
                 : TlsChannelCredentials.create();
@@ -28,26 +41,35 @@ public class GRPCClient {
         );
 
         TokenRefresher tokenRefresher = new TokenRefresher(
-                builder.getClientId(),
-                builder.getClientSecret(),
+                resolvedConfig.clientId().value(),
+                resolvedConfig.clientSecret().value(),
                 this.authStub
         );
 
         GetTokenResponse token = tokenRefresher.getToken();
-
-        @Nullable Optional<String> environmentIdMaybe = Optional.ofNullable(builder.getEnvironmentId());
-
-        if (environmentIdMaybe.isEmpty() && !token.getPrimaryEnvironment().isEmpty()) {
-            environmentIdMaybe = Optional.of(token.getPrimaryEnvironment());
+        String environmentId = resolvedConfig.environmentId().value();
+        if (environmentId.isEmpty() && !token.getPrimaryEnvironment().isEmpty()) {
+            environmentId = token.getPrimaryEnvironment();
         }
 
-        if (environmentIdMaybe.isEmpty()) {
+        if (environmentId.isEmpty()) {
             throw new IllegalArgumentException("Environment ID is required");
         }
 
-        @NonNull String environmentId = environmentIdMaybe.get();
-
-        token.getGrpcEnginesMap();
+        if (!token.containsEnvironmentIdToName(environmentId)) {
+            List<String> environmentIds = new java.util.ArrayList<>();
+            for (var entry : token.getEnvironmentIdToNameMap().entrySet()) {
+                if (entry.getValue().equals(environmentId)) {
+                    environmentIds.add(entry.getKey());
+                }
+            }
+            if (environmentIds.isEmpty()) {
+                throw new IllegalArgumentException("Environment name %s not found".formatted(environmentId));
+            } else if (environmentIds.size() > 1) {
+                throw new IllegalArgumentException("Environment name %s is ambiguous among %s".formatted(environmentId, environmentIds));
+            }
+            environmentId = environmentIds.get(0);
+        }
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(
                 grpcHost,
@@ -62,7 +84,6 @@ public class GRPCClient {
         ).build();
 
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
-
 
     }
 

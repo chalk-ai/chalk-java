@@ -1,12 +1,11 @@
 package ai.chalk.internal.config.models;
 
 import ai.chalk.internal.config.Loader;
-import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Collections;
 import java.util.Map;
 
-@Getter
 public record SourcedConfig(String source, String value) {
     public static SourcedConfig fromEnvVar(String envVarName) {
         return new SourcedConfig(String.format("environment variable '%s'", envVarName), System.getenv(envVarName));
@@ -27,7 +26,7 @@ public record SourcedConfig(String source, String value) {
         return new SourcedConfig(String.format("config file %s", pathStr), value);
     }
 
-    public static SourcedConfig firstNonEmpty(SourcedConfig... configs) {
+    public static @NonNull SourcedConfig firstNonEmpty(SourcedConfig... configs) {
         for (SourcedConfig config : configs) {
             if (config != null && config.value() != null && !config.value().isEmpty()) {
                 return config;

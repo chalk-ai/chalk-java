@@ -2,12 +2,13 @@ package ai.chalk.client;
 
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public record ResolvedConfig(
-        SourcedConfig apiServer,
-        SourcedConfig clientId,
-        SourcedConfig clientSecret,
-        SourcedConfig environmentId
+        @NonNull SourcedConfig apiServer,
+        @NonNull SourcedConfig clientId,
+        @NonNull SourcedConfig clientSecret,
+        @NonNull SourcedConfig environmentId
 ) {
 
     public static ResolvedConfig fromBuilder(
@@ -37,5 +38,9 @@ public record ResolvedConfig(
                         SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment())
                 )
         );
+    }
+
+    public String grpcHost() {
+        return apiServer.value().replaceFirst("^https?://", "");
     }
 }
