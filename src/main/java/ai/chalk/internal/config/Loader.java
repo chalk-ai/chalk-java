@@ -3,9 +3,8 @@ package ai.chalk.internal.config;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.ProjectTokens;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,8 +43,7 @@ public class Loader {
                 throw new Exception("error getting home directory");
             }
         }
-        Path path = Paths.get(configDir, ".chalk.yml");
-        return path;
+        return Paths.get(configDir, ".chalk.yml");
     }
 
     private static ProjectToken getProjectToken(ProjectTokens config, String configPath, String projectRoot) throws Exception {
@@ -72,10 +70,10 @@ public class Loader {
     }
 
     private static ProjectTokens loadAllTokens() throws IOException {
-        Path path = null;
+        Path path;
         try {
             path = getConfigPath();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new IOException("Error getting auth config path");
         }
 
@@ -90,7 +88,7 @@ public class Loader {
         mapper.registerModule(new JavaTimeModule());
         ProjectTokens config;
         try {
-             config = mapper.readValue(new String(data), ProjectTokens.class);
+            config = mapper.readValue(new String(data), ProjectTokens.class);
         } catch (Exception e) {
             throw new IOException(String.format("Error parsing auth config file at path '%s'. Please make sure you have run 'chalk login' successfully. Error details: %s", path, e.getMessage()), e);
         }

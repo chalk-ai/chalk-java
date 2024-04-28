@@ -57,10 +57,9 @@ public class GRPCClient {
                         ServerType.SERVER,
                         Map.of(),
                         tokenRefresher,
-                        builder.getEnvironmentId()
+                        environmentId
                 )
         ).build();
-
 
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
