@@ -1,8 +1,8 @@
 package ai.chalk.client;
 
-import ai.chalk.server.v1.AuthServiceGrpc;
-import ai.chalk.server.v1.GetTokenResponse;
-import ai.chalk.server.v1.TeamServiceGrpc;
+import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
+import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
+import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import io.grpc.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -48,7 +48,6 @@ public class GRPCClient {
         @NonNull String environmentId = environmentIdMaybe.get();
 
         token.getGrpcEnginesMap();
-
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(
                 grpcHost,

@@ -1,6 +1,6 @@
 package ai.chalk.client;
 
-import ai.chalk.server.v1.GetTokenResponse;
+import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import io.grpc.*;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
 import io.grpc.stub.MetadataUtils;

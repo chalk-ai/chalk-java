@@ -19,9 +19,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig apiServer;
     private final SourcedConfig clientId;
     private final SourcedConfig environmentId;
-    private SourcedConfig initialEnvironment;
-    private SourcedConfig clientSecret;
-    private String branch;
+    private final SourcedConfig clientSecret;
     private final RequestHandler handler;
 
     public ChalkClient ChalkClient() throws ChalkException {
@@ -35,17 +33,17 @@ public class ChalkClientImpl implements ChalkClient {
         this.clientId = resolvedConfig.clientId;
         this.clientSecret = resolvedConfig.clientSecret;
         this.environmentId = resolvedConfig.environmentId;
-        this.initialEnvironment = resolvedConfig.environmentId;
-        this.branch = config.getBranch();
+        SourcedConfig initialEnvironment = resolvedConfig.environmentId;
+        String branch = config.getBranch();
 
         this.handler = new RequestHandler(
                 config.getHttpClient(),
                 this.apiServer,
                 this.environmentId,
-                this.initialEnvironment,
+                initialEnvironment,
                 this.clientId,
                 this.clientSecret,
-                this.branch
+                branch
         );
     }
 
