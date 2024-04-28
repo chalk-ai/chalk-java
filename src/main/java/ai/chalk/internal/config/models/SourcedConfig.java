@@ -1,21 +1,12 @@
 package ai.chalk.internal.config.models;
 
 import ai.chalk.internal.config.Loader;
-import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Collections;
 import java.util.Map;
 
-@Getter
-public class SourcedConfig {
-    private final String source;
-    private final String value;
-
-    public SourcedConfig(String source, String value) {
-        this.source = source;
-        this.value = value;
-    }
-
+public record SourcedConfig(String source, String value) {
     public static SourcedConfig fromEnvVar(String envVarName) {
         return new SourcedConfig(String.format("environment variable '%s'", envVarName), System.getenv(envVarName));
     }
@@ -35,9 +26,9 @@ public class SourcedConfig {
         return new SourcedConfig(String.format("config file %s", pathStr), value);
     }
 
-    public static SourcedConfig firstNonEmpty(SourcedConfig... configs) {
+    public static @NonNull SourcedConfig firstNonEmpty(SourcedConfig... configs) {
         for (SourcedConfig config : configs) {
-            if (config != null && config.getValue() != null && !config.getValue().isEmpty()) {
+            if (config != null && config.value() != null && !config.value().isEmpty()) {
                 return config;
             }
         }
@@ -56,8 +47,8 @@ public class SourcedConfig {
         int maxValueWidth = valueHeader.length();
         for (Map.Entry<String, SourcedConfig> entry : configMap.entrySet()) {
             maxConfigNameWidth = Math.max(maxConfigNameWidth, entry.getKey().length());
-            maxSourceWidth = Math.max(maxSourceWidth, entry.getValue().getSource().length());
-            maxValueWidth = Math.max(maxValueWidth, entry.getValue().getValue().length());
+            maxSourceWidth = Math.max(maxSourceWidth, entry.getValue().source().length());
+            maxValueWidth = Math.max(maxValueWidth, entry.getValue().value().length());
         }
         int buffer = 4;
         maxConfigNameWidth += buffer;
@@ -81,7 +72,7 @@ public class SourcedConfig {
         for (Map.Entry<String, SourcedConfig> entry : configMap.entrySet()) {
             result.append(String.format(
                     "%-" + maxConfigNameWidth + "s %-" + maxValueWidth + "s %-" + maxSourceWidth + "s%n",
-                    entry.getKey(), entry.getValue().getValue(), entry.getValue().getSource()
+                    entry.getKey(), entry.getValue().value(), entry.getValue().source()
             ));
         }
 

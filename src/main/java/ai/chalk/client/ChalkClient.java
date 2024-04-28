@@ -1,9 +1,9 @@
 package ai.chalk.client;
 
+import ai.chalk.exceptions.ChalkException;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
-import ai.chalk.exceptions.ChalkException;
 
 import java.net.http.HttpClient;
 
@@ -18,7 +18,6 @@ public interface ChalkClient {
      * <pre>
      *    {@code
      *    client = ChalkClient.builder()
-     *            .withApiServer("https://api.chalk.ai")
      *            .withEnvironmentId("socmc8beyufew")
      *            .withClientId("98wrasfg7dge7wdasg709")
      *            .withClientSecret("h23lkj4h23lkj4z9s78fg908as7fkjh324klj23")
@@ -55,8 +54,8 @@ public interface ChalkClient {
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
      *
      * <p>
-     *     Example usage:
-     *     <pre>
+     * Example usage:
+     * <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
      *         .withInput("user.id", Arrays.asList(1, 2, 3))
@@ -69,10 +68,9 @@ public interface ChalkClient {
      *     </pre>
      * </p>
      *
-     * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
-     *
      * @return {@link OnlineQueryResult }
      * @throws ChalkException
+     * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      */
     OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
 
@@ -95,8 +93,7 @@ public interface ChalkClient {
         public Builder withClientSecret(String clientSecret);
 
         /**
-         * Sets the API server URL. Typically set to
-         * 'https://api.chalk.ai'.
+         * Sets the API server URL. Defaults to "https://api.chalk.ai".
          */
         public Builder withApiServer(String apiServer);
 
@@ -121,10 +118,15 @@ public interface ChalkClient {
         public Builder withHttpClient(HttpClient httpClient);
 
         public String getClientId();
+
         public String getClientSecret();
+
         public String getApiServer();
+
         public String getEnvironmentId();
+
         public String getBranch();
+
         public HttpClient getHttpClient();
 
         ChalkClient build() throws ChalkException;

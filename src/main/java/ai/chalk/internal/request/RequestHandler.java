@@ -5,11 +5,7 @@ import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerException;
 import ai.chalk.internal.config.models.JWT;
 import ai.chalk.internal.config.models.SourcedConfig;
-import ai.chalk.internal.request.models.ChalkHttpException;
-import ai.chalk.internal.request.models.GetTokenRequest;
-import ai.chalk.internal.request.models.GetTokenResponse;
-import ai.chalk.internal.request.models.SendRequestParams;
-import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import ai.chalk.internal.request.models.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -53,7 +49,7 @@ public class RequestHandler {
             this.httpClient = httpClient;
         }
 
-        this.apiServer = URI.create(apiServer.getValue());
+        this.apiServer = URI.create(apiServer.value());
         this.environmentId = environmentId;
         this.initialEnvironment = initialEnvironment;
         this.clientId = clientId;
@@ -66,7 +62,7 @@ public class RequestHandler {
         if (environmentOverride != null && !environmentOverride.isEmpty()) {
             return environmentOverride;
         }
-        return this.environmentId.getValue();
+        return this.environmentId.value();
     }
 
     private Map<String, String> getHeaders(
@@ -81,7 +77,7 @@ public class RequestHandler {
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json");
         headers.put("User-Agent", "chalk-java");
-        headers.put("X-Chalk-Client-Id", this.clientId.getValue());
+        headers.put("X-Chalk-Client-Id", this.clientId.value());
 
         String branchResolved = null;
         if (branchOverride != null && !branchOverride.isEmpty()) {
@@ -99,7 +95,7 @@ public class RequestHandler {
         if (environmentOverride != null && !environmentOverride.isEmpty()) {
             headers.put("X-Chalk-Env-Id", environmentOverride);
         } else {
-            headers.put("X-Chalk-Env-Id", this.environmentId.getValue());
+            headers.put("X-Chalk-Env-Id", this.environmentId.value());
         }
 
         if (previewDeploymentId != null && !previewDeploymentId.isEmpty()) {
@@ -280,8 +276,8 @@ public class RequestHandler {
     private JWT getJwt() throws ChalkException {
         SendRequestParams<GetTokenResponse> params = new SendRequestParams<>(
                 new GetTokenRequest(
-                        this.clientId.getValue(),
-                        this.clientSecret.getValue(),
+                        this.clientId.value(),
+                        this.clientSecret.value(),
                         "client_credentials"
                 ),
                 "POST",
@@ -301,7 +297,7 @@ public class RequestHandler {
             throw new ClientException("Error getting access token", e);
         }
 
-        if (this.initialEnvironment.getValue().isEmpty()) {
+        if (this.initialEnvironment.value().isEmpty()) {
             this.environmentId = new SourcedConfig(
                     response.getPrimaryEnvironment(),
                     "Primary environment from credentials exchange response"

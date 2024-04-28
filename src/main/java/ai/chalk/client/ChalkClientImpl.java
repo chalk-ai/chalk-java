@@ -19,9 +19,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig apiServer;
     private final SourcedConfig clientId;
     private final SourcedConfig environmentId;
-    private SourcedConfig initialEnvironment;
-    private SourcedConfig clientSecret;
-    private String branch;
+    private final SourcedConfig clientSecret;
     private final RequestHandler handler;
 
     public ChalkClient ChalkClient() throws ChalkException {
@@ -31,21 +29,21 @@ public class ChalkClientImpl implements ChalkClient {
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         ResolvedConfig resolvedConfig = this.resolveConfig(config);
-        this.apiServer = resolvedConfig.apiServer;
-        this.clientId = resolvedConfig.clientId;
-        this.clientSecret = resolvedConfig.clientSecret;
-        this.environmentId = resolvedConfig.environmentId;
-        this.initialEnvironment = resolvedConfig.environmentId;
-        this.branch = config.getBranch();
+        this.apiServer = resolvedConfig.apiServer();
+        this.clientId = resolvedConfig.clientId();
+        this.clientSecret = resolvedConfig.clientSecret();
+        this.environmentId = resolvedConfig.environmentId();
+        SourcedConfig initialEnvironment = resolvedConfig.environmentId();
+        String branch = config.getBranch();
 
         this.handler = new RequestHandler(
                 config.getHttpClient(),
                 this.apiServer,
                 this.environmentId,
-                this.initialEnvironment,
+                initialEnvironment,
                 this.clientId,
                 this.clientSecret,
-                this.branch
+                branch
         );
     }
 
@@ -72,13 +70,8 @@ public class ChalkClientImpl implements ChalkClient {
         return this.handler.sendRequest(request).toResult();
     }
 
-    public record ResolvedConfig(SourcedConfig apiServer, SourcedConfig clientId, SourcedConfig clientSecret,
-                                 SourcedConfig environmentId) {
-    }
-
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
-
         String projectRoot;
         try {
             projectRoot = Loader.loadProjectDirectory();
@@ -87,34 +80,12 @@ public class ChalkClientImpl implements ChalkClient {
             // TODO: Add some logging here
         }
 
-        ResolvedConfig config = new ResolvedConfig(
-                SourcedConfig.firstNonEmpty(
-                        SourcedConfig.fromBuilder(builder.getApiServer()),
-                        SourcedConfig.fromEnvVar(ConfigEnvVars.apiServerKey),
-                        SourcedConfig.fromConfigFile(chalkYamlConfig.getApiServer()),
-                        new SourcedConfig("default", "https://api.chalk.ai")
-                ),
-                SourcedConfig.firstNonEmpty(
-                        SourcedConfig.fromBuilder(builder.getClientId()),
-                        SourcedConfig.fromEnvVar(ConfigEnvVars.clientIdKey),
-                        SourcedConfig.fromConfigFile(chalkYamlConfig.getClientId())
-                ),
-                SourcedConfig.firstNonEmpty(
-                        SourcedConfig.fromBuilder(builder.getClientSecret()),
-                        SourcedConfig.fromEnvVar(ConfigEnvVars.clientSecretKey),
-                        SourcedConfig.fromConfigFile(chalkYamlConfig.getClientSecret())
-                ),
-                SourcedConfig.firstNonEmpty(
-                        SourcedConfig.fromBuilder(builder.getEnvironmentId()),
-                        SourcedConfig.fromEnvVar(ConfigEnvVars.environmentIdKey),
-                        SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment())
-                )
-        );
+        ResolvedConfig config = ResolvedConfig.fromBuilder(builder, chalkYamlConfig);
 
-        if (config.clientId.getValue().isEmpty() ||
-                config.clientSecret.getValue().isEmpty() ||
-                config.apiServer.getValue().isEmpty() ||
-                config.environmentId.getValue().isEmpty()) {
+        if (config.clientId().value().isEmpty() ||
+                config.clientSecret().value().isEmpty() ||
+                config.apiServer().value().isEmpty() ||
+                config.environmentId().value().isEmpty()) {
             System.err.println(this.getConfigStr());
             throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
         }
@@ -129,8 +100,8 @@ public class ChalkClientImpl implements ChalkClient {
                         "Environment ID", this.environmentId,
                         "Client ID", this.clientId,
                         "Client Secret", new SourcedConfig(
-                                this.clientSecret.getSource(),
-                                this.clientSecret.getValue().replaceAll(".", "*")
+                                this.clientSecret.source(),
+                                this.clientSecret.value().replaceAll(".", "*")
                         )
                 )) +
                 """
