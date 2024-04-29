@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class TestOnlineQueryParams {
@@ -26,9 +27,9 @@ public class TestOnlineQueryParams {
     public void testInputSerializationLossless() throws Exception {
         ZoneId zoneIdUTC = ZoneId.of("UTC");
 
-        LocalDateTime dateTime1 = LocalDateTime.of(2024, Month.APRIL, 25, 10, 0); // 10:00 AM
-        LocalDateTime dateTime2 = LocalDateTime.of(2024, Month.APRIL, 25, 14, 0); // 2:00 PM
-        LocalDateTime dateTime3 = LocalDateTime.of(2024, Month.APRIL, 25, 18, 0); // 6:00 PM
+        LocalDateTime dateTime1 = LocalDateTime.of(2024, Month.APRIL, 25, 10, 0, 0, 123456789); // 10:00 AM
+        LocalDateTime dateTime2 = LocalDateTime.of(2024, Month.APRIL, 25, 14, 0, 0, 333333333); // 2:00 PM
+        LocalDateTime dateTime3 = LocalDateTime.of(2024, Month.APRIL, 25, 18, 0, 0, 987654321); // 6:00 PM
 
         ZonedDateTime utcTime1 = ZonedDateTime.of(dateTime1, zoneIdUTC);
         ZonedDateTime utcTime2 = ZonedDateTime.of(dateTime2, zoneIdUTC);
@@ -161,17 +162,20 @@ public class TestOnlineQueryParams {
 
             var localDateTimeField = deserialized.getField("user.local_datetime");
             assert localDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(0).equals(dateTime1);
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(1).equals(dateTime2);
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(2).equals(dateTime3);
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(0).equals(dateTime1.truncatedTo(ChronoUnit.MICROS));
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(1).equals(dateTime2.truncatedTo(ChronoUnit.MICROS));
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(2).equals(dateTime3.truncatedTo(ChronoUnit.MICROS));
 
             var zonedDateTimeField = deserialized.getField("user.zoned_datetime");
             assert zonedDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
-            // Epoch micros were accurate here, but the format is all over the place. Why is it in microseconds (Long)
-            // instead of a ZonedDateTime?
-            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(0).equals(utcTime1);
-            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(1).equals(utcTime2);
-            // assert deserialized.getVectorCopy("user.zoned_datetime").getObject(2).equals(utcTime3);
+            // getObject just returns a Long that represents epoch microseconds instead of returning a ZonedDateTime.
+            // This is expected and discussed here https://github.com/apache/arrow/issues/25947
+            var epochMicros1 = utcTime1.toInstant().getEpochSecond() * 1000000 + utcTime1.toInstant().getNano() / 1000;
+            var epochMicros2 = utcTime2.toInstant().getEpochSecond() * 1000000 + utcTime2.toInstant().getNano() / 1000;
+            var epochMicros3 = utcTime3.toInstant().getEpochSecond() * 1000000 + utcTime3.toInstant().getNano() / 1000;
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(0).equals(epochMicros1);
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(1).equals(epochMicros2);
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(2).equals(epochMicros3);
 
 
             /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)

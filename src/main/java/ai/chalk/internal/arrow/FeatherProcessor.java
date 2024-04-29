@@ -101,7 +101,7 @@ public class FeatherProcessor {
                 throw new Exception(String.format("Have `ZonedDateTime` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
             }
             TimeStampMicroTZHolder holder = new TimeStampMicroTZHolder();
-            holder.value = zonedDt.toInstant().toEpochMilli() * 1000;
+            holder.value = zonedDt.toInstant().getEpochSecond() * 1_000_000 + zonedDt.getNano() / 1_000;
             holder.timezone = zonedDt.getZone().toString();
             timestampWriter.write(holder);
         } else if (value instanceof LocalDateTime localDt) {
@@ -109,7 +109,7 @@ public class FeatherProcessor {
                 throw new Exception(String.format("Have `LocalDateTime` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
             }
             TimeStampMicroHolder holder = new TimeStampMicroHolder();
-            holder.value = localDt.atZone(ZoneId.of("UTC")).toInstant().toEpochMilli() * 1000;
+            holder.value = localDt.atZone(ZoneId.of("UTC")).toInstant().getEpochSecond() * 1_000_000 + localDt.getNano() / 1_000;
             timestampWriter.write(holder);
         } else if (value instanceof List) {
             if (!(writer instanceof BaseWriter.ListWriter)) {
