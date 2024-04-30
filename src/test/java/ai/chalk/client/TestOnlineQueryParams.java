@@ -1,18 +1,201 @@
 package ai.chalk.client;
 
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 public class TestOnlineQueryParams {
+    public static boolean jsonCompare(String expected, String actual) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode tree1 = mapper.readTree(expected);
+        JsonNode tree2 = mapper.readTree(actual);
+        return tree1.equals(tree2);
+    }
+    @Test
+    public void testInputSerializationLossless() throws Exception {
+        ZoneId zoneIdUTC = ZoneId.of("UTC");
+
+        LocalDateTime dateTime1 = LocalDateTime.of(2024, Month.APRIL, 25, 10, 0, 0, 123456789); // 10:00 AM
+        LocalDateTime dateTime2 = LocalDateTime.of(2024, Month.APRIL, 25, 14, 0, 0, 333333333); // 2:00 PM
+        LocalDateTime dateTime3 = LocalDateTime.of(2024, Month.APRIL, 25, 18, 0, 0, 987654321); // 6:00 PM
+
+        ZonedDateTime utcTime1 = ZonedDateTime.of(dateTime1, zoneIdUTC);
+        ZonedDateTime utcTime2 = ZonedDateTime.of(dateTime2, zoneIdUTC);
+        ZonedDateTime utcTime3 = ZonedDateTime.of(dateTime3, zoneIdUTC);
+
+        var params = OnlineQueryParams.builder()
+                .withInput("user.float_feature", Arrays.asList(1.0, 2.0, 3.0))
+                .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
+                .withInput("user.int_feature", Arrays.asList(1, 2, 3))
+                .withInput("user.bool_feature", Arrays.asList(true, false, true))
+                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
+                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
+                .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
+                        new HashMap<String, Object>() {{
+                            put("name", "a");
+                            put("amount", 1.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "a");
+                                        put("amount", 1.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "b");
+                                        put("amount", 2.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "b");
+                            put("amount", 2.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "c");
+                                        put("amount", 3.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "d");
+                                        put("amount", 4.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "c");
+                            put("amount", 3.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "e");
+                                        put("amount", 5.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "f");
+                                        put("amount", 6.0);
+                                    }}
+                            ));
+                        }}
+                ))
+                .withInput(
+                        "user.struct_with_int_list",
+                        Arrays.asList(
+                                new TreeMap<String, Object>() {{
+                                    put("name", "a");
+                                    put("luckyNumbers", Arrays.asList(1, 2, 3));
+                                }},
+                                new TreeMap<String, Object>() {{
+                                    put("name", "b");
+                                    put("luckyNumbers", Arrays.asList(4, 5, 6));
+                                }},
+                                new TreeMap<String, Object>() {{
+                                    put("name", "c");
+                                    put("luckyNumbers", Arrays.asList(7, 8, 9));
+                                }}
+                        )
+                )
+                /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
+                .withInput("user.struct_with_struct", Arrays.asList(
+                        new StructWithStruct("a", new InnerStruct("a", 1.0)),
+                        new StructWithStruct("b", new InnerStruct("b", 2.0)),
+                        new StructWithStruct("c", new InnerStruct("c", 3.0))
+                ))
+                */
+                /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
+                .withInput("user.struct_feature__via_classes__", Arrays.asList(
+                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
+                ))
+                */
+                .build();
+        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
+            var floatField = deserialized.getField("user.float_feature");
+            assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(0).equals(1.0);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(1).equals(2.0);
+            assert deserialized.getVectorCopy("user.float_feature").getObject(2).equals(3.0);
+
+            var stringField = deserialized.getField("user.string_feature");
+            assert stringField.getType().getTypeID().equals(ArrowType.ArrowTypeID.LargeUtf8);
+            assert deserialized.getVectorCopy("user.string_feature").getObject(0).toString().equals("a");
+            assert deserialized.getVectorCopy("user.string_feature").getObject(1).toString().equals("b");
+            assert deserialized.getVectorCopy("user.string_feature").getObject(2).toString().equals("c");
+
+            var intField = deserialized.getField("user.int_feature");
+            assert intField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Int);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(0).equals(1L);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(1).equals(2L);
+            assert deserialized.getVectorCopy("user.int_feature").getObject(2).equals(3L);
+
+            var boolField = deserialized.getField("user.bool_feature");
+            assert boolField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Bool);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(0).equals(true);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(1).equals(false);
+            assert deserialized.getVectorCopy("user.bool_feature").getObject(2).equals(true);
+
+
+            var structVal1 = "{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}";
+            var structVal2 = "{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}";
+            var structVal3 = "{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}";
+            var structFieldViaHashMap = deserialized.getField("user.struct_feature__via_hashmap__");
+            assert structFieldViaHashMap.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(0).toString(), structVal1);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(1).toString(), structVal2);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(2).toString(), structVal3);
+
+            var structWithIntListField = deserialized.getField("user.struct_with_int_list");
+            assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
+            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+
+            var localDateTimeField = deserialized.getField("user.local_datetime");
+            assert localDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(0).equals(dateTime1.truncatedTo(ChronoUnit.MICROS));
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(1).equals(dateTime2.truncatedTo(ChronoUnit.MICROS));
+            assert deserialized.getVectorCopy("user.local_datetime").getObject(2).equals(dateTime3.truncatedTo(ChronoUnit.MICROS));
+
+            var zonedDateTimeField = deserialized.getField("user.zoned_datetime");
+            assert zonedDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
+            // getObject just returns a Long that represents epoch microseconds instead of returning a ZonedDateTime.
+            // This is expected and discussed here https://github.com/apache/arrow/issues/25947
+            var epochMicros1 = utcTime1.toInstant().getEpochSecond() * 1000000 + utcTime1.toInstant().getNano() / 1000;
+            var epochMicros2 = utcTime2.toInstant().getEpochSecond() * 1000000 + utcTime2.toInstant().getNano() / 1000;
+            var epochMicros3 = utcTime3.toInstant().getEpochSecond() * 1000000 + utcTime3.toInstant().getNano() / 1000;
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(0).equals(epochMicros1);
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(1).equals(epochMicros2);
+            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(2).equals(epochMicros3);
+
+
+            /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
+            var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
+            assert structFieldViaClasses.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(0).toString().equals(structVal1);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(1).toString().equals(structVal2);
+            assert deserialized.getVectorCopy("user.struct_feature__via_classes__").getObject(2).toString().equals(structVal3);
+            */
+
+            /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
+            var structWithStructField = deserialized.getField("user.struct_with_struct");
+            assert structWithStructField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(0).toString().equals("{\"title\":\"a\",\"flux\":{\"description\":\"a\",\"amount\":1.0}}");
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(1).toString().equals("{\"title\":\"b\",\"flux\":{\"description\":\"b\",\"amount\":2.0}}");
+            assert deserialized.getVectorCopy("user.struct_with_struct").getObject(2).toString().equals("{\"title\":\"c\",\"flux\":{\"description\":\"c\",\"amount\":3.0}}");
+            */
+        }
+    }
+
     @Test
     public void testWithInputs() throws Exception {
         Map<String, List<?>> inputs = new HashMap<>();
@@ -223,14 +406,19 @@ public class TestOnlineQueryParams {
     public void testLargeUtf8AsInput() throws Exception {
         var largeString = "a".repeat(100000);
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        assert reconstructedInput.getVectorCopy("user.id").getObject(0).toString().equals(largeString);
     }
 
     @Test
     public void testLargeBinaryAsInput() throws Exception {
-        var largeBinary = "a".repeat(100000).getBytes();
+        var largeBinaryString = "acb".repeat(100000);
+        var largeBinary = largeBinaryString.getBytes();
         var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        assert new String((byte[]) reconstructedInput.getVectorCopy("user.binary_data").getObject(0)).equals(largeBinaryString);
     }
 
 
@@ -281,7 +469,7 @@ public class TestOnlineQueryParams {
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def", "ghiRR")
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .withOutputs("user.today", "user.socure_score")
                 .build();
@@ -320,7 +508,7 @@ public class TestOnlineQueryParams {
                 .build();
         var p2 = OnlineQueryParams
                 .builder()
-                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "abc", "def", "ghi")
                 .withInput(InitFeaturesTestFeatures.user.id, expectedInputs)
                 .withOutputs("user.today", "user.socure_score")
                 .build();
