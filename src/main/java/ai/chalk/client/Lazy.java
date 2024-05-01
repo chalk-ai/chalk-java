@@ -14,7 +14,9 @@ class Lazy<T> implements Supplier<T> {
     public T get() {
         if (value == null) {
             synchronized (this) {
-                value = supplier.get();
+                if (value == null) {
+                    value = supplier.get();
+                }
             }
         }
         return value;
