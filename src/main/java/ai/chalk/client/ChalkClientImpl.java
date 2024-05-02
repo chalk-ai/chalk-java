@@ -79,8 +79,8 @@ public class ChalkClientImpl implements ChalkClient {
         try {
             projectRoot = Loader.loadProjectDirectory();
             chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
-        } catch (Exception deferredExc) {
-            chalkYamlExc = deferredExc;
+        } catch (Exception deferredException) {
+            chalkYamlExc = deferredException;
         }
 
         ResolvedConfig config = ResolvedConfig.fromBuilder(builder, chalkYamlConfig);
