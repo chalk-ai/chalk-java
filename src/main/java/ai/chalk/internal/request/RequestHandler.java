@@ -18,6 +18,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -313,7 +314,7 @@ public class RequestHandler {
             }
         }
 
-        LocalDateTime expiry = LocalDateTime.now(ZoneOffset.UTC).plusSeconds(response.getExpiresIn());
+        ZonedDateTime expiry = ZonedDateTime.now().plusSeconds(response.getExpiresIn());
         return new JWT(response.getAccessToken(), expiry);
     }
 
@@ -322,7 +323,7 @@ public class RequestHandler {
                 forceRefresh ||
                         jwt == null ||
                         jwt.getValidUntil() == null ||
-                        LocalDateTime.now(ZoneOffset.UTC).plusSeconds(10).isAfter(jwt.getValidUntil())
+                        ZonedDateTime.now().plusSeconds(10).isAfter(jwt.getValidUntil())
         ) {
             this.jwt = getJwt();
         }
