@@ -73,11 +73,13 @@ public class ChalkClientImpl implements ChalkClient {
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         String projectRoot;
+
+        Exception chalkYamlExc = null;
         try {
             projectRoot = Loader.loadProjectDirectory();
             chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
-        } catch (Exception ignored) {
-            // TODO: Add some logging here
+        } catch (Exception deferredException) {
+            chalkYamlExc = deferredException;
         }
 
         ResolvedConfig config = ResolvedConfig.fromBuilder(builder, chalkYamlConfig);
@@ -87,7 +89,12 @@ public class ChalkClientImpl implements ChalkClient {
                 config.apiServer().value().isEmpty() ||
                 config.environmentId().value().isEmpty()) {
             System.err.println(this.getConfigStr());
-            throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
+            String msg = "Chalk's config variables are not set correctly. See error log for more details.";
+            if (chalkYamlExc != null) {
+                throw new ClientException(msg, chalkYamlExc);
+            } else {
+                throw new ClientException(msg);
+            }
         }
 
         return config;
