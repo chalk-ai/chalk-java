@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'ai.chalk'
-version '0.6.5'
+version '0.6.6'
 
 repositories {
     mavenCentral()
@@ -117,10 +117,10 @@ nexusPublishing {
         }
     }
 }
-
-signing {
-    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
-    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications
-}
+//
+//signing {
+//    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
+//    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
+//    useInMemoryPgpKeys(signingKey, signingPassword)
+//    sign publishing.publications
+//}
