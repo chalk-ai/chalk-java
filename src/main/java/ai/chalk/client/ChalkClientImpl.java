@@ -89,7 +89,7 @@ public class ChalkClientImpl implements ChalkClient {
                 config.apiServer().value().isEmpty() ||
                 config.environmentId().value().isEmpty()) {
             System.err.println(this.getConfigStr());
-            String msg = "Chalk's config variables are not set correctly. See error log for more details.";
+            String msg = "Chalk's config variables are not set correctly. See error log or stacktrace for more details.";
             if (chalkYamlExc != null) {
                 throw new ClientException(msg, chalkYamlExc);
             } else {
