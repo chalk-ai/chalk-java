@@ -26,13 +26,17 @@ public record SourcedConfig(String source, String value) {
         return new SourcedConfig(String.format("config file %s", pathStr), value);
     }
 
+    public static SourcedConfig missing() {
+        return new SourcedConfig("missing", "");
+    }
+
     public static @NonNull SourcedConfig firstNonEmpty(SourcedConfig... configs) {
         for (SourcedConfig config : configs) {
             if (config != null && config.value() != null && !config.value().isEmpty()) {
                 return config;
             }
         }
-        return new SourcedConfig("missing", "");
+        return SourcedConfig.missing();
     }
 
 

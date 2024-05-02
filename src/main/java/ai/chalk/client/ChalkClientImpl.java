@@ -14,6 +14,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig apiServer;
@@ -73,11 +74,13 @@ public class ChalkClientImpl implements ChalkClient {
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         String projectRoot;
+
+        Exception chalkYamlExc = null;
         try {
             projectRoot = Loader.loadProjectDirectory();
             chalkYamlConfig = Loader.getChalkYamlConfig(projectRoot);
-        } catch (Exception ignored) {
-            // TODO: Add some logging here
+        } catch (Exception deferredException) {
+            chalkYamlExc = deferredException;
         }
 
         ResolvedConfig config = ResolvedConfig.fromBuilder(builder, chalkYamlConfig);
@@ -87,24 +90,34 @@ public class ChalkClientImpl implements ChalkClient {
                 config.apiServer().value().isEmpty() ||
                 config.environmentId().value().isEmpty()) {
             System.err.println(this.getConfigStr());
-            throw new ClientException("Chalk's config variables are not set correctly. See error log for more details.");
+            String msg = "Chalk's config variables are not set correctly. See error log or stacktrace for more details.";
+            if (chalkYamlExc != null) {
+                throw new ClientException(msg, chalkYamlExc);
+            } else {
+                throw new ClientException(msg);
+            }
         }
 
         return config;
     }
 
     private String getConfigStr() {
+        // At init time these non-nullable attributes might still be null
+        SourcedConfig apiServer = Optional.ofNullable(this.apiServer).orElse(SourcedConfig.missing());
+        SourcedConfig environmentId = Optional.ofNullable(this.environmentId).orElse(SourcedConfig.missing());
+        SourcedConfig clientId = Optional.ofNullable(this.clientId).orElse(SourcedConfig.missing());
+        SourcedConfig clientSecret = Optional.ofNullable(this.clientSecret).orElse(SourcedConfig.missing());
         return "ChalkClient's config variables and the source of these variables are displayed in the following table.\n\n" +
                 SourcedConfig.getConfigTableStr(Map.of(
-                        "Api Server", this.apiServer,
-                        "Environment ID", this.environmentId,
-                        "Client ID", this.clientId,
+                        "Api Server", apiServer,
+                        "Environment ID", environmentId,
+                        "Client ID", clientId,
                         "Client Secret", new SourcedConfig(
-                                this.clientSecret.source(),
-                                this.clientSecret.value().replaceAll(".", "*")
+                                clientSecret.source(),
+                                clientSecret.value().replaceAll(".", "*")
                         )
                 )) +
-                """
+                """ 
                         For each variable, we take the first non-empty value, in order, from the following sources:
                           1. The value passed to ChalkClient's Builder
                           2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)

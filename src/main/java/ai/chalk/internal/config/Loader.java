@@ -46,7 +46,7 @@ public class Loader {
         return Paths.get(configDir, ".chalk.yml");
     }
 
-    private static ProjectToken getProjectToken(ProjectTokens config, String configPath, String projectRoot) throws Exception {
+    public static ProjectToken getProjectToken(ProjectTokens config, String configPath, String projectRoot) throws Exception {
         if (config.getTokens() == null) {
             throw new Exception(String.format("'tokens' collection does not exist or is empty in the auth config file '%s' -- please try to 'chalk login' again", configPath));
         }
@@ -69,14 +69,7 @@ public class Loader {
         return returnToken;
     }
 
-    private static ProjectTokens loadAllTokens() throws IOException {
-        Path path;
-        try {
-            path = getConfigPath();
-        } catch (Exception e) {
-            throw new IOException("Error getting auth config path");
-        }
-
+    public static ProjectTokens loadAllTokens(Path path) throws IOException {
         byte[] data;
         try {
             data = Files.readAllBytes(path);
@@ -97,7 +90,13 @@ public class Loader {
     }
 
     public static ProjectToken getChalkYamlConfig(String projectRoot) throws Exception {
-        ProjectTokens config = loadAllTokens();
-        return getProjectToken(config, getConfigPath().toString(), projectRoot);
+        Path path;
+        try {
+            path = getConfigPath();
+        } catch (Exception e) {
+            throw new IOException("Error getting auth config path");
+        }
+        ProjectTokens config = loadAllTokens(path);
+        return getProjectToken(config, path.toString(), projectRoot);
     }
 }
