@@ -41,6 +41,7 @@ public class TestConfigLoader {
     public void TestLoadAllTokens() throws Exception {
         var tempFile = writeTempYAMLFile();
         ProjectTokens config = Loader.loadAllTokens(tempFile);
+        
         var token = getProjectToken(config, tempFile.toString(), "/Users/papan/dev/my_project");
         assert token.getClientId().equals("client-my-project");
         assert token.getClientSecret().equals("secret-my-project");
