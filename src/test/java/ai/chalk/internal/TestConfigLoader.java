@@ -20,7 +20,6 @@ public class TestConfigLoader {
     public Path writeTempYAMLFile(String content) throws Exception {
         Path tempYamlFile = Files.createTempFile("chalk", ".yml");
         Files.writeString(tempYamlFile, content);
-        System.out.println("Temporary YAML file created at: " + tempYamlFile);
         return tempYamlFile;
     }
 
