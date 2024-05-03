@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 
 public class Loader {
@@ -79,10 +78,7 @@ public class Loader {
         }
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        var timeModule = new JavaTimeModule();
-        timeModule.addDeserializer(ZonedDateTime.class, new ChalkYamlDateTimeDeserializer());
-        mapper.registerModule(timeModule);
-
+        mapper.registerModule(new JavaTimeModule());
         ProjectTokens config;
         try {
             config = mapper.readValue(new String(data), ProjectTokens.class);
