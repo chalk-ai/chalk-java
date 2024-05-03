@@ -2,12 +2,10 @@ package ai.chalk.internal;
 
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectTokens;
-import ai.chalk.internal.request.RequestHandler;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

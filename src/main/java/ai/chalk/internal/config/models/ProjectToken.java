@@ -3,7 +3,6 @@ package ai.chalk.internal.config.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Data
