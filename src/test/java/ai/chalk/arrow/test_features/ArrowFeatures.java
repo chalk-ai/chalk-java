@@ -7,6 +7,7 @@ public class ArrowFeatures {
     public static MyTail myTail;
     public static Transaction transaction;
     public static ArrowUser user;
+    public static VersionedFeaturesClass versionedFeaturesClass;
 
 
     private static Exception initException = Initializer.initFeatures(ArrowFeatures.class);
