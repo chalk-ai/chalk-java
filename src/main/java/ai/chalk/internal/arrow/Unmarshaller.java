@@ -91,7 +91,7 @@ public class Unmarshaller {
         List<T> result = new ArrayList<T>();
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
-            Map<String, Feature<?>> featureMap;
+            Map<String, List<Feature<?>>> featureMap;
             try {
                 featureMap = Initializer.initResult(obj);
             } catch (Exception e) {
@@ -108,8 +108,8 @@ public class Unmarshaller {
                     continue;
                 }
 
-                var feature = featureMap.get(fqn);
-                if (feature == null) {
+                var featureList = featureMap.get(fqn);
+                if (featureList == null) {
                     // We are faking the attributes of a struct as features,
                     // instead of having the struct itself be a feature.
                     if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
@@ -124,7 +124,10 @@ public class Unmarshaller {
                     } else {
                         throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
                     }
-                } else {
+                    continue;
+                }
+
+                for (Feature<?> feature : featureList) {
                     switch (arrowField.getType().getTypeID()) {
                         case Int -> {
                             var castInt = (ArrowType.Int) (arrowField.getFieldType().getType());
@@ -333,8 +336,11 @@ public class Unmarshaller {
                                         if (value instanceof Map) {
                                             unmarshalNested((Map<String, Object>) value, dataclassFeatureMap, childFqn);
                                         } else {
-                                            var childFeature = dataclassFeatureMap.get(childFqn);
-                                            childFeature.setValue(value);
+                                            var childFeatures = dataclassFeatureMap.get(childFqn);
+                                            if (childFeatures.size() > 1) {
+                                                throw new Exception(String.format("Dataclass child feature '%s' should have FQNs that map to only 1 feature", childFqn));
+                                            }
+                                            childFeatures.get(0).setValue(value);
                                         }
                                     }
                                     resultList.add(dataclassInstance);
@@ -399,15 +405,17 @@ public class Unmarshaller {
         return listToArray(result, target);
     }
 
-    private static void unmarshalNested(Map<String, Object> struct, Map<String, Feature<?>> featureMap, String fqn) {
+    private static void unmarshalNested(Map<String, Object> struct, Map<String, List<Feature<?>>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {
             var childFqn = fqn + "." + entry.getKey();
             var value = entry.getValue();
             if (value instanceof Map) {
                 unmarshalNested((Map<String, Object>) value, featureMap, childFqn);
             } else {
-                var childFeature = featureMap.get(childFqn);
-                childFeature.setValue(value);
+                var childFeatures = featureMap.get(childFqn);
+                for (Feature<?> childFeature : childFeatures) {
+                    childFeature.setValue(value);
+                }
             }
         }
     }

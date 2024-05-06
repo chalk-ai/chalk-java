@@ -2,6 +2,7 @@ package ai.chalk.arrow;
 
 import ai.chalk.arrow.test_features.ArrowFeatures;
 import ai.chalk.arrow.test_features.ArrowUser;
+import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
@@ -1124,5 +1125,45 @@ public class TestUnmarshaller {
         assert users[1].smallTransactions.getValue().get(0).amount.getValue().equals(3.0);
 
         assert users[2].smallTransactions.getValue().size() == 0;
+    }
+
+    @Test
+    public void TestUnmarshalVersioned() throws Exception {
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var defaultVector = new VarCharVector("versioned_features_class.grade@2", allocator);
+        defaultVector.allocateNew();
+        String[] idValues = {"a", "b", "c"};
+        for (int i = 0; i < idValues.length; i++) {
+            defaultVector.set(i, idValues[i].getBytes());
+        }
+        defaultVector.setValueCount(idValues.length);
+        fieldVectors.add(defaultVector);
+
+        var v1Vector = new VarCharVector("versioned_features_class.grade", allocator);
+        v1Vector.allocateNew();
+        String[] v1Values = {"d", "e", "f"};
+        for (int i = 0; i < v1Values.length; i++) {
+            v1Vector.set(i, v1Values[i].getBytes());
+        }
+        v1Vector.setValueCount(v1Values.length);
+        fieldVectors.add(v1Vector);
+
+        var table = new Table(fieldVectors);
+
+        var versionedClasses = Unmarshaller.unmarshalTable(table, VersionedFeaturesClass.class);
+
+        assert versionedClasses[0].grade.getValue().equals("a");
+        assert versionedClasses[1].grade.getValue().equals("b");
+        assert versionedClasses[2].grade.getValue().equals("c");
+
+        assert versionedClasses[0].grade_v1.getValue().equals("d");
+        assert versionedClasses[1].grade_v1.getValue().equals("e");
+        assert versionedClasses[2].grade_v1.getValue().equals("f");
+
+        assert versionedClasses[0].grade_v2.getValue().equals("a");
+        assert versionedClasses[1].grade_v2.getValue().equals("b");
+        assert versionedClasses[2].grade_v2.getValue().equals("c");
     }
 }

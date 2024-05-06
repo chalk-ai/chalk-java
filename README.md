@@ -12,7 +12,7 @@ The Java client is hosted on Maven Central.
 #### Gradle
 Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'ai.chalk:chalk-java:0.6.7'
+implementation 'ai.chalk:chalk-java:0.6.8'
 ```
 
 #### Maven
@@ -22,7 +22,7 @@ Add the following dependency block to your `pom.xml`.
     <dependency>
         <groupId>ai.chalk</groupId>
         <artifactId>chalk-java</artifactId>
-        <version>0.6.7</version>
+        <version>0.6.8</version>
     </dependency>
 </dependencies>
 ```

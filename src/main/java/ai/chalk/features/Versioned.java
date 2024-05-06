@@ -7,9 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface HasMany {
-    String localKey();
-
-    String foreignKey();
-
+public @interface Versioned {
+    int defaultVersion() default 0;
 }
