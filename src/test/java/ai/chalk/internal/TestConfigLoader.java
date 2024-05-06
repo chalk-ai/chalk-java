@@ -33,7 +33,6 @@ public class TestConfigLoader {
             """;
         Path tempYamlFile = Files.createTempFile(".chalk", ".yml");
         Files.writeString(tempYamlFile, yamlContent);
-        System.out.println("Temporary YAML file created at: " + tempYamlFile);
         return tempYamlFile;
     }
 
