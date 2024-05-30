@@ -59,15 +59,6 @@ public class TestUtils {
 
     @Test
     public void testToSnakeCase() {
-        /*
-        def test_to_snake_case():
-            assert to_snake_case("SEGMENT_ID_HASH") == "segment_id_hash"
-            assert to_snake_case("accountId") == "account_id"
-            assert to_snake_case("account_id") == "account_id"
-            assert to_snake_case("foo") == "foo"
-            assert to_snake_case("FOO") == "foo"
-            assert to_snake_case("FooBar") == "foo_bar"
-         */
         assertEquals("segment_id_hash", Utils.toSnakeCase("SEGMENT_ID_HASH"));
         assertEquals("account_id", Utils.toSnakeCase("accountId"));
         assertEquals("account_id", Utils.toSnakeCase("account_id"));
@@ -75,7 +66,7 @@ public class TestUtils {
         assertEquals("foo", Utils.toSnakeCase("FOO"));
         assertEquals("foo_bar", Utils.toSnakeCase("FooBar"));
         assertEquals("abc7d7_efg", Utils.toSnakeCase("abc7d7Efg"));
-        assertEquals("be_really_careful", Utils.toSnakeCase("be__REALLY__careful"));
+        assertEquals("be_really__careful", Utils.toSnakeCase("be__REALLY__careful"));
     }
 
 }
