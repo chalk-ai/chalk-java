@@ -80,7 +80,7 @@ public class Utils {
     }
 
 
-    public static Field getFieldFromFqn(Class<?> clazz, String fqn) throws Exception {
+    public static Field getFieldFromFqn(Class<?> clazz, String fqn) {
         String featureName = Utils.getDotDelimitedLastSection(fqn);
         for (Field field : clazz.getDeclaredFields()) {
             if (Utils.getResolvedName(field).equals(featureName)) {
