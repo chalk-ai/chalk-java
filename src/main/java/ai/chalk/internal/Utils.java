@@ -8,6 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.Duration;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Utils {
     public static String getResolvedName(Field field) {
