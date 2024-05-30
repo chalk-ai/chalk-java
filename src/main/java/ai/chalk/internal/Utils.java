@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class Utils {
-    public static String getFieldFqn(Field field) {
+    public static String getResolvedName(Field field) {
         // If has the Name annotation, use that as the name
         // Otherwise, use the field name snake cased
         if (field.isAnnotationPresent(Name.class)) {
@@ -83,9 +83,7 @@ public class Utils {
     public static Field getFieldFromFqn(Class<?> clazz, String fqn) throws Exception {
         String featureName = Utils.getDotDelimitedLastSection(fqn);
         for (Field field : clazz.getDeclaredFields()) {
-            // TODO: Get name override if annotation is present
-            var resolvedFieldName = Utils.getFieldFqn(field);
-            if (resolvedFieldName.equals(featureName)) {
+            if (Utils.getResolvedName(field).equals(featureName)) {
                 return field;
             }
         }
