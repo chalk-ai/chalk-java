@@ -1191,4 +1191,31 @@ public class TestUnmarshaller {
         assert namedClasses[1].abc7d7Efg.getValue().equals("b");
         assert namedClasses[2].abc7d7Efg.getValue().equals("c");
     }
+
+    @Test
+    public void TestSnakeCaseBackCompat() throws Exception {
+        // Test that snake case fields can still be deser-ed into.
+        // This supports backwards compatibility with older versions
+        // codegen where we generated snake case fields.
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
+        defaultVector.allocateNew();
+        String[] idValues = {"a", "b", "c"};
+        for (int i = 0; i < idValues.length; i++) {
+            defaultVector.set(i, idValues[i].getBytes());
+        }
+        defaultVector.setValueCount(idValues.length);
+        fieldVectors.add(defaultVector);
+
+        var table = new Table(fieldVectors);
+
+        var namedClasses = Unmarshaller.unmarshalTable(table, NamedFeaturesClass.class);
+
+        assert namedClasses[0].abc_7d7_efg.getValue().equals("a");
+        assert namedClasses[1].abc_7d7_efg.getValue().equals("b");
+        assert namedClasses[2].abc_7d7_efg.getValue().equals("c");
+    }
+
 }
