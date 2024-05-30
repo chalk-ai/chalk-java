@@ -1,6 +1,7 @@
 package ai.chalk.arrow;
 
 import ai.chalk.arrow.test_features.ArrowUser;
+import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.Unmarshaller;
@@ -1166,5 +1167,28 @@ public class TestUnmarshaller {
         assert versionedClasses[0].grade_v2.getValue().equals("a");
         assert versionedClasses[1].grade_v2.getValue().equals("b");
         assert versionedClasses[2].grade_v2.getValue().equals("c");
+    }
+
+    @Test
+    public void TestUnmarshalNamed() throws Exception {
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
+        defaultVector.allocateNew();
+        String[] idValues = {"a", "b", "c"};
+        for (int i = 0; i < idValues.length; i++) {
+            defaultVector.set(i, idValues[i].getBytes());
+        }
+        defaultVector.setValueCount(idValues.length);
+        fieldVectors.add(defaultVector);
+
+        var table = new Table(fieldVectors);
+
+        var namedClasses = Unmarshaller.unmarshalTable(table, NamedFeaturesClass.class);
+
+        assert namedClasses[0].abc7d7Efg.getValue().equals("a");
+        assert namedClasses[1].abc7d7Efg.getValue().equals("b");
+        assert namedClasses[2].abc7d7Efg.getValue().equals("c");
     }
 }
