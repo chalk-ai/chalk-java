@@ -33,7 +33,7 @@ public class Initializer {
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
         var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
-            var childFqn = rootFeatureFqn + "." + Utils.toSnakeCase(field.getName());
+            var childFqn = rootFeatureFqn + "." + Utils.getFieldFqn(field);
             var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>());
             field.set(fc, feature);
         }
@@ -51,7 +51,7 @@ public class Initializer {
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
             for (Field ff : f.getType().getFields()) {
-                var childFqn = fqn + "." + Utils.toSnakeCase(ff.getName());
+                var childFqn = fqn + "." + Utils.getFieldFqn(ff);
                 if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
                     // For input features, struct field FQNs end at the last actual feature in the chain.
                     // Only override the fqn for StructFeaturesClass children for initing features that are

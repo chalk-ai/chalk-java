@@ -1,14 +1,24 @@
 package ai.chalk.internal;
 
+import ai.chalk.features.Name;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Utils {
+    public static String getFieldFqn(Field field) {
+        // If has the Name annotation, use that as the name
+        // Otherwise, use the field name snake cased
+        if (field.isAnnotationPresent(Name.class)) {
+            return field.getAnnotation(Name.class).value();
+        }
+        return toSnakeCase(field.getName());
+
+    }
     public static String toSnakeCase(String s) {
         s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
         s = s.replaceAll("__([A-Z])", "_$1");
@@ -74,7 +84,7 @@ public class Utils {
         String featureName = Utils.getDotDelimitedLastSection(fqn);
         for (Field field : clazz.getDeclaredFields()) {
             // TODO: Get name override if annotation is present
-            var resolvedFieldName = Utils.toSnakeCase(field.getName());
+            var resolvedFieldName = Utils.getFieldFqn(field);
             if (resolvedFieldName.equals(featureName)) {
                 return field;
             }

@@ -1,6 +1,5 @@
 package ai.chalk.arrow;
 
-import ai.chalk.arrow.test_features.ArrowFeatures;
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
