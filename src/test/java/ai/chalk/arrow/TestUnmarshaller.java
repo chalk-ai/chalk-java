@@ -1160,13 +1160,13 @@ public class TestUnmarshaller {
         assert versionedClasses[1].grade.getValue().equals("b");
         assert versionedClasses[2].grade.getValue().equals("c");
 
-        assert versionedClasses[0].grade_v1.getValue().equals("d");
-        assert versionedClasses[1].grade_v1.getValue().equals("e");
-        assert versionedClasses[2].grade_v1.getValue().equals("f");
+        assert versionedClasses[0].gradeV1.getValue().equals("d");
+        assert versionedClasses[1].gradeV1.getValue().equals("e");
+        assert versionedClasses[2].gradeV1.getValue().equals("f");
 
-        assert versionedClasses[0].grade_v2.getValue().equals("a");
-        assert versionedClasses[1].grade_v2.getValue().equals("b");
-        assert versionedClasses[2].grade_v2.getValue().equals("c");
+        assert versionedClasses[0].gradeV2.getValue().equals("a");
+        assert versionedClasses[1].gradeV2.getValue().equals("b");
+        assert versionedClasses[2].gradeV2.getValue().equals("c");
     }
 
     @Test
