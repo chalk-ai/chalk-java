@@ -10,7 +10,10 @@ import java.util.List;
 
 public class Utils {
     public static String toSnakeCase(String s) {
-        return s.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+        s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
+        s = s.replaceAll("__([A-Z])", "_$1");
+        s = s.replaceAll("([a-z0-9])([A-Z])", "$1_$2");
+        return s.toLowerCase();
     }
 
     public static <T> T[] listToArray(List<T> list, Class<T> clazz) {
@@ -69,13 +72,15 @@ public class Utils {
 
     public static Field getFieldFromFqn(Class<?> clazz, String fqn) throws Exception {
         String featureName = Utils.getDotDelimitedLastSection(fqn);
-        String fieldName = Utils.firstLetterToLower(Utils.fqnCamelCase(featureName));
         for (Field field : clazz.getDeclaredFields()) {
-            if (field.getName().equals(fieldName)) {
+            // TODO: Get name override if annotation is present
+            var resolvedFieldName = Utils.toSnakeCase(field.getName());
+            if (resolvedFieldName.equals(featureName)) {
                 return field;
             }
         }
-        throw new IllegalArgumentException("Field " + fieldName + " does not exist in class " + clazz.getName());
+        throw new IllegalArgumentException("Field that corresponds to the feature '" + featureName +
+                "' does not exist in class " + clazz.getName());
     }
 
     public static Class<?> getListFeatureInnerType(Field field) throws Exception {

@@ -25,7 +25,8 @@ public class TestUnmarshaller {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
 
-        var idVector = new VarCharVector(ArrowFeatures.transaction.id.getFqn(), allocator);
+        var idVector = new VarCharVector("transaction.id", allocator);
+
         idVector.allocateNew();
         String[] idValues = {"1", "2", "3"};
         for (int i = 0; i < idValues.length; i++) {
@@ -34,7 +35,7 @@ public class TestUnmarshaller {
         idVector.setValueCount(idValues.length);
         fieldVectors.add(idVector);
 
-        var amountVector = new Float8Vector(ArrowFeatures.transaction.amount.getFqn(), allocator);
+        var amountVector = new Float8Vector("transaction.amount", allocator);
         amountVector.allocateNew();
         double[] amountValues = {1.0, 2.0, 3.0};
         for (int i = 0; i < amountValues.length; i++) {
@@ -43,7 +44,7 @@ public class TestUnmarshaller {
         amountVector.setValueCount(amountValues.length);
         fieldVectors.add(amountVector);
 
-        var userIdVector = new VarCharVector(ArrowFeatures.transaction.userId.getFqn(), allocator);
+        var userIdVector = new VarCharVector("transaction.user_id", allocator);
         userIdVector.allocateNew();
         String[] userIdValues = {"1", "1", "2"};
         for (int i = 0; i < userIdValues.length; i++) {
@@ -123,7 +124,7 @@ public class TestUnmarshaller {
         doubleVector.setValueCount(doubleValues.length);
         fieldVectors.add(doubleVector);
 
-        var boolVector = new BitVector("arrow_user.favorite_float", allocator);
+        var boolVector = new BitVector("arrow_user.favorite_boolean", allocator);
         boolVector.allocateNew();
         boolean[] boolValues = {true, false, true};
         for (int i = 0; i < boolValues.length; i++) {
