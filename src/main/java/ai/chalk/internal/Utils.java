@@ -21,6 +21,7 @@ public class Utils {
 
     }
     public static String toSnakeCase(String s) {
+        // Aims to be in parity with chalkpy's impl
         s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
         s = s.replaceAll("__([A-Z])", "_$1");
         s = s.replaceAll("([a-z0-9])([A-Z])", "$1_$2");
