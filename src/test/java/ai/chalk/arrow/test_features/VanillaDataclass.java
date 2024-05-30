@@ -5,6 +5,6 @@ import ai.chalk.features.StructFeaturesClass;
 
 
 public class VanillaDataclass extends StructFeaturesClass {
-    public Feature<Long> nice_number;
-    public Feature<java.time.LocalDateTime> nice_datetime;
+    public Feature<Long> niceNumber;
+    public Feature<java.time.LocalDateTime> niceDatetime;
 }
