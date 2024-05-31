@@ -67,6 +67,8 @@ public class TestUtils {
         assertEquals("foo_bar", Utils.chalkpySnakeCase("FooBar"));
         assertEquals("abc7d7_efg", Utils.chalkpySnakeCase("abc7d7Efg"));
         assertEquals("be_really__careful", Utils.chalkpySnakeCase("be__REALLY__careful"));
+        assertEquals("ml_foo", Utils.chalkpySnakeCase("MLFoo"));
+        assertEquals("fish_paste", Utils.chalkpySnakeCase("Fish_Paste"));
     }
 
 }
