@@ -17,10 +17,10 @@ public class Utils {
         if (field.isAnnotationPresent(Name.class)) {
             return field.getAnnotation(Name.class).value();
         }
-        return toSnakeCase(field.getName());
+        return chalkpySnakeCase(field.getName());
 
     }
-    public static String toSnakeCase(String s) {
+    public static String chalkpySnakeCase(String s) {
         // Aims to be in parity with chalkpy's impl
         s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
         s = s.replaceAll("__([A-Z])", "_$1");

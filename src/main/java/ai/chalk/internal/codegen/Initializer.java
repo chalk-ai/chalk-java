@@ -14,7 +14,7 @@ public class Initializer {
             if (!FeaturesBase.class.isAssignableFrom(field.getType())) {
                 continue;
             }
-            var rootFeatureFqn = Utils.toSnakeCase(field.getType().getSimpleName());
+            var rootFeatureFqn = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
                 var featureClass = Initializer.init(field, rootFeatureFqn, null, new HashSet<>());
                 field.set(cls, featureClass);
@@ -31,7 +31,7 @@ public class Initializer {
         Field[] fields = Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
 
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
-        var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
+        var rootFeatureFqn = Utils.chalkpySnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
             var childFqn = rootFeatureFqn + "." + Utils.getResolvedName(field);
             var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>());

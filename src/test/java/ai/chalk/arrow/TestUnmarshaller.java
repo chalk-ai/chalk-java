@@ -1196,7 +1196,7 @@ public class TestUnmarshaller {
     public void TestSnakeCaseBackCompat() throws Exception {
         // Test that snake case fields can still be deser-ed into.
         // This supports backwards compatibility with older versions
-        // codegen where we generated snake case fields.
+        // of codegen where we generated snake case fields.
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
 

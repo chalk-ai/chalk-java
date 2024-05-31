@@ -50,8 +50,8 @@ public class Unmarshaller {
                 throw new Exception("Field " + fqn + " is not annotated as a has-many field");
             }
             HasMany hm = hasManyField.getAnnotation(HasMany.class);
-            String localFqn = Utils.toSnakeCase(localClass.getSimpleName()) + "." + hm.localKey();
-            String foreignFqn = Utils.toSnakeCase(hasManyClass.getSimpleName()) + "." + hm.foreignKey();
+            String localFqn = Utils.chalkpySnakeCase(localClass.getSimpleName()) + "." + hm.localKey();
+            String foreignFqn = Utils.chalkpySnakeCase(hasManyClass.getSimpleName()) + "." + hm.foreignKey();
 
             FeaturesClass[] objects = unmarshalTable(table, hasManyClass.asSubclass(FeaturesClass.class));
             Map<String, List<FeaturesClass>> grouped = new HashMap<>();
@@ -330,7 +330,7 @@ public class Unmarshaller {
                                     var dataclassFeatureMap = Initializer.initResult(dataclassInstance);
 
                                     for (Map.Entry<String, Object> entry : ((Map<String, Object>) rawObj).entrySet()) {
-                                        var dataclassRootFqn = Utils.toSnakeCase(dataclass.getSimpleName());
+                                        var dataclassRootFqn = Utils.chalkpySnakeCase(dataclass.getSimpleName());
                                         var childFqn = dataclassRootFqn + "." + entry.getKey();
                                         var value = entry.getValue();
                                         if (value instanceof Map) {
