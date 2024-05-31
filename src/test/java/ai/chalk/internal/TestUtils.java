@@ -57,4 +57,18 @@ public class TestUtils {
         assertEquals("all", Utils.toChalkDuration(duration));
     }
 
+    @Test
+    public void testToSnakeCase() {
+        assertEquals("segment_id_hash", Utils.chalkpySnakeCase("SEGMENT_ID_HASH"));
+        assertEquals("account_id", Utils.chalkpySnakeCase("accountId"));
+        assertEquals("account_id", Utils.chalkpySnakeCase("account_id"));
+        assertEquals("foo", Utils.chalkpySnakeCase("foo"));
+        assertEquals("foo", Utils.chalkpySnakeCase("FOO"));
+        assertEquals("foo_bar", Utils.chalkpySnakeCase("FooBar"));
+        assertEquals("abc7d7_efg", Utils.chalkpySnakeCase("abc7d7Efg"));
+        assertEquals("be_really__careful", Utils.chalkpySnakeCase("be__REALLY__careful"));
+        assertEquals("ml_foo", Utils.chalkpySnakeCase("MLFoo"));
+        assertEquals("fish_paste", Utils.chalkpySnakeCase("Fish_Paste"));
+    }
+
 }

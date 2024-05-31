@@ -1,7 +1,7 @@
 package ai.chalk.arrow;
 
-import ai.chalk.arrow.test_features.ArrowFeatures;
 import ai.chalk.arrow.test_features.ArrowUser;
+import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.Unmarshaller;
@@ -25,7 +25,8 @@ public class TestUnmarshaller {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
 
-        var idVector = new VarCharVector(ArrowFeatures.transaction.id.getFqn(), allocator);
+        var idVector = new VarCharVector("transaction.id", allocator);
+
         idVector.allocateNew();
         String[] idValues = {"1", "2", "3"};
         for (int i = 0; i < idValues.length; i++) {
@@ -34,7 +35,7 @@ public class TestUnmarshaller {
         idVector.setValueCount(idValues.length);
         fieldVectors.add(idVector);
 
-        var amountVector = new Float8Vector(ArrowFeatures.transaction.amount.getFqn(), allocator);
+        var amountVector = new Float8Vector("transaction.amount", allocator);
         amountVector.allocateNew();
         double[] amountValues = {1.0, 2.0, 3.0};
         for (int i = 0; i < amountValues.length; i++) {
@@ -43,7 +44,7 @@ public class TestUnmarshaller {
         amountVector.setValueCount(amountValues.length);
         fieldVectors.add(amountVector);
 
-        var userIdVector = new VarCharVector(ArrowFeatures.transaction.userId.getFqn(), allocator);
+        var userIdVector = new VarCharVector("transaction.user_id", allocator);
         userIdVector.allocateNew();
         String[] userIdValues = {"1", "1", "2"};
         for (int i = 0; i < userIdValues.length; i++) {
@@ -60,7 +61,7 @@ public class TestUnmarshaller {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var allocator = new RootAllocator(Long.MAX_VALUE);
 
-        var idVector = new VarCharVector(ArrowFeatures.user.id.getFqn(), allocator);
+        var idVector = new VarCharVector("arrow_user.id", allocator);
         idVector.allocateNew();
         String[] idValues = {"1", "2", "3"};
         for (int i = 0; i < idValues.length; i++) {
@@ -69,7 +70,7 @@ public class TestUnmarshaller {
         idVector.setValueCount(idValues.length);
         fieldVectors.add(idVector);
 
-        var bigIntVector = new BigIntVector(ArrowFeatures.user.favoriteBigInt.getFqn(), allocator);
+        var bigIntVector = new BigIntVector("arrow_user.favorite_big_int", allocator);
         bigIntVector.allocateNew();
         long[] values = {1, 2, 3};
         for (int i = 0; i < values.length; i++) {
@@ -78,7 +79,7 @@ public class TestUnmarshaller {
         bigIntVector.setValueCount(values.length);
         fieldVectors.add(bigIntVector);
 
-        var intVector = new IntVector(ArrowFeatures.user.favoriteInt.getFqn(), allocator);
+        var intVector = new IntVector("arrow_user.favorite_int", allocator);
         intVector.allocateNew();
         int[] intValues = {1, 2, 3};
         for (int i = 0; i < intValues.length; i++) {
@@ -87,7 +88,7 @@ public class TestUnmarshaller {
         intVector.setValueCount(intValues.length);
         fieldVectors.add(intVector);
 
-        var smallIntVector = new SmallIntVector(ArrowFeatures.user.favoriteSmallInt.getFqn(), allocator);
+        var smallIntVector = new SmallIntVector("arrow_user.favorite_small_int", allocator);
         smallIntVector.allocateNew();
         short[] smallIntValues = {1, 2, 3};
         for (int i = 0; i < smallIntValues.length; i++) {
@@ -96,7 +97,7 @@ public class TestUnmarshaller {
         smallIntVector.setValueCount(smallIntValues.length);
         fieldVectors.add(smallIntVector);
 
-        var tinyIntVector = new TinyIntVector(ArrowFeatures.user.favoriteTinyInt.getFqn(), allocator);
+        var tinyIntVector = new TinyIntVector("arrow_user.favorite_tiny_int", allocator);
         tinyIntVector.allocateNew();
         byte[] tinyIntValues = {1, 2, 3};
         for (int i = 0; i < tinyIntValues.length; i++) {
@@ -105,7 +106,7 @@ public class TestUnmarshaller {
         tinyIntVector.setValueCount(tinyIntValues.length);
         fieldVectors.add(tinyIntVector);
 
-        var floatVector = new Float4Vector(ArrowFeatures.user.favoriteFloat4.getFqn(), allocator);
+        var floatVector = new Float4Vector("arrow_user.favorite_float4", allocator);
         floatVector.allocateNew();
         float[] floatValues = {1.0f, 2.0f, 3.0f};
         for (int i = 0; i < floatValues.length; i++) {
@@ -114,7 +115,7 @@ public class TestUnmarshaller {
         floatVector.setValueCount(floatValues.length);
         fieldVectors.add(floatVector);
 
-        var doubleVector = new Float8Vector(ArrowFeatures.user.favoriteFloat8.getFqn(), allocator);
+        var doubleVector = new Float8Vector("arrow_user.favorite_float8", allocator);
         doubleVector.allocateNew();
         double[] doubleValues = {1.0, 2.0, 3.0};
         for (int i = 0; i < doubleValues.length; i++) {
@@ -123,7 +124,7 @@ public class TestUnmarshaller {
         doubleVector.setValueCount(doubleValues.length);
         fieldVectors.add(doubleVector);
 
-        var boolVector = new BitVector(ArrowFeatures.user.favoriteBoolean.getFqn(), allocator);
+        var boolVector = new BitVector("arrow_user.favorite_boolean", allocator);
         boolVector.allocateNew();
         boolean[] boolValues = {true, false, true};
         for (int i = 0; i < boolValues.length; i++) {
@@ -131,7 +132,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(boolVector);
 
-        var utf8Vector = new VarCharVector(ArrowFeatures.user.favoriteUtf8.getFqn(), allocator);
+        var utf8Vector = new VarCharVector("arrow_user.favorite_utf8", allocator);
         utf8Vector.allocateNew();
         String[] utf8Values = {"a", "b", "c"};
         for (int i = 0; i < utf8Values.length; i++) {
@@ -140,7 +141,7 @@ public class TestUnmarshaller {
         utf8Vector.setValueCount(utf8Values.length);
         fieldVectors.add(utf8Vector);
 
-        var largeUtf8Vector = new LargeVarCharVector(ArrowFeatures.user.favoriteLargeUtf8.getFqn(), allocator);
+        var largeUtf8Vector = new LargeVarCharVector("arrow_user.favorite_large_utf8", allocator);
         largeUtf8Vector.allocateNew();
         String[] largeUtf8Values = {"a", "b", "c"};
         for (int i = 0; i < largeUtf8Values.length; i++) {
@@ -149,7 +150,7 @@ public class TestUnmarshaller {
         largeUtf8Vector.setValueCount(largeUtf8Values.length);
         fieldVectors.add(largeUtf8Vector);
 
-        var dateVector = new DateDayVector(ArrowFeatures.user.favoriteDateDay.getFqn(), allocator);
+        var dateVector = new DateDayVector("arrow_user.favorite_date_day", allocator);
         dateVector.allocateNew();
         int[] dateValues = {18839, 18840, 18841};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < dateValues.length; i++) {
@@ -158,7 +159,7 @@ public class TestUnmarshaller {
         dateVector.setValueCount(dateValues.length);
         fieldVectors.add(dateVector);
 
-        var dateMilliVector = new DateMilliVector(ArrowFeatures.user.favoriteDateMilli.getFqn(), allocator);
+        var dateMilliVector = new DateMilliVector("arrow_user.favorite_date_milli", allocator);
         dateMilliVector.allocateNew();
         // Thursday, July 31, 2021, ..., ... For some reason has to be epoch seconds instead of epoch milliseconds.
         long[] dateMilliValues = {1627689600, 1627776000, 1627862400};
@@ -168,7 +169,7 @@ public class TestUnmarshaller {
         dateMilliVector.setValueCount(dateMilliValues.length);
         fieldVectors.add(dateMilliVector);
 
-        var timestampSecVector = new TimeStampSecVector(ArrowFeatures.user.favoriteTimestampSec.getFqn(), allocator);
+        var timestampSecVector = new TimeStampSecVector("arrow_user.favorite_timestamp_sec", allocator);
         timestampSecVector.allocateNew();
         long[] timestampSecValues = {1627689600, 1627776000, 1627862400};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampSecValues.length; i++) {
@@ -180,7 +181,7 @@ public class TestUnmarshaller {
         var secTzType = FieldType.nullable(
             new org.apache.arrow.vector.types.pojo.ArrowType.Timestamp(org.apache.arrow.vector.types.TimeUnit.SECOND, "US/Pacific")
         );
-        var timestampSecTzVector = new TimeStampSecTZVector(ArrowFeatures.user.favoriteTimestampSecTz.getFqn(), secTzType, allocator);
+        var timestampSecTzVector = new TimeStampSecTZVector("arrow_user.favorite_timestamp_sec_tz", secTzType, allocator);
         timestampSecTzVector.allocateNew();
         long[] timestampSecTzValues = {1627689600, 1627776000, 1627862400};  // Thursday, July 31, 2021 Pacific??, ..., ...
         for (int i = 0; i < timestampSecTzValues.length; i++) {
@@ -189,7 +190,7 @@ public class TestUnmarshaller {
         timestampSecTzVector.setValueCount(timestampSecTzValues.length);
         fieldVectors.add(timestampSecTzVector);
 
-        var timestampMilliVector = new TimeStampMilliVector(ArrowFeatures.user.favoriteTimestampMilli.getFqn(), allocator);
+        var timestampMilliVector = new TimeStampMilliVector("arrow_user.favorite_timestamp_milli", allocator);
         timestampMilliVector.allocateNew();
         long[] timestampMilliValues = {1627689600001L, 1627776000001L, 1627862400001L};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampMilliValues.length; i++) {
@@ -201,7 +202,7 @@ public class TestUnmarshaller {
         var milliTzType = FieldType.nullable(
             new org.apache.arrow.vector.types.pojo.ArrowType.Timestamp(org.apache.arrow.vector.types.TimeUnit.MILLISECOND, "US/Pacific")
         );
-        var timestampMilliTzVector = new TimeStampMilliTZVector(ArrowFeatures.user.favoriteTimestampMilliTz.getFqn(), milliTzType, allocator);
+        var timestampMilliTzVector = new TimeStampMilliTZVector("arrow_user.favorite_timestamp_milli_tz", milliTzType, allocator);
         timestampMilliTzVector.allocateNew();
         for (int i = 0; i < timestampMilliValues.length; i++) {
             timestampMilliTzVector.set(i, timestampMilliValues[i]);
@@ -209,7 +210,7 @@ public class TestUnmarshaller {
         timestampMilliTzVector.setValueCount(timestampMilliValues.length);
         fieldVectors.add(timestampMilliTzVector);
 
-        var timestampMicroVector = new TimeStampMicroVector(ArrowFeatures.user.favoriteTimestampMicro.getFqn(), allocator);
+        var timestampMicroVector = new TimeStampMicroVector("arrow_user.favorite_timestamp_micro", allocator);
         timestampMicroVector.allocateNew();
         long[] timestampMicroValues = {1627689600000001L, 1627776000000001L, 1627862400000001L};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampMicroValues.length; i++) {
@@ -221,7 +222,7 @@ public class TestUnmarshaller {
         var microTzType = FieldType.nullable(
             new org.apache.arrow.vector.types.pojo.ArrowType.Timestamp(org.apache.arrow.vector.types.TimeUnit.MICROSECOND, "US/Pacific")
         );
-        var timestampMicroTzVector = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTz.getFqn(), microTzType, allocator);
+        var timestampMicroTzVector = new TimeStampMicroTZVector("arrow_user.favorite_timestamp_micro_tz", microTzType, allocator);
         timestampMicroTzVector.allocateNew();
 
         for (int i = 0; i < timestampMicroValues.length; i++) {
@@ -230,7 +231,7 @@ public class TestUnmarshaller {
         timestampMicroTzVector.setValueCount(timestampMicroValues.length);
         fieldVectors.add(timestampMicroTzVector);
 
-        var timestampNanoVector = new TimeStampNanoVector(ArrowFeatures.user.favoriteTimestampNano.getFqn(), allocator);
+        var timestampNanoVector = new TimeStampNanoVector("arrow_user.favorite_timestamp_nano", allocator);
         timestampNanoVector.allocateNew();
         long[] timestampNanoValues = {1627689600000000001L, 1627776000000000001L, 1627862400000000001L};  // Thursday, July 31, 2021, ..., ...
         for (int i = 0; i < timestampNanoValues.length; i++) {
@@ -242,7 +243,7 @@ public class TestUnmarshaller {
         var nanoTzType = FieldType.nullable(
             new org.apache.arrow.vector.types.pojo.ArrowType.Timestamp(org.apache.arrow.vector.types.TimeUnit.NANOSECOND, "US/Pacific")
         );
-        var timestampNanoTzVector = new TimeStampNanoTZVector(ArrowFeatures.user.favoriteTimestampNanoTz.getFqn(), nanoTzType, allocator);
+        var timestampNanoTzVector = new TimeStampNanoTZVector("arrow_user.favorite_timestamp_nano_tz", nanoTzType, allocator);
         timestampNanoTzVector.allocateNew();
         for (int i = 0; i < timestampNanoValues.length; i++) {
             timestampNanoTzVector.set(i, timestampNanoValues[i]);
@@ -250,7 +251,7 @@ public class TestUnmarshaller {
         timestampNanoTzVector.setValueCount(timestampNanoValues.length);
         fieldVectors.add(timestampNanoTzVector);
 
-        var timeSecVector = new TimeSecVector(ArrowFeatures.user.favoriteTimeSec.getFqn(), allocator);
+        var timeSecVector = new TimeSecVector("arrow_user.favorite_time_sec", allocator);
         timeSecVector.allocateNew();
         int[] timeSecValues = {36840, 36841, 36842};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeSecValues.length; i++) {
@@ -259,7 +260,7 @@ public class TestUnmarshaller {
         timeSecVector.setValueCount(timeSecValues.length);
         fieldVectors.add(timeSecVector);
 
-        var timeMilliVector = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilli.getFqn(), allocator);
+        var timeMilliVector = new TimeMilliVector("arrow_user.favorite_time_milli", allocator);
         timeMilliVector.allocateNew();
         int[] timeMilliValues = {36840001, 36841001, 36842001};  // 10:14:00.000, 10:14:00.001, 10:14:00.002
         for (int i = 0; i < timeMilliValues.length; i++) {
@@ -268,7 +269,7 @@ public class TestUnmarshaller {
         timeMilliVector.setValueCount(timeMilliValues.length);
         fieldVectors.add(timeMilliVector);
 
-        var timeMicroVector = new TimeMicroVector(ArrowFeatures.user.favoriteTimeMicro.getFqn(), allocator);
+        var timeMicroVector = new TimeMicroVector("arrow_user.favorite_time_micro", allocator);
         timeMicroVector.allocateNew();
         long[] timeMicroValues = {36840000001L, 36841000001L, 36842000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeMicroValues.length; i++) {
@@ -278,7 +279,7 @@ public class TestUnmarshaller {
         timeMicroVector.setValueCount(timeMicroValues.length);
         fieldVectors.add(timeMicroVector);
 
-        var timeNanoVector = new TimeNanoVector(ArrowFeatures.user.favoriteTimeNano.getFqn(), allocator);
+        var timeNanoVector = new TimeNanoVector("arrow_user.favorite_time_nano", allocator);
         timeNanoVector.allocateNew();
         long[] timeNanoValues = {36840000000001L, 36841000000001L, 36842000000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < timeNanoValues.length; i++) {
@@ -290,7 +291,7 @@ public class TestUnmarshaller {
         var durationSecType = FieldType.nullable(
                 new org.apache.arrow.vector.types.pojo.ArrowType.Duration(TimeUnit.SECOND)
         );
-        var durationSecVector = new DurationVector(ArrowFeatures.user.favoriteDurationSec.getFqn(), durationSecType, allocator);
+        var durationSecVector = new DurationVector("arrow_user.favorite_duration_sec", durationSecType, allocator);
         durationSecVector.allocateNew();
         int[] durationSecValues = {36900, 36901, 36902};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationSecValues.length; i++) {
@@ -302,7 +303,7 @@ public class TestUnmarshaller {
         var durationMilliType = FieldType.nullable(
                 new org.apache.arrow.vector.types.pojo.ArrowType.Duration(TimeUnit.MILLISECOND)
         );
-        var durationMilliVector = new DurationVector(ArrowFeatures.user.favoriteDurationMilli.getFqn(), durationMilliType, allocator);
+        var durationMilliVector = new DurationVector("arrow_user.favorite_duration_milli", durationMilliType, allocator);
         durationMilliVector.allocateNew();
         int[] durationMilliValues = {36840001, 36841001, 36842001};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMilliValues.length; i++) {
@@ -314,7 +315,7 @@ public class TestUnmarshaller {
         var durationMicroType = FieldType.nullable(
                 new org.apache.arrow.vector.types.pojo.ArrowType.Duration(TimeUnit.MICROSECOND)
         );
-        var durationMicroVector = new DurationVector(ArrowFeatures.user.favoriteDurationMicro.getFqn(), durationMicroType, allocator);
+        var durationMicroVector = new DurationVector("arrow_user.favorite_duration_micro", durationMicroType, allocator);
         durationMicroVector.allocateNew();
         long[] durationMicroValues = {36840000001L, 36841000001L, 36842000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationMicroValues.length; i++) {
@@ -326,7 +327,7 @@ public class TestUnmarshaller {
         var durationNanoType = FieldType.nullable(
                 new org.apache.arrow.vector.types.pojo.ArrowType.Duration(TimeUnit.NANOSECOND)
         );
-        var durationNanoVector = new DurationVector(ArrowFeatures.user.favoriteDurationNano.getFqn(), durationNanoType, allocator);
+        var durationNanoVector = new DurationVector("arrow_user.favorite_duration_nano", durationNanoType, allocator);
         durationNanoVector.allocateNew();
         long[] durationNanoValues = {36840000000001L, 36841000000001L, 36842000000001L};  // 10:14:00, 10:14:01, 10:14:02
         for (int i = 0; i < durationNanoValues.length; i++) {
@@ -343,7 +344,8 @@ public class TestUnmarshaller {
                 public Feature<java.time.LocalDateTime> niceDatetime;
             }
          */
-        var structVector = StructVector.empty(ArrowFeatures.user.favoriteStruct.getFqn(), allocator);
+        var structVector = StructVector.empty("arrow_user.favorite_struct", allocator);
+
         var numRows = 3;
         structVector.setValueCount(numRows);
         structVector.allocateNew();
@@ -363,7 +365,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVector);
 
-        var listVector = ListVector.empty(ArrowFeatures.user.favoriteStringList.getFqn(), allocator);
+        var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
         var listWriter = listVector.getWriter();
         var varCharValues = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
         for (var i = 0; i < 3; i++) {
@@ -381,7 +383,7 @@ public class TestUnmarshaller {
         listVector.setValueCount(3);
         fieldVectors.add(listVector);
 
-        var boolListVector = ListVector.empty(ArrowFeatures.user.favoriteBooleanList.getFqn(), allocator);
+        var boolListVector = ListVector.empty("arrow_user.favorite_boolean_list", allocator);
         var boolListWriter = boolListVector.getWriter();
         var boolListValues = new boolean[]{false, true, true, true, false, true, true, true, false};
         for (var i = 0; i < 3; i++) {
@@ -396,7 +398,7 @@ public class TestUnmarshaller {
         boolListVector.setValueCount(3);
         fieldVectors.add(boolListVector);
 
-        var longListVector = ListVector.empty(ArrowFeatures.user.favoriteLongList.getFqn(), allocator);
+        var longListVector = ListVector.empty("arrow_user.favorite_long_list", allocator);
         var longListWriter = longListVector.getWriter();
         var longListValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
         for (var i = 0; i < 3; i++) {
@@ -411,7 +413,7 @@ public class TestUnmarshaller {
         longListVector.setValueCount(3);
         fieldVectors.add(longListVector);
 
-        var doubleListvector = ListVector.empty(ArrowFeatures.user.favoriteDoubleList.getFqn(), allocator);
+        var doubleListvector = ListVector.empty("arrow_user.favorite_double_list", allocator);
         var doubleListWriter = doubleListvector.getWriter();
         var doubleListValues = new double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
         for (var i = 0; i < 3; i++) {
@@ -426,7 +428,7 @@ public class TestUnmarshaller {
         doubleListvector.setValueCount(3);
         fieldVectors.add(doubleListvector);
 
-        var timestampSecListVector = ListVector.empty(ArrowFeatures.user.favoriteTimestampSecList.getFqn(), allocator);
+        var timestampSecListVector = ListVector.empty("arrow_user.favorite_timestamp_sec_list", allocator);
         var timestampSecListWriter = timestampSecListVector.getWriter();
         var timestampSecListValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
         for (var i = 0; i < 3; i++) {
@@ -442,7 +444,7 @@ public class TestUnmarshaller {
         fieldVectors.add(timestampSecListVector);
 
         // Create a list of structs
-        var structListVector = ListVector.empty(ArrowFeatures.user.favoriteStructList.getFqn(), allocator);
+        var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
         var structListWriter = structListVector.getWriter();
         var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
         var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
@@ -461,7 +463,7 @@ public class TestUnmarshaller {
         structListVector.setValueCount(3);
         fieldVectors.add(structListVector);
 
-        var hasOneDoubleVector = new Float8Vector(ArrowFeatures.user.favoriteHasOne.length.getFqn(), allocator);
+        var hasOneDoubleVector = new Float8Vector("arrow_user.favorite_has_one.length", allocator);
         hasOneDoubleVector.allocateNew();
         double[] hasOneDoubleValues = {1.0, 2.0, 3.0};
         for (int i = 0; i < hasOneDoubleValues.length; i++) {
@@ -470,7 +472,7 @@ public class TestUnmarshaller {
         hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
         fieldVectors.add(hasOneDoubleVector);
 
-        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favoriteWindowed__86400__", allocator);
+        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed__86400__", allocator);
         windowedDoubleVector__1d__.allocateNew();
         double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
         for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
@@ -479,7 +481,7 @@ public class TestUnmarshaller {
         windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
         fieldVectors.add(windowedDoubleVector__1d__);
 
-        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favoriteWindowed__601__", allocator);
+        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed__601__", allocator);
         windowedDoubleVector__601s__.allocateNew();
         double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
         for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
@@ -490,7 +492,7 @@ public class TestUnmarshaller {
 
         // Add nullable versions of the above vectors
 
-        var bigIntVectorNullable = new BigIntVector(ArrowFeatures.user.favoriteBigIntNullable.getFqn(), allocator);
+        var bigIntVectorNullable = new BigIntVector("arrow_user.favorite_big_int_nullable", allocator);
         bigIntVectorNullable.allocateNew();
         Long[] optionalLongValues = {1L, null, 3L};
         for (int i = 0; i < optionalLongValues.length; i++) {
@@ -501,7 +503,7 @@ public class TestUnmarshaller {
         bigIntVectorNullable.setValueCount(optionalLongValues.length);
         fieldVectors.add(bigIntVectorNullable);
 
-        var intVectorNullable = new IntVector(ArrowFeatures.user.favoriteIntNullable.getFqn(), allocator);
+        var intVectorNullable = new IntVector("arrow_user.favorite_int_nullable", allocator);
         intVectorNullable.allocateNew();
         Integer[] optionalIntValues = {1, null, 3};
         for (int i = 0; i < optionalIntValues.length; i++) {
@@ -512,7 +514,7 @@ public class TestUnmarshaller {
         intVectorNullable.setValueCount(optionalIntValues.length);
         fieldVectors.add(intVectorNullable);
 
-        var smallIntVectorNullable = new SmallIntVector(ArrowFeatures.user.favoriteSmallIntNullable.getFqn(), allocator);
+        var smallIntVectorNullable = new SmallIntVector("arrow_user.favorite_small_int_nullable", allocator);
         smallIntVectorNullable.allocateNew();
         Short[] optionalSmallIntValues = {1, null, 3};
         for (int i = 0; i < optionalSmallIntValues.length; i++) {
@@ -523,7 +525,7 @@ public class TestUnmarshaller {
         smallIntVectorNullable.setValueCount(optionalSmallIntValues.length);
         fieldVectors.add(smallIntVectorNullable);
 
-        var tinyIntVectorNullable = new TinyIntVector(ArrowFeatures.user.favoriteTinyIntNullable.getFqn(), allocator);
+        var tinyIntVectorNullable = new TinyIntVector("arrow_user.favorite_tiny_int_nullable", allocator);
         tinyIntVectorNullable.allocateNew();
         Byte[] optionalTinyIntValues = {1, null, 3};
         for (int i = 0; i < optionalTinyIntValues.length; i++) {
@@ -534,7 +536,7 @@ public class TestUnmarshaller {
         tinyIntVectorNullable.setValueCount(optionalTinyIntValues.length);
         fieldVectors.add(tinyIntVectorNullable);
 
-        var floatVectorNullable = new Float4Vector(ArrowFeatures.user.favoriteFloat4Nullable.getFqn(), allocator);
+        var floatVectorNullable = new Float4Vector("arrow_user.favorite_float4_nullable", allocator);
         floatVectorNullable.allocateNew();
         Float[] optionalFloatValues = {1.0f, null, 3.0f};
         for (int i = 0; i < optionalFloatValues.length; i++) {
@@ -545,7 +547,7 @@ public class TestUnmarshaller {
         floatVectorNullable.setValueCount(optionalFloatValues.length);
         fieldVectors.add(floatVectorNullable);
 
-        var doubleVectorNullable = new Float8Vector(ArrowFeatures.user.favoriteFloat8Nullable.getFqn(), allocator);
+        var doubleVectorNullable = new Float8Vector("arrow_user.favorite_float8_nullable", allocator);
         doubleVectorNullable.allocateNew();
         Double[] optionalDoubleValues = {1.0, null, 3.0};
         for (int i = 0; i < optionalDoubleValues.length; i++) {
@@ -556,7 +558,7 @@ public class TestUnmarshaller {
         doubleVectorNullable.setValueCount(optionalDoubleValues.length);
         fieldVectors.add(doubleVectorNullable);
 
-        var utf8VectorNullable = new VarCharVector(ArrowFeatures.user.favoriteUtf8Nullable.getFqn(), allocator);
+        var utf8VectorNullable = new VarCharVector("arrow_user.favorite_utf8_nullable", allocator);
         utf8VectorNullable.allocateNew();
         String[] optionalUtf8Values = {"a", null, ""};
         for (int i = 0; i < optionalUtf8Values.length; i++) {
@@ -568,7 +570,7 @@ public class TestUnmarshaller {
         fieldVectors.add(utf8VectorNullable);
 
 
-        var largeUtf8VectorNullable = new LargeVarCharVector(ArrowFeatures.user.favoriteLargeUtf8Nullable.getFqn(), allocator);
+        var largeUtf8VectorNullable = new LargeVarCharVector("arrow_user.favorite_large_utf8_nullable", allocator);
         largeUtf8VectorNullable.allocateNew();
         String[] optionalLargeUtf8Values = {"a", null, ""};
         for (int i = 0; i < optionalLargeUtf8Values.length; i++) {
@@ -579,7 +581,7 @@ public class TestUnmarshaller {
         largeUtf8VectorNullable.setValueCount(optionalLargeUtf8Values.length);
          fieldVectors.add(largeUtf8VectorNullable);
 
-        var booleanVectorNullable = new BitVector(ArrowFeatures.user.favoriteBooleanNullable.getFqn(), allocator);
+        var booleanVectorNullable = new BitVector("arrow_user.favorite_boolean_nullable", allocator);
         booleanVectorNullable.allocateNew();
         Boolean[] optionalBooleanValues = {true, null, false};
         for (int i = 0; i < optionalBooleanValues.length; i++) {
@@ -590,7 +592,7 @@ public class TestUnmarshaller {
         booleanVectorNullable.setValueCount(optionalBooleanValues.length);
         fieldVectors.add(booleanVectorNullable);
 
-        var dateDayVectorNullable = new DateDayVector(ArrowFeatures.user.favoriteDateDayNullable.getFqn(), allocator);
+        var dateDayVectorNullable = new DateDayVector("arrow_user.favorite_date_day_nullable", allocator);
         dateDayVectorNullable.allocateNew();
         Integer[] optionalDateDayValues = {18839, null, 18841};
         for (int i = 0; i < optionalDateDayValues.length; i++) {
@@ -601,7 +603,7 @@ public class TestUnmarshaller {
         dateDayVectorNullable.setValueCount(optionalDateDayValues.length);
         fieldVectors.add(dateDayVectorNullable);
 
-        var dateMilliVectorNullable = new DateMilliVector(ArrowFeatures.user.favoriteDateMilliNullable.getFqn(), allocator);
+        var dateMilliVectorNullable = new DateMilliVector("arrow_user.favorite_date_milli_nullable", allocator);
         dateMilliVectorNullable.allocateNew();
         Long[] optionalDateMilliValues = {1627689600L, null, 1627862400L};;
         for (int i = 0; i < optionalDateMilliValues.length; i++) {
@@ -612,7 +614,7 @@ public class TestUnmarshaller {
         dateMilliVectorNullable.setValueCount(optionalDateMilliValues.length);
         fieldVectors.add(dateMilliVectorNullable);
         
-        var timeSecVectorNullable = new TimeSecVector(ArrowFeatures.user.favoriteTimeSecNullable.getFqn(), allocator);
+        var timeSecVectorNullable = new TimeSecVector("arrow_user.favorite_time_sec_nullable", allocator);
         timeSecVectorNullable.allocateNew();
         Integer[] optionalTimeSecValues = {36840, null, 36842};
         for (int i = 0; i < optionalTimeSecValues.length; i++) {
@@ -623,7 +625,7 @@ public class TestUnmarshaller {
         timeSecVectorNullable.setValueCount(optionalTimeSecValues.length);
         fieldVectors.add(timeSecVectorNullable);
         
-        var timeMilliVectorNullable = new TimeMilliVector(ArrowFeatures.user.favoriteTimeMilliNullable.getFqn(), allocator);
+        var timeMilliVectorNullable = new TimeMilliVector("arrow_user.favorite_time_milli_nullable", allocator);
         timeMilliVectorNullable.allocateNew();
         Integer[] optionalTimeMilliValues = {36840001, null, 36842001};
         for (int i = 0; i < optionalTimeMilliValues.length; i++) {
@@ -634,7 +636,7 @@ public class TestUnmarshaller {
         timeMilliVectorNullable.setValueCount(optionalTimeMilliValues.length);
         fieldVectors.add(timeMilliVectorNullable);
         
-        var timeMicroVectorNullable = new TimeMicroVector(ArrowFeatures.user.favoriteTimeMicroNullable.getFqn(), allocator);
+        var timeMicroVectorNullable = new TimeMicroVector("arrow_user.favorite_time_micro_nullable", allocator);
         timeMicroVectorNullable.allocateNew();
         Long[] optionalTimeMicroValues = {36840000001L, null, 36842000001L};
         for (int i = 0; i < optionalTimeMicroValues.length; i++) {
@@ -645,7 +647,7 @@ public class TestUnmarshaller {
         timeMicroVectorNullable.setValueCount(optionalTimeMicroValues.length);
         fieldVectors.add(timeMicroVectorNullable);
         
-        var timeNanoVectorNullable = new TimeNanoVector(ArrowFeatures.user.favoriteTimeNanoNullable.getFqn(), allocator);
+        var timeNanoVectorNullable = new TimeNanoVector("arrow_user.favorite_time_nano_nullable", allocator);
         timeNanoVectorNullable.allocateNew();
         Long[] optionalTimeNanoValues = {36840000000001L, null, 36842000000001L};
         for (int i = 0; i < optionalTimeNanoValues.length; i++) {
@@ -656,7 +658,7 @@ public class TestUnmarshaller {
         timeNanoVectorNullable.setValueCount(optionalTimeNanoValues.length);
         fieldVectors.add(timeNanoVectorNullable);
 
-        var timestampSecVectorNullable = new TimeStampSecVector(ArrowFeatures.user.favoriteTimestampSecNullable.getFqn(), allocator);
+        var timestampSecVectorNullable = new TimeStampSecVector("arrow_user.favorite_timestamp_sec_nullable", allocator);
         timestampSecVectorNullable.allocateNew();
         Integer[] optionalTimestampSecValues = {1627689600, null, 1627862400};
         for (int i = 0; i < optionalTimestampSecValues.length; i++) {
@@ -667,7 +669,7 @@ public class TestUnmarshaller {
         timestampSecVectorNullable.setValueCount(optionalTimestampSecValues.length);
         fieldVectors.add(timestampSecVectorNullable);
         
-        var timestampMilliVectorNullable = new TimeStampMilliVector(ArrowFeatures.user.favoriteTimestampMilliNullable.getFqn(), allocator);
+        var timestampMilliVectorNullable = new TimeStampMilliVector("arrow_user.favorite_timestamp_milli_nullable", allocator);
         timestampMilliVectorNullable.allocateNew();
         Long[] optionalTimestampMilliValues = {1627689600001L, null, 1627862400001L};
         for (int i = 0; i < optionalTimestampMilliValues.length; i++) {
@@ -678,7 +680,7 @@ public class TestUnmarshaller {
         timestampMilliVectorNullable.setValueCount(optionalTimestampMilliValues.length);
         fieldVectors.add(timestampMilliVectorNullable);
         
-        var timestampMicroVectorNullable = new TimeStampMicroVector(ArrowFeatures.user.favoriteTimestampMicroNullable.getFqn(), allocator);
+        var timestampMicroVectorNullable = new TimeStampMicroVector("arrow_user.favorite_timestamp_micro_nullable", allocator);
         timestampMicroVectorNullable.allocateNew();
         Long[] optionalTimestampMicroValues = {1627689600000001L, null, 1627862400000001L};
         for (int i = 0; i < optionalTimestampMicroValues.length; i++) {
@@ -689,7 +691,7 @@ public class TestUnmarshaller {
         timestampMicroVectorNullable.setValueCount(optionalTimestampMicroValues.length);
         fieldVectors.add(timestampMicroVectorNullable);
         
-        var timestampNanoVectorNullable = new TimeStampNanoVector(ArrowFeatures.user.favoriteTimestampNanoNullable.getFqn(), allocator);
+        var timestampNanoVectorNullable = new TimeStampNanoVector("arrow_user.favorite_timestamp_nano_nullable", allocator);
         timestampNanoVectorNullable.allocateNew();
         Long[] optionalTimestampNanoValues = {1627689600000000001L, null, 1627862400000000001L};
         for (int i = 0; i < optionalTimestampNanoValues.length; i++) {
@@ -700,7 +702,7 @@ public class TestUnmarshaller {
         timestampNanoVectorNullable.setValueCount(optionalTimestampNanoValues.length);
         fieldVectors.add(timestampNanoVectorNullable);
 
-        var timestampSecTzVectorNullable = new TimeStampSecTZVector(ArrowFeatures.user.favoriteTimestampSecTzNullable.getFqn(), secTzType, allocator);
+        var timestampSecTzVectorNullable = new TimeStampSecTZVector("arrow_user.favorite_timestamp_sec_tz_nullable", secTzType, allocator);
         timestampSecTzVectorNullable.allocateNew();
         Integer[] optionalTimestampSecTzValues = {1627689600, null, 1627862400};
         for (int i = 0; i < optionalTimestampSecTzValues.length; i++) {
@@ -711,7 +713,7 @@ public class TestUnmarshaller {
         timestampSecTzVectorNullable.setValueCount(optionalTimestampSecTzValues.length);
         fieldVectors.add(timestampSecTzVectorNullable);
 
-        var timestampMilliTzVectorNullable = new TimeStampMilliTZVector(ArrowFeatures.user.favoriteTimestampMilliTzNullable.getFqn(), milliTzType, allocator);
+        var timestampMilliTzVectorNullable = new TimeStampMilliTZVector("arrow_user.favorite_timestamp_milli_tz_nullable", milliTzType, allocator);
         timestampMilliTzVectorNullable.allocateNew();
         Long[] optionalTimestampMilliTzValues = {1627689600001L, null, 1627862400001L};
         for (int i = 0; i < optionalTimestampMilliTzValues.length; i++) {
@@ -722,7 +724,7 @@ public class TestUnmarshaller {
         timestampMilliTzVectorNullable.setValueCount(optionalTimestampMilliTzValues.length);
         fieldVectors.add(timestampMilliTzVectorNullable);
 
-        var timestampMicroTzVectorNullable = new TimeStampMicroTZVector(ArrowFeatures.user.favoriteTimestampMicroTzNullable.getFqn(), microTzType, allocator);
+        var timestampMicroTzVectorNullable = new TimeStampMicroTZVector("arrow_user.favorite_timestamp_micro_tz_nullable", microTzType, allocator);
         timestampMicroTzVectorNullable.allocateNew();
         Long[] optionalTimestampMicroTzValues = {1627689600000001L, null, 1627862400000001L};
         for (int i = 0; i < optionalTimestampMicroTzValues.length; i++) {
@@ -733,7 +735,7 @@ public class TestUnmarshaller {
         timestampMicroTzVectorNullable.setValueCount(optionalTimestampMicroTzValues.length);
         fieldVectors.add(timestampMicroTzVectorNullable);
 
-        var timestampNanoTzVectorNullable = new TimeStampNanoTZVector(ArrowFeatures.user.favoriteTimestampNanoTzNullable.getFqn(), nanoTzType, allocator);
+        var timestampNanoTzVectorNullable = new TimeStampNanoTZVector("arrow_user.favorite_timestamp_nano_tz_nullable", nanoTzType, allocator);
         timestampNanoTzVectorNullable.allocateNew();
         Long[] optionalTimestampNanoTzValues = {1627689600000000001L, null, 1627862400000000001L};
         for (int i = 0; i < optionalTimestampNanoTzValues.length; i++) {
@@ -744,7 +746,7 @@ public class TestUnmarshaller {
         timestampNanoTzVectorNullable.setValueCount(optionalTimestampNanoTzValues.length);
         fieldVectors.add(timestampNanoTzVectorNullable);
 
-        var durationSecVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationSecNullable.getFqn(), durationSecType, allocator);
+        var durationSecVectorNullable = new DurationVector("arrow_user.favorite_duration_sec_nullable", durationSecType, allocator);
         durationSecVectorNullable.allocateNew();
         Integer[] optionalDurationSecValues = {36900, null, 36902};
         for (int i = 0; i < optionalDurationSecValues.length; i++) {
@@ -754,7 +756,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(durationSecVectorNullable);
 
-        var durationMilliVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationMilliNullable.getFqn(), durationMilliType, allocator);
+        var durationMilliVectorNullable = new DurationVector("arrow_user.favorite_duration_milli_nullable", durationMilliType, allocator);
         durationMilliVectorNullable.allocateNew();
         Integer[] optionalDurationMilliValues = {36840001, null, 36842001};
         for (int i = 0; i < optionalDurationMilliValues.length; i++) {
@@ -764,7 +766,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(durationMilliVectorNullable);
 
-        var durationMicroVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationMicroNullable.getFqn(), durationMicroType, allocator);
+        var durationMicroVectorNullable = new DurationVector("arrow_user.favorite_duration_micro_nullable", durationMicroType, allocator);
         durationMicroVectorNullable.allocateNew();
         Long[] optionalDurationMicroValues = {36840000001L, null, 36842000001L};
         for (int i = 0; i < optionalDurationMicroValues.length; i++) {
@@ -774,7 +776,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(durationMicroVectorNullable);
 
-        var durationNanoVectorNullable = new DurationVector(ArrowFeatures.user.favoriteDurationNanoNullable.getFqn(), durationNanoType, allocator);
+        var durationNanoVectorNullable = new DurationVector("arrow_user.favorite_duration_nano_nullable", durationNanoType, allocator);
         durationNanoVectorNullable.allocateNew();
         Long[] optionalDurationNanoValues = {36840000000001L, null, 36842000000001L};
         for (int i = 0; i < optionalDurationNanoValues.length; i++) {
@@ -784,7 +786,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(durationNanoVectorNullable);
 
-        var structVectorNullable = StructVector.empty(ArrowFeatures.user.favoriteStructNullable.getFqn(), allocator);
+        var structVectorNullable = StructVector.empty("arrow_user.favorite_struct_nullable", allocator);
         var numNullableRows = 3;
         structVectorNullable.setValueCount(numNullableRows);
         structVectorNullable.allocateNew();
@@ -801,7 +803,7 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVectorNullable);
 
-        var listVectorNullable = ListVector.empty(ArrowFeatures.user.favoriteStringListNullable.getFqn(), allocator);
+        var listVectorNullable = ListVector.empty("arrow_user.favorite_string_list_nullable", allocator);
         listVectorNullable.setValueCount(numNullableRows);
         listVectorNullable.allocateNew();
 
@@ -923,12 +925,12 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2.plusNanos(1));
         assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3.plusNanos(1));
 
-        assert users[0].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStruct.nice_datetime.getValue().equals(expectedDatetime3);
-        assert users[0].favoriteStruct.nice_number.getValue().equals(1L);
-        assert users[1].favoriteStruct.nice_number.getValue().equals(2L);
-        assert users[2].favoriteStruct.nice_number.getValue().equals(3L);
+        assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
 
         assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
         assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));
@@ -950,25 +952,25 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime3, expectedDatetime1, expectedDatetime2));
         assert users[2].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime2, expectedDatetime3, expectedDatetime1));
 
-        assert users[0].favoriteStructList.getValue().get(0).nice_number.getValue().equals(1L);
-        assert users[0].favoriteStructList.getValue().get(1).nice_number.getValue().equals(2L);
-        assert users[0].favoriteStructList.getValue().get(2).nice_number.getValue().equals(3L);
-        assert users[1].favoriteStructList.getValue().get(0).nice_number.getValue().equals(4L);
-        assert users[1].favoriteStructList.getValue().get(1).nice_number.getValue().equals(5L);
-        assert users[1].favoriteStructList.getValue().get(2).nice_number.getValue().equals(6L);
-        assert users[2].favoriteStructList.getValue().get(0).nice_number.getValue().equals(7L);
-        assert users[2].favoriteStructList.getValue().get(1).nice_number.getValue().equals(8L);
-        assert users[2].favoriteStructList.getValue().get(2).nice_number.getValue().equals(9L);
+        assert users[0].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(1L);
+        assert users[0].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(2L);
+        assert users[0].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(3L);
+        assert users[1].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(4L);
+        assert users[1].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(5L);
+        assert users[1].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(6L);
+        assert users[2].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(7L);
+        assert users[2].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(8L);
+        assert users[2].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(9L);
 
-        assert users[0].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime1);
-        assert users[0].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime2);
-        assert users[0].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime3);
-        assert users[1].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime3);
-        assert users[1].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStructList.getValue().get(0).nice_datetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStructList.getValue().get(1).nice_datetime.getValue().equals(expectedDatetime3);
-        assert users[2].favoriteStructList.getValue().get(2).nice_datetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[0].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
 
         assert users[0].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36900));
         assert users[1].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36901));
@@ -1006,13 +1008,13 @@ public class TestUnmarshaller {
         assert users[1].favoriteHasOne.length.getValue().equals(2.0);
         assert users[2].favoriteHasOne.length.getValue().equals(3.0);
 
-        assert users[0].favoriteWindowed.bucket_1d.getValue().equals(1.0);
-        assert users[1].favoriteWindowed.bucket_1d.getValue().equals(2.0);
-        assert users[2].favoriteWindowed.bucket_1d.getValue().equals(3.0);
+        assert users[0].favoriteWindowed.bucket1d.getValue().equals(1.0);
+        assert users[1].favoriteWindowed.bucket1d.getValue().equals(2.0);
+        assert users[2].favoriteWindowed.bucket1d.getValue().equals(3.0);
 
-        assert users[0].favoriteWindowed.bucket_601s.getValue().equals(4.0);
-        assert users[1].favoriteWindowed.bucket_601s.getValue().equals(5.0);
-        assert users[2].favoriteWindowed.bucket_601s.getValue().equals(6.0);
+        assert users[0].favoriteWindowed.bucket601s.getValue().equals(4.0);
+        assert users[1].favoriteWindowed.bucket601s.getValue().equals(5.0);
+        assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
 
         // TODO: Support complex structs and lists
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
@@ -1096,12 +1098,12 @@ public class TestUnmarshaller {
         assert users[2].favoriteLargeUtf8Nullable.getValue().equals("");
 
         // TODO: Maybe should not propogate nulls, i.e. make favoriteStructNullable null instead of its fields
-        assert users[0].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime1);
-        assert users[1].favoriteStructNullable.nice_datetime.getValue().equals(expectedDatetime2);
-        assert users[2].favoriteStructNullable.nice_datetime.getValue() == null;
-        assert users[0].favoriteStructNullable.nice_number.getValue().equals(1L);
-        assert users[1].favoriteStructNullable.nice_number.getValue().equals(2L);
-        assert users[2].favoriteStructNullable.nice_number.getValue() == null;
+        assert users[0].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructNullable.niceDatetime.getValue() == null;
+        assert users[0].favoriteStructNullable.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStructNullable.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStructNullable.niceNumber.getValue() == null;
 
         assert users[0].favoriteStringListNullable.getValue().equals(Arrays.asList("a", "b", "c"));
         assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
@@ -1158,12 +1160,62 @@ public class TestUnmarshaller {
         assert versionedClasses[1].grade.getValue().equals("b");
         assert versionedClasses[2].grade.getValue().equals("c");
 
-        assert versionedClasses[0].grade_v1.getValue().equals("d");
-        assert versionedClasses[1].grade_v1.getValue().equals("e");
-        assert versionedClasses[2].grade_v1.getValue().equals("f");
+        assert versionedClasses[0].gradeV1.getValue().equals("d");
+        assert versionedClasses[1].gradeV1.getValue().equals("e");
+        assert versionedClasses[2].gradeV1.getValue().equals("f");
 
-        assert versionedClasses[0].grade_v2.getValue().equals("a");
-        assert versionedClasses[1].grade_v2.getValue().equals("b");
-        assert versionedClasses[2].grade_v2.getValue().equals("c");
+        assert versionedClasses[0].gradeV2.getValue().equals("a");
+        assert versionedClasses[1].gradeV2.getValue().equals("b");
+        assert versionedClasses[2].gradeV2.getValue().equals("c");
     }
+
+    @Test
+    public void TestUnmarshalNamed() throws Exception {
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
+        defaultVector.allocateNew();
+        String[] idValues = {"a", "b", "c"};
+        for (int i = 0; i < idValues.length; i++) {
+            defaultVector.set(i, idValues[i].getBytes());
+        }
+        defaultVector.setValueCount(idValues.length);
+        fieldVectors.add(defaultVector);
+
+        var table = new Table(fieldVectors);
+
+        var namedClasses = Unmarshaller.unmarshalTable(table, NamedFeaturesClass.class);
+
+        assert namedClasses[0].abc7d7Efg.getValue().equals("a");
+        assert namedClasses[1].abc7d7Efg.getValue().equals("b");
+        assert namedClasses[2].abc7d7Efg.getValue().equals("c");
+    }
+
+    @Test
+    public void TestSnakeCaseBackCompat() throws Exception {
+        // Test that snake case fields can still be deser-ed into.
+        // This supports backwards compatibility with older versions
+        // of codegen where we generated snake case fields.
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        var allocator = new RootAllocator(Long.MAX_VALUE);
+
+        var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
+        defaultVector.allocateNew();
+        String[] idValues = {"a", "b", "c"};
+        for (int i = 0; i < idValues.length; i++) {
+            defaultVector.set(i, idValues[i].getBytes());
+        }
+        defaultVector.setValueCount(idValues.length);
+        fieldVectors.add(defaultVector);
+
+        var table = new Table(fieldVectors);
+
+        var namedClasses = Unmarshaller.unmarshalTable(table, NamedFeaturesClass.class);
+
+        assert namedClasses[0].abc_7d7_efg.getValue().equals("a");
+        assert namedClasses[1].abc_7d7_efg.getValue().equals("b");
+        assert namedClasses[2].abc_7d7_efg.getValue().equals("c");
+    }
+
 }

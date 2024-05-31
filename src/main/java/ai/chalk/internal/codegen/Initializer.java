@@ -14,7 +14,7 @@ public class Initializer {
             if (!FeaturesBase.class.isAssignableFrom(field.getType())) {
                 continue;
             }
-            var rootFeatureFqn = Utils.toSnakeCase(field.getType().getSimpleName());
+            var rootFeatureFqn = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
                 var featureClass = Initializer.init(field, rootFeatureFqn, null, new HashSet<>());
                 field.set(cls, featureClass);
@@ -31,9 +31,9 @@ public class Initializer {
         Field[] fields = Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
 
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
-        var rootFeatureFqn = Utils.toSnakeCase(fc.getClass().getSimpleName());
+        var rootFeatureFqn = Utils.chalkpySnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
-            var childFqn = rootFeatureFqn + "." + field.getName();
+            var childFqn = rootFeatureFqn + "." + Utils.getResolvedName(field);
             var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>());
             field.set(fc, feature);
         }
@@ -51,7 +51,7 @@ public class Initializer {
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
             for (Field ff : f.getType().getFields()) {
-                var childFqn = fqn + "." + ff.getName();
+                var childFqn = fqn + "." + Utils.getResolvedName(ff);
                 if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
                     // For input features, struct field FQNs end at the last actual feature in the chain.
                     // Only override the fqn for StructFeaturesClass children for initing features that are

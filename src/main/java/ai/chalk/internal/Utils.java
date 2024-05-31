@@ -1,16 +1,31 @@
 package ai.chalk.internal;
 
+import ai.chalk.features.Name;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Utils {
-    public static String toSnakeCase(String s) {
-        return s.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+    public static String getResolvedName(Field field) {
+        // If has the Name annotation, use that as the name
+        // Otherwise, use the field name snake cased
+        if (field.isAnnotationPresent(Name.class)) {
+            return field.getAnnotation(Name.class).value();
+        }
+        return chalkpySnakeCase(field.getName());
+
+    }
+    public static String chalkpySnakeCase(String s) {
+        // Aims to be in parity with chalkpy's impl
+        s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
+        s = s.replaceAll("__([A-Z])", "_$1");
+        s = s.replaceAll("([a-z0-9])([A-Z])", "$1_$2");
+        return s.toLowerCase();
     }
 
     public static <T> T[] listToArray(List<T> list, Class<T> clazz) {
@@ -24,58 +39,15 @@ public class Utils {
         return splitArr[splitArr.length - 1];
     }
 
-    public static String firstLetterToLower(String s) {
-        if (s == null || s.isEmpty()) {
-            return s; // return the input string if it's null or empty
-        }
-        return Character.toLowerCase(s.charAt(0)) + s.substring(1);
-    }
-
-    public static String fqnCamelCase(String s) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '_' && i + 1 < s.length()) {
-                // Skip over '_' in "_{{lowercase}}".
-                continue;
-            } else if (isASCIIDigit(c) || c == '.') {
-                result.append(c);
-            } else {
-                // Assume we have a letter now - if not, it's a bogus identifier.
-                // The next word is a sequence of characters that must start upper case.
-                if (isASCIILower(c)) {
-                    c = Character.toUpperCase(c);
-                }
-                result.append(c);
-
-                // Accept lower case sequence that follows.
-                while (i + 1 < s.length() && isASCIILower(s.charAt(i + 1))) {
-                    result.append(s.charAt(i + 1));
-                    i++;
-                }
-            }
-        }
-        return result.toString();
-    }
-
-    private static boolean isASCIIDigit(char c) {
-        return c >= '0' && c <= '9';
-    }
-
-    private static boolean isASCIILower(char c) {
-        return c >= 'a' && c <= 'z';
-    }
-
-
     public static Field getFieldFromFqn(Class<?> clazz, String fqn) throws Exception {
         String featureName = Utils.getDotDelimitedLastSection(fqn);
-        String fieldName = Utils.firstLetterToLower(Utils.fqnCamelCase(featureName));
         for (Field field : clazz.getDeclaredFields()) {
-            if (field.getName().equals(fieldName)) {
+            if (Utils.getResolvedName(field).equals(featureName)) {
                 return field;
             }
         }
-        throw new IllegalArgumentException("Field " + fieldName + " does not exist in class " + clazz.getName());
+        throw new IllegalArgumentException("Field that corresponds to the feature '" + featureName +
+                "' does not exist in class " + clazz.getName());
     }
 
     public static Class<?> getListFeatureInnerType(Field field) throws Exception {

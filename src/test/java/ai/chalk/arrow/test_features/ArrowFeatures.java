@@ -8,6 +8,7 @@ public class ArrowFeatures {
     public static Transaction transaction;
     public static ArrowUser user;
     public static VersionedFeaturesClass versionedFeaturesClass;
+    public static NamedFeaturesClass namedFeaturesClass;
 
 
     private static Exception initException = Initializer.initFeatures(ArrowFeatures.class);

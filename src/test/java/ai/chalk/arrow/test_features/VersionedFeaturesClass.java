@@ -8,7 +8,7 @@ public class VersionedFeaturesClass extends FeaturesClass {
     @Versioned(defaultVersion = 2)
     public Feature<String> grade;
     @Versioned
-    public Feature<String> grade_v1;
+    public Feature<String> gradeV1;
     @Versioned
-    public Feature<String> grade_v2;
+    public Feature<String> gradeV2;
 }
