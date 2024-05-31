@@ -98,7 +98,7 @@ public class TestChalkClient {
         }
     }
 
-    @Disabled("Branch feather queries not supported yet")
+    @Test
     public void testBranchFromClientArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
@@ -126,7 +126,7 @@ public class TestChalkClient {
         }
     }
 
-    @Disabled("Branch feather queries not supported")
+    @Test
     public void testBranchFromMethodArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
