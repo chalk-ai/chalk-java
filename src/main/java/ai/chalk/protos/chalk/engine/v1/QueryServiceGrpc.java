@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.63.0)",
+    value = "by gRPC proto compiler (version 1.64.0)",
     comments = "Source: chalk/engine/v1/query_server.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class QueryServiceGrpc {
