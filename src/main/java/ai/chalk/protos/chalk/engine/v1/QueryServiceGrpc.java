@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.63.0)",
+    value = "by gRPC proto compiler (version 1.64.0)",
     comments = "Source: chalk/engine/v1/query_server.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class QueryServiceGrpc {
@@ -77,35 +77,66 @@ public final class QueryServiceGrpc {
     return getOnlineQueryMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest,
-      ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> getOnlineQueryFeatherMethod;
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest,
+      ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> getOnlineQueryBulkMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "OnlineQueryFeather",
-      requestType = ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest.class,
-      responseType = ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "OnlineQueryBulk",
+      requestType = ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest.class,
+      responseType = ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest,
-      ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> getOnlineQueryFeatherMethod() {
-    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> getOnlineQueryFeatherMethod;
-    if ((getOnlineQueryFeatherMethod = QueryServiceGrpc.getOnlineQueryFeatherMethod) == null) {
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest,
+      ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> getOnlineQueryBulkMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> getOnlineQueryBulkMethod;
+    if ((getOnlineQueryBulkMethod = QueryServiceGrpc.getOnlineQueryBulkMethod) == null) {
       synchronized (QueryServiceGrpc.class) {
-        if ((getOnlineQueryFeatherMethod = QueryServiceGrpc.getOnlineQueryFeatherMethod) == null) {
-          QueryServiceGrpc.getOnlineQueryFeatherMethod = getOnlineQueryFeatherMethod =
-              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse>newBuilder()
+        if ((getOnlineQueryBulkMethod = QueryServiceGrpc.getOnlineQueryBulkMethod) == null) {
+          QueryServiceGrpc.getOnlineQueryBulkMethod = getOnlineQueryBulkMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "OnlineQueryFeather"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "OnlineQueryBulk"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest.getDefaultInstance()))
+                  ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new QueryServiceMethodDescriptorSupplier("OnlineQueryFeather"))
+                  ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new QueryServiceMethodDescriptorSupplier("OnlineQueryBulk"))
               .build();
         }
       }
     }
-    return getOnlineQueryFeatherMethod;
+    return getOnlineQueryBulkMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest,
+      ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> getOnlineQueryMultiMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "OnlineQueryMulti",
+      requestType = ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest.class,
+      responseType = ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest,
+      ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> getOnlineQueryMultiMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> getOnlineQueryMultiMethod;
+    if ((getOnlineQueryMultiMethod = QueryServiceGrpc.getOnlineQueryMultiMethod) == null) {
+      synchronized (QueryServiceGrpc.class) {
+        if ((getOnlineQueryMultiMethod = QueryServiceGrpc.getOnlineQueryMultiMethod) == null) {
+          QueryServiceGrpc.getOnlineQueryMultiMethod = getOnlineQueryMultiMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest, ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "OnlineQueryMulti"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new QueryServiceMethodDescriptorSupplier("OnlineQueryMulti"))
+              .build();
+        }
+      }
+    }
+    return getOnlineQueryMultiMethod;
   }
 
   /**
@@ -172,9 +203,16 @@ public final class QueryServiceGrpc {
 
     /**
      */
-    default void onlineQueryFeather(ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getOnlineQueryFeatherMethod(), responseObserver);
+    default void onlineQueryBulk(ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getOnlineQueryBulkMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void onlineQueryMulti(ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getOnlineQueryMultiMethod(), responseObserver);
     }
   }
 
@@ -223,10 +261,18 @@ public final class QueryServiceGrpc {
 
     /**
      */
-    public void onlineQueryFeather(ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> responseObserver) {
+    public void onlineQueryBulk(ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getOnlineQueryFeatherMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getOnlineQueryBulkMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void onlineQueryMulti(ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getOnlineQueryMultiMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -262,9 +308,16 @@ public final class QueryServiceGrpc {
 
     /**
      */
-    public ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse onlineQueryFeather(ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest request) {
+    public ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse onlineQueryBulk(ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getOnlineQueryFeatherMethod(), getCallOptions(), request);
+          getChannel(), getOnlineQueryBulkMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse onlineQueryMulti(ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getOnlineQueryMultiMethod(), getCallOptions(), request);
     }
   }
 
@@ -302,16 +355,25 @@ public final class QueryServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse> onlineQueryFeather(
-        ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse> onlineQueryBulk(
+        ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getOnlineQueryFeatherMethod(), getCallOptions()), request);
+          getChannel().newCall(getOnlineQueryBulkMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> onlineQueryMulti(
+        ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getOnlineQueryMultiMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_PING = 0;
   private static final int METHODID_ONLINE_QUERY = 1;
-  private static final int METHODID_ONLINE_QUERY_FEATHER = 2;
+  private static final int METHODID_ONLINE_QUERY_BULK = 2;
+  private static final int METHODID_ONLINE_QUERY_MULTI = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -338,9 +400,13 @@ public final class QueryServiceGrpc {
           serviceImpl.onlineQuery((ai.chalk.protos.chalk.common.v1.OnlineQueryRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryResponse>) responseObserver);
           break;
-        case METHODID_ONLINE_QUERY_FEATHER:
-          serviceImpl.onlineQueryFeather((ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest) request,
-              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse>) responseObserver);
+        case METHODID_ONLINE_QUERY_BULK:
+          serviceImpl.onlineQueryBulk((ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse>) responseObserver);
+          break;
+        case METHODID_ONLINE_QUERY_MULTI:
+          serviceImpl.onlineQueryMulti((ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -375,12 +441,19 @@ public final class QueryServiceGrpc {
               ai.chalk.protos.chalk.common.v1.OnlineQueryResponse>(
                 service, METHODID_ONLINE_QUERY)))
         .addMethod(
-          getOnlineQueryFeatherMethod(),
+          getOnlineQueryBulkMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherRequest,
-              ai.chalk.protos.chalk.common.v1.OnlineQueryFeatherResponse>(
-                service, METHODID_ONLINE_QUERY_FEATHER)))
+              ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest,
+              ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse>(
+                service, METHODID_ONLINE_QUERY_BULK)))
+        .addMethod(
+          getOnlineQueryMultiMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest,
+              ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse>(
+                service, METHODID_ONLINE_QUERY_MULTI)))
         .build();
   }
 
@@ -431,7 +504,8 @@ public final class QueryServiceGrpc {
               .setSchemaDescriptor(new QueryServiceFileDescriptorSupplier())
               .addMethod(getPingMethod())
               .addMethod(getOnlineQueryMethod())
-              .addMethod(getOnlineQueryFeatherMethod())
+              .addMethod(getOnlineQueryBulkMethod())
+              .addMethod(getOnlineQueryMultiMethod())
               .build();
         }
       }

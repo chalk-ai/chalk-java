@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.63.0)",
+    value = "by gRPC proto compiler (version 1.64.0)",
     comments = "Source: chalk/server/v1/team.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class TeamServiceGrpc {
@@ -268,37 +268,6 @@ public final class TeamServiceGrpc {
     return getCreateEnvironmentMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
-      ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "CreateServiceToken",
-      requestType = ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest.class,
-      responseType = ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
-      ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod() {
-    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod;
-    if ((getCreateServiceTokenMethod = TeamServiceGrpc.getCreateServiceTokenMethod) == null) {
-      synchronized (TeamServiceGrpc.class) {
-        if ((getCreateServiceTokenMethod = TeamServiceGrpc.getCreateServiceTokenMethod) == null) {
-          TeamServiceGrpc.getCreateServiceTokenMethod = getCreateServiceTokenMethod =
-              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateServiceToken"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("CreateServiceToken"))
-              .build();
-        }
-      }
-    }
-    return getCreateServiceTokenMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest,
       ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> getGetAvailablePermissionsMethod;
 
@@ -331,6 +300,37 @@ public final class TeamServiceGrpc {
     return getGetAvailablePermissionsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
+      ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateServiceToken",
+      requestType = ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
+      ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> getCreateServiceTokenMethod;
+    if ((getCreateServiceTokenMethod = TeamServiceGrpc.getCreateServiceTokenMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getCreateServiceTokenMethod = TeamServiceGrpc.getCreateServiceTokenMethod) == null) {
+          TeamServiceGrpc.getCreateServiceTokenMethod = getCreateServiceTokenMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateServiceToken"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("CreateServiceToken"))
+              .build();
+        }
+      }
+    }
+    return getCreateServiceTokenMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest,
       ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse> getDeleteServiceTokenMethod;
 
@@ -360,6 +360,99 @@ public final class TeamServiceGrpc {
       }
     }
     return getDeleteServiceTokenMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest,
+      ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> getListServiceTokensMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListServiceTokens",
+      requestType = ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest,
+      ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> getListServiceTokensMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest, ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> getListServiceTokensMethod;
+    if ((getListServiceTokensMethod = TeamServiceGrpc.getListServiceTokensMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getListServiceTokensMethod = TeamServiceGrpc.getListServiceTokensMethod) == null) {
+          TeamServiceGrpc.getListServiceTokensMethod = getListServiceTokensMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest, ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListServiceTokens"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("ListServiceTokens"))
+              .build();
+        }
+      }
+    }
+    return getListServiceTokensMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest,
+      ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> getUpdateServiceTokenMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateServiceToken",
+      requestType = ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest,
+      ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> getUpdateServiceTokenMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> getUpdateServiceTokenMethod;
+    if ((getUpdateServiceTokenMethod = TeamServiceGrpc.getUpdateServiceTokenMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getUpdateServiceTokenMethod = TeamServiceGrpc.getUpdateServiceTokenMethod) == null) {
+          TeamServiceGrpc.getUpdateServiceTokenMethod = getUpdateServiceTokenMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest, ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateServiceToken"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("UpdateServiceToken"))
+              .build();
+        }
+      }
+    }
+    return getUpdateServiceTokenMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest,
+      ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> getUpsertFeaturePermissionsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpsertFeaturePermissions",
+      requestType = ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest,
+      ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> getUpsertFeaturePermissionsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest, ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> getUpsertFeaturePermissionsMethod;
+    if ((getUpsertFeaturePermissionsMethod = TeamServiceGrpc.getUpsertFeaturePermissionsMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getUpsertFeaturePermissionsMethod = TeamServiceGrpc.getUpsertFeaturePermissionsMethod) == null) {
+          TeamServiceGrpc.getUpsertFeaturePermissionsMethod = getUpsertFeaturePermissionsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest, ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpsertFeaturePermissions"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("UpsertFeaturePermissions"))
+              .build();
+        }
+      }
+    }
+    return getUpsertFeaturePermissionsMethod;
   }
 
   /**
@@ -468,13 +561,6 @@ public final class TeamServiceGrpc {
 
     /**
      */
-    default void createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateServiceTokenMethod(), responseObserver);
-    }
-
-    /**
-     */
     default void getAvailablePermissions(ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAvailablePermissionsMethod(), responseObserver);
@@ -482,9 +568,37 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    default void createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateServiceTokenMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void deleteServiceToken(ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteServiceTokenMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void listServiceTokens(ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListServiceTokensMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void updateServiceToken(ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateServiceTokenMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void upsertFeaturePermissions(ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpsertFeaturePermissionsMethod(), responseObserver);
     }
   }
 
@@ -581,14 +695,6 @@ public final class TeamServiceGrpc {
 
     /**
      */
-    public void createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getCreateServiceTokenMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
     public void getAvailablePermissions(ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -597,10 +703,42 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public void createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCreateServiceTokenMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void deleteServiceToken(ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteServiceTokenMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void listServiceTokens(ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListServiceTokensMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateServiceToken(ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateServiceTokenMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void upsertFeaturePermissions(ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpsertFeaturePermissionsMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -678,13 +816,6 @@ public final class TeamServiceGrpc {
 
     /**
      */
-    public ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getCreateServiceTokenMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
     public ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse getAvailablePermissions(ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAvailablePermissionsMethod(), getCallOptions(), request);
@@ -692,9 +823,37 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse createServiceToken(ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateServiceTokenMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse deleteServiceToken(ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteServiceTokenMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse listServiceTokens(ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListServiceTokensMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse updateServiceToken(ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateServiceTokenMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse upsertFeaturePermissions(ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpsertFeaturePermissionsMethod(), getCallOptions(), request);
     }
   }
 
@@ -780,14 +939,6 @@ public final class TeamServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> createServiceToken(
-        ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getCreateServiceTokenMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> getAvailablePermissions(
         ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -796,10 +947,42 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse> createServiceToken(
+        ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCreateServiceTokenMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse> deleteServiceToken(
         ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteServiceTokenMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse> listServiceTokens(
+        ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListServiceTokensMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse> updateServiceToken(
+        ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateServiceTokenMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> upsertFeaturePermissions(
+        ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpsertFeaturePermissionsMethod(), getCallOptions()), request);
     }
   }
 
@@ -811,9 +994,12 @@ public final class TeamServiceGrpc {
   private static final int METHODID_CREATE_TEAM = 5;
   private static final int METHODID_CREATE_PROJECT = 6;
   private static final int METHODID_CREATE_ENVIRONMENT = 7;
-  private static final int METHODID_CREATE_SERVICE_TOKEN = 8;
-  private static final int METHODID_GET_AVAILABLE_PERMISSIONS = 9;
+  private static final int METHODID_GET_AVAILABLE_PERMISSIONS = 8;
+  private static final int METHODID_CREATE_SERVICE_TOKEN = 9;
   private static final int METHODID_DELETE_SERVICE_TOKEN = 10;
+  private static final int METHODID_LIST_SERVICE_TOKENS = 11;
+  private static final int METHODID_UPDATE_SERVICE_TOKEN = 12;
+  private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 13;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -864,17 +1050,29 @@ public final class TeamServiceGrpc {
           serviceImpl.createEnvironment((ai.chalk.protos.chalk.server.v1.CreateEnvironmentRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateEnvironmentResponse>) responseObserver);
           break;
-        case METHODID_CREATE_SERVICE_TOKEN:
-          serviceImpl.createServiceToken((ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest) request,
-              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>) responseObserver);
-          break;
         case METHODID_GET_AVAILABLE_PERMISSIONS:
           serviceImpl.getAvailablePermissions((ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse>) responseObserver);
           break;
+        case METHODID_CREATE_SERVICE_TOKEN:
+          serviceImpl.createServiceToken((ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>) responseObserver);
+          break;
         case METHODID_DELETE_SERVICE_TOKEN:
           serviceImpl.deleteServiceToken((ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse>) responseObserver);
+          break;
+        case METHODID_LIST_SERVICE_TOKENS:
+          serviceImpl.listServiceTokens((ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_SERVICE_TOKEN:
+          serviceImpl.updateServiceToken((ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse>) responseObserver);
+          break;
+        case METHODID_UPSERT_FEATURE_PERMISSIONS:
+          serviceImpl.upsertFeaturePermissions((ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -951,13 +1149,6 @@ public final class TeamServiceGrpc {
               ai.chalk.protos.chalk.server.v1.CreateEnvironmentResponse>(
                 service, METHODID_CREATE_ENVIRONMENT)))
         .addMethod(
-          getCreateServiceTokenMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
-              ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>(
-                service, METHODID_CREATE_SERVICE_TOKEN)))
-        .addMethod(
           getGetAvailablePermissionsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -965,12 +1156,40 @@ public final class TeamServiceGrpc {
               ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse>(
                 service, METHODID_GET_AVAILABLE_PERMISSIONS)))
         .addMethod(
+          getCreateServiceTokenMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.CreateServiceTokenRequest,
+              ai.chalk.protos.chalk.server.v1.CreateServiceTokenResponse>(
+                service, METHODID_CREATE_SERVICE_TOKEN)))
+        .addMethod(
           getDeleteServiceTokenMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               ai.chalk.protos.chalk.server.v1.DeleteServiceTokenRequest,
               ai.chalk.protos.chalk.server.v1.DeleteServiceTokenResponse>(
                 service, METHODID_DELETE_SERVICE_TOKEN)))
+        .addMethod(
+          getListServiceTokensMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.ListServiceTokensRequest,
+              ai.chalk.protos.chalk.server.v1.ListServiceTokensResponse>(
+                service, METHODID_LIST_SERVICE_TOKENS)))
+        .addMethod(
+          getUpdateServiceTokenMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.UpdateServiceTokenRequest,
+              ai.chalk.protos.chalk.server.v1.UpdateServiceTokenResponse>(
+                service, METHODID_UPDATE_SERVICE_TOKEN)))
+        .addMethod(
+          getUpsertFeaturePermissionsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest,
+              ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse>(
+                service, METHODID_UPSERT_FEATURE_PERMISSIONS)))
         .build();
   }
 
@@ -1027,9 +1246,12 @@ public final class TeamServiceGrpc {
               .addMethod(getCreateTeamMethod())
               .addMethod(getCreateProjectMethod())
               .addMethod(getCreateEnvironmentMethod())
-              .addMethod(getCreateServiceTokenMethod())
               .addMethod(getGetAvailablePermissionsMethod())
+              .addMethod(getCreateServiceTokenMethod())
               .addMethod(getDeleteServiceTokenMethod())
+              .addMethod(getListServiceTokensMethod())
+              .addMethod(getUpdateServiceTokenMethod())
+              .addMethod(getUpsertFeaturePermissionsMethod())
               .build();
         }
       }
