@@ -98,7 +98,7 @@ public class TestChalkClient {
         }
     }
 
-    @Test
+    @Disabled("Branch server issue")
     public void testBranchFromClientArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
@@ -126,7 +126,7 @@ public class TestChalkClient {
         }
     }
 
-    @Test
+    @Disabled("Branch server issue")
     public void testBranchFromMethodArg() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();
