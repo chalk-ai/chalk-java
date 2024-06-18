@@ -588,7 +588,11 @@ public class TestOnlineQueryParams {
                 .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.branch)     // StructFeaturesClass
                 .withOutputs(InitFeaturesTestFeatures.user.burrys_membership)            // FeaturesClass
                 .build();
-        assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
+        assert Arrays.equals(p.getOutputs().toArray(), new String[]{
+                "test_user.mean_attendance_count",
+                "test_user.burrys_membership.branch",
+                "test_user.burrys_membership",
+        });
         // Test serialization is OK.
         BytesProducer.convertOnlineQueryParamsToBytes(p);
     }
