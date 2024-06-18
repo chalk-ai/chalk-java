@@ -585,9 +585,14 @@ public class TestOnlineQueryParams {
                 .builder()
                 .withInput(InitFeaturesTestFeatures.user.id, "1", "2", "3")
                 .withOutputs(InitFeaturesTestFeatures.user.mean_attendance_count)        // WindowedFeaturesClass
-                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.branch)    // StructFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership.branch)     // StructFeaturesClass
+                .withOutputs(InitFeaturesTestFeatures.user.burrys_membership)            // FeaturesClass
                 .build();
-        assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.mean_attendance_count", "test_user.burrys_membership.branch"});
+        assert Arrays.equals(p.getOutputs().toArray(), new String[]{
+                "test_user.mean_attendance_count",
+                "test_user.burrys_membership.branch",
+                "test_user.burrys_membership",
+        });
         // Test serialization is OK.
         BytesProducer.convertOnlineQueryParamsToBytes(p);
     }
@@ -621,5 +626,9 @@ public class TestOnlineQueryParams {
         assert InitFeaturesTestFeatures.user.mean_attendance_count.getFqn().equals("test_user.mean_attendance_count");
         assert InitFeaturesTestFeatures.user.mean_attendance_count.bucket_all.getFqn().equals("test_user.mean_attendance_count__all__");
         assert InitFeaturesTestFeatures.user.mean_attendance_count.bucket_1w.getFqn().equals("test_user.mean_attendance_count__604800__");
+
+        // Normal feature classes
+        assert InitFeaturesTestFeatures.user.getFqn().equals("test_user");
+        assert InitFeaturesTestFeatures.user.burrys_membership.getFqn().equals("test_user.burrys_membership");
     }
 }

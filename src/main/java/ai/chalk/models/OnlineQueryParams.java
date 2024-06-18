@@ -1,6 +1,7 @@
 package ai.chalk.models;
 
 import ai.chalk.features.Feature;
+import ai.chalk.features.FeaturesBase;
 import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.features.WindowedFeaturesClass;
 import lombok.AllArgsConstructor;
@@ -174,15 +175,7 @@ public class OnlineQueryParams {
             return this._withOutputs(outputFqns);
         }
 
-        public T _withOutputs(WindowedFeaturesClass... outputs) {
-            var outputFqns = new String[outputs.length];
-            for (int i = 0; i < outputs.length; i++) {
-                outputFqns[i] = outputs[i].getFqn();
-            }
-            return this._withOutputs(outputFqns);
-        }
-
-        public T _withOutputs(StructFeaturesClass... outputs) {
+        public T _withOutputs(FeaturesBase... outputs) {
             var outputFqns = new String[outputs.length];
             for (int i = 0; i < outputs.length; i++) {
                 outputFqns[i] = outputs[i].getFqn();
@@ -328,11 +321,7 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
-        public BuilderComplete withOutputs(WindowedFeaturesClass... outputs) {
-            return this._withOutputs(outputs);
-        }
-
-        public BuilderComplete withOutputs(StructFeaturesClass... outputs) {
+        public BuilderComplete withOutputs(FeaturesBase... outputs) {
             return this._withOutputs(outputs);
         }
 
@@ -393,11 +382,7 @@ public class OnlineQueryParams {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
 
-        public BuilderComplete withOutputs(WindowedFeaturesClass... outputs) {
-            return this.newBuilderComplete()._withOutputs(outputs);
-        }
-
-        public BuilderComplete withOutputs(StructFeaturesClass... outputs) {
+        public BuilderComplete withOutputs(FeaturesBase... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
     }
@@ -455,11 +440,7 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
-        public BuilderWithOutputs withOutputs(WindowedFeaturesClass... outputs) {
-            return this._withOutputs(outputs);
-        }
-
-        public BuilderWithOutputs withOutputs(StructFeaturesClass... outputs) {
+        public BuilderWithOutputs withOutputs(FeaturesBase... outputs) {
             return this._withOutputs(outputs);
         }
     }
