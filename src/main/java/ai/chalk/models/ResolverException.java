@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ResolverException {
     // The name of the class of the exception.
     private String kind;
@@ -15,6 +16,8 @@ public class ResolverException {
 
     // The stacktrace produced by the code.
     private String stacktrace;
+
+    private String internalStacktrace;
 
     @Override
     public String toString() {

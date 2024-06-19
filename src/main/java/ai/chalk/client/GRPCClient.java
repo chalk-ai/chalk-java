@@ -2,6 +2,8 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ServerError;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
@@ -15,8 +17,10 @@ import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import io.grpc.*;
+import org.apache.arrow.vector.table.Table;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -165,12 +169,35 @@ public class GRPCClient {
                 .build();
         OnlineQueryBulkResponse response = this.queryStub.onlineQueryBulk(request);
 
-        // Deserialize scalars table
-        // Deserialize groups table
-        // Convert errors?
-        // Convert meta
+        Table scalars = null;
+        if (!response.getScalarsData().isEmpty()) {
+            try {
+                scalars = FeatherProcessor.convertBytesToTable(response.getScalarsData().toByteArray());
+            } catch (Exception e) {
+                throw new ClientException("Failed to convert scalar data bytes to table", e);
+            }
+        }
 
+        Map<String, Table> groups = new HashMap<>();
+        for (var entry : response.getGroupsDataMap().entrySet()) {
+            String fqn = entry.getKey();
+            try {
+                groups.put(fqn, FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray()));
+            } catch (Exception e) {
+                throw new ClientException(String.format("Failed to convert bytes to table for %s", fqn), e);
+            }
+        }
 
+        ServerError[] errors = new ServerError[response.getErrorsCount()];
+        for (int i = 0; i < response.getErrorsCount(); i++) {
+            errors[i] = GrpcSerializer.toServerError(response.getErrors(i));
+        }
+
+        return new OnlineQueryResult(
+            scalars,
+            groups,
+            errors,
+            GrpcSerializer.toQueryMeta(response.getResponseMeta())
+        );
     }
-
 }
