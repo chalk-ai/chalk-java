@@ -1,18 +1,29 @@
 package ai.chalk.client;
 
+import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
+import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.protos.chalk.common.v1.*;
+import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.Timestamp;
 import io.grpc.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class GRPCClient {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
+    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
     public GRPCClient(BuilderImpl builder) {
         ProjectToken chalkYamlConfig = new ProjectToken();
@@ -84,6 +95,81 @@ public class GRPCClient {
         ).build();
 
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
+
+        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(
+                grpcHost,
+                channelCreds
+        ).maxInboundMessageSize(1024 * 1024 * 100).intercept(
+                new AuthenticatedHeaderClientInterceptor(
+                        ServerType.ENGINE,
+                        Map.of(),
+                        tokenRefresher,
+                        environmentId
+                )
+        ).build();
+        this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+    }
+
+    public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
+        byte[] bodyBytes;
+        try {
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        }
+
+        List<OutputExpr> outputs = new ArrayList<>();
+        for (var output : params.getOutputs()) {
+            outputs.add(OutputExpr.newBuilder().setFeatureFqn(output).build());
+        }
+
+        List<Timestamp> now = new ArrayList<>();
+        for (var n : params.getNow()) {
+            now.add(Timestamp.newBuilder().setSeconds(n.toEpochSecond()).setNanos(n.getNano()).build());
+        }
+
+        var context = OnlineQueryContext.newBuilder();
+        if (params.getBranch() != null) {
+            context.setBranchId(params.getBranch());
+        }
+        if (params.getCorrelationId() != null) {
+            context.setCorrelationId(params.getCorrelationId());
+        }
+        if (params.getPreviewDeploymentId() != null) {
+            context.setDeploymentId(params.getPreviewDeploymentId());
+        }
+        if (params.getEnvironmentId() != null) {
+            context.setEnvironment(params.getEnvironmentId());
+        }
+        if (params.getQueryName() != null) {
+            context.setQueryName(params.getQueryName());
+        }
+        // TODO: Add queryNameVersion
+        // TODO: Add required resolver tags
+
+        var options = OnlineQueryResponseOptions.newBuilder();
+        // TODO: Add includeMeta
+        // TODO: Add explain
+        // TODO: Add feature encoding options
+        if (params.getMeta() != null) {
+            options.putAllMetadata(params.getMeta());
+        }
+
+        var request = OnlineQueryBulkRequest.newBuilder()
+                .setInputsFeather(ByteString.copyFrom(bodyBytes))
+                .addAllOutputs(outputs)
+                .addAllNow(now)
+                .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
+                .setContext(context)
+                .setResponseOptions(options)
+                .build();
+        OnlineQueryBulkResponse response = this.queryStub.onlineQueryBulk(request);
+
+        // Deserialize scalars table
+        // Deserialize groups table
+        // Convert errors?
+        // Convert meta
+
 
     }
 

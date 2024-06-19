@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.time.Duration;
 
@@ -109,6 +110,12 @@ public class OnlineQueryParams {
      */
     private String branch;
 
+    /**
+     * The time at which to evaluate the query. If not specified, the current time will be used.
+     * The length of this list must be the same as the length of the values in `inputs`.
+     */
+     private List<ZonedDateTime> now;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -126,6 +133,7 @@ public class OnlineQueryParams {
         protected String queryName;
         protected String correlationId;
         protected String branch;
+        protected List<ZonedDateTime> now;
 
         protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
@@ -220,6 +228,16 @@ public class OnlineQueryParams {
             return this.withTags(Arrays.asList(tag));
         }
 
+
+        // withNow takes a list of ZonedDateTimes and adds them to the now list
+        public T withNow(List<ZonedDateTime> now) {
+            if (this.now == null) {
+                this.now = new ArrayList<>();
+            }
+            this.now.addAll(now);
+            return (T) this;
+        }
+
         // withIncludeMeta sets the includeMeta flag
         public T withIncludeMeta(boolean includeMeta) {
             this.includeMeta = includeMeta;
@@ -269,7 +287,7 @@ public class OnlineQueryParams {
         }
 
         public OnlineQueryParams build() {
-            return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch, now);
         }
     }
 
@@ -287,9 +305,25 @@ public class OnlineQueryParams {
             String previewDeploymentId,
             String queryName,
             String correlationId,
-            String branch
+            String branch,
+            List<ZonedDateTime> now
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
 
         public BuilderComplete withInput(String fqn, List<?> values) {
@@ -326,7 +360,22 @@ public class OnlineQueryParams {
         }
 
         public OnlineQueryParamsComplete build() {
-            return new OnlineQueryParamsComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new OnlineQueryParamsComplete(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
     }
 
@@ -344,13 +393,44 @@ public class OnlineQueryParams {
             String previewDeploymentId,
             String queryName,
             String correlationId,
-            String branch
+            String branch,
+            List<ZonedDateTime> now
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
 
         private BuilderComplete newBuilderComplete() {
-            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderComplete(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+                );
         }
 
         public BuilderWithInputs withInput(String fqn, List<?> values) {
@@ -401,13 +481,45 @@ public class OnlineQueryParams {
                 String previewDeploymentId,
                 String queryName,
                 String correlationId,
-                String branch
+                String branch,
+                List<ZonedDateTime> now
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
 
+
         public BuilderComplete newBuilderComplete() {
-            return new BuilderComplete(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderComplete(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
 
         public BuilderComplete withInput(String fqn, List<?> values) {
@@ -460,17 +572,63 @@ public class OnlineQueryParams {
                 String previewDeploymentId,
                 String queryName,
                 String correlationId,
-                String branch
+                String branch,
+                List<ZonedDateTime> now
         ) {
-            super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            super(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+            );
         }
 
         public BuilderWithInputs newBuilderWithInputs() {
-            return new BuilderWithInputs(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderWithInputs(
+                    inputs,
+                    outputs,
+                    staleness,
+                    meta,
+                    tags,
+                    includeMeta,
+                    storePlanStages,
+                    explain,
+                    environmentId,
+                    previewDeploymentId,
+                    queryName,
+                    correlationId,
+                    branch,
+                    now
+                );
         }
 
         public BuilderWithOutputs newBuilderWithOutputs() {
-            return new BuilderWithOutputs(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+            return new BuilderWithOutputs(
+                inputs,
+                outputs,
+                staleness,
+                meta,
+                tags,
+                includeMeta,
+                storePlanStages,
+                explain,
+                environmentId,
+                previewDeploymentId,
+                queryName,
+                correlationId,
+                branch,
+                now
+         );
         }
 
         public BuilderWithInputs withInput(String fqn, List<?> values) {

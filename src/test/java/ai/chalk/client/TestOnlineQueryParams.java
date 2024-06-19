@@ -240,6 +240,7 @@ public class TestOnlineQueryParams {
         var userIds = Arrays.asList(1, 2, 3);
         var emails = Arrays.asList("a", "b", "c");
         var socureScores = Arrays.asList(1.0, 2.0, 3.0);
+        var now = Arrays.asList(ZonedDateTime.now(), ZonedDateTime.now().minusDays(1));
         inputs.put("user.id", userIds);
         inputs.put("user.email", emails);
         inputs.put("user.socure_score", socureScores);
@@ -263,7 +264,8 @@ public class TestOnlineQueryParams {
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
                 .withCorrelationId("abc")
-                .withBranch("abc");
+                .withBranch("abc")
+                .withNow(now);
         OnlineQueryParams paramsSeed = builderSeed.build();
         assert paramsSeed.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
         assert paramsSeed.getMeta().get("user.id").equals("abc");
@@ -278,6 +280,8 @@ public class TestOnlineQueryParams {
         assert paramsSeed.getQueryName().equals("abc");
         assert paramsSeed.getCorrelationId().equals("abc");
         assert paramsSeed.getBranch().equals("abc");
+        assert paramsSeed.getNow().equals(now);
+
 
         // Test BuilderWithInputs with optional params
         OnlineQueryParams.BuilderWithInputs builderWithInputs = OnlineQueryParams.builder()
