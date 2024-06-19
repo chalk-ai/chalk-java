@@ -35,13 +35,7 @@ public class UnauthenticatedHeaderClientInterceptor implements ClientInterceptor
                 for (Map.Entry<Metadata.Key<String>, String> entry : allHeaders.entrySet()) {
                     headers.put(entry.getKey(), entry.getValue());
                 }
-
-                MetadataUtils.newAttachHeadersInterceptor(headers).interceptCall(
-                        method,
-                        callOptions,
-                        next
-                );
-
+                super.start(responseListener, headers);
             }
         };
     }

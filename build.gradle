@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'ai.chalk'
-version '0.8.1'
+version '0.8.3'
 
 repositories {
     mavenCentral()
@@ -21,6 +21,7 @@ dependencies {
     api 'io.grpc:grpc-core:1.64.0'
     api 'io.grpc:grpc-protobuf:1.64.0'
     api 'io.grpc:grpc-stub:1.64.0'
+    api 'io.grpc:grpc-netty-shaded:1.64.0'
     api 'org.apache.arrow:arrow-compression:13.0.0'
     api 'org.apache.arrow:arrow-memory-netty:13.0.0'
     api 'org.apache.arrow:arrow-vector:13.0.0'
@@ -119,9 +120,9 @@ nexusPublishing {
     }
 }
 
-signing {
-    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
-    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications
-}
+//signing {
+//    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
+//    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
+//    useInMemoryPgpKeys(signingKey, signingPassword)
+//    sign publishing.publications
+//}

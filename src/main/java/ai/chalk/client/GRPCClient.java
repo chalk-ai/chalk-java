@@ -19,6 +19,8 @@ import com.google.protobuf.Timestamp;
 import io.grpc.*;
 import org.apache.arrow.vector.table.Table;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,7 @@ public class GRPCClient {
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
-    public GRPCClient(BuilderImpl builder) {
+    public GRPCClient(BuilderImpl builder) throws ChalkException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         String projectRoot;
         try {
@@ -100,8 +102,23 @@ public class GRPCClient {
 
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
+        String engineHost = null;
+        try {
+            engineHost = token.getEnginesOrThrow(environmentId);
+        } catch (Exception e) {
+            throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
+        }
+
+        try {
+            URI uri = new URI(engineHost);
+            engineHost = uri.getHost();
+            if (uri.getPort() > 0) {
+                engineHost = "%s:%d".formatted(engineHost, uri.getPort());
+            }
+        } catch (URISyntaxException ignored) {}
+
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(
-                grpcHost,
+                engineHost,
                 channelCreds
         ).maxInboundMessageSize(1024 * 1024 * 100).intercept(
                 new AuthenticatedHeaderClientInterceptor(
@@ -111,6 +128,7 @@ public class GRPCClient {
                         environmentId
                 )
         ).build();
+
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
@@ -128,8 +146,10 @@ public class GRPCClient {
         }
 
         List<Timestamp> now = new ArrayList<>();
-        for (var n : params.getNow()) {
-            now.add(Timestamp.newBuilder().setSeconds(n.toEpochSecond()).setNanos(n.getNano()).build());
+        if (params.getNow() != null) {
+            for (var n : params.getNow()) {
+                now.add(Timestamp.newBuilder().setSeconds(n.toEpochSecond()).setNanos(n.getNano()).build());
+            }
         }
 
         var context = OnlineQueryContext.newBuilder();
