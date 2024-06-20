@@ -10,6 +10,7 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.protos.chalk.common.v1.*;
+import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -88,17 +89,17 @@ public class GRPCClient {
             environmentId = environmentIds.get(0);
         }
 
-        Channel authenticatedServerChannel = Grpc.newChannelBuilder(
-                grpcHost,
-                channelCreds
-        ).maxInboundMessageSize(1024 * 1024 * 100).intercept(
+        Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
+            .maxInboundMessageSize(1024 * 1024 * 100)
+            .intercept(
                 new AuthenticatedHeaderClientInterceptor(
                         ServerType.SERVER,
                         Map.of(),
                         tokenRefresher,
                         environmentId
                 )
-        ).build();
+            )
+            .build();
 
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
@@ -117,17 +118,17 @@ public class GRPCClient {
             }
         } catch (URISyntaxException ignored) {}
 
-        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(
-                engineHost,
-                channelCreds
-        ).maxInboundMessageSize(1024 * 1024 * 100).intercept(
+        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
+            .maxInboundMessageSize(1024 * 1024 * 100)
+            .intercept(
                 new AuthenticatedHeaderClientInterceptor(
                         ServerType.ENGINE,
                         Map.of(),
                         tokenRefresher,
                         environmentId
                 )
-        ).build();
+            )
+            .build();
 
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }

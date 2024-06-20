@@ -15,4 +15,8 @@ public class GrpcHeaders {
     static final Metadata.Key<String> AUTHORIZATION_KEY = Metadata.Key.of(
             "Authorization", Metadata.ASCII_STRING_MARSHALLER
     );
+
+    static final Metadata.Key<String> CONTENT_TYPE = Metadata.Key.of(
+            "content-type", Metadata.ASCII_STRING_MARSHALLER
+    );
 }

@@ -43,6 +43,7 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
                     headers.put(entry.getKey(), entry.getValue());
                 }
                 headers.put(GrpcHeaders.AUTHORIZATION_KEY, "Bearer " + token.getAccessToken());
+                headers.put(GrpcHeaders.CONTENT_TYPE, "application/grpc");
                 super.start(responseListener, headers);
             }
         };
