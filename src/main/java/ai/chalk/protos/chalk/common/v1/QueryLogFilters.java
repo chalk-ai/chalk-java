@@ -20,10 +20,7 @@ private static final long serialVersionUID = 0L;
     operationId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     operationKind_ = java.util.Collections.emptyList();
-    queryName_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-    queryNameVersion_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
+    queryName_ = java.util.Collections.emptyList();
     agentId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     branchName_ =
@@ -180,76 +177,43 @@ private static final long serialVersionUID = 0L;
 
   public static final int QUERY_NAME_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList queryName_ =
-      com.google.protobuf.LazyStringArrayList.emptyList();
+  private java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName> queryName_;
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @return A list containing the queryName.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  public com.google.protobuf.ProtocolStringList
-      getQueryNameList() {
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName> getQueryNameList() {
     return queryName_;
   }
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @return The count of queryName.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder> 
+      getQueryNameOrBuilderList() {
+    return queryName_;
+  }
+  /**
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+   */
+  @java.lang.Override
   public int getQueryNameCount() {
     return queryName_.size();
   }
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @param index The index of the element to return.
-   * @return The queryName at the given index.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  public java.lang.String getQueryName(int index) {
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.VersionedQueryName getQueryName(int index) {
     return queryName_.get(index);
   }
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the queryName at the given index.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  public com.google.protobuf.ByteString
-      getQueryNameBytes(int index) {
-    return queryName_.getByteString(index);
-  }
-
-  public static final int QUERY_NAME_VERSION_FIELD_NUMBER = 4;
-  @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList queryNameVersion_ =
-      com.google.protobuf.LazyStringArrayList.emptyList();
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @return A list containing the queryNameVersion.
-   */
-  public com.google.protobuf.ProtocolStringList
-      getQueryNameVersionList() {
-    return queryNameVersion_;
-  }
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @return The count of queryNameVersion.
-   */
-  public int getQueryNameVersionCount() {
-    return queryNameVersion_.size();
-  }
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @param index The index of the element to return.
-   * @return The queryNameVersion at the given index.
-   */
-  public java.lang.String getQueryNameVersion(int index) {
-    return queryNameVersion_.get(index);
-  }
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the queryNameVersion at the given index.
-   */
-  public com.google.protobuf.ByteString
-      getQueryNameVersionBytes(int index) {
-    return queryNameVersion_.getByteString(index);
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder getQueryNameOrBuilder(
+      int index) {
+    return queryName_.get(index);
   }
 
   public static final int AGENT_ID_FIELD_NUMBER = 5;
@@ -558,10 +522,7 @@ private static final long serialVersionUID = 0L;
       output.writeEnumNoTag(operationKind_.get(i));
     }
     for (int i = 0; i < queryName_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, queryName_.getRaw(i));
-    }
-    for (int i = 0; i < queryNameVersion_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, queryNameVersion_.getRaw(i));
+      output.writeMessage(3, queryName_.get(i));
     }
     for (int i = 0; i < agentId_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, agentId_.getRaw(i));
@@ -617,21 +578,9 @@ private static final long serialVersionUID = 0L;
           .computeUInt32SizeNoTag(dataSize);
       }operationKindMemoizedSerializedSize = dataSize;
     }
-    {
-      int dataSize = 0;
-      for (int i = 0; i < queryName_.size(); i++) {
-        dataSize += computeStringSizeNoTag(queryName_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getQueryNameList().size();
-    }
-    {
-      int dataSize = 0;
-      for (int i = 0; i < queryNameVersion_.size(); i++) {
-        dataSize += computeStringSizeNoTag(queryNameVersion_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getQueryNameVersionList().size();
+    for (int i = 0; i < queryName_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, queryName_.get(i));
     }
     {
       int dataSize = 0;
@@ -713,8 +662,6 @@ private static final long serialVersionUID = 0L;
     if (!operationKind_.equals(other.operationKind_)) return false;
     if (!getQueryNameList()
         .equals(other.getQueryNameList())) return false;
-    if (!getQueryNameVersionList()
-        .equals(other.getQueryNameVersionList())) return false;
     if (!getAgentIdList()
         .equals(other.getAgentIdList())) return false;
     if (!getBranchNameList()
@@ -750,10 +697,6 @@ private static final long serialVersionUID = 0L;
     if (getQueryNameCount() > 0) {
       hash = (37 * hash) + QUERY_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getQueryNameList().hashCode();
-    }
-    if (getQueryNameVersionCount() > 0) {
-      hash = (37 * hash) + QUERY_NAME_VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getQueryNameVersionList().hashCode();
     }
     if (getAgentIdCount() > 0) {
       hash = (37 * hash) + AGENT_ID_FIELD_NUMBER;
@@ -918,10 +861,13 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.LazyStringArrayList.emptyList();
       operationKind_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000002);
-      queryName_ =
-          com.google.protobuf.LazyStringArrayList.emptyList();
-      queryNameVersion_ =
-          com.google.protobuf.LazyStringArrayList.emptyList();
+      if (queryNameBuilder_ == null) {
+        queryName_ = java.util.Collections.emptyList();
+      } else {
+        queryName_ = null;
+        queryNameBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000004);
       agentId_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       branchName_ =
@@ -935,7 +881,7 @@ private static final long serialVersionUID = 0L;
       deploymentId_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       queryStatus_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00000200);
       return this;
     }
 
@@ -974,9 +920,18 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
       }
       result.operationKind_ = operationKind_;
-      if (((bitField0_ & 0x00000400) != 0)) {
+      if (queryNameBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0)) {
+          queryName_ = java.util.Collections.unmodifiableList(queryName_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.queryName_ = queryName_;
+      } else {
+        result.queryName_ = queryNameBuilder_.build();
+      }
+      if (((bitField0_ & 0x00000200) != 0)) {
         queryStatus_ = java.util.Collections.unmodifiableList(queryStatus_);
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
       }
       result.queryStatus_ = queryStatus_;
     }
@@ -987,35 +942,27 @@ private static final long serialVersionUID = 0L;
         operationId_.makeImmutable();
         result.operationId_ = operationId_;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        queryName_.makeImmutable();
-        result.queryName_ = queryName_;
-      }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        queryNameVersion_.makeImmutable();
-        result.queryNameVersion_ = queryNameVersion_;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
         agentId_.makeImmutable();
         result.agentId_ = agentId_;
       }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         branchName_.makeImmutable();
         result.branchName_ = branchName_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         correlationId_.makeImmutable();
         result.correlationId_ = correlationId_;
       }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         traceId_.makeImmutable();
         result.traceId_ = traceId_;
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000080) != 0)) {
         queryPlanId_.makeImmutable();
         result.queryPlanId_ = queryPlanId_;
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         deploymentId_.makeImmutable();
         result.deploymentId_ = deploymentId_;
       }
@@ -1085,30 +1032,36 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       }
-      if (!other.queryName_.isEmpty()) {
-        if (queryName_.isEmpty()) {
-          queryName_ = other.queryName_;
-          bitField0_ |= 0x00000004;
-        } else {
-          ensureQueryNameIsMutable();
-          queryName_.addAll(other.queryName_);
+      if (queryNameBuilder_ == null) {
+        if (!other.queryName_.isEmpty()) {
+          if (queryName_.isEmpty()) {
+            queryName_ = other.queryName_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureQueryNameIsMutable();
+            queryName_.addAll(other.queryName_);
+          }
+          onChanged();
         }
-        onChanged();
-      }
-      if (!other.queryNameVersion_.isEmpty()) {
-        if (queryNameVersion_.isEmpty()) {
-          queryNameVersion_ = other.queryNameVersion_;
-          bitField0_ |= 0x00000008;
-        } else {
-          ensureQueryNameVersionIsMutable();
-          queryNameVersion_.addAll(other.queryNameVersion_);
+      } else {
+        if (!other.queryName_.isEmpty()) {
+          if (queryNameBuilder_.isEmpty()) {
+            queryNameBuilder_.dispose();
+            queryNameBuilder_ = null;
+            queryName_ = other.queryName_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            queryNameBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getQueryNameFieldBuilder() : null;
+          } else {
+            queryNameBuilder_.addAllMessages(other.queryName_);
+          }
         }
-        onChanged();
       }
       if (!other.agentId_.isEmpty()) {
         if (agentId_.isEmpty()) {
           agentId_ = other.agentId_;
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
         } else {
           ensureAgentIdIsMutable();
           agentId_.addAll(other.agentId_);
@@ -1118,7 +1071,7 @@ private static final long serialVersionUID = 0L;
       if (!other.branchName_.isEmpty()) {
         if (branchName_.isEmpty()) {
           branchName_ = other.branchName_;
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000010;
         } else {
           ensureBranchNameIsMutable();
           branchName_.addAll(other.branchName_);
@@ -1128,7 +1081,7 @@ private static final long serialVersionUID = 0L;
       if (!other.correlationId_.isEmpty()) {
         if (correlationId_.isEmpty()) {
           correlationId_ = other.correlationId_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
         } else {
           ensureCorrelationIdIsMutable();
           correlationId_.addAll(other.correlationId_);
@@ -1138,7 +1091,7 @@ private static final long serialVersionUID = 0L;
       if (!other.traceId_.isEmpty()) {
         if (traceId_.isEmpty()) {
           traceId_ = other.traceId_;
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000040;
         } else {
           ensureTraceIdIsMutable();
           traceId_.addAll(other.traceId_);
@@ -1148,7 +1101,7 @@ private static final long serialVersionUID = 0L;
       if (!other.queryPlanId_.isEmpty()) {
         if (queryPlanId_.isEmpty()) {
           queryPlanId_ = other.queryPlanId_;
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
         } else {
           ensureQueryPlanIdIsMutable();
           queryPlanId_.addAll(other.queryPlanId_);
@@ -1158,7 +1111,7 @@ private static final long serialVersionUID = 0L;
       if (!other.deploymentId_.isEmpty()) {
         if (deploymentId_.isEmpty()) {
           deploymentId_ = other.deploymentId_;
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
         } else {
           ensureDeploymentIdIsMutable();
           deploymentId_.addAll(other.deploymentId_);
@@ -1168,7 +1121,7 @@ private static final long serialVersionUID = 0L;
       if (!other.queryStatus_.isEmpty()) {
         if (queryStatus_.isEmpty()) {
           queryStatus_ = other.queryStatus_;
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000200);
         } else {
           ensureQueryStatusIsMutable();
           queryStatus_.addAll(other.queryStatus_);
@@ -1225,17 +1178,18 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 18
             case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-              ensureQueryNameIsMutable();
-              queryName_.add(s);
+              ai.chalk.protos.chalk.common.v1.VersionedQueryName m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.common.v1.VersionedQueryName.parser(),
+                      extensionRegistry);
+              if (queryNameBuilder_ == null) {
+                ensureQueryNameIsMutable();
+                queryName_.add(m);
+              } else {
+                queryNameBuilder_.addMessage(m);
+              }
               break;
             } // case 26
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-              ensureQueryNameVersionIsMutable();
-              queryNameVersion_.add(s);
-              break;
-            } // case 34
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
               ensureAgentIdIsMutable();
@@ -1611,226 +1565,244 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.LazyStringArrayList queryName_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
+    private java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName> queryName_ =
+      java.util.Collections.emptyList();
     private void ensureQueryNameIsMutable() {
-      if (!queryName_.isModifiable()) {
-        queryName_ = new com.google.protobuf.LazyStringArrayList(queryName_);
-      }
-      bitField0_ |= 0x00000004;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @return A list containing the queryName.
-     */
-    public com.google.protobuf.ProtocolStringList
-        getQueryNameList() {
-      queryName_.makeImmutable();
-      return queryName_;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @return The count of queryName.
-     */
-    public int getQueryNameCount() {
-      return queryName_.size();
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param index The index of the element to return.
-     * @return The queryName at the given index.
-     */
-    public java.lang.String getQueryName(int index) {
-      return queryName_.get(index);
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the queryName at the given index.
-     */
-    public com.google.protobuf.ByteString
-        getQueryNameBytes(int index) {
-      return queryName_.getByteString(index);
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param index The index to set the value at.
-     * @param value The queryName to set.
-     * @return This builder for chaining.
-     */
-    public Builder setQueryName(
-        int index, java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureQueryNameIsMutable();
-      queryName_.set(index, value);
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param value The queryName to add.
-     * @return This builder for chaining.
-     */
-    public Builder addQueryName(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureQueryNameIsMutable();
-      queryName_.add(value);
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param values The queryName to add.
-     * @return This builder for chaining.
-     */
-    public Builder addAllQueryName(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureQueryNameIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, queryName_);
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearQueryName() {
-      queryName_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000004);;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-     * @param value The bytes of the queryName to add.
-     * @return This builder for chaining.
-     */
-    public Builder addQueryNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      ensureQueryNameIsMutable();
-      queryName_.add(value);
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
+      if (!((bitField0_ & 0x00000004) != 0)) {
+        queryName_ = new java.util.ArrayList<ai.chalk.protos.chalk.common.v1.VersionedQueryName>(queryName_);
+        bitField0_ |= 0x00000004;
+       }
     }
 
-    private com.google.protobuf.LazyStringArrayList queryNameVersion_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-    private void ensureQueryNameVersionIsMutable() {
-      if (!queryNameVersion_.isModifiable()) {
-        queryNameVersion_ = new com.google.protobuf.LazyStringArrayList(queryNameVersion_);
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.VersionedQueryName, ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder, ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder> queryNameBuilder_;
+
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName> getQueryNameList() {
+      if (queryNameBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(queryName_);
+      } else {
+        return queryNameBuilder_.getMessageList();
       }
-      bitField0_ |= 0x00000008;
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @return A list containing the queryNameVersion.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getQueryNameVersionList() {
-      queryNameVersion_.makeImmutable();
-      return queryNameVersion_;
+    public int getQueryNameCount() {
+      if (queryNameBuilder_ == null) {
+        return queryName_.size();
+      } else {
+        return queryNameBuilder_.getCount();
+      }
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @return The count of queryNameVersion.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public int getQueryNameVersionCount() {
-      return queryNameVersion_.size();
+    public ai.chalk.protos.chalk.common.v1.VersionedQueryName getQueryName(int index) {
+      if (queryNameBuilder_ == null) {
+        return queryName_.get(index);
+      } else {
+        return queryNameBuilder_.getMessage(index);
+      }
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param index The index of the element to return.
-     * @return The queryNameVersion at the given index.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public java.lang.String getQueryNameVersion(int index) {
-      return queryNameVersion_.get(index);
-    }
-    /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the queryNameVersion at the given index.
-     */
-    public com.google.protobuf.ByteString
-        getQueryNameVersionBytes(int index) {
-      return queryNameVersion_.getByteString(index);
-    }
-    /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param index The index to set the value at.
-     * @param value The queryNameVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setQueryNameVersion(
-        int index, java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureQueryNameVersionIsMutable();
-      queryNameVersion_.set(index, value);
-      bitField0_ |= 0x00000008;
-      onChanged();
+    public Builder setQueryName(
+        int index, ai.chalk.protos.chalk.common.v1.VersionedQueryName value) {
+      if (queryNameBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureQueryNameIsMutable();
+        queryName_.set(index, value);
+        onChanged();
+      } else {
+        queryNameBuilder_.setMessage(index, value);
+      }
       return this;
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param value The queryNameVersion to add.
-     * @return This builder for chaining.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public Builder addQueryNameVersion(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureQueryNameVersionIsMutable();
-      queryNameVersion_.add(value);
-      bitField0_ |= 0x00000008;
-      onChanged();
+    public Builder setQueryName(
+        int index, ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder builderForValue) {
+      if (queryNameBuilder_ == null) {
+        ensureQueryNameIsMutable();
+        queryName_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        queryNameBuilder_.setMessage(index, builderForValue.build());
+      }
       return this;
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param values The queryNameVersion to add.
-     * @return This builder for chaining.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public Builder addAllQueryNameVersion(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureQueryNameVersionIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, queryNameVersion_);
-      bitField0_ |= 0x00000008;
-      onChanged();
+    public Builder addQueryName(ai.chalk.protos.chalk.common.v1.VersionedQueryName value) {
+      if (queryNameBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureQueryNameIsMutable();
+        queryName_.add(value);
+        onChanged();
+      } else {
+        queryNameBuilder_.addMessage(value);
+      }
       return this;
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @return This builder for chaining.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public Builder clearQueryNameVersion() {
-      queryNameVersion_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000008);;
-      onChanged();
+    public Builder addQueryName(
+        int index, ai.chalk.protos.chalk.common.v1.VersionedQueryName value) {
+      if (queryNameBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureQueryNameIsMutable();
+        queryName_.add(index, value);
+        onChanged();
+      } else {
+        queryNameBuilder_.addMessage(index, value);
+      }
       return this;
     }
     /**
-     * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-     * @param value The bytes of the queryNameVersion to add.
-     * @return This builder for chaining.
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
      */
-    public Builder addQueryNameVersionBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      ensureQueryNameVersionIsMutable();
-      queryNameVersion_.add(value);
-      bitField0_ |= 0x00000008;
-      onChanged();
+    public Builder addQueryName(
+        ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder builderForValue) {
+      if (queryNameBuilder_ == null) {
+        ensureQueryNameIsMutable();
+        queryName_.add(builderForValue.build());
+        onChanged();
+      } else {
+        queryNameBuilder_.addMessage(builderForValue.build());
+      }
       return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public Builder addQueryName(
+        int index, ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder builderForValue) {
+      if (queryNameBuilder_ == null) {
+        ensureQueryNameIsMutable();
+        queryName_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        queryNameBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public Builder addAllQueryName(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.common.v1.VersionedQueryName> values) {
+      if (queryNameBuilder_ == null) {
+        ensureQueryNameIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, queryName_);
+        onChanged();
+      } else {
+        queryNameBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public Builder clearQueryName() {
+      if (queryNameBuilder_ == null) {
+        queryName_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+      } else {
+        queryNameBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public Builder removeQueryName(int index) {
+      if (queryNameBuilder_ == null) {
+        ensureQueryNameIsMutable();
+        queryName_.remove(index);
+        onChanged();
+      } else {
+        queryNameBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder getQueryNameBuilder(
+        int index) {
+      return getQueryNameFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder getQueryNameOrBuilder(
+        int index) {
+      if (queryNameBuilder_ == null) {
+        return queryName_.get(index);  } else {
+        return queryNameBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder> 
+         getQueryNameOrBuilderList() {
+      if (queryNameBuilder_ != null) {
+        return queryNameBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(queryName_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder addQueryNameBuilder() {
+      return getQueryNameFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.common.v1.VersionedQueryName.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder addQueryNameBuilder(
+        int index) {
+      return getQueryNameFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.common.v1.VersionedQueryName.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder> 
+         getQueryNameBuilderList() {
+      return getQueryNameFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.VersionedQueryName, ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder, ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder> 
+        getQueryNameFieldBuilder() {
+      if (queryNameBuilder_ == null) {
+        queryNameBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.VersionedQueryName, ai.chalk.protos.chalk.common.v1.VersionedQueryName.Builder, ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder>(
+                queryName_,
+                ((bitField0_ & 0x00000004) != 0),
+                getParentForChildren(),
+                isClean());
+        queryName_ = null;
+      }
+      return queryNameBuilder_;
     }
 
     private com.google.protobuf.LazyStringArrayList agentId_ =
@@ -1839,7 +1811,7 @@ private static final long serialVersionUID = 0L;
       if (!agentId_.isModifiable()) {
         agentId_ = new com.google.protobuf.LazyStringArrayList(agentId_);
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
     }
     /**
      * <code>repeated string agent_id = 5 [json_name = "agentId"];</code>
@@ -1885,7 +1857,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureAgentIdIsMutable();
       agentId_.set(index, value);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1899,7 +1871,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureAgentIdIsMutable();
       agentId_.add(value);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1913,7 +1885,7 @@ private static final long serialVersionUID = 0L;
       ensureAgentIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, agentId_);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1924,7 +1896,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearAgentId() {
       agentId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000010);;
+      bitField0_ = (bitField0_ & ~0x00000008);;
       onChanged();
       return this;
     }
@@ -1939,7 +1911,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureAgentIdIsMutable();
       agentId_.add(value);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1950,7 +1922,7 @@ private static final long serialVersionUID = 0L;
       if (!branchName_.isModifiable()) {
         branchName_ = new com.google.protobuf.LazyStringArrayList(branchName_);
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
     }
     /**
      * <code>repeated string branch_name = 6 [json_name = "branchName"];</code>
@@ -1996,7 +1968,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureBranchNameIsMutable();
       branchName_.set(index, value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2010,7 +1982,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureBranchNameIsMutable();
       branchName_.add(value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2024,7 +1996,7 @@ private static final long serialVersionUID = 0L;
       ensureBranchNameIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, branchName_);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2035,7 +2007,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearBranchName() {
       branchName_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000020);;
+      bitField0_ = (bitField0_ & ~0x00000010);;
       onChanged();
       return this;
     }
@@ -2050,7 +2022,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureBranchNameIsMutable();
       branchName_.add(value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2061,7 +2033,7 @@ private static final long serialVersionUID = 0L;
       if (!correlationId_.isModifiable()) {
         correlationId_ = new com.google.protobuf.LazyStringArrayList(correlationId_);
       }
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
     }
     /**
      * <code>repeated string correlation_id = 7 [json_name = "correlationId"];</code>
@@ -2107,7 +2079,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureCorrelationIdIsMutable();
       correlationId_.set(index, value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2121,7 +2093,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureCorrelationIdIsMutable();
       correlationId_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2135,7 +2107,7 @@ private static final long serialVersionUID = 0L;
       ensureCorrelationIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, correlationId_);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2146,7 +2118,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearCorrelationId() {
       correlationId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000040);;
+      bitField0_ = (bitField0_ & ~0x00000020);;
       onChanged();
       return this;
     }
@@ -2161,7 +2133,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureCorrelationIdIsMutable();
       correlationId_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2172,7 +2144,7 @@ private static final long serialVersionUID = 0L;
       if (!traceId_.isModifiable()) {
         traceId_ = new com.google.protobuf.LazyStringArrayList(traceId_);
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
     }
     /**
      * <code>repeated string trace_id = 8 [json_name = "traceId"];</code>
@@ -2218,7 +2190,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTraceIdIsMutable();
       traceId_.set(index, value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -2232,7 +2204,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTraceIdIsMutable();
       traceId_.add(value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -2246,7 +2218,7 @@ private static final long serialVersionUID = 0L;
       ensureTraceIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, traceId_);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -2257,7 +2229,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearTraceId() {
       traceId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000080);;
+      bitField0_ = (bitField0_ & ~0x00000040);;
       onChanged();
       return this;
     }
@@ -2272,7 +2244,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureTraceIdIsMutable();
       traceId_.add(value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -2283,7 +2255,7 @@ private static final long serialVersionUID = 0L;
       if (!queryPlanId_.isModifiable()) {
         queryPlanId_ = new com.google.protobuf.LazyStringArrayList(queryPlanId_);
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
     }
     /**
      * <code>repeated string query_plan_id = 9 [json_name = "queryPlanId"];</code>
@@ -2329,7 +2301,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureQueryPlanIdIsMutable();
       queryPlanId_.set(index, value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2343,7 +2315,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureQueryPlanIdIsMutable();
       queryPlanId_.add(value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2357,7 +2329,7 @@ private static final long serialVersionUID = 0L;
       ensureQueryPlanIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, queryPlanId_);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2368,7 +2340,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearQueryPlanId() {
       queryPlanId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000100);;
+      bitField0_ = (bitField0_ & ~0x00000080);;
       onChanged();
       return this;
     }
@@ -2383,7 +2355,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureQueryPlanIdIsMutable();
       queryPlanId_.add(value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2394,7 +2366,7 @@ private static final long serialVersionUID = 0L;
       if (!deploymentId_.isModifiable()) {
         deploymentId_ = new com.google.protobuf.LazyStringArrayList(deploymentId_);
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
     }
     /**
      * <code>repeated string deployment_id = 10 [json_name = "deploymentId"];</code>
@@ -2440,7 +2412,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureDeploymentIdIsMutable();
       deploymentId_.set(index, value);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2454,7 +2426,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureDeploymentIdIsMutable();
       deploymentId_.add(value);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2468,7 +2440,7 @@ private static final long serialVersionUID = 0L;
       ensureDeploymentIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, deploymentId_);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2479,7 +2451,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearDeploymentId() {
       deploymentId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000200);;
+      bitField0_ = (bitField0_ & ~0x00000100);;
       onChanged();
       return this;
     }
@@ -2494,7 +2466,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureDeploymentIdIsMutable();
       deploymentId_.add(value);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2502,9 +2474,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<java.lang.Integer> queryStatus_ =
       java.util.Collections.emptyList();
     private void ensureQueryStatusIsMutable() {
-      if (!((bitField0_ & 0x00000400) != 0)) {
+      if (!((bitField0_ & 0x00000200) != 0)) {
         queryStatus_ = new java.util.ArrayList<java.lang.Integer>(queryStatus_);
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000200;
       }
     }
     /**
@@ -2580,7 +2552,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearQueryStatus() {
       queryStatus_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00000200);
       onChanged();
       return this;
     }

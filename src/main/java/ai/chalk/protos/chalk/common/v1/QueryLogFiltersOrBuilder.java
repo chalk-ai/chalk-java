@@ -87,54 +87,28 @@ public interface QueryLogFiltersOrBuilder extends
   int getOperationKindValue(int index);
 
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @return A list containing the queryName.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  java.util.List<java.lang.String>
+  java.util.List<ai.chalk.protos.chalk.common.v1.VersionedQueryName> 
       getQueryNameList();
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @return The count of queryName.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.VersionedQueryName getQueryName(int index);
+  /**
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
   int getQueryNameCount();
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @param index The index of the element to return.
-   * @return The queryName at the given index.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  java.lang.String getQueryName(int index);
+  java.util.List<? extends ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder> 
+      getQueryNameOrBuilderList();
   /**
-   * <code>repeated string query_name = 3 [json_name = "queryName"];</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the queryName at the given index.
+   * <code>repeated .chalk.common.v1.VersionedQueryName query_name = 3 [json_name = "queryName"];</code>
    */
-  com.google.protobuf.ByteString
-      getQueryNameBytes(int index);
-
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @return A list containing the queryNameVersion.
-   */
-  java.util.List<java.lang.String>
-      getQueryNameVersionList();
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @return The count of queryNameVersion.
-   */
-  int getQueryNameVersionCount();
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @param index The index of the element to return.
-   * @return The queryNameVersion at the given index.
-   */
-  java.lang.String getQueryNameVersion(int index);
-  /**
-   * <code>repeated string query_name_version = 4 [json_name = "queryNameVersion"];</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the queryNameVersion at the given index.
-   */
-  com.google.protobuf.ByteString
-      getQueryNameVersionBytes(int index);
+  ai.chalk.protos.chalk.common.v1.VersionedQueryNameOrBuilder getQueryNameOrBuilder(
+      int index);
 
   /**
    * <code>repeated string agent_id = 5 [json_name = "agentId"];</code>
