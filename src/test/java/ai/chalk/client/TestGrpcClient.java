@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class TestGrpcClient {
-        private static GRPCClient client;
+        private static ChalkClient client;
 
         @BeforeAll
         public static void setUpClass() throws Exception {
             if (FraudTemplateFeatures.getInitException() != null) {
                 throw FraudTemplateFeatures.getInitException();
             }
-            client = new GRPCClient(new BuilderImpl());
+            client = ChalkClient.builder().withGrpc().build();
         }
 
         @Test

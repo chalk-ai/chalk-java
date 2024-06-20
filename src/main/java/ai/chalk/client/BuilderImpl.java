@@ -20,6 +20,7 @@ public class BuilderImpl implements ChalkClient.Builder {
     private String branch;
     @Nullable
     private HttpClient httpClient;
+    private boolean useGrpc;
 
     public BuilderImpl() {
         this.clientId = null;
@@ -60,7 +61,15 @@ public class BuilderImpl implements ChalkClient.Builder {
         return this;
     }
 
+    public BuilderImpl withGrpc() {
+        this.useGrpc = true;
+        return this;
+    }
+
     public ChalkClient build() throws ChalkException {
+        if (useGrpc) {
+            return new GRPCClient(this);
+        }
         return new ChalkClientImpl(this);
     }
 }

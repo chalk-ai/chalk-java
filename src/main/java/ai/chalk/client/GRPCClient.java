@@ -30,6 +30,10 @@ public class GRPCClient implements ChalkClient {
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
+    public GRPCClient() throws ChalkException {
+        this(new BuilderImpl());
+    }
+
     public GRPCClient(BuilderImpl builder) throws ChalkException {
         ProjectToken chalkYamlConfig = new ProjectToken();
         String projectRoot;
