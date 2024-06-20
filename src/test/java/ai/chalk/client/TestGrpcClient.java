@@ -3,6 +3,7 @@ package ai.chalk.client;
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
 import ai.chalk.models.OnlineQueryParams;
+import ai.chalk.models.OnlineQueryResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,16 +22,19 @@ public class TestGrpcClient {
 
         @Test
         public void testOnlineQuery() throws Exception {
+            var userIds = List.of("1", "2", "3");
             var params = OnlineQueryParams.builder()
-                .withInput("user.id", List.of(1L))
-                .withOutputs("user.socure_score")
-                .build();
-            try (var res = client.onlineQuery(params)) {
-                var users = res.unmarshal(User.class);
-                System.out.println(">>> SOCURE SCORE: ");
-                System.out.println(users[0].socure_score.getValue());
+                    .withInput(FraudTemplateFeatures.user.id, userIds)
+                    .withOutputs(FraudTemplateFeatures.user.socure_score)
+                    .build();
+
+            try (OnlineQueryResult result = client.onlineQuery(params)) {
+                assert result.getErrors().length == 0;
+                var users = result.unmarshal(User.class);
+                assert users.length == userIds.size();
+                assert users[0].socure_score.getValue().equals(123.0);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
 }

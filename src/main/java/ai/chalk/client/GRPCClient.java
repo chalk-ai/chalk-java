@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
+
 public class GRPCClient {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
@@ -100,43 +102,34 @@ public class GRPCClient {
                 )
             )
             .build();
-
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
-        String engineHost = null;
+        String engineHost;
         try {
-            engineHost = token.getEnginesOrThrow(environmentId);
+            engineHost = token
+                .getEnginesOrThrow(environmentId)
+                .replaceFirst("^https?://", "");
         } catch (Exception e) {
             throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
         }
-
-        try {
-            URI uri = new URI(engineHost);
-            engineHost = uri.getHost();
-            if (uri.getPort() > 0) {
-                engineHost = "%s:%d".formatted(engineHost, uri.getPort());
-            }
-        } catch (URISyntaxException ignored) {}
-
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
             .maxInboundMessageSize(1024 * 1024 * 100)
             .intercept(
                 new AuthenticatedHeaderClientInterceptor(
-                        ServerType.ENGINE,
-                        Map.of(),
-                        tokenRefresher,
-                        environmentId
+                    ServerType.ENGINE,
+                    Map.of(),
+                    tokenRefresher,
+                    environmentId
                 )
             )
             .build();
-
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try {
-            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
+            bodyBytes = inputsToArrowBytes(params.getInputs());
         } catch (Exception e) {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
@@ -149,7 +142,12 @@ public class GRPCClient {
         List<Timestamp> now = new ArrayList<>();
         if (params.getNow() != null) {
             for (var n : params.getNow()) {
-                now.add(Timestamp.newBuilder().setSeconds(n.toEpochSecond()).setNanos(n.getNano()).build());
+                now.add(
+                    Timestamp.newBuilder()
+                    .setSeconds(n.toEpochSecond())
+                    .setNanos(n.getNano())
+                    .build()
+                );
             }
         }
 

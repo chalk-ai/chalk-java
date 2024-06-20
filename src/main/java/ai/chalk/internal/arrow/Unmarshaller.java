@@ -26,6 +26,9 @@ import static ai.chalk.internal.Utils.*;
 import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList;
 
 public class Unmarshaller {
+    public static List<String> fqnsToSkip = List.of(Constants.tsFeatureFqn, Constants.indexFqn);
+    public static List<String> prefixToSkip = List.of(Constants.metadataPrefix);
+
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
         try {
             var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
@@ -99,13 +102,16 @@ public class Unmarshaller {
             }
             result.add(obj);
 
+            outerLoop:
             for (var arrowField : table.getSchema().getFields()) {
                 String fqn = arrowField.getName();
-                String[] fqnsToSkip = new String[]{
-                        Constants.tsFeatureFqn,
-                };
-                if (Arrays.asList(fqnsToSkip).contains(fqn)) {
+                if (fqnsToSkip.contains(fqn)) {
                     continue;
+                }
+                for (String prefix : prefixToSkip) {
+                    if (fqn.startsWith(prefix)) {
+                        continue outerLoop;
+                    }
                 }
 
                 var featureList = featureMap.get(fqn);
