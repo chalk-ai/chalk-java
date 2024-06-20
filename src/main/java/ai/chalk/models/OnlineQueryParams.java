@@ -61,8 +61,12 @@ public class OnlineQueryParams {
      */
     private Map<String, String> meta;
 
-
     private List<String> tags;
+
+    /**
+     * Triggers returning metadata about the query execution. This could make the query slightly
+     * slower. For more information, see https://docs.chalk.ai/docs/query-basics.
+     */
     private boolean includeMeta;
 
     /**
@@ -75,9 +79,9 @@ public class OnlineQueryParams {
     private boolean storePlanStages;
 
     /**
-     * Log the query execution plan. Requests using `explain` will be slower
-     * than requests not using `explain`.
-     * If true, 'include_meta' will be set to true as well.
+     * Log the query execution plan. Requests using `explain=True` will be slower
+     * than requests using `explain=False`.
+     * If `True`, 'includeMeta' will be set to `True` as well.
      */
     private boolean explain;
 
@@ -98,6 +102,8 @@ public class OnlineQueryParams {
      */
     private String queryName;
 
+    private String queryNameVersion;
+
     /**
      * You can specify a correlation ID to be used in logs and web interfaces.
      * This should be globally unique, i.e. a `uuid` or similar. Logs generated
@@ -116,6 +122,12 @@ public class OnlineQueryParams {
      */
      private List<ZonedDateTime> now;
 
+    /**
+     * If specified, *all* required_resolver_tags must be present on a resolver for it to be
+     * considered eligible to execute.
+     */
+    private List<String> requiredResolverTags;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -131,9 +143,11 @@ public class OnlineQueryParams {
         protected String environmentId;
         protected String previewDeploymentId;
         protected String queryName;
+        protected String queryNameVersion;
         protected String correlationId;
         protected String branch;
         protected List<ZonedDateTime> now;
+        protected List<String> requiredResolverTags;
 
         protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
@@ -228,6 +242,21 @@ public class OnlineQueryParams {
             return this.withTags(Arrays.asList(tag));
         }
 
+        public T withRequiredResolverTags(List<String> requiredResolverTags) {
+            if (this.requiredResolverTags == null) {
+                this.requiredResolverTags = new ArrayList<>();
+            }
+            this.requiredResolverTags.addAll(requiredResolverTags);
+            return (T) this;
+        }
+
+        public T withRequiredResolverTags(String... requiredResolverTags) {
+            return this.withRequiredResolverTags(Arrays.asList(requiredResolverTags));
+        }
+
+        public T withRequiredResolverTag(String requiredResolverTag) {
+            return this.withRequiredResolverTags(Arrays.asList(requiredResolverTag));
+        }
 
         // withNow takes a list of ZonedDateTimes and adds them to the now list
         public T withNow(List<ZonedDateTime> now) {
@@ -274,6 +303,12 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        // withQueryNameVersion sets the queryNameVersion
+        public T withQueryNameVersion(String queryNameVersion) {
+            this.queryNameVersion = queryNameVersion;
+            return (T) this;
+        }
+
         // withCorrelationId sets the correlationId
         public T withCorrelationId(String correlationId) {
             this.correlationId = correlationId;
@@ -287,7 +322,24 @@ public class OnlineQueryParams {
         }
 
         public OnlineQueryParams build() {
-            return new OnlineQueryParams(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch, now);
+            return new OnlineQueryParams(
+                    inputs,
+                    outputs,
+                    staleness,
+                    meta,
+                    tags,
+                    includeMeta,
+                    storePlanStages,
+                    explain,
+                    environmentId,
+                    previewDeploymentId,
+                    queryName,
+                    queryNameVersion,
+                    correlationId,
+                    branch,
+                    now,
+                    requiredResolverTags
+            );
         }
     }
 
@@ -304,9 +356,11 @@ public class OnlineQueryParams {
             String environmentId,
             String previewDeploymentId,
             String queryName,
+            String queryNameVersion,
             String correlationId,
             String branch,
-            List<ZonedDateTime> now
+            List<ZonedDateTime> now,
+            List<String> requiredResolverTags
         ) {
             super(
                 inputs,
@@ -320,9 +374,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
 
@@ -372,9 +428,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
     }
@@ -392,9 +450,11 @@ public class OnlineQueryParams {
             String environmentId,
             String previewDeploymentId,
             String queryName,
+            String queryNameVersion,
             String correlationId,
             String branch,
-            List<ZonedDateTime> now
+            List<ZonedDateTime> now,
+            List<String> requiredResolverTags
         ) {
             super(
                 inputs,
@@ -408,9 +468,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
 
@@ -427,9 +489,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
                 );
         }
 
@@ -480,9 +544,11 @@ public class OnlineQueryParams {
                 String environmentId,
                 String previewDeploymentId,
                 String queryName,
+                String queryNameVersion,
                 String correlationId,
                 String branch,
-                List<ZonedDateTime> now
+                List<ZonedDateTime> now,
+                List<String> requiredResolverTags
         ) {
             super(
                 inputs,
@@ -496,9 +562,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
 
@@ -516,9 +584,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
 
@@ -571,9 +641,11 @@ public class OnlineQueryParams {
                 String environmentId,
                 String previewDeploymentId,
                 String queryName,
+                String queryNameVersion,
                 String correlationId,
                 String branch,
-                List<ZonedDateTime> now
+                List<ZonedDateTime> now,
+                List<String> requiredResolverTags
         ) {
             super(
                 inputs,
@@ -587,9 +659,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
             );
         }
 
@@ -606,9 +680,11 @@ public class OnlineQueryParams {
                     environmentId,
                     previewDeploymentId,
                     queryName,
+                    queryNameVersion,
                     correlationId,
                     branch,
-                    now
+                    now,
+                    requiredResolverTags
                 );
         }
 
@@ -625,9 +701,11 @@ public class OnlineQueryParams {
                 environmentId,
                 previewDeploymentId,
                 queryName,
+                queryNameVersion,
                 correlationId,
                 branch,
-                now
+                now,
+                requiredResolverTags
          );
         }
 

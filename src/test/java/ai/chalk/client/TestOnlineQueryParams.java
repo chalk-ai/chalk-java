@@ -240,12 +240,14 @@ public class TestOnlineQueryParams {
         var userIds = Arrays.asList(1, 2, 3);
         var emails = Arrays.asList("a", "b", "c");
         var socureScores = Arrays.asList(1.0, 2.0, 3.0);
-        var now = Arrays.asList(ZonedDateTime.now(), ZonedDateTime.now().minusDays(1));
         inputs.put("user.id", userIds);
         inputs.put("user.email", emails);
         inputs.put("user.socure_score", socureScores);
 
         var outputs = new String[]{"user.today", "user.socure_score"};
+        var now = Arrays.asList(ZonedDateTime.now(), ZonedDateTime.now().minusDays(1));
+        var requiredResolverTags = List.of("prod1", "prod2");
+        var queryNameVersion = "queryNameVersionAbc";
 
         // Test BuilderSeed with optional params
         OnlineQueryParams.BuilderSeed builderSeed = OnlineQueryParams.builder()
@@ -265,7 +267,9 @@ public class TestOnlineQueryParams {
                 .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
-                .withNow(now);
+                .withNow(now)
+                .withRequiredResolverTags(requiredResolverTags)
+                .withQueryNameVersion(queryNameVersion);
         OnlineQueryParams paramsSeed = builderSeed.build();
         assert paramsSeed.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
         assert paramsSeed.getMeta().get("user.id").equals("abc");
@@ -281,6 +285,8 @@ public class TestOnlineQueryParams {
         assert paramsSeed.getCorrelationId().equals("abc");
         assert paramsSeed.getBranch().equals("abc");
         assert paramsSeed.getNow().equals(now);
+        assert paramsSeed.getRequiredResolverTags().equals(requiredResolverTags);
+        assert paramsSeed.getQueryNameVersion().equals(queryNameVersion);
 
 
         // Test BuilderWithInputs with optional params
@@ -302,7 +308,10 @@ public class TestOnlineQueryParams {
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
                 .withCorrelationId("abc")
-                .withBranch("abc");
+                .withBranch("abc")
+                .withNow(now)
+                .withRequiredResolverTags(requiredResolverTags)
+                .withQueryNameVersion(queryNameVersion);
 
         OnlineQueryParams paramsWithInputs = builderWithInputs.build();
         assert paramsWithInputs.getInputs().get("user.id").equals(userIds);
@@ -321,6 +330,10 @@ public class TestOnlineQueryParams {
         assert paramsWithInputs.getPreviewDeploymentId().equals("abc");
         assert paramsWithInputs.getQueryName().equals("abc");
         assert paramsWithInputs.getCorrelationId().equals("abc");
+        assert paramsWithInputs.getBranch().equals("abc");
+        assert paramsWithInputs.getNow().equals(now);
+        assert paramsWithInputs.getRequiredResolverTags().equals(requiredResolverTags);
+        assert paramsWithInputs.getQueryNameVersion().equals(queryNameVersion);
 
         // Test BuilderWithOutputs with optional params
         OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
@@ -380,7 +393,10 @@ public class TestOnlineQueryParams {
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
                 .withCorrelationId("abc")
-                .withBranch("abc");
+                .withBranch("abc")
+                .withNow(now)
+                .withRequiredResolverTags(requiredResolverTags)
+                .withQueryNameVersion(queryNameVersion);
 
         OnlineQueryParamsComplete paramsComplete = builderComplete.build();
         assert paramsComplete.getInputs().get("user.id").equals(userIds);
@@ -401,6 +417,10 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getPreviewDeploymentId().equals("abc");
         assert paramsComplete.getQueryName().equals("abc");
         assert paramsComplete.getCorrelationId().equals("abc");
+        assert paramsComplete.getBranch().equals("abc");
+        assert paramsComplete.getNow().equals(now);
+        assert paramsComplete.getRequiredResolverTags().equals(requiredResolverTags);
+        assert paramsComplete.getQueryNameVersion().equals(queryNameVersion);
 
         // Test serialization
         BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete);

@@ -4,13 +4,11 @@ import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
-import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.protos.chalk.common.v1.*;
-import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -20,8 +18,6 @@ import com.google.protobuf.Timestamp;
 import io.grpc.*;
 import org.apache.arrow.vector.table.Table;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -116,10 +112,10 @@ public class GRPCClient {
             .maxInboundMessageSize(1024 * 1024 * 100)
             .intercept(
                 new AuthenticatedHeaderClientInterceptor(
-                    ServerType.ENGINE,
-                    Map.of(),
-                    tokenRefresher,
-                    environmentId
+                        ServerType.ENGINE,
+                        Map.of(),
+                        tokenRefresher,
+                        environmentId
                 )
             )
             .build();
@@ -179,13 +175,13 @@ public class GRPCClient {
         }
 
         var request = OnlineQueryBulkRequest.newBuilder()
-                .setInputsFeather(ByteString.copyFrom(bodyBytes))
-                .addAllOutputs(outputs)
-                .addAllNow(now)
-                .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
-                .setContext(context)
-                .setResponseOptions(options)
-                .build();
+            .setInputsFeather(ByteString.copyFrom(bodyBytes))
+            .addAllOutputs(outputs)
+            .addAllNow(now)
+            .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
+            .setContext(context)
+            .setResponseOptions(options)
+            .build();
         OnlineQueryBulkResponse response = this.queryStub.onlineQueryBulk(request);
 
         Table scalars = null;

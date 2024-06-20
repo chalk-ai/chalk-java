@@ -43,9 +43,11 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             String environmentId,
             String previewDeploymentId,
             String queryName,
+            String queryNameVersion,
             String correlationId,
             String branch,
-            List<ZonedDateTime> now
+            List<ZonedDateTime> now,
+            List<String> requiredResolverTags
     ) {
         super(
             inputs,
@@ -59,9 +61,11 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             environmentId,
             previewDeploymentId,
             queryName,
+            queryNameVersion,
             correlationId,
             branch,
-            now
+            now,
+            requiredResolverTags
         );
     }
 }
