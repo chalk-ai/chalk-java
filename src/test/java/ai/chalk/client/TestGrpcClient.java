@@ -17,7 +17,7 @@ public class TestGrpcClient {
             if (FraudTemplateFeatures.getInitException() != null) {
                 throw FraudTemplateFeatures.getInitException();
             }
-            client = ChalkClient.builder().withGrpc().build();
+            client = ChalkClient.createGrpc();
         }
 
         @Test
