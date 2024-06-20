@@ -59,7 +59,7 @@ public final class AuditProto {
       "ption\210\001\001\022\032\n\010endpoint\030\003 \001(\tR\010endpoint\022*\n\002" +
       "at\030\004 \001(\0132\032.google.protobuf.TimestampR\002at" +
       "\022\036\n\010trace_id\030\005 \001(\004H\001R\007traceId\210\001\001\022)\n\004code" +
-      "\030\006 \001(\0162\020.google.rpc.CodeH\002R\004code\210\001\001\022@\n\007r" +
+      "\030\006 \001(\0162\020.com.google.rpc.CodeH\002R\004code\210\001\001\022@\n\007r" +
       "equest\030\007 \003(\0132&.chalk.server.v1.AuditLog." +
       "RequestEntryR\007request\022C\n\010response\030\010 \003(\0132" +
       "\'.chalk.server.v1.AuditLog.ResponseEntry" +
@@ -87,7 +87,7 @@ public final class AuditProto {
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
-          google.rpc.CodeProto.getDescriptor(),
+          com.google.rpc.CodeProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_AuditLog_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -128,7 +128,7 @@ public final class AuditProto {
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
-    google.rpc.CodeProto.getDescriptor();
+    com.google.rpc.CodeProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
