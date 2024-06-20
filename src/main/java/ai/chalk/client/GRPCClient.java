@@ -25,7 +25,7 @@ import java.util.Map;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
-public class GRPCClient {
+public class GRPCClient implements ChalkClient {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
@@ -120,6 +120,11 @@ public class GRPCClient {
             )
             .build();
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+    }
+
+    @Override
+    public void printConfig() {
+        System.err.println("Config printing for GRPC client not yet implemented");
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
