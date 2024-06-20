@@ -120,9 +120,9 @@ nexusPublishing {
     }
 }
 
-//signing {
-//    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
-//    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
-//    useInMemoryPgpKeys(signingKey, signingPassword)
-//    sign publishing.publications
-//}
+signing {
+    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
+    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications
+}
