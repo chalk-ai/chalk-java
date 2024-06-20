@@ -44,12 +44,12 @@ public interface PagerDutyIntegrationOrBuilder extends
   boolean getDefault();
 
   /**
-   * <code>string token = 4 [json_name = "token"];</code>
+   * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The token.
    */
   java.lang.String getToken();
   /**
-   * <code>string token = 4 [json_name = "token"];</code>
+   * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for token.
    */
   com.google.protobuf.ByteString

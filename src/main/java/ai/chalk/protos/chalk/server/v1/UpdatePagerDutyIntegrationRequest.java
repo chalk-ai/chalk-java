@@ -152,7 +152,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object token_ = "";
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return Whether the token field is set.
    */
   @java.lang.Override
@@ -160,7 +160,7 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000004) != 0);
   }
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The token.
    */
   @java.lang.Override
@@ -177,7 +177,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for token.
    */
   @java.lang.Override
@@ -806,14 +806,14 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object token_ = "";
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return Whether the token field is set.
      */
     public boolean hasToken() {
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The token.
      */
     public java.lang.String getToken() {
@@ -829,7 +829,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The bytes for token.
      */
     public com.google.protobuf.ByteString
@@ -846,7 +846,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The token to set.
      * @return This builder for chaining.
      */
@@ -859,7 +859,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return This builder for chaining.
      */
     public Builder clearToken() {
@@ -869,7 +869,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional string token = 4 [json_name = "token"];</code>
+     * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The bytes for token to set.
      * @return This builder for chaining.
      */

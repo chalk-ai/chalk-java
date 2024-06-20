@@ -21,12 +21,12 @@ public interface GetTokenRequestOrBuilder extends
       getClientIdBytes();
 
   /**
-   * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+   * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The clientSecret.
    */
   java.lang.String getClientSecret();
   /**
-   * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+   * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for clientSecret.
    */
   com.google.protobuf.ByteString

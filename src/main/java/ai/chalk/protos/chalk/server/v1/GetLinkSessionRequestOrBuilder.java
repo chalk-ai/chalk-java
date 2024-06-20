@@ -9,12 +9,12 @@ public interface GetLinkSessionRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The linkCode.
    */
   java.lang.String getLinkCode();
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for linkCode.
    */
   com.google.protobuf.ByteString

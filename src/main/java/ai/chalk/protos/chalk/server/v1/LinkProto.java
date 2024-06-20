@@ -50,39 +50,43 @@ public final class LinkProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\032chalk/server/v1/link.proto\022\017chalk.serv" +
-      "er.v1\032\037google/protobuf/timestamp.proto\"\210" +
-      "\002\n\tLinkToken\022\022\n\004name\030\001 \001(\tR\004name\022\033\n\tclie" +
-      "nt_id\030\002 \001(\tR\010clientId\022#\n\rclient_secret\030\003" +
-      " \001(\tR\014clientSecret\022\035\n\napi_server\030\004 \001(\tR\t" +
-      "apiServer\0222\n\022active_environment\030\005 \001(\tH\000R" +
-      "\021activeEnvironment\210\001\001\022;\n\013valid_until\030\006 \001" +
-      "(\0132\032.google.protobuf.TimestampR\nvalidUnt" +
-      "ilB\025\n\023_active_environment\"W\n\025GetLinkSess" +
-      "ionRequest\022\033\n\tlink_code\030\001 \001(\tR\010linkCode\022" +
-      "!\n\014project_name\030\002 \001(\tR\013projectName\"\257\001\n\026G" +
-      "etLinkSessionResponse\022:\n\006status\030\001 \001(\0162\"." +
-      "chalk.server.v1.LinkSessionStatusR\006statu" +
-      "s\022\030\n\007message\030\002 \001(\tR\007message\0225\n\005token\030\003 \001" +
-      "(\0132\032.chalk.server.v1.LinkTokenH\000R\005token\210" +
-      "\001\001B\010\n\006_token\"\032\n\030CreateLinkSessionRequest" +
-      "\"\220\001\n\031CreateLinkSessionResponse\022\033\n\tlink_c" +
-      "ode\030\001 \001(\tR\010linkCode\022\033\n\tauth_link\030\002 \001(\tR\010" +
-      "authLink\0229\n\nexpires_at\030\003 \001(\0132\032.google.pr" +
-      "otobuf.TimestampR\texpiresAt*\340\001\n\021LinkSess" +
-      "ionStatus\022#\n\037LINK_SESSION_STATUS_UNSPECI" +
-      "FIED\020\000\022\037\n\033LINK_SESSION_STATUS_PENDING\020\001\022" +
-      "\037\n\033LINK_SESSION_STATUS_SUCCESS\020\002\022\036\n\032LINK" +
-      "_SESSION_STATUS_FAILED\020\003\022!\n\035LINK_SESSION" +
-      "_STATUS_NOT_FOUND\020\004\022!\n\035LINK_SESSION_STAT" +
-      "US_FORBIDDEN\020\005B\236\001\n\037ai.chalk.protos.chalk" +
-      ".server.v1B\tLinkProtoP\001Z\022server/v1;serve" +
-      "rv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Serv" +
-      "er\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Ch" +
-      "alk::Server::V1b\006proto3"
+      "er.v1\032\036chalk/utils/v1/sensitive.proto\032 g" +
+      "oogle/protobuf/descriptor.proto\032\037google/" +
+      "protobuf/timestamp.proto\"\216\002\n\tLinkToken\022\022" +
+      "\n\004name\030\001 \001(\tR\004name\022\033\n\tclient_id\030\002 \001(\tR\010c" +
+      "lientId\022)\n\rclient_secret\030\003 \001(\tB\004\330\241\'\001R\014cl" +
+      "ientSecret\022\035\n\napi_server\030\004 \001(\tR\tapiServe" +
+      "r\0222\n\022active_environment\030\005 \001(\tH\000R\021activeE" +
+      "nvironment\210\001\001\022;\n\013valid_until\030\006 \001(\0132\032.goo" +
+      "gle.protobuf.TimestampR\nvalidUntilB\025\n\023_a" +
+      "ctive_environment\"]\n\025GetLinkSessionReque" +
+      "st\022!\n\tlink_code\030\001 \001(\tB\004\330\241\'\001R\010linkCode\022!\n" +
+      "\014project_name\030\002 \001(\tR\013projectName\"\257\001\n\026Get" +
+      "LinkSessionResponse\022:\n\006status\030\001 \001(\0162\".ch" +
+      "alk.server.v1.LinkSessionStatusR\006status\022" +
+      "\030\n\007message\030\002 \001(\tR\007message\0225\n\005token\030\003 \001(\013" +
+      "2\032.chalk.server.v1.LinkTokenH\000R\005token\210\001\001" +
+      "B\010\n\006_token\"\032\n\030CreateLinkSessionRequest\"\234" +
+      "\001\n\031CreateLinkSessionResponse\022!\n\tlink_cod" +
+      "e\030\001 \001(\tB\004\330\241\'\001R\010linkCode\022!\n\tauth_link\030\002 \001" +
+      "(\tB\004\330\241\'\001R\010authLink\0229\n\nexpires_at\030\003 \001(\0132\032" +
+      ".google.protobuf.TimestampR\texpiresAt*\340\001" +
+      "\n\021LinkSessionStatus\022#\n\037LINK_SESSION_STAT" +
+      "US_UNSPECIFIED\020\000\022\037\n\033LINK_SESSION_STATUS_" +
+      "PENDING\020\001\022\037\n\033LINK_SESSION_STATUS_SUCCESS" +
+      "\020\002\022\036\n\032LINK_SESSION_STATUS_FAILED\020\003\022!\n\035LI" +
+      "NK_SESSION_STATUS_NOT_FOUND\020\004\022!\n\035LINK_SE" +
+      "SSION_STATUS_FORBIDDEN\020\005B\236\001\n\037ai.chalk.pr" +
+      "otos.chalk.server.v1B\tLinkProtoP\001Z\022serve" +
+      "r/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017" +
+      "Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMet" +
+      "adata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor(),
+          com.google.protobuf.DescriptorProtos.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_LinkToken_descriptor =
@@ -115,6 +119,13 @@ public final class LinkProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateLinkSessionResponse_descriptor,
         new java.lang.String[] { "LinkCode", "AuthLink", "ExpiresAt", });
+    com.google.protobuf.ExtensionRegistry registry =
+        com.google.protobuf.ExtensionRegistry.newInstance();
+    registry.add(ai.chalk.protos.chalk.utils.v1.SensitiveProto.sensitive);
+    com.google.protobuf.Descriptors.FileDescriptor
+        .internalUpdateFileDescriptor(descriptor, registry);
+    ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor();
+    com.google.protobuf.DescriptorProtos.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

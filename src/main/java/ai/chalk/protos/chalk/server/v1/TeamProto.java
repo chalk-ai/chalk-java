@@ -195,154 +195,161 @@ public final class TeamProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\032chalk/server/v1/team.proto\022\017chalk.serv" +
-      "er.v1\032\031chalk/auth/v1/agent.proto\032 chalk/" +
-      "auth/v1/displayagent.proto\032%chalk/auth/v" +
-      "1/featurepermission.proto\032\037chalk/auth/v1" +
-      "/permissions.proto\032!chalk/server/v1/envi" +
-      "ronment.proto\"\017\n\rGetEnvRequest\"P\n\016GetEnv" +
-      "Response\022>\n\013environment\030\001 \001(\0132\034.chalk.se" +
-      "rver.v1.EnvironmentR\013environment\"2\n\026GetE" +
-      "nvironmentsRequest\022\030\n\007project\030\001 \001(\tR\007pro" +
-      "ject\"[\n\027GetEnvironmentsResponse\022@\n\014envir" +
-      "onments\030\002 \003(\0132\034.chalk.server.v1.Environm" +
-      "entR\014environments\"\021\n\017GetAgentRequest\">\n\020" +
-      "GetAgentResponse\022*\n\005agent\030\001 \001(\0132\024.chalk." +
-      "auth.v1.AgentR\005agent\"\030\n\026GetDisplayAgentR" +
-      "equest\"L\n\027GetDisplayAgentResponse\0221\n\005age" +
-      "nt\030\001 \001(\0132\033.chalk.auth.v1.DisplayAgentR\005a" +
-      "gent\"\226\001\n\004Team\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 " +
-      "\001(\tR\004name\022\022\n\004slug\030\003 \001(\tR\004slug\022\027\n\004logo\030\004 " +
-      "\001(\tH\000R\004logo\210\001\001\0224\n\010projects\030\005 \003(\0132\030.chalk" +
-      ".server.v1.ProjectR\010projectsB\007\n\005_logo\"\210\001" +
-      "\n\007Project\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007team_id\030\002 \001" +
-      "(\tR\006teamId\022\022\n\004name\030\003 \001(\tR\004name\022@\n\014enviro" +
-      "nments\030\004 \003(\0132\034.chalk.server.v1.Environme" +
-      "ntR\014environments\"]\n\021CreateTeamRequest\022\022\n" +
-      "\004name\030\001 \001(\tR\004name\022\022\n\004slug\030\002 \001(\tR\004slug\022\027\n" +
-      "\004logo\030\003 \001(\tH\000R\004logo\210\001\001B\007\n\005_logo\"?\n\022Creat" +
-      "eTeamResponse\022)\n\004team\030\001 \001(\0132\025.chalk.serv" +
-      "er.v1.TeamR\004team\"*\n\024CreateProjectRequest" +
-      "\022\022\n\004name\030\001 \001(\tR\004name\"K\n\025CreateProjectRes" +
-      "ponse\0222\n\007project\030\001 \001(\0132\030.chalk.server.v1" +
-      ".ProjectR\007project\"l\n\030CreateEnvironmentRe" +
-      "quest\022\035\n\nproject_id\030\001 \001(\tR\tprojectId\022\022\n\004" +
-      "name\030\002 \001(\tR\004name\022\035\n\nis_default\030\003 \001(\010R\tis" +
-      "Default\"[\n\031CreateEnvironmentResponse\022>\n\013" +
-      "environment\030\001 \001(\0132\034.chalk.server.v1.Envi" +
-      "ronmentR\013environment\"\020\n\016GetTeamRequest\"<" +
-      "\n\017GetTeamResponse\022)\n\004team\030\001 \001(\0132\025.chalk." +
-      "server.v1.TeamR\004team\"\313\003\n\031CreateServiceTo" +
-      "kenRequest\022\022\n\004name\030\001 \001(\tR\004name\022;\n\013permis" +
-      "sions\030\002 \003(\0162\031.chalk.auth.v1.PermissionR\013" +
-      "permissions\022\'\n\rcustom_claims\030\003 \003(\tB\002\030\001R\014" +
-      "customClaims\022C\n\017customer_claims\030\004 \003(\0132\032." +
-      "chalk.auth.v1.CustomClaimR\016customerClaim" +
-      "s\022\201\001\n\031feature_tag_to_permission\030\005 \003(\0132F." +
-      "chalk.server.v1.CreateServiceTokenReques" +
-      "t.FeatureTagToPermissionEntryR\026featureTa" +
-      "gToPermission\032k\n\033FeatureTagToPermissionE" +
-      "ntry\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005value\030\002 \001(\0162 ." +
-      "chalk.auth.v1.FeaturePermissionR\005value:\002" +
-      "8\001\"y\n\032CreateServiceTokenResponse\0226\n\005agen" +
-      "t\030\001 \001(\0132 .chalk.auth.v1.ServiceTokenAgen" +
-      "tR\005agent\022#\n\rclient_secret\030\002 \001(\tR\014clientS" +
-      "ecret\"+\n\031DeleteServiceTokenRequest\022\016\n\002id" +
-      "\030\001 \001(\tR\002id\"\034\n\032DeleteServiceTokenResponse" +
-      "\"\327\001\n\025PermissionDescription\022)\n\002id\030\001 \001(\0162\031" +
-      ".chalk.auth.v1.PermissionR\002id\022\022\n\004slug\030\002 " +
-      "\001(\tR\004slug\022\034\n\tnamespace\030\003 \001(\tR\tnamespace\022" +
-      "\022\n\004name\030\004 \001(\tR\004name\022 \n\013description\030\005 \001(\t" +
-      "R\013description\022+\n\021group_description\030\006 \001(\t" +
-      "R\020groupDescription\"\207\002\n\017RoleDescription\022\016" +
-      "\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 \001(\tR\004name\022 \n\013de" +
-      "scription\030\003 \001(\tR\013description\022;\n\013permissi" +
-      "ons\030\004 \003(\0162\031.chalk.auth.v1.PermissionR\013pe" +
-      "rmissions\022R\n\023feature_permissions\030\005 \001(\0132!" +
-      ".chalk.auth.v1.FeaturePermissionsR\022featu" +
-      "rePermissions\022\035\n\nis_default\030\006 \001(\010R\tisDef" +
-      "ault\" \n\036GetAvailablePermissionsRequest\"\215" +
-      "\002\n\037GetAvailablePermissionsResponse\022H\n\013pe" +
-      "rmissions\030\001 \003(\0132&.chalk.server.v1.Permis" +
-      "sionDescriptionR\013permissions\0226\n\005roles\030\002 " +
-      "\003(\0132 .chalk.server.v1.RoleDescriptionR\005r" +
-      "oles\022h\n#available_service_token_permissi" +
-      "ons\030\003 \003(\0162\031.chalk.auth.v1.PermissionR av" +
-      "ailableServiceTokenPermissions\"z\n\037Upsert" +
-      "FeaturePermissionsRequest\022\022\n\004role\030\001 \001(\tR" +
-      "\004role\022C\n\013permissions\030\002 \001(\0132!.chalk.auth." +
-      "v1.FeaturePermissionsR\013permissions\"{\n Up" +
-      "sertFeaturePermissionsResponse\022\022\n\004role\030\001" +
-      " \001(\tR\004role\022C\n\013permissions\030\002 \001(\0132!.chalk." +
-      "auth.v1.FeaturePermissionsR\013permissions\"" +
-      "\032\n\030ListServiceTokensRequest\"\\\n\031ListServi" +
-      "ceTokensResponse\022?\n\006agents\030\001 \003(\0132\'.chalk" +
-      ".auth.v1.DisplayServiceTokenAgentR\006agent" +
-      "s\"\277\003\n\031UpdateServiceTokenRequest\022\033\n\tclien" +
-      "t_id\030\001 \001(\tR\010clientId\022\022\n\004name\030\002 \001(\tR\004name" +
-      "\022;\n\013permissions\030\003 \003(\0162\031.chalk.auth.v1.Pe" +
-      "rmissionR\013permissions\022C\n\017customer_claims" +
-      "\030\004 \003(\0132\032.chalk.auth.v1.CustomClaimR\016cust" +
-      "omerClaims\022\201\001\n\031feature_tag_to_permission" +
-      "\030\005 \003(\0132F.chalk.server.v1.UpdateServiceTo" +
-      "kenRequest.FeatureTagToPermissionEntryR\026" +
-      "featureTagToPermission\032k\n\033FeatureTagToPe" +
-      "rmissionEntry\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005value" +
-      "\030\002 \001(\0162 .chalk.auth.v1.FeaturePermission" +
-      "R\005value:\0028\001\"[\n\032UpdateServiceTokenRespons" +
-      "e\022=\n\005agent\030\001 \001(\0132\'.chalk.auth.v1.Display" +
-      "ServiceTokenAgentR\005agent2\370\013\n\013TeamService" +
-      "\022Q\n\006GetEnv\022\036.chalk.server.v1.GetEnvReque" +
-      "st\032\037.chalk.server.v1.GetEnvResponse\"\006\220\002\001" +
-      "\200}\013\022l\n\017GetEnvironments\022\'.chalk.server.v1" +
-      ".GetEnvironmentsRequest\032(.chalk.server.v" +
-      "1.GetEnvironmentsResponse\"\006\220\002\001\200}\002\022W\n\010Get" +
-      "Agent\022 .chalk.server.v1.GetAgentRequest\032" +
-      "!.chalk.server.v1.GetAgentResponse\"\006\220\002\001\200" +
-      "}\002\022l\n\017GetDisplayAgent\022\'.chalk.server.v1." +
-      "GetDisplayAgentRequest\032(.chalk.server.v1" +
-      ".GetDisplayAgentResponse\"\006\220\002\001\200}\002\022T\n\007GetT" +
-      "eam\022\037.chalk.server.v1.GetTeamRequest\032 .c" +
-      "halk.server.v1.GetTeamResponse\"\006\220\002\001\200}\t\022Z" +
-      "\n\nCreateTeam\022\".chalk.server.v1.CreateTea" +
-      "mRequest\032#.chalk.server.v1.CreateTeamRes" +
-      "ponse\"\003\200}\032\022c\n\rCreateProject\022%.chalk.serv" +
-      "er.v1.CreateProjectRequest\032&.chalk.serve" +
-      "r.v1.CreateProjectResponse\"\003\200}\032\022o\n\021Creat" +
-      "eEnvironment\022).chalk.server.v1.CreateEnv" +
-      "ironmentRequest\032*.chalk.server.v1.Create" +
-      "EnvironmentResponse\"\003\200}\032\022\204\001\n\027GetAvailabl" +
-      "ePermissions\022/.chalk.server.v1.GetAvaila" +
-      "blePermissionsRequest\0320.chalk.server.v1." +
-      "GetAvailablePermissionsResponse\"\006\220\002\001\200}\002\022" +
-      "r\n\022CreateServiceToken\022*.chalk.server.v1." +
-      "CreateServiceTokenRequest\032+.chalk.server" +
-      ".v1.CreateServiceTokenResponse\"\003\200}\025\022r\n\022D" +
-      "eleteServiceToken\022*.chalk.server.v1.Dele" +
-      "teServiceTokenRequest\032+.chalk.server.v1." +
-      "DeleteServiceTokenResponse\"\003\200}\025\022o\n\021ListS" +
-      "erviceTokens\022).chalk.server.v1.ListServi" +
-      "ceTokensRequest\032*.chalk.server.v1.ListSe" +
-      "rviceTokensResponse\"\003\200}\026\022r\n\022UpdateServic" +
-      "eToken\022*.chalk.server.v1.UpdateServiceTo" +
-      "kenRequest\032+.chalk.server.v1.UpdateServi" +
-      "ceTokenResponse\"\003\200}\025\022\204\001\n\030UpsertFeaturePe" +
-      "rmissions\0220.chalk.server.v1.UpsertFeatur" +
-      "ePermissionsRequest\0321.chalk.server.v1.Up" +
-      "sertFeaturePermissionsResponse\"\003\200}\025B\236\001\n\037" +
-      "ai.chalk.protos.chalk.server.v1B\tTeamPro" +
-      "toP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.S" +
-      "erver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Serve" +
-      "r\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pr" +
-      "oto3"
+      "er.v1\032\031chalk/auth/v1/agent.proto\032\031chalk/" +
+      "auth/v1/audit.proto\032 chalk/auth/v1/displ" +
+      "ayagent.proto\032%chalk/auth/v1/featureperm" +
+      "ission.proto\032\037chalk/auth/v1/permissions." +
+      "proto\032!chalk/server/v1/environment.proto" +
+      "\032\036chalk/utils/v1/sensitive.proto\032 google" +
+      "/protobuf/descriptor.proto\"\017\n\rGetEnvRequ" +
+      "est\"P\n\016GetEnvResponse\022>\n\013environment\030\001 \001" +
+      "(\0132\034.chalk.server.v1.EnvironmentR\013enviro" +
+      "nment\"2\n\026GetEnvironmentsRequest\022\030\n\007proje" +
+      "ct\030\001 \001(\tR\007project\"[\n\027GetEnvironmentsResp" +
+      "onse\022@\n\014environments\030\002 \003(\0132\034.chalk.serve" +
+      "r.v1.EnvironmentR\014environments\"\021\n\017GetAge" +
+      "ntRequest\">\n\020GetAgentResponse\022*\n\005agent\030\001" +
+      " \001(\0132\024.chalk.auth.v1.AgentR\005agent\"\030\n\026Get" +
+      "DisplayAgentRequest\"L\n\027GetDisplayAgentRe" +
+      "sponse\0221\n\005agent\030\001 \001(\0132\033.chalk.auth.v1.Di" +
+      "splayAgentR\005agent\"\226\001\n\004Team\022\016\n\002id\030\001 \001(\tR\002" +
+      "id\022\022\n\004name\030\002 \001(\tR\004name\022\022\n\004slug\030\003 \001(\tR\004sl" +
+      "ug\022\027\n\004logo\030\004 \001(\tH\000R\004logo\210\001\001\0224\n\010projects\030" +
+      "\005 \003(\0132\030.chalk.server.v1.ProjectR\010project" +
+      "sB\007\n\005_logo\"\210\001\n\007Project\022\016\n\002id\030\001 \001(\tR\002id\022\027" +
+      "\n\007team_id\030\002 \001(\tR\006teamId\022\022\n\004name\030\003 \001(\tR\004n" +
+      "ame\022@\n\014environments\030\004 \003(\0132\034.chalk.server" +
+      ".v1.EnvironmentR\014environments\"]\n\021CreateT" +
+      "eamRequest\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004slug\030\002" +
+      " \001(\tR\004slug\022\027\n\004logo\030\003 \001(\tH\000R\004logo\210\001\001B\007\n\005_" +
+      "logo\"?\n\022CreateTeamResponse\022)\n\004team\030\001 \001(\013" +
+      "2\025.chalk.server.v1.TeamR\004team\"*\n\024CreateP" +
+      "rojectRequest\022\022\n\004name\030\001 \001(\tR\004name\"K\n\025Cre" +
+      "ateProjectResponse\0222\n\007project\030\001 \001(\0132\030.ch" +
+      "alk.server.v1.ProjectR\007project\"l\n\030Create" +
+      "EnvironmentRequest\022\035\n\nproject_id\030\001 \001(\tR\t" +
+      "projectId\022\022\n\004name\030\002 \001(\tR\004name\022\035\n\nis_defa" +
+      "ult\030\003 \001(\010R\tisDefault\"[\n\031CreateEnvironmen" +
+      "tResponse\022>\n\013environment\030\001 \001(\0132\034.chalk.s" +
+      "erver.v1.EnvironmentR\013environment\"\020\n\016Get" +
+      "TeamRequest\"<\n\017GetTeamResponse\022)\n\004team\030\001" +
+      " \001(\0132\025.chalk.server.v1.TeamR\004team\"\313\003\n\031Cr" +
+      "eateServiceTokenRequest\022\022\n\004name\030\001 \001(\tR\004n" +
+      "ame\022;\n\013permissions\030\002 \003(\0162\031.chalk.auth.v1" +
+      ".PermissionR\013permissions\022\'\n\rcustom_claim" +
+      "s\030\003 \003(\tB\002\030\001R\014customClaims\022C\n\017customer_cl" +
+      "aims\030\004 \003(\0132\032.chalk.auth.v1.CustomClaimR\016" +
+      "customerClaims\022\201\001\n\031feature_tag_to_permis" +
+      "sion\030\005 \003(\0132F.chalk.server.v1.CreateServi" +
+      "ceTokenRequest.FeatureTagToPermissionEnt" +
+      "ryR\026featureTagToPermission\032k\n\033FeatureTag" +
+      "ToPermissionEntry\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005v" +
+      "alue\030\002 \001(\0162 .chalk.auth.v1.FeaturePermis" +
+      "sionR\005value:\0028\001\"\177\n\032CreateServiceTokenRes" +
+      "ponse\0226\n\005agent\030\001 \001(\0132 .chalk.auth.v1.Ser" +
+      "viceTokenAgentR\005agent\022)\n\rclient_secret\030\002" +
+      " \001(\tB\004\330\241\'\001R\014clientSecret\"+\n\031DeleteServic" +
+      "eTokenRequest\022\016\n\002id\030\001 \001(\tR\002id\"\034\n\032DeleteS" +
+      "erviceTokenResponse\"\327\001\n\025PermissionDescri" +
+      "ption\022)\n\002id\030\001 \001(\0162\031.chalk.auth.v1.Permis" +
+      "sionR\002id\022\022\n\004slug\030\002 \001(\tR\004slug\022\034\n\tnamespac" +
+      "e\030\003 \001(\tR\tnamespace\022\022\n\004name\030\004 \001(\tR\004name\022 " +
+      "\n\013description\030\005 \001(\tR\013description\022+\n\021grou" +
+      "p_description\030\006 \001(\tR\020groupDescription\"\207\002" +
+      "\n\017RoleDescription\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004nam" +
+      "e\030\002 \001(\tR\004name\022 \n\013description\030\003 \001(\tR\013desc" +
+      "ription\022;\n\013permissions\030\004 \003(\0162\031.chalk.aut" +
+      "h.v1.PermissionR\013permissions\022R\n\023feature_" +
+      "permissions\030\005 \001(\0132!.chalk.auth.v1.Featur" +
+      "ePermissionsR\022featurePermissions\022\035\n\nis_d" +
+      "efault\030\006 \001(\010R\tisDefault\" \n\036GetAvailableP" +
+      "ermissionsRequest\"\215\002\n\037GetAvailablePermis" +
+      "sionsResponse\022H\n\013permissions\030\001 \003(\0132&.cha" +
+      "lk.server.v1.PermissionDescriptionR\013perm" +
+      "issions\0226\n\005roles\030\002 \003(\0132 .chalk.server.v1" +
+      ".RoleDescriptionR\005roles\022h\n#available_ser" +
+      "vice_token_permissions\030\003 \003(\0162\031.chalk.aut" +
+      "h.v1.PermissionR availableServiceTokenPe" +
+      "rmissions\"z\n\037UpsertFeaturePermissionsReq" +
+      "uest\022\022\n\004role\030\001 \001(\tR\004role\022C\n\013permissions\030" +
+      "\002 \001(\0132!.chalk.auth.v1.FeaturePermissions" +
+      "R\013permissions\"{\n UpsertFeaturePermission" +
+      "sResponse\022\022\n\004role\030\001 \001(\tR\004role\022C\n\013permiss" +
+      "ions\030\002 \001(\0132!.chalk.auth.v1.FeaturePermis" +
+      "sionsR\013permissions\"\032\n\030ListServiceTokensR" +
+      "equest\"\\\n\031ListServiceTokensResponse\022?\n\006a" +
+      "gents\030\001 \003(\0132\'.chalk.auth.v1.DisplayServi" +
+      "ceTokenAgentR\006agents\"\277\003\n\031UpdateServiceTo" +
+      "kenRequest\022\033\n\tclient_id\030\001 \001(\tR\010clientId\022" +
+      "\022\n\004name\030\002 \001(\tR\004name\022;\n\013permissions\030\003 \003(\016" +
+      "2\031.chalk.auth.v1.PermissionR\013permissions" +
+      "\022C\n\017customer_claims\030\004 \003(\0132\032.chalk.auth.v" +
+      "1.CustomClaimR\016customerClaims\022\201\001\n\031featur" +
+      "e_tag_to_permission\030\005 \003(\0132F.chalk.server" +
+      ".v1.UpdateServiceTokenRequest.FeatureTag" +
+      "ToPermissionEntryR\026featureTagToPermissio" +
+      "n\032k\n\033FeatureTagToPermissionEntry\022\020\n\003key\030" +
+      "\001 \001(\tR\003key\0226\n\005value\030\002 \001(\0162 .chalk.auth.v" +
+      "1.FeaturePermissionR\005value:\0028\001\"[\n\032Update" +
+      "ServiceTokenResponse\022=\n\005agent\030\001 \001(\0132\'.ch" +
+      "alk.auth.v1.DisplayServiceTokenAgentR\005ag" +
+      "ent2\272\014\n\013TeamService\022Q\n\006GetEnv\022\036.chalk.se" +
+      "rver.v1.GetEnvRequest\032\037.chalk.server.v1." +
+      "GetEnvResponse\"\006\220\002\001\200}\013\022l\n\017GetEnvironment" +
+      "s\022\'.chalk.server.v1.GetEnvironmentsReque" +
+      "st\032(.chalk.server.v1.GetEnvironmentsResp" +
+      "onse\"\006\220\002\001\200}\002\022W\n\010GetAgent\022 .chalk.server." +
+      "v1.GetAgentRequest\032!.chalk.server.v1.Get" +
+      "AgentResponse\"\006\220\002\001\200}\002\022l\n\017GetDisplayAgent" +
+      "\022\'.chalk.server.v1.GetDisplayAgentReques" +
+      "t\032(.chalk.server.v1.GetDisplayAgentRespo" +
+      "nse\"\006\220\002\001\200}\002\022T\n\007GetTeam\022\037.chalk.server.v1" +
+      ".GetTeamRequest\032 .chalk.server.v1.GetTea" +
+      "mResponse\"\006\220\002\001\200}\t\022`\n\nCreateTeam\022\".chalk." +
+      "server.v1.CreateTeamRequest\032#.chalk.serv" +
+      "er.v1.CreateTeamResponse\"\t\200}\033\212\323\016\002\010\002\022i\n\rC" +
+      "reateProject\022%.chalk.server.v1.CreatePro" +
+      "jectRequest\032&.chalk.server.v1.CreateProj" +
+      "ectResponse\"\t\200}\032\212\323\016\002\010\002\022u\n\021CreateEnvironm" +
+      "ent\022).chalk.server.v1.CreateEnvironmentR" +
+      "equest\032*.chalk.server.v1.CreateEnvironme" +
+      "ntResponse\"\t\200}\032\212\323\016\002\010\002\022\204\001\n\027GetAvailablePe" +
+      "rmissions\022/.chalk.server.v1.GetAvailable" +
+      "PermissionsRequest\0320.chalk.server.v1.Get" +
+      "AvailablePermissionsResponse\"\006\220\002\001\200}\002\022\217\001\n" +
+      "\022CreateServiceToken\022*.chalk.server.v1.Cr" +
+      "eateServiceTokenRequest\032+.chalk.server.v" +
+      "1.CreateServiceTokenResponse\" \200}\025\212\323\016\031\010\002\022" +
+      "\025Created service token\022x\n\022DeleteServiceT" +
+      "oken\022*.chalk.server.v1.DeleteServiceToke" +
+      "nRequest\032+.chalk.server.v1.DeleteService" +
+      "TokenResponse\"\t\200}\025\212\323\016\002\010\002\022o\n\021ListServiceT" +
+      "okens\022).chalk.server.v1.ListServiceToken" +
+      "sRequest\032*.chalk.server.v1.ListServiceTo" +
+      "kensResponse\"\003\200}\026\022x\n\022UpdateServiceToken\022" +
+      "*.chalk.server.v1.UpdateServiceTokenRequ" +
+      "est\032+.chalk.server.v1.UpdateServiceToken" +
+      "Response\"\t\200}\025\212\323\016\002\010\002\022\212\001\n\030UpsertFeaturePer" +
+      "missions\0220.chalk.server.v1.UpsertFeature" +
+      "PermissionsRequest\0321.chalk.server.v1.Ups" +
+      "ertFeaturePermissionsResponse\"\t\200}\025\212\323\016\002\010\002" +
+      "B\236\001\n\037ai.chalk.protos.chalk.server.v1B\tTe" +
+      "amProtoP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Ch" +
+      "alk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\" +
+      "Server\\V1\\GPBMetadata\352\002\021Chalk::Server::V" +
+      "1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.auth.v1.AgentProto.getDescriptor(),
+          ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.DisplayagentProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.FeaturepermissionProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           ai.chalk.protos.chalk.server.v1.EnvironmentProto.getDescriptor(),
+          ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor(),
+          com.google.protobuf.DescriptorProtos.getDescriptor(),
         });
     internal_static_chalk_server_v1_GetEnvRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -550,14 +557,19 @@ public final class TeamProto {
         new java.lang.String[] { "Agent", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
+    registry.add(ai.chalk.protos.chalk.auth.v1.AuditProto.audit);
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);
+    registry.add(ai.chalk.protos.chalk.utils.v1.SensitiveProto.sensitive);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     ai.chalk.protos.chalk.auth.v1.AgentProto.getDescriptor();
+    ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.DisplayagentProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.FeaturepermissionProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     ai.chalk.protos.chalk.server.v1.EnvironmentProto.getDescriptor();
+    ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor();
+    com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
