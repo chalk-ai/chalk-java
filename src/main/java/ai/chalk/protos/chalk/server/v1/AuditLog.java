@@ -299,9 +299,9 @@ private static final long serialVersionUID = 0L;
    * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The code.
    */
-  @java.lang.Override public ai.chalk.protos.google.rpc.Code getCode() {
-    ai.chalk.protos.google.rpc.Code result = ai.chalk.protos.google.rpc.Code.forNumber(code_);
-    return result == null ? ai.chalk.protos.google.rpc.Code.UNRECOGNIZED : result;
+  @java.lang.Override public google.rpc.Code getCode() {
+    google.rpc.Code result = google.rpc.Code.forNumber(code_);
+    return result == null ? google.rpc.Code.UNRECOGNIZED : result;
   }
 
   public static final int REQUEST_FIELD_NUMBER = 7;
@@ -1794,9 +1794,9 @@ com.google.protobuf.Value defaultValue) {
      * @return The code.
      */
     @java.lang.Override
-    public ai.chalk.protos.google.rpc.Code getCode() {
-      ai.chalk.protos.google.rpc.Code result = ai.chalk.protos.google.rpc.Code.forNumber(code_);
-      return result == null ? ai.chalk.protos.google.rpc.Code.UNRECOGNIZED : result;
+    public google.rpc.Code getCode() {
+      google.rpc.Code result = google.rpc.Code.forNumber(code_);
+      return result == null ? google.rpc.Code.UNRECOGNIZED : result;
     }
     /**
      * <pre>
@@ -1807,7 +1807,7 @@ com.google.protobuf.Value defaultValue) {
      * @param value The code to set.
      * @return This builder for chaining.
      */
-    public Builder setCode(ai.chalk.protos.google.rpc.Code value) {
+    public Builder setCode(google.rpc.Code value) {
       if (value == null) {
         throw new NullPointerException();
       }

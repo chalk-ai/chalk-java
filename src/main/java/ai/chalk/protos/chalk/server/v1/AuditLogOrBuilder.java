@@ -156,7 +156,7 @@ public interface AuditLogOrBuilder extends
    * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The code.
    */
-  ai.chalk.protos.google.rpc.Code getCode();
+  google.rpc.Code getCode();
 
   /**
    * <pre>

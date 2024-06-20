@@ -87,7 +87,7 @@ public final class AuditProto {
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
-          ai.chalk.protos.google.rpc.CodeProto.getDescriptor(),
+          google.rpc.CodeProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_AuditLog_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -128,7 +128,7 @@ public final class AuditProto {
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
-    ai.chalk.protos.google.rpc.CodeProto.getDescriptor();
+    google.rpc.CodeProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
