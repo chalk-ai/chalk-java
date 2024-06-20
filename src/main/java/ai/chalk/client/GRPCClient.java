@@ -113,7 +113,7 @@ public class GRPCClient implements ChalkClient {
             throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
         }
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
-            .maxInboundMessageSize(1024 * 1024 * 100)
+            .maxInboundMessageSize(1024 * 1024 * 500)
             .intercept(
                 new AuthenticatedHeaderClientInterceptor(
                         ServerType.ENGINE,
@@ -149,9 +149,9 @@ public class GRPCClient implements ChalkClient {
             for (var n : params.getNow()) {
                 now.add(
                     Timestamp.newBuilder()
-                    .setSeconds(n.toEpochSecond())
-                    .setNanos(n.getNano())
-                    .build()
+                        .setSeconds(n.toEpochSecond())
+                        .setNanos(n.getNano())
+                        .build()
                 );
             }
         }
