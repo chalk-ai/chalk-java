@@ -7,4 +7,5 @@ public class User extends FeaturesClass {
     public Feature<String> id;
     public Feature<Double> socure_score;
     public Feature<byte[]> binary_data;
+    public Feature<Double> crashingFeature;
 }

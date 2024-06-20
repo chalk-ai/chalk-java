@@ -183,7 +183,7 @@ public class GRPCClient implements ChalkClient {
         }
 
         var options = OnlineQueryResponseOptions.newBuilder()
-                .setIncludeMeta(params.isIncludeMeta())
+                .setIncludeMeta(params.isIncludeMeta() || params.isExplain())
                 .setEncodingOptions(
                     FeatureEncodingOptions.newBuilder()
                         .setEncodeStructsAsObjects(true)
