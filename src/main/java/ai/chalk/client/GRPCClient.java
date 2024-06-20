@@ -163,13 +163,26 @@ public class GRPCClient {
         if (params.getQueryName() != null) {
             context.setQueryName(params.getQueryName());
         }
-        // TODO: Add queryNameVersion
-        // TODO: Add required resolver tags
+        if (params.getQueryNameVersion() != null) {
+            context.setQueryNameVersion(params.getQueryNameVersion());
+        }
+        if (params.getTags() != null) {
+            context.addAllTags(params.getTags());
+        }
+        if (params.getRequiredResolverTags() != null) {
+            context.addAllRequiredResolverTags(params.getRequiredResolverTags());
+        }
 
-        var options = OnlineQueryResponseOptions.newBuilder();
-        // TODO: Add includeMeta
-        // TODO: Add explain
-        // TODO: Add feature encoding options
+        var options = OnlineQueryResponseOptions.newBuilder()
+                .setIncludeMeta(params.isIncludeMeta())
+                .setEncodingOptions(
+                    FeatureEncodingOptions.newBuilder()
+                        .setEncodeStructsAsObjects(true)
+                        .build()
+                );
+        if (params.isExplain()) {
+            options.setExplain(ExplainOptions.newBuilder().build());
+        }
         if (params.getMeta() != null) {
             options.putAllMetadata(params.getMeta());
         }
