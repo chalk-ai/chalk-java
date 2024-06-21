@@ -30,7 +30,7 @@ import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 public class GRPCClient implements ChalkClient {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
-    private final Channel engineChannel;
+    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
@@ -117,7 +117,7 @@ public class GRPCClient implements ChalkClient {
         } catch (Exception e) {
             throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
         }
-        this.engineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
+        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
             .maxInboundMessageSize(1024 * 1024 * 500)
             .intercept(
                 new AuthenticatedHeaderClientInterceptor(
@@ -128,12 +128,14 @@ public class GRPCClient implements ChalkClient {
                 )
             )
             .build();
+        this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
-    private QueryServiceGrpc.QueryServiceBlockingStub queryStub(AtomicReference<Metadata> trailersRef) {
+    private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
         AtomicReference<Metadata> headersRef = new AtomicReference<>();
-        return QueryServiceGrpc.newBlockingStub(this.engineChannel).
-                withInterceptors(MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef));
+        return this.queryStub.withInterceptors(
+                MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef)
+        );
     }
 
     @Override
@@ -217,7 +219,7 @@ public class GRPCClient implements ChalkClient {
 
         AtomicReference<OnlineQueryBulkResponse> responseRef = new AtomicReference<>();
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStub(trailersRef).onlineQueryBulk(request);
+        OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
 
         Table scalars = null;
         if (!response.getScalarsData().isEmpty()) {
