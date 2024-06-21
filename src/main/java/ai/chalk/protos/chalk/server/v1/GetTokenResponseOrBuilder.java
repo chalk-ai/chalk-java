@@ -9,12 +9,12 @@ public interface GetTokenResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_token = 1 [json_name = "accessToken"];</code>
+   * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The accessToken.
    */
   java.lang.String getAccessToken();
   /**
-   * <code>string access_token = 1 [json_name = "accessToken"];</code>
+   * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for accessToken.
    */
   com.google.protobuf.ByteString

@@ -9,24 +9,24 @@ public interface CreateLinkSessionResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The linkCode.
    */
   java.lang.String getLinkCode();
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for linkCode.
    */
   com.google.protobuf.ByteString
       getLinkCodeBytes();
 
   /**
-   * <code>string auth_link = 2 [json_name = "authLink"];</code>
+   * <code>string auth_link = 2 [json_name = "authLink", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The authLink.
    */
   java.lang.String getAuthLink();
   /**
-   * <code>string auth_link = 2 [json_name = "authLink"];</code>
+   * <code>string auth_link = 2 [json_name = "authLink", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for authLink.
    */
   com.google.protobuf.ByteString

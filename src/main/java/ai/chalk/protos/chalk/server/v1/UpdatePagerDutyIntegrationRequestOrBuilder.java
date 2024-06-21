@@ -49,17 +49,17 @@ public interface UpdatePagerDutyIntegrationRequestOrBuilder extends
   boolean getDefault();
 
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return Whether the token field is set.
    */
   boolean hasToken();
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The token.
    */
   java.lang.String getToken();
   /**
-   * <code>optional string token = 4 [json_name = "token"];</code>
+   * <code>optional string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for token.
    */
   com.google.protobuf.ByteString

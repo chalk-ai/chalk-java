@@ -60,57 +60,63 @@ public final class AuthProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\032chalk/server/v1/auth.proto\022\017chalk.serv" +
-      "er.v1\032\037chalk/auth/v1/permissions.proto\032\032" +
-      "chalk/server/v1/link.proto\032\037google/proto" +
-      "buf/timestamp.proto\"\227\001\n\017GetTokenRequest\022" +
-      "\033\n\tclient_id\030\001 \001(\tR\010clientId\022#\n\rclient_s" +
-      "ecret\030\002 \001(\tR\014clientSecret\022\035\n\ngrant_type\030" +
-      "\003 \001(\tR\tgrantType\022\031\n\005scope\030\004 \001(\tH\000R\005scope" +
-      "\210\001\001B\010\n\006_scope\"\361\005\n\020GetTokenResponse\022!\n\014ac" +
-      "cess_token\030\001 \001(\tR\013accessToken\022\035\n\ntoken_t" +
-      "ype\030\002 \001(\tR\ttokenType\022\035\n\nexpires_in\030\003 \001(\005" +
-      "R\texpiresIn\0229\n\nexpires_at\030\004 \001(\0132\032.google" +
-      ".protobuf.TimestampR\texpiresAt\022\035\n\napi_se" +
-      "rver\030\005 \001(\tR\tapiServer\0224\n\023primary_environ" +
-      "ment\030\006 \001(\tH\000R\022primaryEnvironment\210\001\001\022H\n\007e" +
-      "ngines\030\007 \003(\0132..chalk.server.v1.GetTokenR" +
-      "esponse.EnginesEntryR\007engines\022U\n\014grpc_en" +
-      "gines\030\010 \003(\01322.chalk.server.v1.GetTokenRe" +
-      "sponse.GrpcEnginesEntryR\013grpcEngines\022o\n\026" +
-      "environment_id_to_name\030\t \003(\0132:.chalk.ser" +
-      "ver.v1.GetTokenResponse.EnvironmentIdToN" +
-      "ameEntryR\023environmentIdToName\032:\n\014Engines" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\032>\n\020GrpcEnginesEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032F\n\030Env" +
-      "ironmentIdToNameEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
-      "\024\n\005value\030\002 \001(\tR\005value:\0028\001B\026\n\024_primary_en" +
-      "vironment\"j\n\030UpdateLinkSessionRequest\022\026\n" +
-      "\006status\030\001 \001(\tR\006status\022\027\n\007user_id\030\002 \001(\tR\006" +
-      "userId\022\035\n\nsession_id\030\003 \001(\tR\tsessionId\"+\n" +
-      "\031UpdateLinkSessionResponse\022\016\n\002id\030\001 \001(\tR\002" +
-      "id2\255\003\n\013AuthService\022T\n\010GetToken\022 .chalk.s" +
-      "erver.v1.GetTokenRequest\032!.chalk.server." +
-      "v1.GetTokenResponse\"\003\200}\001\022o\n\021CreateLinkSe" +
-      "ssion\022).chalk.server.v1.CreateLinkSessio" +
-      "nRequest\032*.chalk.server.v1.CreateLinkSes" +
-      "sionResponse\"\003\200}\001\022f\n\016GetLinkSession\022&.ch" +
-      "alk.server.v1.GetLinkSessionRequest\032\'.ch" +
-      "alk.server.v1.GetLinkSessionResponse\"\003\200}" +
-      "\001\022o\n\021UpdateLinkSession\022).chalk.server.v1" +
-      ".UpdateLinkSessionRequest\032*.chalk.server" +
-      ".v1.UpdateLinkSessionResponse\"\003\200}\001B\236\001\n\037a" +
-      "i.chalk.protos.chalk.server.v1B\tAuthProt" +
-      "oP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Se" +
-      "rver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server" +
-      "\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pro" +
-      "to3"
+      "er.v1\032\031chalk/auth/v1/audit.proto\032\037chalk/" +
+      "auth/v1/permissions.proto\032\032chalk/server/" +
+      "v1/link.proto\032\036chalk/utils/v1/sensitive." +
+      "proto\032 google/protobuf/descriptor.proto\032" +
+      "\037google/protobuf/timestamp.proto\"\235\001\n\017Get" +
+      "TokenRequest\022\033\n\tclient_id\030\001 \001(\tR\010clientI" +
+      "d\022)\n\rclient_secret\030\002 \001(\tB\004\330\241\'\001R\014clientSe" +
+      "cret\022\035\n\ngrant_type\030\003 \001(\tR\tgrantType\022\031\n\005s" +
+      "cope\030\004 \001(\tH\000R\005scope\210\001\001B\010\n\006_scope\"\367\005\n\020Get" +
+      "TokenResponse\022\'\n\014access_token\030\001 \001(\tB\004\330\241\'" +
+      "\001R\013accessToken\022\035\n\ntoken_type\030\002 \001(\tR\ttoke" +
+      "nType\022\035\n\nexpires_in\030\003 \001(\005R\texpiresIn\0229\n\n" +
+      "expires_at\030\004 \001(\0132\032.google.protobuf.Times" +
+      "tampR\texpiresAt\022\035\n\napi_server\030\005 \001(\tR\tapi" +
+      "Server\0224\n\023primary_environment\030\006 \001(\tH\000R\022p" +
+      "rimaryEnvironment\210\001\001\022H\n\007engines\030\007 \003(\0132.." +
+      "chalk.server.v1.GetTokenResponse.Engines" +
+      "EntryR\007engines\022U\n\014grpc_engines\030\010 \003(\01322.c" +
+      "halk.server.v1.GetTokenResponse.GrpcEngi" +
+      "nesEntryR\013grpcEngines\022o\n\026environment_id_" +
+      "to_name\030\t \003(\0132:.chalk.server.v1.GetToken" +
+      "Response.EnvironmentIdToNameEntryR\023envir" +
+      "onmentIdToName\032:\n\014EnginesEntry\022\020\n\003key\030\001 " +
+      "\001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032>\n\020Gr" +
+      "pcEnginesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
+      "e\030\002 \001(\tR\005value:\0028\001\032F\n\030EnvironmentIdToNam" +
+      "eEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
+      "\005value:\0028\001B\026\n\024_primary_environment\"j\n\030Up" +
+      "dateLinkSessionRequest\022\026\n\006status\030\001 \001(\tR\006" +
+      "status\022\027\n\007user_id\030\002 \001(\tR\006userId\022\035\n\nsessi" +
+      "on_id\030\003 \001(\tR\tsessionId\"+\n\031UpdateLinkSess" +
+      "ionResponse\022\016\n\002id\030\001 \001(\tR\002id2\277\003\n\013AuthServ" +
+      "ice\022Z\n\010GetToken\022 .chalk.server.v1.GetTok" +
+      "enRequest\032!.chalk.server.v1.GetTokenResp" +
+      "onse\"\t\200}\001\212\323\016\002\010\001\022u\n\021CreateLinkSession\022).c" +
+      "halk.server.v1.CreateLinkSessionRequest\032" +
+      "*.chalk.server.v1.CreateLinkSessionRespo" +
+      "nse\"\t\200}\001\212\323\016\002\010\001\022f\n\016GetLinkSession\022&.chalk" +
+      ".server.v1.GetLinkSessionRequest\032\'.chalk" +
+      ".server.v1.GetLinkSessionResponse\"\003\200}\001\022u" +
+      "\n\021UpdateLinkSession\022).chalk.server.v1.Up" +
+      "dateLinkSessionRequest\032*.chalk.server.v1" +
+      ".UpdateLinkSessionResponse\"\t\200}\001\212\323\016\002\010\001B\236\001" +
+      "\n\037ai.chalk.protos.chalk.server.v1B\tAuthP" +
+      "rotoP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk" +
+      ".Server.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Ser" +
+      "ver\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           ai.chalk.protos.chalk.server.v1.LinkProto.getDescriptor(),
+          ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor(),
+          com.google.protobuf.DescriptorProtos.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_GetTokenRequest_descriptor =
@@ -157,11 +163,16 @@ public final class AuthProto {
         new java.lang.String[] { "Id", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
+    registry.add(ai.chalk.protos.chalk.auth.v1.AuditProto.audit);
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);
+    registry.add(ai.chalk.protos.chalk.utils.v1.SensitiveProto.sensitive);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
+    ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     ai.chalk.protos.chalk.server.v1.LinkProto.getDescriptor();
+    ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor();
+    com.google.protobuf.DescriptorProtos.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

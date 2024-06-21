@@ -71,7 +71,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object clientSecret_ = "";
   /**
-   * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+   * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The clientSecret.
    */
   @java.lang.Override
@@ -88,7 +88,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+   * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for clientSecret.
    */
   @java.lang.Override
@@ -600,7 +600,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object clientSecret_ = "";
     /**
-     * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+     * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The clientSecret.
      */
     public java.lang.String getClientSecret() {
@@ -616,7 +616,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+     * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The bytes for clientSecret.
      */
     public com.google.protobuf.ByteString
@@ -633,7 +633,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+     * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The clientSecret to set.
      * @return This builder for chaining.
      */
@@ -646,7 +646,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+     * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
      * @return This builder for chaining.
      */
     public Builder clearClientSecret() {
@@ -656,7 +656,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string client_secret = 2 [json_name = "clientSecret"];</code>
+     * <code>string client_secret = 2 [json_name = "clientSecret", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The bytes for clientSecret to set.
      * @return This builder for chaining.
      */

@@ -145,7 +145,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object token_ = "";
   /**
-   * <code>string token = 4 [json_name = "token"];</code>
+   * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The token.
    */
   @java.lang.Override
@@ -162,7 +162,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string token = 4 [json_name = "token"];</code>
+   * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for token.
    */
   @java.lang.Override
@@ -834,7 +834,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object token_ = "";
     /**
-     * <code>string token = 4 [json_name = "token"];</code>
+     * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The token.
      */
     public java.lang.String getToken() {
@@ -850,7 +850,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string token = 4 [json_name = "token"];</code>
+     * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The bytes for token.
      */
     public com.google.protobuf.ByteString
@@ -867,7 +867,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string token = 4 [json_name = "token"];</code>
+     * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The token to set.
      * @return This builder for chaining.
      */
@@ -880,7 +880,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string token = 4 [json_name = "token"];</code>
+     * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @return This builder for chaining.
      */
     public Builder clearToken() {
@@ -890,7 +890,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string token = 4 [json_name = "token"];</code>
+     * <code>string token = 4 [json_name = "token", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The bytes for token to set.
      * @return This builder for chaining.
      */

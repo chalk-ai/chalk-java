@@ -64,7 +64,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object accessToken_ = "";
   /**
-   * <code>string access_token = 1 [json_name = "accessToken"];</code>
+   * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The accessToken.
    */
   @java.lang.Override
@@ -81,7 +81,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string access_token = 1 [json_name = "accessToken"];</code>
+   * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for accessToken.
    */
   @java.lang.Override
@@ -1135,7 +1135,7 @@ java.lang.String defaultValue) {
 
     private java.lang.Object accessToken_ = "";
     /**
-     * <code>string access_token = 1 [json_name = "accessToken"];</code>
+     * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The accessToken.
      */
     public java.lang.String getAccessToken() {
@@ -1151,7 +1151,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string access_token = 1 [json_name = "accessToken"];</code>
+     * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The bytes for accessToken.
      */
     public com.google.protobuf.ByteString
@@ -1168,7 +1168,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string access_token = 1 [json_name = "accessToken"];</code>
+     * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The accessToken to set.
      * @return This builder for chaining.
      */
@@ -1181,7 +1181,7 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>string access_token = 1 [json_name = "accessToken"];</code>
+     * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
      * @return This builder for chaining.
      */
     public Builder clearAccessToken() {
@@ -1191,7 +1191,7 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>string access_token = 1 [json_name = "accessToken"];</code>
+     * <code>string access_token = 1 [json_name = "accessToken", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The bytes for accessToken to set.
      * @return This builder for chaining.
      */

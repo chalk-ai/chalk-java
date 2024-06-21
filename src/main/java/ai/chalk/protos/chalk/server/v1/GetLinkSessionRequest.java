@@ -49,7 +49,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object linkCode_ = "";
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The linkCode.
    */
   @java.lang.Override
@@ -66,7 +66,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string link_code = 1 [json_name = "linkCode"];</code>
+   * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
    * @return The bytes for linkCode.
    */
   @java.lang.Override
@@ -479,7 +479,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object linkCode_ = "";
     /**
-     * <code>string link_code = 1 [json_name = "linkCode"];</code>
+     * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The linkCode.
      */
     public java.lang.String getLinkCode() {
@@ -495,7 +495,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string link_code = 1 [json_name = "linkCode"];</code>
+     * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
      * @return The bytes for linkCode.
      */
     public com.google.protobuf.ByteString
@@ -512,7 +512,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string link_code = 1 [json_name = "linkCode"];</code>
+     * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The linkCode to set.
      * @return This builder for chaining.
      */
@@ -525,7 +525,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string link_code = 1 [json_name = "linkCode"];</code>
+     * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
      * @return This builder for chaining.
      */
     public Builder clearLinkCode() {
@@ -535,7 +535,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string link_code = 1 [json_name = "linkCode"];</code>
+     * <code>string link_code = 1 [json_name = "linkCode", (.chalk.utils.v1.sensitive) = true];</code>
      * @param value The bytes for linkCode to set.
      * @return This builder for chaining.
      */
