@@ -30,6 +30,8 @@ public class GRPCClient implements ChalkClient {
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
+    private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
+
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
     }
@@ -128,7 +130,7 @@ public class GRPCClient implements ChalkClient {
 
     @Override
     public void printConfig() {
-        System.err.println("Config printing for GRPC client not yet implemented");
+        logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
