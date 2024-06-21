@@ -50,6 +50,18 @@ public interface ChalkClient {
     }
 
     /**
+     * <p> Creates a new ChalkClient instance that uses gRPC for communication.
+     * The gRPC ChalkClient instance is configured with config variables
+     * sourced the same way as the default ChalkClient instance.
+     *
+     * @return a new ChalkClient instance that uses gRPC
+     * @throws ChalkException
+     */
+    static ChalkClient createGrpc() throws ChalkException {
+        return builder().withGrpc().build();
+    }
+
+    /**
      * OnlineQuery computes features values using online resolvers.
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
      *
@@ -116,6 +128,8 @@ public interface ChalkClient {
          * custom timeouts, etc.
          */
         public Builder withHttpClient(HttpClient httpClient);
+
+        public Builder withGrpc();
 
         public String getClientId();
 

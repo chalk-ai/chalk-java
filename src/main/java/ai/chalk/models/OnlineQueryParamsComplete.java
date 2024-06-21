@@ -1,6 +1,7 @@
 package ai.chalk.models;
 
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +43,29 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             String environmentId,
             String previewDeploymentId,
             String queryName,
+            String queryNameVersion,
             String correlationId,
-            String branch
+            String branch,
+            List<ZonedDateTime> now,
+            List<String> requiredResolverTags
     ) {
-        super(inputs, outputs, staleness, meta, tags, includeMeta, storePlanStages, explain, environmentId, previewDeploymentId, queryName, correlationId, branch);
+        super(
+            inputs,
+            outputs,
+            staleness,
+            meta,
+            tags,
+            includeMeta,
+            storePlanStages,
+            explain,
+            environmentId,
+            previewDeploymentId,
+            queryName,
+            queryNameVersion,
+            correlationId,
+            branch,
+            now,
+            requiredResolverTags
+        );
     }
 }

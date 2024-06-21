@@ -25,6 +25,9 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
         for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
             this.allHeaders.put(Metadata.Key.of(entry.getKey(), Metadata.ASCII_STRING_MARSHALLER), entry.getValue());
         }
+        if (serverType.equals(ServerType.ENGINE)) {
+            this.allHeaders.put(GrpcHeaders.DEPLOYMENT_TYPE, "engine-grpc");
+        }
     }
 
     private final Map<Metadata.Key<String>, String> allHeaders;
@@ -43,11 +46,7 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
                     headers.put(entry.getKey(), entry.getValue());
                 }
                 headers.put(GrpcHeaders.AUTHORIZATION_KEY, "Bearer " + token.getAccessToken());
-                MetadataUtils.newAttachHeadersInterceptor(headers).interceptCall(
-                        method,
-                        callOptions,
-                        next
-                );
+                super.start(responseListener, headers);
             }
         };
     }

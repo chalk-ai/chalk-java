@@ -23,6 +23,8 @@ public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig clientSecret;
     private final RequestHandler handler;
 
+    private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
+
     public ChalkClient ChalkClient() throws ChalkException {
         return ChalkClient.builder().build();
     }
@@ -127,6 +129,6 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     public void printConfig() {
-        System.out.println(this.getConfigStr());
+        logger.log(System.Logger.Level.INFO, this.getConfigStr());
     }
 }
