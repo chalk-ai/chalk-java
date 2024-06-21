@@ -217,7 +217,6 @@ public class GRPCClient implements ChalkClient {
             .setResponseOptions(options)
             .build();
 
-        AtomicReference<OnlineQueryBulkResponse> responseRef = new AtomicReference<>();
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
         OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
 
