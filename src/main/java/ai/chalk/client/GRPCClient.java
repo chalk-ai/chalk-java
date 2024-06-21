@@ -6,7 +6,6 @@ import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
-import ai.chalk.internal.request.models.ChalkHttpException;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.protos.chalk.common.v1.*;
@@ -118,7 +117,7 @@ public class GRPCClient implements ChalkClient {
         } catch (Exception e) {
             throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
         }
-        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
+        this.engineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
             .maxInboundMessageSize(1024 * 1024 * 500)
             .intercept(
                 new AuthenticatedHeaderClientInterceptor(
@@ -129,7 +128,6 @@ public class GRPCClient implements ChalkClient {
                 )
             )
             .build();
-        this.engineChannel = authenticatedEngineChannel;
     }
 
     private QueryServiceGrpc.QueryServiceBlockingStub queryStub(AtomicReference<Metadata> trailersRef) {
@@ -218,9 +216,8 @@ public class GRPCClient implements ChalkClient {
             .build();
 
         AtomicReference<OnlineQueryBulkResponse> responseRef = new AtomicReference<>();
-        AtomicReference<Metadata> metaRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStub(metaRef).onlineQueryBulk(request);
-        var traceId = metaRef.get().get(CHALK_TRACE_ID_KEY);
+        AtomicReference<Metadata> trailersRef = new AtomicReference<>();
+        OnlineQueryBulkResponse response = this.queryStub(trailersRef).onlineQueryBulk(request);
 
         Table scalars = null;
         if (!response.getScalarsData().isEmpty()) {
@@ -250,7 +247,10 @@ public class GRPCClient implements ChalkClient {
             scalars,
             groups,
             errors,
-            GrpcSerializer.toQueryMeta(response.getResponseMeta(), traceId)
+            GrpcSerializer.toQueryMeta(
+                response.getResponseMeta(),
+                trailersRef.get().get(CHALK_TRACE_ID_KEY)
+            )
         );
     }
 }
