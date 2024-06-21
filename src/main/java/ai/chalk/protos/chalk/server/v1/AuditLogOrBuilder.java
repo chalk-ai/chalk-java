@@ -135,7 +135,7 @@ public interface AuditLogOrBuilder extends
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return Whether the code field is set.
    */
   boolean hasCode();
@@ -144,7 +144,7 @@ public interface AuditLogOrBuilder extends
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The enum numeric value on the wire for code.
    */
   int getCodeValue();
@@ -153,7 +153,7 @@ public interface AuditLogOrBuilder extends
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The code.
    */
   com.google.rpc.Code getCode();

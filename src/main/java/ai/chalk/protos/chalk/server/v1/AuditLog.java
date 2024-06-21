@@ -274,7 +274,7 @@ private static final long serialVersionUID = 0L;
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return Whether the code field is set.
    */
   @java.lang.Override public boolean hasCode() {
@@ -285,7 +285,7 @@ private static final long serialVersionUID = 0L;
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The enum numeric value on the wire for code.
    */
   @java.lang.Override public int getCodeValue() {
@@ -296,7 +296,7 @@ private static final long serialVersionUID = 0L;
    * The status of the request.
    * </pre>
    *
-   * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+   * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
    * @return The code.
    */
   @java.lang.Override public com.google.rpc.Code getCode() {
@@ -1753,7 +1753,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @return Whether the code field is set.
      */
     @java.lang.Override public boolean hasCode() {
@@ -1764,7 +1764,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @return The enum numeric value on the wire for code.
      */
     @java.lang.Override public int getCodeValue() {
@@ -1775,7 +1775,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @param value The enum numeric value on the wire for code to set.
      * @return This builder for chaining.
      */
@@ -1790,7 +1790,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @return The code.
      */
     @java.lang.Override
@@ -1803,7 +1803,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @param value The code to set.
      * @return This builder for chaining.
      */
@@ -1821,7 +1821,7 @@ com.google.protobuf.Value defaultValue) {
      * The status of the request.
      * </pre>
      *
-     * <code>optional .com.google.rpc.Code code = 6 [json_name = "code"];</code>
+     * <code>optional .google.rpc.Code code = 6 [json_name = "code"];</code>
      * @return This builder for chaining.
      */
     public Builder clearCode() {
