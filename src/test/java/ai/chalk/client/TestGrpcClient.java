@@ -44,6 +44,22 @@ public class TestGrpcClient {
                 throw e;
             }
         }
+        @Test
+        public void testOnlineQueryTraceId() throws Exception {
+            var userIds = List.of("5524");
+            var params = OnlineQueryParams.builder()
+                    .withInput(FraudTemplateFeatures.user.id, userIds)
+                    .withOutputs(FraudTemplateFeatures.user.socure_score)
+                    .build();
+
+            try (OnlineQueryResult result = client.onlineQuery(params)) {
+                assert result.getErrors().length == 0;
+                assert result.getMeta().getTraceId() != null;
+                assert result.getMeta().getTraceId().length() > 0;
+            } catch (Exception e) {
+                throw e;
+            }
+        }
 
         @Disabled("Has-many not yet supported on GRPC query")
         public void testOnlineQueryHasMany() throws Exception {

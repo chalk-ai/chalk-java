@@ -56,7 +56,7 @@ public class GrpcSerializer {
         );
     }
 
-    public static ai.chalk.models.QueryMeta toQueryMeta(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadata meta) {
+    public static ai.chalk.models.QueryMeta toQueryMeta(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadata meta, String traceId) {
         ZonedDateTime queryTimestamp = null;
         if (meta.hasQueryTimestamp()) {
             var ts = meta.getQueryTimestamp();
@@ -72,7 +72,8 @@ public class GrpcSerializer {
             meta.getEnvironmentName(),
             meta.getQueryId(),
             queryTimestamp,
-            meta.getQueryHash()
+            meta.getQueryHash(),
+            traceId
         );
     }
 }

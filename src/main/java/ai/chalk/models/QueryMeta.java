@@ -59,4 +59,9 @@ public class QueryMeta {
      * over time as we adjust implementation details.
      */
     private String queryHash;
+
+    /**
+     * Associated trace ID for this query. Instrumental for debugging.
+     */
+    private String traceId;
 }

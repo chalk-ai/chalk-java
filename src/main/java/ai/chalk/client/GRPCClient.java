@@ -16,12 +16,14 @@ import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import io.grpc.*;
+import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.vector.table.Table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
@@ -30,6 +32,7 @@ public class GRPCClient implements ChalkClient {
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
+    private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
 
     public GRPCClient() throws ChalkException {
@@ -128,6 +131,13 @@ public class GRPCClient implements ChalkClient {
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
+    private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
+        AtomicReference<Metadata> headersRef = new AtomicReference<>();
+        return this.queryStub.withInterceptors(
+                MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef)
+        );
+    }
+
     @Override
     public void printConfig() {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
@@ -206,7 +216,9 @@ public class GRPCClient implements ChalkClient {
             .setContext(context)
             .setResponseOptions(options)
             .build();
-        OnlineQueryBulkResponse response = this.queryStub.onlineQueryBulk(request);
+
+        AtomicReference<Metadata> trailersRef = new AtomicReference<>();
+        OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
 
         Table scalars = null;
         if (!response.getScalarsData().isEmpty()) {
@@ -236,7 +248,10 @@ public class GRPCClient implements ChalkClient {
             scalars,
             groups,
             errors,
-            GrpcSerializer.toQueryMeta(response.getResponseMeta())
+            GrpcSerializer.toQueryMeta(
+                response.getResponseMeta(),
+                trailersRef.get().get(CHALK_TRACE_ID_KEY)
+            )
         );
     }
 }
