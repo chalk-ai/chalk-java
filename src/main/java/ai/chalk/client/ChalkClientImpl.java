@@ -48,6 +48,8 @@ public class ChalkClientImpl implements ChalkClient {
                 this.clientSecret,
                 branch
         );
+
+        this.handler.refreshJwt(false);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
