@@ -38,6 +38,7 @@ public class ChalkClientImpl implements ChalkClient {
         this.environmentId = resolvedConfig.environmentId();
         SourcedConfig initialEnvironment = resolvedConfig.environmentId();
         String branch = config.getBranch();
+        String deploymentTag = config.getDeploymentTag();
 
         this.handler = new RequestHandler(
                 config.getHttpClient(),
@@ -46,7 +47,8 @@ public class ChalkClientImpl implements ChalkClient {
                 initialEnvironment,
                 this.clientId,
                 this.clientSecret,
-                branch
+                branch,
+                deploymentTag
         );
     }
 
@@ -119,7 +121,7 @@ public class ChalkClientImpl implements ChalkClient {
                                 clientSecret.value().replaceAll(".", "*")
                         )
                 )) +
-                """ 
+                """
                         For each variable, we take the first non-empty value, in order, from the following sources:
                           1. The value passed to ChalkClient's Builder
                           2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)

@@ -141,6 +141,8 @@ public interface ChalkClient {
 
         public String getBranch();
 
+        public String getDeploymentTag();
+
         public HttpClient getHttpClient();
 
         ChalkClient build() throws ChalkException;

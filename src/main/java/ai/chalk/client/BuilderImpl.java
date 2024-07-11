@@ -21,6 +21,8 @@ public class BuilderImpl implements ChalkClient.Builder {
     @Nullable
     private HttpClient httpClient;
     private boolean useGrpc;
+    @Nullable
+    private String deploymentTag;
 
     public BuilderImpl() {
         this.clientId = null;
@@ -28,6 +30,7 @@ public class BuilderImpl implements ChalkClient.Builder {
         this.apiServer = null;
         this.environmentId = null;
         this.branch = null;
+        this.deploymentTag = null;
         this.httpClient = null;
     }
 
@@ -53,6 +56,11 @@ public class BuilderImpl implements ChalkClient.Builder {
 
     public BuilderImpl withBranch(String branch) {
         this.branch = branch;
+        return this;
+    }
+
+    public BuilderImpl WithDeploymentTag(String deploymentTag) {
+        this.deploymentTag = deploymentTag;
         return this;
     }
 

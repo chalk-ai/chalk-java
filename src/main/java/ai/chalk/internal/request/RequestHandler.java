@@ -32,6 +32,8 @@ public class RequestHandler {
     private final SourcedConfig clientId;
     private final SourcedConfig clientSecret;
     private final String branch;
+    private final String deploymentTag;
+
 
     public RequestHandler(
             HttpClient httpClient,
@@ -100,6 +102,9 @@ public class RequestHandler {
 
         if (previewDeploymentId != null && !previewDeploymentId.isEmpty()) {
             headers.put("X-Chalk-Preview-Deployment", previewDeploymentId);
+        }
+        if (this.De) {
+            headers.put("X-Chalk-Env-Id", this.environmentId.value());
         }
 
         if (queryName != null && !queryName.isEmpty()) {
