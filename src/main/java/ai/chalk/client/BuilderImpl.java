@@ -59,7 +59,7 @@ public class BuilderImpl implements ChalkClient.Builder {
         return this;
     }
 
-    public BuilderImpl WithDeploymentTag(String deploymentTag) {
+    public BuilderImpl withDeploymentTag(String deploymentTag) {
         this.deploymentTag = deploymentTag;
         return this;
     }

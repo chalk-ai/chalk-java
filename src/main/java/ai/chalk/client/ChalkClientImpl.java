@@ -39,6 +39,9 @@ public class ChalkClientImpl implements ChalkClient {
         SourcedConfig initialEnvironment = resolvedConfig.environmentId();
         String branch = config.getBranch();
         String deploymentTag = config.getDeploymentTag();
+        if (branch != null && deploymentTag != null) {
+            throw new ClientException("Cannot set both branch and deploymentTag");
+        }
 
         this.handler = new RequestHandler(
                 config.getHttpClient(),
