@@ -123,7 +123,7 @@ public class ChalkClientImpl implements ChalkClient {
                         For each variable, we take the first non-empty value, in order, from the following sources:
                           1. The value passed to ChalkClient's Builder
                           2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
-                          3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+                          3. The value in your '~/.chalk.yml' file
                           4. A default value (if applicable)
                         """;
     }
