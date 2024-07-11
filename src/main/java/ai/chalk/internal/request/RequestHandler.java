@@ -42,7 +42,8 @@ public class RequestHandler {
             SourcedConfig environmentId,
             SourcedConfig clientId,
             SourcedConfig clientSecret,
-            String branch
+            String branch,
+            String deploymentTag
     ) {
         if (httpClient == null) {
             System.setProperty("jdk.httpclient.keepalive.timeout", "300");
@@ -57,6 +58,7 @@ public class RequestHandler {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.branch = branch;
+        this.deploymentTag = deploymentTag;
         this.engines = new HashMap<>();
     }
 
@@ -103,8 +105,8 @@ public class RequestHandler {
         if (previewDeploymentId != null && !previewDeploymentId.isEmpty()) {
             headers.put("X-Chalk-Preview-Deployment", previewDeploymentId);
         }
-        if (this.De) {
-            headers.put("X-Chalk-Env-Id", this.environmentId.value());
+        if (this.deploymentTag != null) {
+            headers.put("X-Chalk-Deployment-Tag", this.deploymentTag);
         }
 
         if (queryName != null && !queryName.isEmpty()) {
