@@ -103,7 +103,8 @@ public class GRPCClient implements ChalkClient {
                         ServerType.SERVER,
                         Map.of(),
                         tokenRefresher,
-                        environmentId
+                        environmentId,
+                        null
                 )
             )
             .build();
@@ -124,7 +125,8 @@ public class GRPCClient implements ChalkClient {
                         ServerType.ENGINE,
                         Map.of(),
                         tokenRefresher,
-                        environmentId
+                        environmentId,
+                        builder.getDeploymentTag()
                 )
             )
             .build();

@@ -9,13 +9,16 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 
 public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
     public AuthenticatedHeaderClientInterceptor(
             @NonNull ServerType serverType,
             @NonNull Map<String, String> additionalHeaders,
             @NonNull TokenRefresher tokenRefresher,
-            @NonNull String environmentId
+            @NonNull String environmentId,
+            @Nullable String deploymentTag
     ) {
         this.tokenRefresher = tokenRefresher;
         this.allHeaders = new HashMap<>(Map.of(
@@ -28,6 +31,10 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
         if (serverType.equals(ServerType.ENGINE)) {
             this.allHeaders.put(GrpcHeaders.DEPLOYMENT_TYPE, "engine-grpc");
         }
+        if (deploymentTag != null) {
+            this.allHeaders.put(GrpcHeaders.DEPLOYMENT_TAG, deploymentTag);
+        }
+
     }
 
     private final Map<Metadata.Key<String>, String> allHeaders;
