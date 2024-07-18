@@ -10,13 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class TestOnlineQueryParams {
+public class TestOnlineQueryParams extends AllocatorTest {
     public static boolean jsonCompare(String expected, String actual) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode tree1 = mapper.readTree(expected);
@@ -118,7 +116,7 @@ public class TestOnlineQueryParams {
                 ))
                 */
                 .build();
-        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
         try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
             var floatField = deserialized.getField("user.float_feature");
             assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
@@ -423,14 +421,14 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getQueryNameVersion().equals(queryNameVersion);
 
         // Test serialization
-        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete);
+        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
     }
 
     @Test
     public void testLargeUtf8AsInput() throws Exception {
         var largeString = "a".repeat(100000);
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
-        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
         var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
         assert reconstructedInput.getVectorCopy("user.id").getObject(0).toString().equals(largeString);
     }
@@ -440,7 +438,7 @@ public class TestOnlineQueryParams {
         var largeBinaryString = "acb".repeat(100000);
         var largeBinary = largeBinaryString.getBytes();
         var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
-        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
         var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
         assert new String((byte[]) reconstructedInput.getVectorCopy("user.binary_data").getObject(0)).equals(largeBinaryString);
     }
@@ -453,7 +451,7 @@ public class TestOnlineQueryParams {
         inputs.put("user.id", userIds);
         var outputs = new String[]{"user.today", "user.socure_score"};
         var params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -461,7 +459,7 @@ public class TestOnlineQueryParams {
         var userIds = Arrays.asList("1", "2", "3");
         var params = OnlineQueryParams.builder().withInput("user.id", userIds).withOutputs("user.today", "user.socure_score").build();
         assert params.getInputs().get("user.id").equals(userIds);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -469,7 +467,7 @@ public class TestOnlineQueryParams {
         var outputs = Arrays.asList("user.today", "user.socure_score");
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
         assert params.getOutputs().equals(outputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -477,7 +475,7 @@ public class TestOnlineQueryParams {
         var outputs = new String[]{"user.today", "user.socure_score"};
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
         assert Arrays.equals(params.getOutputs().toArray(), outputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     /**
@@ -513,7 +511,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals(p.getInputs().get("test_user.id").toArray(), expectedInputs);
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -552,7 +550,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert p.getInputs().get("test_user.id").equals(expectedInputs);
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -596,7 +594,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.id", "test_user.burrys_membership.membership_id"});
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -618,7 +616,7 @@ public class TestOnlineQueryParams {
                 "test_user.burrys_membership",
         });
         // Test serialization is OK.
-        BytesProducer.convertOnlineQueryParamsToBytes(p);
+        BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
     }
 
 

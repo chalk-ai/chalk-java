@@ -35,7 +35,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
-    private final RootAllocator allocator = new RootAllocator(Long.MAX_VALUE);
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -147,10 +147,18 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
-        try {
-            bodyBytes = inputsToArrowBytes(params.getInputs(), this.allocator.newChildAllocator());
-        } catch (Exception e) {
-            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        try (
+            var childAllocator = allocator.newChildAllocator(
+                "grpc_online_query_params",
+                0,
+                FeatherProcessor.CHILD_ALLOCATOR_SIZE
+            )
+        ) {
+            try {
+                bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
+            } catch (Exception e) {
+                throw new ClientException("Failed to serialize OnlineQueryParams", e);
+            }
         }
 
         List<OutputExpr> outputs = new ArrayList<>();

@@ -2,6 +2,7 @@ package ai.chalk.arrow;
 
 
 import ai.chalk.arrow.test_features.User;
+import ai.chalk.client.AllocatorTest;
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.arrow.FeatherProcessor;
@@ -24,28 +25,12 @@ import org.junit.jupiter.api.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.*;
 
-public class TestFeather {
+public class TestFeather extends AllocatorTest {
     /**
      * This tests that all fields in an OnlineQueryBulkResponse correctly deserialize.
      */
-    private static RootAllocator rootAllocator;
-    private BufferAllocator childAllocator;
-
-
-    @BeforeAll
-    public static void setUp() {
-        rootAllocator = new RootAllocator(Long.MAX_VALUE);
-
-    }
-    @AfterAll public static void tearDown() {
-        rootAllocator.close();
-    }
 
     @Test
     public void testConvertBytesResponseToResult() throws Exception {
@@ -129,8 +114,8 @@ public class TestFeather {
             intArray[i] = i;
         }
         byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(
-                OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build(),
-
+            OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build(),
+            TestFeather.allocator
         );
         try (
             Table table = FeatherProcessor.convertBytesToTable(bytes);
@@ -190,7 +175,7 @@ public class TestFeather {
         assert scalarsTable.getRowCount() == 3;
 
         try (
-            BigIntVector expected = new BigIntVector("int_vector", new RootAllocator(Long.MAX_VALUE));
+            BigIntVector expected = new BigIntVector("int_vector", allocator);
             BigIntWriter writer = new BigIntWriterImpl(expected);
         ) {
             expected.allocateNew(4032);
@@ -207,7 +192,7 @@ public class TestFeather {
         }
 
         try (
-                BitVector expected = new BitVector("bool_vector", new RootAllocator(Long.MAX_VALUE));
+                BitVector expected = new BitVector("bool_vector", allocator);
         ) {
             expected.allocateNew(3);
             expected.set(0, 1);
@@ -220,7 +205,7 @@ public class TestFeather {
         }
 
         try (
-                Float8Vector expected = new Float8Vector("float_vector", new RootAllocator(Long.MAX_VALUE));
+                Float8Vector expected = new Float8Vector("float_vector", allocator);
                 Float8Writer writer = new Float8WriterImpl(expected);
         ) {
             expected.allocateNew(3);
@@ -237,7 +222,7 @@ public class TestFeather {
         }
 
         try (
-            LargeVarCharVector expected = new LargeVarCharVector("str_vector", new RootAllocator(Long.MAX_VALUE));
+            LargeVarCharVector expected = new LargeVarCharVector("str_vector", allocator);
         ) {
             expected.allocateNew(3);
             expected.set(0, "string1".getBytes());
@@ -250,7 +235,7 @@ public class TestFeather {
         }
 
         try (
-                DateMilliVector expected = new DateMilliVector("date_vector", new RootAllocator(Long.MAX_VALUE));
+                DateMilliVector expected = new DateMilliVector("date_vector", allocator);
                 DateMilliWriter writer = new DateMilliWriterImpl(expected);
         ) {
             expected.allocateNew(3);
@@ -267,7 +252,7 @@ public class TestFeather {
         }
 
         try (
-                TimeStampMicroTZVector expected = new TimeStampMicroTZVector("datetime_vector", new RootAllocator(Long.MAX_VALUE), "UTC");
+                TimeStampMicroTZVector expected = new TimeStampMicroTZVector("datetime_vector", allocator, "UTC");
                 TimeStampMicroTZWriter writer = new TimeStampMicroTZWriterImpl(expected);
         ) {
             expected.allocateNew(3);

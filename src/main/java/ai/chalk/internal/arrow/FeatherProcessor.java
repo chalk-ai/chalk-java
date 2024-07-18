@@ -21,7 +21,6 @@ import org.apache.arrow.vector.util.VectorSchemaRootAppender;
 
 
 import java.io.ByteArrayOutputStream;
-import java.nio.Buffer;
 import java.nio.channels.Channels;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -69,7 +68,7 @@ public class FeatherProcessor {
         }
     }
 
-    public static void writeValue(BaseWriter writer, Object value) throws Exception {
+    public static void writeValue(BaseWriter writer, Object value, BufferAllocator allocator) throws Exception {
         if (value instanceof Integer) {
             if (!(writer instanceof BigIntWriter intWriter)) {
                 throw new Exception(String.format("Have `Integer` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
@@ -91,7 +90,6 @@ public class FeatherProcessor {
             }
             var bytesValue = stringValue.getBytes();
             try (
-                var allocator = new RootAllocator(Long.MAX_VALUE);
                 ArrowBuf tempBuf = allocator.buffer(bytesValue.length)
             ) {
                 tempBuf.setBytes(0, bytesValue);
@@ -107,7 +105,6 @@ public class FeatherProcessor {
                 throw new Exception(String.format("Have `byte[]` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
             }
             try (
-                var allocator = new RootAllocator(Long.MAX_VALUE);
                 ArrowBuf tempBuf = allocator.buffer(binaryValue.length)
             ) {
                 tempBuf.setBytes(0, binaryValue);
@@ -161,7 +158,7 @@ public class FeatherProcessor {
             }
             listWriter.startList();
             for (Object item: (List<?>) value) {
-                writeValue(innerWriter, item);
+                writeValue(innerWriter, item, allocator);
             }
             listWriter.endList();
         } else if (writer instanceof NullableStructWriter structWriter) {
@@ -171,23 +168,23 @@ public class FeatherProcessor {
                 var fieldVal = pair.value();
                 var fieldName = pair.key();
                 if (fieldVal instanceof Integer) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal);
+                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Long) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal);
+                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Double) {
-                    writeValue(structWriter.float8(fieldName), fieldVal);
+                    writeValue(structWriter.float8(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof String) {
-                    writeValue(structWriter.largeVarChar(fieldName), fieldVal);
+                    writeValue(structWriter.largeVarChar(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Boolean) {
-                    writeValue(structWriter.bit(fieldName), fieldVal);
+                    writeValue(structWriter.bit(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof byte[]) {
-                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal);
+                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof ZonedDateTime) {
-                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal);
+                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof LocalDateTime) {
-                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal);
+                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof List) {
-                    writeValue(structWriter.list(fieldName), fieldVal);
+                    writeValue(structWriter.list(fieldName), fieldVal, allocator);
                 } else {
                     throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
                 }
@@ -201,23 +198,23 @@ public class FeatherProcessor {
                 var fieldVal = pair.value();
                 var fieldName = pair.key();
                 if (fieldVal instanceof Integer) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal);
+                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Long) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal);
+                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Double) {
-                    writeValue(structWriter.float8(fieldName), fieldVal);
+                    writeValue(structWriter.float8(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof String) {
-                    writeValue(structWriter.largeVarChar(fieldName), fieldVal);
+                    writeValue(structWriter.largeVarChar(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof Boolean) {
-                    writeValue(structWriter.bit(fieldName), fieldVal);
+                    writeValue(structWriter.bit(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof ZonedDateTime) {
-                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal);
+                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof LocalDateTime) {
-                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal);
+                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof byte[]) {
-                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal);
+                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal, allocator);
                 } else if (fieldVal instanceof List) {
-                    writeValue(structWriter.list(fieldName), fieldVal);
+                    writeValue(structWriter.list(fieldName), fieldVal, allocator);
                 } else {
                     throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
                 }
@@ -257,7 +254,7 @@ public class FeatherProcessor {
                 var writer = new BigIntWriterImpl(intVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof Long) {
                 BigIntVector longVector = new BigIntVector(fqn, allocator);
@@ -265,7 +262,7 @@ public class FeatherProcessor {
                 var writer = new BigIntWriterImpl(longVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof Double) {
                 Float8Vector doubleVector = new Float8Vector(fqn, allocator);
@@ -273,7 +270,7 @@ public class FeatherProcessor {
                 var writer = new Float8WriterImpl(doubleVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof String) {
                 LargeVarCharVector stringVector = new LargeVarCharVector(fqn, allocator);
@@ -281,7 +278,7 @@ public class FeatherProcessor {
                 var writer = new LargeVarCharWriterImpl(stringVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof Boolean) {
                 BitVector boolVector = new BitVector(fqn, allocator);
@@ -289,7 +286,7 @@ public class FeatherProcessor {
                 var writer = new BitWriterImpl(boolVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof byte[]) {
                 LargeVarBinaryVector binaryVector = new LargeVarBinaryVector(fqn, allocator);
@@ -297,7 +294,7 @@ public class FeatherProcessor {
                 var writer = new LargeVarBinaryWriterImpl(binaryVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof ZonedDateTime zonedDt) {
                 String tz = zonedDt.getZone().toString();
@@ -306,7 +303,7 @@ public class FeatherProcessor {
                 var writer = new TimeStampMicroTZWriterImpl(timestampVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof LocalDateTime localDt) {
                 TimeStampMicroVector timestampVector = new TimeStampMicroVector(fqn, allocator);
@@ -314,14 +311,14 @@ public class FeatherProcessor {
                 var writer = new TimeStampMicroWriterImpl(timestampVector);
                 for (int i = 0; i < values.size(); i++) {
                     writer.setPosition(i);
-                    writeValue(writer, values.get(i));
+                    writeValue(writer, values.get(i), allocator);
                 }
             } else if (firstVal instanceof List) {
                 var listVector = LargeListVector.empty(fqn, allocator);
                 fieldVectors.add(listVector);
                 var writer = listVector.getWriter();
                 for (Object o : values) {
-                    writeValue(writer, o);
+                    writeValue(writer, o, allocator);
                 }
                 writer.setValueCount(values.size());
             } else if (firstVal instanceof Map) {
@@ -329,7 +326,7 @@ public class FeatherProcessor {
                 fieldVectors.add(structVector);
                 var writer = structVector.getWriter();
                 for (Object o : values) {
-                    writeValue(writer, o);
+                    writeValue(writer, o, allocator);
                 }
                 // Importante to `setValueCount` otherwise values all null.
                 writer.setValueCount(values.size());

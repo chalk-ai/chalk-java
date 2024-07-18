@@ -3,6 +3,7 @@ package ai.chalk.arrow;
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
+import ai.chalk.client.AllocatorTest;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
@@ -19,12 +20,10 @@ import java.time.*;
 import java.util.*;
 
 
-public class TestUnmarshaller {
+public class TestUnmarshaller extends AllocatorTest {
     public Table getHasManyTable() {
         // Transactions class
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
-
         var idVector = new VarCharVector("transaction.id", allocator);
 
         idVector.allocateNew();
@@ -59,7 +58,6 @@ public class TestUnmarshaller {
 
     public Table getTestTableWithAllArrowTypes() {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var idVector = new VarCharVector("arrow_user.id", allocator);
         idVector.allocateNew();
@@ -1132,7 +1130,6 @@ public class TestUnmarshaller {
     @Test
     public void TestUnmarshalVersioned() throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("versioned_features_class.grade@2", allocator);
         defaultVector.allocateNew();
@@ -1172,7 +1169,6 @@ public class TestUnmarshaller {
     @Test
     public void TestUnmarshalNamed() throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
         defaultVector.allocateNew();
@@ -1198,7 +1194,6 @@ public class TestUnmarshaller {
         // This supports backwards compatibility with older versions
         // of codegen where we generated snake case fields.
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
         defaultVector.allocateNew();

@@ -26,12 +26,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final RequestHandler handler;
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
-    private static final RootAllocator allocator = new RootAllocator(Long.MAX_VALUE);
-
-    public ChalkClient ChalkClient() throws ChalkException {
-        return ChalkClient.builder().build();
-    }
-
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         ResolvedConfig resolvedConfig = this.resolveConfig(config);
@@ -142,5 +137,10 @@ public class ChalkClientImpl implements ChalkClient {
 
     public void printConfig() {
         logger.log(System.Logger.Level.INFO, this.getConfigStr());
+    }
+
+    @Override
+    public void close() {
+        this.allocator.close();
     }
 }
