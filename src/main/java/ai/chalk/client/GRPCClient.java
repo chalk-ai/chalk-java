@@ -154,11 +154,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 FeatherProcessor.CHILD_ALLOCATOR_SIZE
             )
         ) {
-            try {
-                bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
-            } catch (Exception e) {
-                throw new ClientException("Failed to serialize OnlineQueryParams", e);
-            }
+            bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
         List<OutputExpr> outputs = new ArrayList<>();
