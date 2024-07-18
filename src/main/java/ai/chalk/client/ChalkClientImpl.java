@@ -51,17 +51,15 @@ public class ChalkClientImpl implements ChalkClient {
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try (
-            var childAllocator = allocator.newChildAllocator(
-                    "online_query_params",
-                    0,
-                    FeatherProcessor.CHILD_ALLOCATOR_SIZE
-            )
+                var childAllocator = allocator.newChildAllocator(
+                        "online_query_params",
+                        0,
+                        FeatherProcessor.CHILD_ALLOCATOR_SIZE
+                )
         ) {
-            try {
-                bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
-            } catch (Exception e) {
-                throw new ClientException("Failed to serialize OnlineQueryParams", e);
-            }
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
         SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
