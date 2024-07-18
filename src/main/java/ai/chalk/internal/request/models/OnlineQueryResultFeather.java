@@ -4,16 +4,19 @@ import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
-import ai.chalk.models.QueryMeta;
 import ai.chalk.internal.bytes.BytesConsumer;
+import ai.chalk.models.QueryMeta;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.Getter;
 import org.apache.arrow.vector.table.Table;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 
 
 public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<String, Table> groupsData,
