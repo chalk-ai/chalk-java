@@ -30,11 +30,6 @@ import java.util.*;
 public class FeatherProcessor {
     public static final long ROOT_ALLOCATOR_SIZE = Long.MAX_VALUE;
     public static final long CHILD_ALLOCATOR_SIZE = 1024 * 1024 * 1024;
-    public BufferAllocator allocator;
-
-    public FeatherProcessor(BufferAllocator allocator) {
-        this.allocator = allocator;
-    }
 
     public static ArrayList<StructEntry> getEntriesFromMap(Map<String, ?> obj) {
         var entries = new ArrayList<StructEntry>();
