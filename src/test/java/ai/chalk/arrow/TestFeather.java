@@ -115,7 +115,7 @@ public class TestFeather extends AllocatorTest {
         }
         byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(
             OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build(),
-            TestFeather.allocator
+            allocator
         );
         try (
             Table table = FeatherProcessor.convertBytesToTable(bytes);

@@ -32,9 +32,8 @@ public class TestUnmarshaller {
 
     @AfterAll
     public static void tearDown() {
-        // TODO: Fix test leak. Does not seem as simple as just closing the writers.
-        //       Suspecting need to close the writers not immediately but at the end
-        //       of table creation.
+        // TODO: Fix test leak in fixture. Does not seem as simple as just closing the writers.
+        //       Suspecting need to close the writers not immediately but after table creation.
         // allocator.close();
     }
 
