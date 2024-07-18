@@ -54,7 +54,7 @@ public class ChalkClientImpl implements ChalkClient {
             var childAllocator = allocator.newChildAllocator(
                     "online_query_params",
                     0,
-                    FeatherProcessor.CHILD_ALLOCATOR_SIZE
+                    FeatherProcessor.REQUEST_ALLOCATOR_SIZE
             )
         ) {
             try {

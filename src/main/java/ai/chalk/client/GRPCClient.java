@@ -151,7 +151,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             var childAllocator = allocator.newChildAllocator(
                 "grpc_online_query_params",
                 0,
-                FeatherProcessor.CHILD_ALLOCATOR_SIZE
+                FeatherProcessor.REQUEST_ALLOCATOR_SIZE
             )
         ) {
             try {
@@ -230,38 +230,51 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
         OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
 
-        Table scalars = null;
-        if (!response.getScalarsData().isEmpty()) {
-            try {
-                scalars = FeatherProcessor.convertBytesToTable(response.getScalarsData().toByteArray(), allocator);
-            } catch (Exception e) {
-                throw new ClientException("Failed to convert scalar data bytes to table", e);
-            }
-        }
-
-        Map<String, Table> groups = new HashMap<>();
-        for (var entry : response.getGroupsDataMap().entrySet()) {
-            String fqn = entry.getKey();
-            try {
-                groups.put(fqn, FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), allocator));
-            } catch (Exception e) {
-                throw new ClientException(String.format("Failed to convert bytes to table for %s", fqn), e);
-            }
-        }
+        var meta = GrpcSerializer.toQueryMeta(
+                response.getResponseMeta(),
+                trailersRef.get().get(CHALK_TRACE_ID_KEY)
+        );
 
         ServerError[] errors = new ServerError[response.getErrorsCount()];
         for (int i = 0; i < response.getErrorsCount(); i++) {
             errors[i] = GrpcSerializer.toServerError(response.getErrors(i));
         }
 
+        Table scalars = null;
+        Map<String, Table> groups = new HashMap<>();
+        try {
+            if (!response.getScalarsData().isEmpty()) {
+                try {
+                    scalars = FeatherProcessor.convertBytesToTable(response.getScalarsData().toByteArray(), allocator);
+                } catch (Exception e) {
+                    throw new ClientException("Failed to convert scalar data bytes to table", e);
+                }
+            }
+
+            for (var entry : response.getGroupsDataMap().entrySet()) {
+                String fqn = entry.getKey();
+                try {
+                    groups.put(fqn, FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), allocator));
+                } catch (Exception e) {
+                    throw new ClientException(
+                        String.format("Failed to convert bytes to table for feature '%s'", fqn), e
+                    );
+                }
+            }
+        } finally {
+            if (scalars != null) {
+                scalars.close();
+            }
+            for (var table : groups.values()) {
+                table.close();
+            }
+        }
+
         return new OnlineQueryResult(
             scalars,
             groups,
             errors,
-            GrpcSerializer.toQueryMeta(
-                response.getResponseMeta(),
-                trailersRef.get().get(CHALK_TRACE_ID_KEY)
-            )
+            meta
         );
     }
 
