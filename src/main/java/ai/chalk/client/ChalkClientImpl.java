@@ -81,6 +81,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
+        // ignore the warning here, because we don't want to free the memory yet
         return this.handler.sendRequest(request).toResult();
     }
 
