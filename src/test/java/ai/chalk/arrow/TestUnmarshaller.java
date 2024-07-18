@@ -15,8 +15,8 @@ import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
@@ -24,14 +24,14 @@ import java.util.*;
 
 
 public class TestUnmarshaller {
-    private static RootAllocator allocator;
-    @BeforeAll
-    public static void setUp() {
+    private RootAllocator allocator;
+    @BeforeEach
+    public void setUp() {
         allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         // TODO: Fix test leak in fixture. Does not seem as simple as just closing the writers.
         //       Suspecting need to close the writers not immediately but after table creation.
         // allocator.close();

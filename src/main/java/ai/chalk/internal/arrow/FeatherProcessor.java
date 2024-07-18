@@ -330,7 +330,6 @@ public class FeatherProcessor {
             }
         }
 
-        byte[] byteArr;
         try (
             VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -339,9 +338,8 @@ public class FeatherProcessor {
             writer.start();
             writer.writeBatch();
             writer.end();
-            byteArr = out.toByteArray();
+            return out.toByteArray();
         }
-        return byteArr;
     }
 
     /*
