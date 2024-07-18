@@ -4,21 +4,15 @@ import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.models.OnlineQueryResult;
-import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-
-@AllArgsConstructor
-public class OnlineQueryBulkResponse {
-    Map<String, OnlineQueryResultFeather> queryResults;
-
+public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> queryResults) implements AutoCloseable {
     public static OnlineQueryBulkResponse fromBytes(byte[] bytes) throws ChalkException {
         Map<String, Object> res;
         try {
-
             res = BytesConsumer.unmarshal(bytes);
         } catch (Exception e) {
             throw new ClientException("failed to unmarshal bytes into OnlineQueryBulkResponse", e);
@@ -28,7 +22,6 @@ public class OnlineQueryBulkResponse {
         if (res.containsKey("query_results_bytes")) {
             byte[] queryResultsBytes = (byte[]) res.get("query_results_bytes");
             try {
-
                 Map<String, Object> resultBytesMap = BytesConsumer.unmarshal(queryResultsBytes);
                 for (Map.Entry<String, Object> entry : resultBytesMap.entrySet()) {
                     String key = entry.getKey();
@@ -37,6 +30,9 @@ public class OnlineQueryBulkResponse {
                     resultFeatherMap.put(key, featherResult);
                 }
             } catch (Exception e) {
+                for (var subResult: resultFeatherMap.values()) {
+                    subResult.close();
+                }
                 throw new ClientException("failed to unmarshal bytes into OnlineQueryBulkResponse", e);
             }
         } else {
@@ -52,10 +48,17 @@ public class OnlineQueryBulkResponse {
         }
         OnlineQueryResultFeather internalResult = this.queryResults.get("0");
         return new OnlineQueryResult(
-                internalResult.getScalarData(),
-                internalResult.getGroupsData(),
-                internalResult.getErrors(),
-                internalResult.getMeta()
+                internalResult.scalarData(),
+                internalResult.groupsData(),
+                internalResult.errors(),
+                internalResult.meta()
         );
+    }
+
+    @Override
+    public void close() {
+        for (var subResult: queryResults.values()) {
+            subResult.close();
+        }
     }
 }
