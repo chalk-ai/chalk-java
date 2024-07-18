@@ -57,11 +57,9 @@ public class ChalkClientImpl implements ChalkClient {
                     FeatherProcessor.REQUEST_ALLOCATOR_SIZE
             )
         ) {
-            try {
-                bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
-            } catch (Exception e) {
-                throw new ClientException("Failed to serialize OnlineQueryParams", e);
-            }
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
         SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
@@ -76,7 +74,13 @@ public class ChalkClientImpl implements ChalkClient {
                 .build();
 
         byte[] response = this.handler.sendRequest(request);
-        try (var allocator = this.allocator.newChildAllocator("online_query_response", 0, FeatherProcessor.RESPONSE_ALLOCATOR_SIZE)) {
+        try (
+            var allocator = this.allocator.newChildAllocator(
+                "online_query_response",
+                0,
+                FeatherProcessor.RESPONSE_ALLOCATOR_SIZE
+            )
+        ) {
             // ignore the warning here, because we don't want to free the memory yet
             var bulkResponse = OnlineQueryBulkResponse.fromBytes(response, allocator);
             return bulkResponse.toResult();

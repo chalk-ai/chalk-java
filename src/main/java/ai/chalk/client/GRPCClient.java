@@ -242,10 +242,17 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         Table scalars = null;
         Map<String, Table> groups = new HashMap<>();
-        try {
+        try (
+            var responseAlloc = this.allocator.newChildAllocator(
+                "grpc_online_query_response", 0, FeatherProcessor.RESPONSE_ALLOCATOR_SIZE
+            )
+        ) {
             if (!response.getScalarsData().isEmpty()) {
                 try {
-                    scalars = FeatherProcessor.convertBytesToTable(response.getScalarsData().toByteArray(), allocator);
+                    scalars = FeatherProcessor.convertBytesToTable(
+                        response.getScalarsData().toByteArray(),
+                        responseAlloc
+                    );
                 } catch (Exception e) {
                     throw new ClientException("Failed to convert scalar data bytes to table", e);
                 }
@@ -254,7 +261,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             for (var entry : response.getGroupsDataMap().entrySet()) {
                 String fqn = entry.getKey();
                 try {
-                    groups.put(fqn, FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), allocator));
+                    groups.put(
+                        fqn,
+                        FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), responseAlloc)
+                    );
                 } catch (Exception e) {
                     throw new ClientException(
                         String.format("Failed to convert bytes to table for feature '%s'", fqn), e
