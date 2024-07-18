@@ -28,10 +28,10 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 public class FeatherProcessor {
-    public static final long ALLOCATOR_SIZE_RESPONSE = 10L * 1_000_000_000;
-    public static final long ALLOCATOR_SIZE_ROOT = ALLOCATOR_SIZE_RESPONSE * 500;
-    public static final long ALLOCATOR_SIZE_TEST = 1_000_000;
     public static final long ALLOCATOR_SIZE_REQUEST = 1_000_000_000;
+    public static final long ALLOCATOR_SIZE_RESPONSE = 10 * ALLOCATOR_SIZE_REQUEST;
+    public static final long ALLOCATOR_SIZE_ROOT = ALLOCATOR_SIZE_RESPONSE * 500;
+    public static final long ALLOCATOR_SIZE_TEST = ALLOCATOR_SIZE_RESPONSE / 100;
 
     public static ArrayList<StructEntry> getEntriesFromMap(Map<String, ?> obj) {
         var entries = new ArrayList<StructEntry>();
