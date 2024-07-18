@@ -29,7 +29,9 @@ import java.util.*;
 
 public class FeatherProcessor {
     public static final long ROOT_ALLOCATOR_SIZE = Long.MAX_VALUE;
-    public static final long CHILD_ALLOCATOR_SIZE = 1024 * 1024 * 1024;
+    public static final long CHILD_ALLOCATOR_SIZE = 1024 * 1024;
+    public static final long REQUEST_ALLOCATOR_SIZE = 1024 * 1024 * 1024;
+    public static final long RESPONSE_ALLOCATOR_SIZE = 10 * 1024 * 1024 * 1024;
     public BufferAllocator allocator;
 
     public FeatherProcessor(BufferAllocator allocator) {
@@ -359,7 +361,7 @@ public class FeatherProcessor {
         ```
     ).
      */
-    public static Table getTableIfBatchSizeOne(byte[] bytes) throws Exception {
+    public static Table getTableIfBatchSizeOne(byte[] bytes, BufferAllocator allocator) throws Exception {
         try (
             SeekableReadChannel seekableReadChannelBatchCounter = new SeekableReadChannel(
                 new ByteArrayReadableSeekableByteChannel(bytes)
@@ -388,8 +390,8 @@ public class FeatherProcessor {
         return null;
     }
 
-    public static Table convertBytesToTable(byte[] bytes) throws Exception {
-        var maybeSingleBatchTable = getTableIfBatchSizeOne(bytes);
+    public static Table convertBytesToTable(byte[] bytes, BufferAllocator allocator) throws Exception {
+        var maybeSingleBatchTable = getTableIfBatchSizeOne(bytes, allocator);
         if (maybeSingleBatchTable != null) {
             return maybeSingleBatchTable;
         }
@@ -399,13 +401,11 @@ public class FeatherProcessor {
             );
             ArrowFileReader arrowFileReader = new ArrowFileReader(
                 seekableReadChannel,
-                new RootAllocator(Long.MAX_VALUE),
+                allocator,
                 new CommonsCompressionFactory()
             );
             VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
-            VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(
-                readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE)
-            )
+            VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), allocator)
         ) {
             collectorRoot.allocateNew();
             while (arrowFileReader.loadNextBatch()) {

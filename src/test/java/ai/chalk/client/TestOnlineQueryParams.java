@@ -117,7 +117,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 */
                 .build();
         var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
-        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
+        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized, allocator)) {
             var floatField = deserialized.getField("user.float_feature");
             assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
             assert deserialized.getVectorCopy("user.float_feature").getObject(0).equals(1.0);
@@ -429,7 +429,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         var largeString = "a".repeat(100000);
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
         var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
-        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
         assert reconstructedInput.getVectorCopy("user.id").getObject(0).toString().equals(largeString);
     }
 
@@ -439,7 +439,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         var largeBinary = largeBinaryString.getBytes();
         var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
         var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
-        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
+        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
         assert new String((byte[]) reconstructedInput.getVectorCopy("user.binary_data").getObject(0)).equals(largeBinaryString);
     }
 

@@ -36,7 +36,7 @@ public class TestFeather extends AllocatorTest {
     public void testConvertBytesResponseToResult() throws Exception {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "bulk_query_response.txt")), "UTF-8");
         byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes, allocator);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         Table groupsTable = result.getGroupsTables().get("user.cups");
@@ -82,7 +82,7 @@ public class TestFeather extends AllocatorTest {
     public void testConvertMultipleHasManyResultToBytes() throws Exception {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "multi_has_many_base64.txt")), "UTF-8");
         byte[] decodedBytes = Base64.getDecoder().decode(encodedString.trim());
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes);
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(decodedBytes, allocator);
         OnlineQueryResult result = response.toResult();
         assert result.getGroupsTables().size() == 2;
         assert result.getGroupsTables().get("series.investors").getRowCount() == 52;
@@ -93,7 +93,7 @@ public class TestFeather extends AllocatorTest {
     public void testMillionRowsInOutput() {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "million_scalar_rows.bin"));
-            OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+            OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes, allocator);
             OnlineQueryResult result = response.toResult();
             Table scalarsTable = result.getScalarsTable();
             assert scalarsTable.getRowCount() == 1_000_000;
@@ -118,7 +118,7 @@ public class TestFeather extends AllocatorTest {
             TestFeather.allocator
         );
         try (
-            Table table = FeatherProcessor.convertBytesToTable(bytes);
+            Table table = FeatherProcessor.convertBytesToTable(bytes, allocator);
         ) {
             assert table.getRowCount() == 1_000_000;
         }
@@ -132,7 +132,7 @@ public class TestFeather extends AllocatorTest {
     public void testListsInScalarTable() throws Exception {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "list_feature_in_scalar_table.txt")), "UTF-8");
         byte[] bytes = Base64.getDecoder().decode(encodedString.trim());
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes, allocator);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         assert scalarsTable.getRowCount() == 5;
@@ -148,7 +148,7 @@ public class TestFeather extends AllocatorTest {
     @Test
     public void testStructsInScalarTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "structs_in_scalar_table.bin"));
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes, allocator);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         assert scalarsTable.getRowCount() == 5;
@@ -169,7 +169,7 @@ public class TestFeather extends AllocatorTest {
     @Test
     public void testPrimitiveTypesInOutputTable() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "all_types_in_scalar_table.bin"));
-        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes);
+        OnlineQueryBulkResponse response = OnlineQueryBulkResponse.fromBytes(bytes, allocator);
         OnlineQueryResult result = response.toResult();
         Table scalarsTable = result.getScalarsTable();
         assert scalarsTable.getRowCount() == 3;

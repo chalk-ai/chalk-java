@@ -64,9 +64,8 @@ public class ChalkClientImpl implements ChalkClient {
             }
         }
 
-        SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+        SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
                 .path("/v1/query/feather")
-                .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
@@ -76,8 +75,12 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        // ignore the warning here, because we don't want to free the memory yet
-        return this.handler.sendRequest(request).toResult();
+        byte[] response = this.handler.sendRequest(request);
+        try (var allocator = this.allocator.newChildAllocator("online_query_response", 0, FeatherProcessor.RESPONSE_ALLOCATOR_SIZE)) {
+            // ignore the warning here, because we don't want to free the memory yet
+            var bulkResponse = OnlineQueryBulkResponse.fromBytes(response, allocator);
+            return bulkResponse.toResult();
+        }
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
