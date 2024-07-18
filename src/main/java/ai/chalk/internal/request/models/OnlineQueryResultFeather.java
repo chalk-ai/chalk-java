@@ -13,6 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.vector.table.Table;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.StringJoiner;
 
 
 public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<String, Table> groupsData,
-                                       ServerError[] errors, QueryMeta meta) implements AutoCloseable {
+                                       ServerError[] errors, QueryMeta meta, BufferAllocator allocator) implements AutoCloseable {
     private static final Set<String> REQUIRED_KEYS = Set.of(
             "has_data",
             "scalar_data",
@@ -137,13 +138,15 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
                     scalarData,
                     groupsData,
                     errors,
-                    meta
+                    meta,
+                    allocator
             );
         } catch (Exception e) {
             if (scalarData != null) scalarData.close();
             for (Table table : groupsData.values()) {
                 table.close();
             }
+            allocator.close();
             throw e;
         }
     }
@@ -156,5 +159,6 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
         for (Table table : groupsData.values()) {
             table.close();
         }
+        allocator.close();
     }
 }

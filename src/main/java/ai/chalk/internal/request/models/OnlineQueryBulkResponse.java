@@ -49,10 +49,11 @@ public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> quer
         }
         OnlineQueryResultFeather internalResult = this.queryResults.get("0");
         return new OnlineQueryResult(
-                internalResult.scalarData(),
-                internalResult.groupsData(),
-                internalResult.errors(),
-                internalResult.meta()
+            internalResult.scalarData(),
+            internalResult.groupsData(),
+            internalResult.errors(),
+            internalResult.meta(),
+            internalResult.allocator()
         );
     }
 

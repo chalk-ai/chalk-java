@@ -240,11 +240,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         Table scalars = null;
         Map<String, Table> groups = new HashMap<>();
-        try (
-            var responseAlloc = this.allocator.newChildAllocator(
-                "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
-            )
-        ) {
+        var responseAlloc = this.allocator.newChildAllocator(
+            "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
+        );
+        try {
             if (!response.getScalarsData().isEmpty()) {
                 try {
                     scalars = FeatherProcessor.convertBytesToTable(
@@ -276,13 +275,15 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             for (var table : groups.values()) {
                 table.close();
             }
+            responseAlloc.close();
         }
 
         return new OnlineQueryResult(
             scalars,
             groups,
             errors,
-            meta
+            meta,
+            responseAlloc
         );
     }
 
