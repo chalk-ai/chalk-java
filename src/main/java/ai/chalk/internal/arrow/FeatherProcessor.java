@@ -28,10 +28,10 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 public class FeatherProcessor {
-    public static final long ROOT_ALLOCATOR_SIZE = Long.MAX_VALUE;
-    public static final long CHILD_ALLOCATOR_SIZE = 1024 * 1024;
-    public static final long REQUEST_ALLOCATOR_SIZE = 1024 * 1024 * 1024;
-    public static final long RESPONSE_ALLOCATOR_SIZE = 10 * 1024 * 1024 * 1024;
+    public static final long ALLOCATOR_SIZE_ROOT = Long.MAX_VALUE;
+    public static final long ALLOCATOR_SIZE_TEST = 1024 * 1024;
+    public static final long ALLOCATOR_SIZE_REQUEST = 1024 * 1024 * 1024;
+    public static final long ALLOCATOR_SIZE_RESPONSE = 10L * 1024 * 1024 * 1024;
     public BufferAllocator allocator;
 
     public FeatherProcessor(BufferAllocator allocator) {

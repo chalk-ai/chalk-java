@@ -27,7 +27,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final RequestHandler handler;
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
-    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         ResolvedConfig resolvedConfig = this.resolveConfig(config);
@@ -55,7 +55,7 @@ public class ChalkClientImpl implements ChalkClient {
             var childAllocator = allocator.newChildAllocator(
                 "online_query_params",
                 0,
-                FeatherProcessor.CHILD_ALLOCATOR_SIZE
+                FeatherProcessor.ALLOCATOR_SIZE_TEST
             )
         ) {
             bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
@@ -79,7 +79,7 @@ public class ChalkClientImpl implements ChalkClient {
             var allocator = this.allocator.newChildAllocator(
                 "online_query_response",
                 0,
-                FeatherProcessor.RESPONSE_ALLOCATOR_SIZE
+                FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
             )
         ) {
             // ignore the warning here, because we don't want to free the memory yet
