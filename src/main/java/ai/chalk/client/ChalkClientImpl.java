@@ -15,6 +15,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.memory.RootAllocator;
 
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
@@ -73,7 +74,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        byte[] response = this.handler.sendRequest(request);
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
         try (
             var allocator = this.allocator.newChildAllocator(
                 "online_query_response",
@@ -82,7 +83,7 @@ public class ChalkClientImpl implements ChalkClient {
             )
         ) {
             // ignore the warning here, because we don't want to free the memory yet
-            var bulkResponse = OnlineQueryBulkResponse.fromBytes(response, allocator);
+            var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
             return bulkResponse.toResult();
         }
     }
