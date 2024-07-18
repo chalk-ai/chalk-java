@@ -52,9 +52,9 @@ public class ChalkClientImpl implements ChalkClient {
         byte[] bodyBytes;
         try (
             var childAllocator = allocator.newChildAllocator(
-                    "online_query_params",
-                    0,
-                    FeatherProcessor.REQUEST_ALLOCATOR_SIZE
+                "online_query_params",
+                0,
+                FeatherProcessor.CHILD_ALLOCATOR_SIZE
             )
         ) {
             bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
