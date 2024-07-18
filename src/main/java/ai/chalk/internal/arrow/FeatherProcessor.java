@@ -32,11 +32,6 @@ public class FeatherProcessor {
     public static final long ALLOCATOR_SIZE_TEST = 1024 * 1024;
     public static final long ALLOCATOR_SIZE_REQUEST = 1024 * 1024 * 1024;
     public static final long ALLOCATOR_SIZE_RESPONSE = 10L * 1024 * 1024 * 1024;
-    public BufferAllocator allocator;
-
-    public FeatherProcessor(BufferAllocator allocator) {
-        this.allocator = allocator;
-    }
 
     public static ArrayList<StructEntry> getEntriesFromMap(Map<String, ?> obj) {
         var entries = new ArrayList<StructEntry>();
