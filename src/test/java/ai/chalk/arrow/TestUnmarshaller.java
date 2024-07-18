@@ -5,6 +5,7 @@ import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.client.AllocatorTest;
 import ai.chalk.internal.Utils;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
@@ -14,13 +15,29 @@ import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
 import java.util.*;
 
 
-public class TestUnmarshaller extends AllocatorTest {
+public class TestUnmarshaller {
+    private static RootAllocator allocator;
+    @BeforeAll
+    public static void setUp() {
+        allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        // TODO: Fix test leak. Does not seem as simple as just closing the writers.
+        //       Suspecting need to close the writers not immediately but at the end
+        //       of table creation.
+        // allocator.close();
+    }
+
     public Table getHasManyTable() {
         // Transactions class
         List<FieldVector> fieldVectors = new ArrayList<>();
