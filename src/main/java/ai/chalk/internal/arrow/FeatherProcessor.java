@@ -363,7 +363,7 @@ public class FeatherProcessor {
             );
             ArrowFileReader arrowFileReaderBatchCounter = new ArrowFileReader(
                 seekableReadChannelBatchCounter,
-                new RootAllocator(Long.MAX_VALUE),
+                allocator,
                 new CommonsCompressionFactory()
             );
             VectorSchemaRoot readerRootBatchCounter = arrowFileReaderBatchCounter.getVectorSchemaRoot();
