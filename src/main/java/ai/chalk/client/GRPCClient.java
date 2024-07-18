@@ -35,7 +35,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
-    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -151,7 +151,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             var childAllocator = allocator.newChildAllocator(
                 "grpc_online_query_params",
                 0,
-                FeatherProcessor.CHILD_ALLOCATOR_SIZE
+                FeatherProcessor.ALLOCATOR_SIZE_REQUEST
             )
         ) {
             bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);

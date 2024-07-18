@@ -3,7 +3,6 @@ package ai.chalk.arrow;
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
-import ai.chalk.client.AllocatorTest;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
@@ -27,7 +26,7 @@ public class TestUnmarshaller {
     private RootAllocator allocator;
     @BeforeEach
     public void setUp() {
-        allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
+        allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
     }
 
     @AfterEach

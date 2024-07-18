@@ -10,7 +10,7 @@ public abstract class AllocatorTest {
 
     @BeforeEach
     public void setUp() {
-        allocator = new RootAllocator(FeatherProcessor.ROOT_ALLOCATOR_SIZE);
+        allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
     }
 
     @AfterEach
