@@ -17,6 +17,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
+import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
 import java.util.ArrayList;
@@ -27,13 +28,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
-public class GRPCClient implements ChalkClient {
+public class GRPCClient implements ChalkClient, AutoCloseable {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
     private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
+    private final RootAllocator allocator = new RootAllocator(Long.MAX_VALUE);
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -146,7 +148,7 @@ public class GRPCClient implements ChalkClient {
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try {
-            bodyBytes = inputsToArrowBytes(params.getInputs());
+            bodyBytes = inputsToArrowBytes(params.getInputs(), this.allocator.newChildAllocator());
         } catch (Exception e) {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
@@ -253,5 +255,10 @@ public class GRPCClient implements ChalkClient {
                 trailersRef.get().get(CHALK_TRACE_ID_KEY)
             )
         );
+    }
+
+    @Override
+    public void close() {
+        this.allocator.close();
     }
 }

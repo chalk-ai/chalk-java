@@ -8,6 +8,7 @@ import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.impl.*;
@@ -19,8 +20,8 @@ import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.util.JsonStringHashMap;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -33,6 +34,19 @@ public class TestFeather {
     /**
      * This tests that all fields in an OnlineQueryBulkResponse correctly deserialize.
      */
+    private static RootAllocator rootAllocator;
+    private BufferAllocator childAllocator;
+
+
+    @BeforeAll
+    public static void setUp() {
+        rootAllocator = new RootAllocator(Long.MAX_VALUE);
+
+    }
+    @AfterAll public static void tearDown() {
+        rootAllocator.close();
+    }
+
     @Test
     public void testConvertBytesResponseToResult() throws Exception {
         String encodedString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"), "src/test/java/ai/chalk/arrow/test_data", "bulk_query_response.txt")), "UTF-8");
@@ -114,7 +128,10 @@ public class TestFeather {
         for (int i = 0; i < 1_000_000; i++) {
             intArray[i] = i;
         }
-        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build());
+        byte[] bytes = BytesProducer.convertOnlineQueryParamsToBytes(
+                OnlineQueryParams.builder().withInput("user.id", list).withOutputs("doesntmatter").build(),
+
+        );
         try (
             Table table = FeatherProcessor.convertBytesToTable(bytes);
         ) {

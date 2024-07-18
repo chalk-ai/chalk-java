@@ -3,6 +3,7 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
@@ -12,6 +13,7 @@ import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
+import org.apache.arrow.memory.RootAllocator;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +26,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final RequestHandler handler;
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
+    private static final RootAllocator allocator = new RootAllocator(Long.MAX_VALUE);
 
     public ChalkClient ChalkClient() throws ChalkException {
         return ChalkClient.builder().build();
@@ -52,10 +55,18 @@ public class ChalkClientImpl implements ChalkClient {
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
-        try {
-            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
-        } catch (Exception e) {
-            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        try (
+            var childAllocator = allocator.newChildAllocator(
+                    "online_query_params",
+                    0,
+                    FeatherProcessor.CHILD_ALLOCATOR_SIZE
+            )
+        ) {
+            try {
+                bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
+            } catch (Exception e) {
+                throw new ClientException("Failed to serialize OnlineQueryParams", e);
+            }
         }
 
         SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()

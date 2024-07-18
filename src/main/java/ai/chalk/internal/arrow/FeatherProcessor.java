@@ -3,6 +3,7 @@ package ai.chalk.internal.arrow;
 import ai.chalk.internal.Utils;
 import org.apache.arrow.compression.CommonsCompressionFactory;
 import org.apache.arrow.memory.ArrowBuf;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.LargeListVector;
@@ -20,6 +21,7 @@ import org.apache.arrow.vector.util.VectorSchemaRootAppender;
 
 
 import java.io.ByteArrayOutputStream;
+import java.nio.Buffer;
 import java.nio.channels.Channels;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -27,6 +29,13 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 public class FeatherProcessor {
+    public static final long ROOT_ALLOCATOR_SIZE = Long.MAX_VALUE;
+    public static final long CHILD_ALLOCATOR_SIZE = 1024 * 1024 * 1024;
+    public BufferAllocator allocator;
+
+    public FeatherProcessor(BufferAllocator allocator) {
+        this.allocator = allocator;
+    }
 
     public static ArrayList<StructEntry> getEntriesFromMap(Map<String, ?> obj) {
         var entries = new ArrayList<StructEntry>();
@@ -220,10 +229,9 @@ public class FeatherProcessor {
     }
 
 
-    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs) throws Exception {
+    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs, BufferAllocator allocator) throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
         var uniformListLength = -1;
-        List<RootAllocator> allocators = new ArrayList<>();
         for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
             List<?> value = entry.getValue();
             List<Object> values;
@@ -243,8 +251,6 @@ public class FeatherProcessor {
             var clazz = values.get(0).getClass();
             var firstVal = values.get(0);
             var fqn = entry.getKey();
-            var allocator = new RootAllocator(Long.MAX_VALUE);
-            allocators.add(allocator);
             if (firstVal instanceof Integer) {
                 BigIntVector intVector = new BigIntVector(fqn, allocator);
                 fieldVectors.add(intVector);
@@ -342,9 +348,6 @@ public class FeatherProcessor {
             writer.writeBatch();
             writer.end();
             byteArr = out.toByteArray();
-        }
-        for (RootAllocator allocator : allocators) {
-            allocator.close();
         }
         return byteArr;
     }
