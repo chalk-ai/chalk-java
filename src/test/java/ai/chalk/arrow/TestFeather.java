@@ -23,9 +23,11 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 public class TestFeather {
     /**
@@ -283,5 +285,108 @@ public class TestFeather {
         BytesConsumer.ConsumptionResult<Long> result = BytesConsumer.consume8ByteLen(0, intBytes);
         assert result.getIndex() == 8;
         assert result.getResult() == 123;
+    }
+
+    @Test
+    public void testMemoryLeak() throws Exception {
+        ZoneId zoneIdUTC = ZoneId.of("UTC");
+
+        LocalDateTime dateTime1 = LocalDateTime.of(2024, Month.APRIL, 25, 10, 0, 0, 123456789); // 10:00 AM
+        LocalDateTime dateTime2 = LocalDateTime.of(2024, Month.APRIL, 25, 14, 0, 0, 333333333); // 2:00 PM
+        LocalDateTime dateTime3 = LocalDateTime.of(2024, Month.APRIL, 25, 18, 0, 0, 987654321); // 6:00 PM
+
+        ZonedDateTime utcTime1 = ZonedDateTime.of(dateTime1, zoneIdUTC);
+        ZonedDateTime utcTime2 = ZonedDateTime.of(dateTime2, zoneIdUTC);
+        ZonedDateTime utcTime3 = ZonedDateTime.of(dateTime3, zoneIdUTC);
+
+        var params = OnlineQueryParams.builder()
+                .withInput("user.float_feature", Arrays.asList(1.0, 2.0, 3.0))
+                .withInput("user.string_feature", Arrays.asList("a", "b", "c"))
+                .withInput("user.int_feature", Arrays.asList(1, 2, 3))
+                .withInput("user.bool_feature", Arrays.asList(true, false, true))
+                .withInput("user.local_datetime", Arrays.asList(dateTime1, dateTime2, dateTime3))
+                .withInput("user.zoned_datetime", Arrays.asList(utcTime1, utcTime2, utcTime3))
+                .withInput("user.struct_feature__via_hashmap__", Arrays.asList(
+                        new HashMap<String, Object>() {{
+                            put("name", "a");
+                            put("amount", 1.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "a");
+                                        put("amount", 1.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "b");
+                                        put("amount", 2.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "b");
+                            put("amount", 2.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "c");
+                                        put("amount", 3.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "d");
+                                        put("amount", 4.0);
+                                    }}
+                            ));
+                        }},
+                        new HashMap<String, Object>() {{
+                            put("name", "c");
+                            put("amount", 3.0);
+                            put("fluctuations", Arrays.asList(
+                                    new HashMap<String, Object>() {{
+                                        put("description", "e");
+                                        put("amount", 5.0);
+                                    }},
+                                    new HashMap<String, Object>() {{
+                                        put("description", "f");
+                                        put("amount", 6.0);
+                                    }}
+                            ));
+                        }}
+                ))
+                .withInput(
+                        "user.struct_with_int_list",
+                        Arrays.asList(
+                                new TreeMap<String, Object>() {{
+                                    put("name", "a");
+                                    put("luckyNumbers", Arrays.asList(1, 2, 3));
+                                }},
+                                new TreeMap<String, Object>() {{
+                                    put("name", "b");
+                                    put("luckyNumbers", Arrays.asList(4, 5, 6));
+                                }},
+                                new TreeMap<String, Object>() {{
+                                    put("name", "c");
+                                    put("luckyNumbers", Arrays.asList(7, 8, 9));
+                                }}
+                        )
+                )
+                /* Couldn't call `.struct()` on a `NullableStructWriter` to obtain a faithful inner struct writer.
+                .withInput("user.struct_with_struct", Arrays.asList(
+                        new StructWithStruct("a", new InnerStruct("a", 1.0)),
+                        new StructWithStruct("b", new InnerStruct("b", 2.0)),
+                        new StructWithStruct("c", new InnerStruct("c", 3.0))
+                ))
+                */
+                /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
+                .withInput("user.struct_feature__via_classes__", Arrays.asList(
+                        new StructWithStructList("a", 1.0, Arrays.asList(new InnerStruct("a", 1.0), new InnerStruct("b", 2.0))),
+                        new StructWithStructList("b", 2.0, Arrays.asList(new InnerStruct("c", 3.0), new InnerStruct("d", 4.0))),
+                        new StructWithStructList("c", 3.0, Arrays.asList(new InnerStruct("e", 5.0), new InnerStruct("f", 6.0)))
+                ))
+                */
+                .build();
+        // Using the allocator as a hack to test for memory leaks.
+        // If there are memory leaks, the allocator will throw an
+        // InvalidStateException notifying us of the leak.
+        try (var allocator = new RootAllocator()) {
+            FeatherProcessor.inputsToArrowBytes(params.getInputs());
+        }
     }
 }
