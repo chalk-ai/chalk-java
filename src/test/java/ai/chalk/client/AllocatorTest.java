@@ -2,19 +2,19 @@ package ai.chalk.client;
 
 import ai.chalk.internal.arrow.FeatherProcessor;
 import org.apache.arrow.memory.RootAllocator;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AllocatorTest {
-    protected static RootAllocator allocator;
+    protected RootAllocator allocator;
 
-    @BeforeAll
-    public static void setUp() {
-        allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
+    @BeforeEach
+    public void setUp() {
+        allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         allocator.close();
     }
 }
