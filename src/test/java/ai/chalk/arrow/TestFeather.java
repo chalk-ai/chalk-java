@@ -136,11 +136,10 @@ public class TestFeather extends AllocatorTest {
         try (OnlineQueryResult result = response.toResult();) {
             Table scalarsTable = result.getScalarsTable();
             assert scalarsTable.getRowCount() == 5;
-            // FIXME: Need to fix mem leak in `unmarshal`
-            //    User[] users = result.unmarshal(User.class);
-            //    for (User user : users) {
-            //        assert Arrays.equals(user.favoriteNumbers.getValue().toArray(), new Long[]{1L, 2L, 3L});
-            //    }
+            User[] users = result.unmarshal(User.class);
+            for (User user : users) {
+                assert Arrays.equals(user.favoriteNumbers.getValue().toArray(), new Long[]{1L, 2L, 3L});
+            }
         }
     }
 
