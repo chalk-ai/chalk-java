@@ -1,6 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
+import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
@@ -123,6 +124,14 @@ public interface ChalkClient extends AutoCloseable {
          */
         public Builder withBranch(String branch);
 
+
+        /**
+         * Sets the deployment Tag. This is the identifier
+         * that distinguishes between different tagged
+         * deployments in a particular environment.
+         */
+        public Builder withDeploymentTag(String deploymentTag);
+
         /**
          * Sets the HTTP client. This is useful for setting
          * custom timeouts, etc.
@@ -140,6 +149,8 @@ public interface ChalkClient extends AutoCloseable {
         public String getEnvironmentId();
 
         public String getBranch();
+
+        public String getDeploymentTag();
 
         public HttpClient getHttpClient();
 
