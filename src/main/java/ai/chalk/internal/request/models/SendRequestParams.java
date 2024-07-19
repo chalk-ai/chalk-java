@@ -8,11 +8,10 @@ import lombok.Data;
 // `responseClass` method takes in `Class<Object>` instead of `Class<T>`
 @Data
 @AllArgsConstructor
-public class SendRequestParams<T> {
+public class SendRequestParams {
     private Object body;
     private String method;
     private String path;
-    private Class<T> responseClass;
     private boolean dontRefresh;
     private String environmentOverride;
     private String previewDeploymentId;
@@ -24,7 +23,6 @@ public class SendRequestParams<T> {
         private Object body;
         private String method;
         private String path;
-        private Class<T> responseClass;
         private boolean dontRefresh;
         private String environmentOverride;
         private String previewDeploymentId;
@@ -32,59 +30,55 @@ public class SendRequestParams<T> {
         private String queryName;
         private Boolean isEngineRequest;
 
-        public Builder<T> body(Object body) {
+        public Builder body(Object body) {
             this.body = body;
             return this;
         }
 
-        public Builder<T> method(String method) {
+        public Builder method(String method) {
             this.method = method;
             return this;
         }
 
-        public Builder<T> path(String path) {
+        public Builder path(String path) {
             this.path = path;
             return this;
         }
 
-        public Builder<T> responseClass(Class<T> responseClass) {
-            this.responseClass = responseClass;
-            return this;
-        }
 
-        public Builder<T> dontRefresh(boolean dontRefresh) {
+        public Builder dontRefresh(boolean dontRefresh) {
             this.dontRefresh = dontRefresh;
             return this;
         }
 
-        public Builder<T> environmentOverride(String environmentOverride) {
+        public Builder environmentOverride(String environmentOverride) {
             this.environmentOverride = environmentOverride;
             return this;
         }
 
-        public Builder<T> previewDeploymentId(String previewDeploymentId) {
+        public Builder previewDeploymentId(String previewDeploymentId) {
             this.previewDeploymentId = previewDeploymentId;
             return this;
         }
 
-        public Builder<T> queryName(String queryName) {
+        public Builder queryName(String queryName) {
             this.queryName = queryName;
             return this;
         }
 
-        public Builder<T> branch(String branch) {
+        public Builder branch(String branch) {
             this.branch = branch;
             return this;
         }
 
-        public Builder<T> isEngineRequest(Boolean isEngineRequest) {
+        public Builder isEngineRequest(Boolean isEngineRequest) {
             this.isEngineRequest = isEngineRequest;
             return this;
         }
 
-        public SendRequestParams<T> build() {
-            return new SendRequestParams<>(
-                    body, method, path, responseClass, dontRefresh,
+        public SendRequestParams build() {
+            return new SendRequestParams(
+                    body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
                     isEngineRequest
             );

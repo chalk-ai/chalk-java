@@ -6,6 +6,7 @@ import ai.chalk.features.FeaturesClass;
 import ai.chalk.internal.arrow.Unmarshaller;
 import lombok.Data;
 import lombok.AllArgsConstructor;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.vector.table.Table;
 
 import java.util.Map;
@@ -51,6 +52,13 @@ public class OnlineQueryResult implements AutoCloseable {
     private final QueryMeta meta;
 
     /**
+     * allocator associated with the arrow objects in the result.
+     * Needs to be closed when the result is no longer needed.
+     */
+    private final BufferAllocator allocator;
+
+
+    /**
      * close releases resources associated with the result.
      */
     public void close() {
@@ -62,6 +70,7 @@ public class OnlineQueryResult implements AutoCloseable {
                 table.close();
             }
         }
+        allocator.close();
     }
 
     public <T extends FeaturesClass> T[] unmarshal(Class<T> clazz) throws ClientException {

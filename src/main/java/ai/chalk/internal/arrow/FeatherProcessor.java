@@ -354,14 +354,14 @@ public class FeatherProcessor {
         ```
     ).
      */
-    public static Table getTableIfBatchSizeOne(byte[] bytes) throws Exception {
+    public static Table getTableIfBatchSizeOne(byte[] bytes, BufferAllocator allocator) throws Exception {
         try (
             SeekableReadChannel seekableReadChannelBatchCounter = new SeekableReadChannel(
                 new ByteArrayReadableSeekableByteChannel(bytes)
             );
             ArrowFileReader arrowFileReaderBatchCounter = new ArrowFileReader(
                 seekableReadChannelBatchCounter,
-                new RootAllocator(Long.MAX_VALUE),
+                allocator,
                 new CommonsCompressionFactory()
             );
             VectorSchemaRoot readerRootBatchCounter = arrowFileReaderBatchCounter.getVectorSchemaRoot();
@@ -383,8 +383,8 @@ public class FeatherProcessor {
         return null;
     }
 
-    public static Table convertBytesToTable(byte[] bytes) throws Exception {
-        var maybeSingleBatchTable = getTableIfBatchSizeOne(bytes);
+    public static Table convertBytesToTable(byte[] bytes, BufferAllocator allocator) throws Exception {
+        var maybeSingleBatchTable = getTableIfBatchSizeOne(bytes, allocator);
         if (maybeSingleBatchTable != null) {
             return maybeSingleBatchTable;
         }
@@ -394,13 +394,11 @@ public class FeatherProcessor {
             );
             ArrowFileReader arrowFileReader = new ArrowFileReader(
                 seekableReadChannel,
-                new RootAllocator(Long.MAX_VALUE),
+                allocator,
                 new CommonsCompressionFactory()
             );
             VectorSchemaRoot readerRoot = arrowFileReader.getVectorSchemaRoot();
-            VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(
-                readerRoot.getSchema(), new RootAllocator(Long.MAX_VALUE)
-            )
+            VectorSchemaRoot collectorRoot = VectorSchemaRoot.create(readerRoot.getSchema(), allocator)
         ) {
             collectorRoot.allocateNew();
             while (arrowFileReader.loadNextBatch()) {

@@ -15,6 +15,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.memory.RootAllocator;
 
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
@@ -62,9 +63,8 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+        SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
                 .path("/v1/query/feather")
-                .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
@@ -74,8 +74,15 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        var allocator = this.allocator.newChildAllocator(
+            "online_query_response",
+            0,
+            FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
+        );
         // ignore the warning here, because we don't want to free the memory yet
-        return this.handler.sendRequest(request).toResult();
+        var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
+        return bulkResponse.toResult();
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
