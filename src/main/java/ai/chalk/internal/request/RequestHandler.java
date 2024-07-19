@@ -129,7 +129,7 @@ public class RequestHandler {
         return bodyBytes;
     }
 
-    public HttpResponse<byte[]> sendRequest(SendRequestParams args) throws ChalkException {
+    public <T> T sendRequest(SendRequestParams<T> args) throws ChalkException {
         byte[] bodyBytes;
         try {
             bodyBytes = this.getBodyBytes(args.getBody());
@@ -198,25 +198,35 @@ public class RequestHandler {
             throw getHttpException(response, request.uri().toString());
         }
 
-        return response;
-    }
 
-    private <T> T deserializeResponseBody(byte[] body, Class<T> responseClass) throws ChalkException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        try {
-            return objectMapper.readValue(body, responseClass);
-        } catch (IOException e) {
-            throw new ClientException(
-                    "Exception occurred while unmarshalling response",
-                    e
-            );
+        if (args.getResponseClass() == OnlineQueryBulkResponse.class) {
+            // Custom Chalk byte-packing deserialization
+            try {
+                return (T) OnlineQueryBulkResponse.fromBytes(response.body());
+            } catch (Exception e) {
+                throw new ClientException(
+                        "Exception occurred while unmarshalling response",
+                        e
+                );
+            }
+        } else {
+            // JSON deserialization
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+            try {
+                return objectMapper.readValue(response.body(), args.getResponseClass());
+            } catch (IOException e) {
+                throw new ClientException(
+                        "Exception occurred while unmarshalling response",
+                        e
+                );
+            }
         }
     }
 
-    private URI getUri(SendRequestParams args) {
+    private <T> URI getUri(SendRequestParams<T> args) {
         if (args.getIsEngineRequest()) {
             String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
             if (resolved != null &&
@@ -264,7 +274,7 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        SendRequestParams params = new SendRequestParams(
+        SendRequestParams<GetTokenResponse> params = new SendRequestParams<>(
                 new GetTokenRequest(
                         this.clientId.value(),
                         this.clientSecret.value(),
@@ -272,6 +282,7 @@ public class RequestHandler {
                 ),
                 "POST",
                 "/v1/oauth/token",
+                GetTokenResponse.class,
                 true,
                 null,
                 null,
@@ -281,8 +292,7 @@ public class RequestHandler {
         );
         GetTokenResponse response;
         try {
-            HttpResponse<byte[]> responseRaw = this.sendRequest(params);
-            response = this.deserializeResponseBody(responseRaw.body(), GetTokenResponse.class);
+            response = this.sendRequest(params);
         } catch (Exception e) {
             throw new ClientException("Error getting access token", e);
         }

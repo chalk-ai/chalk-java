@@ -92,9 +92,6 @@ public class Unmarshaller {
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
-
-        // Exists to work around `row.getLargeList` not being available.
-        var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
             Map<String, List<Feature<?>>> featureMap;
@@ -312,14 +309,7 @@ public class Unmarshaller {
                         case List, LargeList -> {
                             List<?> originalList;
                             if (arrowField.getType().getTypeID() == LargeList) {
-                                LargeListVector largeListVector;
-                                if (fqnToLargeListColumnCopy.containsKey(fqn)) {
-                                    largeListVector = fqnToLargeListColumnCopy.get(fqn);
-                                } else {
-                                    // TODO: Get large list without copying. The obvious `row.getLargeList` does not exist.
-                                    largeListVector = (LargeListVector) table.getVectorCopy(fqn);
-                                    fqnToLargeListColumnCopy.put(fqn, largeListVector);
-                                }
+                                var largeListVector = (LargeListVector) table.getVectorCopy(fqn);
                                 originalList = largeListVector.getObject(row.getRowNumber());
                             } else {
                                 originalList = row.getList(fqn);
@@ -417,9 +407,6 @@ public class Unmarshaller {
                     }
                 }
             }
-        }
-        for (var entry : fqnToLargeListColumnCopy.entrySet()) {
-            entry.getValue().close();
         }
         return listToArray(result, target);
     }

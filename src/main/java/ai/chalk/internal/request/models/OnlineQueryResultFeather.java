@@ -10,10 +10,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.vector.table.Table;
 
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +20,7 @@ import java.util.StringJoiner;
 
 
 public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<String, Table> groupsData,
-                                       ServerError[] errors, QueryMeta meta, BufferAllocator allocator) implements AutoCloseable {
+                                       ServerError[] errors, QueryMeta meta) implements AutoCloseable {
     private static final Set<String> REQUIRED_KEYS = Set.of(
             "has_data",
             "scalar_data",
@@ -31,7 +29,7 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
             "meta"
     );
 
-    public static OnlineQueryResultFeather fromBytes(byte[] bytes, BufferAllocator allocator) throws ChalkException {
+    public static OnlineQueryResultFeather fromBytes(byte[] bytes) throws ChalkException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
@@ -102,7 +100,7 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
                     throw new ClientException("malformed value 'scalar_data' in unmarshalled bytes");
                 }
                 try {
-                    scalarData = FeatherProcessor.convertBytesToTable(scalarDataBytes, allocator);
+                    scalarData = FeatherProcessor.convertBytesToTable(scalarDataBytes);
                 } catch (Exception e) {
                     throw new ClientException("failed to convert scalar data bytes to VectorSchemaRoot", e);
                 }
@@ -125,7 +123,7 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
                         throw new ClientException(String.format("malformed value 'groups_data' in unmarshalled bytes - expected `byte[]` found `%s`", entry.getValue().getClass().getSimpleName()));
                     }
                     try {
-                        Table table = FeatherProcessor.convertBytesToTable(value, allocator);
+                        Table table = FeatherProcessor.convertBytesToTable(value);
                         groupsData.put(key, table);
                     } catch (Exception e) {
                         throw new ClientException(String.format("failed to convert data for has-many feature '%s' bytes to VectorSchemaRoot", key), e);
@@ -138,15 +136,13 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
                     scalarData,
                     groupsData,
                     errors,
-                    meta,
-                    allocator
+                    meta
             );
         } catch (Exception e) {
             if (scalarData != null) scalarData.close();
             for (Table table : groupsData.values()) {
                 table.close();
             }
-            allocator.close();
             throw e;
         }
     }
@@ -159,6 +155,5 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
         for (Table table : groupsData.values()) {
             table.close();
         }
-        allocator.close();
     }
 }

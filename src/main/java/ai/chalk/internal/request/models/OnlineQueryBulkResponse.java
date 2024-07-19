@@ -4,14 +4,13 @@ import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.models.OnlineQueryResult;
-import org.apache.arrow.memory.BufferAllocator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> queryResults) implements AutoCloseable {
-    public static OnlineQueryBulkResponse fromBytes(byte[] bytes, BufferAllocator allocator) throws ChalkException {
+    public static OnlineQueryBulkResponse fromBytes(byte[] bytes) throws ChalkException {
         Map<String, Object> res;
         try {
             res = BytesConsumer.unmarshal(bytes);
@@ -27,7 +26,7 @@ public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> quer
                 for (Map.Entry<String, Object> entry : resultBytesMap.entrySet()) {
                     String key = entry.getKey();
                     byte[] value = (byte[]) entry.getValue();
-                    OnlineQueryResultFeather featherResult = OnlineQueryResultFeather.fromBytes(value, allocator);
+                    OnlineQueryResultFeather featherResult = OnlineQueryResultFeather.fromBytes(value);
                     resultFeatherMap.put(key, featherResult);
                 }
             } catch (Exception e) {
@@ -49,11 +48,10 @@ public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> quer
         }
         OnlineQueryResultFeather internalResult = this.queryResults.get("0");
         return new OnlineQueryResult(
-            internalResult.scalarData(),
-            internalResult.groupsData(),
-            internalResult.errors(),
-            internalResult.meta(),
-            internalResult.allocator()
+                internalResult.scalarData(),
+                internalResult.groupsData(),
+                internalResult.errors(),
+                internalResult.meta()
         );
     }
 
