@@ -268,7 +268,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                     );
                 }
             }
-        } finally {
+        } catch (Exception e) {
             if (scalars != null) {
                 scalars.close();
             }
