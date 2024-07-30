@@ -36,6 +36,11 @@ public final class SourcesProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_graph_v1_KafkaSource_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_graph_v1_PubSubSource_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_graph_v1_PubSubSource_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_graph_v1_DatabaseSourceReference_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -209,203 +214,213 @@ public final class SourcesProto {
       "le/protobuf/duration.proto\"a\n\025StreamSour" +
       "ceReference\0224\n\004type\030\001 \001(\0162 .chalk.graph." +
       "v1.StreamSourceTypeR\004type\022\022\n\004name\030\002 \001(\tR" +
-      "\004name\"\210\001\n\014StreamSource\0223\n\005kafka\030\001 \001(\0132\033." +
+      "\004name\"\300\001\n\014StreamSource\0223\n\005kafka\030\001 \001(\0132\033." +
       "chalk.graph.v1.KafkaSourceH\000R\005kafka\0229\n\007k" +
       "inesis\030\002 \001(\0132\035.chalk.graph.v1.KinesisSou" +
-      "rceH\000R\007kinesisB\010\n\006source\"\356\003\n\rKinesisSour" +
-      "ce\022\022\n\004name\030\001 \001(\tR\004name\022\037\n\013stream_name\030\002 " +
-      "\001(\tR\nstreamName\022\035\n\nstream_arn\030\003 \001(\tR\tstr" +
-      "eamArn\022\037\n\013region_name\030\004 \001(\tR\nregionName\022" +
-      "M\n\025late_arrival_deadline\030\005 \001(\0132\031.google." +
-      "protobuf.DurationR\023lateArrivalDeadline\022@" +
-      "\n\035dead_letter_queue_stream_name\030\006 \001(\tR\031d" +
-      "eadLetterQueueStreamName\022)\n\021aws_access_k" +
-      "ey_id\030\007 \001(\tR\016awsAccessKeyId\0221\n\025aws_secre" +
-      "t_access_key\030\010 \001(\tR\022awsSecretAccessKey\022*" +
-      "\n\021aws_session_token\030\t \001(\tR\017awsSessionTok" +
-      "en\022!\n\014endpoint_url\030\n \001(\tR\013endpointUrl\022*\n" +
-      "\021consumer_role_arn\030\013 \001(\tR\017consumerRoleAr" +
-      "n\"\256\004\n\013KafkaSource\022\022\n\004name\030\001 \001(\tR\004name\022+\n" +
-      "\021bootstrap_servers\030\002 \003(\tR\020bootstrapServe" +
-      "rs\022\024\n\005topic\030\003 \001(\tR\005topic\0222\n\025ssl_keystore" +
-      "_location\030\004 \001(\tR\023sslKeystoreLocation\022\036\n\013" +
-      "ssl_ca_file\030\005 \001(\tR\tsslCaFile\022(\n\020client_i" +
-      "d_prefix\030\006 \001(\tR\016clientIdPrefix\022&\n\017group_" +
-      "id_prefix\030\007 \001(\tR\rgroupIdPrefix\022+\n\021securi" +
-      "ty_protocol\030\010 \001(\tR\020securityProtocol\022%\n\016s" +
-      "asl_mechanism\030\t \001(\tR\rsaslMechanism\022#\n\rsa" +
-      "sl_username\030\n \001(\tR\014saslUsername\022#\n\rsasl_" +
-      "password\030\013 \001(\tR\014saslPassword\022M\n\025late_arr" +
-      "ival_deadline\030\014 \001(\0132\031.google.protobuf.Du" +
-      "rationR\023lateArrivalDeadline\0225\n\027dead_lett" +
-      "er_queue_topic\030\r \001(\tR\024deadLetterQueueTop" +
-      "ic\"e\n\027DatabaseSourceReference\0226\n\004type\030\001 " +
-      "\001(\0162\".chalk.graph.v1.DatabaseSourceTypeR" +
-      "\004type\022\022\n\004name\030\002 \001(\tR\004name\"\364\004\n\016DatabaseSo" +
-      "urce\022<\n\010bigquery\030\001 \001(\0132\036.chalk.graph.v1." +
-      "BigQuerySourceH\000R\010bigquery\022<\n\010cloudsql\030\002" +
-      " \001(\0132\036.chalk.graph.v1.CloudSQLSourceH\000R\010" +
-      "cloudsql\022B\n\ndatabricks\030\003 \001(\0132 .chalk.gra" +
-      "ph.v1.DatabricksSourceH\000R\ndatabricks\0223\n\005" +
-      "mysql\030\004 \001(\0132\033.chalk.graph.v1.MySQLSource" +
-      "H\000R\005mysql\022<\n\010postgres\030\005 \001(\0132\036.chalk.grap" +
-      "h.v1.PostgresSourceH\000R\010postgres\022<\n\010redsh" +
-      "ift\030\006 \001(\0132\036.chalk.graph.v1.RedshiftSourc" +
-      "eH\000R\010redshift\022?\n\tsnowflake\030\007 \001(\0132\037.chalk" +
-      ".graph.v1.SnowflakeSourceH\000R\tsnowflake\0226" +
-      "\n\006sqlite\030\010 \001(\0132\034.chalk.graph.v1.SQLiteSo" +
-      "urceH\000R\006sqlite\0229\n\007spanner\030\t \001(\0132\035.chalk." +
-      "graph.v1.SpannerSourceH\000R\007spanner\0223\n\005tri" +
-      "no\030\n \001(\0132\033.chalk.graph.v1.TrinoSourceH\000R" +
-      "\005trinoB\010\n\006source\"\275\004\n\016BigQuerySource\022\022\n\004n" +
-      "ame\030\001 \001(\tR\004name\022\030\n\007project\030\002 \001(\tR\007projec" +
-      "t\022\030\n\007dataset\030\003 \001(\tR\007dataset\022\032\n\010location\030" +
-      "\004 \001(\tR\010location\022-\n\022credentials_base64\030\005 " +
-      "\001(\tR\021credentialsBase64\022)\n\020credentials_pa" +
-      "th\030\006 \001(\tR\017credentialsPath\022O\n\013engine_args" +
-      "\030\007 \003(\0132..chalk.graph.v1.BigQuerySource.E" +
-      "ngineArgsEntryR\nengineArgs\022_\n\021async_engi" +
-      "ne_args\030\010 \003(\01323.chalk.graph.v1.BigQueryS" +
-      "ource.AsyncEngineArgsEntryR\017asyncEngineA" +
-      "rgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key" +
-      "\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarV" +
-      "alueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022" +
-      "\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk" +
-      ".arrow.v1.ScalarValueR\005value:\0028\001\"\370\003\n\016Clo" +
-      "udSQLSource\022\022\n\004name\030\001 \001(\tR\004name\022\016\n\002db\030\002 " +
-      "\001(\tR\002db\022\022\n\004user\030\003 \001(\tR\004user\022\032\n\010password\030" +
-      "\004 \001(\tR\010password\022#\n\rinstance_name\030\005 \001(\tR\014" +
-      "instanceName\022O\n\013engine_args\030\006 \003(\0132..chal" +
-      "k.graph.v1.CloudSQLSource.EngineArgsEntr" +
-      "yR\nengineArgs\022_\n\021async_engine_args\030\007 \003(\013" +
-      "23.chalk.graph.v1.CloudSQLSource.AsyncEn" +
-      "gineArgsEntryR\017asyncEngineArgs\032Z\n\017Engine" +
-      "ArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001" +
-      "(\0132\033.chalk.arrow.v1.ScalarValueR\005value:\002" +
-      "8\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sca" +
-      "larValueR\005value:\0028\001\"\221\004\n\020DatabricksSource" +
-      "\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host" +
-      "\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\033\n\t" +
-      "http_path\030\005 \001(\tR\010httpPath\022!\n\014access_toke" +
-      "n\030\006 \001(\tR\013accessToken\022Q\n\013engine_args\030\007 \003(" +
-      "\01320.chalk.graph.v1.DatabricksSource.Engi" +
-      "neArgsEntryR\nengineArgs\022a\n\021async_engine_" +
-      "args\030\010 \003(\01325.chalk.graph.v1.DatabricksSo" +
-      "urce.AsyncEngineArgsEntryR\017asyncEngineAr" +
-      "gs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
-      "1\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarVa" +
-      "lueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020" +
-      "\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk." +
-      "arrow.v1.ScalarValueR\005value:\0028\001\"\362\003\n\013MySQ" +
-      "LSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(" +
-      "\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR" +
-      "\002db\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010password\030\006 \001(" +
-      "\tR\010password\022L\n\013engine_args\030\007 \003(\0132+.chalk" +
-      ".graph.v1.MySQLSource.EngineArgsEntryR\ne" +
-      "ngineArgs\022\\\n\021async_engine_args\030\010 \003(\01320.c" +
-      "halk.graph.v1.MySQLSource.AsyncEngineArg" +
-      "sEntryR\017asyncEngineArgs\032Z\n\017EngineArgsEnt" +
-      "ry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.ch" +
-      "alk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024A" +
-      "syncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n" +
-      "\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValu" +
-      "eR\005value:\0028\001\"\373\003\n\016PostgresSource\022\022\n\004name\030" +
-      "\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030" +
-      "\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004user\030\005 \001(" +
-      "\tR\004user\022\032\n\010password\030\006 \001(\tR\010password\022O\n\013e" +
-      "ngine_args\030\007 \003(\0132..chalk.graph.v1.Postgr" +
-      "esSource.EngineArgsEntryR\nengineArgs\022_\n\021" +
-      "async_engine_args\030\010 \003(\01323.chalk.graph.v1" +
-      ".PostgresSource.AsyncEngineArgsEntryR\017as" +
-      "yncEngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030" +
-      "\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow." +
-      "v1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngine" +
-      "ArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001" +
-      "(\0132\033.chalk.arrow.v1.ScalarValueR\005value:\002" +
-      "8\001\"\265\004\n\016RedshiftSource\022\022\n\004name\030\001 \001(\tR\004nam" +
-      "e\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004por" +
-      "t\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004user\030\005 \001(\tR\004user\022\032\n" +
-      "\010password\030\006 \001(\tR\010password\022\033\n\ts3_client\030\007" +
-      " \001(\tR\010s3Client\022\033\n\ts3_bucket\030\010 \001(\tR\010s3Buc" +
-      "ket\022O\n\013engine_args\030\t \003(\0132..chalk.graph.v" +
-      "1.RedshiftSource.EngineArgsEntryR\nengine" +
-      "Args\022_\n\021async_engine_args\030\n \003(\01323.chalk." +
-      "graph.v1.RedshiftSource.AsyncEngineArgsE" +
+      "rceH\000R\007kinesis\0226\n\006pubsub\030\003 \001(\0132\034.chalk.g" +
+      "raph.v1.PubSubSourceH\000R\006pubsubB\010\n\006source" +
+      "\"\356\003\n\rKinesisSource\022\022\n\004name\030\001 \001(\tR\004name\022\037" +
+      "\n\013stream_name\030\002 \001(\tR\nstreamName\022\035\n\nstrea" +
+      "m_arn\030\003 \001(\tR\tstreamArn\022\037\n\013region_name\030\004 " +
+      "\001(\tR\nregionName\022M\n\025late_arrival_deadline" +
+      "\030\005 \001(\0132\031.google.protobuf.DurationR\023lateA" +
+      "rrivalDeadline\022@\n\035dead_letter_queue_stre" +
+      "am_name\030\006 \001(\tR\031deadLetterQueueStreamName" +
+      "\022)\n\021aws_access_key_id\030\007 \001(\tR\016awsAccessKe" +
+      "yId\0221\n\025aws_secret_access_key\030\010 \001(\tR\022awsS" +
+      "ecretAccessKey\022*\n\021aws_session_token\030\t \001(" +
+      "\tR\017awsSessionToken\022!\n\014endpoint_url\030\n \001(\t" +
+      "R\013endpointUrl\022*\n\021consumer_role_arn\030\013 \001(\t" +
+      "R\017consumerRoleArn\"\256\004\n\013KafkaSource\022\022\n\004nam" +
+      "e\030\001 \001(\tR\004name\022+\n\021bootstrap_servers\030\002 \003(\t" +
+      "R\020bootstrapServers\022\024\n\005topic\030\003 \001(\tR\005topic" +
+      "\0222\n\025ssl_keystore_location\030\004 \001(\tR\023sslKeys" +
+      "toreLocation\022\036\n\013ssl_ca_file\030\005 \001(\tR\tsslCa" +
+      "File\022(\n\020client_id_prefix\030\006 \001(\tR\016clientId" +
+      "Prefix\022&\n\017group_id_prefix\030\007 \001(\tR\rgroupId" +
+      "Prefix\022+\n\021security_protocol\030\010 \001(\tR\020secur" +
+      "ityProtocol\022%\n\016sasl_mechanism\030\t \001(\tR\rsas" +
+      "lMechanism\022#\n\rsasl_username\030\n \001(\tR\014saslU" +
+      "sername\022#\n\rsasl_password\030\013 \001(\tR\014saslPass" +
+      "word\022M\n\025late_arrival_deadline\030\014 \001(\0132\031.go" +
+      "ogle.protobuf.DurationR\023lateArrivalDeadl" +
+      "ine\0225\n\027dead_letter_queue_topic\030\r \001(\tR\024de" +
+      "adLetterQueueTopic\"\360\001\n\014PubSubSource\022\022\n\004n" +
+      "ame\030\001 \001(\tR\004name\022\035\n\nproject_id\030\002 \001(\tR\tpro" +
+      "jectId\022\'\n\017subscription_id\030\003 \001(\tR\016subscri" +
+      "ptionId\022M\n\025late_arrival_deadline\030\004 \001(\0132\031" +
+      ".google.protobuf.DurationR\023lateArrivalDe" +
+      "adline\0225\n\027dead_letter_queue_topic\030\005 \001(\tR" +
+      "\024deadLetterQueueTopic\"e\n\027DatabaseSourceR" +
+      "eference\0226\n\004type\030\001 \001(\0162\".chalk.graph.v1." +
+      "DatabaseSourceTypeR\004type\022\022\n\004name\030\002 \001(\tR\004" +
+      "name\"\364\004\n\016DatabaseSource\022<\n\010bigquery\030\001 \001(" +
+      "\0132\036.chalk.graph.v1.BigQuerySourceH\000R\010big" +
+      "query\022<\n\010cloudsql\030\002 \001(\0132\036.chalk.graph.v1" +
+      ".CloudSQLSourceH\000R\010cloudsql\022B\n\ndatabrick" +
+      "s\030\003 \001(\0132 .chalk.graph.v1.DatabricksSourc" +
+      "eH\000R\ndatabricks\0223\n\005mysql\030\004 \001(\0132\033.chalk.g" +
+      "raph.v1.MySQLSourceH\000R\005mysql\022<\n\010postgres" +
+      "\030\005 \001(\0132\036.chalk.graph.v1.PostgresSourceH\000" +
+      "R\010postgres\022<\n\010redshift\030\006 \001(\0132\036.chalk.gra" +
+      "ph.v1.RedshiftSourceH\000R\010redshift\022?\n\tsnow" +
+      "flake\030\007 \001(\0132\037.chalk.graph.v1.SnowflakeSo" +
+      "urceH\000R\tsnowflake\0226\n\006sqlite\030\010 \001(\0132\034.chal" +
+      "k.graph.v1.SQLiteSourceH\000R\006sqlite\0229\n\007spa" +
+      "nner\030\t \001(\0132\035.chalk.graph.v1.SpannerSourc" +
+      "eH\000R\007spanner\0223\n\005trino\030\n \001(\0132\033.chalk.grap" +
+      "h.v1.TrinoSourceH\000R\005trinoB\010\n\006source\"\275\004\n\016" +
+      "BigQuerySource\022\022\n\004name\030\001 \001(\tR\004name\022\030\n\007pr" +
+      "oject\030\002 \001(\tR\007project\022\030\n\007dataset\030\003 \001(\tR\007d" +
+      "ataset\022\032\n\010location\030\004 \001(\tR\010location\022-\n\022cr" +
+      "edentials_base64\030\005 \001(\tR\021credentialsBase6" +
+      "4\022)\n\020credentials_path\030\006 \001(\tR\017credentials" +
+      "Path\022O\n\013engine_args\030\007 \003(\0132..chalk.graph." +
+      "v1.BigQuerySource.EngineArgsEntryR\nengin" +
+      "eArgs\022_\n\021async_engine_args\030\010 \003(\01323.chalk" +
+      ".graph.v1.BigQuerySource.AsyncEngineArgs" +
+      "EntryR\017asyncEngineArgs\032Z\n\017EngineArgsEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.cha" +
+      "lk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024As" +
+      "yncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005" +
+      "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
+      "R\005value:\0028\001\"\370\003\n\016CloudSQLSource\022\022\n\004name\030\001" +
+      " \001(\tR\004name\022\016\n\002db\030\002 \001(\tR\002db\022\022\n\004user\030\003 \001(\t" +
+      "R\004user\022\032\n\010password\030\004 \001(\tR\010password\022#\n\rin" +
+      "stance_name\030\005 \001(\tR\014instanceName\022O\n\013engin" +
+      "e_args\030\006 \003(\0132..chalk.graph.v1.CloudSQLSo" +
+      "urce.EngineArgsEntryR\nengineArgs\022_\n\021asyn" +
+      "c_engine_args\030\007 \003(\01323.chalk.graph.v1.Clo" +
+      "udSQLSource.AsyncEngineArgsEntryR\017asyncE" +
+      "ngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(" +
+      "\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.S" +
+      "calarValueR\005value:\0028\001\032_\n\024AsyncEngineArgs" +
+      "Entry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033" +
+      ".chalk.arrow.v1.ScalarValueR\005value:\0028\001\"\221" +
+      "\004\n\020DatabricksSource\022\022\n\004name\030\001 \001(\tR\004name\022" +
+      "\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022" +
+      "\016\n\002db\030\004 \001(\tR\002db\022\033\n\thttp_path\030\005 \001(\tR\010http" +
+      "Path\022!\n\014access_token\030\006 \001(\tR\013accessToken\022" +
+      "Q\n\013engine_args\030\007 \003(\01320.chalk.graph.v1.Da" +
+      "tabricksSource.EngineArgsEntryR\nengineAr" +
+      "gs\022a\n\021async_engine_args\030\010 \003(\01325.chalk.gr" +
+      "aph.v1.DatabricksSource.AsyncEngineArgsE" +
       "ntryR\017asyncEngineArgs\032Z\n\017EngineArgsEntry" +
       "\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chal" +
       "k.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024Asy" +
       "ncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005v" +
       "alue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR" +
-      "\005value:\0028\001\"\317\004\n\017SnowflakeSource\022\022\n\004name\030\001" +
-      " \001(\tR\004name\022\016\n\002db\030\002 \001(\tR\002db\022\026\n\006schema\030\003 \001" +
-      "(\tR\006schema\022\022\n\004role\030\004 \001(\tR\004role\022\022\n\004user\030\005" +
-      " \001(\tR\004user\022\032\n\010password\030\006 \001(\tR\010password\022-" +
-      "\n\022account_identifier\030\007 \001(\tR\021accountIdent" +
-      "ifier\022\034\n\twarehouse\030\010 \001(\tR\twarehouse\022P\n\013e" +
-      "ngine_args\030\t \003(\0132/.chalk.graph.v1.Snowfl" +
-      "akeSource.EngineArgsEntryR\nengineArgs\022`\n" +
-      "\021async_engine_args\030\n \003(\01324.chalk.graph.v" +
-      "1.SnowflakeSource.AsyncEngineArgsEntryR\017" +
-      "asyncEngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003ke" +
-      "y\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arro" +
-      "w.v1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngi" +
+      "\005value:\0028\001\"\362\003\n\013MySQLSource\022\022\n\004name\030\001 \001(\t" +
+      "R\004name\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\t" +
+      "R\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004user\030\005 \001(\tR\004us" +
+      "er\022\032\n\010password\030\006 \001(\tR\010password\022L\n\013engine" +
+      "_args\030\007 \003(\0132+.chalk.graph.v1.MySQLSource" +
+      ".EngineArgsEntryR\nengineArgs\022\\\n\021async_en" +
+      "gine_args\030\010 \003(\01320.chalk.graph.v1.MySQLSo" +
+      "urce.AsyncEngineArgsEntryR\017asyncEngineAr" +
+      "gs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
+      "1\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarVa" +
+      "lueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk." +
+      "arrow.v1.ScalarValueR\005value:\0028\001\"\373\003\n\016Post" +
+      "gresSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002" +
+      " \001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001" +
+      "(\tR\002db\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010password\030\006" +
+      " \001(\tR\010password\022O\n\013engine_args\030\007 \003(\0132..ch" +
+      "alk.graph.v1.PostgresSource.EngineArgsEn" +
+      "tryR\nengineArgs\022_\n\021async_engine_args\030\010 \003" +
+      "(\01323.chalk.graph.v1.PostgresSource.Async" +
+      "EngineArgsEntryR\017asyncEngineArgs\032Z\n\017Engi" +
       "neArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002" +
       " \001(\0132\033.chalk.arrow.v1.ScalarValueR\005value" +
-      ":\0028\001\"\252\003\n\014SQLiteSource\022\022\n\004name\030\001 \001(\tR\004nam" +
-      "e\022\033\n\tfile_name\030\002 \001(\tR\010fileName\022M\n\013engine" +
-      "_args\030\003 \003(\0132,.chalk.graph.v1.SQLiteSourc" +
-      "e.EngineArgsEntryR\nengineArgs\022]\n\021async_e" +
-      "ngine_args\030\004 \003(\01321.chalk.graph.v1.SQLite" +
-      "Source.AsyncEngineArgsEntryR\017asyncEngine" +
-      "Args\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
-      "y\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Scalar" +
-      "ValueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry" +
-      "\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chal" +
-      "k.arrow.v1.ScalarValueR\005value:\0028\001\"\205\004\n\rSp" +
-      "annerSource\022\022\n\004name\030\001 \001(\tR\004name\022\030\n\007proje" +
-      "ct\030\002 \001(\tR\007project\022\032\n\010instance\030\003 \001(\tR\010ins" +
-      "tance\022\016\n\002db\030\004 \001(\tR\002db\022-\n\022credentials_bas" +
-      "e64\030\005 \001(\tR\021credentialsBase64\022N\n\013engine_a" +
-      "rgs\030\006 \003(\0132-.chalk.graph.v1.SpannerSource" +
-      ".EngineArgsEntryR\nengineArgs\022^\n\021async_en" +
-      "gine_args\030\007 \003(\01322.chalk.graph.v1.Spanner" +
-      "Source.AsyncEngineArgsEntryR\017asyncEngine" +
-      "Args\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
-      "y\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Scalar" +
-      "ValueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry" +
-      "\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chal" +
-      "k.arrow.v1.ScalarValueR\005value:\0028\001\"\224\004\n\013Tr" +
-      "inoSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 " +
-      "\001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\030\n\007catalog" +
-      "\030\004 \001(\tR\007catalog\022\026\n\006schema\030\005 \001(\tR\006schema\022" +
-      "\022\n\004user\030\006 \001(\tR\004user\022\032\n\010password\030\007 \001(\tR\010p" +
-      "assword\022L\n\013engine_args\030\010 \003(\0132+.chalk.gra" +
-      "ph.v1.TrinoSource.EngineArgsEntryR\nengin" +
-      "eArgs\022\\\n\021async_engine_args\030\t \003(\01320.chalk" +
-      ".graph.v1.TrinoSource.AsyncEngineArgsEnt" +
-      "ryR\017asyncEngineArgs\032Z\n\017EngineArgsEntry\022\020" +
-      "\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk." +
-      "arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024Async" +
-      "EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005val" +
-      "ue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005v" +
-      "alue:\0028\001*t\n\020StreamSourceType\022\"\n\036STREAM_S" +
-      "OURCE_TYPE_UNSPECIFIED\020\000\022\034\n\030STREAM_SOURC" +
-      "E_TYPE_KAFKA\020\001\022\036\n\032STREAM_SOURCE_TYPE_KIN" +
-      "ESIS\020\002*\222\003\n\022DatabaseSourceType\022$\n DATABAS" +
-      "E_SOURCE_TYPE_UNSPECIFIED\020\000\022!\n\035DATABASE_" +
-      "SOURCE_TYPE_BIGQUERY\020\001\022!\n\035DATABASE_SOURC" +
-      "E_TYPE_CLOUDSQL\020\002\022#\n\037DATABASE_SOURCE_TYP" +
-      "E_DATABRICKS\020\003\022\036\n\032DATABASE_SOURCE_TYPE_M" +
-      "YSQL\020\004\022!\n\035DATABASE_SOURCE_TYPE_POSTGRES\020" +
-      "\005\022!\n\035DATABASE_SOURCE_TYPE_REDSHIFT\020\006\022\"\n\036" +
-      "DATABASE_SOURCE_TYPE_SNOWFLAKE\020\007\022\037\n\033DATA" +
-      "BASE_SOURCE_TYPE_SQLITE\020\010\022 \n\034DATABASE_SO" +
-      "URCE_TYPE_SPANNER\020\t\022\036\n\032DATABASE_SOURCE_T" +
-      "YPE_TRINO\020\nB\210\001\n\036ai.chalk.protos.chalk.gr" +
-      "aph.v1B\014SourcesProtoP\001\242\002\003CGX\252\002\016Chalk.Gra" +
-      "ph.V1\312\002\016Chalk\\Graph\\V1\342\002\032Chalk\\Graph\\V1\\" +
-      "GPBMetadata\352\002\020Chalk::Graph::V1b\006proto3"
+      ":\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001(" +
+      "\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.S" +
+      "calarValueR\005value:\0028\001\"\265\004\n\016RedshiftSource" +
+      "\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host" +
+      "\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004" +
+      "user\030\005 \001(\tR\004user\022\032\n\010password\030\006 \001(\tR\010pass" +
+      "word\022\033\n\ts3_client\030\007 \001(\tR\010s3Client\022\033\n\ts3_" +
+      "bucket\030\010 \001(\tR\010s3Bucket\022O\n\013engine_args\030\t " +
+      "\003(\0132..chalk.graph.v1.RedshiftSource.Engi" +
+      "neArgsEntryR\nengineArgs\022_\n\021async_engine_" +
+      "args\030\n \003(\01323.chalk.graph.v1.RedshiftSour" +
+      "ce.AsyncEngineArgsEntryR\017asyncEngineArgs" +
+      "\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n" +
+      "\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValu" +
+      "eR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003" +
+      "key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.ar" +
+      "row.v1.ScalarValueR\005value:\0028\001\"\367\004\n\017Snowfl" +
+      "akeSource\022\022\n\004name\030\001 \001(\tR\004name\022\016\n\002db\030\002 \001(" +
+      "\tR\002db\022\026\n\006schema\030\003 \001(\tR\006schema\022\022\n\004role\030\004 " +
+      "\001(\tR\004role\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010passwor" +
+      "d\030\006 \001(\tR\010password\022-\n\022account_identifier\030" +
+      "\007 \001(\tR\021accountIdentifier\022\034\n\twarehouse\030\010 " +
+      "\001(\tR\twarehouse\022P\n\013engine_args\030\t \003(\0132/.ch" +
+      "alk.graph.v1.SnowflakeSource.EngineArgsE" +
+      "ntryR\nengineArgs\022`\n\021async_engine_args\030\n " +
+      "\003(\01324.chalk.graph.v1.SnowflakeSource.Asy" +
+      "ncEngineArgsEntryR\017asyncEngineArgs\022&\n\017pr" +
+      "ivate_key_b64\030\013 \001(\tR\rprivateKeyB64\032Z\n\017En" +
+      "gineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value" +
+      "\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005val" +
+      "ue:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 " +
+      "\001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1" +
+      ".ScalarValueR\005value:\0028\001\"\252\003\n\014SQLiteSource" +
+      "\022\022\n\004name\030\001 \001(\tR\004name\022\033\n\tfile_name\030\002 \001(\tR" +
+      "\010fileName\022M\n\013engine_args\030\003 \003(\0132,.chalk.g" +
+      "raph.v1.SQLiteSource.EngineArgsEntryR\nen" +
+      "gineArgs\022]\n\021async_engine_args\030\004 \003(\01321.ch" +
+      "alk.graph.v1.SQLiteSource.AsyncEngineArg" +
+      "sEntryR\017asyncEngineArgs\032Z\n\017EngineArgsEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.ch" +
+      "alk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024A" +
+      "syncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n" +
+      "\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValu" +
+      "eR\005value:\0028\001\"\205\004\n\rSpannerSource\022\022\n\004name\030\001" +
+      " \001(\tR\004name\022\030\n\007project\030\002 \001(\tR\007project\022\032\n\010" +
+      "instance\030\003 \001(\tR\010instance\022\016\n\002db\030\004 \001(\tR\002db" +
+      "\022-\n\022credentials_base64\030\005 \001(\tR\021credential" +
+      "sBase64\022N\n\013engine_args\030\006 \003(\0132-.chalk.gra" +
+      "ph.v1.SpannerSource.EngineArgsEntryR\neng" +
+      "ineArgs\022^\n\021async_engine_args\030\007 \003(\01322.cha" +
+      "lk.graph.v1.SpannerSource.AsyncEngineArg" +
+      "sEntryR\017asyncEngineArgs\032Z\n\017EngineArgsEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.ch" +
+      "alk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024A" +
+      "syncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n" +
+      "\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValu" +
+      "eR\005value:\0028\001\"\224\004\n\013TrinoSource\022\022\n\004name\030\001 \001" +
+      "(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001" +
+      "(\tR\004port\022\030\n\007catalog\030\004 \001(\tR\007catalog\022\026\n\006sc" +
+      "hema\030\005 \001(\tR\006schema\022\022\n\004user\030\006 \001(\tR\004user\022\032" +
+      "\n\010password\030\007 \001(\tR\010password\022L\n\013engine_arg" +
+      "s\030\010 \003(\0132+.chalk.graph.v1.TrinoSource.Eng" +
+      "ineArgsEntryR\nengineArgs\022\\\n\021async_engine" +
+      "_args\030\t \003(\01320.chalk.graph.v1.TrinoSource" +
+      ".AsyncEngineArgsEntryR\017asyncEngineArgs\032Z" +
+      "\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005v" +
+      "alue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR" +
+      "\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arro" +
+      "w.v1.ScalarValueR\005value:\0028\001*\223\001\n\020StreamSo" +
+      "urceType\022\"\n\036STREAM_SOURCE_TYPE_UNSPECIFI" +
+      "ED\020\000\022\034\n\030STREAM_SOURCE_TYPE_KAFKA\020\001\022\036\n\032ST" +
+      "REAM_SOURCE_TYPE_KINESIS\020\002\022\035\n\031STREAM_SOU" +
+      "RCE_TYPE_PUBSUB\020\003*\222\003\n\022DatabaseSourceType" +
+      "\022$\n DATABASE_SOURCE_TYPE_UNSPECIFIED\020\000\022!" +
+      "\n\035DATABASE_SOURCE_TYPE_BIGQUERY\020\001\022!\n\035DAT" +
+      "ABASE_SOURCE_TYPE_CLOUDSQL\020\002\022#\n\037DATABASE" +
+      "_SOURCE_TYPE_DATABRICKS\020\003\022\036\n\032DATABASE_SO" +
+      "URCE_TYPE_MYSQL\020\004\022!\n\035DATABASE_SOURCE_TYP" +
+      "E_POSTGRES\020\005\022!\n\035DATABASE_SOURCE_TYPE_RED" +
+      "SHIFT\020\006\022\"\n\036DATABASE_SOURCE_TYPE_SNOWFLAK" +
+      "E\020\007\022\037\n\033DATABASE_SOURCE_TYPE_SQLITE\020\010\022 \n\034" +
+      "DATABASE_SOURCE_TYPE_SPANNER\020\t\022\036\n\032DATABA" +
+      "SE_SOURCE_TYPE_TRINO\020\nB\210\001\n\036ai.chalk.prot" +
+      "os.chalk.graph.v1B\014SourcesProtoP\001\242\002\003CGX\252" +
+      "\002\016Chalk.Graph.V1\312\002\016Chalk\\Graph\\V1\342\002\032Chal" +
+      "k\\Graph\\V1\\GPBMetadata\352\002\020Chalk::Graph::V" +
+      "1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -424,7 +439,7 @@ public final class SourcesProto {
     internal_static_chalk_graph_v1_StreamSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_StreamSource_descriptor,
-        new java.lang.String[] { "Kafka", "Kinesis", "Source", });
+        new java.lang.String[] { "Kafka", "Kinesis", "Pubsub", "Source", });
     internal_static_chalk_graph_v1_KinesisSource_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_graph_v1_KinesisSource_fieldAccessorTable = new
@@ -437,20 +452,26 @@ public final class SourcesProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_KafkaSource_descriptor,
         new java.lang.String[] { "Name", "BootstrapServers", "Topic", "SslKeystoreLocation", "SslCaFile", "ClientIdPrefix", "GroupIdPrefix", "SecurityProtocol", "SaslMechanism", "SaslUsername", "SaslPassword", "LateArrivalDeadline", "DeadLetterQueueTopic", });
-    internal_static_chalk_graph_v1_DatabaseSourceReference_descriptor =
+    internal_static_chalk_graph_v1_PubSubSource_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_graph_v1_PubSubSource_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_graph_v1_PubSubSource_descriptor,
+        new java.lang.String[] { "Name", "ProjectId", "SubscriptionId", "LateArrivalDeadline", "DeadLetterQueueTopic", });
+    internal_static_chalk_graph_v1_DatabaseSourceReference_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_graph_v1_DatabaseSourceReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_DatabaseSourceReference_descriptor,
         new java.lang.String[] { "Type", "Name", });
     internal_static_chalk_graph_v1_DatabaseSource_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_chalk_graph_v1_DatabaseSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_DatabaseSource_descriptor,
         new java.lang.String[] { "Bigquery", "Cloudsql", "Databricks", "Mysql", "Postgres", "Redshift", "Snowflake", "Sqlite", "Spanner", "Trino", "Source", });
     internal_static_chalk_graph_v1_BigQuerySource_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_graph_v1_BigQuerySource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_BigQuerySource_descriptor,
@@ -468,7 +489,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_BigQuerySource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_CloudSQLSource_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_chalk_graph_v1_CloudSQLSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_CloudSQLSource_descriptor,
@@ -486,7 +507,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_CloudSQLSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_DatabricksSource_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_chalk_graph_v1_DatabricksSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_DatabricksSource_descriptor,
@@ -504,7 +525,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_DatabricksSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_MySQLSource_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_chalk_graph_v1_MySQLSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_MySQLSource_descriptor,
@@ -522,7 +543,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_MySQLSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_PostgresSource_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_chalk_graph_v1_PostgresSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_PostgresSource_descriptor,
@@ -540,7 +561,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_PostgresSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_RedshiftSource_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_chalk_graph_v1_RedshiftSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_RedshiftSource_descriptor,
@@ -558,11 +579,11 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_RedshiftSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_SnowflakeSource_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_chalk_graph_v1_SnowflakeSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_SnowflakeSource_descriptor,
-        new java.lang.String[] { "Name", "Db", "Schema", "Role", "User", "Password", "AccountIdentifier", "Warehouse", "EngineArgs", "AsyncEngineArgs", });
+        new java.lang.String[] { "Name", "Db", "Schema", "Role", "User", "Password", "AccountIdentifier", "Warehouse", "EngineArgs", "AsyncEngineArgs", "PrivateKeyB64", });
     internal_static_chalk_graph_v1_SnowflakeSource_EngineArgsEntry_descriptor =
       internal_static_chalk_graph_v1_SnowflakeSource_descriptor.getNestedTypes().get(0);
     internal_static_chalk_graph_v1_SnowflakeSource_EngineArgsEntry_fieldAccessorTable = new
@@ -576,7 +597,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_SnowflakeSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_SQLiteSource_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_chalk_graph_v1_SQLiteSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_SQLiteSource_descriptor,
@@ -594,7 +615,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_SQLiteSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_SpannerSource_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_chalk_graph_v1_SpannerSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_SpannerSource_descriptor,
@@ -612,7 +633,7 @@ public final class SourcesProto {
         internal_static_chalk_graph_v1_SpannerSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_graph_v1_TrinoSource_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_chalk_graph_v1_TrinoSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_TrinoSource_descriptor,

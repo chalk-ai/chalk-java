@@ -762,4 +762,19 @@ com.google.protobuf.Value defaultValue);
    */
   com.google.protobuf.Value getSpecConfigJsonOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   * @return Whether the archivedAt field is set.
+   */
+  boolean hasArchivedAt();
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   * @return The archivedAt.
+   */
+  com.google.protobuf.Timestamp getArchivedAt();
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getArchivedAtOrBuilder();
 }

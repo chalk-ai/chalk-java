@@ -139,6 +139,37 @@ public final class QueryServiceGrpc {
     return getOnlineQueryMultiMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest,
+      ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> getUploadFeaturesBulkMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UploadFeaturesBulk",
+      requestType = ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest.class,
+      responseType = ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest,
+      ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> getUploadFeaturesBulkMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest, ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> getUploadFeaturesBulkMethod;
+    if ((getUploadFeaturesBulkMethod = QueryServiceGrpc.getUploadFeaturesBulkMethod) == null) {
+      synchronized (QueryServiceGrpc.class) {
+        if ((getUploadFeaturesBulkMethod = QueryServiceGrpc.getUploadFeaturesBulkMethod) == null) {
+          QueryServiceGrpc.getUploadFeaturesBulkMethod = getUploadFeaturesBulkMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest, ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UploadFeaturesBulk"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new QueryServiceMethodDescriptorSupplier("UploadFeaturesBulk"))
+              .build();
+        }
+      }
+    }
+    return getUploadFeaturesBulkMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -214,6 +245,13 @@ public final class QueryServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getOnlineQueryMultiMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void uploadFeaturesBulk(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUploadFeaturesBulkMethod(), responseObserver);
+    }
   }
 
   /**
@@ -274,6 +312,14 @@ public final class QueryServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getOnlineQueryMultiMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void uploadFeaturesBulk(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUploadFeaturesBulkMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -318,6 +364,13 @@ public final class QueryServiceGrpc {
     public ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse onlineQueryMulti(ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getOnlineQueryMultiMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse uploadFeaturesBulk(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUploadFeaturesBulkMethod(), getCallOptions(), request);
     }
   }
 
@@ -368,12 +421,21 @@ public final class QueryServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getOnlineQueryMultiMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse> uploadFeaturesBulk(
+        ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUploadFeaturesBulkMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PING = 0;
   private static final int METHODID_ONLINE_QUERY = 1;
   private static final int METHODID_ONLINE_QUERY_BULK = 2;
   private static final int METHODID_ONLINE_QUERY_MULTI = 3;
+  private static final int METHODID_UPLOAD_FEATURES_BULK = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -407,6 +469,10 @@ public final class QueryServiceGrpc {
         case METHODID_ONLINE_QUERY_MULTI:
           serviceImpl.onlineQueryMulti((ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse>) responseObserver);
+          break;
+        case METHODID_UPLOAD_FEATURES_BULK:
+          serviceImpl.uploadFeaturesBulk((ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -454,6 +520,13 @@ public final class QueryServiceGrpc {
               ai.chalk.protos.chalk.common.v1.OnlineQueryMultiRequest,
               ai.chalk.protos.chalk.common.v1.OnlineQueryMultiResponse>(
                 service, METHODID_ONLINE_QUERY_MULTI)))
+        .addMethod(
+          getUploadFeaturesBulkMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest,
+              ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse>(
+                service, METHODID_UPLOAD_FEATURES_BULK)))
         .build();
   }
 
@@ -506,6 +579,7 @@ public final class QueryServiceGrpc {
               .addMethod(getOnlineQueryMethod())
               .addMethod(getOnlineQueryBulkMethod())
               .addMethod(getOnlineQueryMultiMethod())
+              .addMethod(getUploadFeaturesBulkMethod())
               .build();
         }
       }

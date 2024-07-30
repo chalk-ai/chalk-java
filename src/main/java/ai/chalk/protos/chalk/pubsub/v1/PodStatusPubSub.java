@@ -28,6 +28,9 @@ private static final long serialVersionUID = 0L;
     datadogVersion_ = "";
     podTemplateHash_ = "";
     cluster_ = "";
+    uid_ = "";
+    name_ = "";
+    namespace_ = "";
   }
 
   @java.lang.Override
@@ -15302,6 +15305,42 @@ java.lang.String defaultValue) {
 
     /**
      * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     * @return Whether the resources field is set.
+     */
+    boolean hasResources();
+    /**
+     * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     * @return The resources.
+     */
+    ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getResources();
+    /**
+     * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     */
+    ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder getResourcesOrBuilder();
+
+    /**
+     * <pre>
      * RestartPolicy defines the restart behavior of individual containers in a pod.
      * This field may only be set for init containers, and the only allowed value is "Always".
      * For non-init containers or when this field is not specified,
@@ -16071,6 +16110,53 @@ java.lang.String defaultValue) {
       return env_.get(index);
     }
 
+    public static final int RESOURCES_FIELD_NUMBER = 8;
+    private ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources_;
+    /**
+     * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     * @return Whether the resources field is set.
+     */
+    @java.lang.Override
+    public boolean hasResources() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     * @return The resources.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getResources() {
+      return resources_ == null ? ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance() : resources_;
+    }
+    /**
+     * <pre>
+     * Compute Resources required by this container.
+     * Cannot be updated.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder getResourcesOrBuilder() {
+      return resources_ == null ? ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance() : resources_;
+    }
+
     public static final int RESTART_POLICY_FIELD_NUMBER = 24;
     @SuppressWarnings("serial")
     private volatile java.lang.Object restartPolicy_ = "";
@@ -16100,7 +16186,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasRestartPolicy() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
      * <pre>
@@ -16198,7 +16284,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasTerminationMessagePath() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
      * <pre>
@@ -16278,7 +16364,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasTerminationMessagePolicy() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
      * <pre>
@@ -16356,7 +16442,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasImagePullPolicy() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000040) != 0);
     }
     /**
      * <pre>
@@ -16495,10 +16581,13 @@ java.lang.String defaultValue) {
       for (int i = 0; i < env_.size(); i++) {
         output.writeMessage(7, env_.get(i));
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
+      if (((bitField0_ & 0x00000004) != 0)) {
+        output.writeMessage(8, getResources());
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 13, terminationMessagePath_);
       }
-      if (((bitField0_ & 0x00000020) != 0)) {
+      if (((bitField0_ & 0x00000040) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 14, imagePullPolicy_);
       }
       if (stdin_ != false) {
@@ -16510,10 +16599,10 @@ java.lang.String defaultValue) {
       if (tty_ != false) {
         output.writeBool(18, tty_);
       }
-      if (((bitField0_ & 0x00000010) != 0)) {
+      if (((bitField0_ & 0x00000020) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 20, terminationMessagePolicy_);
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
+      if (((bitField0_ & 0x00000008) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 24, restartPolicy_);
       }
       getUnknownFields().writeTo(output);
@@ -16554,10 +16643,14 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, env_.get(i));
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getResources());
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, terminationMessagePath_);
       }
-      if (((bitField0_ & 0x00000020) != 0)) {
+      if (((bitField0_ & 0x00000040) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, imagePullPolicy_);
       }
       if (stdin_ != false) {
@@ -16572,10 +16665,10 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(18, tty_);
       }
-      if (((bitField0_ & 0x00000010) != 0)) {
+      if (((bitField0_ & 0x00000020) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(20, terminationMessagePolicy_);
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
+      if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, restartPolicy_);
       }
       size += getUnknownFields().getSerializedSize();
@@ -16611,6 +16704,11 @@ java.lang.String defaultValue) {
       }
       if (!getEnvList()
           .equals(other.getEnvList())) return false;
+      if (hasResources() != other.hasResources()) return false;
+      if (hasResources()) {
+        if (!getResources()
+            .equals(other.getResources())) return false;
+      }
       if (hasRestartPolicy() != other.hasRestartPolicy()) return false;
       if (hasRestartPolicy()) {
         if (!getRestartPolicy()
@@ -16669,6 +16767,10 @@ java.lang.String defaultValue) {
       if (getEnvCount() > 0) {
         hash = (37 * hash) + ENV_FIELD_NUMBER;
         hash = (53 * hash) + getEnvList().hashCode();
+      }
+      if (hasResources()) {
+        hash = (37 * hash) + RESOURCES_FIELD_NUMBER;
+        hash = (53 * hash) + getResources().hashCode();
       }
       if (hasRestartPolicy()) {
         hash = (37 * hash) + RESTART_POLICY_FIELD_NUMBER;
@@ -16818,13 +16920,20 @@ java.lang.String defaultValue) {
 
       // Construct using ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Container.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getEnvFieldBuilder();
+          getResourcesFieldBuilder();
+        }
       }
       @java.lang.Override
       public Builder clear() {
@@ -16844,6 +16953,11 @@ java.lang.String defaultValue) {
           envBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        resources_ = null;
+        if (resourcesBuilder_ != null) {
+          resourcesBuilder_.dispose();
+          resourcesBuilder_ = null;
+        }
         restartPolicy_ = "";
         terminationMessagePath_ = "";
         terminationMessagePolicy_ = "";
@@ -16918,28 +17032,34 @@ java.lang.String defaultValue) {
           to_bitField0_ |= 0x00000002;
         }
         if (((from_bitField0_ & 0x00000040) != 0)) {
-          result.restartPolicy_ = restartPolicy_;
+          result.resources_ = resourcesBuilder_ == null
+              ? resources_
+              : resourcesBuilder_.build();
           to_bitField0_ |= 0x00000004;
         }
         if (((from_bitField0_ & 0x00000080) != 0)) {
-          result.terminationMessagePath_ = terminationMessagePath_;
+          result.restartPolicy_ = restartPolicy_;
           to_bitField0_ |= 0x00000008;
         }
         if (((from_bitField0_ & 0x00000100) != 0)) {
-          result.terminationMessagePolicy_ = terminationMessagePolicy_;
+          result.terminationMessagePath_ = terminationMessagePath_;
           to_bitField0_ |= 0x00000010;
         }
         if (((from_bitField0_ & 0x00000200) != 0)) {
-          result.imagePullPolicy_ = imagePullPolicy_;
+          result.terminationMessagePolicy_ = terminationMessagePolicy_;
           to_bitField0_ |= 0x00000020;
         }
         if (((from_bitField0_ & 0x00000400) != 0)) {
-          result.stdin_ = stdin_;
+          result.imagePullPolicy_ = imagePullPolicy_;
+          to_bitField0_ |= 0x00000040;
         }
         if (((from_bitField0_ & 0x00000800) != 0)) {
-          result.stdinOnce_ = stdinOnce_;
+          result.stdin_ = stdin_;
         }
         if (((from_bitField0_ & 0x00001000) != 0)) {
+          result.stdinOnce_ = stdinOnce_;
+        }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
           result.tty_ = tty_;
         }
         result.bitField0_ |= to_bitField0_;
@@ -17050,24 +17170,27 @@ java.lang.String defaultValue) {
             }
           }
         }
+        if (other.hasResources()) {
+          mergeResources(other.getResources());
+        }
         if (other.hasRestartPolicy()) {
           restartPolicy_ = other.restartPolicy_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (other.hasTerminationMessagePath()) {
           terminationMessagePath_ = other.terminationMessagePath_;
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           onChanged();
         }
         if (other.hasTerminationMessagePolicy()) {
           terminationMessagePolicy_ = other.terminationMessagePolicy_;
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           onChanged();
         }
         if (other.hasImagePullPolicy()) {
           imagePullPolicy_ = other.imagePullPolicy_;
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
           onChanged();
         }
         if (other.getStdin() != false) {
@@ -17145,39 +17268,46 @@ java.lang.String defaultValue) {
                 }
                 break;
               } // case 58
+              case 66: {
+                input.readMessage(
+                    getResourcesFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 66
               case 106: {
                 terminationMessagePath_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000080;
+                bitField0_ |= 0x00000100;
                 break;
               } // case 106
               case 114: {
                 imagePullPolicy_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000200;
+                bitField0_ |= 0x00000400;
                 break;
               } // case 114
               case 128: {
                 stdin_ = input.readBool();
-                bitField0_ |= 0x00000400;
+                bitField0_ |= 0x00000800;
                 break;
               } // case 128
               case 136: {
                 stdinOnce_ = input.readBool();
-                bitField0_ |= 0x00000800;
+                bitField0_ |= 0x00001000;
                 break;
               } // case 136
               case 144: {
                 tty_ = input.readBool();
-                bitField0_ |= 0x00001000;
+                bitField0_ |= 0x00002000;
                 break;
               } // case 144
               case 162: {
                 terminationMessagePolicy_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000200;
                 break;
               } // case 162
               case 194: {
                 restartPolicy_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000040;
+                bitField0_ |= 0x00000080;
                 break;
               } // case 194
               default: {
@@ -18429,6 +18559,190 @@ java.lang.String defaultValue) {
         return envBuilder_;
       }
 
+      private ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder> resourcesBuilder_;
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       * @return Whether the resources field is set.
+       */
+      public boolean hasResources() {
+        return ((bitField0_ & 0x00000040) != 0);
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       * @return The resources.
+       */
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getResources() {
+        if (resourcesBuilder_ == null) {
+          return resources_ == null ? ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance() : resources_;
+        } else {
+          return resourcesBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public Builder setResources(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements value) {
+        if (resourcesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          resources_ = value;
+        } else {
+          resourcesBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public Builder setResources(
+          ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder builderForValue) {
+        if (resourcesBuilder_ == null) {
+          resources_ = builderForValue.build();
+        } else {
+          resourcesBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public Builder mergeResources(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements value) {
+        if (resourcesBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) != 0) &&
+            resources_ != null &&
+            resources_ != ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance()) {
+            getResourcesBuilder().mergeFrom(value);
+          } else {
+            resources_ = value;
+          }
+        } else {
+          resourcesBuilder_.mergeFrom(value);
+        }
+        if (resources_ != null) {
+          bitField0_ |= 0x00000040;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public Builder clearResources() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        resources_ = null;
+        if (resourcesBuilder_ != null) {
+          resourcesBuilder_.dispose();
+          resourcesBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder getResourcesBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getResourcesFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder getResourcesOrBuilder() {
+        if (resourcesBuilder_ != null) {
+          return resourcesBuilder_.getMessageOrBuilder();
+        } else {
+          return resources_ == null ?
+              ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance() : resources_;
+        }
+      }
+      /**
+       * <pre>
+       * Compute Resources required by this container.
+       * Cannot be updated.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>optional .chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements resources = 8 [json_name = "resources"];</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder> 
+          getResourcesFieldBuilder() {
+        if (resourcesBuilder_ == null) {
+          resourcesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder>(
+                  getResources(),
+                  getParentForChildren(),
+                  isClean());
+          resources_ = null;
+        }
+        return resourcesBuilder_;
+      }
+
       private java.lang.Object restartPolicy_ = "";
       /**
        * <pre>
@@ -18455,7 +18769,7 @@ java.lang.String defaultValue) {
        * @return Whether the restartPolicy field is set.
        */
       public boolean hasRestartPolicy() {
-        return ((bitField0_ & 0x00000040) != 0);
+        return ((bitField0_ & 0x00000080) != 0);
       }
       /**
        * <pre>
@@ -18559,7 +18873,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         restartPolicy_ = value;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -18589,7 +18903,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearRestartPolicy() {
         restartPolicy_ = getDefaultInstance().getRestartPolicy();
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -18623,7 +18937,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         restartPolicy_ = value;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -18645,7 +18959,7 @@ java.lang.String defaultValue) {
        * @return Whether the terminationMessagePath field is set.
        */
       public boolean hasTerminationMessagePath() {
-        return ((bitField0_ & 0x00000080) != 0);
+        return ((bitField0_ & 0x00000100) != 0);
       }
       /**
        * <pre>
@@ -18722,7 +19036,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         terminationMessagePath_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -18743,7 +19057,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearTerminationMessagePath() {
         terminationMessagePath_ = getDefaultInstance().getTerminationMessagePath();
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
@@ -18768,7 +19082,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         terminationMessagePath_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -18790,7 +19104,7 @@ java.lang.String defaultValue) {
        * @return Whether the terminationMessagePolicy field is set.
        */
       public boolean hasTerminationMessagePolicy() {
-        return ((bitField0_ & 0x00000100) != 0);
+        return ((bitField0_ & 0x00000200) != 0);
       }
       /**
        * <pre>
@@ -18867,7 +19181,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         terminationMessagePolicy_ = value;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -18888,7 +19202,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearTerminationMessagePolicy() {
         terminationMessagePolicy_ = getDefaultInstance().getTerminationMessagePolicy();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -18913,7 +19227,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         terminationMessagePolicy_ = value;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -18933,7 +19247,7 @@ java.lang.String defaultValue) {
        * @return Whether the imagePullPolicy field is set.
        */
       public boolean hasImagePullPolicy() {
-        return ((bitField0_ & 0x00000200) != 0);
+        return ((bitField0_ & 0x00000400) != 0);
       }
       /**
        * <pre>
@@ -19004,7 +19318,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         imagePullPolicy_ = value;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -19023,7 +19337,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearImagePullPolicy() {
         imagePullPolicy_ = getDefaultInstance().getImagePullPolicy();
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
@@ -19046,7 +19360,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         imagePullPolicy_ = value;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -19078,7 +19392,7 @@ java.lang.String defaultValue) {
       public Builder setStdin(boolean value) {
 
         stdin_ = value;
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         onChanged();
         return this;
       }
@@ -19092,7 +19406,7 @@ java.lang.String defaultValue) {
        * @return This builder for chaining.
        */
       public Builder clearStdin() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         stdin_ = false;
         onChanged();
         return this;
@@ -19133,7 +19447,7 @@ java.lang.String defaultValue) {
       public Builder setStdinOnce(boolean value) {
 
         stdinOnce_ = value;
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         onChanged();
         return this;
       }
@@ -19151,7 +19465,7 @@ java.lang.String defaultValue) {
        * @return This builder for chaining.
        */
       public Builder clearStdinOnce() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         stdinOnce_ = false;
         onChanged();
         return this;
@@ -19182,7 +19496,7 @@ java.lang.String defaultValue) {
       public Builder setTty(boolean value) {
 
         tty_ = value;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -19195,7 +19509,7 @@ java.lang.String defaultValue) {
        * @return This builder for chaining.
        */
       public Builder clearTty() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         tty_ = false;
         onChanged();
         return this;
@@ -22378,6 +22692,1881 @@ java.lang.String defaultValue) {
 
     @java.lang.Override
     public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ContainerStatus getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface QuantityOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chalk.pubsub.v1.PodStatusPubSub.Quantity)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return Whether the string field is set.
+     */
+    boolean hasString();
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return The string.
+     */
+    java.lang.String getString();
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return The bytes for string.
+     */
+    com.google.protobuf.ByteString
+        getStringBytes();
+  }
+  /**
+   * Protobuf type {@code chalk.pubsub.v1.PodStatusPubSub.Quantity}
+   */
+  public static final class Quantity extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chalk.pubsub.v1.PodStatusPubSub.Quantity)
+      QuantityOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Quantity.newBuilder() to construct.
+    private Quantity(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Quantity() {
+      string_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Quantity();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.class, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int STRING_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object string_ = "";
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return Whether the string field is set.
+     */
+    @java.lang.Override
+    public boolean hasString() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return The string.
+     */
+    @java.lang.Override
+    public java.lang.String getString() {
+      java.lang.Object ref = string_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        string_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string string = 1 [json_name = "string"];</code>
+     * @return The bytes for string.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getStringBytes() {
+      java.lang.Object ref = string_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        string_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, string_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, string_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity)) {
+        return super.equals(obj);
+      }
+      ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity other = (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) obj;
+
+      if (hasString() != other.hasString()) return false;
+      if (hasString()) {
+        if (!getString()
+            .equals(other.getString())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasString()) {
+        hash = (37 * hash) + STRING_FIELD_NUMBER;
+        hash = (53 * hash) + getString().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chalk.pubsub.v1.PodStatusPubSub.Quantity}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chalk.pubsub.v1.PodStatusPubSub.Quantity)
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.class, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder.class);
+      }
+
+      // Construct using ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        string_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor;
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getDefaultInstanceForType() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity build() {
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity buildPartial() {
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity result = new ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity result) {
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.string_ = string_;
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) {
+          return mergeFrom((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity other) {
+        if (other == ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.getDefaultInstance()) return this;
+        if (other.hasString()) {
+          string_ = other.string_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                string_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object string_ = "";
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @return Whether the string field is set.
+       */
+      public boolean hasString() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @return The string.
+       */
+      public java.lang.String getString() {
+        java.lang.Object ref = string_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          string_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @return The bytes for string.
+       */
+      public com.google.protobuf.ByteString
+          getStringBytes() {
+        java.lang.Object ref = string_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          string_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @param value The string to set.
+       * @return This builder for chaining.
+       */
+      public Builder setString(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        string_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearString() {
+        string_ = getDefaultInstance().getString();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string string = 1 [json_name = "string"];</code>
+       * @param value The bytes for string to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStringBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        string_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chalk.pubsub.v1.PodStatusPubSub.Quantity)
+    }
+
+    // @@protoc_insertion_point(class_scope:chalk.pubsub.v1.PodStatusPubSub.Quantity)
+    private static final ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity();
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Quantity>
+        PARSER = new com.google.protobuf.AbstractParser<Quantity>() {
+      @java.lang.Override
+      public Quantity parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<Quantity> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Quantity> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResourceRequirementsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    int getLimitsCount();
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    boolean containsLimits(
+        java.lang.String key);
+    /**
+     * Use {@link #getLimitsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    getLimits();
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    getLimitsMap();
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrDefault(
+        java.lang.String key,
+        /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue);
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrThrow(
+        java.lang.String key);
+
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    int getRequestsCount();
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    boolean containsRequests(
+        java.lang.String key);
+    /**
+     * Use {@link #getRequestsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    getRequests();
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    getRequestsMap();
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrDefault(
+        java.lang.String key,
+        /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue);
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrThrow(
+        java.lang.String key);
+  }
+  /**
+   * Protobuf type {@code chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements}
+   */
+  public static final class ResourceRequirements extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)
+      ResourceRequirementsOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ResourceRequirements.newBuilder() to construct.
+    private ResourceRequirements(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResourceRequirements() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ResourceRequirements();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 1:
+          return internalGetLimits();
+        case 2:
+          return internalGetRequests();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.class, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder.class);
+    }
+
+    public static final int LIMITS_FIELD_NUMBER = 1;
+    private static final class LimitsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>newDefaultInstance(
+                  ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.getDefaultInstance());
+    }
+    @SuppressWarnings("serial")
+    private com.google.protobuf.MapField<
+        java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> limits_;
+    private com.google.protobuf.MapField<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    internalGetLimits() {
+      if (limits_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            LimitsDefaultEntryHolder.defaultEntry);
+      }
+      return limits_;
+    }
+    public int getLimitsCount() {
+      return internalGetLimits().getMap().size();
+    }
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    @java.lang.Override
+    public boolean containsLimits(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetLimits().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getLimitsMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getLimits() {
+      return getLimitsMap();
+    }
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getLimitsMap() {
+      return internalGetLimits().getMap();
+    }
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrDefault(
+        java.lang.String key,
+        /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> map =
+          internalGetLimits().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * Limits describes the maximum amount of compute resources allowed.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> map =
+          internalGetLimits().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int REQUESTS_FIELD_NUMBER = 2;
+    private static final class RequestsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>newDefaultInstance(
+                  ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.getDefaultInstance());
+    }
+    @SuppressWarnings("serial")
+    private com.google.protobuf.MapField<
+        java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> requests_;
+    private com.google.protobuf.MapField<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+    internalGetRequests() {
+      if (requests_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            RequestsDefaultEntryHolder.defaultEntry);
+      }
+      return requests_;
+    }
+    public int getRequestsCount() {
+      return internalGetRequests().getMap().size();
+    }
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    @java.lang.Override
+    public boolean containsRequests(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetRequests().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getRequestsMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getRequests() {
+      return getRequestsMap();
+    }
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getRequestsMap() {
+      return internalGetRequests().getMap();
+    }
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrDefault(
+        java.lang.String key,
+        /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> map =
+          internalGetRequests().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * Requests describes the minimum amount of compute resources required.
+     * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+     * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+     * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+     * +optional
+     * </pre>
+     *
+     * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> map =
+          internalGetRequests().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetLimits(),
+          LimitsDefaultEntryHolder.defaultEntry,
+          1);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetRequests(),
+          RequestsDefaultEntryHolder.defaultEntry,
+          2);
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> entry
+           : internalGetLimits().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+        limits__ = LimitsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, limits__);
+      }
+      for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> entry
+           : internalGetRequests().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+        requests__ = RequestsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, requests__);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)) {
+        return super.equals(obj);
+      }
+      ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements other = (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements) obj;
+
+      if (!internalGetLimits().equals(
+          other.internalGetLimits())) return false;
+      if (!internalGetRequests().equals(
+          other.internalGetRequests())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (!internalGetLimits().getMap().isEmpty()) {
+        hash = (37 * hash) + LIMITS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetLimits().hashCode();
+      }
+      if (!internalGetRequests().getMap().isEmpty()) {
+        hash = (37 * hash) + REQUESTS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetRequests().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirementsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+          int number) {
+        switch (number) {
+          case 1:
+            return internalGetLimits();
+          case 2:
+            return internalGetRequests();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+          int number) {
+        switch (number) {
+          case 1:
+            return internalGetMutableLimits();
+          case 2:
+            return internalGetMutableRequests();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.class, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.Builder.class);
+      }
+
+      // Construct using ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        internalGetMutableLimits().clear();
+        internalGetMutableRequests().clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusProto.internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor;
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getDefaultInstanceForType() {
+        return ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements build() {
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements buildPartial() {
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements result = new ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.limits_ = internalGetLimits().build(LimitsDefaultEntryHolder.defaultEntry);
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.requests_ = internalGetRequests().build(RequestsDefaultEntryHolder.defaultEntry);
+        }
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements) {
+          return mergeFrom((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements other) {
+        if (other == ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements.getDefaultInstance()) return this;
+        internalGetMutableLimits().mergeFrom(
+            other.internalGetLimits());
+        bitField0_ |= 0x00000001;
+        internalGetMutableRequests().mergeFrom(
+            other.internalGetRequests());
+        bitField0_ |= 0x00000002;
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+                limits__ = input.readMessage(
+                    LimitsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableLimits().ensureBuilderMap().put(
+                    limits__.getKey(), limits__.getValue());
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+                requests__ = input.readMessage(
+                    RequestsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableRequests().ensureBuilderMap().put(
+                    requests__.getKey(), requests__.getValue());
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private static final class LimitsConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> {
+        @java.lang.Override
+        public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity build(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder val) {
+          if (val instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) { return (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) val; }
+          return ((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder) val).build();
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> defaultEntry() {
+          return LimitsDefaultEntryHolder.defaultEntry;
+        }
+      };
+      private static final LimitsConverter limitsConverter = new LimitsConverter();
+
+      private com.google.protobuf.MapFieldBuilder<
+          java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder> limits_;
+      private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder>
+          internalGetLimits() {
+        if (limits_ == null) {
+          return new com.google.protobuf.MapFieldBuilder<>(limitsConverter);
+        }
+        return limits_;
+      }
+      private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder>
+          internalGetMutableLimits() {
+        if (limits_ == null) {
+          limits_ = new com.google.protobuf.MapFieldBuilder<>(limitsConverter);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return limits_;
+      }
+      public int getLimitsCount() {
+        return internalGetLimits().ensureBuilderMap().size();
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      @java.lang.Override
+      public boolean containsLimits(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        return internalGetLimits().ensureBuilderMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getLimitsMap()} instead.
+       */
+      @java.lang.Override
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getLimits() {
+        return getLimitsMap();
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      @java.lang.Override
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getLimitsMap() {
+        return internalGetLimits().getImmutableMap();
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      @java.lang.Override
+      public /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrDefault(
+          java.lang.String key,
+          /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> map = internalGetMutableLimits().ensureBuilderMap();
+        return map.containsKey(key) ? limitsConverter.build(map.get(key)) : defaultValue;
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getLimitsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> map = internalGetMutableLimits().ensureBuilderMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return limitsConverter.build(map.get(key));
+      }
+      public Builder clearLimits() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        internalGetMutableLimits().clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      public Builder removeLimits(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        internalGetMutableLimits().ensureBuilderMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+          getMutableLimits() {
+        bitField0_ |= 0x00000001;
+        return internalGetMutableLimits().ensureMessageMap();
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      public Builder putLimits(
+          java.lang.String key,
+          ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity value) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        if (value == null) { throw new NullPointerException("map value"); }
+        internalGetMutableLimits().ensureBuilderMap()
+            .put(key, value);
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      public Builder putAllLimits(
+          java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> values) {
+        for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> e : values.entrySet()) {
+          if (e.getKey() == null || e.getValue() == null) {
+            throw new NullPointerException();
+          }
+        }
+        internalGetMutableLimits().ensureBuilderMap()
+            .putAll(values);
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       * Limits describes the maximum amount of compute resources allowed.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; limits = 1 [json_name = "limits"];</code>
+       */
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder putLimitsBuilderIfAbsent(
+          java.lang.String key) {
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> builderMap = internalGetMutableLimits().ensureBuilderMap();
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder entry = builderMap.get(key);
+        if (entry == null) {
+          entry = ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.newBuilder();
+          builderMap.put(key, entry);
+        }
+        if (entry instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) {
+          entry = ((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) entry).toBuilder();
+          builderMap.put(key, entry);
+        }
+        return (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder) entry;
+      }
+
+      private static final class RequestsConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> {
+        @java.lang.Override
+        public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity build(ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder val) {
+          if (val instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) { return (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) val; }
+          return ((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder) val).build();
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> defaultEntry() {
+          return RequestsDefaultEntryHolder.defaultEntry;
+        }
+      };
+      private static final RequestsConverter requestsConverter = new RequestsConverter();
+
+      private com.google.protobuf.MapFieldBuilder<
+          java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder> requests_;
+      private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder>
+          internalGetRequests() {
+        if (requests_ == null) {
+          return new com.google.protobuf.MapFieldBuilder<>(requestsConverter);
+        }
+        return requests_;
+      }
+      private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder>
+          internalGetMutableRequests() {
+        if (requests_ == null) {
+          requests_ = new com.google.protobuf.MapFieldBuilder<>(requestsConverter);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return requests_;
+      }
+      public int getRequestsCount() {
+        return internalGetRequests().ensureBuilderMap().size();
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      @java.lang.Override
+      public boolean containsRequests(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        return internalGetRequests().ensureBuilderMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getRequestsMap()} instead.
+       */
+      @java.lang.Override
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getRequests() {
+        return getRequestsMap();
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      @java.lang.Override
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> getRequestsMap() {
+        return internalGetRequests().getImmutableMap();
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      @java.lang.Override
+      public /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrDefault(
+          java.lang.String key,
+          /* nullable */
+ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity defaultValue) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> map = internalGetMutableRequests().ensureBuilderMap();
+        return map.containsKey(key) ? requestsConverter.build(map.get(key)) : defaultValue;
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      @java.lang.Override
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity getRequestsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> map = internalGetMutableRequests().ensureBuilderMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return requestsConverter.build(map.get(key));
+      }
+      public Builder clearRequests() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        internalGetMutableRequests().clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      public Builder removeRequests(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        internalGetMutableRequests().ensureBuilderMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity>
+          getMutableRequests() {
+        bitField0_ |= 0x00000002;
+        return internalGetMutableRequests().ensureMessageMap();
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      public Builder putRequests(
+          java.lang.String key,
+          ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity value) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        if (value == null) { throw new NullPointerException("map value"); }
+        internalGetMutableRequests().ensureBuilderMap()
+            .put(key, value);
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      public Builder putAllRequests(
+          java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> values) {
+        for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity> e : values.entrySet()) {
+          if (e.getKey() == null || e.getValue() == null) {
+            throw new NullPointerException();
+          }
+        }
+        internalGetMutableRequests().ensureBuilderMap()
+            .putAll(values);
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <pre>
+       * Requests describes the minimum amount of compute resources required.
+       * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+       * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+       * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       * +optional
+       * </pre>
+       *
+       * <code>map&lt;string, .chalk.pubsub.v1.PodStatusPubSub.Quantity&gt; requests = 2 [json_name = "requests"];</code>
+       */
+      public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder putRequestsBuilderIfAbsent(
+          java.lang.String key) {
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder> builderMap = internalGetMutableRequests().ensureBuilderMap();
+        ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.QuantityOrBuilder entry = builderMap.get(key);
+        if (entry == null) {
+          entry = ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.newBuilder();
+          builderMap.put(key, entry);
+        }
+        if (entry instanceof ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) {
+          entry = ((ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity) entry).toBuilder();
+          builderMap.put(key, entry);
+        }
+        return (ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.Quantity.Builder) entry;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)
+    }
+
+    // @@protoc_insertion_point(class_scope:chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements)
+    private static final ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements();
+    }
+
+    public static ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResourceRequirements>
+        PARSER = new com.google.protobuf.AbstractParser<ResourceRequirements>() {
+      @java.lang.Override
+      public ResourceRequirements parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResourceRequirements> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResourceRequirements> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ai.chalk.protos.chalk.pubsub.v1.PodStatusPubSub.ResourceRequirements getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -30950,6 +33139,139 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int UID_FIELD_NUMBER = 24;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object uid_ = "";
+  /**
+   * <pre>
+   *  // node.UID
+   * </pre>
+   *
+   * <code>string uid = 24 [json_name = "uid"];</code>
+   * @return The uid.
+   */
+  @java.lang.Override
+  public java.lang.String getUid() {
+    java.lang.Object ref = uid_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      uid_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  // node.UID
+   * </pre>
+   *
+   * <code>string uid = 24 [json_name = "uid"];</code>
+   * @return The bytes for uid.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getUidBytes() {
+    java.lang.Object ref = uid_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      uid_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int NAME_FIELD_NUMBER = 25;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object name_ = "";
+  /**
+   * <pre>
+   *  // node.Name
+   * </pre>
+   *
+   * <code>string name = 25 [json_name = "name"];</code>
+   * @return The name.
+   */
+  @java.lang.Override
+  public java.lang.String getName() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      name_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  // node.Name
+   * </pre>
+   *
+   * <code>string name = 25 [json_name = "name"];</code>
+   * @return The bytes for name.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getNameBytes() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      name_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int NAMESPACE_FIELD_NUMBER = 26;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object namespace_ = "";
+  /**
+   * <code>string namespace = 26 [json_name = "namespace"];</code>
+   * @return The namespace.
+   */
+  @java.lang.Override
+  public java.lang.String getNamespace() {
+    java.lang.Object ref = namespace_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      namespace_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string namespace = 26 [json_name = "namespace"];</code>
+   * @return The bytes for namespace.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getNamespaceBytes() {
+    java.lang.Object ref = namespace_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      namespace_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -31011,6 +33333,15 @@ java.lang.String defaultValue) {
         22);
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cluster_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 23, cluster_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uid_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 24, uid_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 25, name_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(namespace_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 26, namespace_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -31082,6 +33413,15 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cluster_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, cluster_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uid_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, uid_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(25, name_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(namespace_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(26, namespace_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -31131,6 +33471,12 @@ java.lang.String defaultValue) {
         other.internalGetAnnotations())) return false;
     if (!getCluster()
         .equals(other.getCluster())) return false;
+    if (!getUid()
+        .equals(other.getUid())) return false;
+    if (!getName()
+        .equals(other.getName())) return false;
+    if (!getNamespace()
+        .equals(other.getNamespace())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -31181,6 +33527,12 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + CLUSTER_FIELD_NUMBER;
     hash = (53 * hash) + getCluster().hashCode();
+    hash = (37 * hash) + UID_FIELD_NUMBER;
+    hash = (53 * hash) + getUid().hashCode();
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + NAMESPACE_FIELD_NUMBER;
+    hash = (53 * hash) + getNamespace().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -31371,6 +33723,9 @@ java.lang.String defaultValue) {
       internalGetMutableLabels().clear();
       internalGetMutableAnnotations().clear();
       cluster_ = "";
+      uid_ = "";
+      name_ = "";
+      namespace_ = "";
       return this;
     }
 
@@ -31454,6 +33809,15 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00002000) != 0)) {
         result.cluster_ = cluster_;
+      }
+      if (((from_bitField0_ & 0x00004000) != 0)) {
+        result.uid_ = uid_;
+      }
+      if (((from_bitField0_ & 0x00008000) != 0)) {
+        result.name_ = name_;
+      }
+      if (((from_bitField0_ & 0x00010000) != 0)) {
+        result.namespace_ = namespace_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -31556,6 +33920,21 @@ java.lang.String defaultValue) {
       if (!other.getCluster().isEmpty()) {
         cluster_ = other.cluster_;
         bitField0_ |= 0x00002000;
+        onChanged();
+      }
+      if (!other.getUid().isEmpty()) {
+        uid_ = other.uid_;
+        bitField0_ |= 0x00004000;
+        onChanged();
+      }
+      if (!other.getName().isEmpty()) {
+        name_ = other.name_;
+        bitField0_ |= 0x00008000;
+        onChanged();
+      }
+      if (!other.getNamespace().isEmpty()) {
+        namespace_ = other.namespace_;
+        bitField0_ |= 0x00010000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -31666,6 +34045,21 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00002000;
               break;
             } // case 186
+            case 194: {
+              uid_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00004000;
+              break;
+            } // case 194
+            case 202: {
+              name_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00008000;
+              break;
+            } // case 202
+            case 210: {
+              namespace_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00010000;
+              break;
+            } // case 210
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -32929,6 +35323,262 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       cluster_ = value;
       bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object uid_ = "";
+    /**
+     * <pre>
+     *  // node.UID
+     * </pre>
+     *
+     * <code>string uid = 24 [json_name = "uid"];</code>
+     * @return The uid.
+     */
+    public java.lang.String getUid() {
+      java.lang.Object ref = uid_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        uid_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  // node.UID
+     * </pre>
+     *
+     * <code>string uid = 24 [json_name = "uid"];</code>
+     * @return The bytes for uid.
+     */
+    public com.google.protobuf.ByteString
+        getUidBytes() {
+      java.lang.Object ref = uid_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  // node.UID
+     * </pre>
+     *
+     * <code>string uid = 24 [json_name = "uid"];</code>
+     * @param value The uid to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUid(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      uid_ = value;
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  // node.UID
+     * </pre>
+     *
+     * <code>string uid = 24 [json_name = "uid"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUid() {
+      uid_ = getDefaultInstance().getUid();
+      bitField0_ = (bitField0_ & ~0x00004000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  // node.UID
+     * </pre>
+     *
+     * <code>string uid = 24 [json_name = "uid"];</code>
+     * @param value The bytes for uid to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUidBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      uid_ = value;
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object name_ = "";
+    /**
+     * <pre>
+     *  // node.Name
+     * </pre>
+     *
+     * <code>string name = 25 [json_name = "name"];</code>
+     * @return The name.
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  // node.Name
+     * </pre>
+     *
+     * <code>string name = 25 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  // node.Name
+     * </pre>
+     *
+     * <code>string name = 25 [json_name = "name"];</code>
+     * @param value The name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      name_ = value;
+      bitField0_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  // node.Name
+     * </pre>
+     *
+     * <code>string name = 25 [json_name = "name"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+      name_ = getDefaultInstance().getName();
+      bitField0_ = (bitField0_ & ~0x00008000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  // node.Name
+     * </pre>
+     *
+     * <code>string name = 25 [json_name = "name"];</code>
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      name_ = value;
+      bitField0_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object namespace_ = "";
+    /**
+     * <code>string namespace = 26 [json_name = "namespace"];</code>
+     * @return The namespace.
+     */
+    public java.lang.String getNamespace() {
+      java.lang.Object ref = namespace_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        namespace_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string namespace = 26 [json_name = "namespace"];</code>
+     * @return The bytes for namespace.
+     */
+    public com.google.protobuf.ByteString
+        getNamespaceBytes() {
+      java.lang.Object ref = namespace_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        namespace_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string namespace = 26 [json_name = "namespace"];</code>
+     * @param value The namespace to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNamespace(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      namespace_ = value;
+      bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string namespace = 26 [json_name = "namespace"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearNamespace() {
+      namespace_ = getDefaultInstance().getNamespace();
+      bitField0_ = (bitField0_ & ~0x00010000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string namespace = 26 [json_name = "namespace"];</code>
+     * @param value The bytes for namespace to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNamespaceBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      namespace_ = value;
+      bitField0_ |= 0x00010000;
       onChanged();
       return this;
     }
