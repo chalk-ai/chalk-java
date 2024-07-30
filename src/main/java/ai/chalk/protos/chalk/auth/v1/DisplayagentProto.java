@@ -51,6 +51,11 @@ public final class DisplayagentProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_auth_v1_DisplayTenantAgent_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_auth_v1_DisplayMetadataServiceAgent_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_auth_v1_DisplayMetadataServiceAgent_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_auth_v1_DisplayAgent_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -108,19 +113,22 @@ public final class DisplayagentProto {
       "\022\033\n\tteam_name\030\006 \001(\tR\010teamName\022!\n\014project" +
       "_name\030\007 \001(\tR\013projectName\022)\n\020environment_" +
       "name\030\010 \001(\tR\017environmentName\"\024\n\022DisplayTe" +
-      "nantAgent\"\304\002\n\014DisplayAgent\022@\n\nuser_agent" +
-      "\030\001 \001(\0132\037.chalk.auth.v1.DisplayUserAgentH" +
-      "\000R\tuserAgent\022Y\n\023service_token_agent\030\002 \001(" +
-      "\0132\'.chalk.auth.v1.DisplayServiceTokenAge" +
-      "ntH\000R\021serviceTokenAgent\022F\n\014engine_agent\030" +
-      "\003 \001(\0132!.chalk.auth.v1.DisplayEngineAgent" +
-      "H\000R\013engineAgent\022F\n\014tenant_agent\030\004 \001(\0132!." +
-      "chalk.auth.v1.DisplayTenantAgentH\000R\013tena" +
-      "ntAgentB\007\n\005agentB\230\001\n\035ai.chalk.protos.cha" +
-      "lk.auth.v1B\021DisplayagentProtoP\001Z\016auth/v1" +
-      ";authv1\242\002\003CAX\252\002\rChalk.Auth.V1\312\002\rChalk\\Au" +
-      "th\\V1\342\002\031Chalk\\Auth\\V1\\GPBMetadata\352\002\017Chal" +
-      "k::Auth::V1b\006proto3"
+      "nantAgent\"\035\n\033DisplayMetadataServiceAgent" +
+      "\"\250\003\n\014DisplayAgent\022@\n\nuser_agent\030\001 \001(\0132\037." +
+      "chalk.auth.v1.DisplayUserAgentH\000R\tuserAg" +
+      "ent\022Y\n\023service_token_agent\030\002 \001(\0132\'.chalk" +
+      ".auth.v1.DisplayServiceTokenAgentH\000R\021ser" +
+      "viceTokenAgent\022F\n\014engine_agent\030\003 \001(\0132!.c" +
+      "halk.auth.v1.DisplayEngineAgentH\000R\013engin" +
+      "eAgent\022F\n\014tenant_agent\030\004 \001(\0132!.chalk.aut" +
+      "h.v1.DisplayTenantAgentH\000R\013tenantAgent\022b" +
+      "\n\026metadata_service_agent\030\005 \001(\0132*.chalk.a" +
+      "uth.v1.DisplayMetadataServiceAgentH\000R\024me" +
+      "tadataServiceAgentB\007\n\005agentB\230\001\n\035ai.chalk" +
+      ".protos.chalk.auth.v1B\021DisplayagentProto" +
+      "P\001Z\016auth/v1;authv1\242\002\003CAX\252\002\rChalk.Auth.V1" +
+      "\312\002\rChalk\\Auth\\V1\342\002\031Chalk\\Auth\\V1\\GPBMeta" +
+      "data\352\002\017Chalk::Auth::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -171,12 +179,18 @@ public final class DisplayagentProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_auth_v1_DisplayTenantAgent_descriptor,
         new java.lang.String[] { });
-    internal_static_chalk_auth_v1_DisplayAgent_descriptor =
+    internal_static_chalk_auth_v1_DisplayMetadataServiceAgent_descriptor =
       getDescriptor().getMessageTypes().get(7);
+    internal_static_chalk_auth_v1_DisplayMetadataServiceAgent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_auth_v1_DisplayMetadataServiceAgent_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_auth_v1_DisplayAgent_descriptor =
+      getDescriptor().getMessageTypes().get(8);
     internal_static_chalk_auth_v1_DisplayAgent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_auth_v1_DisplayAgent_descriptor,
-        new java.lang.String[] { "UserAgent", "ServiceTokenAgent", "EngineAgent", "TenantAgent", "Agent", });
+        new java.lang.String[] { "UserAgent", "ServiceTokenAgent", "EngineAgent", "TenantAgent", "MetadataServiceAgent", "Agent", });
     ai.chalk.protos.chalk.auth.v1.FeaturepermissionProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();

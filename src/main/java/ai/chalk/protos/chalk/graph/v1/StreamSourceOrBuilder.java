@@ -38,5 +38,20 @@ public interface StreamSourceOrBuilder extends
    */
   ai.chalk.protos.chalk.graph.v1.KinesisSourceOrBuilder getKinesisOrBuilder();
 
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   * @return Whether the pubsub field is set.
+   */
+  boolean hasPubsub();
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   * @return The pubsub.
+   */
+  ai.chalk.protos.chalk.graph.v1.PubSubSource getPubsub();
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder getPubsubOrBuilder();
+
   ai.chalk.protos.chalk.graph.v1.StreamSource.SourceCase getSourceCase();
 }

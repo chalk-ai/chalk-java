@@ -38,7 +38,7 @@ public final class QueryServerProto {
       "alk.engine.v1\032\037chalk/auth/v1/permissions" +
       ".proto\032\"chalk/common/v1/online_query.pro" +
       "to\"\037\n\013PingRequest\022\020\n\003num\030\001 \001(\005R\003num\" \n\014P" +
-      "ingResponse\022\020\n\003num\030\001 \001(\005R\003num2\215\003\n\014QueryS" +
+      "ingResponse\022\020\n\003num\030\001 \001(\005R\003num2\201\004\n\014QueryS" +
       "ervice\022E\n\004Ping\022\034.chalk.engine.v1.PingReq" +
       "uest\032\035.chalk.engine.v1.PingResponse\"\000\022]\n" +
       "\013OnlineQuery\022#.chalk.common.v1.OnlineQue" +
@@ -48,11 +48,14 @@ public final class QueryServerProto {
       ".common.v1.OnlineQueryBulkResponse\"\003\200}\003\022" +
       "l\n\020OnlineQueryMulti\022(.chalk.common.v1.On" +
       "lineQueryMultiRequest\032).chalk.common.v1." +
-      "OnlineQueryMultiResponse\"\003\200}\003B\221\001\n\037ai.cha" +
-      "lk.protos.chalk.engine.v1B\020QueryServerPr" +
-      "otoP\001\242\002\003CEX\252\002\017Chalk.Engine.V1\312\002\017Chalk\\En" +
-      "gine\\V1\342\002\033Chalk\\Engine\\V1\\GPBMetadata\352\002\021" +
-      "Chalk::Engine::V1b\006proto3"
+      "OnlineQueryMultiResponse\"\003\200}\003\022r\n\022UploadF" +
+      "eaturesBulk\022*.chalk.common.v1.UploadFeat" +
+      "uresBulkRequest\032+.chalk.common.v1.Upload" +
+      "FeaturesBulkResponse\"\003\200}\003B\221\001\n\037ai.chalk.p" +
+      "rotos.chalk.engine.v1B\020QueryServerProtoP" +
+      "\001\242\002\003CEX\252\002\017Chalk.Engine.V1\312\002\017Chalk\\Engine" +
+      "\\V1\342\002\033Chalk\\Engine\\V1\\GPBMetadata\352\002\021Chal" +
+      "k::Engine::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

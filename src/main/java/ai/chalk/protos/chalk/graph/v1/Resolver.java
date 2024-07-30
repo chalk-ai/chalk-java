@@ -29,6 +29,7 @@ private static final long serialVersionUID = 0L;
     doc_ = "";
     environments_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    resourceHint_ = 0;
   }
 
   @java.lang.Override
@@ -600,6 +601,24 @@ private static final long serialVersionUID = 0L;
     return function_ == null ? ai.chalk.protos.chalk.graph.v1.FunctionReference.getDefaultInstance() : function_;
   }
 
+  public static final int RESOURCE_HINT_FIELD_NUMBER = 17;
+  private int resourceHint_ = 0;
+  /**
+   * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+   * @return The enum numeric value on the wire for resourceHint.
+   */
+  @java.lang.Override public int getResourceHintValue() {
+    return resourceHint_;
+  }
+  /**
+   * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+   * @return The resourceHint.
+   */
+  @java.lang.Override public ai.chalk.protos.chalk.graph.v1.ResourceHint getResourceHint() {
+    ai.chalk.protos.chalk.graph.v1.ResourceHint result = ai.chalk.protos.chalk.graph.v1.ResourceHint.forNumber(resourceHint_);
+    return result == null ? ai.chalk.protos.chalk.graph.v1.ResourceHint.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -661,6 +680,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000080) != 0)) {
       output.writeMessage(16, getFunction());
+    }
+    if (resourceHint_ != ai.chalk.protos.chalk.graph.v1.ResourceHint.RESOURCE_HINT_UNSPECIFIED.getNumber()) {
+      output.writeEnum(17, resourceHint_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -739,6 +761,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(16, getFunction());
     }
+    if (resourceHint_ != ai.chalk.protos.chalk.graph.v1.ResourceHint.RESOURCE_HINT_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(17, resourceHint_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -809,6 +835,7 @@ private static final long serialVersionUID = 0L;
       if (!getFunction()
           .equals(other.getFunction())) return false;
     }
+    if (resourceHint_ != other.resourceHint_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -879,6 +906,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + FUNCTION_FIELD_NUMBER;
       hash = (53 * hash) + getFunction().hashCode();
     }
+    hash = (37 * hash) + RESOURCE_HINT_FIELD_NUMBER;
+    hash = (53 * hash) + resourceHint_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1079,6 +1108,7 @@ private static final long serialVersionUID = 0L;
         functionBuilder_.dispose();
         functionBuilder_ = null;
       }
+      resourceHint_ = 0;
       return this;
     }
 
@@ -1202,6 +1232,9 @@ private static final long serialVersionUID = 0L;
             ? function_
             : functionBuilder_.build();
         to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00010000) != 0)) {
+        result.resourceHint_ = resourceHint_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1389,6 +1422,9 @@ private static final long serialVersionUID = 0L;
       if (other.hasFunction()) {
         mergeFunction(other.getFunction());
       }
+      if (other.resourceHint_ != 0) {
+        setResourceHintValue(other.getResourceHintValue());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1531,6 +1567,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00008000;
               break;
             } // case 130
+            case 136: {
+              resourceHint_ = input.readEnum();
+              bitField0_ |= 0x00010000;
+              break;
+            } // case 136
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3511,6 +3552,59 @@ private static final long serialVersionUID = 0L;
         function_ = null;
       }
       return functionBuilder_;
+    }
+
+    private int resourceHint_ = 0;
+    /**
+     * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+     * @return The enum numeric value on the wire for resourceHint.
+     */
+    @java.lang.Override public int getResourceHintValue() {
+      return resourceHint_;
+    }
+    /**
+     * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+     * @param value The enum numeric value on the wire for resourceHint to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResourceHintValue(int value) {
+      resourceHint_ = value;
+      bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+     * @return The resourceHint.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.ResourceHint getResourceHint() {
+      ai.chalk.protos.chalk.graph.v1.ResourceHint result = ai.chalk.protos.chalk.graph.v1.ResourceHint.forNumber(resourceHint_);
+      return result == null ? ai.chalk.protos.chalk.graph.v1.ResourceHint.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+     * @param value The resourceHint to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResourceHint(ai.chalk.protos.chalk.graph.v1.ResourceHint value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00010000;
+      resourceHint_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearResourceHint() {
+      bitField0_ = (bitField0_ & ~0x00010000);
+      resourceHint_ = 0;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
