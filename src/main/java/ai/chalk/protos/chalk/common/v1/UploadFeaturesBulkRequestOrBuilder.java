@@ -15,30 +15,6 @@ public interface UploadFeaturesBulkRequestOrBuilder extends
   com.google.protobuf.ByteString getInputsFeather();
 
   /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  java.util.List<com.google.protobuf.Timestamp> 
-      getNowList();
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  com.google.protobuf.Timestamp getNow(int index);
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  int getNowCount();
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  java.util.List<? extends com.google.protobuf.TimestampOrBuilder> 
-      getNowOrBuilderList();
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  com.google.protobuf.TimestampOrBuilder getNowOrBuilder(
-      int index);
-
-  /**
    * <code>.chalk.common.v1.FeatherBodyType body_type = 7 [json_name = "bodyType"];</code>
    * @return The enum numeric value on the wire for bodyType.
    */

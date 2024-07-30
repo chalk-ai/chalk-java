@@ -22,7 +22,6 @@ private static final long serialVersionUID = 0L;
   }
   private UploadFeaturesBulkRequest() {
     inputsFeather_ = com.google.protobuf.ByteString.EMPTY;
-    now_ = java.util.Collections.emptyList();
     bodyType_ = 0;
   }
 
@@ -55,47 +54,6 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public com.google.protobuf.ByteString getInputsFeather() {
     return inputsFeather_;
-  }
-
-  public static final int NOW_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private java.util.List<com.google.protobuf.Timestamp> now_;
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  @java.lang.Override
-  public java.util.List<com.google.protobuf.Timestamp> getNowList() {
-    return now_;
-  }
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends com.google.protobuf.TimestampOrBuilder> 
-      getNowOrBuilderList() {
-    return now_;
-  }
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  @java.lang.Override
-  public int getNowCount() {
-    return now_.size();
-  }
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  @java.lang.Override
-  public com.google.protobuf.Timestamp getNow(int index) {
-    return now_.get(index);
-  }
-  /**
-   * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-   */
-  @java.lang.Override
-  public com.google.protobuf.TimestampOrBuilder getNowOrBuilder(
-      int index) {
-    return now_.get(index);
   }
 
   public static final int BODY_TYPE_FIELD_NUMBER = 7;
@@ -133,9 +91,6 @@ private static final long serialVersionUID = 0L;
     if (!inputsFeather_.isEmpty()) {
       output.writeBytes(1, inputsFeather_);
     }
-    for (int i = 0; i < now_.size(); i++) {
-      output.writeMessage(3, now_.get(i));
-    }
     if (bodyType_ != ai.chalk.protos.chalk.common.v1.FeatherBodyType.FEATHER_BODY_TYPE_UNSPECIFIED.getNumber()) {
       output.writeEnum(7, bodyType_);
     }
@@ -151,10 +106,6 @@ private static final long serialVersionUID = 0L;
     if (!inputsFeather_.isEmpty()) {
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(1, inputsFeather_);
-    }
-    for (int i = 0; i < now_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, now_.get(i));
     }
     if (bodyType_ != ai.chalk.protos.chalk.common.v1.FeatherBodyType.FEATHER_BODY_TYPE_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
@@ -177,8 +128,6 @@ private static final long serialVersionUID = 0L;
 
     if (!getInputsFeather()
         .equals(other.getInputsFeather())) return false;
-    if (!getNowList()
-        .equals(other.getNowList())) return false;
     if (bodyType_ != other.bodyType_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -193,10 +142,6 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + INPUTS_FEATHER_FIELD_NUMBER;
     hash = (53 * hash) + getInputsFeather().hashCode();
-    if (getNowCount() > 0) {
-      hash = (37 * hash) + NOW_FIELD_NUMBER;
-      hash = (53 * hash) + getNowList().hashCode();
-    }
     hash = (37 * hash) + BODY_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + bodyType_;
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -335,13 +280,6 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       inputsFeather_ = com.google.protobuf.ByteString.EMPTY;
-      if (nowBuilder_ == null) {
-        now_ = java.util.Collections.emptyList();
-      } else {
-        now_ = null;
-        nowBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000002);
       bodyType_ = 0;
       return this;
     }
@@ -369,22 +307,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest buildPartial() {
       ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest result = new ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest(this);
-      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
-    }
-
-    private void buildPartialRepeatedFields(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest result) {
-      if (nowBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
-          now_ = java.util.Collections.unmodifiableList(now_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.now_ = now_;
-      } else {
-        result.now_ = nowBuilder_.build();
-      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest result) {
@@ -392,7 +317,7 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.inputsFeather_ = inputsFeather_;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
+      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.bodyType_ = bodyType_;
       }
     }
@@ -444,32 +369,6 @@ private static final long serialVersionUID = 0L;
       if (other.getInputsFeather() != com.google.protobuf.ByteString.EMPTY) {
         setInputsFeather(other.getInputsFeather());
       }
-      if (nowBuilder_ == null) {
-        if (!other.now_.isEmpty()) {
-          if (now_.isEmpty()) {
-            now_ = other.now_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureNowIsMutable();
-            now_.addAll(other.now_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.now_.isEmpty()) {
-          if (nowBuilder_.isEmpty()) {
-            nowBuilder_.dispose();
-            nowBuilder_ = null;
-            now_ = other.now_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-            nowBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getNowFieldBuilder() : null;
-          } else {
-            nowBuilder_.addAllMessages(other.now_);
-          }
-        }
-      }
       if (other.bodyType_ != 0) {
         setBodyTypeValue(other.getBodyTypeValue());
       }
@@ -504,22 +403,9 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 26: {
-              com.google.protobuf.Timestamp m =
-                  input.readMessage(
-                      com.google.protobuf.Timestamp.parser(),
-                      extensionRegistry);
-              if (nowBuilder_ == null) {
-                ensureNowIsMutable();
-                now_.add(m);
-              } else {
-                nowBuilder_.addMessage(m);
-              }
-              break;
-            } // case 26
             case 56: {
               bodyType_ = input.readEnum();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               break;
             } // case 56
             default: {
@@ -571,246 +457,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<com.google.protobuf.Timestamp> now_ =
-      java.util.Collections.emptyList();
-    private void ensureNowIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
-        now_ = new java.util.ArrayList<com.google.protobuf.Timestamp>(now_);
-        bitField0_ |= 0x00000002;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> nowBuilder_;
-
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public java.util.List<com.google.protobuf.Timestamp> getNowList() {
-      if (nowBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(now_);
-      } else {
-        return nowBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public int getNowCount() {
-      if (nowBuilder_ == null) {
-        return now_.size();
-      } else {
-        return nowBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public com.google.protobuf.Timestamp getNow(int index) {
-      if (nowBuilder_ == null) {
-        return now_.get(index);
-      } else {
-        return nowBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder setNow(
-        int index, com.google.protobuf.Timestamp value) {
-      if (nowBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureNowIsMutable();
-        now_.set(index, value);
-        onChanged();
-      } else {
-        nowBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder setNow(
-        int index, com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (nowBuilder_ == null) {
-        ensureNowIsMutable();
-        now_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        nowBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder addNow(com.google.protobuf.Timestamp value) {
-      if (nowBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureNowIsMutable();
-        now_.add(value);
-        onChanged();
-      } else {
-        nowBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder addNow(
-        int index, com.google.protobuf.Timestamp value) {
-      if (nowBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureNowIsMutable();
-        now_.add(index, value);
-        onChanged();
-      } else {
-        nowBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder addNow(
-        com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (nowBuilder_ == null) {
-        ensureNowIsMutable();
-        now_.add(builderForValue.build());
-        onChanged();
-      } else {
-        nowBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder addNow(
-        int index, com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (nowBuilder_ == null) {
-        ensureNowIsMutable();
-        now_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        nowBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder addAllNow(
-        java.lang.Iterable<? extends com.google.protobuf.Timestamp> values) {
-      if (nowBuilder_ == null) {
-        ensureNowIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, now_);
-        onChanged();
-      } else {
-        nowBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder clearNow() {
-      if (nowBuilder_ == null) {
-        now_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-      } else {
-        nowBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public Builder removeNow(int index) {
-      if (nowBuilder_ == null) {
-        ensureNowIsMutable();
-        now_.remove(index);
-        onChanged();
-      } else {
-        nowBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public com.google.protobuf.Timestamp.Builder getNowBuilder(
-        int index) {
-      return getNowFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getNowOrBuilder(
-        int index) {
-      if (nowBuilder_ == null) {
-        return now_.get(index);  } else {
-        return nowBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public java.util.List<? extends com.google.protobuf.TimestampOrBuilder> 
-         getNowOrBuilderList() {
-      if (nowBuilder_ != null) {
-        return nowBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(now_);
-      }
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public com.google.protobuf.Timestamp.Builder addNowBuilder() {
-      return getNowFieldBuilder().addBuilder(
-          com.google.protobuf.Timestamp.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public com.google.protobuf.Timestamp.Builder addNowBuilder(
-        int index) {
-      return getNowFieldBuilder().addBuilder(
-          index, com.google.protobuf.Timestamp.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .google.protobuf.Timestamp now = 3 [json_name = "now"];</code>
-     */
-    public java.util.List<com.google.protobuf.Timestamp.Builder> 
-         getNowBuilderList() {
-      return getNowFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-        getNowFieldBuilder() {
-      if (nowBuilder_ == null) {
-        nowBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                now_,
-                ((bitField0_ & 0x00000002) != 0),
-                getParentForChildren(),
-                isClean());
-        now_ = null;
-      }
-      return nowBuilder_;
-    }
-
     private int bodyType_ = 0;
     /**
      * <code>.chalk.common.v1.FeatherBodyType body_type = 7 [json_name = "bodyType"];</code>
@@ -826,7 +472,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder setBodyTypeValue(int value) {
       bodyType_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -848,7 +494,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       bodyType_ = value.getNumber();
       onChanged();
       return this;
@@ -858,7 +504,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearBodyType() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000002);
       bodyType_ = 0;
       onChanged();
       return this;

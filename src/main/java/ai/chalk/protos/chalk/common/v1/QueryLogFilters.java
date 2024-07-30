@@ -34,6 +34,8 @@ private static final long serialVersionUID = 0L;
     deploymentId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     queryStatus_ = java.util.Collections.emptyList();
+    metaQueryHash_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -62,9 +64,9 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -76,9 +78,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -89,9 +91,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -103,9 +105,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -496,6 +498,43 @@ private static final long serialVersionUID = 0L;
   }
   private int queryStatusMemoizedSerializedSize;
 
+  public static final int META_QUERY_HASH_FIELD_NUMBER = 12;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList metaQueryHash_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @return A list containing the metaQueryHash.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getMetaQueryHashList() {
+    return metaQueryHash_;
+  }
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @return The count of metaQueryHash.
+   */
+  public int getMetaQueryHashCount() {
+    return metaQueryHash_.size();
+  }
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @param index The index of the element to return.
+   * @return The metaQueryHash at the given index.
+   */
+  public java.lang.String getMetaQueryHash(int index) {
+    return metaQueryHash_.get(index);
+  }
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the metaQueryHash at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getMetaQueryHashBytes(int index) {
+    return metaQueryHash_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -548,6 +587,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < queryStatus_.size(); i++) {
       output.writeEnumNoTag(queryStatus_.get(i));
+    }
+    for (int i = 0; i < metaQueryHash_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 12, metaQueryHash_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -642,6 +684,14 @@ private static final long serialVersionUID = 0L;
           .computeUInt32SizeNoTag(dataSize);
       }queryStatusMemoizedSerializedSize = dataSize;
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < metaQueryHash_.size(); i++) {
+        dataSize += computeStringSizeNoTag(metaQueryHash_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getMetaQueryHashList().size();
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -675,6 +725,8 @@ private static final long serialVersionUID = 0L;
     if (!getDeploymentIdList()
         .equals(other.getDeploymentIdList())) return false;
     if (!queryStatus_.equals(other.queryStatus_)) return false;
+    if (!getMetaQueryHashList()
+        .equals(other.getMetaQueryHashList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -725,6 +777,10 @@ private static final long serialVersionUID = 0L;
     if (getQueryStatusCount() > 0) {
       hash = (37 * hash) + QUERY_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + queryStatus_.hashCode();
+    }
+    if (getMetaQueryHashCount() > 0) {
+      hash = (37 * hash) + META_QUERY_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getMetaQueryHashList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -882,6 +938,8 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.LazyStringArrayList.emptyList();
       queryStatus_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000200);
+      metaQueryHash_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -965,6 +1023,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000100) != 0)) {
         deploymentId_.makeImmutable();
         result.deploymentId_ = deploymentId_;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        metaQueryHash_.makeImmutable();
+        result.metaQueryHash_ = metaQueryHash_;
       }
     }
 
@@ -1128,6 +1190,16 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       }
+      if (!other.metaQueryHash_.isEmpty()) {
+        if (metaQueryHash_.isEmpty()) {
+          metaQueryHash_ = other.metaQueryHash_;
+          bitField0_ |= 0x00000400;
+        } else {
+          ensureMetaQueryHashIsMutable();
+          metaQueryHash_.addAll(other.metaQueryHash_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1243,6 +1315,12 @@ private static final long serialVersionUID = 0L;
               input.popLimit(oldLimit);
               break;
             } // case 90
+            case 98: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureMetaQueryHashIsMutable();
+              metaQueryHash_.add(s);
+              break;
+            } // case 98
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1270,9 +1348,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1285,9 +1363,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1298,9 +1376,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1312,9 +1390,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1327,9 +1405,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1348,9 +1426,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1368,9 +1446,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1388,9 +1466,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -1405,9 +1483,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+     * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
      * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-     * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+     * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
      * </pre>
      *
      * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -2607,6 +2685,117 @@ private static final long serialVersionUID = 0L;
       for (int value : values) {
         queryStatus_.add(value);
       }
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList metaQueryHash_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureMetaQueryHashIsMutable() {
+      if (!metaQueryHash_.isModifiable()) {
+        metaQueryHash_ = new com.google.protobuf.LazyStringArrayList(metaQueryHash_);
+      }
+      bitField0_ |= 0x00000400;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @return A list containing the metaQueryHash.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getMetaQueryHashList() {
+      metaQueryHash_.makeImmutable();
+      return metaQueryHash_;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @return The count of metaQueryHash.
+     */
+    public int getMetaQueryHashCount() {
+      return metaQueryHash_.size();
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param index The index of the element to return.
+     * @return The metaQueryHash at the given index.
+     */
+    public java.lang.String getMetaQueryHash(int index) {
+      return metaQueryHash_.get(index);
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the metaQueryHash at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getMetaQueryHashBytes(int index) {
+      return metaQueryHash_.getByteString(index);
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param index The index to set the value at.
+     * @param value The metaQueryHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetaQueryHash(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureMetaQueryHashIsMutable();
+      metaQueryHash_.set(index, value);
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param value The metaQueryHash to add.
+     * @return This builder for chaining.
+     */
+    public Builder addMetaQueryHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureMetaQueryHashIsMutable();
+      metaQueryHash_.add(value);
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param values The metaQueryHash to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllMetaQueryHash(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureMetaQueryHashIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, metaQueryHash_);
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMetaQueryHash() {
+      metaQueryHash_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000400);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+     * @param value The bytes of the metaQueryHash to add.
+     * @return This builder for chaining.
+     */
+    public Builder addMetaQueryHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureMetaQueryHashIsMutable();
+      metaQueryHash_.add(value);
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
