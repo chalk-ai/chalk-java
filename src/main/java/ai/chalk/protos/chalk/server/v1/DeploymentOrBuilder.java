@@ -42,4 +42,29 @@ public interface DeploymentOrBuilder extends
    * @return The status.
    */
   ai.chalk.protos.chalk.server.v1.DeploymentStatus getStatus();
+
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return A list containing the deploymentTags.
+   */
+  java.util.List<java.lang.String>
+      getDeploymentTagsList();
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return The count of deploymentTags.
+   */
+  int getDeploymentTagsCount();
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the element to return.
+   * @return The deploymentTags at the given index.
+   */
+  java.lang.String getDeploymentTags(int index);
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the deploymentTags at the given index.
+   */
+  com.google.protobuf.ByteString
+      getDeploymentTagsBytes(int index);
 }

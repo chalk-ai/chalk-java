@@ -47,6 +47,7 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     KAFKA(1),
     KINESIS(2),
+    PUBSUB(3),
     SOURCE_NOT_SET(0);
     private final int value;
     private SourceCase(int value) {
@@ -66,6 +67,7 @@ private static final long serialVersionUID = 0L;
       switch (value) {
         case 1: return KAFKA;
         case 2: return KINESIS;
+        case 3: return PUBSUB;
         case 0: return SOURCE_NOT_SET;
         default: return null;
       }
@@ -143,6 +145,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.graph.v1.KinesisSource.getDefaultInstance();
   }
 
+  public static final int PUBSUB_FIELD_NUMBER = 3;
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   * @return Whether the pubsub field is set.
+   */
+  @java.lang.Override
+  public boolean hasPubsub() {
+    return sourceCase_ == 3;
+  }
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   * @return The pubsub.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.PubSubSource getPubsub() {
+    if (sourceCase_ == 3) {
+       return (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder getPubsubOrBuilder() {
+    if (sourceCase_ == 3) {
+       return (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -163,6 +196,9 @@ private static final long serialVersionUID = 0L;
     if (sourceCase_ == 2) {
       output.writeMessage(2, (ai.chalk.protos.chalk.graph.v1.KinesisSource) source_);
     }
+    if (sourceCase_ == 3) {
+      output.writeMessage(3, (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -179,6 +215,10 @@ private static final long serialVersionUID = 0L;
     if (sourceCase_ == 2) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, (ai.chalk.protos.chalk.graph.v1.KinesisSource) source_);
+    }
+    if (sourceCase_ == 3) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -205,6 +245,10 @@ private static final long serialVersionUID = 0L;
         if (!getKinesis()
             .equals(other.getKinesis())) return false;
         break;
+      case 3:
+        if (!getPubsub()
+            .equals(other.getPubsub())) return false;
+        break;
       case 0:
       default:
     }
@@ -227,6 +271,10 @@ private static final long serialVersionUID = 0L;
       case 2:
         hash = (37 * hash) + KINESIS_FIELD_NUMBER;
         hash = (53 * hash) + getKinesis().hashCode();
+        break;
+      case 3:
+        hash = (37 * hash) + PUBSUB_FIELD_NUMBER;
+        hash = (53 * hash) + getPubsub().hashCode();
         break;
       case 0:
       default:
@@ -368,6 +416,9 @@ private static final long serialVersionUID = 0L;
       if (kinesisBuilder_ != null) {
         kinesisBuilder_.clear();
       }
+      if (pubsubBuilder_ != null) {
+        pubsubBuilder_.clear();
+      }
       sourceCase_ = 0;
       source_ = null;
       return this;
@@ -416,6 +467,10 @@ private static final long serialVersionUID = 0L;
       if (sourceCase_ == 2 &&
           kinesisBuilder_ != null) {
         result.source_ = kinesisBuilder_.build();
+      }
+      if (sourceCase_ == 3 &&
+          pubsubBuilder_ != null) {
+        result.source_ = pubsubBuilder_.build();
       }
     }
 
@@ -472,6 +527,10 @@ private static final long serialVersionUID = 0L;
           mergeKinesis(other.getKinesis());
           break;
         }
+        case PUBSUB: {
+          mergePubsub(other.getPubsub());
+          break;
+        }
         case SOURCE_NOT_SET: {
           break;
         }
@@ -516,6 +575,13 @@ private static final long serialVersionUID = 0L;
               sourceCase_ = 2;
               break;
             } // case 18
+            case 26: {
+              input.readMessage(
+                  getPubsubFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              sourceCase_ = 3;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -830,6 +896,148 @@ private static final long serialVersionUID = 0L;
       sourceCase_ = 2;
       onChanged();
       return kinesisBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.PubSubSource, ai.chalk.protos.chalk.graph.v1.PubSubSource.Builder, ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder> pubsubBuilder_;
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     * @return Whether the pubsub field is set.
+     */
+    @java.lang.Override
+    public boolean hasPubsub() {
+      return sourceCase_ == 3;
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     * @return The pubsub.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.PubSubSource getPubsub() {
+      if (pubsubBuilder_ == null) {
+        if (sourceCase_ == 3) {
+          return (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+      } else {
+        if (sourceCase_ == 3) {
+          return pubsubBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    public Builder setPubsub(ai.chalk.protos.chalk.graph.v1.PubSubSource value) {
+      if (pubsubBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        source_ = value;
+        onChanged();
+      } else {
+        pubsubBuilder_.setMessage(value);
+      }
+      sourceCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    public Builder setPubsub(
+        ai.chalk.protos.chalk.graph.v1.PubSubSource.Builder builderForValue) {
+      if (pubsubBuilder_ == null) {
+        source_ = builderForValue.build();
+        onChanged();
+      } else {
+        pubsubBuilder_.setMessage(builderForValue.build());
+      }
+      sourceCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    public Builder mergePubsub(ai.chalk.protos.chalk.graph.v1.PubSubSource value) {
+      if (pubsubBuilder_ == null) {
+        if (sourceCase_ == 3 &&
+            source_ != ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance()) {
+          source_ = ai.chalk.protos.chalk.graph.v1.PubSubSource.newBuilder((ai.chalk.protos.chalk.graph.v1.PubSubSource) source_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          source_ = value;
+        }
+        onChanged();
+      } else {
+        if (sourceCase_ == 3) {
+          pubsubBuilder_.mergeFrom(value);
+        } else {
+          pubsubBuilder_.setMessage(value);
+        }
+      }
+      sourceCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    public Builder clearPubsub() {
+      if (pubsubBuilder_ == null) {
+        if (sourceCase_ == 3) {
+          sourceCase_ = 0;
+          source_ = null;
+          onChanged();
+        }
+      } else {
+        if (sourceCase_ == 3) {
+          sourceCase_ = 0;
+          source_ = null;
+        }
+        pubsubBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.PubSubSource.Builder getPubsubBuilder() {
+      return getPubsubFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder getPubsubOrBuilder() {
+      if ((sourceCase_ == 3) && (pubsubBuilder_ != null)) {
+        return pubsubBuilder_.getMessageOrBuilder();
+      } else {
+        if (sourceCase_ == 3) {
+          return (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.PubSubSource pubsub = 3 [json_name = "pubsub"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.PubSubSource, ai.chalk.protos.chalk.graph.v1.PubSubSource.Builder, ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder> 
+        getPubsubFieldBuilder() {
+      if (pubsubBuilder_ == null) {
+        if (!(sourceCase_ == 3)) {
+          source_ = ai.chalk.protos.chalk.graph.v1.PubSubSource.getDefaultInstance();
+        }
+        pubsubBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.PubSubSource, ai.chalk.protos.chalk.graph.v1.PubSubSource.Builder, ai.chalk.protos.chalk.graph.v1.PubSubSourceOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v1.PubSubSource) source_,
+                getParentForChildren(),
+                isClean());
+        source_ = null;
+      }
+      sourceCase_ = 3;
+      onChanged();
+      return pubsubBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

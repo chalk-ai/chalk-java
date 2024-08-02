@@ -15,36 +15,36 @@ public final class BillingServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "chalk.server.v1.BillingService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesRequest,
-      ai.chalk.protos.chalk.server.v1.GetNodesResponse> getGetNodesMethod;
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest,
+      ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> getGetNodesAndPodsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetNodes",
-      requestType = ai.chalk.protos.chalk.server.v1.GetNodesRequest.class,
-      responseType = ai.chalk.protos.chalk.server.v1.GetNodesResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "GetNodesAndPods",
+      requestType = ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesRequest,
-      ai.chalk.protos.chalk.server.v1.GetNodesResponse> getGetNodesMethod() {
-    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesRequest, ai.chalk.protos.chalk.server.v1.GetNodesResponse> getGetNodesMethod;
-    if ((getGetNodesMethod = BillingServiceGrpc.getGetNodesMethod) == null) {
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest,
+      ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> getGetNodesAndPodsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest, ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> getGetNodesAndPodsMethod;
+    if ((getGetNodesAndPodsMethod = BillingServiceGrpc.getGetNodesAndPodsMethod) == null) {
       synchronized (BillingServiceGrpc.class) {
-        if ((getGetNodesMethod = BillingServiceGrpc.getGetNodesMethod) == null) {
-          BillingServiceGrpc.getGetNodesMethod = getGetNodesMethod =
-              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetNodesRequest, ai.chalk.protos.chalk.server.v1.GetNodesResponse>newBuilder()
+        if ((getGetNodesAndPodsMethod = BillingServiceGrpc.getGetNodesAndPodsMethod) == null) {
+          BillingServiceGrpc.getGetNodesAndPodsMethod = getGetNodesAndPodsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest, ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNodes"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNodesAndPods"))
               .setSafe(true)
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.server.v1.GetNodesRequest.getDefaultInstance()))
+                  ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ai.chalk.protos.chalk.server.v1.GetNodesResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new BillingServiceMethodDescriptorSupplier("GetNodes"))
+                  ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BillingServiceMethodDescriptorSupplier("GetNodesAndPods"))
               .build();
         }
       }
     }
-    return getGetNodesMethod;
+    return getGetNodesAndPodsMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetUsageChartRequest,
@@ -160,13 +160,23 @@ public final class BillingServiceGrpc {
   public interface AsyncService {
 
     /**
+     * <pre>
+     * GetNodesAndPods returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * </pre>
      */
-    default void getNodes(ai.chalk.protos.chalk.server.v1.GetNodesRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNodesMethod(), responseObserver);
+    default void getNodesAndPods(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNodesAndPodsMethod(), responseObserver);
     }
 
     /**
+     * <pre>
+     * GetUsageChart shows the Chalk credit usage between a provided start and
+     * end period. The usage can be grouped by UsageChartPeriod for daily or
+     * monthly usage, and by UsageChartGrouping for instance type or cluster usage.
+     * </pre>
      */
     default void getUsageChart(ai.chalk.protos.chalk.server.v1.GetUsageChartRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUsageChartResponse> responseObserver) {
@@ -174,6 +184,10 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetUtilizationRates returns the current utilization rates for all
+     * instance types.
+     * </pre>
      */
     default void getUtilizationRates(ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse> responseObserver) {
@@ -209,14 +223,24 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetNodesAndPods returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * </pre>
      */
-    public void getNodes(ai.chalk.protos.chalk.server.v1.GetNodesRequest request,
-        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesResponse> responseObserver) {
+    public void getNodesAndPods(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetNodesMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetNodesAndPodsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
+     * <pre>
+     * GetUsageChart shows the Chalk credit usage between a provided start and
+     * end period. The usage can be grouped by UsageChartPeriod for daily or
+     * monthly usage, and by UsageChartGrouping for instance type or cluster usage.
+     * </pre>
      */
     public void getUsageChart(ai.chalk.protos.chalk.server.v1.GetUsageChartRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUsageChartResponse> responseObserver) {
@@ -225,6 +249,10 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetUtilizationRates returns the current utilization rates for all
+     * instance types.
+     * </pre>
      */
     public void getUtilizationRates(ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse> responseObserver) {
@@ -250,13 +278,23 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetNodesAndPods returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * </pre>
      */
-    public ai.chalk.protos.chalk.server.v1.GetNodesResponse getNodes(ai.chalk.protos.chalk.server.v1.GetNodesRequest request) {
+    public ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse getNodesAndPods(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetNodesMethod(), getCallOptions(), request);
+          getChannel(), getGetNodesAndPodsMethod(), getCallOptions(), request);
     }
 
     /**
+     * <pre>
+     * GetUsageChart shows the Chalk credit usage between a provided start and
+     * end period. The usage can be grouped by UsageChartPeriod for daily or
+     * monthly usage, and by UsageChartGrouping for instance type or cluster usage.
+     * </pre>
      */
     public ai.chalk.protos.chalk.server.v1.GetUsageChartResponse getUsageChart(ai.chalk.protos.chalk.server.v1.GetUsageChartRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -264,6 +302,10 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetUtilizationRates returns the current utilization rates for all
+     * instance types.
+     * </pre>
      */
     public ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse getUtilizationRates(ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -288,14 +330,24 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetNodesAndPods returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetNodesResponse> getNodes(
-        ai.chalk.protos.chalk.server.v1.GetNodesRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> getNodesAndPods(
+        ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetNodesMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetNodesAndPodsMethod(), getCallOptions()), request);
     }
 
     /**
+     * <pre>
+     * GetUsageChart shows the Chalk credit usage between a provided start and
+     * end period. The usage can be grouped by UsageChartPeriod for daily or
+     * monthly usage, and by UsageChartGrouping for instance type or cluster usage.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetUsageChartResponse> getUsageChart(
         ai.chalk.protos.chalk.server.v1.GetUsageChartRequest request) {
@@ -304,6 +356,10 @@ public final class BillingServiceGrpc {
     }
 
     /**
+     * <pre>
+     * GetUtilizationRates returns the current utilization rates for all
+     * instance types.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse> getUtilizationRates(
         ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest request) {
@@ -312,7 +368,7 @@ public final class BillingServiceGrpc {
     }
   }
 
-  private static final int METHODID_GET_NODES = 0;
+  private static final int METHODID_GET_NODES_AND_PODS = 0;
   private static final int METHODID_GET_USAGE_CHART = 1;
   private static final int METHODID_GET_UTILIZATION_RATES = 2;
 
@@ -333,9 +389,9 @@ public final class BillingServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_NODES:
-          serviceImpl.getNodes((ai.chalk.protos.chalk.server.v1.GetNodesRequest) request,
-              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesResponse>) responseObserver);
+        case METHODID_GET_NODES_AND_PODS:
+          serviceImpl.getNodesAndPods((ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse>) responseObserver);
           break;
         case METHODID_GET_USAGE_CHART:
           serviceImpl.getUsageChart((ai.chalk.protos.chalk.server.v1.GetUsageChartRequest) request,
@@ -364,12 +420,12 @@ public final class BillingServiceGrpc {
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
-          getGetNodesMethod(),
+          getGetNodesAndPodsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              ai.chalk.protos.chalk.server.v1.GetNodesRequest,
-              ai.chalk.protos.chalk.server.v1.GetNodesResponse>(
-                service, METHODID_GET_NODES)))
+              ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest,
+              ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse>(
+                service, METHODID_GET_NODES_AND_PODS)))
         .addMethod(
           getGetUsageChartMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -432,7 +488,7 @@ public final class BillingServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new BillingServiceFileDescriptorSupplier())
-              .addMethod(getGetNodesMethod())
+              .addMethod(getGetNodesAndPodsMethod())
               .addMethod(getGetUsageChartMethod())
               .addMethod(getGetUtilizationRatesMethod())
               .build();

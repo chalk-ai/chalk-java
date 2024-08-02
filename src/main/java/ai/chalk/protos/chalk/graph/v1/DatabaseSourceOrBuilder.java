@@ -158,5 +158,20 @@ public interface DatabaseSourceOrBuilder extends
    */
   ai.chalk.protos.chalk.graph.v1.TrinoSourceOrBuilder getTrinoOrBuilder();
 
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   * @return Whether the dynamodb field is set.
+   */
+  boolean hasDynamodb();
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   * @return The dynamodb.
+   */
+  ai.chalk.protos.chalk.graph.v1.DynamoDBSource getDynamodb();
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder getDynamodbOrBuilder();
+
   ai.chalk.protos.chalk.graph.v1.DatabaseSource.SourceCase getSourceCase();
 }

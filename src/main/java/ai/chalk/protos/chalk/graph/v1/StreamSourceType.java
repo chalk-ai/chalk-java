@@ -21,6 +21,10 @@ public enum StreamSourceType
    * <code>STREAM_SOURCE_TYPE_KINESIS = 2;</code>
    */
   STREAM_SOURCE_TYPE_KINESIS(2),
+  /**
+   * <code>STREAM_SOURCE_TYPE_PUBSUB = 3;</code>
+   */
+  STREAM_SOURCE_TYPE_PUBSUB(3),
   UNRECOGNIZED(-1),
   ;
 
@@ -36,6 +40,10 @@ public enum StreamSourceType
    * <code>STREAM_SOURCE_TYPE_KINESIS = 2;</code>
    */
   public static final int STREAM_SOURCE_TYPE_KINESIS_VALUE = 2;
+  /**
+   * <code>STREAM_SOURCE_TYPE_PUBSUB = 3;</code>
+   */
+  public static final int STREAM_SOURCE_TYPE_PUBSUB_VALUE = 3;
 
 
   public final int getNumber() {
@@ -65,6 +73,7 @@ public enum StreamSourceType
       case 0: return STREAM_SOURCE_TYPE_UNSPECIFIED;
       case 1: return STREAM_SOURCE_TYPE_KAFKA;
       case 2: return STREAM_SOURCE_TYPE_KINESIS;
+      case 3: return STREAM_SOURCE_TYPE_PUBSUB;
       default: return null;
     }
   }
