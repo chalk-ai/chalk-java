@@ -296,4 +296,21 @@ public interface ResolverOrBuilder extends
    * <code>.chalk.graph.v1.FunctionReference function = 16 [json_name = "function"];</code>
    */
   ai.chalk.protos.chalk.graph.v1.FunctionReferenceOrBuilder getFunctionOrBuilder();
+
+  /**
+   * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+   * @return The enum numeric value on the wire for resourceHint.
+   */
+  int getResourceHintValue();
+  /**
+   * <code>.chalk.graph.v1.ResourceHint resource_hint = 17 [json_name = "resourceHint"];</code>
+   * @return The resourceHint.
+   */
+  ai.chalk.protos.chalk.graph.v1.ResourceHint getResourceHint();
+
+  /**
+   * <code>bool is_static = 18 [json_name = "isStatic"];</code>
+   * @return The isStatic.
+   */
+  boolean getIsStatic();
 }

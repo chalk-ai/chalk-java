@@ -151,4 +151,28 @@ public interface GraphOrBuilder extends
    */
   ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
       int index);
+
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery> 
+      getNamedQueriesList();
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.NamedQuery getNamedQueries(int index);
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  int getNamedQueriesCount();
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder> 
+      getNamedQueriesOrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder getNamedQueriesOrBuilder(
+      int index);
 }

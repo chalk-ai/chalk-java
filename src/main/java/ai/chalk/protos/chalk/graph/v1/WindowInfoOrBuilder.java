@@ -22,4 +22,19 @@ public interface WindowInfoOrBuilder extends
    * <code>.google.protobuf.Duration duration = 1 [json_name = "duration"];</code>
    */
   com.google.protobuf.DurationOrBuilder getDurationOrBuilder();
+
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   * @return Whether the aggregation field is set.
+   */
+  boolean hasAggregation();
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   * @return The aggregation.
+   */
+  ai.chalk.protos.chalk.graph.v1.WindowAggregation getAggregation();
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder getAggregationOrBuilder();
 }

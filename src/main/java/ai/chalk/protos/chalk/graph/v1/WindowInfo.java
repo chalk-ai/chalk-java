@@ -66,6 +66,32 @@ private static final long serialVersionUID = 0L;
     return duration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : duration_;
   }
 
+  public static final int AGGREGATION_FIELD_NUMBER = 2;
+  private ai.chalk.protos.chalk.graph.v1.WindowAggregation aggregation_;
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   * @return Whether the aggregation field is set.
+   */
+  @java.lang.Override
+  public boolean hasAggregation() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   * @return The aggregation.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.WindowAggregation getAggregation() {
+    return aggregation_ == null ? ai.chalk.protos.chalk.graph.v1.WindowAggregation.getDefaultInstance() : aggregation_;
+  }
+  /**
+   * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder getAggregationOrBuilder() {
+    return aggregation_ == null ? ai.chalk.protos.chalk.graph.v1.WindowAggregation.getDefaultInstance() : aggregation_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -83,6 +109,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(1, getDuration());
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(2, getAggregation());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -95,6 +124,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getDuration());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getAggregation());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -116,6 +149,11 @@ private static final long serialVersionUID = 0L;
       if (!getDuration()
           .equals(other.getDuration())) return false;
     }
+    if (hasAggregation() != other.hasAggregation()) return false;
+    if (hasAggregation()) {
+      if (!getAggregation()
+          .equals(other.getAggregation())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -130,6 +168,10 @@ private static final long serialVersionUID = 0L;
     if (hasDuration()) {
       hash = (37 * hash) + DURATION_FIELD_NUMBER;
       hash = (53 * hash) + getDuration().hashCode();
+    }
+    if (hasAggregation()) {
+      hash = (37 * hash) + AGGREGATION_FIELD_NUMBER;
+      hash = (53 * hash) + getAggregation().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -262,6 +304,7 @@ private static final long serialVersionUID = 0L;
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getDurationFieldBuilder();
+        getAggregationFieldBuilder();
       }
     }
     @java.lang.Override
@@ -272,6 +315,11 @@ private static final long serialVersionUID = 0L;
       if (durationBuilder_ != null) {
         durationBuilder_.dispose();
         durationBuilder_ = null;
+      }
+      aggregation_ = null;
+      if (aggregationBuilder_ != null) {
+        aggregationBuilder_.dispose();
+        aggregationBuilder_ = null;
       }
       return this;
     }
@@ -312,6 +360,12 @@ private static final long serialVersionUID = 0L;
             ? duration_
             : durationBuilder_.build();
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.aggregation_ = aggregationBuilder_ == null
+            ? aggregation_
+            : aggregationBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -363,6 +417,9 @@ private static final long serialVersionUID = 0L;
       if (other.hasDuration()) {
         mergeDuration(other.getDuration());
       }
+      if (other.hasAggregation()) {
+        mergeAggregation(other.getAggregation());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -396,6 +453,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              input.readMessage(
+                  getAggregationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -532,6 +596,127 @@ private static final long serialVersionUID = 0L;
         duration_ = null;
       }
       return durationBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.graph.v1.WindowAggregation aggregation_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.WindowAggregation, ai.chalk.protos.chalk.graph.v1.WindowAggregation.Builder, ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder> aggregationBuilder_;
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     * @return Whether the aggregation field is set.
+     */
+    public boolean hasAggregation() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     * @return The aggregation.
+     */
+    public ai.chalk.protos.chalk.graph.v1.WindowAggregation getAggregation() {
+      if (aggregationBuilder_ == null) {
+        return aggregation_ == null ? ai.chalk.protos.chalk.graph.v1.WindowAggregation.getDefaultInstance() : aggregation_;
+      } else {
+        return aggregationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public Builder setAggregation(ai.chalk.protos.chalk.graph.v1.WindowAggregation value) {
+      if (aggregationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        aggregation_ = value;
+      } else {
+        aggregationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public Builder setAggregation(
+        ai.chalk.protos.chalk.graph.v1.WindowAggregation.Builder builderForValue) {
+      if (aggregationBuilder_ == null) {
+        aggregation_ = builderForValue.build();
+      } else {
+        aggregationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public Builder mergeAggregation(ai.chalk.protos.chalk.graph.v1.WindowAggregation value) {
+      if (aggregationBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0) &&
+          aggregation_ != null &&
+          aggregation_ != ai.chalk.protos.chalk.graph.v1.WindowAggregation.getDefaultInstance()) {
+          getAggregationBuilder().mergeFrom(value);
+        } else {
+          aggregation_ = value;
+        }
+      } else {
+        aggregationBuilder_.mergeFrom(value);
+      }
+      if (aggregation_ != null) {
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public Builder clearAggregation() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      aggregation_ = null;
+      if (aggregationBuilder_ != null) {
+        aggregationBuilder_.dispose();
+        aggregationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.WindowAggregation.Builder getAggregationBuilder() {
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return getAggregationFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder getAggregationOrBuilder() {
+      if (aggregationBuilder_ != null) {
+        return aggregationBuilder_.getMessageOrBuilder();
+      } else {
+        return aggregation_ == null ?
+            ai.chalk.protos.chalk.graph.v1.WindowAggregation.getDefaultInstance() : aggregation_;
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.WindowAggregation aggregation = 2 [json_name = "aggregation"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.WindowAggregation, ai.chalk.protos.chalk.graph.v1.WindowAggregation.Builder, ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder> 
+        getAggregationFieldBuilder() {
+      if (aggregationBuilder_ == null) {
+        aggregationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.WindowAggregation, ai.chalk.protos.chalk.graph.v1.WindowAggregation.Builder, ai.chalk.protos.chalk.graph.v1.WindowAggregationOrBuilder>(
+                getAggregation(),
+                getParentForChildren(),
+                isClean());
+        aggregation_ = null;
+      }
+      return aggregationBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

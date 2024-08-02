@@ -49,6 +49,7 @@ private static final long serialVersionUID = 0L;
     SERVICE_TOKEN_AGENT(2),
     ENGINE_AGENT(3),
     TENANT_AGENT(4),
+    METADATA_SERVICE_AGENT(5),
     AGENT_NOT_SET(0);
     private final int value;
     private AgentCase(int value) {
@@ -70,6 +71,7 @@ private static final long serialVersionUID = 0L;
         case 2: return SERVICE_TOKEN_AGENT;
         case 3: return ENGINE_AGENT;
         case 4: return TENANT_AGENT;
+        case 5: return METADATA_SERVICE_AGENT;
         case 0: return AGENT_NOT_SET;
         default: return null;
       }
@@ -209,6 +211,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.auth.v1.DisplayTenantAgent.getDefaultInstance();
   }
 
+  public static final int METADATA_SERVICE_AGENT_FIELD_NUMBER = 5;
+  /**
+   * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   * @return Whether the metadataServiceAgent field is set.
+   */
+  @java.lang.Override
+  public boolean hasMetadataServiceAgent() {
+    return agentCase_ == 5;
+  }
+  /**
+   * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   * @return The metadataServiceAgent.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent getMetadataServiceAgent() {
+    if (agentCase_ == 5) {
+       return (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_;
+    }
+    return ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgentOrBuilder getMetadataServiceAgentOrBuilder() {
+    if (agentCase_ == 5) {
+       return (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_;
+    }
+    return ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -235,6 +268,9 @@ private static final long serialVersionUID = 0L;
     if (agentCase_ == 4) {
       output.writeMessage(4, (ai.chalk.protos.chalk.auth.v1.DisplayTenantAgent) agent_);
     }
+    if (agentCase_ == 5) {
+      output.writeMessage(5, (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -259,6 +295,10 @@ private static final long serialVersionUID = 0L;
     if (agentCase_ == 4) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, (ai.chalk.protos.chalk.auth.v1.DisplayTenantAgent) agent_);
+    }
+    if (agentCase_ == 5) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -293,6 +333,10 @@ private static final long serialVersionUID = 0L;
         if (!getTenantAgent()
             .equals(other.getTenantAgent())) return false;
         break;
+      case 5:
+        if (!getMetadataServiceAgent()
+            .equals(other.getMetadataServiceAgent())) return false;
+        break;
       case 0:
       default:
     }
@@ -323,6 +367,10 @@ private static final long serialVersionUID = 0L;
       case 4:
         hash = (37 * hash) + TENANT_AGENT_FIELD_NUMBER;
         hash = (53 * hash) + getTenantAgent().hashCode();
+        break;
+      case 5:
+        hash = (37 * hash) + METADATA_SERVICE_AGENT_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadataServiceAgent().hashCode();
         break;
       case 0:
       default:
@@ -470,6 +518,9 @@ private static final long serialVersionUID = 0L;
       if (tenantAgentBuilder_ != null) {
         tenantAgentBuilder_.clear();
       }
+      if (metadataServiceAgentBuilder_ != null) {
+        metadataServiceAgentBuilder_.clear();
+      }
       agentCase_ = 0;
       agent_ = null;
       return this;
@@ -526,6 +577,10 @@ private static final long serialVersionUID = 0L;
       if (agentCase_ == 4 &&
           tenantAgentBuilder_ != null) {
         result.agent_ = tenantAgentBuilder_.build();
+      }
+      if (agentCase_ == 5 &&
+          metadataServiceAgentBuilder_ != null) {
+        result.agent_ = metadataServiceAgentBuilder_.build();
       }
     }
 
@@ -590,6 +645,10 @@ private static final long serialVersionUID = 0L;
           mergeTenantAgent(other.getTenantAgent());
           break;
         }
+        case METADATA_SERVICE_AGENT: {
+          mergeMetadataServiceAgent(other.getMetadataServiceAgent());
+          break;
+        }
         case AGENT_NOT_SET: {
           break;
         }
@@ -648,6 +707,13 @@ private static final long serialVersionUID = 0L;
               agentCase_ = 4;
               break;
             } // case 34
+            case 42: {
+              input.readMessage(
+                  getMetadataServiceAgentFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              agentCase_ = 5;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1246,6 +1312,148 @@ private static final long serialVersionUID = 0L;
       agentCase_ = 4;
       onChanged();
       return tenantAgentBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.Builder, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgentOrBuilder> metadataServiceAgentBuilder_;
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     * @return Whether the metadataServiceAgent field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadataServiceAgent() {
+      return agentCase_ == 5;
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     * @return The metadataServiceAgent.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent getMetadataServiceAgent() {
+      if (metadataServiceAgentBuilder_ == null) {
+        if (agentCase_ == 5) {
+          return (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_;
+        }
+        return ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+      } else {
+        if (agentCase_ == 5) {
+          return metadataServiceAgentBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    public Builder setMetadataServiceAgent(ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent value) {
+      if (metadataServiceAgentBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        agent_ = value;
+        onChanged();
+      } else {
+        metadataServiceAgentBuilder_.setMessage(value);
+      }
+      agentCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    public Builder setMetadataServiceAgent(
+        ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.Builder builderForValue) {
+      if (metadataServiceAgentBuilder_ == null) {
+        agent_ = builderForValue.build();
+        onChanged();
+      } else {
+        metadataServiceAgentBuilder_.setMessage(builderForValue.build());
+      }
+      agentCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    public Builder mergeMetadataServiceAgent(ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent value) {
+      if (metadataServiceAgentBuilder_ == null) {
+        if (agentCase_ == 5 &&
+            agent_ != ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance()) {
+          agent_ = ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.newBuilder((ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          agent_ = value;
+        }
+        onChanged();
+      } else {
+        if (agentCase_ == 5) {
+          metadataServiceAgentBuilder_.mergeFrom(value);
+        } else {
+          metadataServiceAgentBuilder_.setMessage(value);
+        }
+      }
+      agentCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    public Builder clearMetadataServiceAgent() {
+      if (metadataServiceAgentBuilder_ == null) {
+        if (agentCase_ == 5) {
+          agentCase_ = 0;
+          agent_ = null;
+          onChanged();
+        }
+      } else {
+        if (agentCase_ == 5) {
+          agentCase_ = 0;
+          agent_ = null;
+        }
+        metadataServiceAgentBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.Builder getMetadataServiceAgentBuilder() {
+      return getMetadataServiceAgentFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgentOrBuilder getMetadataServiceAgentOrBuilder() {
+      if ((agentCase_ == 5) && (metadataServiceAgentBuilder_ != null)) {
+        return metadataServiceAgentBuilder_.getMessageOrBuilder();
+      } else {
+        if (agentCase_ == 5) {
+          return (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_;
+        }
+        return ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.auth.v1.DisplayMetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.Builder, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgentOrBuilder> 
+        getMetadataServiceAgentFieldBuilder() {
+      if (metadataServiceAgentBuilder_ == null) {
+        if (!(agentCase_ == 5)) {
+          agent_ = ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.getDefaultInstance();
+        }
+        metadataServiceAgentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent.Builder, ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgentOrBuilder>(
+                (ai.chalk.protos.chalk.auth.v1.DisplayMetadataServiceAgent) agent_,
+                getParentForChildren(),
+                isClean());
+        agent_ = null;
+      }
+      agentCase_ = 5;
+      onChanged();
+      return metadataServiceAgentBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

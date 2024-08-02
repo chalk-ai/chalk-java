@@ -171,4 +171,16 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue);
    */
   ai.chalk.protos.chalk.arrow.v1.ScalarValue getAsyncEngineArgsOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>string private_key_b64 = 11 [json_name = "privateKeyB64"];</code>
+   * @return The privateKeyB64.
+   */
+  java.lang.String getPrivateKeyB64();
+  /**
+   * <code>string private_key_b64 = 11 [json_name = "privateKeyB64"];</code>
+   * @return The bytes for privateKeyB64.
+   */
+  com.google.protobuf.ByteString
+      getPrivateKeyB64Bytes();
 }

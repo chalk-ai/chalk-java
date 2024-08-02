@@ -23,6 +23,7 @@ private static final long serialVersionUID = 0L;
     sinkResolvers_ = java.util.Collections.emptyList();
     databaseSources_ = java.util.Collections.emptyList();
     streamSources_ = java.util.Collections.emptyList();
+    namedQueries_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -291,6 +292,47 @@ private static final long serialVersionUID = 0L;
     return streamSources_.get(index);
   }
 
+  public static final int NAMED_QUERIES_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery> namedQueries_;
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery> getNamedQueriesList() {
+    return namedQueries_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder> 
+      getNamedQueriesOrBuilderList() {
+    return namedQueries_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  @java.lang.Override
+  public int getNamedQueriesCount() {
+    return namedQueries_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.NamedQuery getNamedQueries(int index) {
+    return namedQueries_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder getNamedQueriesOrBuilder(
+      int index) {
+    return namedQueries_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -322,6 +364,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < streamSources_.size(); i++) {
       output.writeMessage(6, streamSources_.get(i));
+    }
+    for (int i = 0; i < namedQueries_.size(); i++) {
+      output.writeMessage(7, namedQueries_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -356,6 +401,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, streamSources_.get(i));
     }
+    for (int i = 0; i < namedQueries_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, namedQueries_.get(i));
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -383,6 +432,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getDatabaseSourcesList())) return false;
     if (!getStreamSourcesList()
         .equals(other.getStreamSourcesList())) return false;
+    if (!getNamedQueriesList()
+        .equals(other.getNamedQueriesList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -417,6 +468,10 @@ private static final long serialVersionUID = 0L;
     if (getStreamSourcesCount() > 0) {
       hash = (37 * hash) + STREAM_SOURCES_FIELD_NUMBER;
       hash = (53 * hash) + getStreamSourcesList().hashCode();
+    }
+    if (getNamedQueriesCount() > 0) {
+      hash = (37 * hash) + NAMED_QUERIES_FIELD_NUMBER;
+      hash = (53 * hash) + getNamedQueriesList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -591,6 +646,13 @@ private static final long serialVersionUID = 0L;
         streamSourcesBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000020);
+      if (namedQueriesBuilder_ == null) {
+        namedQueries_ = java.util.Collections.emptyList();
+      } else {
+        namedQueries_ = null;
+        namedQueriesBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000040);
       return this;
     }
 
@@ -677,6 +739,15 @@ private static final long serialVersionUID = 0L;
         result.streamSources_ = streamSources_;
       } else {
         result.streamSources_ = streamSourcesBuilder_.build();
+      }
+      if (namedQueriesBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0)) {
+          namedQueries_ = java.util.Collections.unmodifiableList(namedQueries_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.namedQueries_ = namedQueries_;
+      } else {
+        result.namedQueries_ = namedQueriesBuilder_.build();
       }
     }
 
@@ -884,6 +955,32 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (namedQueriesBuilder_ == null) {
+        if (!other.namedQueries_.isEmpty()) {
+          if (namedQueries_.isEmpty()) {
+            namedQueries_ = other.namedQueries_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureNamedQueriesIsMutable();
+            namedQueries_.addAll(other.namedQueries_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.namedQueries_.isEmpty()) {
+          if (namedQueriesBuilder_.isEmpty()) {
+            namedQueriesBuilder_.dispose();
+            namedQueriesBuilder_ = null;
+            namedQueries_ = other.namedQueries_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+            namedQueriesBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getNamedQueriesFieldBuilder() : null;
+          } else {
+            namedQueriesBuilder_.addAllMessages(other.namedQueries_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -988,6 +1085,19 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 50
+            case 58: {
+              ai.chalk.protos.chalk.graph.v1.NamedQuery m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v1.NamedQuery.parser(),
+                      extensionRegistry);
+              if (namedQueriesBuilder_ == null) {
+                ensureNamedQueriesIsMutable();
+                namedQueries_.add(m);
+              } else {
+                namedQueriesBuilder_.addMessage(m);
+              }
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2443,6 +2553,246 @@ private static final long serialVersionUID = 0L;
         streamSources_ = null;
       }
       return streamSourcesBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery> namedQueries_ =
+      java.util.Collections.emptyList();
+    private void ensureNamedQueriesIsMutable() {
+      if (!((bitField0_ & 0x00000040) != 0)) {
+        namedQueries_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v1.NamedQuery>(namedQueries_);
+        bitField0_ |= 0x00000040;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.NamedQuery, ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder, ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder> namedQueriesBuilder_;
+
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery> getNamedQueriesList() {
+      if (namedQueriesBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(namedQueries_);
+      } else {
+        return namedQueriesBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public int getNamedQueriesCount() {
+      if (namedQueriesBuilder_ == null) {
+        return namedQueries_.size();
+      } else {
+        return namedQueriesBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.NamedQuery getNamedQueries(int index) {
+      if (namedQueriesBuilder_ == null) {
+        return namedQueries_.get(index);
+      } else {
+        return namedQueriesBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder setNamedQueries(
+        int index, ai.chalk.protos.chalk.graph.v1.NamedQuery value) {
+      if (namedQueriesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureNamedQueriesIsMutable();
+        namedQueries_.set(index, value);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder setNamedQueries(
+        int index, ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder builderForValue) {
+      if (namedQueriesBuilder_ == null) {
+        ensureNamedQueriesIsMutable();
+        namedQueries_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        namedQueriesBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder addNamedQueries(ai.chalk.protos.chalk.graph.v1.NamedQuery value) {
+      if (namedQueriesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureNamedQueriesIsMutable();
+        namedQueries_.add(value);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder addNamedQueries(
+        int index, ai.chalk.protos.chalk.graph.v1.NamedQuery value) {
+      if (namedQueriesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureNamedQueriesIsMutable();
+        namedQueries_.add(index, value);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder addNamedQueries(
+        ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder builderForValue) {
+      if (namedQueriesBuilder_ == null) {
+        ensureNamedQueriesIsMutable();
+        namedQueries_.add(builderForValue.build());
+        onChanged();
+      } else {
+        namedQueriesBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder addNamedQueries(
+        int index, ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder builderForValue) {
+      if (namedQueriesBuilder_ == null) {
+        ensureNamedQueriesIsMutable();
+        namedQueries_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        namedQueriesBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder addAllNamedQueries(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v1.NamedQuery> values) {
+      if (namedQueriesBuilder_ == null) {
+        ensureNamedQueriesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, namedQueries_);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder clearNamedQueries() {
+      if (namedQueriesBuilder_ == null) {
+        namedQueries_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public Builder removeNamedQueries(int index) {
+      if (namedQueriesBuilder_ == null) {
+        ensureNamedQueriesIsMutable();
+        namedQueries_.remove(index);
+        onChanged();
+      } else {
+        namedQueriesBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder getNamedQueriesBuilder(
+        int index) {
+      return getNamedQueriesFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder getNamedQueriesOrBuilder(
+        int index) {
+      if (namedQueriesBuilder_ == null) {
+        return namedQueries_.get(index);  } else {
+        return namedQueriesBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder> 
+         getNamedQueriesOrBuilderList() {
+      if (namedQueriesBuilder_ != null) {
+        return namedQueriesBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(namedQueries_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder addNamedQueriesBuilder() {
+      return getNamedQueriesFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v1.NamedQuery.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder addNamedQueriesBuilder(
+        int index) {
+      return getNamedQueriesFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v1.NamedQuery.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder> 
+         getNamedQueriesBuilderList() {
+      return getNamedQueriesFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.NamedQuery, ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder, ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder> 
+        getNamedQueriesFieldBuilder() {
+      if (namedQueriesBuilder_ == null) {
+        namedQueriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.NamedQuery, ai.chalk.protos.chalk.graph.v1.NamedQuery.Builder, ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder>(
+                namedQueries_,
+                ((bitField0_ & 0x00000040) != 0),
+                getParentForChildren(),
+                isClean());
+        namedQueries_ = null;
+      }
+      return namedQueriesBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

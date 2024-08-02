@@ -16,16 +16,6 @@ public final class BillingProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_chalk_server_v1_GetNodesRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_chalk_server_v1_GetNodesRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_chalk_server_v1_GetNodesResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_chalk_server_v1_GetNodesResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_GetUsageChartRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -45,6 +35,16 @@ public final class BillingProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_GetUtilizationRatesResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetNodesAndPodsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetNodesAndPodsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetNodesAndPodsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetNodesAndPodsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -59,41 +59,46 @@ public final class BillingProto {
       "o\032!chalk/pubsub/v1/node_status.proto\032 ch" +
       "alk/pubsub/v1/pod_status.proto\032\033chalk/se" +
       "rver/v1/chart.proto\032\031chalk/usage/v1/rate" +
-      ".proto\"\021\n\017GetNodesRequest\"\237\001\n\020GetNodesRe" +
-      "sponse\022F\n\rnode_statuses\030\001 \003(\0132!.chalk.pu" +
-      "bsub.v1.NodeStatusPubSubR\014nodeStatuses\022C" +
-      "\n\014pod_statuses\030\002 \003(\0132 .chalk.pubsub.v1.P" +
-      "odStatusPubSubR\013podStatuses\"\210\002\n\024GetUsage" +
-      "ChartRequest\022\036\n\010start_ms\030\001 \001(\003H\000R\007startM" +
-      "s\210\001\001\022\032\n\006end_ms\030\002 \001(\003H\001R\005endMs\210\001\001\022>\n\006peri" +
-      "od\030\003 \001(\0162!.chalk.server.v1.UsageChartPer" +
-      "iodH\002R\006period\210\001\001\022D\n\010grouping\030\004 \001(\0162#.cha" +
-      "lk.server.v1.UsageChartGroupingH\003R\010group" +
-      "ing\210\001\001B\013\n\t_start_msB\t\n\007_end_msB\t\n\007_perio" +
-      "dB\013\n\t_grouping\"E\n\025GetUsageChartResponse\022" +
-      ",\n\005chart\030\001 \001(\0132\026.chalk.server.v1.ChartR\005" +
-      "chart\"\034\n\032GetUtilizationRatesRequest\"P\n\033G" +
-      "etUtilizationRatesResponse\0221\n\005rates\030\001 \003(" +
-      "\0132\033.chalk.usage.v1.MachineRateR\005rates*t\n" +
-      "\020UsageChartPeriod\022\"\n\036USAGE_CHART_PERIOD_" +
-      "UNSPECIFIED\020\000\022\034\n\030USAGE_CHART_PERIOD_DAIL" +
-      "Y\020\001\022\036\n\032USAGE_CHART_PERIOD_MONTHLY\020\002*\204\001\n\022" +
-      "UsageChartGrouping\022$\n USAGE_CHART_GROUPI" +
-      "NG_UNSPECIFIED\020\000\022&\n\"USAGE_CHART_GROUPING" +
-      "_INSTANCE_TYPE\020\001\022 \n\034USAGE_CHART_GROUPING" +
-      "_CLUSTER\020\0022\313\002\n\016BillingService\022W\n\010GetNode" +
-      "s\022 .chalk.server.v1.GetNodesRequest\032!.ch" +
-      "alk.server.v1.GetNodesResponse\"\006\220\002\001\200}\013\022f" +
-      "\n\rGetUsageChart\022%.chalk.server.v1.GetUsa" +
-      "geChartRequest\032&.chalk.server.v1.GetUsag" +
-      "eChartResponse\"\006\220\002\001\200}\006\022x\n\023GetUtilization" +
-      "Rates\022+.chalk.server.v1.GetUtilizationRa" +
-      "tesRequest\032,.chalk.server.v1.GetUtilizat" +
-      "ionRatesResponse\"\006\220\002\001\200}\001B\241\001\n\037ai.chalk.pr" +
-      "otos.chalk.server.v1B\014BillingProtoP\001Z\022se" +
-      "rver/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1" +
-      "\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPB" +
-      "Metadata\352\002\021Chalk::Server::V1b\006proto3"
+      ".proto\"\210\002\n\024GetUsageChartRequest\022\036\n\010start" +
+      "_ms\030\001 \001(\003H\000R\007startMs\210\001\001\022\032\n\006end_ms\030\002 \001(\003H" +
+      "\001R\005endMs\210\001\001\022>\n\006period\030\003 \001(\0162!.chalk.serv" +
+      "er.v1.UsageChartPeriodH\002R\006period\210\001\001\022D\n\010g" +
+      "rouping\030\004 \001(\0162#.chalk.server.v1.UsageCha" +
+      "rtGroupingH\003R\010grouping\210\001\001B\013\n\t_start_msB\t" +
+      "\n\007_end_msB\t\n\007_periodB\013\n\t_grouping\"E\n\025Get" +
+      "UsageChartResponse\022,\n\005chart\030\001 \001(\0132\026.chal" +
+      "k.server.v1.ChartR\005chart\"\034\n\032GetUtilizati" +
+      "onRatesRequest\"P\n\033GetUtilizationRatesRes" +
+      "ponse\0221\n\005rates\030\001 \003(\0132\033.chalk.usage.v1.Ma" +
+      "chineRateR\005rates\"\322\001\n\026GetNodesAndPodsRequ" +
+      "est\022!\n\tnamespace\030\001 \001(\tH\000R\tnamespace\210\001\001\0221" +
+      "\n\022pod_label_selector\030\002 \001(\tH\001R\020podLabelSe" +
+      "lector\210\001\001\022*\n\016environment_id\030\003 \001(\tH\002R\renv" +
+      "ironmentId\210\001\001B\014\n\n_namespaceB\025\n\023_pod_labe" +
+      "l_selectorB\021\n\017_environment_id\"\210\001\n\027GetNod" +
+      "esAndPodsResponse\0227\n\005nodes\030\001 \003(\0132!.chalk" +
+      ".pubsub.v1.NodeStatusPubSubR\005nodes\0224\n\004po" +
+      "ds\030\002 \003(\0132 .chalk.pubsub.v1.PodStatusPubS" +
+      "ubR\004pods*t\n\020UsageChartPeriod\022\"\n\036USAGE_CH" +
+      "ART_PERIOD_UNSPECIFIED\020\000\022\034\n\030USAGE_CHART_" +
+      "PERIOD_DAILY\020\001\022\036\n\032USAGE_CHART_PERIOD_MON" +
+      "THLY\020\002*\204\001\n\022UsageChartGrouping\022$\n USAGE_C" +
+      "HART_GROUPING_UNSPECIFIED\020\000\022&\n\"USAGE_CHA" +
+      "RT_GROUPING_INSTANCE_TYPE\020\001\022 \n\034USAGE_CHA" +
+      "RT_GROUPING_CLUSTER\020\0022\340\002\n\016BillingService" +
+      "\022l\n\017GetNodesAndPods\022\'.chalk.server.v1.Ge" +
+      "tNodesAndPodsRequest\032(.chalk.server.v1.G" +
+      "etNodesAndPodsResponse\"\006\220\002\001\200}\013\022f\n\rGetUsa" +
+      "geChart\022%.chalk.server.v1.GetUsageChartR" +
+      "equest\032&.chalk.server.v1.GetUsageChartRe" +
+      "sponse\"\006\220\002\001\200}\006\022x\n\023GetUtilizationRates\022+." +
+      "chalk.server.v1.GetUtilizationRatesReque" +
+      "st\032,.chalk.server.v1.GetUtilizationRates" +
+      "Response\"\006\220\002\001\200}\001B\241\001\n\037ai.chalk.protos.cha" +
+      "lk.server.v1B\014BillingProtoP\001Z\022server/v1;" +
+      "serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk" +
+      "\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata" +
+      "\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -104,42 +109,42 @@ public final class BillingProto {
           ai.chalk.protos.chalk.server.v1.ChartProto.getDescriptor(),
           ai.chalk.protos.chalk.usage.v1.RateProto.getDescriptor(),
         });
-    internal_static_chalk_server_v1_GetNodesRequest_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_chalk_server_v1_GetNodesRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_chalk_server_v1_GetNodesRequest_descriptor,
-        new java.lang.String[] { });
-    internal_static_chalk_server_v1_GetNodesResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_chalk_server_v1_GetNodesResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_chalk_server_v1_GetNodesResponse_descriptor,
-        new java.lang.String[] { "NodeStatuses", "PodStatuses", });
     internal_static_chalk_server_v1_GetUsageChartRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_chalk_server_v1_GetUsageChartRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetUsageChartRequest_descriptor,
         new java.lang.String[] { "StartMs", "EndMs", "Period", "Grouping", });
     internal_static_chalk_server_v1_GetUsageChartResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_chalk_server_v1_GetUsageChartResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetUsageChartResponse_descriptor,
         new java.lang.String[] { "Chart", });
     internal_static_chalk_server_v1_GetUtilizationRatesRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_server_v1_GetUtilizationRatesRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetUtilizationRatesRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetUtilizationRatesResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_chalk_server_v1_GetUtilizationRatesResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetUtilizationRatesResponse_descriptor,
         new java.lang.String[] { "Rates", });
+    internal_static_chalk_server_v1_GetNodesAndPodsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_server_v1_GetNodesAndPodsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetNodesAndPodsRequest_descriptor,
+        new java.lang.String[] { "Namespace", "PodLabelSelector", "EnvironmentId", });
+    internal_static_chalk_server_v1_GetNodesAndPodsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_chalk_server_v1_GetNodesAndPodsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetNodesAndPodsResponse_descriptor,
+        new java.lang.String[] { "Nodes", "Pods", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);

@@ -82,4 +82,38 @@ public interface AggregateUDFExprNodeOrBuilder extends
    */
   ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getOrderByOrBuilder(
       int index);
+
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  int getKwargsCount();
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  boolean containsKwargs(
+      java.lang.String key);
+  /**
+   * Use {@link #getKwargsMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+  getKwargs();
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+  getKwargsMap();
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrDefault(
+      java.lang.String key,
+      /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode defaultValue);
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrThrow(
+      java.lang.String key);
 }

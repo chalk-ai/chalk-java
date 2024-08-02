@@ -50,6 +50,7 @@ private static final long serialVersionUID = 0L;
     HAS_MANY(3),
     FEATURE_TIME(4),
     WINDOWED(5),
+    GROUP_BY(6),
     TYPE_NOT_SET(0);
     private final int value;
     private TypeCase(int value) {
@@ -72,6 +73,7 @@ private static final long serialVersionUID = 0L;
         case 3: return HAS_MANY;
         case 4: return FEATURE_TIME;
         case 5: return WINDOWED;
+        case 6: return GROUP_BY;
         case 0: return TYPE_NOT_SET;
         default: return null;
       }
@@ -242,6 +244,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.graph.v1.WindowedFeatureType.getDefaultInstance();
   }
 
+  public static final int GROUP_BY_FIELD_NUMBER = 6;
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   * @return Whether the groupBy field is set.
+   */
+  @java.lang.Override
+  public boolean hasGroupBy() {
+    return typeCase_ == 6;
+  }
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   * @return The groupBy.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.GroupByFeatureType getGroupBy() {
+    if (typeCase_ == 6) {
+       return (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder getGroupByOrBuilder() {
+    if (typeCase_ == 6) {
+       return (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -271,6 +304,9 @@ private static final long serialVersionUID = 0L;
     if (typeCase_ == 5) {
       output.writeMessage(5, (ai.chalk.protos.chalk.graph.v1.WindowedFeatureType) type_);
     }
+    if (typeCase_ == 6) {
+      output.writeMessage(6, (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -299,6 +335,10 @@ private static final long serialVersionUID = 0L;
     if (typeCase_ == 5) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, (ai.chalk.protos.chalk.graph.v1.WindowedFeatureType) type_);
+    }
+    if (typeCase_ == 6) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -337,6 +377,10 @@ private static final long serialVersionUID = 0L;
         if (!getWindowed()
             .equals(other.getWindowed())) return false;
         break;
+      case 6:
+        if (!getGroupBy()
+            .equals(other.getGroupBy())) return false;
+        break;
       case 0:
       default:
     }
@@ -371,6 +415,10 @@ private static final long serialVersionUID = 0L;
       case 5:
         hash = (37 * hash) + WINDOWED_FIELD_NUMBER;
         hash = (53 * hash) + getWindowed().hashCode();
+        break;
+      case 6:
+        hash = (37 * hash) + GROUP_BY_FIELD_NUMBER;
+        hash = (53 * hash) + getGroupBy().hashCode();
         break;
       case 0:
       default:
@@ -521,6 +569,9 @@ private static final long serialVersionUID = 0L;
       if (windowedBuilder_ != null) {
         windowedBuilder_.clear();
       }
+      if (groupByBuilder_ != null) {
+        groupByBuilder_.clear();
+      }
       typeCase_ = 0;
       type_ = null;
       return this;
@@ -581,6 +632,10 @@ private static final long serialVersionUID = 0L;
       if (typeCase_ == 5 &&
           windowedBuilder_ != null) {
         result.type_ = windowedBuilder_.build();
+      }
+      if (typeCase_ == 6 &&
+          groupByBuilder_ != null) {
+        result.type_ = groupByBuilder_.build();
       }
     }
 
@@ -649,6 +704,10 @@ private static final long serialVersionUID = 0L;
           mergeWindowed(other.getWindowed());
           break;
         }
+        case GROUP_BY: {
+          mergeGroupBy(other.getGroupBy());
+          break;
+        }
         case TYPE_NOT_SET: {
           break;
         }
@@ -714,6 +773,13 @@ private static final long serialVersionUID = 0L;
               typeCase_ = 5;
               break;
             } // case 42
+            case 50: {
+              input.readMessage(
+                  getGroupByFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              typeCase_ = 6;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1454,6 +1520,148 @@ private static final long serialVersionUID = 0L;
       typeCase_ = 5;
       onChanged();
       return windowedBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.GroupByFeatureType, ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.Builder, ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder> groupByBuilder_;
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     * @return Whether the groupBy field is set.
+     */
+    @java.lang.Override
+    public boolean hasGroupBy() {
+      return typeCase_ == 6;
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     * @return The groupBy.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.GroupByFeatureType getGroupBy() {
+      if (groupByBuilder_ == null) {
+        if (typeCase_ == 6) {
+          return (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+      } else {
+        if (typeCase_ == 6) {
+          return groupByBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    public Builder setGroupBy(ai.chalk.protos.chalk.graph.v1.GroupByFeatureType value) {
+      if (groupByBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        type_ = value;
+        onChanged();
+      } else {
+        groupByBuilder_.setMessage(value);
+      }
+      typeCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    public Builder setGroupBy(
+        ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.Builder builderForValue) {
+      if (groupByBuilder_ == null) {
+        type_ = builderForValue.build();
+        onChanged();
+      } else {
+        groupByBuilder_.setMessage(builderForValue.build());
+      }
+      typeCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    public Builder mergeGroupBy(ai.chalk.protos.chalk.graph.v1.GroupByFeatureType value) {
+      if (groupByBuilder_ == null) {
+        if (typeCase_ == 6 &&
+            type_ != ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance()) {
+          type_ = ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.newBuilder((ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          type_ = value;
+        }
+        onChanged();
+      } else {
+        if (typeCase_ == 6) {
+          groupByBuilder_.mergeFrom(value);
+        } else {
+          groupByBuilder_.setMessage(value);
+        }
+      }
+      typeCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    public Builder clearGroupBy() {
+      if (groupByBuilder_ == null) {
+        if (typeCase_ == 6) {
+          typeCase_ = 0;
+          type_ = null;
+          onChanged();
+        }
+      } else {
+        if (typeCase_ == 6) {
+          typeCase_ = 0;
+          type_ = null;
+        }
+        groupByBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.Builder getGroupByBuilder() {
+      return getGroupByFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder getGroupByOrBuilder() {
+      if ((typeCase_ == 6) && (groupByBuilder_ != null)) {
+        return groupByBuilder_.getMessageOrBuilder();
+      } else {
+        if (typeCase_ == 6) {
+          return (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.GroupByFeatureType, ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.Builder, ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder> 
+        getGroupByFieldBuilder() {
+      if (groupByBuilder_ == null) {
+        if (!(typeCase_ == 6)) {
+          type_ = ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.getDefaultInstance();
+        }
+        groupByBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.GroupByFeatureType, ai.chalk.protos.chalk.graph.v1.GroupByFeatureType.Builder, ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v1.GroupByFeatureType) type_,
+                getParentForChildren(),
+                isClean());
+        type_ = null;
+      }
+      typeCase_ = 6;
+      onChanged();
+      return groupByBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

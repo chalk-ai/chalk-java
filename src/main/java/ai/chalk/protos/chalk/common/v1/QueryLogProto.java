@@ -61,7 +61,7 @@ public final class QueryLogProto {
       "\022VersionedQueryName\022\035\n\nquery_name\030\001 \001(\tR" +
       "\tqueryName\0221\n\022query_name_version\030\002 \001(\tH\000" +
       "R\020queryNameVersion\210\001\001B\025\n\023_query_name_ver" +
-      "sion\"\307\003\n\017QueryLogFilters\022!\n\014operation_id" +
+      "sion\"\357\003\n\017QueryLogFilters\022!\n\014operation_id" +
       "\030\001 \003(\tR\013operationId\022E\n\016operation_kind\030\002 " +
       "\003(\0162\036.chalk.common.v1.OperationKindR\rope" +
       "rationKind\022B\n\nquery_name\030\003 \003(\0132#.chalk.c" +
@@ -72,7 +72,8 @@ public final class QueryLogProto {
       "ceId\022\"\n\rquery_plan_id\030\t \003(\tR\013queryPlanId" +
       "\022#\n\rdeployment_id\030\n \003(\tR\014deploymentId\022?\n" +
       "\014query_status\030\013 \003(\0162\034.chalk.common.v1.Qu" +
-      "eryStatusR\013queryStatus\"\223\001\n\033GetQueryLogEn" +
+      "eryStatusR\013queryStatus\022&\n\017meta_query_has" +
+      "h\030\014 \003(\tR\rmetaQueryHash\"\223\001\n\033GetQueryLogEn" +
       "triesPageToken\022(\n\020operation_id_hwm\030\001 \001(\t" +
       "R\016operationIdHwm\022J\n\023query_timestamp_hwm\030" +
       "\002 \001(\0132\032.google.protobuf.TimestampR\021query" +
@@ -86,7 +87,7 @@ public final class QueryLogProto {
       " \001(\0132 .chalk.common.v1.QueryLogFiltersR\007" +
       "filters\022\033\n\tpage_size\030\004 \001(\005R\010pageSize\022\035\n\n" +
       "page_token\030\005 \001(\tR\tpageTokenB(\n&_query_ti" +
-      "mestamp_upper_bound_exclusive\"\373\005\n\rQueryL" +
+      "mestamp_upper_bound_exclusive\"\243\006\n\rQueryL" +
       "ogEntry\022!\n\014operation_id\030\001 \001(\tR\013operation" +
       "Id\022%\n\016environment_id\030\002 \001(\tR\renvironmentI" +
       "d\022#\n\rdeployment_id\030\003 \001(\tR\014deploymentId\022E" +
@@ -105,7 +106,8 @@ public final class QueryLogProto {
       "\030\014 \001(\tR\nbranchName\022%\n\016correlation_id\030\r \001" +
       "(\tR\rcorrelationId\022\031\n\010trace_id\030\016 \001(\tR\007tra" +
       "ceId\022\"\n\rquery_plan_id\030\017 \001(\tR\013queryPlanId" +
-      "\022!\n\014value_tables\030\020 \003(\tR\013valueTables\"~\n\032G" +
+      "\022!\n\014value_tables\030\020 \003(\tR\013valueTables\022&\n\017m" +
+      "eta_query_hash\030\021 \001(\tR\rmetaQueryHash\"~\n\032G" +
       "etQueryLogEntriesResponse\0228\n\007entries\030\001 \003" +
       "(\0132\036.chalk.common.v1.QueryLogEntryR\007entr" +
       "ies\022&\n\017next_page_token\030\002 \001(\tR\rnextPageTo" +
@@ -132,7 +134,7 @@ public final class QueryLogProto {
     internal_static_chalk_common_v1_QueryLogFilters_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_QueryLogFilters_descriptor,
-        new java.lang.String[] { "OperationId", "OperationKind", "QueryName", "AgentId", "BranchName", "CorrelationId", "TraceId", "QueryPlanId", "DeploymentId", "QueryStatus", });
+        new java.lang.String[] { "OperationId", "OperationKind", "QueryName", "AgentId", "BranchName", "CorrelationId", "TraceId", "QueryPlanId", "DeploymentId", "QueryStatus", "MetaQueryHash", });
     internal_static_chalk_common_v1_GetQueryLogEntriesPageToken_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_common_v1_GetQueryLogEntriesPageToken_fieldAccessorTable = new
@@ -150,7 +152,7 @@ public final class QueryLogProto {
     internal_static_chalk_common_v1_QueryLogEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_QueryLogEntry_descriptor,
-        new java.lang.String[] { "OperationId", "EnvironmentId", "DeploymentId", "OperationKind", "QueryTimestamp", "ExecutionStartedAt", "ExecutionFinishedAt", "QueryStatus", "QueryName", "QueryNameVersion", "AgentId", "BranchName", "CorrelationId", "TraceId", "QueryPlanId", "ValueTables", });
+        new java.lang.String[] { "OperationId", "EnvironmentId", "DeploymentId", "OperationKind", "QueryTimestamp", "ExecutionStartedAt", "ExecutionFinishedAt", "QueryStatus", "QueryName", "QueryNameVersion", "AgentId", "BranchName", "CorrelationId", "TraceId", "QueryPlanId", "ValueTables", "MetaQueryHash", });
     internal_static_chalk_common_v1_GetQueryLogEntriesResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_common_v1_GetQueryLogEntriesResponse_fieldAccessorTable = new
