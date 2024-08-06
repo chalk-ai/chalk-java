@@ -91,10 +91,19 @@ public class Unmarshaller {
     }
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
-        List<T> result = new ArrayList<T>();
-
         // Exists to work around `row.getLargeList` not being available.
-        var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
+        var fqnToLargeListColumn = new HashMap<String, LargeListVector>();
+        try {
+            return unmarshalTableInner(table, target, fqnToLargeListColumn);
+        } finally {
+            for (var entry : fqnToLargeListColumn.entrySet()) {
+                entry.getValue().close();
+            }
+        }
+    }
+
+    public static <T extends FeaturesClass> T[] unmarshalTableInner(Table table, Class<T> target, HashMap<String, LargeListVector> fqnToLargeListColumn) throws Exception {
+        List<T> result = new ArrayList<T>();
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
             Map<String, List<Feature<?>>> featureMap;
@@ -313,12 +322,12 @@ public class Unmarshaller {
                             List<?> originalList;
                             if (arrowField.getType().getTypeID() == LargeList) {
                                 LargeListVector largeListVector;
-                                if (fqnToLargeListColumnCopy.containsKey(fqn)) {
-                                    largeListVector = fqnToLargeListColumnCopy.get(fqn);
+                                if (fqnToLargeListColumn.containsKey(fqn)) {
+                                    largeListVector = fqnToLargeListColumn.get(fqn);
                                 } else {
                                     // TODO: Get large list without copying. The obvious `row.getLargeList` does not exist.
                                     largeListVector = (LargeListVector) table.getVectorCopy(fqn);
-                                    fqnToLargeListColumnCopy.put(fqn, largeListVector);
+                                    fqnToLargeListColumn.put(fqn, largeListVector);
                                 }
                                 originalList = largeListVector.getObject(row.getRowNumber());
                             } else {
@@ -417,9 +426,6 @@ public class Unmarshaller {
                     }
                 }
             }
-        }
-        for (var entry : fqnToLargeListColumnCopy.entrySet()) {
-            entry.getValue().close();
         }
         return listToArray(result, target);
     }
