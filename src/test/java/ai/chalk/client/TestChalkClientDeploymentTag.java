@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 
-public class TestChalkClient {
+public class TestChalkClientDeploymentTag {
 
     private static ChalkClient client;
 
