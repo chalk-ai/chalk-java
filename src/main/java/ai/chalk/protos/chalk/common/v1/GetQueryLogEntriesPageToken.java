@@ -6,8 +6,9 @@ package ai.chalk.protos.chalk.common.v1;
 
 /**
  * <pre>
- * Internal protobuf representing a next page token. Contains the operation id and the query timestamp for the last row in the pervious batch. Results are sorted query timestamp
- * then by operation id lexagraphically, so this is all we need to know where the next page begins
+ * Internal protobuf representing a next page token. Contains the operation id and the query timestamp for the last row
+ * in the previous batch. Results are sorted query timestamp then by operation id lexicographically, so this is all we
+ * need to know where the next page begins
  * </pre>
  *
  * Protobuf type {@code chalk.common.v1.GetQueryLogEntriesPageToken}
@@ -285,8 +286,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Internal protobuf representing a next page token. Contains the operation id and the query timestamp for the last row in the pervious batch. Results are sorted query timestamp
-   * then by operation id lexagraphically, so this is all we need to know where the next page begins
+   * Internal protobuf representing a next page token. Contains the operation id and the query timestamp for the last row
+   * in the previous batch. Results are sorted query timestamp then by operation id lexicographically, so this is all we
+   * need to know where the next page begins
    * </pre>
    *
    * Protobuf type {@code chalk.common.v1.GetQueryLogEntriesPageToken}

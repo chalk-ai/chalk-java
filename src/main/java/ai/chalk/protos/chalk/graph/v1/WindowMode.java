@@ -104,7 +104,7 @@ public enum WindowMode
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor().getEnumTypes().get(1);
+    return ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor().getEnumTypes().get(2);
   }
 
   private static final WindowMode[] VALUES = values();

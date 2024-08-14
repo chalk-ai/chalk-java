@@ -140,6 +140,16 @@ public final class OnlineQueryProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_common_v1_QueryExplainInfo_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_UploadFeaturesBulkRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_UploadFeaturesBulkResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -268,14 +278,19 @@ public final class OnlineQueryProto {
       "etadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030" +
       "\002 \001(\tR\005value:\0028\001\"H\n\020QueryExplainInfo\022$\n\013" +
       "plan_string\030\001 \001(\tH\000R\nplanString\210\001\001B\016\n\014_p" +
-      "lan_string*w\n\017FeatherBodyType\022!\n\035FEATHER" +
-      "_BODY_TYPE_UNSPECIFIED\020\000\022\033\n\027FEATHER_BODY" +
-      "_TYPE_TABLE\020\001\022$\n FEATHER_BODY_TYPE_RECOR" +
-      "D_BATCHES\020\002B\221\001\n\037ai.chalk.protos.chalk.co" +
-      "mmon.v1B\020OnlineQueryProtoP\001\242\002\003CCX\252\002\017Chal" +
-      "k.Common.V1\312\002\017Chalk\\Common\\V1\342\002\033Chalk\\Co" +
-      "mmon\\V1\\GPBMetadata\352\002\021Chalk::Common::V1b" +
-      "\006proto3"
+      "lan_string\"\201\001\n\031UploadFeaturesBulkRequest" +
+      "\022%\n\016inputs_feather\030\001 \001(\014R\rinputsFeather\022" +
+      "=\n\tbody_type\030\007 \001(\0162 .chalk.common.v1.Fea" +
+      "therBodyTypeR\010bodyType\"Q\n\032UploadFeatures" +
+      "BulkResponse\0223\n\006errors\030\001 \003(\0132\033.chalk.com" +
+      "mon.v1.ChalkErrorR\006errors*w\n\017FeatherBody" +
+      "Type\022!\n\035FEATHER_BODY_TYPE_UNSPECIFIED\020\000\022" +
+      "\033\n\027FEATHER_BODY_TYPE_TABLE\020\001\022$\n FEATHER_" +
+      "BODY_TYPE_RECORD_BATCHES\020\002B\221\001\n\037ai.chalk." +
+      "protos.chalk.common.v1B\020OnlineQueryProto" +
+      "P\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017Chalk\\Commo" +
+      "n\\V1\342\002\033Chalk\\Common\\V1\\GPBMetadata\352\002\021Cha" +
+      "lk::Common::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -435,6 +450,18 @@ public final class OnlineQueryProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_QueryExplainInfo_descriptor,
         new java.lang.String[] { "PlanString", });
+    internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_chalk_common_v1_UploadFeaturesBulkRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor,
+        new java.lang.String[] { "InputsFeather", "BodyType", });
+    internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_chalk_common_v1_UploadFeaturesBulkResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor,
+        new java.lang.String[] { "Errors", });
     ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();

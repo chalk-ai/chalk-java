@@ -8,7 +8,7 @@ import ai.chalk.models.OnlineQueryResult;
 
 import java.net.http.HttpClient;
 
-public interface ChalkClient {
+public interface ChalkClient extends AutoCloseable {
 
     /**
      * Creates a new ChalkClient builder that can be used

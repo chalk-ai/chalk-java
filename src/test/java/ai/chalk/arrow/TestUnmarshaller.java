@@ -4,6 +4,7 @@ import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
@@ -13,6 +14,8 @@ import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.FieldType;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
@@ -20,11 +23,22 @@ import java.util.*;
 
 
 public class TestUnmarshaller {
+    private RootAllocator allocator;
+    @BeforeEach
+    public void setUp() {
+        allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        // TODO: Fix test leak in fixture. Does not seem as simple as just closing the writers.
+        //       Suspecting need to close the writers not immediately but after table creation.
+        // allocator.close();
+    }
+
     public Table getHasManyTable() {
         // Transactions class
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
-
         var idVector = new VarCharVector("transaction.id", allocator);
 
         idVector.allocateNew();
@@ -59,7 +73,6 @@ public class TestUnmarshaller {
 
     public Table getTestTableWithAllArrowTypes() {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var idVector = new VarCharVector("arrow_user.id", allocator);
         idVector.allocateNew();
@@ -1132,7 +1145,6 @@ public class TestUnmarshaller {
     @Test
     public void TestUnmarshalVersioned() throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("versioned_features_class.grade@2", allocator);
         defaultVector.allocateNew();
@@ -1172,7 +1184,6 @@ public class TestUnmarshaller {
     @Test
     public void TestUnmarshalNamed() throws Exception {
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
         defaultVector.allocateNew();
@@ -1198,7 +1209,6 @@ public class TestUnmarshaller {
         // This supports backwards compatibility with older versions
         // of codegen where we generated snake case fields.
         List<FieldVector> fieldVectors = new ArrayList<>();
-        var allocator = new RootAllocator(Long.MAX_VALUE);
 
         var defaultVector = new VarCharVector("named_features_class.abc_7d7_efg", allocator);
         defaultVector.allocateNew();

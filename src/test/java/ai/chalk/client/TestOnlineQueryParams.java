@@ -10,13 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class TestOnlineQueryParams {
+public class TestOnlineQueryParams extends AllocatorTest {
     public static boolean jsonCompare(String expected, String actual) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode tree1 = mapper.readTree(expected);
@@ -118,53 +116,66 @@ public class TestOnlineQueryParams {
                 ))
                 */
                 .build();
-        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs());
-        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized)) {
+        var serialized = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+        try (var deserialized = FeatherProcessor.convertBytesToTable(serialized, allocator)) {
             var floatField = deserialized.getField("user.float_feature");
             assert floatField.getType().getTypeID().equals(ArrowType.ArrowTypeID.FloatingPoint);
-            assert deserialized.getVectorCopy("user.float_feature").getObject(0).equals(1.0);
-            assert deserialized.getVectorCopy("user.float_feature").getObject(1).equals(2.0);
-            assert deserialized.getVectorCopy("user.float_feature").getObject(2).equals(3.0);
+            try (var vector = deserialized.getVectorCopy("user.float_feature")) {
+                assert vector.getObject(0).equals(1.0);
+                assert vector.getObject(1).equals(2.0);
+                assert vector.getObject(2).equals(3.0);
+            }
 
             var stringField = deserialized.getField("user.string_feature");
             assert stringField.getType().getTypeID().equals(ArrowType.ArrowTypeID.LargeUtf8);
-            assert deserialized.getVectorCopy("user.string_feature").getObject(0).toString().equals("a");
-            assert deserialized.getVectorCopy("user.string_feature").getObject(1).toString().equals("b");
-            assert deserialized.getVectorCopy("user.string_feature").getObject(2).toString().equals("c");
+            try (var vector = deserialized.getVectorCopy("user.string_feature")) {
+                assert vector.getObject(0).toString().equals("a");
+                assert vector.getObject(1).toString().equals("b");
+                assert vector.getObject(2).toString().equals("c");
+            }
 
             var intField = deserialized.getField("user.int_feature");
             assert intField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Int);
-            assert deserialized.getVectorCopy("user.int_feature").getObject(0).equals(1L);
-            assert deserialized.getVectorCopy("user.int_feature").getObject(1).equals(2L);
-            assert deserialized.getVectorCopy("user.int_feature").getObject(2).equals(3L);
+            try (var vector = deserialized.getVectorCopy("user.int_feature")) {
+                assert vector.getObject(0).equals(1L);
+                assert vector.getObject(1).equals(2L);
+                assert vector.getObject(2).equals(3L);
+            }
 
             var boolField = deserialized.getField("user.bool_feature");
             assert boolField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Bool);
-            assert deserialized.getVectorCopy("user.bool_feature").getObject(0).equals(true);
-            assert deserialized.getVectorCopy("user.bool_feature").getObject(1).equals(false);
-            assert deserialized.getVectorCopy("user.bool_feature").getObject(2).equals(true);
-
+            try (var vector = deserialized.getVectorCopy("user.bool_feature")) {
+                assert vector.getObject(0).equals(true);
+                assert vector.getObject(1).equals(false);
+                assert vector.getObject(2).equals(true);
+            }
 
             var structVal1 = "{\"name\":\"a\",\"amount\":1.0,\"fluctuations\":[{\"description\":\"a\",\"amount\":1.0},{\"description\":\"b\",\"amount\":2.0}]}";
             var structVal2 = "{\"name\":\"b\",\"amount\":2.0,\"fluctuations\":[{\"description\":\"c\",\"amount\":3.0},{\"description\":\"d\",\"amount\":4.0}]}";
             var structVal3 = "{\"name\":\"c\",\"amount\":3.0,\"fluctuations\":[{\"description\":\"e\",\"amount\":5.0},{\"description\":\"f\",\"amount\":6.0}]}";
             var structFieldViaHashMap = deserialized.getField("user.struct_feature__via_hashmap__");
             assert structFieldViaHashMap.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(0).toString(), structVal1);
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(1).toString(), structVal2);
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_feature__via_hashmap__").getObject(2).toString(), structVal3);
+            try (var vector = deserialized.getVectorCopy("user.struct_feature__via_hashmap__")) {
+                assert jsonCompare(vector.getObject(0).toString(), structVal1);
+                assert jsonCompare(vector.getObject(1).toString(), structVal2);
+                assert jsonCompare(vector.getObject(2).toString(), structVal3);
+            }
 
             var structWithIntListField = deserialized.getField("user.struct_with_int_list");
             assert structWithIntListField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Struct);
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
-            assert jsonCompare(deserialized.getVectorCopy("user.struct_with_int_list").getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+            try (var vector = deserialized.getVectorCopy("user.struct_with_int_list")) {
+                assert jsonCompare(vector.getObject(0).toString(), "{\"name\":\"a\",\"luckyNumbers\":[1,2,3]}");
+                assert jsonCompare(vector.getObject(1).toString(), "{\"name\":\"b\",\"luckyNumbers\":[4,5,6]}");
+                assert jsonCompare(vector.getObject(2).toString(), "{\"name\":\"c\",\"luckyNumbers\":[7,8,9]}");
+            }
 
             var localDateTimeField = deserialized.getField("user.local_datetime");
             assert localDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(0).equals(dateTime1.truncatedTo(ChronoUnit.MICROS));
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(1).equals(dateTime2.truncatedTo(ChronoUnit.MICROS));
-            assert deserialized.getVectorCopy("user.local_datetime").getObject(2).equals(dateTime3.truncatedTo(ChronoUnit.MICROS));
+            try (var vector = deserialized.getVectorCopy("user.local_datetime")) {
+                assert vector.getObject(0).equals(dateTime1.truncatedTo(ChronoUnit.MICROS));
+                assert vector.getObject(1).equals(dateTime2.truncatedTo(ChronoUnit.MICROS));
+                assert vector.getObject(2).equals(dateTime3.truncatedTo(ChronoUnit.MICROS));
+            }
 
             var zonedDateTimeField = deserialized.getField("user.zoned_datetime");
             assert zonedDateTimeField.getType().getTypeID().equals(ArrowType.ArrowTypeID.Timestamp);
@@ -173,10 +184,11 @@ public class TestOnlineQueryParams {
             var epochMicros1 = utcTime1.toInstant().getEpochSecond() * 1000000 + utcTime1.toInstant().getNano() / 1000;
             var epochMicros2 = utcTime2.toInstant().getEpochSecond() * 1000000 + utcTime2.toInstant().getNano() / 1000;
             var epochMicros3 = utcTime3.toInstant().getEpochSecond() * 1000000 + utcTime3.toInstant().getNano() / 1000;
-            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(0).equals(epochMicros1);
-            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(1).equals(epochMicros2);
-            assert deserialized.getVectorCopy("user.zoned_datetime").getObject(2).equals(epochMicros3);
-
+            try (var vector = deserialized.getVectorCopy("user.zoned_datetime")) {
+                assert vector.getObject(0).equals(epochMicros1);
+                assert vector.getObject(1).equals(epochMicros2);
+                assert vector.getObject(2).equals(epochMicros3);
+            }
 
             /* Supporting this makes error handling very terrible, but it was beautiful when it worked ;)
             var structFieldViaClasses = deserialized.getField("user.struct_feature__via_classes__");
@@ -423,16 +435,20 @@ public class TestOnlineQueryParams {
         assert paramsComplete.getQueryNameVersion().equals(queryNameVersion);
 
         // Test serialization
-        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete);
+        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
     }
 
     @Test
     public void testLargeUtf8AsInput() throws Exception {
         var largeString = "a".repeat(100000);
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(largeString, largeString)).withOutputs("user.today", "user.socure_score").build();
-        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
-        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
-        assert reconstructedInput.getVectorCopy("user.id").getObject(0).toString().equals(largeString);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+        try (
+            var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
+            var vector = reconstructedInput.getVectorCopy("user.id")
+        ) {
+            assert vector.getObject(0).toString().equals(largeString);
+        }
     }
 
     @Test
@@ -440,9 +456,14 @@ public class TestOnlineQueryParams {
         var largeBinaryString = "acb".repeat(100000);
         var largeBinary = largeBinaryString.getBytes();
         var params = OnlineQueryParams.builder().withInput("user.binary_data", Arrays.asList(largeBinary, largeBinary)).withOutputs("user.today", "user.socure_score").build();
-        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
-        var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes);
-        assert new String((byte[]) reconstructedInput.getVectorCopy("user.binary_data").getObject(0)).equals(largeBinaryString);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+
+        try (
+            var reconstructedInput = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
+            var vector = reconstructedInput.getVectorCopy("user.binary_data")
+        ) {
+            assert new String((byte[]) vector.getObject(0)).equals(largeBinaryString);
+        }
     }
 
 
@@ -453,7 +474,7 @@ public class TestOnlineQueryParams {
         inputs.put("user.id", userIds);
         var outputs = new String[]{"user.today", "user.socure_score"};
         var params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -461,7 +482,7 @@ public class TestOnlineQueryParams {
         var userIds = Arrays.asList("1", "2", "3");
         var params = OnlineQueryParams.builder().withInput("user.id", userIds).withOutputs("user.today", "user.socure_score").build();
         assert params.getInputs().get("user.id").equals(userIds);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -469,7 +490,7 @@ public class TestOnlineQueryParams {
         var outputs = Arrays.asList("user.today", "user.socure_score");
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
         assert params.getOutputs().equals(outputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     @Test
@@ -477,7 +498,7 @@ public class TestOnlineQueryParams {
         var outputs = new String[]{"user.today", "user.socure_score"};
         var params = OnlineQueryParams.builder().withInput("user.id", Arrays.asList(1, 2, 3)).withOutputs(outputs).build();
         assert Arrays.equals(params.getOutputs().toArray(), outputs);
-        BytesProducer.convertOnlineQueryParamsToBytes(params);
+        BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
     }
 
     /**
@@ -513,7 +534,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals(p.getInputs().get("test_user.id").toArray(), expectedInputs);
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -552,7 +573,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert p.getInputs().get("test_user.id").equals(expectedInputs);
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -596,7 +617,7 @@ public class TestOnlineQueryParams {
         for (OnlineQueryParamsComplete p : allParams) {
             assert Arrays.equals(p.getOutputs().toArray(), new String[]{"test_user.id", "test_user.burrys_membership.membership_id"});
             // Test serialization is OK.
-            BytesProducer.convertOnlineQueryParamsToBytes(p);
+            BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
         }
     }
 
@@ -618,7 +639,7 @@ public class TestOnlineQueryParams {
                 "test_user.burrys_membership",
         });
         // Test serialization is OK.
-        BytesProducer.convertOnlineQueryParamsToBytes(p);
+        BytesProducer.convertOnlineQueryParamsToBytes(p, allocator);
     }
 
 

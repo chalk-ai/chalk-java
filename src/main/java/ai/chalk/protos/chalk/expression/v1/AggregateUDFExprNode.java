@@ -34,6 +34,18 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.expression.v1.ExpressionProto.internal_static_chalk_expression_v1_AggregateUDFExprNode_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+      int number) {
+    switch (number) {
+      case 5:
+        return internalGetKwargs();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -190,6 +202,85 @@ private static final long serialVersionUID = 0L;
     return orderBy_.get(index);
   }
 
+  public static final int KWARGS_FIELD_NUMBER = 5;
+  private static final class KwargsDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>newDefaultInstance(
+                ai.chalk.protos.chalk.expression.v1.ExpressionProto.internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance());
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> kwargs_;
+  private com.google.protobuf.MapField<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+  internalGetKwargs() {
+    if (kwargs_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          KwargsDefaultEntryHolder.defaultEntry);
+    }
+    return kwargs_;
+  }
+  public int getKwargsCount() {
+    return internalGetKwargs().getMap().size();
+  }
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  @java.lang.Override
+  public boolean containsKwargs(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetKwargs().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getKwargsMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getKwargs() {
+    return getKwargsMap();
+  }
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getKwargsMap() {
+    return internalGetKwargs().getMap();
+  }
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrDefault(
+      java.lang.String key,
+      /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> map =
+        internalGetKwargs().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> map =
+        internalGetKwargs().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -216,6 +307,12 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < orderBy_.size(); i++) {
       output.writeMessage(4, orderBy_.get(i));
     }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetKwargs(),
+        KwargsDefaultEntryHolder.defaultEntry,
+        5);
     getUnknownFields().writeTo(output);
   }
 
@@ -239,6 +336,16 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < orderBy_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, orderBy_.get(i));
+    }
+    for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> entry
+         : internalGetKwargs().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+      kwargs__ = KwargsDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, kwargs__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -266,6 +373,8 @@ private static final long serialVersionUID = 0L;
     }
     if (!getOrderByList()
         .equals(other.getOrderByList())) return false;
+    if (!internalGetKwargs().equals(
+        other.internalGetKwargs())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -290,6 +399,10 @@ private static final long serialVersionUID = 0L;
     if (getOrderByCount() > 0) {
       hash = (37 * hash) + ORDER_BY_FIELD_NUMBER;
       hash = (53 * hash) + getOrderByList().hashCode();
+    }
+    if (!internalGetKwargs().getMap().isEmpty()) {
+      hash = (37 * hash) + KWARGS_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetKwargs().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -400,6 +513,28 @@ private static final long serialVersionUID = 0L;
       return ai.chalk.protos.chalk.expression.v1.ExpressionProto.internal_static_chalk_expression_v1_AggregateUDFExprNode_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 5:
+          return internalGetKwargs();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 5:
+          return internalGetMutableKwargs();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -450,6 +585,7 @@ private static final long serialVersionUID = 0L;
         orderByBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000008);
+      internalGetMutableKwargs().clear();
       return this;
     }
 
@@ -514,6 +650,9 @@ private static final long serialVersionUID = 0L;
             ? filter_
             : filterBuilder_.build();
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.kwargs_ = internalGetKwargs().build(KwargsDefaultEntryHolder.defaultEntry);
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -622,6 +761,9 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      internalGetMutableKwargs().mergeFrom(
+          other.internalGetKwargs());
+      bitField0_ |= 0x00000010;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -686,6 +828,15 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 34
+            case 42: {
+              com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+              kwargs__ = input.readMessage(
+                  KwargsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableKwargs().ensureBuilderMap().put(
+                  kwargs__.getKey(), kwargs__.getValue());
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1374,6 +1525,161 @@ private static final long serialVersionUID = 0L;
         orderBy_ = null;
       }
       return orderByBuilder_;
+    }
+
+    private static final class KwargsConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> {
+      @java.lang.Override
+      public ai.chalk.protos.chalk.expression.v1.LogicalExprNode build(ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder val) {
+        if (val instanceof ai.chalk.protos.chalk.expression.v1.LogicalExprNode) { return (ai.chalk.protos.chalk.expression.v1.LogicalExprNode) val; }
+        return ((ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder) val).build();
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.MapEntry<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> defaultEntry() {
+        return KwargsDefaultEntryHolder.defaultEntry;
+      }
+    };
+    private static final KwargsConverter kwargsConverter = new KwargsConverter();
+
+    private com.google.protobuf.MapFieldBuilder<
+        java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder, ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder> kwargs_;
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder, ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder>
+        internalGetKwargs() {
+      if (kwargs_ == null) {
+        return new com.google.protobuf.MapFieldBuilder<>(kwargsConverter);
+      }
+      return kwargs_;
+    }
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder, ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder>
+        internalGetMutableKwargs() {
+      if (kwargs_ == null) {
+        kwargs_ = new com.google.protobuf.MapFieldBuilder<>(kwargsConverter);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return kwargs_;
+    }
+    public int getKwargsCount() {
+      return internalGetKwargs().ensureBuilderMap().size();
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    @java.lang.Override
+    public boolean containsKwargs(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetKwargs().ensureBuilderMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getKwargsMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getKwargs() {
+      return getKwargsMap();
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getKwargsMap() {
+      return internalGetKwargs().getImmutableMap();
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrDefault(
+        java.lang.String key,
+        /* nullable */
+ai.chalk.protos.chalk.expression.v1.LogicalExprNode defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> map = internalGetMutableKwargs().ensureBuilderMap();
+      return map.containsKey(key) ? kwargsConverter.build(map.get(key)) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getKwargsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> map = internalGetMutableKwargs().ensureBuilderMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return kwargsConverter.build(map.get(key));
+    }
+    public Builder clearKwargs() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      internalGetMutableKwargs().clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    public Builder removeKwargs(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableKwargs().ensureBuilderMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode>
+        getMutableKwargs() {
+      bitField0_ |= 0x00000010;
+      return internalGetMutableKwargs().ensureMessageMap();
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    public Builder putKwargs(
+        java.lang.String key,
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableKwargs().ensureBuilderMap()
+          .put(key, value);
+      bitField0_ |= 0x00000010;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    public Builder putAllKwargs(
+        java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> values) {
+      for (java.util.Map.Entry<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNode> e : values.entrySet()) {
+        if (e.getKey() == null || e.getValue() == null) {
+          throw new NullPointerException();
+        }
+      }
+      internalGetMutableKwargs().ensureBuilderMap()
+          .putAll(values);
+      bitField0_ |= 0x00000010;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, .chalk.expression.v1.LogicalExprNode&gt; kwargs = 5 [json_name = "kwargs"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder putKwargsBuilderIfAbsent(
+        java.lang.String key) {
+      java.util.Map<java.lang.String, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> builderMap = internalGetMutableKwargs().ensureBuilderMap();
+      ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder entry = builderMap.get(key);
+      if (entry == null) {
+        entry = ai.chalk.protos.chalk.expression.v1.LogicalExprNode.newBuilder();
+        builderMap.put(key, entry);
+      }
+      if (entry instanceof ai.chalk.protos.chalk.expression.v1.LogicalExprNode) {
+        entry = ((ai.chalk.protos.chalk.expression.v1.LogicalExprNode) entry).toBuilder();
+        builderMap.put(key, entry);
+      }
+      return (ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder) entry;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

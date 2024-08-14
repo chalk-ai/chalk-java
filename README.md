@@ -12,7 +12,7 @@ The Java client is hosted on Maven Central.
 #### Gradle
 Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'ai.chalk:chalk-java:0.9.0'
+implementation 'ai.chalk:chalk-java:0.10.0'
 ```
     
 #### Maven
@@ -22,7 +22,7 @@ Add the following dependency block to your `pom.xml`.
     <dependency>
         <groupId>ai.chalk</groupId>
         <artifactId>chalk-java</artifactId>
-        <version>0.9.0</version>
+        <version>0.10.0</version>
     </dependency>
 </dependencies>
 ```
@@ -52,6 +52,31 @@ ChalkClient client = ChalkClient.builder()
                     .withClientSecret("mnxcvuyqwmj7cnwe4mgfnuywe6jnas9sdn")
                     .build();
 ```
+
+## Memory management
+Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be
+closed to free up memory. 
+
+### Client level
+If you're creating an instance of `ChalkClient` that persists throughout the lifetime of your application, you can
+choose not to call the `close()` method. 
+
+Otherwise, wrap the client in a try-with-resources block to ensure that the Arrow resources
+are closed properly.
+```java
+try (ChalkClient client = ChalkClient.create()) {
+    // Use the client
+}
+```
+
+### Request level
+When making a query, wrap it in a try-with-resources block, too.
+```java
+try (OnlineQueryResult result = client.onlineQuery(params)) {
+    // Use the result
+}
+```
+
 
 #### Debug client configuration
 

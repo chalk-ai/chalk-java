@@ -281,4 +281,56 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getClusterBytes();
+
+  /**
+   * <pre>
+   *  // node.UID
+   * </pre>
+   *
+   * <code>string uid = 24 [json_name = "uid"];</code>
+   * @return The uid.
+   */
+  java.lang.String getUid();
+  /**
+   * <pre>
+   *  // node.UID
+   * </pre>
+   *
+   * <code>string uid = 24 [json_name = "uid"];</code>
+   * @return The bytes for uid.
+   */
+  com.google.protobuf.ByteString
+      getUidBytes();
+
+  /**
+   * <pre>
+   *  // node.Name
+   * </pre>
+   *
+   * <code>string name = 25 [json_name = "name"];</code>
+   * @return The name.
+   */
+  java.lang.String getName();
+  /**
+   * <pre>
+   *  // node.Name
+   * </pre>
+   *
+   * <code>string name = 25 [json_name = "name"];</code>
+   * @return The bytes for name.
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
+
+  /**
+   * <code>string namespace = 26 [json_name = "namespace"];</code>
+   * @return The namespace.
+   */
+  java.lang.String getNamespace();
+  /**
+   * <code>string namespace = 26 [json_name = "namespace"];</code>
+   * @return The bytes for namespace.
+   */
+  com.google.protobuf.ByteString
+      getNamespaceBytes();
 }

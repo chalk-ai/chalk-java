@@ -4,31 +4,34 @@ import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
-import ai.chalk.models.QueryMeta;
 import ai.chalk.internal.bytes.BytesConsumer;
+import ai.chalk.models.QueryMeta;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.vector.table.Table;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 
 
-@Getter
-@AllArgsConstructor
-public class OnlineQueryResultFeather {
-    Boolean hasData;
-    Table scalarData;
-    Map<String, Table> groupsData;
-    ServerError[] errors;
-    QueryMeta meta;
+public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<String, Table> groupsData,
+                                       ServerError[] errors, QueryMeta meta, BufferAllocator allocator) implements AutoCloseable {
+    private static final Set<String> REQUIRED_KEYS = Set.of(
+            "has_data",
+            "scalar_data",
+            "groups_data",
+            "errors",
+            "meta"
+    );
 
-    public static OnlineQueryResultFeather fromBytes(byte[] bytes) throws ChalkException {
+    public static OnlineQueryResultFeather fromBytes(byte[] bytes, BufferAllocator allocator) throws ChalkException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
@@ -41,69 +44,18 @@ public class OnlineQueryResultFeather {
             throw new ClientException("failed to unmarshal bytes into OnlineQueryResultFeather", e);
         }
 
-        Object hasDataObj = res.get("has_data");
-        if (hasDataObj == null) {
-            throw new ClientException("missing key 'has_data' in unmarshalled bytes");
+        StringJoiner missingKeys = new StringJoiner(", ");
+        for (var key : REQUIRED_KEYS) {
+            if (!res.containsKey(key)) {
+                missingKeys.add(key);
+            }
         }
-        if (!(hasDataObj instanceof Boolean)) {
-            throw new ClientException("malformed value 'has_data' in unmarshalled bytes");
-        }
-
-        Table scalarData = null;
-        Map<String, Table> groupsData = new HashMap<>();
-        Boolean hasDataBool = (Boolean) hasDataObj;
-        if (hasDataBool) {
-            var scalarDataBytesObj = res.get("scalar_data");
-            if (scalarDataBytesObj == null) {
-                throw new ClientException("missing key 'scalar_data_bytes' in unmarshalled bytes");
-            }
-            if (!(scalarDataBytesObj instanceof byte[])) {
-                throw new ClientException("malformed value 'scalar_data' in unmarshalled bytes");
-            }
-            byte[] scalarDataBytes = (byte[]) scalarDataBytesObj;
-            try {
-                scalarData = FeatherProcessor.convertBytesToTable(scalarDataBytes);
-            } catch (Exception e) {
-                throw new ClientException("failed to convert scalar data bytes to VectorSchemaRoot", e);
-            }
-
-            var groupsDataBytesObj = res.get("groups_data");
-            if (groupsDataBytesObj == null) {
-                throw new ClientException("missing key 'groups_data' in unmarshalled bytes");
-            }
-            if (!(groupsDataBytesObj instanceof byte[])) {
-                throw new ClientException(String.format("malformed value 'groups_data' in unmarshalled bytes - expected `byte[]` found `%s`", groupsDataBytesObj.getClass().getName()));
-            }
-            byte[] groupsDataBytes = (byte[]) groupsDataBytesObj;
-
-            Map<String, Object> groupsDataMap;
-            try {
-                groupsDataMap = BytesConsumer.unmarshal(groupsDataBytes);
-            } catch (Exception e) {
-                throw new ClientException("failed to unmarshal groups data bytes", e);
-            }
-
-            for (Map.Entry<String, Object> entry : groupsDataMap.entrySet()) {
-                String key = entry.getKey();
-                if (!(entry.getValue() instanceof byte[])) {
-                    throw new ClientException(String.format("malformed value 'groups_data' in unmarshalled bytes - expected `byte[]` found `%s`", entry.getValue().getClass().getSimpleName()));
-                }
-                byte[] value = (byte[]) entry.getValue();
-                Table table = null;
-                try {
-                    table = FeatherProcessor.convertBytesToTable(value);
-                } catch (Exception e) {
-                    throw new ClientException(String.format("failed to convert data for has-many feature '%s' bytes to VectorSchemaRoot", key), e);
-                }
-                groupsData.put(key, table);
-            }
+        if (missingKeys.length() != 0) {
+            throw new ClientException("missing keys '[%s]' in unmarshalled bytes".formatted(missingKeys.toString()));
         }
 
         Object errorsObj = res.get("errors");
         ServerError[] errors;
-        if (!(res.containsKey("errors"))) {
-            throw new ClientException("missing key 'errors' in unmarshalled bytes");
-        }
         if (errorsObj == null) {
             errors = null;
         } else if (!(errorsObj instanceof ArrayList<?> errorsStrList)) {
@@ -124,9 +76,6 @@ public class OnlineQueryResultFeather {
         }
         Object metaStrObj = res.get("meta");
         QueryMeta meta;
-        if (!(res.containsKey("meta"))) {
-            throw new ClientException("missing key 'meta' in unmarshalled bytes");
-        }
         if (metaStrObj == null) {
             meta = null;
         } else if (!(metaStrObj instanceof String metaStr)) {
@@ -139,12 +88,77 @@ public class OnlineQueryResultFeather {
             }
         }
 
-        return new OnlineQueryResultFeather(
-                hasDataBool,
-                scalarData,
-                groupsData,
-                errors,
-                meta
-        );
+        Object hasDataObj = res.get("has_data");
+        if (!(hasDataObj instanceof Boolean hasDataBool)) {
+            throw new ClientException("malformed value 'has_data' in unmarshalled bytes");
+        }
+
+        Table scalarData = null;
+        Map<String, Table> groupsData = new HashMap<>();
+        try {
+            if (hasDataBool) {
+                var scalarDataBytesObj = res.get("scalar_data");
+                if (!(scalarDataBytesObj instanceof byte[] scalarDataBytes)) {
+                    throw new ClientException("malformed value 'scalar_data' in unmarshalled bytes");
+                }
+                try {
+                    scalarData = FeatherProcessor.convertBytesToTable(scalarDataBytes, allocator);
+                } catch (Exception e) {
+                    throw new ClientException("failed to convert scalar data bytes to VectorSchemaRoot", e);
+                }
+
+                var groupsDataBytesObj = res.get("groups_data");
+                if (!(groupsDataBytesObj instanceof byte[] groupsDataBytes)) {
+                    throw new ClientException(String.format("malformed value 'groups_data' in unmarshalled bytes - expected `byte[]` found `%s`", groupsDataBytesObj.getClass().getName()));
+                }
+
+                Map<String, Object> groupsDataMap;
+                try {
+                    groupsDataMap = BytesConsumer.unmarshal(groupsDataBytes);
+                } catch (Exception e) {
+                    throw new ClientException("failed to unmarshal groups data bytes", e);
+                }
+
+                for (Map.Entry<String, Object> entry : groupsDataMap.entrySet()) {
+                    String key = entry.getKey();
+                    if (!(entry.getValue() instanceof byte[] value)) {
+                        throw new ClientException(String.format("malformed value 'groups_data' in unmarshalled bytes - expected `byte[]` found `%s`", entry.getValue().getClass().getSimpleName()));
+                    }
+                    try {
+                        Table table = FeatherProcessor.convertBytesToTable(value, allocator);
+                        groupsData.put(key, table);
+                    } catch (Exception e) {
+                        throw new ClientException(String.format("failed to convert data for has-many feature '%s' bytes to VectorSchemaRoot", key), e);
+                    }
+                }
+            }
+
+            return new OnlineQueryResultFeather(
+                    hasDataBool,
+                    scalarData,
+                    groupsData,
+                    errors,
+                    meta,
+                    allocator
+            );
+        } catch (Exception e) {
+            if (scalarData != null) scalarData.close();
+            for (Table table : groupsData.values()) {
+                table.close();
+            }
+            allocator.close();
+            throw e;
+        }
+    }
+
+    @Override
+    public void close() {
+        if (scalarData != null) {
+            scalarData.close();
+        }
+        for (Table table : groupsData.values()) {
+            table.close();
+        }
+        allocator.close();
     }
 }

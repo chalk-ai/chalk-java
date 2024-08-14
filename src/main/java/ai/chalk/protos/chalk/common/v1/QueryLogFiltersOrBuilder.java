@@ -10,9 +10,9 @@ public interface QueryLogFiltersOrBuilder extends
 
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -22,9 +22,9 @@ public interface QueryLogFiltersOrBuilder extends
       getOperationIdList();
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -33,9 +33,9 @@ public interface QueryLogFiltersOrBuilder extends
   int getOperationIdCount();
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -45,9 +45,9 @@ public interface QueryLogFiltersOrBuilder extends
   java.lang.String getOperationId(int index);
   /**
    * <pre>
-   * All of these fields are optional. If any are specified, they willl be AND'd together in a where clause
+   * All of these fields are optional. If any are specified, they will be AND'd together in a where clause
    * Any len-zero options will be ignored. If multiple options are specified for a given key, they will be OR'd together
-   * i.e. works similarily to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
+   * i.e. works similarly to how you filter products on Amazon -- (size 8 or size 9) AND (color == blue OR color == "red")
    * </pre>
    *
    * <code>repeated string operation_id = 1 [json_name = "operationId"];</code>
@@ -288,4 +288,29 @@ public interface QueryLogFiltersOrBuilder extends
    * @return The enum numeric value on the wire of queryStatus at the given index.
    */
   int getQueryStatusValue(int index);
+
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @return A list containing the metaQueryHash.
+   */
+  java.util.List<java.lang.String>
+      getMetaQueryHashList();
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @return The count of metaQueryHash.
+   */
+  int getMetaQueryHashCount();
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @param index The index of the element to return.
+   * @return The metaQueryHash at the given index.
+   */
+  java.lang.String getMetaQueryHash(int index);
+  /**
+   * <code>repeated string meta_query_hash = 12 [json_name = "metaQueryHash"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the metaQueryHash at the given index.
+   */
+  com.google.protobuf.ByteString
+      getMetaQueryHashBytes(int index);
 }

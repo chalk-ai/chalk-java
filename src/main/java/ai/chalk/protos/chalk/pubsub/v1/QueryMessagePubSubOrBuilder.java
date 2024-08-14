@@ -557,4 +557,33 @@ java.lang.String defaultValue);
    * @return The hasPlanStages.
    */
   boolean getHasPlanStages();
+
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return Whether the metaQueryHash field is set.
+   */
+  boolean hasMetaQueryHash();
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return The metaQueryHash.
+   */
+  java.lang.String getMetaQueryHash();
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return The bytes for metaQueryHash.
+   */
+  com.google.protobuf.ByteString
+      getMetaQueryHashBytes();
 }

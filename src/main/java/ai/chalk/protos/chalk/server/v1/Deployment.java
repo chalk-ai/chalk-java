@@ -20,6 +20,8 @@ private static final long serialVersionUID = 0L;
     id_ = "";
     environmentId_ = "";
     status_ = 0;
+    deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -138,6 +140,43 @@ private static final long serialVersionUID = 0L;
     return result == null ? ai.chalk.protos.chalk.server.v1.DeploymentStatus.UNRECOGNIZED : result;
   }
 
+  public static final int DEPLOYMENT_TAGS_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList deploymentTags_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return A list containing the deploymentTags.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getDeploymentTagsList() {
+    return deploymentTags_;
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return The count of deploymentTags.
+   */
+  public int getDeploymentTagsCount() {
+    return deploymentTags_.size();
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the element to return.
+   * @return The deploymentTags at the given index.
+   */
+  public java.lang.String getDeploymentTags(int index) {
+    return deploymentTags_.get(index);
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the deploymentTags at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getDeploymentTagsBytes(int index) {
+    return deploymentTags_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -161,6 +200,9 @@ private static final long serialVersionUID = 0L;
     if (status_ != ai.chalk.protos.chalk.server.v1.DeploymentStatus.DEPLOYMENT_STATUS_UNSPECIFIED.getNumber()) {
       output.writeEnum(3, status_);
     }
+    for (int i = 0; i < deploymentTags_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, deploymentTags_.getRaw(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -179,6 +221,14 @@ private static final long serialVersionUID = 0L;
     if (status_ != ai.chalk.protos.chalk.server.v1.DeploymentStatus.DEPLOYMENT_STATUS_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(3, status_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < deploymentTags_.size(); i++) {
+        dataSize += computeStringSizeNoTag(deploymentTags_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getDeploymentTagsList().size();
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -200,6 +250,8 @@ private static final long serialVersionUID = 0L;
     if (!getEnvironmentId()
         .equals(other.getEnvironmentId())) return false;
     if (status_ != other.status_) return false;
+    if (!getDeploymentTagsList()
+        .equals(other.getDeploymentTagsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -217,6 +269,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getEnvironmentId().hashCode();
     hash = (37 * hash) + STATUS_FIELD_NUMBER;
     hash = (53 * hash) + status_;
+    if (getDeploymentTagsCount() > 0) {
+      hash = (37 * hash) + DEPLOYMENT_TAGS_FIELD_NUMBER;
+      hash = (53 * hash) + getDeploymentTagsList().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -351,6 +407,8 @@ private static final long serialVersionUID = 0L;
       id_ = "";
       environmentId_ = "";
       status_ = 0;
+      deploymentTags_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -392,6 +450,10 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.status_ = status_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        deploymentTags_.makeImmutable();
+        result.deploymentTags_ = deploymentTags_;
       }
     }
 
@@ -452,6 +514,16 @@ private static final long serialVersionUID = 0L;
       if (other.status_ != 0) {
         setStatusValue(other.getStatusValue());
       }
+      if (!other.deploymentTags_.isEmpty()) {
+        if (deploymentTags_.isEmpty()) {
+          deploymentTags_ = other.deploymentTags_;
+          bitField0_ |= 0x00000008;
+        } else {
+          ensureDeploymentTagsIsMutable();
+          deploymentTags_.addAll(other.deploymentTags_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -493,6 +565,12 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 24
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureDeploymentTagsIsMutable();
+              deploymentTags_.add(s);
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -703,6 +781,117 @@ private static final long serialVersionUID = 0L;
     public Builder clearStatus() {
       bitField0_ = (bitField0_ & ~0x00000004);
       status_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureDeploymentTagsIsMutable() {
+      if (!deploymentTags_.isModifiable()) {
+        deploymentTags_ = new com.google.protobuf.LazyStringArrayList(deploymentTags_);
+      }
+      bitField0_ |= 0x00000008;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return A list containing the deploymentTags.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getDeploymentTagsList() {
+      deploymentTags_.makeImmutable();
+      return deploymentTags_;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return The count of deploymentTags.
+     */
+    public int getDeploymentTagsCount() {
+      return deploymentTags_.size();
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index of the element to return.
+     * @return The deploymentTags at the given index.
+     */
+    public java.lang.String getDeploymentTags(int index) {
+      return deploymentTags_.get(index);
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the deploymentTags at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getDeploymentTagsBytes(int index) {
+      return deploymentTags_.getByteString(index);
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index to set the value at.
+     * @param value The deploymentTags to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentTags(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.set(index, value);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param value The deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addDeploymentTags(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.add(value);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param values The deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllDeploymentTags(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureDeploymentTagsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, deploymentTags_);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDeploymentTags() {
+      deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000008);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param value The bytes of the deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addDeploymentTagsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.add(value);
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }

@@ -42,6 +42,7 @@ private static final long serialVersionUID = 0L;
     agentId_ = "";
     branchName_ = "";
     deploymentId_ = "";
+    metaQueryHash_ = "";
   }
 
   @java.lang.Override
@@ -1013,6 +1014,65 @@ java.lang.String defaultValue) {
     return hasPlanStages_;
   }
 
+  public static final int META_QUERY_HASH_FIELD_NUMBER = 19;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object metaQueryHash_ = "";
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return Whether the metaQueryHash field is set.
+   */
+  @java.lang.Override
+  public boolean hasMetaQueryHash() {
+    return ((bitField0_ & 0x00000200) != 0);
+  }
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return The metaQueryHash.
+   */
+  @java.lang.Override
+  public java.lang.String getMetaQueryHash() {
+    java.lang.Object ref = metaQueryHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      metaQueryHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * the meta query hash
+   * </pre>
+   *
+   * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+   * @return The bytes for metaQueryHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMetaQueryHashBytes() {
+    java.lang.Object ref = metaQueryHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      metaQueryHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1083,6 +1143,9 @@ java.lang.String defaultValue) {
     }
     if (((bitField0_ & 0x00000100) != 0)) {
       output.writeBool(18, hasPlanStages_);
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 19, metaQueryHash_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1182,6 +1245,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(18, hasPlanStages_);
     }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, metaQueryHash_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1259,6 +1325,11 @@ java.lang.String defaultValue) {
     if (hasHasPlanStages()) {
       if (getHasPlanStages()
           != other.getHasPlanStages()) return false;
+    }
+    if (hasMetaQueryHash() != other.hasMetaQueryHash()) return false;
+    if (hasMetaQueryHash()) {
+      if (!getMetaQueryHash()
+          .equals(other.getMetaQueryHash())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -1339,6 +1410,10 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + HAS_PLAN_STAGES_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getHasPlanStages());
+    }
+    if (hasMetaQueryHash()) {
+      hash = (37 * hash) + META_QUERY_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getMetaQueryHash().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1522,6 +1597,7 @@ java.lang.String defaultValue) {
       branchName_ = "";
       deploymentId_ = "";
       hasPlanStages_ = false;
+      metaQueryHash_ = "";
       return this;
     }
 
@@ -1624,6 +1700,10 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00020000) != 0)) {
         result.hasPlanStages_ = hasPlanStages_;
         to_bitField0_ |= 0x00000100;
+      }
+      if (((from_bitField0_ & 0x00040000) != 0)) {
+        result.metaQueryHash_ = metaQueryHash_;
+        to_bitField0_ |= 0x00000200;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1779,6 +1859,11 @@ java.lang.String defaultValue) {
       if (other.hasHasPlanStages()) {
         setHasPlanStages(other.getHasPlanStages());
       }
+      if (other.hasMetaQueryHash()) {
+        metaQueryHash_ = other.metaQueryHash_;
+        bitField0_ |= 0x00040000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1904,6 +1989,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00020000;
               break;
             } // case 144
+            case 154: {
+              metaQueryHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00040000;
+              break;
+            } // case 154
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3868,6 +3958,109 @@ java.lang.String defaultValue) {
     public Builder clearHasPlanStages() {
       bitField0_ = (bitField0_ & ~0x00020000);
       hasPlanStages_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object metaQueryHash_ = "";
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @return Whether the metaQueryHash field is set.
+     */
+    public boolean hasMetaQueryHash() {
+      return ((bitField0_ & 0x00040000) != 0);
+    }
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @return The metaQueryHash.
+     */
+    public java.lang.String getMetaQueryHash() {
+      java.lang.Object ref = metaQueryHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        metaQueryHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @return The bytes for metaQueryHash.
+     */
+    public com.google.protobuf.ByteString
+        getMetaQueryHashBytes() {
+      java.lang.Object ref = metaQueryHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        metaQueryHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @param value The metaQueryHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetaQueryHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      metaQueryHash_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMetaQueryHash() {
+      metaQueryHash_ = getDefaultInstance().getMetaQueryHash();
+      bitField0_ = (bitField0_ & ~0x00040000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * the meta query hash
+     * </pre>
+     *
+     * <code>optional string meta_query_hash = 19 [json_name = "metaQueryHash"];</code>
+     * @param value The bytes for metaQueryHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetaQueryHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      metaQueryHash_ = value;
+      bitField0_ |= 0x00040000;
       onChanged();
       return this;
     }

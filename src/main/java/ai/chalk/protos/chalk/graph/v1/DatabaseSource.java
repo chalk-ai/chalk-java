@@ -55,6 +55,7 @@ private static final long serialVersionUID = 0L;
     SQLITE(8),
     SPANNER(9),
     TRINO(10),
+    DYNAMODB(11),
     SOURCE_NOT_SET(0);
     private final int value;
     private SourceCase(int value) {
@@ -82,6 +83,7 @@ private static final long serialVersionUID = 0L;
         case 8: return SQLITE;
         case 9: return SPANNER;
         case 10: return TRINO;
+        case 11: return DYNAMODB;
         case 0: return SOURCE_NOT_SET;
         default: return null;
       }
@@ -407,6 +409,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.graph.v1.TrinoSource.getDefaultInstance();
   }
 
+  public static final int DYNAMODB_FIELD_NUMBER = 11;
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   * @return Whether the dynamodb field is set.
+   */
+  @java.lang.Override
+  public boolean hasDynamodb() {
+    return sourceCase_ == 11;
+  }
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   * @return The dynamodb.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.DynamoDBSource getDynamodb() {
+    if (sourceCase_ == 11) {
+       return (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder getDynamodbOrBuilder() {
+    if (sourceCase_ == 11) {
+       return (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -450,6 +483,9 @@ private static final long serialVersionUID = 0L;
     }
     if (sourceCase_ == 10) {
       output.writeMessage(10, (ai.chalk.protos.chalk.graph.v1.TrinoSource) source_);
+    }
+    if (sourceCase_ == 11) {
+      output.writeMessage(11, (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -499,6 +535,10 @@ private static final long serialVersionUID = 0L;
     if (sourceCase_ == 10) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(10, (ai.chalk.protos.chalk.graph.v1.TrinoSource) source_);
+    }
+    if (sourceCase_ == 11) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(11, (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -557,6 +597,10 @@ private static final long serialVersionUID = 0L;
         if (!getTrino()
             .equals(other.getTrino())) return false;
         break;
+      case 11:
+        if (!getDynamodb()
+            .equals(other.getDynamodb())) return false;
+        break;
       case 0:
       default:
     }
@@ -611,6 +655,10 @@ private static final long serialVersionUID = 0L;
       case 10:
         hash = (37 * hash) + TRINO_FIELD_NUMBER;
         hash = (53 * hash) + getTrino().hashCode();
+        break;
+      case 11:
+        hash = (37 * hash) + DYNAMODB_FIELD_NUMBER;
+        hash = (53 * hash) + getDynamodb().hashCode();
         break;
       case 0:
       default:
@@ -776,6 +824,9 @@ private static final long serialVersionUID = 0L;
       if (trinoBuilder_ != null) {
         trinoBuilder_.clear();
       }
+      if (dynamodbBuilder_ != null) {
+        dynamodbBuilder_.clear();
+      }
       sourceCase_ = 0;
       source_ = null;
       return this;
@@ -856,6 +907,10 @@ private static final long serialVersionUID = 0L;
       if (sourceCase_ == 10 &&
           trinoBuilder_ != null) {
         result.source_ = trinoBuilder_.build();
+      }
+      if (sourceCase_ == 11 &&
+          dynamodbBuilder_ != null) {
+        result.source_ = dynamodbBuilder_.build();
       }
     }
 
@@ -942,6 +997,10 @@ private static final long serialVersionUID = 0L;
         }
         case TRINO: {
           mergeTrino(other.getTrino());
+          break;
+        }
+        case DYNAMODB: {
+          mergeDynamodb(other.getDynamodb());
           break;
         }
         case SOURCE_NOT_SET: {
@@ -1044,6 +1103,13 @@ private static final long serialVersionUID = 0L;
               sourceCase_ = 10;
               break;
             } // case 82
+            case 90: {
+              input.readMessage(
+                  getDynamodbFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              sourceCase_ = 11;
+              break;
+            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2494,6 +2560,148 @@ private static final long serialVersionUID = 0L;
       sourceCase_ = 10;
       onChanged();
       return trinoBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.DynamoDBSource, ai.chalk.protos.chalk.graph.v1.DynamoDBSource.Builder, ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder> dynamodbBuilder_;
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     * @return Whether the dynamodb field is set.
+     */
+    @java.lang.Override
+    public boolean hasDynamodb() {
+      return sourceCase_ == 11;
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     * @return The dynamodb.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.DynamoDBSource getDynamodb() {
+      if (dynamodbBuilder_ == null) {
+        if (sourceCase_ == 11) {
+          return (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+      } else {
+        if (sourceCase_ == 11) {
+          return dynamodbBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    public Builder setDynamodb(ai.chalk.protos.chalk.graph.v1.DynamoDBSource value) {
+      if (dynamodbBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        source_ = value;
+        onChanged();
+      } else {
+        dynamodbBuilder_.setMessage(value);
+      }
+      sourceCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    public Builder setDynamodb(
+        ai.chalk.protos.chalk.graph.v1.DynamoDBSource.Builder builderForValue) {
+      if (dynamodbBuilder_ == null) {
+        source_ = builderForValue.build();
+        onChanged();
+      } else {
+        dynamodbBuilder_.setMessage(builderForValue.build());
+      }
+      sourceCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    public Builder mergeDynamodb(ai.chalk.protos.chalk.graph.v1.DynamoDBSource value) {
+      if (dynamodbBuilder_ == null) {
+        if (sourceCase_ == 11 &&
+            source_ != ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance()) {
+          source_ = ai.chalk.protos.chalk.graph.v1.DynamoDBSource.newBuilder((ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          source_ = value;
+        }
+        onChanged();
+      } else {
+        if (sourceCase_ == 11) {
+          dynamodbBuilder_.mergeFrom(value);
+        } else {
+          dynamodbBuilder_.setMessage(value);
+        }
+      }
+      sourceCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    public Builder clearDynamodb() {
+      if (dynamodbBuilder_ == null) {
+        if (sourceCase_ == 11) {
+          sourceCase_ = 0;
+          source_ = null;
+          onChanged();
+        }
+      } else {
+        if (sourceCase_ == 11) {
+          sourceCase_ = 0;
+          source_ = null;
+        }
+        dynamodbBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.DynamoDBSource.Builder getDynamodbBuilder() {
+      return getDynamodbFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder getDynamodbOrBuilder() {
+      if ((sourceCase_ == 11) && (dynamodbBuilder_ != null)) {
+        return dynamodbBuilder_.getMessageOrBuilder();
+      } else {
+        if (sourceCase_ == 11) {
+          return (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.DynamoDBSource dynamodb = 11 [json_name = "dynamodb"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.DynamoDBSource, ai.chalk.protos.chalk.graph.v1.DynamoDBSource.Builder, ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder> 
+        getDynamodbFieldBuilder() {
+      if (dynamodbBuilder_ == null) {
+        if (!(sourceCase_ == 11)) {
+          source_ = ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
+        }
+        dynamodbBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.DynamoDBSource, ai.chalk.protos.chalk.graph.v1.DynamoDBSource.Builder, ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_,
+                getParentForChildren(),
+                isClean());
+        source_ = null;
+      }
+      sourceCase_ = 11;
+      onChanged();
+      return dynamodbBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

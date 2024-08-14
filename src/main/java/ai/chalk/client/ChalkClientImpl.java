@@ -3,6 +3,7 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
@@ -12,7 +13,9 @@ import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
+import org.apache.arrow.memory.RootAllocator;
 
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,11 +27,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final RequestHandler handler;
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
-
-    public ChalkClient ChalkClient() throws ChalkException {
-        return ChalkClient.builder().build();
-    }
-
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         ResolvedConfig resolvedConfig = this.resolveConfig(config);
@@ -57,15 +56,20 @@ public class ChalkClientImpl implements ChalkClient {
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
-        try {
-            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params);
+        try (
+            var childAllocator = allocator.newChildAllocator(
+                "online_query_params",
+                0,
+                FeatherProcessor.ALLOCATOR_SIZE_REQUEST
+            )
+        ) {
+            bodyBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, childAllocator);
         } catch (Exception e) {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams<OnlineQueryBulkResponse> request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+        SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
                 .path("/v1/query/feather")
-                .responseClass(OnlineQueryBulkResponse.class)
                 .body(bodyBytes)
                 .method("POST")
                 .branch(params.getBranch())
@@ -75,7 +79,15 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        return this.handler.sendRequest(request).toResult();
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        var allocator = this.allocator.newChildAllocator(
+            "online_query_response",
+            0,
+            FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
+        );
+        // ignore the warning here, because we don't want to free the memory yet
+        var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
+        return bulkResponse.toResult();
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
@@ -128,12 +140,17 @@ public class ChalkClientImpl implements ChalkClient {
                         For each variable, we take the first non-empty value, in order, from the following sources:
                           1. The value passed to ChalkClient's Builder
                           2. The value of the config's corresponding environment variable (see the class `ai.chalk.client.ConfigEnvVars`)
-                          3. The value in the project root's 'chalk.yaml' or 'chalk.yml' file
+                          3. The value in your '~/.chalk.yml' file
                           4. A default value (if applicable)
                         """;
     }
 
     public void printConfig() {
         logger.log(System.Logger.Level.INFO, this.getConfigStr());
+    }
+
+    @Override
+    public void close() {
+        this.allocator.close();
     }
 }

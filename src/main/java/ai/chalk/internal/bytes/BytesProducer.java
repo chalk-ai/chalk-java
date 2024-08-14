@@ -3,6 +3,7 @@ package ai.chalk.internal.bytes;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.arrow.memory.BufferAllocator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -15,7 +16,7 @@ import java.util.Map;
 import static ai.chalk.internal.Utils.toChalkDuration;
 
 public class BytesProducer {
-    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params) throws Exception {
+    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params, BufferAllocator allocator) throws Exception {
         byte[] arrowBytes;
         if (params.getInputs() == null) {
             throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");
@@ -24,7 +25,7 @@ public class BytesProducer {
             throw new Exception("`outputs` cannot be null - please use OnlineQueryParams.builder().outputs(...).build()");
         }
         try {
-            arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs());
+            arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
         } catch (Exception e) {
             throw new Exception("failed to convert inputs to Arrow bytes", e);
         }

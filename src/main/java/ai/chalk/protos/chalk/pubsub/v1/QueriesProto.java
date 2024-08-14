@@ -36,7 +36,7 @@ public final class QueriesProto {
     java.lang.String[] descriptorData = {
       "\n\035chalk/pubsub/v1/queries.proto\022\017chalk.p" +
       "ubsub.v1\032\034gen_bq_schema/bq_field.proto\032\034" +
-      "gen_bq_schema/bq_table.proto\"\203\010\n\022QueryMe" +
+      "gen_bq_schema/bq_table.proto\"\304\010\n\022QueryMe" +
       "ssagePubSub\022!\n\014operation_id\030\001 \001(\tR\013opera" +
       "tionId\022%\n\016environment_id\030\002 \001(\tR\renvironm" +
       "entId\022Q\n\nquery_meta\030\003 \003(\01322.chalk.pubsub" +
@@ -56,17 +56,19 @@ public final class QueriesProto {
       "\030\017 \001(\tH\005R\007agentId\210\001\001\022$\n\013branch_name\030\020 \001(" +
       "\tH\006R\nbranchName\210\001\001\022(\n\rdeployment_id\030\021 \001(" +
       "\tH\007R\014deploymentId\210\001\001\022+\n\017has_plan_stages\030" +
-      "\022 \001(\010H\010R\rhasPlanStages\210\001\001\032<\n\016QueryMetaEn" +
-      "try\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005va" +
-      "lue:\0028\001:\014\352?\t\n\007queriesB\r\n\013_query_nameB\025\n\023" +
-      "_query_name_versionB\021\n\017_correlation_idB\020" +
-      "\n\016_query_plan_idB\r\n\013_has_errorsB\013\n\t_agen" +
-      "t_idB\016\n\014_branch_nameB\020\n\016_deployment_idB\022" +
-      "\n\020_has_plan_stagesB\241\001\n\037ai.chalk.protos.c" +
-      "halk.pubsub.v1B\014QueriesProtoP\001Z\022pubsub/v" +
-      "1;pubsubv1\242\002\003CPX\252\002\017Chalk.Pubsub.V1\312\002\017Cha" +
-      "lk\\Pubsub\\V1\342\002\033Chalk\\Pubsub\\V1\\GPBMetada" +
-      "ta\352\002\021Chalk::Pubsub::V1b\006proto3"
+      "\022 \001(\010H\010R\rhasPlanStages\210\001\001\022+\n\017meta_query_" +
+      "hash\030\023 \001(\tH\tR\rmetaQueryHash\210\001\001\032<\n\016QueryM" +
+      "etaEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(" +
+      "\tR\005value:\0028\001:\014\352?\t\n\007queriesB\r\n\013_query_nam" +
+      "eB\025\n\023_query_name_versionB\021\n\017_correlation" +
+      "_idB\020\n\016_query_plan_idB\r\n\013_has_errorsB\013\n\t" +
+      "_agent_idB\016\n\014_branch_nameB\020\n\016_deployment" +
+      "_idB\022\n\020_has_plan_stagesB\022\n\020_meta_query_h" +
+      "ashB\241\001\n\037ai.chalk.protos.chalk.pubsub.v1B" +
+      "\014QueriesProtoP\001Z\022pubsub/v1;pubsubv1\242\002\003CP" +
+      "X\252\002\017Chalk.Pubsub.V1\312\002\017Chalk\\Pubsub\\V1\342\002\033" +
+      "Chalk\\Pubsub\\V1\\GPBMetadata\352\002\021Chalk::Pub" +
+      "sub::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -79,7 +81,7 @@ public final class QueriesProto {
     internal_static_chalk_pubsub_v1_QueryMessagePubSub_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_QueryMessagePubSub_descriptor,
-        new java.lang.String[] { "OperationId", "EnvironmentId", "QueryMeta", "QueryName", "QueryNameVersion", "CorrelationId", "InputFeatures", "OutputFeatures", "OutputRootFqns", "IntermediateFeatures", "Resolvers", "QueryPlanId", "CreatedAt", "HasErrors", "AgentId", "BranchName", "DeploymentId", "HasPlanStages", });
+        new java.lang.String[] { "OperationId", "EnvironmentId", "QueryMeta", "QueryName", "QueryNameVersion", "CorrelationId", "InputFeatures", "OutputFeatures", "OutputRootFqns", "IntermediateFeatures", "Resolvers", "QueryPlanId", "CreatedAt", "HasErrors", "AgentId", "BranchName", "DeploymentId", "HasPlanStages", "MetaQueryHash", });
     internal_static_chalk_pubsub_v1_QueryMessagePubSub_QueryMetaEntry_descriptor =
       internal_static_chalk_pubsub_v1_QueryMessagePubSub_descriptor.getNestedTypes().get(0);
     internal_static_chalk_pubsub_v1_QueryMessagePubSub_QueryMetaEntry_fieldAccessorTable = new

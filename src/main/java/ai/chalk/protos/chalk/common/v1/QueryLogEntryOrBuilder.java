@@ -219,4 +219,16 @@ public interface QueryLogEntryOrBuilder extends
    */
   com.google.protobuf.ByteString
       getValueTablesBytes(int index);
+
+  /**
+   * <code>string meta_query_hash = 17 [json_name = "metaQueryHash"];</code>
+   * @return The metaQueryHash.
+   */
+  java.lang.String getMetaQueryHash();
+  /**
+   * <code>string meta_query_hash = 17 [json_name = "metaQueryHash"];</code>
+   * @return The bytes for metaQueryHash.
+   */
+  com.google.protobuf.ByteString
+      getMetaQueryHashBytes();
 }
