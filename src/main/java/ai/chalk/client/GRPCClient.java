@@ -105,7 +105,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                         ServerType.SERVER,
                         Map.of(),
                         tokenRefresher,
-                        environmentId
+                        environmentId,
+                        null
                 )
             )
             .build();
@@ -126,7 +127,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                         ServerType.ENGINE,
                         Map.of(),
                         tokenRefresher,
-                        environmentId
+                        environmentId,
+                        builder.getDeploymentTag()
                 )
             )
             .build();
