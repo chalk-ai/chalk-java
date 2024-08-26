@@ -35,34 +35,41 @@ public final class DeploymentProto {
   static {
     java.lang.String[] descriptorData = {
       "\n chalk/server/v1/deployment.proto\022\017chal" +
-      "k.server.v1\"\210\001\n\016InstanceSizing\022(\n\rmin_in" +
-      "stances\030\001 \001(\rH\000R\014minInstances\210\001\001\022(\n\rmax_" +
-      "instances\030\002 \001(\rH\001R\014maxInstances\210\001\001B\020\n\016_m" +
-      "in_instancesB\020\n\016_max_instances\"\247\001\n\nDeplo" +
-      "yment\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016environment_id\030" +
-      "\002 \001(\tR\renvironmentId\0229\n\006status\030\003 \001(\0162!.c" +
-      "halk.server.v1.DeploymentStatusR\006status\022" +
-      "\'\n\017deployment_tags\030\004 \003(\tR\016deploymentTags" +
-      "*\275\003\n\020DeploymentStatus\022!\n\035DEPLOYMENT_STAT" +
-      "US_UNSPECIFIED\020\000\022\035\n\031DEPLOYMENT_STATUS_UN" +
-      "KNOWN\020\001\022\035\n\031DEPLOYMENT_STATUS_PENDING\020\002\022\034" +
-      "\n\030DEPLOYMENT_STATUS_QUEUED\020\003\022\035\n\031DEPLOYME" +
-      "NT_STATUS_WORKING\020\004\022\035\n\031DEPLOYMENT_STATUS" +
-      "_SUCCESS\020\005\022\035\n\031DEPLOYMENT_STATUS_FAILURE\020" +
-      "\006\022$\n DEPLOYMENT_STATUS_INTERNAL_ERROR\020\007\022" +
-      "\035\n\031DEPLOYMENT_STATUS_TIMEOUT\020\010\022\037\n\033DEPLOY" +
-      "MENT_STATUS_CANCELLED\020\t\022\035\n\031DEPLOYMENT_ST" +
-      "ATUS_EXPIRED\020\n\022!\n\035DEPLOYMENT_STATUS_BOOT" +
-      "_ERRORS\020\013\022%\n!DEPLOYMENT_STATUS_AWAITING_" +
-      "SOURCE\020\014B\244\001\n\037ai.chalk.protos.chalk.serve" +
-      "r.v1B\017DeploymentProtoP\001Z\022server/v1;serve" +
-      "rv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Serv" +
-      "er\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Ch" +
-      "alk::Server::V1b\006proto3"
+      "k.server.v1\032\037google/protobuf/timestamp.p" +
+      "roto\"\210\001\n\016InstanceSizing\022(\n\rmin_instances" +
+      "\030\001 \001(\rH\000R\014minInstances\210\001\001\022(\n\rmax_instanc" +
+      "es\030\002 \001(\rH\001R\014maxInstances\210\001\001B\020\n\016_min_inst" +
+      "ancesB\020\n\016_max_instances\"\342\002\n\nDeployment\022\016" +
+      "\n\002id\030\001 \001(\tR\002id\022%\n\016environment_id\030\002 \001(\tR\r" +
+      "environmentId\0229\n\006status\030\003 \001(\0162!.chalk.se" +
+      "rver.v1.DeploymentStatusR\006status\022\'\n\017depl" +
+      "oyment_tags\030\004 \003(\tR\016deploymentTags\0229\n\ncre" +
+      "ated_at\030\016 \001(\0132\032.google.protobuf.Timestam" +
+      "pR\tcreatedAt\0229\n\nupdated_at\030\017 \001(\0132\032.googl" +
+      "e.protobuf.TimestampR\tupdatedAt\022\035\n\ngit_c" +
+      "ommit\030\020 \001(\tR\tgitCommit\022$\n\016base_image_sha" +
+      "\030\030 \001(\tR\014baseImageSha*\275\003\n\020DeploymentStatu" +
+      "s\022!\n\035DEPLOYMENT_STATUS_UNSPECIFIED\020\000\022\035\n\031" +
+      "DEPLOYMENT_STATUS_UNKNOWN\020\001\022\035\n\031DEPLOYMEN" +
+      "T_STATUS_PENDING\020\002\022\034\n\030DEPLOYMENT_STATUS_" +
+      "QUEUED\020\003\022\035\n\031DEPLOYMENT_STATUS_WORKING\020\004\022" +
+      "\035\n\031DEPLOYMENT_STATUS_SUCCESS\020\005\022\035\n\031DEPLOY" +
+      "MENT_STATUS_FAILURE\020\006\022$\n DEPLOYMENT_STAT" +
+      "US_INTERNAL_ERROR\020\007\022\035\n\031DEPLOYMENT_STATUS" +
+      "_TIMEOUT\020\010\022\037\n\033DEPLOYMENT_STATUS_CANCELLE" +
+      "D\020\t\022\035\n\031DEPLOYMENT_STATUS_EXPIRED\020\n\022!\n\035DE" +
+      "PLOYMENT_STATUS_BOOT_ERRORS\020\013\022%\n!DEPLOYM" +
+      "ENT_STATUS_AWAITING_SOURCE\020\014B\244\001\n\037ai.chal" +
+      "k.protos.chalk.server.v1B\017DeploymentProt" +
+      "oP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Se" +
+      "rver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server" +
+      "\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_InstanceSizing_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -75,7 +82,8 @@ public final class DeploymentProto {
     internal_static_chalk_server_v1_Deployment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_Deployment_descriptor,
-        new java.lang.String[] { "Id", "EnvironmentId", "Status", "DeploymentTags", });
+        new java.lang.String[] { "Id", "EnvironmentId", "Status", "DeploymentTags", "CreatedAt", "UpdatedAt", "GitCommit", "BaseImageSha", });
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

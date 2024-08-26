@@ -260,6 +260,84 @@ private static final long serialVersionUID = 0L;
     return secretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretManagerConfig_;
   }
 
+  public static final int WORKLOAD_IDENTITY_FIELD_NUMBER = 7;
+  private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity workloadIdentity_;
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * @return Whether the workloadIdentity field is set.
+   */
+  @java.lang.Override
+  public boolean hasWorkloadIdentity() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * @return The workloadIdentity.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
+    return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
+  }
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
+    return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
+  }
+
+  public static final int DOCKER_BUILD_CONFIG_FIELD_NUMBER = 8;
+  private ai.chalk.protos.chalk.server.v1.DockerBuildConfig dockerBuildConfig_;
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   * @return Whether the dockerBuildConfig field is set.
+   */
+  @java.lang.Override
+  public boolean hasDockerBuildConfig() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   * @return The dockerBuildConfig.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig() {
+    return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+  }
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder() {
+    return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+  }
+
+  public static final int ELASTICSEARCH_LOG_CONFIG_FIELD_NUMBER = 9;
+  private ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig elasticsearchLogConfig_;
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   * @return Whether the elasticsearchLogConfig field is set.
+   */
+  @java.lang.Override
+  public boolean hasElasticsearchLogConfig() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   * @return The elasticsearchLogConfig.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig getElasticsearchLogConfig() {
+    return elasticsearchLogConfig_ == null ? ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance() : elasticsearchLogConfig_;
+  }
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder getElasticsearchLogConfigOrBuilder() {
+    return elasticsearchLogConfig_ == null ? ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance() : elasticsearchLogConfig_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -292,6 +370,15 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000004) != 0)) {
       output.writeMessage(6, getSecretManagerConfig());
     }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      output.writeMessage(7, getWorkloadIdentity());
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeMessage(8, getDockerBuildConfig());
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeMessage(9, getElasticsearchLogConfig());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -320,6 +407,18 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getSecretManagerConfig());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getWorkloadIdentity());
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, getDockerBuildConfig());
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, getElasticsearchLogConfig());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -357,6 +456,21 @@ private static final long serialVersionUID = 0L;
       if (!getSecretManagerConfig()
           .equals(other.getSecretManagerConfig())) return false;
     }
+    if (hasWorkloadIdentity() != other.hasWorkloadIdentity()) return false;
+    if (hasWorkloadIdentity()) {
+      if (!getWorkloadIdentity()
+          .equals(other.getWorkloadIdentity())) return false;
+    }
+    if (hasDockerBuildConfig() != other.hasDockerBuildConfig()) return false;
+    if (hasDockerBuildConfig()) {
+      if (!getDockerBuildConfig()
+          .equals(other.getDockerBuildConfig())) return false;
+    }
+    if (hasElasticsearchLogConfig() != other.hasElasticsearchLogConfig()) return false;
+    if (hasElasticsearchLogConfig()) {
+      if (!getElasticsearchLogConfig()
+          .equals(other.getElasticsearchLogConfig())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -385,6 +499,18 @@ private static final long serialVersionUID = 0L;
     if (hasSecretManagerConfig()) {
       hash = (37 * hash) + SECRET_MANAGER_CONFIG_FIELD_NUMBER;
       hash = (53 * hash) + getSecretManagerConfig().hashCode();
+    }
+    if (hasWorkloadIdentity()) {
+      hash = (37 * hash) + WORKLOAD_IDENTITY_FIELD_NUMBER;
+      hash = (53 * hash) + getWorkloadIdentity().hashCode();
+    }
+    if (hasDockerBuildConfig()) {
+      hash = (37 * hash) + DOCKER_BUILD_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getDockerBuildConfig().hashCode();
+    }
+    if (hasElasticsearchLogConfig()) {
+      hash = (37 * hash) + ELASTICSEARCH_LOG_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getElasticsearchLogConfig().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -518,6 +644,9 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
         getCloudWatchConfigFieldBuilder();
         getSecretManagerConfigFieldBuilder();
+        getWorkloadIdentityFieldBuilder();
+        getDockerBuildConfigFieldBuilder();
+        getElasticsearchLogConfigFieldBuilder();
       }
     }
     @java.lang.Override
@@ -537,6 +666,21 @@ private static final long serialVersionUID = 0L;
       if (secretManagerConfigBuilder_ != null) {
         secretManagerConfigBuilder_.dispose();
         secretManagerConfigBuilder_ = null;
+      }
+      workloadIdentity_ = null;
+      if (workloadIdentityBuilder_ != null) {
+        workloadIdentityBuilder_.dispose();
+        workloadIdentityBuilder_ = null;
+      }
+      dockerBuildConfig_ = null;
+      if (dockerBuildConfigBuilder_ != null) {
+        dockerBuildConfigBuilder_.dispose();
+        dockerBuildConfigBuilder_ = null;
+      }
+      elasticsearchLogConfig_ = null;
+      if (elasticsearchLogConfigBuilder_ != null) {
+        elasticsearchLogConfigBuilder_.dispose();
+        elasticsearchLogConfigBuilder_ = null;
       }
       return this;
     }
@@ -596,6 +740,24 @@ private static final long serialVersionUID = 0L;
             ? secretManagerConfig_
             : secretManagerConfigBuilder_.build();
         to_bitField0_ |= 0x00000004;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.workloadIdentity_ = workloadIdentityBuilder_ == null
+            ? workloadIdentity_
+            : workloadIdentityBuilder_.build();
+        to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.dockerBuildConfig_ = dockerBuildConfigBuilder_ == null
+            ? dockerBuildConfig_
+            : dockerBuildConfigBuilder_.build();
+        to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.elasticsearchLogConfig_ = elasticsearchLogConfigBuilder_ == null
+            ? elasticsearchLogConfig_
+            : elasticsearchLogConfigBuilder_.build();
+        to_bitField0_ |= 0x00000020;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -670,6 +832,15 @@ private static final long serialVersionUID = 0L;
       if (other.hasSecretManagerConfig()) {
         mergeSecretManagerConfig(other.getSecretManagerConfig());
       }
+      if (other.hasWorkloadIdentity()) {
+        mergeWorkloadIdentity(other.getWorkloadIdentity());
+      }
+      if (other.hasDockerBuildConfig()) {
+        mergeDockerBuildConfig(other.getDockerBuildConfig());
+      }
+      if (other.hasElasticsearchLogConfig()) {
+        mergeElasticsearchLogConfig(other.getElasticsearchLogConfig());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -730,6 +901,27 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 58: {
+              input.readMessage(
+                  getWorkloadIdentityFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
+            case 66: {
+              input.readMessage(
+                  getDockerBuildConfigFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
+            case 74: {
+              input.readMessage(
+                  getElasticsearchLogConfigFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 74
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1282,6 +1474,369 @@ private static final long serialVersionUID = 0L;
         secretManagerConfig_ = null;
       }
       return secretManagerConfigBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity workloadIdentity_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> workloadIdentityBuilder_;
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * @return Whether the workloadIdentity field is set.
+     */
+    public boolean hasWorkloadIdentity() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * @return The workloadIdentity.
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
+      if (workloadIdentityBuilder_ == null) {
+        return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
+      } else {
+        return workloadIdentityBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public Builder setWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+      if (workloadIdentityBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        workloadIdentity_ = value;
+      } else {
+        workloadIdentityBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public Builder setWorkloadIdentity(
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder builderForValue) {
+      if (workloadIdentityBuilder_ == null) {
+        workloadIdentity_ = builderForValue.build();
+      } else {
+        workloadIdentityBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public Builder mergeWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+      if (workloadIdentityBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0) &&
+          workloadIdentity_ != null &&
+          workloadIdentity_ != ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance()) {
+          getWorkloadIdentityBuilder().mergeFrom(value);
+        } else {
+          workloadIdentity_ = value;
+        }
+      } else {
+        workloadIdentityBuilder_.mergeFrom(value);
+      }
+      if (workloadIdentity_ != null) {
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public Builder clearWorkloadIdentity() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      workloadIdentity_ = null;
+      if (workloadIdentityBuilder_ != null) {
+        workloadIdentityBuilder_.dispose();
+        workloadIdentityBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder getWorkloadIdentityBuilder() {
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return getWorkloadIdentityFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
+      if (workloadIdentityBuilder_ != null) {
+        return workloadIdentityBuilder_.getMessageOrBuilder();
+      } else {
+        return workloadIdentity_ == null ?
+            ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> 
+        getWorkloadIdentityFieldBuilder() {
+      if (workloadIdentityBuilder_ == null) {
+        workloadIdentityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder>(
+                getWorkloadIdentity(),
+                getParentForChildren(),
+                isClean());
+        workloadIdentity_ = null;
+      }
+      return workloadIdentityBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.DockerBuildConfig dockerBuildConfig_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder> dockerBuildConfigBuilder_;
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     * @return Whether the dockerBuildConfig field is set.
+     */
+    public boolean hasDockerBuildConfig() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     * @return The dockerBuildConfig.
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig() {
+      if (dockerBuildConfigBuilder_ == null) {
+        return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+      } else {
+        return dockerBuildConfigBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder setDockerBuildConfig(ai.chalk.protos.chalk.server.v1.DockerBuildConfig value) {
+      if (dockerBuildConfigBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        dockerBuildConfig_ = value;
+      } else {
+        dockerBuildConfigBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder setDockerBuildConfig(
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder builderForValue) {
+      if (dockerBuildConfigBuilder_ == null) {
+        dockerBuildConfig_ = builderForValue.build();
+      } else {
+        dockerBuildConfigBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder mergeDockerBuildConfig(ai.chalk.protos.chalk.server.v1.DockerBuildConfig value) {
+      if (dockerBuildConfigBuilder_ == null) {
+        if (((bitField0_ & 0x00000080) != 0) &&
+          dockerBuildConfig_ != null &&
+          dockerBuildConfig_ != ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance()) {
+          getDockerBuildConfigBuilder().mergeFrom(value);
+        } else {
+          dockerBuildConfig_ = value;
+        }
+      } else {
+        dockerBuildConfigBuilder_.mergeFrom(value);
+      }
+      if (dockerBuildConfig_ != null) {
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder clearDockerBuildConfig() {
+      bitField0_ = (bitField0_ & ~0x00000080);
+      dockerBuildConfig_ = null;
+      if (dockerBuildConfigBuilder_ != null) {
+        dockerBuildConfigBuilder_.dispose();
+        dockerBuildConfigBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder getDockerBuildConfigBuilder() {
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return getDockerBuildConfigFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder() {
+      if (dockerBuildConfigBuilder_ != null) {
+        return dockerBuildConfigBuilder_.getMessageOrBuilder();
+      } else {
+        return dockerBuildConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder> 
+        getDockerBuildConfigFieldBuilder() {
+      if (dockerBuildConfigBuilder_ == null) {
+        dockerBuildConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder>(
+                getDockerBuildConfig(),
+                getParentForChildren(),
+                isClean());
+        dockerBuildConfig_ = null;
+      }
+      return dockerBuildConfigBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig elasticsearchLogConfig_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.Builder, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder> elasticsearchLogConfigBuilder_;
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     * @return Whether the elasticsearchLogConfig field is set.
+     */
+    public boolean hasElasticsearchLogConfig() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     * @return The elasticsearchLogConfig.
+     */
+    public ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig getElasticsearchLogConfig() {
+      if (elasticsearchLogConfigBuilder_ == null) {
+        return elasticsearchLogConfig_ == null ? ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance() : elasticsearchLogConfig_;
+      } else {
+        return elasticsearchLogConfigBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public Builder setElasticsearchLogConfig(ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig value) {
+      if (elasticsearchLogConfigBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        elasticsearchLogConfig_ = value;
+      } else {
+        elasticsearchLogConfigBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public Builder setElasticsearchLogConfig(
+        ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.Builder builderForValue) {
+      if (elasticsearchLogConfigBuilder_ == null) {
+        elasticsearchLogConfig_ = builderForValue.build();
+      } else {
+        elasticsearchLogConfigBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public Builder mergeElasticsearchLogConfig(ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig value) {
+      if (elasticsearchLogConfigBuilder_ == null) {
+        if (((bitField0_ & 0x00000100) != 0) &&
+          elasticsearchLogConfig_ != null &&
+          elasticsearchLogConfig_ != ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance()) {
+          getElasticsearchLogConfigBuilder().mergeFrom(value);
+        } else {
+          elasticsearchLogConfig_ = value;
+        }
+      } else {
+        elasticsearchLogConfigBuilder_.mergeFrom(value);
+      }
+      if (elasticsearchLogConfig_ != null) {
+        bitField0_ |= 0x00000100;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public Builder clearElasticsearchLogConfig() {
+      bitField0_ = (bitField0_ & ~0x00000100);
+      elasticsearchLogConfig_ = null;
+      if (elasticsearchLogConfigBuilder_ != null) {
+        elasticsearchLogConfigBuilder_.dispose();
+        elasticsearchLogConfigBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.Builder getElasticsearchLogConfigBuilder() {
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return getElasticsearchLogConfigFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder getElasticsearchLogConfigOrBuilder() {
+      if (elasticsearchLogConfigBuilder_ != null) {
+        return elasticsearchLogConfigBuilder_.getMessageOrBuilder();
+      } else {
+        return elasticsearchLogConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance() : elasticsearchLogConfig_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.Builder, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder> 
+        getElasticsearchLogConfigFieldBuilder() {
+      if (elasticsearchLogConfigBuilder_ == null) {
+        elasticsearchLogConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.Builder, ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder>(
+                getElasticsearchLogConfig(),
+                getParentForChildren(),
+                isClean());
+        elasticsearchLogConfig_ = null;
+      }
+      return elasticsearchLogConfigBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

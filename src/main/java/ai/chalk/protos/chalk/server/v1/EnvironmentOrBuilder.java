@@ -777,4 +777,38 @@ com.google.protobuf.Value defaultValue);
    * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getArchivedAtOrBuilder();
+
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return Whether the metadataServerMetricsStoreSecret field is set.
+   */
+  boolean hasMetadataServerMetricsStoreSecret();
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The metadataServerMetricsStoreSecret.
+   */
+  java.lang.String getMetadataServerMetricsStoreSecret();
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The bytes for metadataServerMetricsStoreSecret.
+   */
+  com.google.protobuf.ByteString
+      getMetadataServerMetricsStoreSecretBytes();
+
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return Whether the queryServerMetricsStoreSecret field is set.
+   */
+  boolean hasQueryServerMetricsStoreSecret();
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The queryServerMetricsStoreSecret.
+   */
+  java.lang.String getQueryServerMetricsStoreSecret();
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The bytes for queryServerMetricsStoreSecret.
+   */
+  com.google.protobuf.ByteString
+      getQueryServerMetricsStoreSecretBytes();
 }

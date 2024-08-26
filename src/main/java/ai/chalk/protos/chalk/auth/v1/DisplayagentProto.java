@@ -81,7 +81,7 @@ public final class DisplayagentProto {
       "onmentName\022\035\n\nproject_id\030\003 \001(\tR\tprojectI" +
       "d\022!\n\014project_name\030\004 \001(\tR\013projectName\022B\n\013" +
       "permissions\030\005 \003(\0132 .chalk.auth.v1.Displa" +
-      "yPermissionR\013permissions\"\274\002\n\020DisplayUser" +
+      "yPermissionR\013permissions\"\210\003\n\020DisplayUser" +
       "Agent\022\037\n\tclient_id\030\001 \001(\tB\002\030\001R\010clientId\022\027" +
       "\n\007user_id\030\002 \001(\tR\006userId\022\027\n\007team_id\030\003 \001(\t" +
       "R\006teamId\022j\n\032permissions_by_environment\030\004" +
@@ -89,46 +89,48 @@ public final class DisplayagentProto {
       "ermissionsR\030permissionsByEnvironment\022\"\n\014" +
       "impersonated\030\005 \001(\010R\014impersonated\022\022\n\004name" +
       "\030\006 \001(\tR\004name\022\024\n\005email\030\007 \001(\tR\005email\022\033\n\tte" +
-      "am_name\030\010 \001(\tR\010teamName\">\n\022DisplayCustom" +
-      "Claim\022\020\n\003key\030\001 \001(\tR\003key\022\026\n\006values\030\002 \003(\tR" +
-      "\006values\"\304\004\n\030DisplayServiceTokenAgent\022\016\n\002" +
-      "id\030\001 \001(\tR\002id\022\033\n\tclient_id\030\002 \001(\tR\010clientI" +
-      "d\022\027\n\007team_id\030\003 \001(\tR\006teamId\022\035\n\nproject_id" +
-      "\030\004 \001(\tR\tprojectId\022%\n\016environment_id\030\005 \001(" +
-      "\tR\renvironmentId\022B\n\013permissions\030\006 \003(\0132 ." +
-      "chalk.auth.v1.DisplayPermissionR\013permiss" +
-      "ions\022\022\n\004name\030\007 \001(\tR\004name\022\033\n\tteam_name\030\010 " +
-      "\001(\tR\010teamName\022!\n\014project_name\030\t \001(\tR\013pro" +
-      "jectName\022)\n\020environment_name\030\n \001(\tR\017envi" +
-      "ronmentName\022J\n\017customer_claims\030\013 \003(\0132!.c" +
-      "halk.auth.v1.DisplayCustomClaimR\016custome" +
-      "rClaims\022R\n\023feature_permissions\030\014 \001(\0132!.c" +
-      "halk.auth.v1.FeaturePermissionsR\022feature" +
-      "Permissions\0229\n\ncreated_at\030\r \001(\0132\032.google" +
-      ".protobuf.TimestampR\tcreatedAt\"\222\002\n\022Displ" +
-      "ayEngineAgent\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007team_id" +
-      "\030\002 \001(\tR\006teamId\022\035\n\nproject_id\030\003 \001(\tR\tproj" +
-      "ectId\022%\n\016environment_id\030\004 \001(\tR\renvironme" +
-      "ntId\022\"\n\014impersonated\030\005 \001(\010R\014impersonated" +
-      "\022\033\n\tteam_name\030\006 \001(\tR\010teamName\022!\n\014project" +
-      "_name\030\007 \001(\tR\013projectName\022)\n\020environment_" +
-      "name\030\010 \001(\tR\017environmentName\"\024\n\022DisplayTe" +
-      "nantAgent\"\035\n\033DisplayMetadataServiceAgent" +
-      "\"\250\003\n\014DisplayAgent\022@\n\nuser_agent\030\001 \001(\0132\037." +
-      "chalk.auth.v1.DisplayUserAgentH\000R\tuserAg" +
-      "ent\022Y\n\023service_token_agent\030\002 \001(\0132\'.chalk" +
-      ".auth.v1.DisplayServiceTokenAgentH\000R\021ser" +
-      "viceTokenAgent\022F\n\014engine_agent\030\003 \001(\0132!.c" +
-      "halk.auth.v1.DisplayEngineAgentH\000R\013engin" +
-      "eAgent\022F\n\014tenant_agent\030\004 \001(\0132!.chalk.aut" +
-      "h.v1.DisplayTenantAgentH\000R\013tenantAgent\022b" +
-      "\n\026metadata_service_agent\030\005 \001(\0132*.chalk.a" +
-      "uth.v1.DisplayMetadataServiceAgentH\000R\024me" +
-      "tadataServiceAgentB\007\n\005agentB\230\001\n\035ai.chalk" +
-      ".protos.chalk.auth.v1B\021DisplayagentProto" +
-      "P\001Z\016auth/v1;authv1\242\002\003CAX\252\002\rChalk.Auth.V1" +
-      "\312\002\rChalk\\Auth\\V1\342\002\031Chalk\\Auth\\V1\\GPBMeta" +
-      "data\352\002\017Chalk::Auth::V1b\006proto3"
+      "am_name\030\010 \001(\tR\010teamName\022J\n\017customer_clai" +
+      "ms\030\t \003(\0132!.chalk.auth.v1.DisplayCustomCl" +
+      "aimR\016customerClaims\">\n\022DisplayCustomClai" +
+      "m\022\020\n\003key\030\001 \001(\tR\003key\022\026\n\006values\030\002 \003(\tR\006val" +
+      "ues\"\304\004\n\030DisplayServiceTokenAgent\022\016\n\002id\030\001" +
+      " \001(\tR\002id\022\033\n\tclient_id\030\002 \001(\tR\010clientId\022\027\n" +
+      "\007team_id\030\003 \001(\tR\006teamId\022\035\n\nproject_id\030\004 \001" +
+      "(\tR\tprojectId\022%\n\016environment_id\030\005 \001(\tR\re" +
+      "nvironmentId\022B\n\013permissions\030\006 \003(\0132 .chal" +
+      "k.auth.v1.DisplayPermissionR\013permissions" +
+      "\022\022\n\004name\030\007 \001(\tR\004name\022\033\n\tteam_name\030\010 \001(\tR" +
+      "\010teamName\022!\n\014project_name\030\t \001(\tR\013project" +
+      "Name\022)\n\020environment_name\030\n \001(\tR\017environm" +
+      "entName\022J\n\017customer_claims\030\013 \003(\0132!.chalk" +
+      ".auth.v1.DisplayCustomClaimR\016customerCla" +
+      "ims\022R\n\023feature_permissions\030\014 \001(\0132!.chalk" +
+      ".auth.v1.FeaturePermissionsR\022featurePerm" +
+      "issions\0229\n\ncreated_at\030\r \001(\0132\032.google.pro" +
+      "tobuf.TimestampR\tcreatedAt\"\222\002\n\022DisplayEn" +
+      "gineAgent\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007team_id\030\002 \001" +
+      "(\tR\006teamId\022\035\n\nproject_id\030\003 \001(\tR\tprojectI" +
+      "d\022%\n\016environment_id\030\004 \001(\tR\renvironmentId" +
+      "\022\"\n\014impersonated\030\005 \001(\010R\014impersonated\022\033\n\t" +
+      "team_name\030\006 \001(\tR\010teamName\022!\n\014project_nam" +
+      "e\030\007 \001(\tR\013projectName\022)\n\020environment_name" +
+      "\030\010 \001(\tR\017environmentName\"\024\n\022DisplayTenant" +
+      "Agent\"\035\n\033DisplayMetadataServiceAgent\"\250\003\n" +
+      "\014DisplayAgent\022@\n\nuser_agent\030\001 \001(\0132\037.chal" +
+      "k.auth.v1.DisplayUserAgentH\000R\tuserAgent\022" +
+      "Y\n\023service_token_agent\030\002 \001(\0132\'.chalk.aut" +
+      "h.v1.DisplayServiceTokenAgentH\000R\021service" +
+      "TokenAgent\022F\n\014engine_agent\030\003 \001(\0132!.chalk" +
+      ".auth.v1.DisplayEngineAgentH\000R\013engineAge" +
+      "nt\022F\n\014tenant_agent\030\004 \001(\0132!.chalk.auth.v1" +
+      ".DisplayTenantAgentH\000R\013tenantAgent\022b\n\026me" +
+      "tadata_service_agent\030\005 \001(\0132*.chalk.auth." +
+      "v1.DisplayMetadataServiceAgentH\000R\024metada" +
+      "taServiceAgentB\007\n\005agentB\230\001\n\035ai.chalk.pro" +
+      "tos.chalk.auth.v1B\021DisplayagentProtoP\001Z\016" +
+      "auth/v1;authv1\242\002\003CAX\252\002\rChalk.Auth.V1\312\002\rC" +
+      "halk\\Auth\\V1\342\002\031Chalk\\Auth\\V1\\GPBMetadata" +
+      "\352\002\017Chalk::Auth::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -154,7 +156,7 @@ public final class DisplayagentProto {
     internal_static_chalk_auth_v1_DisplayUserAgent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_auth_v1_DisplayUserAgent_descriptor,
-        new java.lang.String[] { "ClientId", "UserId", "TeamId", "PermissionsByEnvironment", "Impersonated", "Name", "Email", "TeamName", });
+        new java.lang.String[] { "ClientId", "UserId", "TeamId", "PermissionsByEnvironment", "Impersonated", "Name", "Email", "TeamName", "CustomerClaims", });
     internal_static_chalk_auth_v1_DisplayCustomClaim_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_chalk_auth_v1_DisplayCustomClaim_fieldAccessorTable = new

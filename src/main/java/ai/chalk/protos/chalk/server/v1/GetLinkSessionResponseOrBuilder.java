@@ -45,4 +45,16 @@ public interface GetLinkSessionResponseOrBuilder extends
    * <code>optional .chalk.server.v1.LinkToken token = 3 [json_name = "token"];</code>
    */
   ai.chalk.protos.chalk.server.v1.LinkTokenOrBuilder getTokenOrBuilder();
+
+  /**
+   * <code>string session_id = 4 [json_name = "sessionId"];</code>
+   * @return The sessionId.
+   */
+  java.lang.String getSessionId();
+  /**
+   * <code>string session_id = 4 [json_name = "sessionId"];</code>
+   * @return The bytes for sessionId.
+   */
+  com.google.protobuf.ByteString
+      getSessionIdBytes();
 }

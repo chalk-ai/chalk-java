@@ -21,10 +21,21 @@ public interface NamedQueryOrBuilder extends
       getNameBytes();
 
   /**
-   * <code>int64 version = 2 [json_name = "version"];</code>
-   * @return The version.
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return Whether the queryVersion field is set.
    */
-  long getVersion();
+  boolean hasQueryVersion();
+  /**
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return The queryVersion.
+   */
+  java.lang.String getQueryVersion();
+  /**
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return The bytes for queryVersion.
+   */
+  com.google.protobuf.ByteString
+      getQueryVersionBytes();
 
   /**
    * <code>repeated string input = 3 [json_name = "input"];</code>
@@ -248,4 +259,33 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getFileNameBytes();
+
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return Whether the deploymentId field is set.
+   */
+  boolean hasDeploymentId();
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return The deploymentId.
+   */
+  java.lang.String getDeploymentId();
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return The bytes for deploymentId.
+   */
+  com.google.protobuf.ByteString
+      getDeploymentIdBytes();
 }

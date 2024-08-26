@@ -67,4 +67,120 @@ public interface DeploymentOrBuilder extends
    */
   com.google.protobuf.ByteString
       getDeploymentTagsBytes(int index);
+
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  boolean hasCreatedAt();
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  com.google.protobuf.Timestamp getCreatedAt();
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
+
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   * @return Whether the updatedAt field is set.
+   */
+  boolean hasUpdatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   * @return The updatedAt.
+   */
+  com.google.protobuf.Timestamp getUpdatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder();
+
+  /**
+   * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+   * @return The gitCommit.
+   */
+  java.lang.String getGitCommit();
+  /**
+   * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+   * @return The bytes for gitCommit.
+   */
+  com.google.protobuf.ByteString
+      getGitCommitBytes();
+
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   *  string requirements_files = 22;
+   *  string git_tag = 23;
+   * </pre>
+   *
+   * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+   * @return The baseImageSha.
+   */
+  java.lang.String getBaseImageSha();
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   *  string requirements_files = 22;
+   *  string git_tag = 23;
+   * </pre>
+   *
+   * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+   * @return The bytes for baseImageSha.
+   */
+  com.google.protobuf.ByteString
+      getBaseImageShaBytes();
 }

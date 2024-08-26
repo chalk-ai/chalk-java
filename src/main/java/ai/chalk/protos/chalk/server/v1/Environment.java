@@ -53,6 +53,8 @@ private static final long serialVersionUID = 0L;
     defaultPlanner_ = "";
     privatePipRepositories_ = "";
     cloudProvider_ = 0;
+    metadataServerMetricsStoreSecret_ = "";
+    queryServerMetricsStoreSecret_ = "";
   }
 
   @java.lang.Override
@@ -2071,6 +2073,100 @@ com.google.protobuf.Value defaultValue) {
     return archivedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : archivedAt_;
   }
 
+  public static final int METADATA_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER = 44;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object metadataServerMetricsStoreSecret_ = "";
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return Whether the metadataServerMetricsStoreSecret field is set.
+   */
+  @java.lang.Override
+  public boolean hasMetadataServerMetricsStoreSecret() {
+    return ((bitField1_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The metadataServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public java.lang.String getMetadataServerMetricsStoreSecret() {
+    java.lang.Object ref = metadataServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      metadataServerMetricsStoreSecret_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The bytes for metadataServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMetadataServerMetricsStoreSecretBytes() {
+    java.lang.Object ref = metadataServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      metadataServerMetricsStoreSecret_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int QUERY_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER = 45;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object queryServerMetricsStoreSecret_ = "";
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return Whether the queryServerMetricsStoreSecret field is set.
+   */
+  @java.lang.Override
+  public boolean hasQueryServerMetricsStoreSecret() {
+    return ((bitField1_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The queryServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public java.lang.String getQueryServerMetricsStoreSecret() {
+    java.lang.Object ref = queryServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      queryServerMetricsStoreSecret_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The bytes for queryServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getQueryServerMetricsStoreSecretBytes() {
+    java.lang.Object ref = queryServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      queryServerMetricsStoreSecret_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2222,6 +2318,12 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000001) != 0)) {
       output.writeMessage(43, getArchivedAt());
+    }
+    if (((bitField1_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 44, metadataServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 45, queryServerMetricsStoreSecret_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -2386,6 +2488,12 @@ com.google.protobuf.Value defaultValue) {
     if (((bitField1_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(43, getArchivedAt());
+    }
+    if (((bitField1_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(44, metadataServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(45, queryServerMetricsStoreSecret_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -2586,6 +2694,16 @@ com.google.protobuf.Value defaultValue) {
       if (!getArchivedAt()
           .equals(other.getArchivedAt())) return false;
     }
+    if (hasMetadataServerMetricsStoreSecret() != other.hasMetadataServerMetricsStoreSecret()) return false;
+    if (hasMetadataServerMetricsStoreSecret()) {
+      if (!getMetadataServerMetricsStoreSecret()
+          .equals(other.getMetadataServerMetricsStoreSecret())) return false;
+    }
+    if (hasQueryServerMetricsStoreSecret() != other.hasQueryServerMetricsStoreSecret()) return false;
+    if (hasQueryServerMetricsStoreSecret()) {
+      if (!getQueryServerMetricsStoreSecret()
+          .equals(other.getQueryServerMetricsStoreSecret())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -2756,6 +2874,14 @@ com.google.protobuf.Value defaultValue) {
     if (hasArchivedAt()) {
       hash = (37 * hash) + ARCHIVED_AT_FIELD_NUMBER;
       hash = (53 * hash) + getArchivedAt().hashCode();
+    }
+    if (hasMetadataServerMetricsStoreSecret()) {
+      hash = (37 * hash) + METADATA_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER;
+      hash = (53 * hash) + getMetadataServerMetricsStoreSecret().hashCode();
+    }
+    if (hasQueryServerMetricsStoreSecret()) {
+      hash = (37 * hash) + QUERY_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER;
+      hash = (53 * hash) + getQueryServerMetricsStoreSecret().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -2977,6 +3103,8 @@ com.google.protobuf.Value defaultValue) {
         archivedAtBuilder_.dispose();
         archivedAtBuilder_ = null;
       }
+      metadataServerMetricsStoreSecret_ = "";
+      queryServerMetricsStoreSecret_ = "";
       return this;
     }
 
@@ -3186,6 +3314,14 @@ com.google.protobuf.Value defaultValue) {
             ? archivedAt_
             : archivedAtBuilder_.build();
         to_bitField1_ |= 0x00000001;
+      }
+      if (((from_bitField1_ & 0x00000800) != 0)) {
+        result.metadataServerMetricsStoreSecret_ = metadataServerMetricsStoreSecret_;
+        to_bitField1_ |= 0x00000002;
+      }
+      if (((from_bitField1_ & 0x00001000) != 0)) {
+        result.queryServerMetricsStoreSecret_ = queryServerMetricsStoreSecret_;
+        to_bitField1_ |= 0x00000004;
       }
       result.bitField0_ |= to_bitField0_;
       result.bitField1_ |= to_bitField1_;
@@ -3433,6 +3569,16 @@ com.google.protobuf.Value defaultValue) {
       bitField1_ |= 0x00000200;
       if (other.hasArchivedAt()) {
         mergeArchivedAt(other.getArchivedAt());
+      }
+      if (other.hasMetadataServerMetricsStoreSecret()) {
+        metadataServerMetricsStoreSecret_ = other.metadataServerMetricsStoreSecret_;
+        bitField1_ |= 0x00000800;
+        onChanged();
+      }
+      if (other.hasQueryServerMetricsStoreSecret()) {
+        queryServerMetricsStoreSecret_ = other.queryServerMetricsStoreSecret_;
+        bitField1_ |= 0x00001000;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -3691,6 +3837,16 @@ com.google.protobuf.Value defaultValue) {
               bitField1_ |= 0x00000400;
               break;
             } // case 346
+            case 354: {
+              metadataServerMetricsStoreSecret_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00000800;
+              break;
+            } // case 354
+            case 362: {
+              queryServerMetricsStoreSecret_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00001000;
+              break;
+            } // case 362
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -7300,6 +7456,164 @@ com.google.protobuf.Value defaultValue) {
         archivedAt_ = null;
       }
       return archivedAtBuilder_;
+    }
+
+    private java.lang.Object metadataServerMetricsStoreSecret_ = "";
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return Whether the metadataServerMetricsStoreSecret field is set.
+     */
+    public boolean hasMetadataServerMetricsStoreSecret() {
+      return ((bitField1_ & 0x00000800) != 0);
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return The metadataServerMetricsStoreSecret.
+     */
+    public java.lang.String getMetadataServerMetricsStoreSecret() {
+      java.lang.Object ref = metadataServerMetricsStoreSecret_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        metadataServerMetricsStoreSecret_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return The bytes for metadataServerMetricsStoreSecret.
+     */
+    public com.google.protobuf.ByteString
+        getMetadataServerMetricsStoreSecretBytes() {
+      java.lang.Object ref = metadataServerMetricsStoreSecret_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        metadataServerMetricsStoreSecret_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @param value The metadataServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetadataServerMetricsStoreSecret(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      metadataServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMetadataServerMetricsStoreSecret() {
+      metadataServerMetricsStoreSecret_ = getDefaultInstance().getMetadataServerMetricsStoreSecret();
+      bitField1_ = (bitField1_ & ~0x00000800);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @param value The bytes for metadataServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetadataServerMetricsStoreSecretBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      metadataServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object queryServerMetricsStoreSecret_ = "";
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return Whether the queryServerMetricsStoreSecret field is set.
+     */
+    public boolean hasQueryServerMetricsStoreSecret() {
+      return ((bitField1_ & 0x00001000) != 0);
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return The queryServerMetricsStoreSecret.
+     */
+    public java.lang.String getQueryServerMetricsStoreSecret() {
+      java.lang.Object ref = queryServerMetricsStoreSecret_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        queryServerMetricsStoreSecret_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return The bytes for queryServerMetricsStoreSecret.
+     */
+    public com.google.protobuf.ByteString
+        getQueryServerMetricsStoreSecretBytes() {
+      java.lang.Object ref = queryServerMetricsStoreSecret_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        queryServerMetricsStoreSecret_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @param value The queryServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryServerMetricsStoreSecret(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      queryServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearQueryServerMetricsStoreSecret() {
+      queryServerMetricsStoreSecret_ = getDefaultInstance().getQueryServerMetricsStoreSecret();
+      bitField1_ = (bitField1_ & ~0x00001000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @param value The bytes for queryServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryServerMetricsStoreSecretBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      queryServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00001000;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

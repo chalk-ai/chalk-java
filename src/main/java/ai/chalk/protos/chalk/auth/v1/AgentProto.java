@@ -71,50 +71,52 @@ public final class AgentProto {
     java.lang.String[] descriptorData = {
       "\n\031chalk/auth/v1/agent.proto\022\rchalk.auth." +
       "v1\032%chalk/auth/v1/featurepermission.prot" +
-      "o\032\037chalk/auth/v1/permissions.proto\"\251\001\n\026E" +
+      "o\032\037chalk/auth/v1/permissions.proto\"\356\001\n\026E" +
       "nvironmentPermissions\022;\n\013permissions\030\002 \003" +
       "(\0162\031.chalk.auth.v1.PermissionR\013permissio" +
       "ns\022R\n\023feature_permissions\030\003 \001(\0132!.chalk." +
       "auth.v1.FeaturePermissionsR\022featurePermi" +
-      "ssions\"\354\002\n\tUserAgent\022\037\n\tclient_id\030\001 \001(\tB" +
-      "\002\030\001R\010clientId\022\027\n\007user_id\030\002 \001(\tR\006userId\022\027" +
-      "\n\007team_id\030\003 \001(\tR\006teamId\022t\n\032permissions_b" +
-      "y_environment\030\004 \003(\01326.chalk.auth.v1.User" +
-      "Agent.PermissionsByEnvironmentEntryR\030per" +
-      "missionsByEnvironment\022\"\n\014impersonated\030\005 " +
-      "\001(\010R\014impersonated\032r\n\035PermissionsByEnviro" +
-      "nmentEntry\022\020\n\003key\030\001 \001(\tR\003key\022;\n\005value\030\002 " +
-      "\001(\0132%.chalk.auth.v1.EnvironmentPermissio" +
-      "nsR\005value:\0028\001\"7\n\013CustomClaim\022\020\n\003key\030\001 \001(" +
-      "\tR\003key\022\026\n\006values\030\002 \003(\tR\006values\"\372\002\n\021Servi" +
-      "ceTokenAgent\022\016\n\002id\030\001 \001(\tR\002id\022\033\n\tclient_i" +
-      "d\030\002 \001(\tR\010clientId\022\027\n\007team_id\030\003 \001(\tR\006team" +
-      "Id\022 \n\013environment\030\004 \001(\tR\013environment\022;\n\013" +
-      "permissions\030\005 \003(\0162\031.chalk.auth.v1.Permis" +
-      "sionR\013permissions\022\'\n\rcustom_claims\030\006 \003(\t" +
-      "B\002\030\001R\014customClaims\022C\n\017customer_claims\030\007 " +
-      "\003(\0132\032.chalk.auth.v1.CustomClaimR\016custome" +
-      "rClaims\022R\n\023feature_permissions\030\010 \001(\0132!.c" +
-      "halk.auth.v1.FeaturePermissionsR\022feature" +
-      "Permissions\"\240\001\n\013EngineAgent\022\016\n\002id\030\001 \001(\tR" +
-      "\002id\022\027\n\007team_id\030\002 \001(\tR\006teamId\022\035\n\nproject_" +
-      "id\030\003 \001(\tR\tprojectId\022%\n\016environment_id\030\004 " +
-      "\001(\tR\renvironmentId\022\"\n\014impersonated\030\005 \001(\010" +
-      "R\014impersonated\"\026\n\024MetadataServiceAgent\"\r" +
-      "\n\013TenantAgent\"\376\002\n\005Agent\0229\n\nuser_agent\030\001 " +
-      "\001(\0132\030.chalk.auth.v1.UserAgentH\000R\tuserAge" +
-      "nt\022R\n\023service_token_agent\030\002 \001(\0132 .chalk." +
-      "auth.v1.ServiceTokenAgentH\000R\021serviceToke" +
-      "nAgent\022?\n\014engine_agent\030\003 \001(\0132\032.chalk.aut" +
-      "h.v1.EngineAgentH\000R\013engineAgent\022?\n\014tenan" +
-      "t_agent\030\004 \001(\0132\032.chalk.auth.v1.TenantAgen" +
-      "tH\000R\013tenantAgent\022[\n\026metadata_service_age" +
-      "nt\030\005 \001(\0132#.chalk.auth.v1.MetadataService" +
-      "AgentH\000R\024metadataServiceAgentB\007\n\005agentB\221" +
-      "\001\n\035ai.chalk.protos.chalk.auth.v1B\nAgentP" +
-      "rotoP\001Z\016auth/v1;authv1\242\002\003CAX\252\002\rChalk.Aut" +
-      "h.V1\312\002\rChalk\\Auth\\V1\342\002\031Chalk\\Auth\\V1\\GPB" +
-      "Metadata\352\002\017Chalk::Auth::V1b\006proto3"
+      "ssions\022C\n\017customer_claims\030\004 \003(\0132\032.chalk." +
+      "auth.v1.CustomClaimR\016customerClaims\"\354\002\n\t" +
+      "UserAgent\022\037\n\tclient_id\030\001 \001(\tB\002\030\001R\010client" +
+      "Id\022\027\n\007user_id\030\002 \001(\tR\006userId\022\027\n\007team_id\030\003" +
+      " \001(\tR\006teamId\022t\n\032permissions_by_environme" +
+      "nt\030\004 \003(\01326.chalk.auth.v1.UserAgent.Permi" +
+      "ssionsByEnvironmentEntryR\030permissionsByE" +
+      "nvironment\022\"\n\014impersonated\030\005 \001(\010R\014impers" +
+      "onated\032r\n\035PermissionsByEnvironmentEntry\022" +
+      "\020\n\003key\030\001 \001(\tR\003key\022;\n\005value\030\002 \001(\0132%.chalk" +
+      ".auth.v1.EnvironmentPermissionsR\005value:\002" +
+      "8\001\"7\n\013CustomClaim\022\020\n\003key\030\001 \001(\tR\003key\022\026\n\006v" +
+      "alues\030\002 \003(\tR\006values\"\372\002\n\021ServiceTokenAgen" +
+      "t\022\016\n\002id\030\001 \001(\tR\002id\022\033\n\tclient_id\030\002 \001(\tR\010cl" +
+      "ientId\022\027\n\007team_id\030\003 \001(\tR\006teamId\022 \n\013envir" +
+      "onment\030\004 \001(\tR\013environment\022;\n\013permissions" +
+      "\030\005 \003(\0162\031.chalk.auth.v1.PermissionR\013permi" +
+      "ssions\022\'\n\rcustom_claims\030\006 \003(\tB\002\030\001R\014custo" +
+      "mClaims\022C\n\017customer_claims\030\007 \003(\0132\032.chalk" +
+      ".auth.v1.CustomClaimR\016customerClaims\022R\n\023" +
+      "feature_permissions\030\010 \001(\0132!.chalk.auth.v" +
+      "1.FeaturePermissionsR\022featurePermissions" +
+      "\"\240\001\n\013EngineAgent\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007team" +
+      "_id\030\002 \001(\tR\006teamId\022\035\n\nproject_id\030\003 \001(\tR\tp" +
+      "rojectId\022%\n\016environment_id\030\004 \001(\tR\renviro" +
+      "nmentId\022\"\n\014impersonated\030\005 \001(\010R\014impersona" +
+      "ted\"\026\n\024MetadataServiceAgent\"\r\n\013TenantAge" +
+      "nt\"\376\002\n\005Agent\0229\n\nuser_agent\030\001 \001(\0132\030.chalk" +
+      ".auth.v1.UserAgentH\000R\tuserAgent\022R\n\023servi" +
+      "ce_token_agent\030\002 \001(\0132 .chalk.auth.v1.Ser" +
+      "viceTokenAgentH\000R\021serviceTokenAgent\022?\n\014e" +
+      "ngine_agent\030\003 \001(\0132\032.chalk.auth.v1.Engine" +
+      "AgentH\000R\013engineAgent\022?\n\014tenant_agent\030\004 \001" +
+      "(\0132\032.chalk.auth.v1.TenantAgentH\000R\013tenant" +
+      "Agent\022[\n\026metadata_service_agent\030\005 \001(\0132#." +
+      "chalk.auth.v1.MetadataServiceAgentH\000R\024me" +
+      "tadataServiceAgentB\007\n\005agentB\221\001\n\035ai.chalk" +
+      ".protos.chalk.auth.v1B\nAgentProtoP\001Z\016aut" +
+      "h/v1;authv1\242\002\003CAX\252\002\rChalk.Auth.V1\312\002\rChal" +
+      "k\\Auth\\V1\342\002\031Chalk\\Auth\\V1\\GPBMetadata\352\002\017" +
+      "Chalk::Auth::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -127,7 +129,7 @@ public final class AgentProto {
     internal_static_chalk_auth_v1_EnvironmentPermissions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_auth_v1_EnvironmentPermissions_descriptor,
-        new java.lang.String[] { "Permissions", "FeaturePermissions", });
+        new java.lang.String[] { "Permissions", "FeaturePermissions", "CustomerClaims", });
     internal_static_chalk_auth_v1_UserAgent_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_chalk_auth_v1_UserAgent_fieldAccessorTable = new
