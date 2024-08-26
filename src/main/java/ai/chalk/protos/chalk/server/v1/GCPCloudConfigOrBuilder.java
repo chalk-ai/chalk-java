@@ -48,4 +48,19 @@ public interface GCPCloudConfigOrBuilder extends
    */
   com.google.protobuf.ByteString
       getManagementServiceAccountBytes();
+
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   * @return Whether the dockerBuildConfig field is set.
+   */
+  boolean hasDockerBuildConfig();
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   * @return The dockerBuildConfig.
+   */
+  ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig();
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder();
 }

@@ -630,6 +630,25 @@ private static final long serialVersionUID = 0L;
     return isStatic_;
   }
 
+  public static final int IS_TOTAL_FIELD_NUMBER = 19;
+  private boolean isTotal_ = false;
+  /**
+   * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+   * @return Whether the isTotal field is set.
+   */
+  @java.lang.Override
+  public boolean hasIsTotal() {
+    return ((bitField0_ & 0x00000100) != 0);
+  }
+  /**
+   * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+   * @return The isTotal.
+   */
+  @java.lang.Override
+  public boolean getIsTotal() {
+    return isTotal_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -697,6 +716,9 @@ private static final long serialVersionUID = 0L;
     }
     if (isStatic_ != false) {
       output.writeBool(18, isStatic_);
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      output.writeBool(19, isTotal_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -783,6 +805,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(18, isStatic_);
     }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(19, isTotal_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -856,6 +882,11 @@ private static final long serialVersionUID = 0L;
     if (resourceHint_ != other.resourceHint_) return false;
     if (getIsStatic()
         != other.getIsStatic()) return false;
+    if (hasIsTotal() != other.hasIsTotal()) return false;
+    if (hasIsTotal()) {
+      if (getIsTotal()
+          != other.getIsTotal()) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -931,6 +962,11 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + IS_STATIC_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getIsStatic());
+    if (hasIsTotal()) {
+      hash = (37 * hash) + IS_TOTAL_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsTotal());
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1133,6 +1169,7 @@ private static final long serialVersionUID = 0L;
       }
       resourceHint_ = 0;
       isStatic_ = false;
+      isTotal_ = false;
       return this;
     }
 
@@ -1262,6 +1299,10 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00020000) != 0)) {
         result.isStatic_ = isStatic_;
+      }
+      if (((from_bitField0_ & 0x00040000) != 0)) {
+        result.isTotal_ = isTotal_;
+        to_bitField0_ |= 0x00000100;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1455,6 +1496,9 @@ private static final long serialVersionUID = 0L;
       if (other.getIsStatic() != false) {
         setIsStatic(other.getIsStatic());
       }
+      if (other.hasIsTotal()) {
+        setIsTotal(other.getIsTotal());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1607,6 +1651,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00020000;
               break;
             } // case 144
+            case 152: {
+              isTotal_ = input.readBool();
+              bitField0_ |= 0x00040000;
+              break;
+            } // case 152
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3670,6 +3719,46 @@ private static final long serialVersionUID = 0L;
     public Builder clearIsStatic() {
       bitField0_ = (bitField0_ & ~0x00020000);
       isStatic_ = false;
+      onChanged();
+      return this;
+    }
+
+    private boolean isTotal_ ;
+    /**
+     * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+     * @return Whether the isTotal field is set.
+     */
+    @java.lang.Override
+    public boolean hasIsTotal() {
+      return ((bitField0_ & 0x00040000) != 0);
+    }
+    /**
+     * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+     * @return The isTotal.
+     */
+    @java.lang.Override
+    public boolean getIsTotal() {
+      return isTotal_;
+    }
+    /**
+     * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+     * @param value The isTotal to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIsTotal(boolean value) {
+
+      isTotal_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIsTotal() {
+      bitField0_ = (bitField0_ & ~0x00040000);
+      isTotal_ = false;
       onChanged();
       return this;
     }

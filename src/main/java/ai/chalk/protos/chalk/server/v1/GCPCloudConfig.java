@@ -168,6 +168,32 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int DOCKER_BUILD_CONFIG_FIELD_NUMBER = 4;
+  private ai.chalk.protos.chalk.server.v1.DockerBuildConfig dockerBuildConfig_;
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   * @return Whether the dockerBuildConfig field is set.
+   */
+  @java.lang.Override
+  public boolean hasDockerBuildConfig() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   * @return The dockerBuildConfig.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig() {
+    return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+  }
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder() {
+    return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -191,6 +217,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, managementServiceAccount_);
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(4, getDockerBuildConfig());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -208,6 +237,10 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, managementServiceAccount_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getDockerBuildConfig());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -233,6 +266,11 @@ private static final long serialVersionUID = 0L;
       if (!getManagementServiceAccount()
           .equals(other.getManagementServiceAccount())) return false;
     }
+    if (hasDockerBuildConfig() != other.hasDockerBuildConfig()) return false;
+    if (hasDockerBuildConfig()) {
+      if (!getDockerBuildConfig()
+          .equals(other.getDockerBuildConfig())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -251,6 +289,10 @@ private static final long serialVersionUID = 0L;
     if (hasManagementServiceAccount()) {
       hash = (37 * hash) + MANAGEMENT_SERVICE_ACCOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getManagementServiceAccount().hashCode();
+    }
+    if (hasDockerBuildConfig()) {
+      hash = (37 * hash) + DOCKER_BUILD_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getDockerBuildConfig().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -371,13 +413,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.GCPCloudConfig.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getDockerBuildConfigFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -386,6 +434,11 @@ private static final long serialVersionUID = 0L;
       projectId_ = "";
       region_ = "";
       managementServiceAccount_ = "";
+      dockerBuildConfig_ = null;
+      if (dockerBuildConfigBuilder_ != null) {
+        dockerBuildConfigBuilder_.dispose();
+        dockerBuildConfigBuilder_ = null;
+      }
       return this;
     }
 
@@ -429,6 +482,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.managementServiceAccount_ = managementServiceAccount_;
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.dockerBuildConfig_ = dockerBuildConfigBuilder_ == null
+            ? dockerBuildConfig_
+            : dockerBuildConfigBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -492,6 +551,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000004;
         onChanged();
       }
+      if (other.hasDockerBuildConfig()) {
+        mergeDockerBuildConfig(other.getDockerBuildConfig());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -533,6 +595,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 34: {
+              input.readMessage(
+                  getDockerBuildConfigFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -771,6 +840,127 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.DockerBuildConfig dockerBuildConfig_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder> dockerBuildConfigBuilder_;
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     * @return Whether the dockerBuildConfig field is set.
+     */
+    public boolean hasDockerBuildConfig() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     * @return The dockerBuildConfig.
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig() {
+      if (dockerBuildConfigBuilder_ == null) {
+        return dockerBuildConfig_ == null ? ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+      } else {
+        return dockerBuildConfigBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder setDockerBuildConfig(ai.chalk.protos.chalk.server.v1.DockerBuildConfig value) {
+      if (dockerBuildConfigBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        dockerBuildConfig_ = value;
+      } else {
+        dockerBuildConfigBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder setDockerBuildConfig(
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder builderForValue) {
+      if (dockerBuildConfigBuilder_ == null) {
+        dockerBuildConfig_ = builderForValue.build();
+      } else {
+        dockerBuildConfigBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder mergeDockerBuildConfig(ai.chalk.protos.chalk.server.v1.DockerBuildConfig value) {
+      if (dockerBuildConfigBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          dockerBuildConfig_ != null &&
+          dockerBuildConfig_ != ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance()) {
+          getDockerBuildConfigBuilder().mergeFrom(value);
+        } else {
+          dockerBuildConfig_ = value;
+        }
+      } else {
+        dockerBuildConfigBuilder_.mergeFrom(value);
+      }
+      if (dockerBuildConfig_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public Builder clearDockerBuildConfig() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      dockerBuildConfig_ = null;
+      if (dockerBuildConfigBuilder_ != null) {
+        dockerBuildConfigBuilder_.dispose();
+        dockerBuildConfigBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder getDockerBuildConfigBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getDockerBuildConfigFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder() {
+      if (dockerBuildConfigBuilder_ != null) {
+        return dockerBuildConfigBuilder_.getMessageOrBuilder();
+      } else {
+        return dockerBuildConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.DockerBuildConfig.getDefaultInstance() : dockerBuildConfig_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 4 [json_name = "dockerBuildConfig"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder> 
+        getDockerBuildConfigFieldBuilder() {
+      if (dockerBuildConfigBuilder_ == null) {
+        dockerBuildConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.DockerBuildConfig, ai.chalk.protos.chalk.server.v1.DockerBuildConfig.Builder, ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder>(
+                getDockerBuildConfig(),
+                getParentForChildren(),
+                isClean());
+        dockerBuildConfig_ = null;
+      }
+      return dockerBuildConfigBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

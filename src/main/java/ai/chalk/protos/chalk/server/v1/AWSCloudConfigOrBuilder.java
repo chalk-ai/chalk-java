@@ -90,4 +90,49 @@ public interface AWSCloudConfigOrBuilder extends
    * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
    */
   ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretManagerConfigOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * @return Whether the workloadIdentity field is set.
+   */
+  boolean hasWorkloadIdentity();
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * @return The workloadIdentity.
+   */
+  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity();
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   * @return Whether the dockerBuildConfig field is set.
+   */
+  boolean hasDockerBuildConfig();
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   * @return The dockerBuildConfig.
+   */
+  ai.chalk.protos.chalk.server.v1.DockerBuildConfig getDockerBuildConfig();
+  /**
+   * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.DockerBuildConfigOrBuilder getDockerBuildConfigOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   * @return Whether the elasticsearchLogConfig field is set.
+   */
+  boolean hasElasticsearchLogConfig();
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   * @return The elasticsearchLogConfig.
+   */
+  ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig getElasticsearchLogConfig();
+  /**
+   * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder getElasticsearchLogConfigOrBuilder();
 }

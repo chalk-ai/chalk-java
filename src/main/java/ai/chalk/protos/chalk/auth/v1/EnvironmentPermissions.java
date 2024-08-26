@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private EnvironmentPermissions() {
     permissions_ = java.util.Collections.emptyList();
+    customerClaims_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -125,6 +126,47 @@ private static final long serialVersionUID = 0L;
     return featurePermissions_ == null ? ai.chalk.protos.chalk.auth.v1.FeaturePermissions.getDefaultInstance() : featurePermissions_;
   }
 
+  public static final int CUSTOMER_CLAIMS_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim> customerClaims_;
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim> getCustomerClaimsList() {
+    return customerClaims_;
+  }
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder> 
+      getCustomerClaimsOrBuilderList() {
+    return customerClaims_;
+  }
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  @java.lang.Override
+  public int getCustomerClaimsCount() {
+    return customerClaims_.size();
+  }
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.auth.v1.CustomClaim getCustomerClaims(int index) {
+    return customerClaims_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder getCustomerClaimsOrBuilder(
+      int index) {
+    return customerClaims_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -149,6 +191,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(3, getFeaturePermissions());
+    }
+    for (int i = 0; i < customerClaims_.size(); i++) {
+      output.writeMessage(4, customerClaims_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -175,6 +220,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(3, getFeaturePermissions());
     }
+    for (int i = 0; i < customerClaims_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, customerClaims_.get(i));
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -196,6 +245,8 @@ private static final long serialVersionUID = 0L;
       if (!getFeaturePermissions()
           .equals(other.getFeaturePermissions())) return false;
     }
+    if (!getCustomerClaimsList()
+        .equals(other.getCustomerClaimsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -214,6 +265,10 @@ private static final long serialVersionUID = 0L;
     if (hasFeaturePermissions()) {
       hash = (37 * hash) + FEATURE_PERMISSIONS_FIELD_NUMBER;
       hash = (53 * hash) + getFeaturePermissions().hashCode();
+    }
+    if (getCustomerClaimsCount() > 0) {
+      hash = (37 * hash) + CUSTOMER_CLAIMS_FIELD_NUMBER;
+      hash = (53 * hash) + getCustomerClaimsList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -346,6 +401,7 @@ private static final long serialVersionUID = 0L;
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getFeaturePermissionsFieldBuilder();
+        getCustomerClaimsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -359,6 +415,13 @@ private static final long serialVersionUID = 0L;
         featurePermissionsBuilder_.dispose();
         featurePermissionsBuilder_ = null;
       }
+      if (customerClaimsBuilder_ == null) {
+        customerClaims_ = java.util.Collections.emptyList();
+      } else {
+        customerClaims_ = null;
+        customerClaimsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -397,6 +460,15 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.permissions_ = permissions_;
+      if (customerClaimsBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0)) {
+          customerClaims_ = java.util.Collections.unmodifiableList(customerClaims_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.customerClaims_ = customerClaims_;
+      } else {
+        result.customerClaims_ = customerClaimsBuilder_.build();
+      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions result) {
@@ -468,6 +540,32 @@ private static final long serialVersionUID = 0L;
       if (other.hasFeaturePermissions()) {
         mergeFeaturePermissions(other.getFeaturePermissions());
       }
+      if (customerClaimsBuilder_ == null) {
+        if (!other.customerClaims_.isEmpty()) {
+          if (customerClaims_.isEmpty()) {
+            customerClaims_ = other.customerClaims_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureCustomerClaimsIsMutable();
+            customerClaims_.addAll(other.customerClaims_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.customerClaims_.isEmpty()) {
+          if (customerClaimsBuilder_.isEmpty()) {
+            customerClaimsBuilder_.dispose();
+            customerClaimsBuilder_ = null;
+            customerClaims_ = other.customerClaims_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            customerClaimsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getCustomerClaimsFieldBuilder() : null;
+          } else {
+            customerClaimsBuilder_.addAllMessages(other.customerClaims_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -518,6 +616,19 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 26
+            case 34: {
+              ai.chalk.protos.chalk.auth.v1.CustomClaim m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.auth.v1.CustomClaim.parser(),
+                      extensionRegistry);
+              if (customerClaimsBuilder_ == null) {
+                ensureCustomerClaimsIsMutable();
+                customerClaims_.add(m);
+              } else {
+                customerClaimsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -794,6 +905,246 @@ private static final long serialVersionUID = 0L;
         featurePermissions_ = null;
       }
       return featurePermissionsBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim> customerClaims_ =
+      java.util.Collections.emptyList();
+    private void ensureCustomerClaimsIsMutable() {
+      if (!((bitField0_ & 0x00000004) != 0)) {
+        customerClaims_ = new java.util.ArrayList<ai.chalk.protos.chalk.auth.v1.CustomClaim>(customerClaims_);
+        bitField0_ |= 0x00000004;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.auth.v1.CustomClaim, ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder, ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder> customerClaimsBuilder_;
+
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim> getCustomerClaimsList() {
+      if (customerClaimsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(customerClaims_);
+      } else {
+        return customerClaimsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public int getCustomerClaimsCount() {
+      if (customerClaimsBuilder_ == null) {
+        return customerClaims_.size();
+      } else {
+        return customerClaimsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.CustomClaim getCustomerClaims(int index) {
+      if (customerClaimsBuilder_ == null) {
+        return customerClaims_.get(index);
+      } else {
+        return customerClaimsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder setCustomerClaims(
+        int index, ai.chalk.protos.chalk.auth.v1.CustomClaim value) {
+      if (customerClaimsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.set(index, value);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder setCustomerClaims(
+        int index, ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder builderForValue) {
+      if (customerClaimsBuilder_ == null) {
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        customerClaimsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder addCustomerClaims(ai.chalk.protos.chalk.auth.v1.CustomClaim value) {
+      if (customerClaimsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.add(value);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder addCustomerClaims(
+        int index, ai.chalk.protos.chalk.auth.v1.CustomClaim value) {
+      if (customerClaimsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.add(index, value);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder addCustomerClaims(
+        ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder builderForValue) {
+      if (customerClaimsBuilder_ == null) {
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.add(builderForValue.build());
+        onChanged();
+      } else {
+        customerClaimsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder addCustomerClaims(
+        int index, ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder builderForValue) {
+      if (customerClaimsBuilder_ == null) {
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        customerClaimsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder addAllCustomerClaims(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.auth.v1.CustomClaim> values) {
+      if (customerClaimsBuilder_ == null) {
+        ensureCustomerClaimsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, customerClaims_);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder clearCustomerClaims() {
+      if (customerClaimsBuilder_ == null) {
+        customerClaims_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public Builder removeCustomerClaims(int index) {
+      if (customerClaimsBuilder_ == null) {
+        ensureCustomerClaimsIsMutable();
+        customerClaims_.remove(index);
+        onChanged();
+      } else {
+        customerClaimsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder getCustomerClaimsBuilder(
+        int index) {
+      return getCustomerClaimsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder getCustomerClaimsOrBuilder(
+        int index) {
+      if (customerClaimsBuilder_ == null) {
+        return customerClaims_.get(index);  } else {
+        return customerClaimsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder> 
+         getCustomerClaimsOrBuilderList() {
+      if (customerClaimsBuilder_ != null) {
+        return customerClaimsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(customerClaims_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder addCustomerClaimsBuilder() {
+      return getCustomerClaimsFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.auth.v1.CustomClaim.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder addCustomerClaimsBuilder(
+        int index) {
+      return getCustomerClaimsFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.auth.v1.CustomClaim.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder> 
+         getCustomerClaimsBuilderList() {
+      return getCustomerClaimsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.auth.v1.CustomClaim, ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder, ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder> 
+        getCustomerClaimsFieldBuilder() {
+      if (customerClaimsBuilder_ == null) {
+        customerClaimsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.auth.v1.CustomClaim, ai.chalk.protos.chalk.auth.v1.CustomClaim.Builder, ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder>(
+                customerClaims_,
+                ((bitField0_ & 0x00000004) != 0),
+                getParentForChildren(),
+                isClean());
+        customerClaims_ = null;
+      }
+      return customerClaimsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

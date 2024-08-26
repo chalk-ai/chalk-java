@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private NamedQuery() {
     name_ = "";
+    queryVersion_ = "";
     input_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     output_ =
@@ -27,6 +28,7 @@ private static final long serialVersionUID = 0L;
     description_ = "";
     owner_ = "";
     fileName_ = "";
+    deploymentId_ = "";
   }
 
   @java.lang.Override
@@ -105,15 +107,51 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int VERSION_FIELD_NUMBER = 2;
-  private long version_ = 0L;
+  public static final int QUERY_VERSION_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object queryVersion_ = "";
   /**
-   * <code>int64 version = 2 [json_name = "version"];</code>
-   * @return The version.
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return Whether the queryVersion field is set.
    */
   @java.lang.Override
-  public long getVersion() {
-    return version_;
+  public boolean hasQueryVersion() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return The queryVersion.
+   */
+  @java.lang.Override
+  public java.lang.String getQueryVersion() {
+    java.lang.Object ref = queryVersion_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      queryVersion_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+   * @return The bytes for queryVersion.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getQueryVersionBytes() {
+    java.lang.Object ref = queryVersion_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      queryVersion_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int INPUT_FIELD_NUMBER = 3;
@@ -236,7 +274,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasDescription() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>optional string description = 6 [json_name = "description"];</code>
@@ -283,7 +321,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasOwner() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>optional string owner = 7 [json_name = "owner"];</code>
@@ -597,6 +635,65 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int DEPLOYMENT_ID_FIELD_NUMBER = 12;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object deploymentId_ = "";
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return Whether the deploymentId field is set.
+   */
+  @java.lang.Override
+  public boolean hasDeploymentId() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return The deploymentId.
+   */
+  @java.lang.Override
+  public java.lang.String getDeploymentId() {
+    java.lang.Object ref = deploymentId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      deploymentId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * required
+   * </pre>
+   *
+   * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+   * @return The bytes for deploymentId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDeploymentIdBytes() {
+    java.lang.Object ref = deploymentId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      deploymentId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -614,8 +711,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
     }
-    if (version_ != 0L) {
-      output.writeInt64(2, version_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, queryVersion_);
     }
     for (int i = 0; i < input_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, input_.getRaw(i));
@@ -626,10 +723,10 @@ java.lang.String defaultValue) {
     for (int i = 0; i < tags_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, tags_.getRaw(i));
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (((bitField0_ & 0x00000002) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 6, description_);
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (((bitField0_ & 0x00000004) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 7, owner_);
     }
     com.google.protobuf.GeneratedMessageV3
@@ -653,6 +750,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 11, fileName_);
     }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 12, deploymentId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -665,9 +765,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
     }
-    if (version_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(2, version_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, queryVersion_);
     }
     {
       int dataSize = 0;
@@ -693,10 +792,10 @@ java.lang.String defaultValue) {
       size += dataSize;
       size += 1 * getTagsList().size();
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, description_);
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, owner_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
@@ -732,6 +831,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, fileName_);
     }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, deploymentId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -749,8 +851,11 @@ java.lang.String defaultValue) {
 
     if (!getName()
         .equals(other.getName())) return false;
-    if (getVersion()
-        != other.getVersion()) return false;
+    if (hasQueryVersion() != other.hasQueryVersion()) return false;
+    if (hasQueryVersion()) {
+      if (!getQueryVersion()
+          .equals(other.getQueryVersion())) return false;
+    }
     if (!getInputList()
         .equals(other.getInputList())) return false;
     if (!getOutputList()
@@ -775,6 +880,11 @@ java.lang.String defaultValue) {
         other.internalGetPlannerOptions())) return false;
     if (!getFileName()
         .equals(other.getFileName())) return false;
+    if (hasDeploymentId() != other.hasDeploymentId()) return false;
+    if (hasDeploymentId()) {
+      if (!getDeploymentId()
+          .equals(other.getDeploymentId())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -788,9 +898,10 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + VERSION_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getVersion());
+    if (hasQueryVersion()) {
+      hash = (37 * hash) + QUERY_VERSION_FIELD_NUMBER;
+      hash = (53 * hash) + getQueryVersion().hashCode();
+    }
     if (getInputCount() > 0) {
       hash = (37 * hash) + INPUT_FIELD_NUMBER;
       hash = (53 * hash) + getInputList().hashCode();
@@ -825,6 +936,10 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + FILE_NAME_FIELD_NUMBER;
     hash = (53 * hash) + getFileName().hashCode();
+    if (hasDeploymentId()) {
+      hash = (37 * hash) + DEPLOYMENT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getDeploymentId().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -987,7 +1102,7 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       name_ = "";
-      version_ = 0L;
+      queryVersion_ = "";
       input_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       output_ =
@@ -1000,6 +1115,7 @@ java.lang.String defaultValue) {
       internalGetMutableStaleness().clear();
       internalGetMutablePlannerOptions().clear();
       fileName_ = "";
+      deploymentId_ = "";
       return this;
     }
 
@@ -1036,8 +1152,10 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.name_ = name_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.version_ = version_;
+        result.queryVersion_ = queryVersion_;
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         input_.makeImmutable();
@@ -1051,14 +1169,13 @@ java.lang.String defaultValue) {
         tags_.makeImmutable();
         result.tags_ = tags_;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.description_ = description_;
-        to_bitField0_ |= 0x00000001;
+        to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000040) != 0)) {
         result.owner_ = owner_;
-        to_bitField0_ |= 0x00000002;
+        to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000080) != 0)) {
         result.meta_ = internalGetMeta();
@@ -1073,6 +1190,10 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.fileName_ = fileName_;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.deploymentId_ = deploymentId_;
+        to_bitField0_ |= 0x00000008;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1126,8 +1247,10 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (other.getVersion() != 0L) {
-        setVersion(other.getVersion());
+      if (other.hasQueryVersion()) {
+        queryVersion_ = other.queryVersion_;
+        bitField0_ |= 0x00000002;
+        onChanged();
       }
       if (!other.input_.isEmpty()) {
         if (input_.isEmpty()) {
@@ -1183,6 +1306,11 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000400;
         onChanged();
       }
+      if (other.hasDeploymentId()) {
+        deploymentId_ = other.deploymentId_;
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1214,11 +1342,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 16: {
-              version_ = input.readInt64();
+            case 18: {
+              queryVersion_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
-            } // case 16
+            } // case 18
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
               ensureInputIsMutable();
@@ -1279,6 +1407,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000400;
               break;
             } // case 90
+            case 98: {
+              deploymentId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 98
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1368,34 +1501,81 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private long version_ ;
+    private java.lang.Object queryVersion_ = "";
     /**
-     * <code>int64 version = 2 [json_name = "version"];</code>
-     * @return The version.
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+     * @return Whether the queryVersion field is set.
      */
-    @java.lang.Override
-    public long getVersion() {
-      return version_;
+    public boolean hasQueryVersion() {
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>int64 version = 2 [json_name = "version"];</code>
-     * @param value The version to set.
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+     * @return The queryVersion.
+     */
+    public java.lang.String getQueryVersion() {
+      java.lang.Object ref = queryVersion_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        queryVersion_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+     * @return The bytes for queryVersion.
+     */
+    public com.google.protobuf.ByteString
+        getQueryVersionBytes() {
+      java.lang.Object ref = queryVersion_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        queryVersion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+     * @param value The queryVersion to set.
      * @return This builder for chaining.
      */
-    public Builder setVersion(long value) {
-
-      version_ = value;
+    public Builder setQueryVersion(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      queryVersion_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 version = 2 [json_name = "version"];</code>
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearVersion() {
+    public Builder clearQueryVersion() {
+      queryVersion_ = getDefaultInstance().getQueryVersion();
       bitField0_ = (bitField0_ & ~0x00000002);
-      version_ = 0L;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string query_version = 2 [json_name = "queryVersion"];</code>
+     * @param value The bytes for queryVersion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryVersionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      queryVersion_ = value;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -2368,6 +2548,109 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       fileName_ = value;
       bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object deploymentId_ = "";
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @return Whether the deploymentId field is set.
+     */
+    public boolean hasDeploymentId() {
+      return ((bitField0_ & 0x00000800) != 0);
+    }
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @return The deploymentId.
+     */
+    public java.lang.String getDeploymentId() {
+      java.lang.Object ref = deploymentId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        deploymentId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @return The bytes for deploymentId.
+     */
+    public com.google.protobuf.ByteString
+        getDeploymentIdBytes() {
+      java.lang.Object ref = deploymentId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deploymentId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @param value The deploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      deploymentId_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDeploymentId() {
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+      bitField0_ = (bitField0_ & ~0x00000800);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * required
+     * </pre>
+     *
+     * <code>optional string deployment_id = 12 [json_name = "deploymentId"];</code>
+     * @param value The bytes for deploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }

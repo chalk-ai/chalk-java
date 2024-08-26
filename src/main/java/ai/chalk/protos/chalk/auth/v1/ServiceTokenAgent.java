@@ -269,7 +269,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @return A list containing the customClaims.
    */
   @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
@@ -279,7 +279,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @return The count of customClaims.
    */
   @java.lang.Deprecated public int getCustomClaimsCount() {
@@ -288,7 +288,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @param index The index of the element to return.
    * @return The customClaims at the given index.
    */
@@ -298,7 +298,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @param index The index of the value to return.
    * @return The bytes of the customClaims at the given index.
    */
@@ -1427,7 +1427,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @return A list containing the customClaims.
      */
     @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
@@ -1438,7 +1438,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @return The count of customClaims.
      */
     @java.lang.Deprecated public int getCustomClaimsCount() {
@@ -1447,7 +1447,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param index The index of the element to return.
      * @return The customClaims at the given index.
      */
@@ -1457,7 +1457,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param index The index of the value to return.
      * @return The bytes of the customClaims at the given index.
      */
@@ -1468,7 +1468,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param index The index to set the value at.
      * @param value The customClaims to set.
      * @return This builder for chaining.
@@ -1485,7 +1485,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param value The customClaims to add.
      * @return This builder for chaining.
      */
@@ -1501,7 +1501,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param values The customClaims to add.
      * @return This builder for chaining.
      */
@@ -1517,7 +1517,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearCustomClaims() {
@@ -1530,7 +1530,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=33
+     *     See chalk/auth/v1/agent.proto;l=34
      * @param value The bytes of the customClaims to add.
      * @return This builder for chaining.
      */

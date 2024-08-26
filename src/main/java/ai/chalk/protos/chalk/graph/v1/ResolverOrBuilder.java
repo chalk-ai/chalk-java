@@ -313,4 +313,15 @@ public interface ResolverOrBuilder extends
    * @return The isStatic.
    */
   boolean getIsStatic();
+
+  /**
+   * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+   * @return Whether the isTotal field is set.
+   */
+  boolean hasIsTotal();
+  /**
+   * <code>optional bool is_total = 19 [json_name = "isTotal"];</code>
+   * @return The isTotal.
+   */
+  boolean getIsTotal();
 }

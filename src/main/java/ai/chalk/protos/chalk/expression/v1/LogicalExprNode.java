@@ -39,46 +39,94 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.expression.v1.LogicalExprNode.class, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder.class);
   }
 
+  private int exprFormCase_ = 0;
+  @SuppressWarnings("serial")
+  private java.lang.Object exprForm_;
+  public enum ExprFormCase
+      implements com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+    IDENTIFIER(35),
+    GET_ATTRIBUTE(36),
+    GET_SUBSCRIPT(37),
+    CALL(38),
+    LITERAL_VALUE(39),
+    EXPRFORM_NOT_SET(0);
+    private final int value;
+    private ExprFormCase(int value) {
+      this.value = value;
+    }
+    /**
+     * @param value The number of the enum to look for.
+     * @return The enum associated with the given number.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ExprFormCase valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static ExprFormCase forNumber(int value) {
+      switch (value) {
+        case 35: return IDENTIFIER;
+        case 36: return GET_ATTRIBUTE;
+        case 37: return GET_SUBSCRIPT;
+        case 38: return CALL;
+        case 39: return LITERAL_VALUE;
+        case 0: return EXPRFORM_NOT_SET;
+        default: return null;
+      }
+    }
+    public int getNumber() {
+      return this.value;
+    }
+  };
+
+  public ExprFormCase
+  getExprFormCase() {
+    return ExprFormCase.forNumber(
+        exprFormCase_);
+  }
+
   private int exprTypeCase_ = 0;
   @SuppressWarnings("serial")
   private java.lang.Object exprType_;
   public enum ExprTypeCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    COLUMN(1),
-    ALIAS(2),
-    LITERAL(3),
-    BINARY_EXPR(4),
-    AGGREGATE_EXPR(5),
-    IS_NULL_EXPR(6),
-    IS_NOT_NULL_EXPR(7),
-    NOT_EXPR(8),
-    BETWEEN(9),
-    CASE(10),
-    CAST(11),
-    SORT(12),
-    NEGATIVE(13),
-    IN_LIST(14),
-    WILDCARD(15),
-    SCALAR_FUNCTION(16),
-    TRY_CAST(17),
-    WINDOW_EXPR(18),
-    AGGREGATE_UDF_EXPR(19),
-    SCALAR_UDF_EXPR(20),
-    GET_INDEXED_FIELD(21),
-    GROUPING_SET(22),
-    CUBE(23),
-    ROLLUP(24),
-    IS_TRUE(25),
-    IS_FALSE(26),
-    IS_UNKNOWN(27),
-    IS_NOT_TRUE(28),
-    IS_NOT_FALSE(29),
-    IS_NOT_UNKNOWN(30),
-    LIKE(31),
-    ILIKE(32),
-    SIMILAR_TO(33),
-    PLACEHOLDER(34),
+    @java.lang.Deprecated COLUMN(1),
+    @java.lang.Deprecated ALIAS(2),
+    @java.lang.Deprecated LITERAL(3),
+    @java.lang.Deprecated BINARY_EXPR(4),
+    @java.lang.Deprecated AGGREGATE_EXPR(5),
+    @java.lang.Deprecated IS_NULL_EXPR(6),
+    @java.lang.Deprecated IS_NOT_NULL_EXPR(7),
+    @java.lang.Deprecated NOT_EXPR(8),
+    @java.lang.Deprecated BETWEEN(9),
+    @java.lang.Deprecated CASE(10),
+    @java.lang.Deprecated CAST(11),
+    @java.lang.Deprecated SORT(12),
+    @java.lang.Deprecated NEGATIVE(13),
+    @java.lang.Deprecated IN_LIST(14),
+    @java.lang.Deprecated WILDCARD(15),
+    @java.lang.Deprecated SCALAR_FUNCTION(16),
+    @java.lang.Deprecated TRY_CAST(17),
+    @java.lang.Deprecated WINDOW_EXPR(18),
+    @java.lang.Deprecated AGGREGATE_UDF_EXPR(19),
+    @java.lang.Deprecated SCALAR_UDF_EXPR(20),
+    @java.lang.Deprecated GET_INDEXED_FIELD(21),
+    @java.lang.Deprecated GROUPING_SET(22),
+    @java.lang.Deprecated CUBE(23),
+    @java.lang.Deprecated ROLLUP(24),
+    @java.lang.Deprecated IS_TRUE(25),
+    @java.lang.Deprecated IS_FALSE(26),
+    @java.lang.Deprecated IS_UNKNOWN(27),
+    @java.lang.Deprecated IS_NOT_TRUE(28),
+    @java.lang.Deprecated IS_NOT_FALSE(29),
+    @java.lang.Deprecated IS_NOT_UNKNOWN(30),
+    @java.lang.Deprecated LIKE(31),
+    @java.lang.Deprecated ILIKE(32),
+    @java.lang.Deprecated SIMILAR_TO(33),
+    @java.lang.Deprecated PLACEHOLDER(34),
     EXPRTYPE_NOT_SET(0);
     private final int value;
     private ExprTypeCase(int value) {
@@ -145,17 +193,174 @@ private static final long serialVersionUID = 0L;
         exprTypeCase_);
   }
 
+  public static final int IDENTIFIER_FIELD_NUMBER = 35;
+  /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   * @return Whether the identifier field is set.
+   */
+  @java.lang.Override
+  public boolean hasIdentifier() {
+    return exprFormCase_ == 35;
+  }
+  /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   * @return The identifier.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.Identifier getIdentifier() {
+    if (exprFormCase_ == 35) {
+       return (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder getIdentifierOrBuilder() {
+    if (exprFormCase_ == 35) {
+       return (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+  }
+
+  public static final int GET_ATTRIBUTE_FIELD_NUMBER = 36;
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   * @return Whether the getAttribute field is set.
+   */
+  @java.lang.Override
+  public boolean hasGetAttribute() {
+    return exprFormCase_ == 36;
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   * @return The getAttribute.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprGetAttribute getGetAttribute() {
+    if (exprFormCase_ == 36) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder getGetAttributeOrBuilder() {
+    if (exprFormCase_ == 36) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+  }
+
+  public static final int GET_SUBSCRIPT_FIELD_NUMBER = 37;
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   * @return Whether the getSubscript field is set.
+   */
+  @java.lang.Override
+  public boolean hasGetSubscript() {
+    return exprFormCase_ == 37;
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   * @return The getSubscript.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprGetSubscript getGetSubscript() {
+    if (exprFormCase_ == 37) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder getGetSubscriptOrBuilder() {
+    if (exprFormCase_ == 37) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+  }
+
+  public static final int CALL_FIELD_NUMBER = 38;
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   * @return Whether the call field is set.
+   */
+  @java.lang.Override
+  public boolean hasCall() {
+    return exprFormCase_ == 38;
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   * @return The call.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprCall getCall() {
+    if (exprFormCase_ == 38) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder getCallOrBuilder() {
+    if (exprFormCase_ == 38) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+  }
+
+  public static final int LITERAL_VALUE_FIELD_NUMBER = 39;
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   * @return Whether the literalValue field is set.
+   */
+  @java.lang.Override
+  public boolean hasLiteralValue() {
+    return exprFormCase_ == 39;
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   * @return The literalValue.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprLiteral getLiteralValue() {
+    if (exprFormCase_ == 39) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder getLiteralValueOrBuilder() {
+    if (exprFormCase_ == 39) {
+       return (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_;
+    }
+    return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+  }
+
   public static final int COLUMN_FIELD_NUMBER = 1;
   /**
    * <pre>
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=64
    * @return Whether the column field is set.
    */
   @java.lang.Override
-  public boolean hasColumn() {
+  @java.lang.Deprecated public boolean hasColumn() {
     return exprTypeCase_ == 1;
   }
   /**
@@ -163,11 +368,13 @@ private static final long serialVersionUID = 0L;
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=64
    * @return The column.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.Column getColumn() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Column getColumn() {
     if (exprTypeCase_ == 1) {
        return (ai.chalk.protos.chalk.expression.v1.Column) exprType_;
     }
@@ -178,10 +385,10 @@ private static final long serialVersionUID = 0L;
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder() {
     if (exprTypeCase_ == 1) {
        return (ai.chalk.protos.chalk.expression.v1.Column) exprType_;
     }
@@ -194,11 +401,13 @@ private static final long serialVersionUID = 0L;
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=67
    * @return Whether the alias field is set.
    */
   @java.lang.Override
-  public boolean hasAlias() {
+  @java.lang.Deprecated public boolean hasAlias() {
     return exprTypeCase_ == 2;
   }
   /**
@@ -206,11 +415,13 @@ private static final long serialVersionUID = 0L;
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=67
    * @return The alias.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AliasNode getAlias() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AliasNode getAlias() {
     if (exprTypeCase_ == 2) {
        return (ai.chalk.protos.chalk.expression.v1.AliasNode) exprType_;
     }
@@ -221,10 +432,10 @@ private static final long serialVersionUID = 0L;
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder() {
     if (exprTypeCase_ == 2) {
        return (ai.chalk.protos.chalk.expression.v1.AliasNode) exprType_;
     }
@@ -233,29 +444,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int LITERAL_FIELD_NUMBER = 3;
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=69
    * @return Whether the literal field is set.
    */
   @java.lang.Override
-  public boolean hasLiteral() {
+  @java.lang.Deprecated public boolean hasLiteral() {
     return exprTypeCase_ == 3;
   }
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=69
    * @return The literal.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral() {
     if (exprTypeCase_ == 3) {
        return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) exprType_;
     }
     return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
   }
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder() {
     if (exprTypeCase_ == 3) {
        return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) exprType_;
     }
@@ -268,11 +483,13 @@ private static final long serialVersionUID = 0L;
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return Whether the binaryExpr field is set.
    */
   @java.lang.Override
-  public boolean hasBinaryExpr() {
+  @java.lang.Deprecated public boolean hasBinaryExpr() {
     return exprTypeCase_ == 4;
   }
   /**
@@ -280,11 +497,13 @@ private static final long serialVersionUID = 0L;
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return The binaryExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr() {
     if (exprTypeCase_ == 4) {
        return (ai.chalk.protos.chalk.expression.v1.BinaryExprNode) exprType_;
     }
@@ -295,10 +514,10 @@ private static final long serialVersionUID = 0L;
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder() {
     if (exprTypeCase_ == 4) {
        return (ai.chalk.protos.chalk.expression.v1.BinaryExprNode) exprType_;
     }
@@ -311,11 +530,13 @@ private static final long serialVersionUID = 0L;
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return Whether the aggregateExpr field is set.
    */
   @java.lang.Override
-  public boolean hasAggregateExpr() {
+  @java.lang.Deprecated public boolean hasAggregateExpr() {
     return exprTypeCase_ == 5;
   }
   /**
@@ -323,11 +544,13 @@ private static final long serialVersionUID = 0L;
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return The aggregateExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr() {
     if (exprTypeCase_ == 5) {
        return (ai.chalk.protos.chalk.expression.v1.AggregateExprNode) exprType_;
     }
@@ -338,10 +561,10 @@ private static final long serialVersionUID = 0L;
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder() {
     if (exprTypeCase_ == 5) {
        return (ai.chalk.protos.chalk.expression.v1.AggregateExprNode) exprType_;
     }
@@ -354,11 +577,13 @@ private static final long serialVersionUID = 0L;
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=78
    * @return Whether the isNullExpr field is set.
    */
   @java.lang.Override
-  public boolean hasIsNullExpr() {
+  @java.lang.Deprecated public boolean hasIsNullExpr() {
     return exprTypeCase_ == 6;
   }
   /**
@@ -366,11 +591,13 @@ private static final long serialVersionUID = 0L;
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=78
    * @return The isNullExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr() {
     if (exprTypeCase_ == 6) {
        return (ai.chalk.protos.chalk.expression.v1.IsNull) exprType_;
     }
@@ -381,10 +608,10 @@ private static final long serialVersionUID = 0L;
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder() {
     if (exprTypeCase_ == 6) {
        return (ai.chalk.protos.chalk.expression.v1.IsNull) exprType_;
     }
@@ -393,29 +620,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_NOT_NULL_EXPR_FIELD_NUMBER = 7;
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=79
    * @return Whether the isNotNullExpr field is set.
    */
   @java.lang.Override
-  public boolean hasIsNotNullExpr() {
+  @java.lang.Deprecated public boolean hasIsNotNullExpr() {
     return exprTypeCase_ == 7;
   }
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=79
    * @return The isNotNullExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr() {
     if (exprTypeCase_ == 7) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotNull) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsNotNull.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder() {
     if (exprTypeCase_ == 7) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotNull) exprType_;
     }
@@ -424,29 +655,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int NOT_EXPR_FIELD_NUMBER = 8;
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return Whether the notExpr field is set.
    */
   @java.lang.Override
-  public boolean hasNotExpr() {
+  @java.lang.Deprecated public boolean hasNotExpr() {
     return exprTypeCase_ == 8;
   }
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return The notExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.Not getNotExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Not getNotExpr() {
     if (exprTypeCase_ == 8) {
        return (ai.chalk.protos.chalk.expression.v1.Not) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.Not.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder() {
     if (exprTypeCase_ == 8) {
        return (ai.chalk.protos.chalk.expression.v1.Not) exprType_;
     }
@@ -455,29 +690,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int BETWEEN_FIELD_NUMBER = 9;
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=82
    * @return Whether the between field is set.
    */
   @java.lang.Override
-  public boolean hasBetween() {
+  @java.lang.Deprecated public boolean hasBetween() {
     return exprTypeCase_ == 9;
   }
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=82
    * @return The between.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween() {
     if (exprTypeCase_ == 9) {
        return (ai.chalk.protos.chalk.expression.v1.BetweenNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.BetweenNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder() {
     if (exprTypeCase_ == 9) {
        return (ai.chalk.protos.chalk.expression.v1.BetweenNode) exprType_;
     }
@@ -486,29 +725,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int CASE_FIELD_NUMBER = 10;
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return Whether the case field is set.
    */
   @java.lang.Override
-  public boolean hasCase() {
+  @java.lang.Deprecated public boolean hasCase() {
     return exprTypeCase_ == 10;
   }
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return The case.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CaseNode getCase() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CaseNode getCase() {
     if (exprTypeCase_ == 10) {
        return (ai.chalk.protos.chalk.expression.v1.CaseNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.CaseNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder() {
     if (exprTypeCase_ == 10) {
        return (ai.chalk.protos.chalk.expression.v1.CaseNode) exprType_;
     }
@@ -517,29 +760,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int CAST_FIELD_NUMBER = 11;
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=84
    * @return Whether the cast field is set.
    */
   @java.lang.Override
-  public boolean hasCast() {
+  @java.lang.Deprecated public boolean hasCast() {
     return exprTypeCase_ == 11;
   }
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=84
    * @return The cast.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CastNode getCast() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CastNode getCast() {
     if (exprTypeCase_ == 11) {
        return (ai.chalk.protos.chalk.expression.v1.CastNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.CastNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder() {
     if (exprTypeCase_ == 11) {
        return (ai.chalk.protos.chalk.expression.v1.CastNode) exprType_;
     }
@@ -548,29 +795,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int SORT_FIELD_NUMBER = 12;
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=85
    * @return Whether the sort field is set.
    */
   @java.lang.Override
-  public boolean hasSort() {
+  @java.lang.Deprecated public boolean hasSort() {
     return exprTypeCase_ == 12;
   }
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=85
    * @return The sort.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.SortExprNode getSort() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SortExprNode getSort() {
     if (exprTypeCase_ == 12) {
        return (ai.chalk.protos.chalk.expression.v1.SortExprNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.SortExprNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder() {
     if (exprTypeCase_ == 12) {
        return (ai.chalk.protos.chalk.expression.v1.SortExprNode) exprType_;
     }
@@ -579,29 +830,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int NEGATIVE_FIELD_NUMBER = 13;
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return Whether the negative field is set.
    */
   @java.lang.Override
-  public boolean hasNegative() {
+  @java.lang.Deprecated public boolean hasNegative() {
     return exprTypeCase_ == 13;
   }
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return The negative.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative() {
     if (exprTypeCase_ == 13) {
        return (ai.chalk.protos.chalk.expression.v1.NegativeNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.NegativeNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder() {
     if (exprTypeCase_ == 13) {
        return (ai.chalk.protos.chalk.expression.v1.NegativeNode) exprType_;
     }
@@ -610,29 +865,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IN_LIST_FIELD_NUMBER = 14;
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return Whether the inList field is set.
    */
   @java.lang.Override
-  public boolean hasInList() {
+  @java.lang.Deprecated public boolean hasInList() {
     return exprTypeCase_ == 14;
   }
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return The inList.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.InListNode getInList() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.InListNode getInList() {
     if (exprTypeCase_ == 14) {
        return (ai.chalk.protos.chalk.expression.v1.InListNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.InListNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder() {
     if (exprTypeCase_ == 14) {
        return (ai.chalk.protos.chalk.expression.v1.InListNode) exprType_;
     }
@@ -641,29 +900,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int WILDCARD_FIELD_NUMBER = 15;
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return Whether the wildcard field is set.
    */
   @java.lang.Override
-  public boolean hasWildcard() {
+  @java.lang.Deprecated public boolean hasWildcard() {
     return exprTypeCase_ == 15;
   }
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return The wildcard.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard() {
     if (exprTypeCase_ == 15) {
        return (ai.chalk.protos.chalk.expression.v1.Wildcard) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.Wildcard.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder() {
     if (exprTypeCase_ == 15) {
        return (ai.chalk.protos.chalk.expression.v1.Wildcard) exprType_;
     }
@@ -672,29 +935,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int SCALAR_FUNCTION_FIELD_NUMBER = 16;
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=89
    * @return Whether the scalarFunction field is set.
    */
   @java.lang.Override
-  public boolean hasScalarFunction() {
+  @java.lang.Deprecated public boolean hasScalarFunction() {
     return exprTypeCase_ == 16;
   }
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=89
    * @return The scalarFunction.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction() {
     if (exprTypeCase_ == 16) {
        return (ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder() {
     if (exprTypeCase_ == 16) {
        return (ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode) exprType_;
     }
@@ -703,29 +970,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int TRY_CAST_FIELD_NUMBER = 17;
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return Whether the tryCast field is set.
    */
   @java.lang.Override
-  public boolean hasTryCast() {
+  @java.lang.Deprecated public boolean hasTryCast() {
     return exprTypeCase_ == 17;
   }
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return The tryCast.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast() {
     if (exprTypeCase_ == 17) {
        return (ai.chalk.protos.chalk.expression.v1.TryCastNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.TryCastNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder() {
     if (exprTypeCase_ == 17) {
        return (ai.chalk.protos.chalk.expression.v1.TryCastNode) exprType_;
     }
@@ -738,11 +1009,13 @@ private static final long serialVersionUID = 0L;
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return Whether the windowExpr field is set.
    */
   @java.lang.Override
-  public boolean hasWindowExpr() {
+  @java.lang.Deprecated public boolean hasWindowExpr() {
     return exprTypeCase_ == 18;
   }
   /**
@@ -750,11 +1023,13 @@ private static final long serialVersionUID = 0L;
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return The windowExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr() {
     if (exprTypeCase_ == 18) {
        return (ai.chalk.protos.chalk.expression.v1.WindowExprNode) exprType_;
     }
@@ -765,10 +1040,10 @@ private static final long serialVersionUID = 0L;
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder() {
     if (exprTypeCase_ == 18) {
        return (ai.chalk.protos.chalk.expression.v1.WindowExprNode) exprType_;
     }
@@ -781,11 +1056,13 @@ private static final long serialVersionUID = 0L;
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return Whether the aggregateUdfExpr field is set.
    */
   @java.lang.Override
-  public boolean hasAggregateUdfExpr() {
+  @java.lang.Deprecated public boolean hasAggregateUdfExpr() {
     return exprTypeCase_ == 19;
   }
   /**
@@ -793,11 +1070,13 @@ private static final long serialVersionUID = 0L;
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return The aggregateUdfExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr() {
     if (exprTypeCase_ == 19) {
        return (ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode) exprType_;
     }
@@ -808,10 +1087,10 @@ private static final long serialVersionUID = 0L;
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder() {
     if (exprTypeCase_ == 19) {
        return (ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode) exprType_;
     }
@@ -824,11 +1103,13 @@ private static final long serialVersionUID = 0L;
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=99
    * @return Whether the scalarUdfExpr field is set.
    */
   @java.lang.Override
-  public boolean hasScalarUdfExpr() {
+  @java.lang.Deprecated public boolean hasScalarUdfExpr() {
     return exprTypeCase_ == 20;
   }
   /**
@@ -836,11 +1117,13 @@ private static final long serialVersionUID = 0L;
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=99
    * @return The scalarUdfExpr.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr() {
     if (exprTypeCase_ == 20) {
        return (ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode) exprType_;
     }
@@ -851,10 +1134,10 @@ private static final long serialVersionUID = 0L;
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder() {
     if (exprTypeCase_ == 20) {
        return (ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode) exprType_;
     }
@@ -863,29 +1146,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int GET_INDEXED_FIELD_FIELD_NUMBER = 21;
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return Whether the getIndexedField field is set.
    */
   @java.lang.Override
-  public boolean hasGetIndexedField() {
+  @java.lang.Deprecated public boolean hasGetIndexedField() {
     return exprTypeCase_ == 21;
   }
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return The getIndexedField.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField() {
     if (exprTypeCase_ == 21) {
        return (ai.chalk.protos.chalk.expression.v1.GetIndexedField) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.GetIndexedField.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder() {
     if (exprTypeCase_ == 21) {
        return (ai.chalk.protos.chalk.expression.v1.GetIndexedField) exprType_;
     }
@@ -894,29 +1181,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int GROUPING_SET_FIELD_NUMBER = 22;
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=103
    * @return Whether the groupingSet field is set.
    */
   @java.lang.Override
-  public boolean hasGroupingSet() {
+  @java.lang.Deprecated public boolean hasGroupingSet() {
     return exprTypeCase_ == 22;
   }
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=103
    * @return The groupingSet.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet() {
     if (exprTypeCase_ == 22) {
        return (ai.chalk.protos.chalk.expression.v1.GroupingSetNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.GroupingSetNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder() {
     if (exprTypeCase_ == 22) {
        return (ai.chalk.protos.chalk.expression.v1.GroupingSetNode) exprType_;
     }
@@ -925,29 +1216,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int CUBE_FIELD_NUMBER = 23;
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=105
    * @return Whether the cube field is set.
    */
   @java.lang.Override
-  public boolean hasCube() {
+  @java.lang.Deprecated public boolean hasCube() {
     return exprTypeCase_ == 23;
   }
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=105
    * @return The cube.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CubeNode getCube() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CubeNode getCube() {
     if (exprTypeCase_ == 23) {
        return (ai.chalk.protos.chalk.expression.v1.CubeNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.CubeNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder() {
     if (exprTypeCase_ == 23) {
        return (ai.chalk.protos.chalk.expression.v1.CubeNode) exprType_;
     }
@@ -956,29 +1251,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int ROLLUP_FIELD_NUMBER = 24;
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return Whether the rollup field is set.
    */
   @java.lang.Override
-  public boolean hasRollup() {
+  @java.lang.Deprecated public boolean hasRollup() {
     return exprTypeCase_ == 24;
   }
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return The rollup.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.RollupNode getRollup() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.RollupNode getRollup() {
     if (exprTypeCase_ == 24) {
        return (ai.chalk.protos.chalk.expression.v1.RollupNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.RollupNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder() {
     if (exprTypeCase_ == 24) {
        return (ai.chalk.protos.chalk.expression.v1.RollupNode) exprType_;
     }
@@ -987,29 +1286,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_TRUE_FIELD_NUMBER = 25;
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return Whether the isTrue field is set.
    */
   @java.lang.Override
-  public boolean hasIsTrue() {
+  @java.lang.Deprecated public boolean hasIsTrue() {
     return exprTypeCase_ == 25;
   }
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return The isTrue.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue() {
     if (exprTypeCase_ == 25) {
        return (ai.chalk.protos.chalk.expression.v1.IsTrue) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsTrue.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder() {
     if (exprTypeCase_ == 25) {
        return (ai.chalk.protos.chalk.expression.v1.IsTrue) exprType_;
     }
@@ -1018,29 +1321,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_FALSE_FIELD_NUMBER = 26;
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=110
    * @return Whether the isFalse field is set.
    */
   @java.lang.Override
-  public boolean hasIsFalse() {
+  @java.lang.Deprecated public boolean hasIsFalse() {
     return exprTypeCase_ == 26;
   }
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=110
    * @return The isFalse.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse() {
     if (exprTypeCase_ == 26) {
        return (ai.chalk.protos.chalk.expression.v1.IsFalse) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsFalse.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder() {
     if (exprTypeCase_ == 26) {
        return (ai.chalk.protos.chalk.expression.v1.IsFalse) exprType_;
     }
@@ -1049,29 +1356,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_UNKNOWN_FIELD_NUMBER = 27;
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return Whether the isUnknown field is set.
    */
   @java.lang.Override
-  public boolean hasIsUnknown() {
+  @java.lang.Deprecated public boolean hasIsUnknown() {
     return exprTypeCase_ == 27;
   }
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return The isUnknown.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown() {
     if (exprTypeCase_ == 27) {
        return (ai.chalk.protos.chalk.expression.v1.IsUnknown) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsUnknown.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder() {
     if (exprTypeCase_ == 27) {
        return (ai.chalk.protos.chalk.expression.v1.IsUnknown) exprType_;
     }
@@ -1080,29 +1391,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_NOT_TRUE_FIELD_NUMBER = 28;
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=112
    * @return Whether the isNotTrue field is set.
    */
   @java.lang.Override
-  public boolean hasIsNotTrue() {
+  @java.lang.Deprecated public boolean hasIsNotTrue() {
     return exprTypeCase_ == 28;
   }
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=112
    * @return The isNotTrue.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue() {
     if (exprTypeCase_ == 28) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotTrue) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsNotTrue.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder() {
     if (exprTypeCase_ == 28) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotTrue) exprType_;
     }
@@ -1111,29 +1426,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_NOT_FALSE_FIELD_NUMBER = 29;
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return Whether the isNotFalse field is set.
    */
   @java.lang.Override
-  public boolean hasIsNotFalse() {
+  @java.lang.Deprecated public boolean hasIsNotFalse() {
     return exprTypeCase_ == 29;
   }
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return The isNotFalse.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse() {
     if (exprTypeCase_ == 29) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotFalse) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsNotFalse.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder() {
     if (exprTypeCase_ == 29) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotFalse) exprType_;
     }
@@ -1142,29 +1461,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int IS_NOT_UNKNOWN_FIELD_NUMBER = 30;
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=114
    * @return Whether the isNotUnknown field is set.
    */
   @java.lang.Override
-  public boolean hasIsNotUnknown() {
+  @java.lang.Deprecated public boolean hasIsNotUnknown() {
     return exprTypeCase_ == 30;
   }
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=114
    * @return The isNotUnknown.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown() {
     if (exprTypeCase_ == 30) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotUnknown) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.IsNotUnknown.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder() {
     if (exprTypeCase_ == 30) {
        return (ai.chalk.protos.chalk.expression.v1.IsNotUnknown) exprType_;
     }
@@ -1173,29 +1496,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int LIKE_FIELD_NUMBER = 31;
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return Whether the like field is set.
    */
   @java.lang.Override
-  public boolean hasLike() {
+  @java.lang.Deprecated public boolean hasLike() {
     return exprTypeCase_ == 31;
   }
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return The like.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.LikeNode getLike() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.LikeNode getLike() {
     if (exprTypeCase_ == 31) {
        return (ai.chalk.protos.chalk.expression.v1.LikeNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.LikeNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder() {
     if (exprTypeCase_ == 31) {
        return (ai.chalk.protos.chalk.expression.v1.LikeNode) exprType_;
     }
@@ -1204,29 +1531,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int ILIKE_FIELD_NUMBER = 32;
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=116
    * @return Whether the ilike field is set.
    */
   @java.lang.Override
-  public boolean hasIlike() {
+  @java.lang.Deprecated public boolean hasIlike() {
     return exprTypeCase_ == 32;
   }
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=116
    * @return The ilike.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike() {
     if (exprTypeCase_ == 32) {
        return (ai.chalk.protos.chalk.expression.v1.ILikeNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.ILikeNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder() {
     if (exprTypeCase_ == 32) {
        return (ai.chalk.protos.chalk.expression.v1.ILikeNode) exprType_;
     }
@@ -1235,29 +1566,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int SIMILAR_TO_FIELD_NUMBER = 33;
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return Whether the similarTo field is set.
    */
   @java.lang.Override
-  public boolean hasSimilarTo() {
+  @java.lang.Deprecated public boolean hasSimilarTo() {
     return exprTypeCase_ == 33;
   }
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return The similarTo.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo() {
     if (exprTypeCase_ == 33) {
        return (ai.chalk.protos.chalk.expression.v1.SimilarToNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.SimilarToNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder() {
     if (exprTypeCase_ == 33) {
        return (ai.chalk.protos.chalk.expression.v1.SimilarToNode) exprType_;
     }
@@ -1266,29 +1601,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int PLACEHOLDER_FIELD_NUMBER = 34;
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return Whether the placeholder field is set.
    */
   @java.lang.Override
-  public boolean hasPlaceholder() {
+  @java.lang.Deprecated public boolean hasPlaceholder() {
     return exprTypeCase_ == 34;
   }
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return The placeholder.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder() {
     if (exprTypeCase_ == 34) {
        return (ai.chalk.protos.chalk.expression.v1.PlaceholderNode) exprType_;
     }
     return ai.chalk.protos.chalk.expression.v1.PlaceholderNode.getDefaultInstance();
   }
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder() {
     if (exprTypeCase_ == 34) {
        return (ai.chalk.protos.chalk.expression.v1.PlaceholderNode) exprType_;
     }
@@ -1410,6 +1749,21 @@ private static final long serialVersionUID = 0L;
     }
     if (exprTypeCase_ == 34) {
       output.writeMessage(34, (ai.chalk.protos.chalk.expression.v1.PlaceholderNode) exprType_);
+    }
+    if (exprFormCase_ == 35) {
+      output.writeMessage(35, (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_);
+    }
+    if (exprFormCase_ == 36) {
+      output.writeMessage(36, (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_);
+    }
+    if (exprFormCase_ == 37) {
+      output.writeMessage(37, (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_);
+    }
+    if (exprFormCase_ == 38) {
+      output.writeMessage(38, (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_);
+    }
+    if (exprFormCase_ == 39) {
+      output.writeMessage(39, (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1556,6 +1910,26 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(34, (ai.chalk.protos.chalk.expression.v1.PlaceholderNode) exprType_);
     }
+    if (exprFormCase_ == 35) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(35, (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_);
+    }
+    if (exprFormCase_ == 36) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(36, (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_);
+    }
+    if (exprFormCase_ == 37) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(37, (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_);
+    }
+    if (exprFormCase_ == 38) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(38, (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_);
+    }
+    if (exprFormCase_ == 39) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(39, (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1571,6 +1945,31 @@ private static final long serialVersionUID = 0L;
     }
     ai.chalk.protos.chalk.expression.v1.LogicalExprNode other = (ai.chalk.protos.chalk.expression.v1.LogicalExprNode) obj;
 
+    if (!getExprFormCase().equals(other.getExprFormCase())) return false;
+    switch (exprFormCase_) {
+      case 35:
+        if (!getIdentifier()
+            .equals(other.getIdentifier())) return false;
+        break;
+      case 36:
+        if (!getGetAttribute()
+            .equals(other.getGetAttribute())) return false;
+        break;
+      case 37:
+        if (!getGetSubscript()
+            .equals(other.getGetSubscript())) return false;
+        break;
+      case 38:
+        if (!getCall()
+            .equals(other.getCall())) return false;
+        break;
+      case 39:
+        if (!getLiteralValue()
+            .equals(other.getLiteralValue())) return false;
+        break;
+      case 0:
+      default:
+    }
     if (!getExprTypeCase().equals(other.getExprTypeCase())) return false;
     switch (exprTypeCase_) {
       case 1:
@@ -1723,6 +2122,30 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    switch (exprFormCase_) {
+      case 35:
+        hash = (37 * hash) + IDENTIFIER_FIELD_NUMBER;
+        hash = (53 * hash) + getIdentifier().hashCode();
+        break;
+      case 36:
+        hash = (37 * hash) + GET_ATTRIBUTE_FIELD_NUMBER;
+        hash = (53 * hash) + getGetAttribute().hashCode();
+        break;
+      case 37:
+        hash = (37 * hash) + GET_SUBSCRIPT_FIELD_NUMBER;
+        hash = (53 * hash) + getGetSubscript().hashCode();
+        break;
+      case 38:
+        hash = (37 * hash) + CALL_FIELD_NUMBER;
+        hash = (53 * hash) + getCall().hashCode();
+        break;
+      case 39:
+        hash = (37 * hash) + LITERAL_VALUE_FIELD_NUMBER;
+        hash = (53 * hash) + getLiteralValue().hashCode();
+        break;
+      case 0:
+      default:
+    }
     switch (exprTypeCase_) {
       case 1:
         hash = (37 * hash) + COLUMN_FIELD_NUMBER;
@@ -1995,6 +2418,21 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       bitField1_ = 0;
+      if (identifierBuilder_ != null) {
+        identifierBuilder_.clear();
+      }
+      if (getAttributeBuilder_ != null) {
+        getAttributeBuilder_.clear();
+      }
+      if (getSubscriptBuilder_ != null) {
+        getSubscriptBuilder_.clear();
+      }
+      if (callBuilder_ != null) {
+        callBuilder_.clear();
+      }
+      if (literalValueBuilder_ != null) {
+        literalValueBuilder_.clear();
+      }
       if (columnBuilder_ != null) {
         columnBuilder_.clear();
       }
@@ -2097,6 +2535,8 @@ private static final long serialVersionUID = 0L;
       if (placeholderBuilder_ != null) {
         placeholderBuilder_.clear();
       }
+      exprFormCase_ = 0;
+      exprForm_ = null;
       exprTypeCase_ = 0;
       exprType_ = null;
       return this;
@@ -2141,6 +2581,28 @@ private static final long serialVersionUID = 0L;
     }
 
     private void buildPartialOneofs(ai.chalk.protos.chalk.expression.v1.LogicalExprNode result) {
+      result.exprFormCase_ = exprFormCase_;
+      result.exprForm_ = this.exprForm_;
+      if (exprFormCase_ == 35 &&
+          identifierBuilder_ != null) {
+        result.exprForm_ = identifierBuilder_.build();
+      }
+      if (exprFormCase_ == 36 &&
+          getAttributeBuilder_ != null) {
+        result.exprForm_ = getAttributeBuilder_.build();
+      }
+      if (exprFormCase_ == 37 &&
+          getSubscriptBuilder_ != null) {
+        result.exprForm_ = getSubscriptBuilder_.build();
+      }
+      if (exprFormCase_ == 38 &&
+          callBuilder_ != null) {
+        result.exprForm_ = callBuilder_.build();
+      }
+      if (exprFormCase_ == 39 &&
+          literalValueBuilder_ != null) {
+        result.exprForm_ = literalValueBuilder_.build();
+      }
       result.exprTypeCase_ = exprTypeCase_;
       result.exprType_ = this.exprType_;
       if (exprTypeCase_ == 1 &&
@@ -2325,6 +2787,31 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ai.chalk.protos.chalk.expression.v1.LogicalExprNode other) {
       if (other == ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance()) return this;
+      switch (other.getExprFormCase()) {
+        case IDENTIFIER: {
+          mergeIdentifier(other.getIdentifier());
+          break;
+        }
+        case GET_ATTRIBUTE: {
+          mergeGetAttribute(other.getGetAttribute());
+          break;
+        }
+        case GET_SUBSCRIPT: {
+          mergeGetSubscript(other.getGetSubscript());
+          break;
+        }
+        case CALL: {
+          mergeCall(other.getCall());
+          break;
+        }
+        case LITERAL_VALUE: {
+          mergeLiteralValue(other.getLiteralValue());
+          break;
+        }
+        case EXPRFORM_NOT_SET: {
+          break;
+        }
+      }
       switch (other.getExprTypeCase()) {
         case COLUMN: {
           mergeColumn(other.getColumn());
@@ -2730,6 +3217,41 @@ private static final long serialVersionUID = 0L;
               exprTypeCase_ = 34;
               break;
             } // case 274
+            case 282: {
+              input.readMessage(
+                  getIdentifierFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprFormCase_ = 35;
+              break;
+            } // case 282
+            case 290: {
+              input.readMessage(
+                  getGetAttributeFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprFormCase_ = 36;
+              break;
+            } // case 290
+            case 298: {
+              input.readMessage(
+                  getGetSubscriptFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprFormCase_ = 37;
+              break;
+            } // case 298
+            case 306: {
+              input.readMessage(
+                  getCallFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprFormCase_ = 38;
+              break;
+            } // case 306
+            case 314: {
+              input.readMessage(
+                  getLiteralValueFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprFormCase_ = 39;
+              break;
+            } // case 314
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2745,6 +3267,21 @@ private static final long serialVersionUID = 0L;
       } // finally
       return this;
     }
+    private int exprFormCase_ = 0;
+    private java.lang.Object exprForm_;
+    public ExprFormCase
+        getExprFormCase() {
+      return ExprFormCase.forNumber(
+          exprFormCase_);
+    }
+
+    public Builder clearExprForm() {
+      exprFormCase_ = 0;
+      exprForm_ = null;
+      onChanged();
+      return this;
+    }
+
     private int exprTypeCase_ = 0;
     private java.lang.Object exprType_;
     public ExprTypeCase
@@ -2764,17 +3301,729 @@ private static final long serialVersionUID = 0L;
     private int bitField1_;
 
     private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.Identifier, ai.chalk.protos.chalk.expression.v1.Identifier.Builder, ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder> identifierBuilder_;
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     * @return Whether the identifier field is set.
+     */
+    @java.lang.Override
+    public boolean hasIdentifier() {
+      return exprFormCase_ == 35;
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     * @return The identifier.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.Identifier getIdentifier() {
+      if (identifierBuilder_ == null) {
+        if (exprFormCase_ == 35) {
+          return (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+      } else {
+        if (exprFormCase_ == 35) {
+          return identifierBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    public Builder setIdentifier(ai.chalk.protos.chalk.expression.v1.Identifier value) {
+      if (identifierBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        exprForm_ = value;
+        onChanged();
+      } else {
+        identifierBuilder_.setMessage(value);
+      }
+      exprFormCase_ = 35;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    public Builder setIdentifier(
+        ai.chalk.protos.chalk.expression.v1.Identifier.Builder builderForValue) {
+      if (identifierBuilder_ == null) {
+        exprForm_ = builderForValue.build();
+        onChanged();
+      } else {
+        identifierBuilder_.setMessage(builderForValue.build());
+      }
+      exprFormCase_ = 35;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    public Builder mergeIdentifier(ai.chalk.protos.chalk.expression.v1.Identifier value) {
+      if (identifierBuilder_ == null) {
+        if (exprFormCase_ == 35 &&
+            exprForm_ != ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance()) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.Identifier.newBuilder((ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          exprForm_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprFormCase_ == 35) {
+          identifierBuilder_.mergeFrom(value);
+        } else {
+          identifierBuilder_.setMessage(value);
+        }
+      }
+      exprFormCase_ = 35;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    public Builder clearIdentifier() {
+      if (identifierBuilder_ == null) {
+        if (exprFormCase_ == 35) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprFormCase_ == 35) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+        }
+        identifierBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.Identifier.Builder getIdentifierBuilder() {
+      return getIdentifierFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder getIdentifierOrBuilder() {
+      if ((exprFormCase_ == 35) && (identifierBuilder_ != null)) {
+        return identifierBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprFormCase_ == 35) {
+          return (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.Identifier, ai.chalk.protos.chalk.expression.v1.Identifier.Builder, ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder> 
+        getIdentifierFieldBuilder() {
+      if (identifierBuilder_ == null) {
+        if (!(exprFormCase_ == 35)) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.Identifier.getDefaultInstance();
+        }
+        identifierBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.Identifier, ai.chalk.protos.chalk.expression.v1.Identifier.Builder, ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder>(
+                (ai.chalk.protos.chalk.expression.v1.Identifier) exprForm_,
+                getParentForChildren(),
+                isClean());
+        exprForm_ = null;
+      }
+      exprFormCase_ = 35;
+      onChanged();
+      return identifierBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprGetAttribute, ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder> getAttributeBuilder_;
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     * @return Whether the getAttribute field is set.
+     */
+    @java.lang.Override
+    public boolean hasGetAttribute() {
+      return exprFormCase_ == 36;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     * @return The getAttribute.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprGetAttribute getGetAttribute() {
+      if (getAttributeBuilder_ == null) {
+        if (exprFormCase_ == 36) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+      } else {
+        if (exprFormCase_ == 36) {
+          return getAttributeBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    public Builder setGetAttribute(ai.chalk.protos.chalk.expression.v1.ExprGetAttribute value) {
+      if (getAttributeBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        exprForm_ = value;
+        onChanged();
+      } else {
+        getAttributeBuilder_.setMessage(value);
+      }
+      exprFormCase_ = 36;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    public Builder setGetAttribute(
+        ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.Builder builderForValue) {
+      if (getAttributeBuilder_ == null) {
+        exprForm_ = builderForValue.build();
+        onChanged();
+      } else {
+        getAttributeBuilder_.setMessage(builderForValue.build());
+      }
+      exprFormCase_ = 36;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    public Builder mergeGetAttribute(ai.chalk.protos.chalk.expression.v1.ExprGetAttribute value) {
+      if (getAttributeBuilder_ == null) {
+        if (exprFormCase_ == 36 &&
+            exprForm_ != ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance()) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.newBuilder((ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          exprForm_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprFormCase_ == 36) {
+          getAttributeBuilder_.mergeFrom(value);
+        } else {
+          getAttributeBuilder_.setMessage(value);
+        }
+      }
+      exprFormCase_ = 36;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    public Builder clearGetAttribute() {
+      if (getAttributeBuilder_ == null) {
+        if (exprFormCase_ == 36) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprFormCase_ == 36) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+        }
+        getAttributeBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.Builder getGetAttributeBuilder() {
+      return getGetAttributeFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder getGetAttributeOrBuilder() {
+      if ((exprFormCase_ == 36) && (getAttributeBuilder_ != null)) {
+        return getAttributeBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprFormCase_ == 36) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprGetAttribute, ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder> 
+        getGetAttributeFieldBuilder() {
+      if (getAttributeBuilder_ == null) {
+        if (!(exprFormCase_ == 36)) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.getDefaultInstance();
+        }
+        getAttributeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.ExprGetAttribute, ai.chalk.protos.chalk.expression.v1.ExprGetAttribute.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder>(
+                (ai.chalk.protos.chalk.expression.v1.ExprGetAttribute) exprForm_,
+                getParentForChildren(),
+                isClean());
+        exprForm_ = null;
+      }
+      exprFormCase_ = 36;
+      onChanged();
+      return getAttributeBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprGetSubscript, ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder> getSubscriptBuilder_;
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     * @return Whether the getSubscript field is set.
+     */
+    @java.lang.Override
+    public boolean hasGetSubscript() {
+      return exprFormCase_ == 37;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     * @return The getSubscript.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprGetSubscript getGetSubscript() {
+      if (getSubscriptBuilder_ == null) {
+        if (exprFormCase_ == 37) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+      } else {
+        if (exprFormCase_ == 37) {
+          return getSubscriptBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    public Builder setGetSubscript(ai.chalk.protos.chalk.expression.v1.ExprGetSubscript value) {
+      if (getSubscriptBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        exprForm_ = value;
+        onChanged();
+      } else {
+        getSubscriptBuilder_.setMessage(value);
+      }
+      exprFormCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    public Builder setGetSubscript(
+        ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.Builder builderForValue) {
+      if (getSubscriptBuilder_ == null) {
+        exprForm_ = builderForValue.build();
+        onChanged();
+      } else {
+        getSubscriptBuilder_.setMessage(builderForValue.build());
+      }
+      exprFormCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    public Builder mergeGetSubscript(ai.chalk.protos.chalk.expression.v1.ExprGetSubscript value) {
+      if (getSubscriptBuilder_ == null) {
+        if (exprFormCase_ == 37 &&
+            exprForm_ != ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance()) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.newBuilder((ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          exprForm_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprFormCase_ == 37) {
+          getSubscriptBuilder_.mergeFrom(value);
+        } else {
+          getSubscriptBuilder_.setMessage(value);
+        }
+      }
+      exprFormCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    public Builder clearGetSubscript() {
+      if (getSubscriptBuilder_ == null) {
+        if (exprFormCase_ == 37) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprFormCase_ == 37) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+        }
+        getSubscriptBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.Builder getGetSubscriptBuilder() {
+      return getGetSubscriptFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder getGetSubscriptOrBuilder() {
+      if ((exprFormCase_ == 37) && (getSubscriptBuilder_ != null)) {
+        return getSubscriptBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprFormCase_ == 37) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprGetSubscript, ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder> 
+        getGetSubscriptFieldBuilder() {
+      if (getSubscriptBuilder_ == null) {
+        if (!(exprFormCase_ == 37)) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.getDefaultInstance();
+        }
+        getSubscriptBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.ExprGetSubscript, ai.chalk.protos.chalk.expression.v1.ExprGetSubscript.Builder, ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder>(
+                (ai.chalk.protos.chalk.expression.v1.ExprGetSubscript) exprForm_,
+                getParentForChildren(),
+                isClean());
+        exprForm_ = null;
+      }
+      exprFormCase_ = 37;
+      onChanged();
+      return getSubscriptBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprCall, ai.chalk.protos.chalk.expression.v1.ExprCall.Builder, ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder> callBuilder_;
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     * @return Whether the call field is set.
+     */
+    @java.lang.Override
+    public boolean hasCall() {
+      return exprFormCase_ == 38;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     * @return The call.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprCall getCall() {
+      if (callBuilder_ == null) {
+        if (exprFormCase_ == 38) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+      } else {
+        if (exprFormCase_ == 38) {
+          return callBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    public Builder setCall(ai.chalk.protos.chalk.expression.v1.ExprCall value) {
+      if (callBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        exprForm_ = value;
+        onChanged();
+      } else {
+        callBuilder_.setMessage(value);
+      }
+      exprFormCase_ = 38;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    public Builder setCall(
+        ai.chalk.protos.chalk.expression.v1.ExprCall.Builder builderForValue) {
+      if (callBuilder_ == null) {
+        exprForm_ = builderForValue.build();
+        onChanged();
+      } else {
+        callBuilder_.setMessage(builderForValue.build());
+      }
+      exprFormCase_ = 38;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    public Builder mergeCall(ai.chalk.protos.chalk.expression.v1.ExprCall value) {
+      if (callBuilder_ == null) {
+        if (exprFormCase_ == 38 &&
+            exprForm_ != ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance()) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprCall.newBuilder((ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          exprForm_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprFormCase_ == 38) {
+          callBuilder_.mergeFrom(value);
+        } else {
+          callBuilder_.setMessage(value);
+        }
+      }
+      exprFormCase_ = 38;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    public Builder clearCall() {
+      if (callBuilder_ == null) {
+        if (exprFormCase_ == 38) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprFormCase_ == 38) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+        }
+        callBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.ExprCall.Builder getCallBuilder() {
+      return getCallFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder getCallOrBuilder() {
+      if ((exprFormCase_ == 38) && (callBuilder_ != null)) {
+        return callBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprFormCase_ == 38) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprCall, ai.chalk.protos.chalk.expression.v1.ExprCall.Builder, ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder> 
+        getCallFieldBuilder() {
+      if (callBuilder_ == null) {
+        if (!(exprFormCase_ == 38)) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprCall.getDefaultInstance();
+        }
+        callBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.ExprCall, ai.chalk.protos.chalk.expression.v1.ExprCall.Builder, ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder>(
+                (ai.chalk.protos.chalk.expression.v1.ExprCall) exprForm_,
+                getParentForChildren(),
+                isClean());
+        exprForm_ = null;
+      }
+      exprFormCase_ = 38;
+      onChanged();
+      return callBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprLiteral, ai.chalk.protos.chalk.expression.v1.ExprLiteral.Builder, ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder> literalValueBuilder_;
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     * @return Whether the literalValue field is set.
+     */
+    @java.lang.Override
+    public boolean hasLiteralValue() {
+      return exprFormCase_ == 39;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     * @return The literalValue.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprLiteral getLiteralValue() {
+      if (literalValueBuilder_ == null) {
+        if (exprFormCase_ == 39) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+      } else {
+        if (exprFormCase_ == 39) {
+          return literalValueBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    public Builder setLiteralValue(ai.chalk.protos.chalk.expression.v1.ExprLiteral value) {
+      if (literalValueBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        exprForm_ = value;
+        onChanged();
+      } else {
+        literalValueBuilder_.setMessage(value);
+      }
+      exprFormCase_ = 39;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    public Builder setLiteralValue(
+        ai.chalk.protos.chalk.expression.v1.ExprLiteral.Builder builderForValue) {
+      if (literalValueBuilder_ == null) {
+        exprForm_ = builderForValue.build();
+        onChanged();
+      } else {
+        literalValueBuilder_.setMessage(builderForValue.build());
+      }
+      exprFormCase_ = 39;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    public Builder mergeLiteralValue(ai.chalk.protos.chalk.expression.v1.ExprLiteral value) {
+      if (literalValueBuilder_ == null) {
+        if (exprFormCase_ == 39 &&
+            exprForm_ != ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance()) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprLiteral.newBuilder((ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          exprForm_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprFormCase_ == 39) {
+          literalValueBuilder_.mergeFrom(value);
+        } else {
+          literalValueBuilder_.setMessage(value);
+        }
+      }
+      exprFormCase_ = 39;
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    public Builder clearLiteralValue() {
+      if (literalValueBuilder_ == null) {
+        if (exprFormCase_ == 39) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprFormCase_ == 39) {
+          exprFormCase_ = 0;
+          exprForm_ = null;
+        }
+        literalValueBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.ExprLiteral.Builder getLiteralValueBuilder() {
+      return getLiteralValueFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder getLiteralValueOrBuilder() {
+      if ((exprFormCase_ == 39) && (literalValueBuilder_ != null)) {
+        return literalValueBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprFormCase_ == 39) {
+          return (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_;
+        }
+        return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.ExprLiteral, ai.chalk.protos.chalk.expression.v1.ExprLiteral.Builder, ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder> 
+        getLiteralValueFieldBuilder() {
+      if (literalValueBuilder_ == null) {
+        if (!(exprFormCase_ == 39)) {
+          exprForm_ = ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
+        }
+        literalValueBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.ExprLiteral, ai.chalk.protos.chalk.expression.v1.ExprLiteral.Builder, ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder>(
+                (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_,
+                getParentForChildren(),
+                isClean());
+        exprForm_ = null;
+      }
+      exprFormCase_ = 39;
+      onChanged();
+      return literalValueBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Column, ai.chalk.protos.chalk.expression.v1.Column.Builder, ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder> columnBuilder_;
     /**
      * <pre>
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=64
      * @return Whether the column field is set.
      */
     @java.lang.Override
-    public boolean hasColumn() {
+    @java.lang.Deprecated public boolean hasColumn() {
       return exprTypeCase_ == 1;
     }
     /**
@@ -2782,11 +4031,13 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=64
      * @return The column.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.Column getColumn() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Column getColumn() {
       if (columnBuilder_ == null) {
         if (exprTypeCase_ == 1) {
           return (ai.chalk.protos.chalk.expression.v1.Column) exprType_;
@@ -2804,9 +4055,9 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
-    public Builder setColumn(ai.chalk.protos.chalk.expression.v1.Column value) {
+    @java.lang.Deprecated public Builder setColumn(ai.chalk.protos.chalk.expression.v1.Column value) {
       if (columnBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2824,9 +4075,9 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
-    public Builder setColumn(
+    @java.lang.Deprecated public Builder setColumn(
         ai.chalk.protos.chalk.expression.v1.Column.Builder builderForValue) {
       if (columnBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -2842,9 +4093,9 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
-    public Builder mergeColumn(ai.chalk.protos.chalk.expression.v1.Column value) {
+    @java.lang.Deprecated public Builder mergeColumn(ai.chalk.protos.chalk.expression.v1.Column value) {
       if (columnBuilder_ == null) {
         if (exprTypeCase_ == 1 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.Column.getDefaultInstance()) {
@@ -2869,9 +4120,9 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
-    public Builder clearColumn() {
+    @java.lang.Deprecated public Builder clearColumn() {
       if (columnBuilder_ == null) {
         if (exprTypeCase_ == 1) {
           exprTypeCase_ = 0;
@@ -2892,9 +4143,9 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.Column.Builder getColumnBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Column.Builder getColumnBuilder() {
       return getColumnFieldBuilder().getBuilder();
     }
     /**
@@ -2902,10 +4153,10 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder() {
       if ((exprTypeCase_ == 1) && (columnBuilder_ != null)) {
         return columnBuilder_.getMessageOrBuilder();
       } else {
@@ -2920,7 +4171,7 @@ private static final long serialVersionUID = 0L;
      * column references
      * </pre>
      *
-     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+     * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Column, ai.chalk.protos.chalk.expression.v1.Column.Builder, ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder> 
@@ -2948,11 +4199,13 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=67
      * @return Whether the alias field is set.
      */
     @java.lang.Override
-    public boolean hasAlias() {
+    @java.lang.Deprecated public boolean hasAlias() {
       return exprTypeCase_ == 2;
     }
     /**
@@ -2960,11 +4213,13 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=67
      * @return The alias.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AliasNode getAlias() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AliasNode getAlias() {
       if (aliasBuilder_ == null) {
         if (exprTypeCase_ == 2) {
           return (ai.chalk.protos.chalk.expression.v1.AliasNode) exprType_;
@@ -2982,9 +4237,9 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
-    public Builder setAlias(ai.chalk.protos.chalk.expression.v1.AliasNode value) {
+    @java.lang.Deprecated public Builder setAlias(ai.chalk.protos.chalk.expression.v1.AliasNode value) {
       if (aliasBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3002,9 +4257,9 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
-    public Builder setAlias(
+    @java.lang.Deprecated public Builder setAlias(
         ai.chalk.protos.chalk.expression.v1.AliasNode.Builder builderForValue) {
       if (aliasBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3020,9 +4275,9 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
-    public Builder mergeAlias(ai.chalk.protos.chalk.expression.v1.AliasNode value) {
+    @java.lang.Deprecated public Builder mergeAlias(ai.chalk.protos.chalk.expression.v1.AliasNode value) {
       if (aliasBuilder_ == null) {
         if (exprTypeCase_ == 2 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.AliasNode.getDefaultInstance()) {
@@ -3047,9 +4302,9 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
-    public Builder clearAlias() {
+    @java.lang.Deprecated public Builder clearAlias() {
       if (aliasBuilder_ == null) {
         if (exprTypeCase_ == 2) {
           exprTypeCase_ = 0;
@@ -3070,9 +4325,9 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.AliasNode.Builder getAliasBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AliasNode.Builder getAliasBuilder() {
       return getAliasFieldBuilder().getBuilder();
     }
     /**
@@ -3080,10 +4335,10 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder() {
       if ((exprTypeCase_ == 2) && (aliasBuilder_ != null)) {
         return aliasBuilder_.getMessageOrBuilder();
       } else {
@@ -3098,7 +4353,7 @@ private static final long serialVersionUID = 0L;
      * alias
      * </pre>
      *
-     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+     * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.AliasNode, ai.chalk.protos.chalk.expression.v1.AliasNode.Builder, ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder> 
@@ -3122,19 +4377,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> literalBuilder_;
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=69
      * @return Whether the literal field is set.
      */
     @java.lang.Override
-    public boolean hasLiteral() {
+    @java.lang.Deprecated public boolean hasLiteral() {
       return exprTypeCase_ == 3;
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=69
      * @return The literal.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral() {
       if (literalBuilder_ == null) {
         if (exprTypeCase_ == 3) {
           return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) exprType_;
@@ -3148,9 +4407,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
-    public Builder setLiteral(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+    @java.lang.Deprecated public Builder setLiteral(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
       if (literalBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3164,9 +4423,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
-    public Builder setLiteral(
+    @java.lang.Deprecated public Builder setLiteral(
         ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
       if (literalBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3178,9 +4437,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
-    public Builder mergeLiteral(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+    @java.lang.Deprecated public Builder mergeLiteral(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
       if (literalBuilder_ == null) {
         if (exprTypeCase_ == 3 &&
             exprType_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
@@ -3201,9 +4460,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
-    public Builder clearLiteral() {
+    @java.lang.Deprecated public Builder clearLiteral() {
       if (literalBuilder_ == null) {
         if (exprTypeCase_ == 3) {
           exprTypeCase_ = 0;
@@ -3220,16 +4479,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getLiteralBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getLiteralBuilder() {
       return getLiteralFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder() {
       if ((exprTypeCase_ == 3) && (literalBuilder_ != null)) {
         return literalBuilder_.getMessageOrBuilder();
       } else {
@@ -3240,7 +4499,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+     * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
@@ -3268,11 +4527,13 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=72
      * @return Whether the binaryExpr field is set.
      */
     @java.lang.Override
-    public boolean hasBinaryExpr() {
+    @java.lang.Deprecated public boolean hasBinaryExpr() {
       return exprTypeCase_ == 4;
     }
     /**
@@ -3280,11 +4541,13 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=72
      * @return The binaryExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr() {
       if (binaryExprBuilder_ == null) {
         if (exprTypeCase_ == 4) {
           return (ai.chalk.protos.chalk.expression.v1.BinaryExprNode) exprType_;
@@ -3302,9 +4565,9 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
-    public Builder setBinaryExpr(ai.chalk.protos.chalk.expression.v1.BinaryExprNode value) {
+    @java.lang.Deprecated public Builder setBinaryExpr(ai.chalk.protos.chalk.expression.v1.BinaryExprNode value) {
       if (binaryExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3322,9 +4585,9 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
-    public Builder setBinaryExpr(
+    @java.lang.Deprecated public Builder setBinaryExpr(
         ai.chalk.protos.chalk.expression.v1.BinaryExprNode.Builder builderForValue) {
       if (binaryExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3340,9 +4603,9 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
-    public Builder mergeBinaryExpr(ai.chalk.protos.chalk.expression.v1.BinaryExprNode value) {
+    @java.lang.Deprecated public Builder mergeBinaryExpr(ai.chalk.protos.chalk.expression.v1.BinaryExprNode value) {
       if (binaryExprBuilder_ == null) {
         if (exprTypeCase_ == 4 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.BinaryExprNode.getDefaultInstance()) {
@@ -3367,9 +4630,9 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
-    public Builder clearBinaryExpr() {
+    @java.lang.Deprecated public Builder clearBinaryExpr() {
       if (binaryExprBuilder_ == null) {
         if (exprTypeCase_ == 4) {
           exprTypeCase_ = 0;
@@ -3390,9 +4653,9 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.BinaryExprNode.Builder getBinaryExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BinaryExprNode.Builder getBinaryExprBuilder() {
       return getBinaryExprFieldBuilder().getBuilder();
     }
     /**
@@ -3400,10 +4663,10 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder() {
       if ((exprTypeCase_ == 4) && (binaryExprBuilder_ != null)) {
         return binaryExprBuilder_.getMessageOrBuilder();
       } else {
@@ -3418,7 +4681,7 @@ private static final long serialVersionUID = 0L;
      * binary expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+     * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.BinaryExprNode, ai.chalk.protos.chalk.expression.v1.BinaryExprNode.Builder, ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder> 
@@ -3446,11 +4709,13 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=75
      * @return Whether the aggregateExpr field is set.
      */
     @java.lang.Override
-    public boolean hasAggregateExpr() {
+    @java.lang.Deprecated public boolean hasAggregateExpr() {
       return exprTypeCase_ == 5;
     }
     /**
@@ -3458,11 +4723,13 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=75
      * @return The aggregateExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr() {
       if (aggregateExprBuilder_ == null) {
         if (exprTypeCase_ == 5) {
           return (ai.chalk.protos.chalk.expression.v1.AggregateExprNode) exprType_;
@@ -3480,9 +4747,9 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
-    public Builder setAggregateExpr(ai.chalk.protos.chalk.expression.v1.AggregateExprNode value) {
+    @java.lang.Deprecated public Builder setAggregateExpr(ai.chalk.protos.chalk.expression.v1.AggregateExprNode value) {
       if (aggregateExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3500,9 +4767,9 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
-    public Builder setAggregateExpr(
+    @java.lang.Deprecated public Builder setAggregateExpr(
         ai.chalk.protos.chalk.expression.v1.AggregateExprNode.Builder builderForValue) {
       if (aggregateExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3518,9 +4785,9 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
-    public Builder mergeAggregateExpr(ai.chalk.protos.chalk.expression.v1.AggregateExprNode value) {
+    @java.lang.Deprecated public Builder mergeAggregateExpr(ai.chalk.protos.chalk.expression.v1.AggregateExprNode value) {
       if (aggregateExprBuilder_ == null) {
         if (exprTypeCase_ == 5 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.AggregateExprNode.getDefaultInstance()) {
@@ -3545,9 +4812,9 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
-    public Builder clearAggregateExpr() {
+    @java.lang.Deprecated public Builder clearAggregateExpr() {
       if (aggregateExprBuilder_ == null) {
         if (exprTypeCase_ == 5) {
           exprTypeCase_ = 0;
@@ -3568,9 +4835,9 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.AggregateExprNode.Builder getAggregateExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateExprNode.Builder getAggregateExprBuilder() {
       return getAggregateExprFieldBuilder().getBuilder();
     }
     /**
@@ -3578,10 +4845,10 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder() {
       if ((exprTypeCase_ == 5) && (aggregateExprBuilder_ != null)) {
         return aggregateExprBuilder_.getMessageOrBuilder();
       } else {
@@ -3596,7 +4863,7 @@ private static final long serialVersionUID = 0L;
      * aggregate expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.AggregateExprNode, ai.chalk.protos.chalk.expression.v1.AggregateExprNode.Builder, ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder> 
@@ -3624,11 +4891,13 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=78
      * @return Whether the isNullExpr field is set.
      */
     @java.lang.Override
-    public boolean hasIsNullExpr() {
+    @java.lang.Deprecated public boolean hasIsNullExpr() {
       return exprTypeCase_ == 6;
     }
     /**
@@ -3636,11 +4905,13 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=78
      * @return The isNullExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr() {
       if (isNullExprBuilder_ == null) {
         if (exprTypeCase_ == 6) {
           return (ai.chalk.protos.chalk.expression.v1.IsNull) exprType_;
@@ -3658,9 +4929,9 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
-    public Builder setIsNullExpr(ai.chalk.protos.chalk.expression.v1.IsNull value) {
+    @java.lang.Deprecated public Builder setIsNullExpr(ai.chalk.protos.chalk.expression.v1.IsNull value) {
       if (isNullExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3678,9 +4949,9 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
-    public Builder setIsNullExpr(
+    @java.lang.Deprecated public Builder setIsNullExpr(
         ai.chalk.protos.chalk.expression.v1.IsNull.Builder builderForValue) {
       if (isNullExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3696,9 +4967,9 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
-    public Builder mergeIsNullExpr(ai.chalk.protos.chalk.expression.v1.IsNull value) {
+    @java.lang.Deprecated public Builder mergeIsNullExpr(ai.chalk.protos.chalk.expression.v1.IsNull value) {
       if (isNullExprBuilder_ == null) {
         if (exprTypeCase_ == 6 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsNull.getDefaultInstance()) {
@@ -3723,9 +4994,9 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
-    public Builder clearIsNullExpr() {
+    @java.lang.Deprecated public Builder clearIsNullExpr() {
       if (isNullExprBuilder_ == null) {
         if (exprTypeCase_ == 6) {
           exprTypeCase_ = 0;
@@ -3746,9 +5017,9 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsNull.Builder getIsNullExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNull.Builder getIsNullExprBuilder() {
       return getIsNullExprFieldBuilder().getBuilder();
     }
     /**
@@ -3756,10 +5027,10 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder() {
       if ((exprTypeCase_ == 6) && (isNullExprBuilder_ != null)) {
         return isNullExprBuilder_.getMessageOrBuilder();
       } else {
@@ -3774,7 +5045,7 @@ private static final long serialVersionUID = 0L;
      * null checks
      * </pre>
      *
-     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNull, ai.chalk.protos.chalk.expression.v1.IsNull.Builder, ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder> 
@@ -3798,19 +5069,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotNull, ai.chalk.protos.chalk.expression.v1.IsNotNull.Builder, ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder> isNotNullExprBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=79
      * @return Whether the isNotNullExpr field is set.
      */
     @java.lang.Override
-    public boolean hasIsNotNullExpr() {
+    @java.lang.Deprecated public boolean hasIsNotNullExpr() {
       return exprTypeCase_ == 7;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=79
      * @return The isNotNullExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr() {
       if (isNotNullExprBuilder_ == null) {
         if (exprTypeCase_ == 7) {
           return (ai.chalk.protos.chalk.expression.v1.IsNotNull) exprType_;
@@ -3824,9 +5099,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
-    public Builder setIsNotNullExpr(ai.chalk.protos.chalk.expression.v1.IsNotNull value) {
+    @java.lang.Deprecated public Builder setIsNotNullExpr(ai.chalk.protos.chalk.expression.v1.IsNotNull value) {
       if (isNotNullExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3840,9 +5115,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
-    public Builder setIsNotNullExpr(
+    @java.lang.Deprecated public Builder setIsNotNullExpr(
         ai.chalk.protos.chalk.expression.v1.IsNotNull.Builder builderForValue) {
       if (isNotNullExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3854,9 +5129,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
-    public Builder mergeIsNotNullExpr(ai.chalk.protos.chalk.expression.v1.IsNotNull value) {
+    @java.lang.Deprecated public Builder mergeIsNotNullExpr(ai.chalk.protos.chalk.expression.v1.IsNotNull value) {
       if (isNotNullExprBuilder_ == null) {
         if (exprTypeCase_ == 7 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsNotNull.getDefaultInstance()) {
@@ -3877,9 +5152,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
-    public Builder clearIsNotNullExpr() {
+    @java.lang.Deprecated public Builder clearIsNotNullExpr() {
       if (isNotNullExprBuilder_ == null) {
         if (exprTypeCase_ == 7) {
           exprTypeCase_ = 0;
@@ -3896,16 +5171,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsNotNull.Builder getIsNotNullExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotNull.Builder getIsNotNullExprBuilder() {
       return getIsNotNullExprFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder() {
       if ((exprTypeCase_ == 7) && (isNotNullExprBuilder_ != null)) {
         return isNotNullExprBuilder_.getMessageOrBuilder();
       } else {
@@ -3916,7 +5191,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+     * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotNull, ai.chalk.protos.chalk.expression.v1.IsNotNull.Builder, ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder> 
@@ -3940,19 +5215,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Not, ai.chalk.protos.chalk.expression.v1.Not.Builder, ai.chalk.protos.chalk.expression.v1.NotOrBuilder> notExprBuilder_;
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=80
      * @return Whether the notExpr field is set.
      */
     @java.lang.Override
-    public boolean hasNotExpr() {
+    @java.lang.Deprecated public boolean hasNotExpr() {
       return exprTypeCase_ == 8;
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=80
      * @return The notExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.Not getNotExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Not getNotExpr() {
       if (notExprBuilder_ == null) {
         if (exprTypeCase_ == 8) {
           return (ai.chalk.protos.chalk.expression.v1.Not) exprType_;
@@ -3966,9 +5245,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
-    public Builder setNotExpr(ai.chalk.protos.chalk.expression.v1.Not value) {
+    @java.lang.Deprecated public Builder setNotExpr(ai.chalk.protos.chalk.expression.v1.Not value) {
       if (notExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -3982,9 +5261,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
-    public Builder setNotExpr(
+    @java.lang.Deprecated public Builder setNotExpr(
         ai.chalk.protos.chalk.expression.v1.Not.Builder builderForValue) {
       if (notExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -3996,9 +5275,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
-    public Builder mergeNotExpr(ai.chalk.protos.chalk.expression.v1.Not value) {
+    @java.lang.Deprecated public Builder mergeNotExpr(ai.chalk.protos.chalk.expression.v1.Not value) {
       if (notExprBuilder_ == null) {
         if (exprTypeCase_ == 8 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.Not.getDefaultInstance()) {
@@ -4019,9 +5298,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
-    public Builder clearNotExpr() {
+    @java.lang.Deprecated public Builder clearNotExpr() {
       if (notExprBuilder_ == null) {
         if (exprTypeCase_ == 8) {
           exprTypeCase_ = 0;
@@ -4038,16 +5317,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.Not.Builder getNotExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Not.Builder getNotExprBuilder() {
       return getNotExprFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder() {
       if ((exprTypeCase_ == 8) && (notExprBuilder_ != null)) {
         return notExprBuilder_.getMessageOrBuilder();
       } else {
@@ -4058,7 +5337,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+     * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Not, ai.chalk.protos.chalk.expression.v1.Not.Builder, ai.chalk.protos.chalk.expression.v1.NotOrBuilder> 
@@ -4082,19 +5361,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.BetweenNode, ai.chalk.protos.chalk.expression.v1.BetweenNode.Builder, ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder> betweenBuilder_;
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=82
      * @return Whether the between field is set.
      */
     @java.lang.Override
-    public boolean hasBetween() {
+    @java.lang.Deprecated public boolean hasBetween() {
       return exprTypeCase_ == 9;
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=82
      * @return The between.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween() {
       if (betweenBuilder_ == null) {
         if (exprTypeCase_ == 9) {
           return (ai.chalk.protos.chalk.expression.v1.BetweenNode) exprType_;
@@ -4108,9 +5391,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
-    public Builder setBetween(ai.chalk.protos.chalk.expression.v1.BetweenNode value) {
+    @java.lang.Deprecated public Builder setBetween(ai.chalk.protos.chalk.expression.v1.BetweenNode value) {
       if (betweenBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4124,9 +5407,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
-    public Builder setBetween(
+    @java.lang.Deprecated public Builder setBetween(
         ai.chalk.protos.chalk.expression.v1.BetweenNode.Builder builderForValue) {
       if (betweenBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4138,9 +5421,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
-    public Builder mergeBetween(ai.chalk.protos.chalk.expression.v1.BetweenNode value) {
+    @java.lang.Deprecated public Builder mergeBetween(ai.chalk.protos.chalk.expression.v1.BetweenNode value) {
       if (betweenBuilder_ == null) {
         if (exprTypeCase_ == 9 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.BetweenNode.getDefaultInstance()) {
@@ -4161,9 +5444,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
-    public Builder clearBetween() {
+    @java.lang.Deprecated public Builder clearBetween() {
       if (betweenBuilder_ == null) {
         if (exprTypeCase_ == 9) {
           exprTypeCase_ = 0;
@@ -4180,16 +5463,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.BetweenNode.Builder getBetweenBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BetweenNode.Builder getBetweenBuilder() {
       return getBetweenFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder() {
       if ((exprTypeCase_ == 9) && (betweenBuilder_ != null)) {
         return betweenBuilder_.getMessageOrBuilder();
       } else {
@@ -4200,7 +5483,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+     * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.BetweenNode, ai.chalk.protos.chalk.expression.v1.BetweenNode.Builder, ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder> 
@@ -4224,19 +5507,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CaseNode, ai.chalk.protos.chalk.expression.v1.CaseNode.Builder, ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder> caseBuilder_;
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=83
      * @return Whether the case field is set.
      */
     @java.lang.Override
-    public boolean hasCase() {
+    @java.lang.Deprecated public boolean hasCase() {
       return exprTypeCase_ == 10;
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=83
      * @return The case.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CaseNode getCase() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CaseNode getCase() {
       if (caseBuilder_ == null) {
         if (exprTypeCase_ == 10) {
           return (ai.chalk.protos.chalk.expression.v1.CaseNode) exprType_;
@@ -4250,9 +5537,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
-    public Builder setCase(ai.chalk.protos.chalk.expression.v1.CaseNode value) {
+    @java.lang.Deprecated public Builder setCase(ai.chalk.protos.chalk.expression.v1.CaseNode value) {
       if (caseBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4266,9 +5553,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
-    public Builder setCase(
+    @java.lang.Deprecated public Builder setCase(
         ai.chalk.protos.chalk.expression.v1.CaseNode.Builder builderForValue) {
       if (caseBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4280,9 +5567,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
-    public Builder mergeCase(ai.chalk.protos.chalk.expression.v1.CaseNode value) {
+    @java.lang.Deprecated public Builder mergeCase(ai.chalk.protos.chalk.expression.v1.CaseNode value) {
       if (caseBuilder_ == null) {
         if (exprTypeCase_ == 10 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.CaseNode.getDefaultInstance()) {
@@ -4303,9 +5590,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
-    public Builder clearCase() {
+    @java.lang.Deprecated public Builder clearCase() {
       if (caseBuilder_ == null) {
         if (exprTypeCase_ == 10) {
           exprTypeCase_ = 0;
@@ -4322,16 +5609,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.CaseNode.Builder getCaseBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CaseNode.Builder getCaseBuilder() {
       return getCaseFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder() {
       if ((exprTypeCase_ == 10) && (caseBuilder_ != null)) {
         return caseBuilder_.getMessageOrBuilder();
       } else {
@@ -4342,7 +5629,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+     * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CaseNode, ai.chalk.protos.chalk.expression.v1.CaseNode.Builder, ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder> 
@@ -4366,19 +5653,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CastNode, ai.chalk.protos.chalk.expression.v1.CastNode.Builder, ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder> castBuilder_;
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=84
      * @return Whether the cast field is set.
      */
     @java.lang.Override
-    public boolean hasCast() {
+    @java.lang.Deprecated public boolean hasCast() {
       return exprTypeCase_ == 11;
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=84
      * @return The cast.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CastNode getCast() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CastNode getCast() {
       if (castBuilder_ == null) {
         if (exprTypeCase_ == 11) {
           return (ai.chalk.protos.chalk.expression.v1.CastNode) exprType_;
@@ -4392,9 +5683,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
-    public Builder setCast(ai.chalk.protos.chalk.expression.v1.CastNode value) {
+    @java.lang.Deprecated public Builder setCast(ai.chalk.protos.chalk.expression.v1.CastNode value) {
       if (castBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4408,9 +5699,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
-    public Builder setCast(
+    @java.lang.Deprecated public Builder setCast(
         ai.chalk.protos.chalk.expression.v1.CastNode.Builder builderForValue) {
       if (castBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4422,9 +5713,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
-    public Builder mergeCast(ai.chalk.protos.chalk.expression.v1.CastNode value) {
+    @java.lang.Deprecated public Builder mergeCast(ai.chalk.protos.chalk.expression.v1.CastNode value) {
       if (castBuilder_ == null) {
         if (exprTypeCase_ == 11 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.CastNode.getDefaultInstance()) {
@@ -4445,9 +5736,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
-    public Builder clearCast() {
+    @java.lang.Deprecated public Builder clearCast() {
       if (castBuilder_ == null) {
         if (exprTypeCase_ == 11) {
           exprTypeCase_ = 0;
@@ -4464,16 +5755,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.CastNode.Builder getCastBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CastNode.Builder getCastBuilder() {
       return getCastFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder() {
       if ((exprTypeCase_ == 11) && (castBuilder_ != null)) {
         return castBuilder_.getMessageOrBuilder();
       } else {
@@ -4484,7 +5775,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+     * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CastNode, ai.chalk.protos.chalk.expression.v1.CastNode.Builder, ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder> 
@@ -4508,19 +5799,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.SortExprNode, ai.chalk.protos.chalk.expression.v1.SortExprNode.Builder, ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder> sortBuilder_;
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=85
      * @return Whether the sort field is set.
      */
     @java.lang.Override
-    public boolean hasSort() {
+    @java.lang.Deprecated public boolean hasSort() {
       return exprTypeCase_ == 12;
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=85
      * @return The sort.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.SortExprNode getSort() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SortExprNode getSort() {
       if (sortBuilder_ == null) {
         if (exprTypeCase_ == 12) {
           return (ai.chalk.protos.chalk.expression.v1.SortExprNode) exprType_;
@@ -4534,9 +5829,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
-    public Builder setSort(ai.chalk.protos.chalk.expression.v1.SortExprNode value) {
+    @java.lang.Deprecated public Builder setSort(ai.chalk.protos.chalk.expression.v1.SortExprNode value) {
       if (sortBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4550,9 +5845,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
-    public Builder setSort(
+    @java.lang.Deprecated public Builder setSort(
         ai.chalk.protos.chalk.expression.v1.SortExprNode.Builder builderForValue) {
       if (sortBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4564,9 +5859,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
-    public Builder mergeSort(ai.chalk.protos.chalk.expression.v1.SortExprNode value) {
+    @java.lang.Deprecated public Builder mergeSort(ai.chalk.protos.chalk.expression.v1.SortExprNode value) {
       if (sortBuilder_ == null) {
         if (exprTypeCase_ == 12 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.SortExprNode.getDefaultInstance()) {
@@ -4587,9 +5882,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
-    public Builder clearSort() {
+    @java.lang.Deprecated public Builder clearSort() {
       if (sortBuilder_ == null) {
         if (exprTypeCase_ == 12) {
           exprTypeCase_ = 0;
@@ -4606,16 +5901,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.SortExprNode.Builder getSortBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SortExprNode.Builder getSortBuilder() {
       return getSortFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder() {
       if ((exprTypeCase_ == 12) && (sortBuilder_ != null)) {
         return sortBuilder_.getMessageOrBuilder();
       } else {
@@ -4626,7 +5921,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+     * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.SortExprNode, ai.chalk.protos.chalk.expression.v1.SortExprNode.Builder, ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder> 
@@ -4650,19 +5945,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.NegativeNode, ai.chalk.protos.chalk.expression.v1.NegativeNode.Builder, ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder> negativeBuilder_;
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=86
      * @return Whether the negative field is set.
      */
     @java.lang.Override
-    public boolean hasNegative() {
+    @java.lang.Deprecated public boolean hasNegative() {
       return exprTypeCase_ == 13;
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=86
      * @return The negative.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative() {
       if (negativeBuilder_ == null) {
         if (exprTypeCase_ == 13) {
           return (ai.chalk.protos.chalk.expression.v1.NegativeNode) exprType_;
@@ -4676,9 +5975,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
-    public Builder setNegative(ai.chalk.protos.chalk.expression.v1.NegativeNode value) {
+    @java.lang.Deprecated public Builder setNegative(ai.chalk.protos.chalk.expression.v1.NegativeNode value) {
       if (negativeBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4692,9 +5991,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
-    public Builder setNegative(
+    @java.lang.Deprecated public Builder setNegative(
         ai.chalk.protos.chalk.expression.v1.NegativeNode.Builder builderForValue) {
       if (negativeBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4706,9 +6005,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
-    public Builder mergeNegative(ai.chalk.protos.chalk.expression.v1.NegativeNode value) {
+    @java.lang.Deprecated public Builder mergeNegative(ai.chalk.protos.chalk.expression.v1.NegativeNode value) {
       if (negativeBuilder_ == null) {
         if (exprTypeCase_ == 13 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.NegativeNode.getDefaultInstance()) {
@@ -4729,9 +6028,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
-    public Builder clearNegative() {
+    @java.lang.Deprecated public Builder clearNegative() {
       if (negativeBuilder_ == null) {
         if (exprTypeCase_ == 13) {
           exprTypeCase_ = 0;
@@ -4748,16 +6047,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.NegativeNode.Builder getNegativeBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NegativeNode.Builder getNegativeBuilder() {
       return getNegativeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder() {
       if ((exprTypeCase_ == 13) && (negativeBuilder_ != null)) {
         return negativeBuilder_.getMessageOrBuilder();
       } else {
@@ -4768,7 +6067,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+     * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.NegativeNode, ai.chalk.protos.chalk.expression.v1.NegativeNode.Builder, ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder> 
@@ -4792,19 +6091,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.InListNode, ai.chalk.protos.chalk.expression.v1.InListNode.Builder, ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder> inListBuilder_;
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=87
      * @return Whether the inList field is set.
      */
     @java.lang.Override
-    public boolean hasInList() {
+    @java.lang.Deprecated public boolean hasInList() {
       return exprTypeCase_ == 14;
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=87
      * @return The inList.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.InListNode getInList() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.InListNode getInList() {
       if (inListBuilder_ == null) {
         if (exprTypeCase_ == 14) {
           return (ai.chalk.protos.chalk.expression.v1.InListNode) exprType_;
@@ -4818,9 +6121,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
-    public Builder setInList(ai.chalk.protos.chalk.expression.v1.InListNode value) {
+    @java.lang.Deprecated public Builder setInList(ai.chalk.protos.chalk.expression.v1.InListNode value) {
       if (inListBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4834,9 +6137,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
-    public Builder setInList(
+    @java.lang.Deprecated public Builder setInList(
         ai.chalk.protos.chalk.expression.v1.InListNode.Builder builderForValue) {
       if (inListBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4848,9 +6151,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
-    public Builder mergeInList(ai.chalk.protos.chalk.expression.v1.InListNode value) {
+    @java.lang.Deprecated public Builder mergeInList(ai.chalk.protos.chalk.expression.v1.InListNode value) {
       if (inListBuilder_ == null) {
         if (exprTypeCase_ == 14 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.InListNode.getDefaultInstance()) {
@@ -4871,9 +6174,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
-    public Builder clearInList() {
+    @java.lang.Deprecated public Builder clearInList() {
       if (inListBuilder_ == null) {
         if (exprTypeCase_ == 14) {
           exprTypeCase_ = 0;
@@ -4890,16 +6193,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.InListNode.Builder getInListBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.InListNode.Builder getInListBuilder() {
       return getInListFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder() {
       if ((exprTypeCase_ == 14) && (inListBuilder_ != null)) {
         return inListBuilder_.getMessageOrBuilder();
       } else {
@@ -4910,7 +6213,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+     * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.InListNode, ai.chalk.protos.chalk.expression.v1.InListNode.Builder, ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder> 
@@ -4934,19 +6237,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Wildcard, ai.chalk.protos.chalk.expression.v1.Wildcard.Builder, ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder> wildcardBuilder_;
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=88
      * @return Whether the wildcard field is set.
      */
     @java.lang.Override
-    public boolean hasWildcard() {
+    @java.lang.Deprecated public boolean hasWildcard() {
       return exprTypeCase_ == 15;
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=88
      * @return The wildcard.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard() {
       if (wildcardBuilder_ == null) {
         if (exprTypeCase_ == 15) {
           return (ai.chalk.protos.chalk.expression.v1.Wildcard) exprType_;
@@ -4960,9 +6267,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
-    public Builder setWildcard(ai.chalk.protos.chalk.expression.v1.Wildcard value) {
+    @java.lang.Deprecated public Builder setWildcard(ai.chalk.protos.chalk.expression.v1.Wildcard value) {
       if (wildcardBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -4976,9 +6283,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
-    public Builder setWildcard(
+    @java.lang.Deprecated public Builder setWildcard(
         ai.chalk.protos.chalk.expression.v1.Wildcard.Builder builderForValue) {
       if (wildcardBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -4990,9 +6297,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
-    public Builder mergeWildcard(ai.chalk.protos.chalk.expression.v1.Wildcard value) {
+    @java.lang.Deprecated public Builder mergeWildcard(ai.chalk.protos.chalk.expression.v1.Wildcard value) {
       if (wildcardBuilder_ == null) {
         if (exprTypeCase_ == 15 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.Wildcard.getDefaultInstance()) {
@@ -5013,9 +6320,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
-    public Builder clearWildcard() {
+    @java.lang.Deprecated public Builder clearWildcard() {
       if (wildcardBuilder_ == null) {
         if (exprTypeCase_ == 15) {
           exprTypeCase_ = 0;
@@ -5032,16 +6339,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.Wildcard.Builder getWildcardBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.Wildcard.Builder getWildcardBuilder() {
       return getWildcardFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder() {
       if ((exprTypeCase_ == 15) && (wildcardBuilder_ != null)) {
         return wildcardBuilder_.getMessageOrBuilder();
       } else {
@@ -5052,7 +6359,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+     * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Wildcard, ai.chalk.protos.chalk.expression.v1.Wildcard.Builder, ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder> 
@@ -5076,19 +6383,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode, ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.Builder, ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder> scalarFunctionBuilder_;
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=89
      * @return Whether the scalarFunction field is set.
      */
     @java.lang.Override
-    public boolean hasScalarFunction() {
+    @java.lang.Deprecated public boolean hasScalarFunction() {
       return exprTypeCase_ == 16;
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=89
      * @return The scalarFunction.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction() {
       if (scalarFunctionBuilder_ == null) {
         if (exprTypeCase_ == 16) {
           return (ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode) exprType_;
@@ -5102,9 +6413,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
-    public Builder setScalarFunction(ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode value) {
+    @java.lang.Deprecated public Builder setScalarFunction(ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode value) {
       if (scalarFunctionBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5118,9 +6429,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
-    public Builder setScalarFunction(
+    @java.lang.Deprecated public Builder setScalarFunction(
         ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.Builder builderForValue) {
       if (scalarFunctionBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5132,9 +6443,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
-    public Builder mergeScalarFunction(ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode value) {
+    @java.lang.Deprecated public Builder mergeScalarFunction(ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode value) {
       if (scalarFunctionBuilder_ == null) {
         if (exprTypeCase_ == 16 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.getDefaultInstance()) {
@@ -5155,9 +6466,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
-    public Builder clearScalarFunction() {
+    @java.lang.Deprecated public Builder clearScalarFunction() {
       if (scalarFunctionBuilder_ == null) {
         if (exprTypeCase_ == 16) {
           exprTypeCase_ = 0;
@@ -5174,16 +6485,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.Builder getScalarFunctionBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.Builder getScalarFunctionBuilder() {
       return getScalarFunctionFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder() {
       if ((exprTypeCase_ == 16) && (scalarFunctionBuilder_ != null)) {
         return scalarFunctionBuilder_.getMessageOrBuilder();
       } else {
@@ -5194,7 +6505,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+     * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode, ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode.Builder, ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder> 
@@ -5218,19 +6529,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.TryCastNode, ai.chalk.protos.chalk.expression.v1.TryCastNode.Builder, ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder> tryCastBuilder_;
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=90
      * @return Whether the tryCast field is set.
      */
     @java.lang.Override
-    public boolean hasTryCast() {
+    @java.lang.Deprecated public boolean hasTryCast() {
       return exprTypeCase_ == 17;
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=90
      * @return The tryCast.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast() {
       if (tryCastBuilder_ == null) {
         if (exprTypeCase_ == 17) {
           return (ai.chalk.protos.chalk.expression.v1.TryCastNode) exprType_;
@@ -5244,9 +6559,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
-    public Builder setTryCast(ai.chalk.protos.chalk.expression.v1.TryCastNode value) {
+    @java.lang.Deprecated public Builder setTryCast(ai.chalk.protos.chalk.expression.v1.TryCastNode value) {
       if (tryCastBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5260,9 +6575,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
-    public Builder setTryCast(
+    @java.lang.Deprecated public Builder setTryCast(
         ai.chalk.protos.chalk.expression.v1.TryCastNode.Builder builderForValue) {
       if (tryCastBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5274,9 +6589,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
-    public Builder mergeTryCast(ai.chalk.protos.chalk.expression.v1.TryCastNode value) {
+    @java.lang.Deprecated public Builder mergeTryCast(ai.chalk.protos.chalk.expression.v1.TryCastNode value) {
       if (tryCastBuilder_ == null) {
         if (exprTypeCase_ == 17 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.TryCastNode.getDefaultInstance()) {
@@ -5297,9 +6612,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
-    public Builder clearTryCast() {
+    @java.lang.Deprecated public Builder clearTryCast() {
       if (tryCastBuilder_ == null) {
         if (exprTypeCase_ == 17) {
           exprTypeCase_ = 0;
@@ -5316,16 +6631,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.TryCastNode.Builder getTryCastBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.TryCastNode.Builder getTryCastBuilder() {
       return getTryCastFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder() {
       if ((exprTypeCase_ == 17) && (tryCastBuilder_ != null)) {
         return tryCastBuilder_.getMessageOrBuilder();
       } else {
@@ -5336,7 +6651,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+     * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.TryCastNode, ai.chalk.protos.chalk.expression.v1.TryCastNode.Builder, ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder> 
@@ -5364,11 +6679,13 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=93
      * @return Whether the windowExpr field is set.
      */
     @java.lang.Override
-    public boolean hasWindowExpr() {
+    @java.lang.Deprecated public boolean hasWindowExpr() {
       return exprTypeCase_ == 18;
     }
     /**
@@ -5376,11 +6693,13 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=93
      * @return The windowExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr() {
       if (windowExprBuilder_ == null) {
         if (exprTypeCase_ == 18) {
           return (ai.chalk.protos.chalk.expression.v1.WindowExprNode) exprType_;
@@ -5398,9 +6717,9 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
-    public Builder setWindowExpr(ai.chalk.protos.chalk.expression.v1.WindowExprNode value) {
+    @java.lang.Deprecated public Builder setWindowExpr(ai.chalk.protos.chalk.expression.v1.WindowExprNode value) {
       if (windowExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5418,9 +6737,9 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
-    public Builder setWindowExpr(
+    @java.lang.Deprecated public Builder setWindowExpr(
         ai.chalk.protos.chalk.expression.v1.WindowExprNode.Builder builderForValue) {
       if (windowExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5436,9 +6755,9 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
-    public Builder mergeWindowExpr(ai.chalk.protos.chalk.expression.v1.WindowExprNode value) {
+    @java.lang.Deprecated public Builder mergeWindowExpr(ai.chalk.protos.chalk.expression.v1.WindowExprNode value) {
       if (windowExprBuilder_ == null) {
         if (exprTypeCase_ == 18 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.WindowExprNode.getDefaultInstance()) {
@@ -5463,9 +6782,9 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
-    public Builder clearWindowExpr() {
+    @java.lang.Deprecated public Builder clearWindowExpr() {
       if (windowExprBuilder_ == null) {
         if (exprTypeCase_ == 18) {
           exprTypeCase_ = 0;
@@ -5486,9 +6805,9 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.WindowExprNode.Builder getWindowExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WindowExprNode.Builder getWindowExprBuilder() {
       return getWindowExprFieldBuilder().getBuilder();
     }
     /**
@@ -5496,10 +6815,10 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder() {
       if ((exprTypeCase_ == 18) && (windowExprBuilder_ != null)) {
         return windowExprBuilder_.getMessageOrBuilder();
       } else {
@@ -5514,7 +6833,7 @@ private static final long serialVersionUID = 0L;
      * window expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+     * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.WindowExprNode, ai.chalk.protos.chalk.expression.v1.WindowExprNode.Builder, ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder> 
@@ -5542,11 +6861,13 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=96
      * @return Whether the aggregateUdfExpr field is set.
      */
     @java.lang.Override
-    public boolean hasAggregateUdfExpr() {
+    @java.lang.Deprecated public boolean hasAggregateUdfExpr() {
       return exprTypeCase_ == 19;
     }
     /**
@@ -5554,11 +6875,13 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=96
      * @return The aggregateUdfExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr() {
       if (aggregateUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 19) {
           return (ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode) exprType_;
@@ -5576,9 +6899,9 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
-    public Builder setAggregateUdfExpr(ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode value) {
+    @java.lang.Deprecated public Builder setAggregateUdfExpr(ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode value) {
       if (aggregateUdfExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5596,9 +6919,9 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
-    public Builder setAggregateUdfExpr(
+    @java.lang.Deprecated public Builder setAggregateUdfExpr(
         ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode.Builder builderForValue) {
       if (aggregateUdfExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5614,9 +6937,9 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
-    public Builder mergeAggregateUdfExpr(ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode value) {
+    @java.lang.Deprecated public Builder mergeAggregateUdfExpr(ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode value) {
       if (aggregateUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 19 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode.getDefaultInstance()) {
@@ -5641,9 +6964,9 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
-    public Builder clearAggregateUdfExpr() {
+    @java.lang.Deprecated public Builder clearAggregateUdfExpr() {
       if (aggregateUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 19) {
           exprTypeCase_ = 0;
@@ -5664,9 +6987,9 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode.Builder getAggregateUdfExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode.Builder getAggregateUdfExprBuilder() {
       return getAggregateUdfExprFieldBuilder().getBuilder();
     }
     /**
@@ -5674,10 +6997,10 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder() {
       if ((exprTypeCase_ == 19) && (aggregateUdfExprBuilder_ != null)) {
         return aggregateUdfExprBuilder_.getMessageOrBuilder();
       } else {
@@ -5692,7 +7015,7 @@ private static final long serialVersionUID = 0L;
      * AggregateUDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+     * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode, ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode.Builder, ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder> 
@@ -5720,11 +7043,13 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=99
      * @return Whether the scalarUdfExpr field is set.
      */
     @java.lang.Override
-    public boolean hasScalarUdfExpr() {
+    @java.lang.Deprecated public boolean hasScalarUdfExpr() {
       return exprTypeCase_ == 20;
     }
     /**
@@ -5732,11 +7057,13 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=99
      * @return The scalarUdfExpr.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr() {
       if (scalarUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 20) {
           return (ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode) exprType_;
@@ -5754,9 +7081,9 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
-    public Builder setScalarUdfExpr(ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode value) {
+    @java.lang.Deprecated public Builder setScalarUdfExpr(ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode value) {
       if (scalarUdfExprBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5774,9 +7101,9 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
-    public Builder setScalarUdfExpr(
+    @java.lang.Deprecated public Builder setScalarUdfExpr(
         ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode.Builder builderForValue) {
       if (scalarUdfExprBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5792,9 +7119,9 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
-    public Builder mergeScalarUdfExpr(ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode value) {
+    @java.lang.Deprecated public Builder mergeScalarUdfExpr(ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode value) {
       if (scalarUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 20 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode.getDefaultInstance()) {
@@ -5819,9 +7146,9 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
-    public Builder clearScalarUdfExpr() {
+    @java.lang.Deprecated public Builder clearScalarUdfExpr() {
       if (scalarUdfExprBuilder_ == null) {
         if (exprTypeCase_ == 20) {
           exprTypeCase_ = 0;
@@ -5842,9 +7169,9 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode.Builder getScalarUdfExprBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode.Builder getScalarUdfExprBuilder() {
       return getScalarUdfExprFieldBuilder().getBuilder();
     }
     /**
@@ -5852,10 +7179,10 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder() {
       if ((exprTypeCase_ == 20) && (scalarUdfExprBuilder_ != null)) {
         return scalarUdfExprBuilder_.getMessageOrBuilder();
       } else {
@@ -5870,7 +7197,7 @@ private static final long serialVersionUID = 0L;
      * Scalar UDF expressions
      * </pre>
      *
-     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+     * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode, ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode.Builder, ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder> 
@@ -5894,19 +7221,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.GetIndexedField, ai.chalk.protos.chalk.expression.v1.GetIndexedField.Builder, ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder> getIndexedFieldBuilder_;
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=101
      * @return Whether the getIndexedField field is set.
      */
     @java.lang.Override
-    public boolean hasGetIndexedField() {
+    @java.lang.Deprecated public boolean hasGetIndexedField() {
       return exprTypeCase_ == 21;
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=101
      * @return The getIndexedField.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField() {
       if (getIndexedFieldBuilder_ == null) {
         if (exprTypeCase_ == 21) {
           return (ai.chalk.protos.chalk.expression.v1.GetIndexedField) exprType_;
@@ -5920,9 +7251,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
-    public Builder setGetIndexedField(ai.chalk.protos.chalk.expression.v1.GetIndexedField value) {
+    @java.lang.Deprecated public Builder setGetIndexedField(ai.chalk.protos.chalk.expression.v1.GetIndexedField value) {
       if (getIndexedFieldBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -5936,9 +7267,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
-    public Builder setGetIndexedField(
+    @java.lang.Deprecated public Builder setGetIndexedField(
         ai.chalk.protos.chalk.expression.v1.GetIndexedField.Builder builderForValue) {
       if (getIndexedFieldBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -5950,9 +7281,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
-    public Builder mergeGetIndexedField(ai.chalk.protos.chalk.expression.v1.GetIndexedField value) {
+    @java.lang.Deprecated public Builder mergeGetIndexedField(ai.chalk.protos.chalk.expression.v1.GetIndexedField value) {
       if (getIndexedFieldBuilder_ == null) {
         if (exprTypeCase_ == 21 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.GetIndexedField.getDefaultInstance()) {
@@ -5973,9 +7304,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
-    public Builder clearGetIndexedField() {
+    @java.lang.Deprecated public Builder clearGetIndexedField() {
       if (getIndexedFieldBuilder_ == null) {
         if (exprTypeCase_ == 21) {
           exprTypeCase_ = 0;
@@ -5992,16 +7323,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.GetIndexedField.Builder getGetIndexedFieldBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GetIndexedField.Builder getGetIndexedFieldBuilder() {
       return getGetIndexedFieldFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder() {
       if ((exprTypeCase_ == 21) && (getIndexedFieldBuilder_ != null)) {
         return getIndexedFieldBuilder_.getMessageOrBuilder();
       } else {
@@ -6012,7 +7343,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+     * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.GetIndexedField, ai.chalk.protos.chalk.expression.v1.GetIndexedField.Builder, ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder> 
@@ -6036,19 +7367,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.GroupingSetNode, ai.chalk.protos.chalk.expression.v1.GroupingSetNode.Builder, ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder> groupingSetBuilder_;
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=103
      * @return Whether the groupingSet field is set.
      */
     @java.lang.Override
-    public boolean hasGroupingSet() {
+    @java.lang.Deprecated public boolean hasGroupingSet() {
       return exprTypeCase_ == 22;
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=103
      * @return The groupingSet.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet() {
       if (groupingSetBuilder_ == null) {
         if (exprTypeCase_ == 22) {
           return (ai.chalk.protos.chalk.expression.v1.GroupingSetNode) exprType_;
@@ -6062,9 +7397,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
-    public Builder setGroupingSet(ai.chalk.protos.chalk.expression.v1.GroupingSetNode value) {
+    @java.lang.Deprecated public Builder setGroupingSet(ai.chalk.protos.chalk.expression.v1.GroupingSetNode value) {
       if (groupingSetBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6078,9 +7413,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
-    public Builder setGroupingSet(
+    @java.lang.Deprecated public Builder setGroupingSet(
         ai.chalk.protos.chalk.expression.v1.GroupingSetNode.Builder builderForValue) {
       if (groupingSetBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6092,9 +7427,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
-    public Builder mergeGroupingSet(ai.chalk.protos.chalk.expression.v1.GroupingSetNode value) {
+    @java.lang.Deprecated public Builder mergeGroupingSet(ai.chalk.protos.chalk.expression.v1.GroupingSetNode value) {
       if (groupingSetBuilder_ == null) {
         if (exprTypeCase_ == 22 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.GroupingSetNode.getDefaultInstance()) {
@@ -6115,9 +7450,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
-    public Builder clearGroupingSet() {
+    @java.lang.Deprecated public Builder clearGroupingSet() {
       if (groupingSetBuilder_ == null) {
         if (exprTypeCase_ == 22) {
           exprTypeCase_ = 0;
@@ -6134,16 +7469,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.GroupingSetNode.Builder getGroupingSetBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GroupingSetNode.Builder getGroupingSetBuilder() {
       return getGroupingSetFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder() {
       if ((exprTypeCase_ == 22) && (groupingSetBuilder_ != null)) {
         return groupingSetBuilder_.getMessageOrBuilder();
       } else {
@@ -6154,7 +7489,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+     * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.GroupingSetNode, ai.chalk.protos.chalk.expression.v1.GroupingSetNode.Builder, ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder> 
@@ -6178,19 +7513,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CubeNode, ai.chalk.protos.chalk.expression.v1.CubeNode.Builder, ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder> cubeBuilder_;
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=105
      * @return Whether the cube field is set.
      */
     @java.lang.Override
-    public boolean hasCube() {
+    @java.lang.Deprecated public boolean hasCube() {
       return exprTypeCase_ == 23;
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=105
      * @return The cube.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CubeNode getCube() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CubeNode getCube() {
       if (cubeBuilder_ == null) {
         if (exprTypeCase_ == 23) {
           return (ai.chalk.protos.chalk.expression.v1.CubeNode) exprType_;
@@ -6204,9 +7543,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
-    public Builder setCube(ai.chalk.protos.chalk.expression.v1.CubeNode value) {
+    @java.lang.Deprecated public Builder setCube(ai.chalk.protos.chalk.expression.v1.CubeNode value) {
       if (cubeBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6220,9 +7559,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
-    public Builder setCube(
+    @java.lang.Deprecated public Builder setCube(
         ai.chalk.protos.chalk.expression.v1.CubeNode.Builder builderForValue) {
       if (cubeBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6234,9 +7573,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
-    public Builder mergeCube(ai.chalk.protos.chalk.expression.v1.CubeNode value) {
+    @java.lang.Deprecated public Builder mergeCube(ai.chalk.protos.chalk.expression.v1.CubeNode value) {
       if (cubeBuilder_ == null) {
         if (exprTypeCase_ == 23 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.CubeNode.getDefaultInstance()) {
@@ -6257,9 +7596,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
-    public Builder clearCube() {
+    @java.lang.Deprecated public Builder clearCube() {
       if (cubeBuilder_ == null) {
         if (exprTypeCase_ == 23) {
           exprTypeCase_ = 0;
@@ -6276,16 +7615,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.CubeNode.Builder getCubeBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CubeNode.Builder getCubeBuilder() {
       return getCubeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder() {
       if ((exprTypeCase_ == 23) && (cubeBuilder_ != null)) {
         return cubeBuilder_.getMessageOrBuilder();
       } else {
@@ -6296,7 +7635,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+     * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.CubeNode, ai.chalk.protos.chalk.expression.v1.CubeNode.Builder, ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder> 
@@ -6320,19 +7659,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.RollupNode, ai.chalk.protos.chalk.expression.v1.RollupNode.Builder, ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder> rollupBuilder_;
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=107
      * @return Whether the rollup field is set.
      */
     @java.lang.Override
-    public boolean hasRollup() {
+    @java.lang.Deprecated public boolean hasRollup() {
       return exprTypeCase_ == 24;
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=107
      * @return The rollup.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.RollupNode getRollup() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.RollupNode getRollup() {
       if (rollupBuilder_ == null) {
         if (exprTypeCase_ == 24) {
           return (ai.chalk.protos.chalk.expression.v1.RollupNode) exprType_;
@@ -6346,9 +7689,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
-    public Builder setRollup(ai.chalk.protos.chalk.expression.v1.RollupNode value) {
+    @java.lang.Deprecated public Builder setRollup(ai.chalk.protos.chalk.expression.v1.RollupNode value) {
       if (rollupBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6362,9 +7705,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
-    public Builder setRollup(
+    @java.lang.Deprecated public Builder setRollup(
         ai.chalk.protos.chalk.expression.v1.RollupNode.Builder builderForValue) {
       if (rollupBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6376,9 +7719,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
-    public Builder mergeRollup(ai.chalk.protos.chalk.expression.v1.RollupNode value) {
+    @java.lang.Deprecated public Builder mergeRollup(ai.chalk.protos.chalk.expression.v1.RollupNode value) {
       if (rollupBuilder_ == null) {
         if (exprTypeCase_ == 24 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.RollupNode.getDefaultInstance()) {
@@ -6399,9 +7742,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
-    public Builder clearRollup() {
+    @java.lang.Deprecated public Builder clearRollup() {
       if (rollupBuilder_ == null) {
         if (exprTypeCase_ == 24) {
           exprTypeCase_ = 0;
@@ -6418,16 +7761,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.RollupNode.Builder getRollupBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.RollupNode.Builder getRollupBuilder() {
       return getRollupFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder() {
       if ((exprTypeCase_ == 24) && (rollupBuilder_ != null)) {
         return rollupBuilder_.getMessageOrBuilder();
       } else {
@@ -6438,7 +7781,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+     * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.RollupNode, ai.chalk.protos.chalk.expression.v1.RollupNode.Builder, ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder> 
@@ -6462,19 +7805,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsTrue, ai.chalk.protos.chalk.expression.v1.IsTrue.Builder, ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder> isTrueBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=109
      * @return Whether the isTrue field is set.
      */
     @java.lang.Override
-    public boolean hasIsTrue() {
+    @java.lang.Deprecated public boolean hasIsTrue() {
       return exprTypeCase_ == 25;
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=109
      * @return The isTrue.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue() {
       if (isTrueBuilder_ == null) {
         if (exprTypeCase_ == 25) {
           return (ai.chalk.protos.chalk.expression.v1.IsTrue) exprType_;
@@ -6488,9 +7835,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
-    public Builder setIsTrue(ai.chalk.protos.chalk.expression.v1.IsTrue value) {
+    @java.lang.Deprecated public Builder setIsTrue(ai.chalk.protos.chalk.expression.v1.IsTrue value) {
       if (isTrueBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6504,9 +7851,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
-    public Builder setIsTrue(
+    @java.lang.Deprecated public Builder setIsTrue(
         ai.chalk.protos.chalk.expression.v1.IsTrue.Builder builderForValue) {
       if (isTrueBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6518,9 +7865,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
-    public Builder mergeIsTrue(ai.chalk.protos.chalk.expression.v1.IsTrue value) {
+    @java.lang.Deprecated public Builder mergeIsTrue(ai.chalk.protos.chalk.expression.v1.IsTrue value) {
       if (isTrueBuilder_ == null) {
         if (exprTypeCase_ == 25 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsTrue.getDefaultInstance()) {
@@ -6541,9 +7888,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
-    public Builder clearIsTrue() {
+    @java.lang.Deprecated public Builder clearIsTrue() {
       if (isTrueBuilder_ == null) {
         if (exprTypeCase_ == 25) {
           exprTypeCase_ = 0;
@@ -6560,16 +7907,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsTrue.Builder getIsTrueBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsTrue.Builder getIsTrueBuilder() {
       return getIsTrueFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder() {
       if ((exprTypeCase_ == 25) && (isTrueBuilder_ != null)) {
         return isTrueBuilder_.getMessageOrBuilder();
       } else {
@@ -6580,7 +7927,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+     * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsTrue, ai.chalk.protos.chalk.expression.v1.IsTrue.Builder, ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder> 
@@ -6604,19 +7951,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsFalse, ai.chalk.protos.chalk.expression.v1.IsFalse.Builder, ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder> isFalseBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=110
      * @return Whether the isFalse field is set.
      */
     @java.lang.Override
-    public boolean hasIsFalse() {
+    @java.lang.Deprecated public boolean hasIsFalse() {
       return exprTypeCase_ == 26;
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=110
      * @return The isFalse.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse() {
       if (isFalseBuilder_ == null) {
         if (exprTypeCase_ == 26) {
           return (ai.chalk.protos.chalk.expression.v1.IsFalse) exprType_;
@@ -6630,9 +7981,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
-    public Builder setIsFalse(ai.chalk.protos.chalk.expression.v1.IsFalse value) {
+    @java.lang.Deprecated public Builder setIsFalse(ai.chalk.protos.chalk.expression.v1.IsFalse value) {
       if (isFalseBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6646,9 +7997,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
-    public Builder setIsFalse(
+    @java.lang.Deprecated public Builder setIsFalse(
         ai.chalk.protos.chalk.expression.v1.IsFalse.Builder builderForValue) {
       if (isFalseBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6660,9 +8011,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
-    public Builder mergeIsFalse(ai.chalk.protos.chalk.expression.v1.IsFalse value) {
+    @java.lang.Deprecated public Builder mergeIsFalse(ai.chalk.protos.chalk.expression.v1.IsFalse value) {
       if (isFalseBuilder_ == null) {
         if (exprTypeCase_ == 26 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsFalse.getDefaultInstance()) {
@@ -6683,9 +8034,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
-    public Builder clearIsFalse() {
+    @java.lang.Deprecated public Builder clearIsFalse() {
       if (isFalseBuilder_ == null) {
         if (exprTypeCase_ == 26) {
           exprTypeCase_ = 0;
@@ -6702,16 +8053,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsFalse.Builder getIsFalseBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsFalse.Builder getIsFalseBuilder() {
       return getIsFalseFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder() {
       if ((exprTypeCase_ == 26) && (isFalseBuilder_ != null)) {
         return isFalseBuilder_.getMessageOrBuilder();
       } else {
@@ -6722,7 +8073,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+     * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsFalse, ai.chalk.protos.chalk.expression.v1.IsFalse.Builder, ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder> 
@@ -6746,19 +8097,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsUnknown, ai.chalk.protos.chalk.expression.v1.IsUnknown.Builder, ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder> isUnknownBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=111
      * @return Whether the isUnknown field is set.
      */
     @java.lang.Override
-    public boolean hasIsUnknown() {
+    @java.lang.Deprecated public boolean hasIsUnknown() {
       return exprTypeCase_ == 27;
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=111
      * @return The isUnknown.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown() {
       if (isUnknownBuilder_ == null) {
         if (exprTypeCase_ == 27) {
           return (ai.chalk.protos.chalk.expression.v1.IsUnknown) exprType_;
@@ -6772,9 +8127,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
-    public Builder setIsUnknown(ai.chalk.protos.chalk.expression.v1.IsUnknown value) {
+    @java.lang.Deprecated public Builder setIsUnknown(ai.chalk.protos.chalk.expression.v1.IsUnknown value) {
       if (isUnknownBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6788,9 +8143,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
-    public Builder setIsUnknown(
+    @java.lang.Deprecated public Builder setIsUnknown(
         ai.chalk.protos.chalk.expression.v1.IsUnknown.Builder builderForValue) {
       if (isUnknownBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6802,9 +8157,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
-    public Builder mergeIsUnknown(ai.chalk.protos.chalk.expression.v1.IsUnknown value) {
+    @java.lang.Deprecated public Builder mergeIsUnknown(ai.chalk.protos.chalk.expression.v1.IsUnknown value) {
       if (isUnknownBuilder_ == null) {
         if (exprTypeCase_ == 27 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsUnknown.getDefaultInstance()) {
@@ -6825,9 +8180,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
-    public Builder clearIsUnknown() {
+    @java.lang.Deprecated public Builder clearIsUnknown() {
       if (isUnknownBuilder_ == null) {
         if (exprTypeCase_ == 27) {
           exprTypeCase_ = 0;
@@ -6844,16 +8199,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsUnknown.Builder getIsUnknownBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsUnknown.Builder getIsUnknownBuilder() {
       return getIsUnknownFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder() {
       if ((exprTypeCase_ == 27) && (isUnknownBuilder_ != null)) {
         return isUnknownBuilder_.getMessageOrBuilder();
       } else {
@@ -6864,7 +8219,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+     * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsUnknown, ai.chalk.protos.chalk.expression.v1.IsUnknown.Builder, ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder> 
@@ -6888,19 +8243,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotTrue, ai.chalk.protos.chalk.expression.v1.IsNotTrue.Builder, ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder> isNotTrueBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=112
      * @return Whether the isNotTrue field is set.
      */
     @java.lang.Override
-    public boolean hasIsNotTrue() {
+    @java.lang.Deprecated public boolean hasIsNotTrue() {
       return exprTypeCase_ == 28;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=112
      * @return The isNotTrue.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue() {
       if (isNotTrueBuilder_ == null) {
         if (exprTypeCase_ == 28) {
           return (ai.chalk.protos.chalk.expression.v1.IsNotTrue) exprType_;
@@ -6914,9 +8273,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
-    public Builder setIsNotTrue(ai.chalk.protos.chalk.expression.v1.IsNotTrue value) {
+    @java.lang.Deprecated public Builder setIsNotTrue(ai.chalk.protos.chalk.expression.v1.IsNotTrue value) {
       if (isNotTrueBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -6930,9 +8289,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
-    public Builder setIsNotTrue(
+    @java.lang.Deprecated public Builder setIsNotTrue(
         ai.chalk.protos.chalk.expression.v1.IsNotTrue.Builder builderForValue) {
       if (isNotTrueBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -6944,9 +8303,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
-    public Builder mergeIsNotTrue(ai.chalk.protos.chalk.expression.v1.IsNotTrue value) {
+    @java.lang.Deprecated public Builder mergeIsNotTrue(ai.chalk.protos.chalk.expression.v1.IsNotTrue value) {
       if (isNotTrueBuilder_ == null) {
         if (exprTypeCase_ == 28 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsNotTrue.getDefaultInstance()) {
@@ -6967,9 +8326,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
-    public Builder clearIsNotTrue() {
+    @java.lang.Deprecated public Builder clearIsNotTrue() {
       if (isNotTrueBuilder_ == null) {
         if (exprTypeCase_ == 28) {
           exprTypeCase_ = 0;
@@ -6986,16 +8345,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsNotTrue.Builder getIsNotTrueBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotTrue.Builder getIsNotTrueBuilder() {
       return getIsNotTrueFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder() {
       if ((exprTypeCase_ == 28) && (isNotTrueBuilder_ != null)) {
         return isNotTrueBuilder_.getMessageOrBuilder();
       } else {
@@ -7006,7 +8365,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+     * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotTrue, ai.chalk.protos.chalk.expression.v1.IsNotTrue.Builder, ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder> 
@@ -7030,19 +8389,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotFalse, ai.chalk.protos.chalk.expression.v1.IsNotFalse.Builder, ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder> isNotFalseBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=113
      * @return Whether the isNotFalse field is set.
      */
     @java.lang.Override
-    public boolean hasIsNotFalse() {
+    @java.lang.Deprecated public boolean hasIsNotFalse() {
       return exprTypeCase_ == 29;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=113
      * @return The isNotFalse.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse() {
       if (isNotFalseBuilder_ == null) {
         if (exprTypeCase_ == 29) {
           return (ai.chalk.protos.chalk.expression.v1.IsNotFalse) exprType_;
@@ -7056,9 +8419,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
-    public Builder setIsNotFalse(ai.chalk.protos.chalk.expression.v1.IsNotFalse value) {
+    @java.lang.Deprecated public Builder setIsNotFalse(ai.chalk.protos.chalk.expression.v1.IsNotFalse value) {
       if (isNotFalseBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7072,9 +8435,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
-    public Builder setIsNotFalse(
+    @java.lang.Deprecated public Builder setIsNotFalse(
         ai.chalk.protos.chalk.expression.v1.IsNotFalse.Builder builderForValue) {
       if (isNotFalseBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7086,9 +8449,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
-    public Builder mergeIsNotFalse(ai.chalk.protos.chalk.expression.v1.IsNotFalse value) {
+    @java.lang.Deprecated public Builder mergeIsNotFalse(ai.chalk.protos.chalk.expression.v1.IsNotFalse value) {
       if (isNotFalseBuilder_ == null) {
         if (exprTypeCase_ == 29 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsNotFalse.getDefaultInstance()) {
@@ -7109,9 +8472,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
-    public Builder clearIsNotFalse() {
+    @java.lang.Deprecated public Builder clearIsNotFalse() {
       if (isNotFalseBuilder_ == null) {
         if (exprTypeCase_ == 29) {
           exprTypeCase_ = 0;
@@ -7128,16 +8491,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsNotFalse.Builder getIsNotFalseBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotFalse.Builder getIsNotFalseBuilder() {
       return getIsNotFalseFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder() {
       if ((exprTypeCase_ == 29) && (isNotFalseBuilder_ != null)) {
         return isNotFalseBuilder_.getMessageOrBuilder();
       } else {
@@ -7148,7 +8511,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+     * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotFalse, ai.chalk.protos.chalk.expression.v1.IsNotFalse.Builder, ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder> 
@@ -7172,19 +8535,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotUnknown, ai.chalk.protos.chalk.expression.v1.IsNotUnknown.Builder, ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder> isNotUnknownBuilder_;
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=114
      * @return Whether the isNotUnknown field is set.
      */
     @java.lang.Override
-    public boolean hasIsNotUnknown() {
+    @java.lang.Deprecated public boolean hasIsNotUnknown() {
       return exprTypeCase_ == 30;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=114
      * @return The isNotUnknown.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown() {
       if (isNotUnknownBuilder_ == null) {
         if (exprTypeCase_ == 30) {
           return (ai.chalk.protos.chalk.expression.v1.IsNotUnknown) exprType_;
@@ -7198,9 +8565,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
-    public Builder setIsNotUnknown(ai.chalk.protos.chalk.expression.v1.IsNotUnknown value) {
+    @java.lang.Deprecated public Builder setIsNotUnknown(ai.chalk.protos.chalk.expression.v1.IsNotUnknown value) {
       if (isNotUnknownBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7214,9 +8581,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
-    public Builder setIsNotUnknown(
+    @java.lang.Deprecated public Builder setIsNotUnknown(
         ai.chalk.protos.chalk.expression.v1.IsNotUnknown.Builder builderForValue) {
       if (isNotUnknownBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7228,9 +8595,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
-    public Builder mergeIsNotUnknown(ai.chalk.protos.chalk.expression.v1.IsNotUnknown value) {
+    @java.lang.Deprecated public Builder mergeIsNotUnknown(ai.chalk.protos.chalk.expression.v1.IsNotUnknown value) {
       if (isNotUnknownBuilder_ == null) {
         if (exprTypeCase_ == 30 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.IsNotUnknown.getDefaultInstance()) {
@@ -7251,9 +8618,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
-    public Builder clearIsNotUnknown() {
+    @java.lang.Deprecated public Builder clearIsNotUnknown() {
       if (isNotUnknownBuilder_ == null) {
         if (exprTypeCase_ == 30) {
           exprTypeCase_ = 0;
@@ -7270,16 +8637,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.IsNotUnknown.Builder getIsNotUnknownBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotUnknown.Builder getIsNotUnknownBuilder() {
       return getIsNotUnknownFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder() {
       if ((exprTypeCase_ == 30) && (isNotUnknownBuilder_ != null)) {
         return isNotUnknownBuilder_.getMessageOrBuilder();
       } else {
@@ -7290,7 +8657,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+     * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.IsNotUnknown, ai.chalk.protos.chalk.expression.v1.IsNotUnknown.Builder, ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder> 
@@ -7314,19 +8681,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.LikeNode, ai.chalk.protos.chalk.expression.v1.LikeNode.Builder, ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder> likeBuilder_;
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=115
      * @return Whether the like field is set.
      */
     @java.lang.Override
-    public boolean hasLike() {
+    @java.lang.Deprecated public boolean hasLike() {
       return exprTypeCase_ == 31;
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=115
      * @return The like.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.LikeNode getLike() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.LikeNode getLike() {
       if (likeBuilder_ == null) {
         if (exprTypeCase_ == 31) {
           return (ai.chalk.protos.chalk.expression.v1.LikeNode) exprType_;
@@ -7340,9 +8711,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
-    public Builder setLike(ai.chalk.protos.chalk.expression.v1.LikeNode value) {
+    @java.lang.Deprecated public Builder setLike(ai.chalk.protos.chalk.expression.v1.LikeNode value) {
       if (likeBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7356,9 +8727,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
-    public Builder setLike(
+    @java.lang.Deprecated public Builder setLike(
         ai.chalk.protos.chalk.expression.v1.LikeNode.Builder builderForValue) {
       if (likeBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7370,9 +8741,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
-    public Builder mergeLike(ai.chalk.protos.chalk.expression.v1.LikeNode value) {
+    @java.lang.Deprecated public Builder mergeLike(ai.chalk.protos.chalk.expression.v1.LikeNode value) {
       if (likeBuilder_ == null) {
         if (exprTypeCase_ == 31 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.LikeNode.getDefaultInstance()) {
@@ -7393,9 +8764,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
-    public Builder clearLike() {
+    @java.lang.Deprecated public Builder clearLike() {
       if (likeBuilder_ == null) {
         if (exprTypeCase_ == 31) {
           exprTypeCase_ = 0;
@@ -7412,16 +8783,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.LikeNode.Builder getLikeBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.LikeNode.Builder getLikeBuilder() {
       return getLikeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder() {
       if ((exprTypeCase_ == 31) && (likeBuilder_ != null)) {
         return likeBuilder_.getMessageOrBuilder();
       } else {
@@ -7432,7 +8803,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+     * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.LikeNode, ai.chalk.protos.chalk.expression.v1.LikeNode.Builder, ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder> 
@@ -7456,19 +8827,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.ILikeNode, ai.chalk.protos.chalk.expression.v1.ILikeNode.Builder, ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder> ilikeBuilder_;
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=116
      * @return Whether the ilike field is set.
      */
     @java.lang.Override
-    public boolean hasIlike() {
+    @java.lang.Deprecated public boolean hasIlike() {
       return exprTypeCase_ == 32;
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=116
      * @return The ilike.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike() {
       if (ilikeBuilder_ == null) {
         if (exprTypeCase_ == 32) {
           return (ai.chalk.protos.chalk.expression.v1.ILikeNode) exprType_;
@@ -7482,9 +8857,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
-    public Builder setIlike(ai.chalk.protos.chalk.expression.v1.ILikeNode value) {
+    @java.lang.Deprecated public Builder setIlike(ai.chalk.protos.chalk.expression.v1.ILikeNode value) {
       if (ilikeBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7498,9 +8873,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
-    public Builder setIlike(
+    @java.lang.Deprecated public Builder setIlike(
         ai.chalk.protos.chalk.expression.v1.ILikeNode.Builder builderForValue) {
       if (ilikeBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7512,9 +8887,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
-    public Builder mergeIlike(ai.chalk.protos.chalk.expression.v1.ILikeNode value) {
+    @java.lang.Deprecated public Builder mergeIlike(ai.chalk.protos.chalk.expression.v1.ILikeNode value) {
       if (ilikeBuilder_ == null) {
         if (exprTypeCase_ == 32 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.ILikeNode.getDefaultInstance()) {
@@ -7535,9 +8910,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
-    public Builder clearIlike() {
+    @java.lang.Deprecated public Builder clearIlike() {
       if (ilikeBuilder_ == null) {
         if (exprTypeCase_ == 32) {
           exprTypeCase_ = 0;
@@ -7554,16 +8929,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.ILikeNode.Builder getIlikeBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ILikeNode.Builder getIlikeBuilder() {
       return getIlikeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder() {
       if ((exprTypeCase_ == 32) && (ilikeBuilder_ != null)) {
         return ilikeBuilder_.getMessageOrBuilder();
       } else {
@@ -7574,7 +8949,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+     * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.ILikeNode, ai.chalk.protos.chalk.expression.v1.ILikeNode.Builder, ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder> 
@@ -7598,19 +8973,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.SimilarToNode, ai.chalk.protos.chalk.expression.v1.SimilarToNode.Builder, ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder> similarToBuilder_;
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=117
      * @return Whether the similarTo field is set.
      */
     @java.lang.Override
-    public boolean hasSimilarTo() {
+    @java.lang.Deprecated public boolean hasSimilarTo() {
       return exprTypeCase_ == 33;
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=117
      * @return The similarTo.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo() {
       if (similarToBuilder_ == null) {
         if (exprTypeCase_ == 33) {
           return (ai.chalk.protos.chalk.expression.v1.SimilarToNode) exprType_;
@@ -7624,9 +9003,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
-    public Builder setSimilarTo(ai.chalk.protos.chalk.expression.v1.SimilarToNode value) {
+    @java.lang.Deprecated public Builder setSimilarTo(ai.chalk.protos.chalk.expression.v1.SimilarToNode value) {
       if (similarToBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7640,9 +9019,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
-    public Builder setSimilarTo(
+    @java.lang.Deprecated public Builder setSimilarTo(
         ai.chalk.protos.chalk.expression.v1.SimilarToNode.Builder builderForValue) {
       if (similarToBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7654,9 +9033,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
-    public Builder mergeSimilarTo(ai.chalk.protos.chalk.expression.v1.SimilarToNode value) {
+    @java.lang.Deprecated public Builder mergeSimilarTo(ai.chalk.protos.chalk.expression.v1.SimilarToNode value) {
       if (similarToBuilder_ == null) {
         if (exprTypeCase_ == 33 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.SimilarToNode.getDefaultInstance()) {
@@ -7677,9 +9056,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
-    public Builder clearSimilarTo() {
+    @java.lang.Deprecated public Builder clearSimilarTo() {
       if (similarToBuilder_ == null) {
         if (exprTypeCase_ == 33) {
           exprTypeCase_ = 0;
@@ -7696,16 +9075,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.SimilarToNode.Builder getSimilarToBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SimilarToNode.Builder getSimilarToBuilder() {
       return getSimilarToFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder() {
       if ((exprTypeCase_ == 33) && (similarToBuilder_ != null)) {
         return similarToBuilder_.getMessageOrBuilder();
       } else {
@@ -7716,7 +9095,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+     * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.SimilarToNode, ai.chalk.protos.chalk.expression.v1.SimilarToNode.Builder, ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder> 
@@ -7740,19 +9119,23 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.PlaceholderNode, ai.chalk.protos.chalk.expression.v1.PlaceholderNode.Builder, ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder> placeholderBuilder_;
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=119
      * @return Whether the placeholder field is set.
      */
     @java.lang.Override
-    public boolean hasPlaceholder() {
+    @java.lang.Deprecated public boolean hasPlaceholder() {
       return exprTypeCase_ == 34;
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+     * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+     *     See chalk/expression/v1/expression.proto;l=119
      * @return The placeholder.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder() {
       if (placeholderBuilder_ == null) {
         if (exprTypeCase_ == 34) {
           return (ai.chalk.protos.chalk.expression.v1.PlaceholderNode) exprType_;
@@ -7766,9 +9149,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
-    public Builder setPlaceholder(ai.chalk.protos.chalk.expression.v1.PlaceholderNode value) {
+    @java.lang.Deprecated public Builder setPlaceholder(ai.chalk.protos.chalk.expression.v1.PlaceholderNode value) {
       if (placeholderBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -7782,9 +9165,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
-    public Builder setPlaceholder(
+    @java.lang.Deprecated public Builder setPlaceholder(
         ai.chalk.protos.chalk.expression.v1.PlaceholderNode.Builder builderForValue) {
       if (placeholderBuilder_ == null) {
         exprType_ = builderForValue.build();
@@ -7796,9 +9179,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
-    public Builder mergePlaceholder(ai.chalk.protos.chalk.expression.v1.PlaceholderNode value) {
+    @java.lang.Deprecated public Builder mergePlaceholder(ai.chalk.protos.chalk.expression.v1.PlaceholderNode value) {
       if (placeholderBuilder_ == null) {
         if (exprTypeCase_ == 34 &&
             exprType_ != ai.chalk.protos.chalk.expression.v1.PlaceholderNode.getDefaultInstance()) {
@@ -7819,9 +9202,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
-    public Builder clearPlaceholder() {
+    @java.lang.Deprecated public Builder clearPlaceholder() {
       if (placeholderBuilder_ == null) {
         if (exprTypeCase_ == 34) {
           exprTypeCase_ = 0;
@@ -7838,16 +9221,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.expression.v1.PlaceholderNode.Builder getPlaceholderBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.PlaceholderNode.Builder getPlaceholderBuilder() {
       return getPlaceholderFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder() {
       if ((exprTypeCase_ == 34) && (placeholderBuilder_ != null)) {
         return placeholderBuilder_.getMessageOrBuilder();
       } else {
@@ -7858,7 +9241,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+     * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.PlaceholderNode, ai.chalk.protos.chalk.expression.v1.PlaceholderNode.Builder, ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder> 

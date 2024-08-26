@@ -33,6 +33,10 @@ private static final long serialVersionUID = 0L;
     namespace_ = "";
     instanceId_ = "";
     cluster_ = "";
+    totalCpu_ = "";
+    totalMemory_ = "";
+    allocatableCpu_ = "";
+    allocatableMemory_ = "";
   }
 
   @java.lang.Override
@@ -841,6 +845,162 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int TOTAL_CPU_FIELD_NUMBER = 20;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object totalCpu_ = "";
+  /**
+   * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+   * @return The totalCpu.
+   */
+  @java.lang.Override
+  public java.lang.String getTotalCpu() {
+    java.lang.Object ref = totalCpu_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      totalCpu_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+   * @return The bytes for totalCpu.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getTotalCpuBytes() {
+    java.lang.Object ref = totalCpu_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      totalCpu_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TOTAL_MEMORY_FIELD_NUMBER = 21;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object totalMemory_ = "";
+  /**
+   * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+   * @return The totalMemory.
+   */
+  @java.lang.Override
+  public java.lang.String getTotalMemory() {
+    java.lang.Object ref = totalMemory_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      totalMemory_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+   * @return The bytes for totalMemory.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getTotalMemoryBytes() {
+    java.lang.Object ref = totalMemory_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      totalMemory_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ALLOCATABLE_CPU_FIELD_NUMBER = 22;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object allocatableCpu_ = "";
+  /**
+   * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+   * @return The allocatableCpu.
+   */
+  @java.lang.Override
+  public java.lang.String getAllocatableCpu() {
+    java.lang.Object ref = allocatableCpu_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      allocatableCpu_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+   * @return The bytes for allocatableCpu.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getAllocatableCpuBytes() {
+    java.lang.Object ref = allocatableCpu_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      allocatableCpu_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ALLOCATABLE_MEMORY_FIELD_NUMBER = 23;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object allocatableMemory_ = "";
+  /**
+   * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+   * @return The allocatableMemory.
+   */
+  @java.lang.Override
+  public java.lang.String getAllocatableMemory() {
+    java.lang.Object ref = allocatableMemory_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      allocatableMemory_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+   * @return The bytes for allocatableMemory.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getAllocatableMemoryBytes() {
+    java.lang.Object ref = allocatableMemory_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      allocatableMemory_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -914,6 +1074,18 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cluster_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 19, cluster_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(totalCpu_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 20, totalCpu_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(totalMemory_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 21, totalMemory_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableCpu_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 22, allocatableCpu_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 23, allocatableMemory_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -996,6 +1168,18 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cluster_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, cluster_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(totalCpu_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(20, totalCpu_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(totalMemory_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(21, totalMemory_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableCpu_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(22, allocatableCpu_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, allocatableMemory_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1047,6 +1231,14 @@ java.lang.String defaultValue) {
         .equals(other.getInstanceId())) return false;
     if (!getCluster()
         .equals(other.getCluster())) return false;
+    if (!getTotalCpu()
+        .equals(other.getTotalCpu())) return false;
+    if (!getTotalMemory()
+        .equals(other.getTotalMemory())) return false;
+    if (!getAllocatableCpu()
+        .equals(other.getAllocatableCpu())) return false;
+    if (!getAllocatableMemory()
+        .equals(other.getAllocatableMemory())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1102,6 +1294,14 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getInstanceId().hashCode();
     hash = (37 * hash) + CLUSTER_FIELD_NUMBER;
     hash = (53 * hash) + getCluster().hashCode();
+    hash = (37 * hash) + TOTAL_CPU_FIELD_NUMBER;
+    hash = (53 * hash) + getTotalCpu().hashCode();
+    hash = (37 * hash) + TOTAL_MEMORY_FIELD_NUMBER;
+    hash = (53 * hash) + getTotalMemory().hashCode();
+    hash = (37 * hash) + ALLOCATABLE_CPU_FIELD_NUMBER;
+    hash = (53 * hash) + getAllocatableCpu().hashCode();
+    hash = (37 * hash) + ALLOCATABLE_MEMORY_FIELD_NUMBER;
+    hash = (53 * hash) + getAllocatableMemory().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1281,6 +1481,10 @@ java.lang.String defaultValue) {
       namespace_ = "";
       instanceId_ = "";
       cluster_ = "";
+      totalCpu_ = "";
+      totalMemory_ = "";
+      allocatableCpu_ = "";
+      allocatableMemory_ = "";
       return this;
     }
 
@@ -1369,6 +1573,18 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00020000) != 0)) {
         result.cluster_ = cluster_;
+      }
+      if (((from_bitField0_ & 0x00040000) != 0)) {
+        result.totalCpu_ = totalCpu_;
+      }
+      if (((from_bitField0_ & 0x00080000) != 0)) {
+        result.totalMemory_ = totalMemory_;
+      }
+      if (((from_bitField0_ & 0x00100000) != 0)) {
+        result.allocatableCpu_ = allocatableCpu_;
+      }
+      if (((from_bitField0_ & 0x00200000) != 0)) {
+        result.allocatableMemory_ = allocatableMemory_;
       }
     }
 
@@ -1492,6 +1708,26 @@ java.lang.String defaultValue) {
       if (!other.getCluster().isEmpty()) {
         cluster_ = other.cluster_;
         bitField0_ |= 0x00020000;
+        onChanged();
+      }
+      if (!other.getTotalCpu().isEmpty()) {
+        totalCpu_ = other.totalCpu_;
+        bitField0_ |= 0x00040000;
+        onChanged();
+      }
+      if (!other.getTotalMemory().isEmpty()) {
+        totalMemory_ = other.totalMemory_;
+        bitField0_ |= 0x00080000;
+        onChanged();
+      }
+      if (!other.getAllocatableCpu().isEmpty()) {
+        allocatableCpu_ = other.allocatableCpu_;
+        bitField0_ |= 0x00100000;
+        onChanged();
+      }
+      if (!other.getAllocatableMemory().isEmpty()) {
+        allocatableMemory_ = other.allocatableMemory_;
+        bitField0_ |= 0x00200000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -1618,6 +1854,26 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00020000;
               break;
             } // case 154
+            case 162: {
+              totalCpu_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00040000;
+              break;
+            } // case 162
+            case 170: {
+              totalMemory_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00080000;
+              break;
+            } // case 170
+            case 178: {
+              allocatableCpu_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00100000;
+              break;
+            } // case 178
+            case 186: {
+              allocatableMemory_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00200000;
+              break;
+            } // case 186
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3115,6 +3371,294 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       cluster_ = value;
       bitField0_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object totalCpu_ = "";
+    /**
+     * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+     * @return The totalCpu.
+     */
+    public java.lang.String getTotalCpu() {
+      java.lang.Object ref = totalCpu_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        totalCpu_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+     * @return The bytes for totalCpu.
+     */
+    public com.google.protobuf.ByteString
+        getTotalCpuBytes() {
+      java.lang.Object ref = totalCpu_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        totalCpu_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+     * @param value The totalCpu to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalCpu(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      totalCpu_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTotalCpu() {
+      totalCpu_ = getDefaultInstance().getTotalCpu();
+      bitField0_ = (bitField0_ & ~0x00040000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+     * @param value The bytes for totalCpu to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalCpuBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      totalCpu_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object totalMemory_ = "";
+    /**
+     * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+     * @return The totalMemory.
+     */
+    public java.lang.String getTotalMemory() {
+      java.lang.Object ref = totalMemory_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        totalMemory_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+     * @return The bytes for totalMemory.
+     */
+    public com.google.protobuf.ByteString
+        getTotalMemoryBytes() {
+      java.lang.Object ref = totalMemory_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        totalMemory_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+     * @param value The totalMemory to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalMemory(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      totalMemory_ = value;
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTotalMemory() {
+      totalMemory_ = getDefaultInstance().getTotalMemory();
+      bitField0_ = (bitField0_ & ~0x00080000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+     * @param value The bytes for totalMemory to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalMemoryBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      totalMemory_ = value;
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object allocatableCpu_ = "";
+    /**
+     * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+     * @return The allocatableCpu.
+     */
+    public java.lang.String getAllocatableCpu() {
+      java.lang.Object ref = allocatableCpu_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        allocatableCpu_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+     * @return The bytes for allocatableCpu.
+     */
+    public com.google.protobuf.ByteString
+        getAllocatableCpuBytes() {
+      java.lang.Object ref = allocatableCpu_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        allocatableCpu_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+     * @param value The allocatableCpu to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAllocatableCpu(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      allocatableCpu_ = value;
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAllocatableCpu() {
+      allocatableCpu_ = getDefaultInstance().getAllocatableCpu();
+      bitField0_ = (bitField0_ & ~0x00100000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+     * @param value The bytes for allocatableCpu to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAllocatableCpuBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      allocatableCpu_ = value;
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object allocatableMemory_ = "";
+    /**
+     * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+     * @return The allocatableMemory.
+     */
+    public java.lang.String getAllocatableMemory() {
+      java.lang.Object ref = allocatableMemory_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        allocatableMemory_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+     * @return The bytes for allocatableMemory.
+     */
+    public com.google.protobuf.ByteString
+        getAllocatableMemoryBytes() {
+      java.lang.Object ref = allocatableMemory_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        allocatableMemory_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+     * @param value The allocatableMemory to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAllocatableMemory(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      allocatableMemory_ = value;
+      bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAllocatableMemory() {
+      allocatableMemory_ = getDefaultInstance().getAllocatableMemory();
+      bitField0_ = (bitField0_ & ~0x00200000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+     * @param value The bytes for allocatableMemory to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAllocatableMemoryBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      allocatableMemory_ = value;
+      bitField0_ |= 0x00200000;
       onChanged();
       return this;
     }

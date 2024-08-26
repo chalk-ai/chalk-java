@@ -9,610 +9,823 @@ public interface LogicalExprNodeOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   * @return Whether the identifier field is set.
+   */
+  boolean hasIdentifier();
+  /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   * @return The identifier.
+   */
+  ai.chalk.protos.chalk.expression.v1.Identifier getIdentifier();
+  /**
+   * <code>.chalk.expression.v1.Identifier identifier = 35 [json_name = "identifier"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.IdentifierOrBuilder getIdentifierOrBuilder();
+
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   * @return Whether the getAttribute field is set.
+   */
+  boolean hasGetAttribute();
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   * @return The getAttribute.
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprGetAttribute getGetAttribute();
+  /**
+   * <code>.chalk.expression.v1.ExprGetAttribute get_attribute = 36 [json_name = "getAttribute"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprGetAttributeOrBuilder getGetAttributeOrBuilder();
+
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   * @return Whether the getSubscript field is set.
+   */
+  boolean hasGetSubscript();
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   * @return The getSubscript.
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprGetSubscript getGetSubscript();
+  /**
+   * <code>.chalk.expression.v1.ExprGetSubscript get_subscript = 37 [json_name = "getSubscript"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprGetSubscriptOrBuilder getGetSubscriptOrBuilder();
+
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   * @return Whether the call field is set.
+   */
+  boolean hasCall();
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   * @return The call.
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprCall getCall();
+  /**
+   * <code>.chalk.expression.v1.ExprCall call = 38 [json_name = "call"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprCallOrBuilder getCallOrBuilder();
+
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   * @return Whether the literalValue field is set.
+   */
+  boolean hasLiteralValue();
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   * @return The literalValue.
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprLiteral getLiteralValue();
+  /**
+   * <code>.chalk.expression.v1.ExprLiteral literal_value = 39 [json_name = "literalValue"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.ExprLiteralOrBuilder getLiteralValueOrBuilder();
+
+  /**
    * <pre>
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=64
    * @return Whether the column field is set.
    */
-  boolean hasColumn();
+  @java.lang.Deprecated boolean hasColumn();
   /**
    * <pre>
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=64
    * @return The column.
    */
-  ai.chalk.protos.chalk.expression.v1.Column getColumn();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.Column getColumn();
   /**
    * <pre>
    * column references
    * </pre>
    *
-   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column"];</code>
+   * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder getColumnOrBuilder();
 
   /**
    * <pre>
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=67
    * @return Whether the alias field is set.
    */
-  boolean hasAlias();
+  @java.lang.Deprecated boolean hasAlias();
   /**
    * <pre>
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=67
    * @return The alias.
    */
-  ai.chalk.protos.chalk.expression.v1.AliasNode getAlias();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AliasNode getAlias();
   /**
    * <pre>
    * alias
    * </pre>
    *
-   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias"];</code>
+   * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AliasNodeOrBuilder getAliasOrBuilder();
 
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=69
    * @return Whether the literal field is set.
    */
-  boolean hasLiteral();
+  @java.lang.Deprecated boolean hasLiteral();
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=69
    * @return The literal.
    */
-  ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral();
+  @java.lang.Deprecated ai.chalk.protos.chalk.arrow.v1.ScalarValue getLiteral();
   /**
-   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal"];</code>
+   * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getLiteralOrBuilder();
 
   /**
    * <pre>
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return Whether the binaryExpr field is set.
    */
-  boolean hasBinaryExpr();
+  @java.lang.Deprecated boolean hasBinaryExpr();
   /**
    * <pre>
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return The binaryExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.BinaryExprNode getBinaryExpr();
   /**
    * <pre>
    * binary expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr"];</code>
+   * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.BinaryExprNodeOrBuilder getBinaryExprOrBuilder();
 
   /**
    * <pre>
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return Whether the aggregateExpr field is set.
    */
-  boolean hasAggregateExpr();
+  @java.lang.Deprecated boolean hasAggregateExpr();
   /**
    * <pre>
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return The aggregateExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AggregateExprNode getAggregateExpr();
   /**
    * <pre>
    * aggregate expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AggregateExprNodeOrBuilder getAggregateExprOrBuilder();
 
   /**
    * <pre>
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=78
    * @return Whether the isNullExpr field is set.
    */
-  boolean hasIsNullExpr();
+  @java.lang.Deprecated boolean hasIsNullExpr();
   /**
    * <pre>
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=78
    * @return The isNullExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNull getIsNullExpr();
   /**
    * <pre>
    * null checks
    * </pre>
    *
-   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNullOrBuilder getIsNullExprOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=79
    * @return Whether the isNotNullExpr field is set.
    */
-  boolean hasIsNotNullExpr();
+  @java.lang.Deprecated boolean hasIsNotNullExpr();
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=79
    * @return The isNotNullExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotNull getIsNotNullExpr();
   /**
-   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr"];</code>
+   * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotNullOrBuilder getIsNotNullExprOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return Whether the notExpr field is set.
    */
-  boolean hasNotExpr();
+  @java.lang.Deprecated boolean hasNotExpr();
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return The notExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.Not getNotExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.Not getNotExpr();
   /**
-   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr"];</code>
+   * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.NotOrBuilder getNotExprOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=82
    * @return Whether the between field is set.
    */
-  boolean hasBetween();
+  @java.lang.Deprecated boolean hasBetween();
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=82
    * @return The between.
    */
-  ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.BetweenNode getBetween();
   /**
-   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between"];</code>
+   * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.BetweenNodeOrBuilder getBetweenOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return Whether the case field is set.
    */
-  boolean hasCase();
+  @java.lang.Deprecated boolean hasCase();
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return The case.
    */
-  ai.chalk.protos.chalk.expression.v1.CaseNode getCase();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CaseNode getCase();
   /**
-   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case"];</code>
+   * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CaseNodeOrBuilder getCaseOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=84
    * @return Whether the cast field is set.
    */
-  boolean hasCast();
+  @java.lang.Deprecated boolean hasCast();
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=84
    * @return The cast.
    */
-  ai.chalk.protos.chalk.expression.v1.CastNode getCast();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CastNode getCast();
   /**
-   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast"];</code>
+   * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CastNodeOrBuilder getCastOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=85
    * @return Whether the sort field is set.
    */
-  boolean hasSort();
+  @java.lang.Deprecated boolean hasSort();
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=85
    * @return The sort.
    */
-  ai.chalk.protos.chalk.expression.v1.SortExprNode getSort();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.SortExprNode getSort();
   /**
-   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort"];</code>
+   * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.SortExprNodeOrBuilder getSortOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return Whether the negative field is set.
    */
-  boolean hasNegative();
+  @java.lang.Deprecated boolean hasNegative();
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return The negative.
    */
-  ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.NegativeNode getNegative();
   /**
-   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative"];</code>
+   * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.NegativeNodeOrBuilder getNegativeOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return Whether the inList field is set.
    */
-  boolean hasInList();
+  @java.lang.Deprecated boolean hasInList();
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return The inList.
    */
-  ai.chalk.protos.chalk.expression.v1.InListNode getInList();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.InListNode getInList();
   /**
-   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList"];</code>
+   * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.InListNodeOrBuilder getInListOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return Whether the wildcard field is set.
    */
-  boolean hasWildcard();
+  @java.lang.Deprecated boolean hasWildcard();
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return The wildcard.
    */
-  ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.Wildcard getWildcard();
   /**
-   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard"];</code>
+   * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.WildcardOrBuilder getWildcardOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=89
    * @return Whether the scalarFunction field is set.
    */
-  boolean hasScalarFunction();
+  @java.lang.Deprecated boolean hasScalarFunction();
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=89
    * @return The scalarFunction.
    */
-  ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ScalarFunctionNode getScalarFunction();
   /**
-   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction"];</code>
+   * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ScalarFunctionNodeOrBuilder getScalarFunctionOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return Whether the tryCast field is set.
    */
-  boolean hasTryCast();
+  @java.lang.Deprecated boolean hasTryCast();
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return The tryCast.
    */
-  ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.TryCastNode getTryCast();
   /**
-   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast"];</code>
+   * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.TryCastNodeOrBuilder getTryCastOrBuilder();
 
   /**
    * <pre>
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return Whether the windowExpr field is set.
    */
-  boolean hasWindowExpr();
+  @java.lang.Deprecated boolean hasWindowExpr();
   /**
    * <pre>
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return The windowExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.WindowExprNode getWindowExpr();
   /**
    * <pre>
    * window expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr"];</code>
+   * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.WindowExprNodeOrBuilder getWindowExprOrBuilder();
 
   /**
    * <pre>
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return Whether the aggregateUdfExpr field is set.
    */
-  boolean hasAggregateUdfExpr();
+  @java.lang.Deprecated boolean hasAggregateUdfExpr();
   /**
    * <pre>
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return The aggregateUdfExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNode getAggregateUdfExpr();
   /**
    * <pre>
    * AggregateUDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr"];</code>
+   * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.AggregateUDFExprNodeOrBuilder getAggregateUdfExprOrBuilder();
 
   /**
    * <pre>
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=99
    * @return Whether the scalarUdfExpr field is set.
    */
-  boolean hasScalarUdfExpr();
+  @java.lang.Deprecated boolean hasScalarUdfExpr();
   /**
    * <pre>
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=99
    * @return The scalarUdfExpr.
    */
-  ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNode getScalarUdfExpr();
   /**
    * <pre>
    * Scalar UDF expressions
    * </pre>
    *
-   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr"];</code>
+   * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ScalarUDFExprNodeOrBuilder getScalarUdfExprOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return Whether the getIndexedField field is set.
    */
-  boolean hasGetIndexedField();
+  @java.lang.Deprecated boolean hasGetIndexedField();
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return The getIndexedField.
    */
-  ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.GetIndexedField getGetIndexedField();
   /**
-   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField"];</code>
+   * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.GetIndexedFieldOrBuilder getGetIndexedFieldOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=103
    * @return Whether the groupingSet field is set.
    */
-  boolean hasGroupingSet();
+  @java.lang.Deprecated boolean hasGroupingSet();
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=103
    * @return The groupingSet.
    */
-  ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.GroupingSetNode getGroupingSet();
   /**
-   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet"];</code>
+   * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.GroupingSetNodeOrBuilder getGroupingSetOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=105
    * @return Whether the cube field is set.
    */
-  boolean hasCube();
+  @java.lang.Deprecated boolean hasCube();
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=105
    * @return The cube.
    */
-  ai.chalk.protos.chalk.expression.v1.CubeNode getCube();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CubeNode getCube();
   /**
-   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube"];</code>
+   * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.CubeNodeOrBuilder getCubeOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return Whether the rollup field is set.
    */
-  boolean hasRollup();
+  @java.lang.Deprecated boolean hasRollup();
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return The rollup.
    */
-  ai.chalk.protos.chalk.expression.v1.RollupNode getRollup();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.RollupNode getRollup();
   /**
-   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup"];</code>
+   * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.RollupNodeOrBuilder getRollupOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return Whether the isTrue field is set.
    */
-  boolean hasIsTrue();
+  @java.lang.Deprecated boolean hasIsTrue();
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return The isTrue.
    */
-  ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsTrue getIsTrue();
   /**
-   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue"];</code>
+   * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsTrueOrBuilder getIsTrueOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=110
    * @return Whether the isFalse field is set.
    */
-  boolean hasIsFalse();
+  @java.lang.Deprecated boolean hasIsFalse();
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=110
    * @return The isFalse.
    */
-  ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsFalse getIsFalse();
   /**
-   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse"];</code>
+   * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsFalseOrBuilder getIsFalseOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return Whether the isUnknown field is set.
    */
-  boolean hasIsUnknown();
+  @java.lang.Deprecated boolean hasIsUnknown();
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return The isUnknown.
    */
-  ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsUnknown getIsUnknown();
   /**
-   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown"];</code>
+   * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsUnknownOrBuilder getIsUnknownOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=112
    * @return Whether the isNotTrue field is set.
    */
-  boolean hasIsNotTrue();
+  @java.lang.Deprecated boolean hasIsNotTrue();
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=112
    * @return The isNotTrue.
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotTrue getIsNotTrue();
   /**
-   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue"];</code>
+   * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotTrueOrBuilder getIsNotTrueOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return Whether the isNotFalse field is set.
    */
-  boolean hasIsNotFalse();
+  @java.lang.Deprecated boolean hasIsNotFalse();
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return The isNotFalse.
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotFalse getIsNotFalse();
   /**
-   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse"];</code>
+   * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotFalseOrBuilder getIsNotFalseOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=114
    * @return Whether the isNotUnknown field is set.
    */
-  boolean hasIsNotUnknown();
+  @java.lang.Deprecated boolean hasIsNotUnknown();
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=114
    * @return The isNotUnknown.
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotUnknown getIsNotUnknown();
   /**
-   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown"];</code>
+   * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.IsNotUnknownOrBuilder getIsNotUnknownOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return Whether the like field is set.
    */
-  boolean hasLike();
+  @java.lang.Deprecated boolean hasLike();
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return The like.
    */
-  ai.chalk.protos.chalk.expression.v1.LikeNode getLike();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.LikeNode getLike();
   /**
-   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like"];</code>
+   * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.LikeNodeOrBuilder getLikeOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=116
    * @return Whether the ilike field is set.
    */
-  boolean hasIlike();
+  @java.lang.Deprecated boolean hasIlike();
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=116
    * @return The ilike.
    */
-  ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ILikeNode getIlike();
   /**
-   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike"];</code>
+   * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.ILikeNodeOrBuilder getIlikeOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return Whether the similarTo field is set.
    */
-  boolean hasSimilarTo();
+  @java.lang.Deprecated boolean hasSimilarTo();
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return The similarTo.
    */
-  ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.SimilarToNode getSimilarTo();
   /**
-   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo"];</code>
+   * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.SimilarToNodeOrBuilder getSimilarToOrBuilder();
 
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return Whether the placeholder field is set.
    */
-  boolean hasPlaceholder();
+  @java.lang.Deprecated boolean hasPlaceholder();
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
+   * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return The placeholder.
    */
-  ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.PlaceholderNode getPlaceholder();
   /**
-   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder"];</code>
+   * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.expression.v1.PlaceholderNodeOrBuilder getPlaceholderOrBuilder();
+
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNode.ExprFormCase getExprFormCase();
 
   ai.chalk.protos.chalk.expression.v1.LogicalExprNode.ExprTypeCase getExprTypeCase();
 }

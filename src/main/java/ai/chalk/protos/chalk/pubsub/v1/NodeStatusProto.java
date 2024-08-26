@@ -41,7 +41,7 @@ public final class NodeStatusProto {
     java.lang.String[] descriptorData = {
       "\n!chalk/pubsub/v1/node_status.proto\022\017cha" +
       "lk.pubsub.v1\032\034gen_bq_schema/bq_field.pro" +
-      "to\032\034gen_bq_schema/bq_table.proto\"\334\006\n\020Nod" +
+      "to\032\034gen_bq_schema/bq_table.proto\"\364\007\n\020Nod" +
       "eStatusPubSub\022\022\n\004team\030\001 \001(\tR\004team\022\022\n\004nam" +
       "e\030\002 \001(\tR\004name\022\020\n\003uid\030\003 \001(\tR\003uid\022#\n\rinsta" +
       "nce_type\030\004 \001(\tR\014instanceType\022\026\n\006region\030\005" +
@@ -59,15 +59,19 @@ public final class NodeStatusProto {
       "id\022\027\n\007boot_id\030\017 \001(\tR\006bootId\022$\n\runschedul" +
       "able\030\020 \001(\010R\runschedulable\022\034\n\tnamespace\030\021" +
       " \001(\tR\tnamespace\022\037\n\013instance_id\030\022 \001(\tR\nin" +
-      "stanceId\022\030\n\007cluster\030\023 \001(\tR\007cluster\0329\n\013La" +
-      "belsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001" +
-      "(\tR\005value:\0028\001\032>\n\020AnnotationsEntry\022\020\n\003key" +
-      "\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001:\020\352" +
-      "?\r\n\013node_statusB\244\001\n\037ai.chalk.protos.chal" +
-      "k.pubsub.v1B\017NodeStatusProtoP\001Z\022pubsub/v" +
-      "1;pubsubv1\242\002\003CPX\252\002\017Chalk.Pubsub.V1\312\002\017Cha" +
-      "lk\\Pubsub\\V1\342\002\033Chalk\\Pubsub\\V1\\GPBMetada" +
-      "ta\352\002\021Chalk::Pubsub::V1b\006proto3"
+      "stanceId\022\030\n\007cluster\030\023 \001(\tR\007cluster\022\033\n\tto" +
+      "tal_cpu\030\024 \001(\tR\010totalCpu\022!\n\014total_memory\030" +
+      "\025 \001(\tR\013totalMemory\022\'\n\017allocatable_cpu\030\026 " +
+      "\001(\tR\016allocatableCpu\022-\n\022allocatable_memor" +
+      "y\030\027 \001(\tR\021allocatableMemory\0329\n\013LabelsEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001\032>\n\020AnnotationsEntry\022\020\n\003key\030\001 \001(\tR\003" +
+      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001:\020\352?\r\n\013node" +
+      "_statusB\244\001\n\037ai.chalk.protos.chalk.pubsub" +
+      ".v1B\017NodeStatusProtoP\001Z\022pubsub/v1;pubsub" +
+      "v1\242\002\003CPX\252\002\017Chalk.Pubsub.V1\312\002\017Chalk\\Pubsu" +
+      "b\\V1\342\002\033Chalk\\Pubsub\\V1\\GPBMetadata\352\002\021Cha" +
+      "lk::Pubsub::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -80,7 +84,7 @@ public final class NodeStatusProto {
     internal_static_chalk_pubsub_v1_NodeStatusPubSub_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_NodeStatusPubSub_descriptor,
-        new java.lang.String[] { "Team", "Name", "Uid", "InstanceType", "Region", "Zone", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "MachineId", "SystemUuid", "BootId", "Unschedulable", "Namespace", "InstanceId", "Cluster", });
+        new java.lang.String[] { "Team", "Name", "Uid", "InstanceType", "Region", "Zone", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "MachineId", "SystemUuid", "BootId", "Unschedulable", "Namespace", "InstanceId", "Cluster", "TotalCpu", "TotalMemory", "AllocatableCpu", "AllocatableMemory", });
     internal_static_chalk_pubsub_v1_NodeStatusPubSub_LabelsEntry_descriptor =
       internal_static_chalk_pubsub_v1_NodeStatusPubSub_descriptor.getNestedTypes().get(0);
     internal_static_chalk_pubsub_v1_NodeStatusPubSub_LabelsEntry_fieldAccessorTable = new
