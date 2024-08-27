@@ -489,27 +489,72 @@ private static final long serialVersionUID = 0L;
   public static final int EXPLAIN_FIELD_NUMBER = 103;
   private ai.chalk.protos.chalk.common.v1.OfflineQueryExplain explain_;
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+   *     See chalk/common/v1/offline_query.proto;l=79
    * @return Whether the explain field is set.
    */
   @java.lang.Override
-  public boolean hasExplain() {
+  @java.lang.Deprecated public boolean hasExplain() {
     return ((bitField0_ & 0x00000040) != 0);
   }
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+   *     See chalk/common/v1/offline_query.proto;l=79
    * @return The explain.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain() {
     return explain_ == null ? ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.getDefaultInstance() : explain_;
   }
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder() {
     return explain_ == null ? ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.getDefaultInstance() : explain_;
+  }
+
+  public static final int EXPLAIN2_FIELD_NUMBER = 106;
+  private ai.chalk.protos.chalk.common.v1.ExplainOptions explain2_;
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   * @return Whether the explain2 field is set.
+   */
+  @java.lang.Override
+  public boolean hasExplain2() {
+    return ((bitField0_ & 0x00000080) != 0);
+  }
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   * @return The explain2.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.ExplainOptions getExplain2() {
+    return explain2_ == null ? ai.chalk.protos.chalk.common.v1.ExplainOptions.getDefaultInstance() : explain2_;
+  }
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder getExplain2OrBuilder() {
+    return explain2_ == null ? ai.chalk.protos.chalk.common.v1.ExplainOptions.getDefaultInstance() : explain2_;
   }
 
   public static final int TAGS_FIELD_NUMBER = 104;
@@ -558,7 +603,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasCorrelationId() {
-    return ((bitField0_ & 0x00000080) != 0);
+    return ((bitField0_ & 0x00000100) != 0);
   }
   /**
    * <code>optional string correlation_id = 105 [json_name = "correlationId"];</code>
@@ -609,7 +654,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasObservedAtLowerBound() {
-    return ((bitField0_ & 0x00000100) != 0);
+    return ((bitField0_ & 0x00000200) != 0);
   }
   /**
    * <pre>
@@ -668,7 +713,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasObservedAtUpperBound() {
-    return ((bitField0_ & 0x00000200) != 0);
+    return ((bitField0_ & 0x00000400) != 0);
   }
   /**
    * <pre>
@@ -767,13 +812,16 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < tags_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 104, tags_.getRaw(i));
     }
-    if (((bitField0_ & 0x00000080) != 0)) {
+    if (((bitField0_ & 0x00000100) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 105, correlationId_);
     }
-    if (((bitField0_ & 0x00000100) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 201, observedAtLowerBound_);
+    if (((bitField0_ & 0x00000080) != 0)) {
+      output.writeMessage(106, getExplain2());
     }
     if (((bitField0_ & 0x00000200) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 201, observedAtLowerBound_);
+    }
+    if (((bitField0_ & 0x00000400) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 202, observedAtUpperBound_);
     }
     getUnknownFields().writeTo(output);
@@ -846,13 +894,17 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 2 * getTagsList().size();
     }
-    if (((bitField0_ & 0x00000080) != 0)) {
+    if (((bitField0_ & 0x00000100) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(105, correlationId_);
     }
-    if (((bitField0_ & 0x00000100) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(201, observedAtLowerBound_);
+    if (((bitField0_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(106, getExplain2());
     }
     if (((bitField0_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(201, observedAtLowerBound_);
+    }
+    if (((bitField0_ & 0x00000400) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(202, observedAtUpperBound_);
     }
     size += getUnknownFields().getSerializedSize();
@@ -914,6 +966,11 @@ private static final long serialVersionUID = 0L;
     if (hasExplain()) {
       if (!getExplain()
           .equals(other.getExplain())) return false;
+    }
+    if (hasExplain2() != other.hasExplain2()) return false;
+    if (hasExplain2()) {
+      if (!getExplain2()
+          .equals(other.getExplain2())) return false;
     }
     if (!getTagsList()
         .equals(other.getTagsList())) return false;
@@ -987,6 +1044,10 @@ private static final long serialVersionUID = 0L;
     if (hasExplain()) {
       hash = (37 * hash) + EXPLAIN_FIELD_NUMBER;
       hash = (53 * hash) + getExplain().hashCode();
+    }
+    if (hasExplain2()) {
+      hash = (37 * hash) + EXPLAIN2_FIELD_NUMBER;
+      hash = (53 * hash) + getExplain2().hashCode();
     }
     if (getTagsCount() > 0) {
       hash = (37 * hash) + TAGS_FIELD_NUMBER;
@@ -1138,6 +1199,7 @@ private static final long serialVersionUID = 0L;
         getRecomputeFeaturesFieldBuilder();
         getFiltersFieldBuilder();
         getExplainFieldBuilder();
+        getExplain2FieldBuilder();
       }
     }
     @java.lang.Override
@@ -1175,6 +1237,11 @@ private static final long serialVersionUID = 0L;
       if (explainBuilder_ != null) {
         explainBuilder_.dispose();
         explainBuilder_ = null;
+      }
+      explain2_ = null;
+      if (explain2Builder_ != null) {
+        explain2Builder_.dispose();
+        explain2Builder_ = null;
       }
       tags_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
@@ -1277,20 +1344,26 @@ private static final long serialVersionUID = 0L;
         to_bitField0_ |= 0x00000040;
       }
       if (((from_bitField0_ & 0x00001000) != 0)) {
+        result.explain2_ = explain2Builder_ == null
+            ? explain2_
+            : explain2Builder_.build();
+        to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         tags_.makeImmutable();
         result.tags_ = tags_;
       }
-      if (((from_bitField0_ & 0x00002000) != 0)) {
-        result.correlationId_ = correlationId_;
-        to_bitField0_ |= 0x00000080;
-      }
       if (((from_bitField0_ & 0x00004000) != 0)) {
-        result.observedAtLowerBound_ = observedAtLowerBound_;
+        result.correlationId_ = correlationId_;
         to_bitField0_ |= 0x00000100;
       }
       if (((from_bitField0_ & 0x00008000) != 0)) {
-        result.observedAtUpperBound_ = observedAtUpperBound_;
+        result.observedAtLowerBound_ = observedAtLowerBound_;
         to_bitField0_ |= 0x00000200;
+      }
+      if (((from_bitField0_ & 0x00010000) != 0)) {
+        result.observedAtUpperBound_ = observedAtUpperBound_;
+        to_bitField0_ |= 0x00000400;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1418,10 +1491,13 @@ private static final long serialVersionUID = 0L;
       if (other.hasExplain()) {
         mergeExplain(other.getExplain());
       }
+      if (other.hasExplain2()) {
+        mergeExplain2(other.getExplain2());
+      }
       if (!other.tags_.isEmpty()) {
         if (tags_.isEmpty()) {
           tags_ = other.tags_;
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
         } else {
           ensureTagsIsMutable();
           tags_.addAll(other.tags_);
@@ -1430,17 +1506,17 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasCorrelationId()) {
         correlationId_ = other.correlationId_;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         onChanged();
       }
       if (other.hasObservedAtLowerBound()) {
         observedAtLowerBound_ = other.observedAtLowerBound_;
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
       }
       if (other.hasObservedAtUpperBound()) {
         observedAtUpperBound_ = other.observedAtUpperBound_;
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -1553,17 +1629,24 @@ private static final long serialVersionUID = 0L;
             } // case 834
             case 842: {
               correlationId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00004000;
               break;
             } // case 842
+            case 850: {
+              input.readMessage(
+                  getExplain2FieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00001000;
+              break;
+            } // case 850
             case 1610: {
               observedAtLowerBound_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00008000;
               break;
             } // case 1610
             case 1618: {
               observedAtUpperBound_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00010000;
               break;
             } // case 1618
             default: {
@@ -2845,17 +2928,31 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.common.v1.OfflineQueryExplain, ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.Builder, ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder> explainBuilder_;
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+     * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+     *     See chalk/common/v1/offline_query.proto;l=79
      * @return Whether the explain field is set.
      */
-    public boolean hasExplain() {
+    @java.lang.Deprecated public boolean hasExplain() {
       return ((bitField0_ & 0x00000800) != 0);
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+     * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+     *     See chalk/common/v1/offline_query.proto;l=79
      * @return The explain.
      */
-    public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain() {
       if (explainBuilder_ == null) {
         return explain_ == null ? ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.getDefaultInstance() : explain_;
       } else {
@@ -2863,9 +2960,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public Builder setExplain(ai.chalk.protos.chalk.common.v1.OfflineQueryExplain value) {
+    @java.lang.Deprecated public Builder setExplain(ai.chalk.protos.chalk.common.v1.OfflineQueryExplain value) {
       if (explainBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2879,9 +2981,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public Builder setExplain(
+    @java.lang.Deprecated public Builder setExplain(
         ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.Builder builderForValue) {
       if (explainBuilder_ == null) {
         explain_ = builderForValue.build();
@@ -2893,9 +3000,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public Builder mergeExplain(ai.chalk.protos.chalk.common.v1.OfflineQueryExplain value) {
+    @java.lang.Deprecated public Builder mergeExplain(ai.chalk.protos.chalk.common.v1.OfflineQueryExplain value) {
       if (explainBuilder_ == null) {
         if (((bitField0_ & 0x00000800) != 0) &&
           explain_ != null &&
@@ -2914,9 +3026,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public Builder clearExplain() {
+    @java.lang.Deprecated public Builder clearExplain() {
       bitField0_ = (bitField0_ & ~0x00000800);
       explain_ = null;
       if (explainBuilder_ != null) {
@@ -2927,17 +3044,27 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.Builder getExplainBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.Builder getExplainBuilder() {
       bitField0_ |= 0x00000800;
       onChanged();
       return getExplainFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder() {
       if (explainBuilder_ != null) {
         return explainBuilder_.getMessageOrBuilder();
       } else {
@@ -2946,7 +3073,12 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+     * <pre>
+     * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+     * Use explain2
+     * </pre>
+     *
+     * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.common.v1.OfflineQueryExplain, ai.chalk.protos.chalk.common.v1.OfflineQueryExplain.Builder, ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder> 
@@ -2962,13 +3094,134 @@ private static final long serialVersionUID = 0L;
       return explainBuilder_;
     }
 
+    private ai.chalk.protos.chalk.common.v1.ExplainOptions explain2_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.ExplainOptions, ai.chalk.protos.chalk.common.v1.ExplainOptions.Builder, ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder> explain2Builder_;
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     * @return Whether the explain2 field is set.
+     */
+    public boolean hasExplain2() {
+      return ((bitField0_ & 0x00001000) != 0);
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     * @return The explain2.
+     */
+    public ai.chalk.protos.chalk.common.v1.ExplainOptions getExplain2() {
+      if (explain2Builder_ == null) {
+        return explain2_ == null ? ai.chalk.protos.chalk.common.v1.ExplainOptions.getDefaultInstance() : explain2_;
+      } else {
+        return explain2Builder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public Builder setExplain2(ai.chalk.protos.chalk.common.v1.ExplainOptions value) {
+      if (explain2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        explain2_ = value;
+      } else {
+        explain2Builder_.setMessage(value);
+      }
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public Builder setExplain2(
+        ai.chalk.protos.chalk.common.v1.ExplainOptions.Builder builderForValue) {
+      if (explain2Builder_ == null) {
+        explain2_ = builderForValue.build();
+      } else {
+        explain2Builder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public Builder mergeExplain2(ai.chalk.protos.chalk.common.v1.ExplainOptions value) {
+      if (explain2Builder_ == null) {
+        if (((bitField0_ & 0x00001000) != 0) &&
+          explain2_ != null &&
+          explain2_ != ai.chalk.protos.chalk.common.v1.ExplainOptions.getDefaultInstance()) {
+          getExplain2Builder().mergeFrom(value);
+        } else {
+          explain2_ = value;
+        }
+      } else {
+        explain2Builder_.mergeFrom(value);
+      }
+      if (explain2_ != null) {
+        bitField0_ |= 0x00001000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public Builder clearExplain2() {
+      bitField0_ = (bitField0_ & ~0x00001000);
+      explain2_ = null;
+      if (explain2Builder_ != null) {
+        explain2Builder_.dispose();
+        explain2Builder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ExplainOptions.Builder getExplain2Builder() {
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return getExplain2FieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder getExplain2OrBuilder() {
+      if (explain2Builder_ != null) {
+        return explain2Builder_.getMessageOrBuilder();
+      } else {
+        return explain2_ == null ?
+            ai.chalk.protos.chalk.common.v1.ExplainOptions.getDefaultInstance() : explain2_;
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.ExplainOptions, ai.chalk.protos.chalk.common.v1.ExplainOptions.Builder, ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder> 
+        getExplain2FieldBuilder() {
+      if (explain2Builder_ == null) {
+        explain2Builder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.ExplainOptions, ai.chalk.protos.chalk.common.v1.ExplainOptions.Builder, ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder>(
+                getExplain2(),
+                getParentForChildren(),
+                isClean());
+        explain2_ = null;
+      }
+      return explain2Builder_;
+    }
+
     private com.google.protobuf.LazyStringArrayList tags_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     private void ensureTagsIsMutable() {
       if (!tags_.isModifiable()) {
         tags_ = new com.google.protobuf.LazyStringArrayList(tags_);
       }
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00002000;
     }
     /**
      * <code>repeated string tags = 104 [json_name = "tags"];</code>
@@ -3014,7 +3267,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTagsIsMutable();
       tags_.set(index, value);
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3028,7 +3281,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTagsIsMutable();
       tags_.add(value);
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3042,7 +3295,7 @@ private static final long serialVersionUID = 0L;
       ensureTagsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, tags_);
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3053,7 +3306,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearTags() {
       tags_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00001000);;
+      bitField0_ = (bitField0_ & ~0x00002000);;
       onChanged();
       return this;
     }
@@ -3068,7 +3321,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureTagsIsMutable();
       tags_.add(value);
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3079,7 +3332,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the correlationId field is set.
      */
     public boolean hasCorrelationId() {
-      return ((bitField0_ & 0x00002000) != 0);
+      return ((bitField0_ & 0x00004000) != 0);
     }
     /**
      * <code>optional string correlation_id = 105 [json_name = "correlationId"];</code>
@@ -3123,7 +3376,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       correlationId_ = value;
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -3133,7 +3386,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearCorrelationId() {
       correlationId_ = getDefaultInstance().getCorrelationId();
-      bitField0_ = (bitField0_ & ~0x00002000);
+      bitField0_ = (bitField0_ & ~0x00004000);
       onChanged();
       return this;
     }
@@ -3147,7 +3400,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       correlationId_ = value;
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -3162,7 +3415,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the observedAtLowerBound field is set.
      */
     public boolean hasObservedAtLowerBound() {
-      return ((bitField0_ & 0x00004000) != 0);
+      return ((bitField0_ & 0x00008000) != 0);
     }
     /**
      * <pre>
@@ -3218,7 +3471,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       observedAtLowerBound_ = value;
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -3232,7 +3485,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearObservedAtLowerBound() {
       observedAtLowerBound_ = getDefaultInstance().getObservedAtLowerBound();
-      bitField0_ = (bitField0_ & ~0x00004000);
+      bitField0_ = (bitField0_ & ~0x00008000);
       onChanged();
       return this;
     }
@@ -3250,7 +3503,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       observedAtLowerBound_ = value;
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -3265,7 +3518,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the observedAtUpperBound field is set.
      */
     public boolean hasObservedAtUpperBound() {
-      return ((bitField0_ & 0x00008000) != 0);
+      return ((bitField0_ & 0x00010000) != 0);
     }
     /**
      * <pre>
@@ -3321,7 +3574,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       observedAtUpperBound_ = value;
-      bitField0_ |= 0x00008000;
+      bitField0_ |= 0x00010000;
       onChanged();
       return this;
     }
@@ -3335,7 +3588,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearObservedAtUpperBound() {
       observedAtUpperBound_ = getDefaultInstance().getObservedAtUpperBound();
-      bitField0_ = (bitField0_ & ~0x00008000);
+      bitField0_ = (bitField0_ & ~0x00010000);
       onChanged();
       return this;
     }
@@ -3353,7 +3606,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       observedAtUpperBound_ = value;
-      bitField0_ |= 0x00008000;
+      bitField0_ |= 0x00010000;
       onChanged();
       return this;
     }
