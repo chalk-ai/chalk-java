@@ -9,15 +9,27 @@ public interface OnlineQueryContextOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string environment = 1 [json_name = "environment"];</code>
+   * <pre>
+   * environment id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=57
    * @return The environment.
    */
-  java.lang.String getEnvironment();
+  @java.lang.Deprecated java.lang.String getEnvironment();
   /**
-   * <code>string environment = 1 [json_name = "environment"];</code>
+   * <pre>
+   * environment id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=57
    * @return The bytes for environment.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getEnvironmentBytes();
 
   /**
@@ -71,37 +83,73 @@ public interface OnlineQueryContextOrBuilder extends
       getRequiredResolverTagsBytes(int index);
 
   /**
-   * <code>optional string deployment_id = 4 [json_name = "deploymentId"];</code>
+   * <pre>
+   * deployment id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=60
    * @return Whether the deploymentId field is set.
    */
-  boolean hasDeploymentId();
+  @java.lang.Deprecated boolean hasDeploymentId();
   /**
-   * <code>optional string deployment_id = 4 [json_name = "deploymentId"];</code>
+   * <pre>
+   * deployment id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=60
    * @return The deploymentId.
    */
-  java.lang.String getDeploymentId();
+  @java.lang.Deprecated java.lang.String getDeploymentId();
   /**
-   * <code>optional string deployment_id = 4 [json_name = "deploymentId"];</code>
+   * <pre>
+   * deployment id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=60
    * @return The bytes for deploymentId.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getDeploymentIdBytes();
 
   /**
-   * <code>optional string branch_id = 5 [json_name = "branchId"];</code>
+   * <pre>
+   * branch_id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=61
    * @return Whether the branchId field is set.
    */
-  boolean hasBranchId();
+  @java.lang.Deprecated boolean hasBranchId();
   /**
-   * <code>optional string branch_id = 5 [json_name = "branchId"];</code>
+   * <pre>
+   * branch_id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=61
    * @return The branchId.
    */
-  java.lang.String getBranchId();
+  @java.lang.Deprecated java.lang.String getBranchId();
   /**
-   * <code>optional string branch_id = 5 [json_name = "branchId"];</code>
+   * <pre>
+   * branch_id is set in the header. This field is not set anymore
+   * </pre>
+   *
+   * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
+   *     See chalk/common/v1/online_query.proto;l=61
    * @return The bytes for branchId.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getBranchIdBytes();
 
   /**

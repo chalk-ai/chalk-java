@@ -271,19 +271,53 @@ public interface OfflineQueryRequestOrBuilder extends
   int getMaxCacheAgeSecs();
 
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+   *     See chalk/common/v1/offline_query.proto;l=79
    * @return Whether the explain field is set.
    */
-  boolean hasExplain();
+  @java.lang.Deprecated boolean hasExplain();
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
+   * @deprecated chalk.common.v1.OfflineQueryRequest.explain is deprecated.
+   *     See chalk/common/v1/offline_query.proto;l=79
    * @return The explain.
    */
-  ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain();
+  @java.lang.Deprecated ai.chalk.protos.chalk.common.v1.OfflineQueryExplain getExplain();
   /**
-   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain"];</code>
+   * <pre>
+   * Field is deprecated because we shouldn't have OnlineExplain that differs from OfflineExplain
+   * Use explain2
+   * </pre>
+   *
+   * <code>.chalk.common.v1.OfflineQueryExplain explain = 103 [json_name = "explain", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.common.v1.OfflineQueryExplainOrBuilder getExplainOrBuilder();
+
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   * @return Whether the explain2 field is set.
+   */
+  boolean hasExplain2();
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   * @return The explain2.
+   */
+  ai.chalk.protos.chalk.common.v1.ExplainOptions getExplain2();
+  /**
+   * <code>.chalk.common.v1.ExplainOptions explain2 = 106 [json_name = "explain2"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.ExplainOptionsOrBuilder getExplain2OrBuilder();
 
   /**
    * <code>repeated string tags = 104 [json_name = "tags"];</code>
