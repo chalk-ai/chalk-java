@@ -100,7 +100,6 @@ public class TestChalkClient {
                 assert users.length == userIds.length;
                 assert users[0].socure_score.getValue().equals(123.0);
             }
-            ;
         }
     }
 
@@ -119,16 +118,10 @@ public class TestChalkClient {
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 .build();
 
-        for (int i = 0; i < 2; i++) {
-            // Two calls as of now because the first request currently still
-            // gets relayed through the metadata server. Remove this loop
-            // once we directly hit the branch server up on the first request.
-            try (OnlineQueryResult result = branchClient.onlineQuery(params)) {
-                var users = result.unmarshal(User.class);
-                assert users.length == userIds.length;
-                assert users[0].socure_score.getValue().equals(123.0);
-            }
-            ;
+        try (OnlineQueryResult result = branchClient.onlineQuery(params)) {
+            var users = result.unmarshal(User.class);
+            assert users.length == userIds.length;
+            assert users[0].socure_score.getValue().equals(123.0);
         }
     }
 
@@ -152,7 +145,6 @@ public class TestChalkClient {
             assert users.length == userIds.length;
             assert users[0].socure_score.getValue().equals(123.0);
         }
-        ;
     }
 }
 
