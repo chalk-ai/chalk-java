@@ -5,6 +5,10 @@
 package ai.chalk.protos.chalk.common.v1;
 
 /**
+ * <pre>
+ * OfflineQueryExplain is DEPRECATED. DO NOT USE IT!!
+ * </pre>
+ *
  * Protobuf type {@code chalk.common.v1.OfflineQueryExplain}
  */
 public final class OfflineQueryExplain extends
@@ -719,6 +723,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * OfflineQueryExplain is DEPRECATED. DO NOT USE IT!!
+   * </pre>
+   *
    * Protobuf type {@code chalk.common.v1.OfflineQueryExplain}
    */
   public static final class Builder extends

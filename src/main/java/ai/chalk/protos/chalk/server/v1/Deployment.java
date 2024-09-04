@@ -20,6 +20,10 @@ private static final long serialVersionUID = 0L;
     id_ = "";
     environmentId_ = "";
     status_ = 0;
+    deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    gitCommit_ = "";
+    baseImageSha_ = "";
   }
 
   @java.lang.Override
@@ -42,6 +46,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.Deployment.class, ai.chalk.protos.chalk.server.v1.Deployment.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -138,6 +143,235 @@ private static final long serialVersionUID = 0L;
     return result == null ? ai.chalk.protos.chalk.server.v1.DeploymentStatus.UNRECOGNIZED : result;
   }
 
+  public static final int DEPLOYMENT_TAGS_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList deploymentTags_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return A list containing the deploymentTags.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getDeploymentTagsList() {
+    return deploymentTags_;
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @return The count of deploymentTags.
+   */
+  public int getDeploymentTagsCount() {
+    return deploymentTags_.size();
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the element to return.
+   * @return The deploymentTags at the given index.
+   */
+  public java.lang.String getDeploymentTags(int index) {
+    return deploymentTags_.get(index);
+  }
+  /**
+   * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the deploymentTags at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getDeploymentTagsBytes(int index) {
+    return deploymentTags_.getByteString(index);
+  }
+
+  public static final int CREATED_AT_FIELD_NUMBER = 14;
+  private com.google.protobuf.Timestamp createdAt_;
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasCreatedAt() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getCreatedAt() {
+    return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+  }
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   *  string requirements_filepath = 7;
+   *  string dockerfile_filepath = 8;
+   *  string runtime = 9;
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   *  string final_dependency_hash = 12;
+   *  bool is_preview_deployment = 13;
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
+    return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+  }
+
+  public static final int UPDATED_AT_FIELD_NUMBER = 15;
+  private com.google.protobuf.Timestamp updatedAt_;
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   * @return Whether the updatedAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasUpdatedAt() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   * @return The updatedAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getUpdatedAt() {
+    return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+  }
+  /**
+   * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder() {
+    return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+  }
+
+  public static final int GIT_COMMIT_FIELD_NUMBER = 16;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitCommit_ = "";
+  /**
+   * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+   * @return The gitCommit.
+   */
+  @java.lang.Override
+  public java.lang.String getGitCommit() {
+    java.lang.Object ref = gitCommit_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitCommit_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+   * @return The bytes for gitCommit.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitCommitBytes() {
+    java.lang.Object ref = gitCommit_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitCommit_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int BASE_IMAGE_SHA_FIELD_NUMBER = 24;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object baseImageSha_ = "";
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   *  string requirements_files = 22;
+   *  string git_tag = 23;
+   * </pre>
+   *
+   * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+   * @return The baseImageSha.
+   */
+  @java.lang.Override
+  public java.lang.String getBaseImageSha() {
+    java.lang.Object ref = baseImageSha_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      baseImageSha_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   *  string requirements_files = 22;
+   *  string git_tag = 23;
+   * </pre>
+   *
+   * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+   * @return The bytes for baseImageSha.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBaseImageShaBytes() {
+    java.lang.Object ref = baseImageSha_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      baseImageSha_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -161,6 +395,21 @@ private static final long serialVersionUID = 0L;
     if (status_ != ai.chalk.protos.chalk.server.v1.DeploymentStatus.DEPLOYMENT_STATUS_UNSPECIFIED.getNumber()) {
       output.writeEnum(3, status_);
     }
+    for (int i = 0; i < deploymentTags_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, deploymentTags_.getRaw(i));
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(14, getCreatedAt());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(15, getUpdatedAt());
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 16, gitCommit_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 24, baseImageSha_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -179,6 +428,28 @@ private static final long serialVersionUID = 0L;
     if (status_ != ai.chalk.protos.chalk.server.v1.DeploymentStatus.DEPLOYMENT_STATUS_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(3, status_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < deploymentTags_.size(); i++) {
+        dataSize += computeStringSizeNoTag(deploymentTags_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getDeploymentTagsList().size();
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(14, getCreatedAt());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(15, getUpdatedAt());
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, gitCommit_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, baseImageSha_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -200,6 +471,22 @@ private static final long serialVersionUID = 0L;
     if (!getEnvironmentId()
         .equals(other.getEnvironmentId())) return false;
     if (status_ != other.status_) return false;
+    if (!getDeploymentTagsList()
+        .equals(other.getDeploymentTagsList())) return false;
+    if (hasCreatedAt() != other.hasCreatedAt()) return false;
+    if (hasCreatedAt()) {
+      if (!getCreatedAt()
+          .equals(other.getCreatedAt())) return false;
+    }
+    if (hasUpdatedAt() != other.hasUpdatedAt()) return false;
+    if (hasUpdatedAt()) {
+      if (!getUpdatedAt()
+          .equals(other.getUpdatedAt())) return false;
+    }
+    if (!getGitCommit()
+        .equals(other.getGitCommit())) return false;
+    if (!getBaseImageSha()
+        .equals(other.getBaseImageSha())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -217,6 +504,22 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getEnvironmentId().hashCode();
     hash = (37 * hash) + STATUS_FIELD_NUMBER;
     hash = (53 * hash) + status_;
+    if (getDeploymentTagsCount() > 0) {
+      hash = (37 * hash) + DEPLOYMENT_TAGS_FIELD_NUMBER;
+      hash = (53 * hash) + getDeploymentTagsList().hashCode();
+    }
+    if (hasCreatedAt()) {
+      hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
+      hash = (53 * hash) + getCreatedAt().hashCode();
+    }
+    if (hasUpdatedAt()) {
+      hash = (37 * hash) + UPDATED_AT_FIELD_NUMBER;
+      hash = (53 * hash) + getUpdatedAt().hashCode();
+    }
+    hash = (37 * hash) + GIT_COMMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getGitCommit().hashCode();
+    hash = (37 * hash) + BASE_IMAGE_SHA_FIELD_NUMBER;
+    hash = (53 * hash) + getBaseImageSha().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -336,13 +639,20 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.Deployment.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getCreatedAtFieldBuilder();
+        getUpdatedAtFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -351,6 +661,20 @@ private static final long serialVersionUID = 0L;
       id_ = "";
       environmentId_ = "";
       status_ = 0;
+      deploymentTags_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      createdAt_ = null;
+      if (createdAtBuilder_ != null) {
+        createdAtBuilder_.dispose();
+        createdAtBuilder_ = null;
+      }
+      updatedAt_ = null;
+      if (updatedAtBuilder_ != null) {
+        updatedAtBuilder_.dispose();
+        updatedAtBuilder_ = null;
+      }
+      gitCommit_ = "";
+      baseImageSha_ = "";
       return this;
     }
 
@@ -393,6 +717,30 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.status_ = status_;
       }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        deploymentTags_.makeImmutable();
+        result.deploymentTags_ = deploymentTags_;
+      }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.createdAt_ = createdAtBuilder_ == null
+            ? createdAt_
+            : createdAtBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.updatedAt_ = updatedAtBuilder_ == null
+            ? updatedAt_
+            : updatedAtBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.gitCommit_ = gitCommit_;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.baseImageSha_ = baseImageSha_;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -452,6 +800,32 @@ private static final long serialVersionUID = 0L;
       if (other.status_ != 0) {
         setStatusValue(other.getStatusValue());
       }
+      if (!other.deploymentTags_.isEmpty()) {
+        if (deploymentTags_.isEmpty()) {
+          deploymentTags_ = other.deploymentTags_;
+          bitField0_ |= 0x00000008;
+        } else {
+          ensureDeploymentTagsIsMutable();
+          deploymentTags_.addAll(other.deploymentTags_);
+        }
+        onChanged();
+      }
+      if (other.hasCreatedAt()) {
+        mergeCreatedAt(other.getCreatedAt());
+      }
+      if (other.hasUpdatedAt()) {
+        mergeUpdatedAt(other.getUpdatedAt());
+      }
+      if (!other.getGitCommit().isEmpty()) {
+        gitCommit_ = other.gitCommit_;
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
+      if (!other.getBaseImageSha().isEmpty()) {
+        baseImageSha_ = other.baseImageSha_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -493,6 +867,36 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 24
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureDeploymentTagsIsMutable();
+              deploymentTags_.add(s);
+              break;
+            } // case 34
+            case 114: {
+              input.readMessage(
+                  getCreatedAtFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 114
+            case 122: {
+              input.readMessage(
+                  getUpdatedAtFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 122
+            case 130: {
+              gitCommit_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 130
+            case 194: {
+              baseImageSha_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 194
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -703,6 +1107,679 @@ private static final long serialVersionUID = 0L;
     public Builder clearStatus() {
       bitField0_ = (bitField0_ & ~0x00000004);
       status_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureDeploymentTagsIsMutable() {
+      if (!deploymentTags_.isModifiable()) {
+        deploymentTags_ = new com.google.protobuf.LazyStringArrayList(deploymentTags_);
+      }
+      bitField0_ |= 0x00000008;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return A list containing the deploymentTags.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getDeploymentTagsList() {
+      deploymentTags_.makeImmutable();
+      return deploymentTags_;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return The count of deploymentTags.
+     */
+    public int getDeploymentTagsCount() {
+      return deploymentTags_.size();
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index of the element to return.
+     * @return The deploymentTags at the given index.
+     */
+    public java.lang.String getDeploymentTags(int index) {
+      return deploymentTags_.get(index);
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the deploymentTags at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getDeploymentTagsBytes(int index) {
+      return deploymentTags_.getByteString(index);
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param index The index to set the value at.
+     * @param value The deploymentTags to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentTags(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.set(index, value);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param value The deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addDeploymentTags(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.add(value);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param values The deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllDeploymentTags(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureDeploymentTagsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, deploymentTags_);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDeploymentTags() {
+      deploymentTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000008);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string deployment_tags = 4 [json_name = "deploymentTags"];</code>
+     * @param value The bytes of the deploymentTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addDeploymentTagsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureDeploymentTagsIsMutable();
+      deploymentTags_.add(value);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Timestamp createdAt_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> createdAtBuilder_;
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     * @return Whether the createdAt field is set.
+     */
+    public boolean hasCreatedAt() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     * @return The createdAt.
+     */
+    public com.google.protobuf.Timestamp getCreatedAt() {
+      if (createdAtBuilder_ == null) {
+        return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+      } else {
+        return createdAtBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public Builder setCreatedAt(com.google.protobuf.Timestamp value) {
+      if (createdAtBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        createdAt_ = value;
+      } else {
+        createdAtBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public Builder setCreatedAt(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (createdAtBuilder_ == null) {
+        createdAt_ = builderForValue.build();
+      } else {
+        createdAtBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public Builder mergeCreatedAt(com.google.protobuf.Timestamp value) {
+      if (createdAtBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          createdAt_ != null &&
+          createdAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getCreatedAtBuilder().mergeFrom(value);
+        } else {
+          createdAt_ = value;
+        }
+      } else {
+        createdAtBuilder_.mergeFrom(value);
+      }
+      if (createdAt_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public Builder clearCreatedAt() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      createdAt_ = null;
+      if (createdAtBuilder_ != null) {
+        createdAtBuilder_.dispose();
+        createdAtBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getCreatedAtBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return getCreatedAtFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
+      if (createdAtBuilder_ != null) {
+        return createdAtBuilder_.getMessageOrBuilder();
+      } else {
+        return createdAt_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+      }
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     *  string requirements_filepath = 7;
+     *  string dockerfile_filepath = 8;
+     *  string runtime = 9;
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     *  string final_dependency_hash = 12;
+     *  bool is_preview_deployment = 13;
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getCreatedAtFieldBuilder() {
+      if (createdAtBuilder_ == null) {
+        createdAtBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getCreatedAt(),
+                getParentForChildren(),
+                isClean());
+        createdAt_ = null;
+      }
+      return createdAtBuilder_;
+    }
+
+    private com.google.protobuf.Timestamp updatedAt_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> updatedAtBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     * @return Whether the updatedAt field is set.
+     */
+    public boolean hasUpdatedAt() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     * @return The updatedAt.
+     */
+    public com.google.protobuf.Timestamp getUpdatedAt() {
+      if (updatedAtBuilder_ == null) {
+        return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+      } else {
+        return updatedAtBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public Builder setUpdatedAt(com.google.protobuf.Timestamp value) {
+      if (updatedAtBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        updatedAt_ = value;
+      } else {
+        updatedAtBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public Builder setUpdatedAt(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (updatedAtBuilder_ == null) {
+        updatedAt_ = builderForValue.build();
+      } else {
+        updatedAtBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public Builder mergeUpdatedAt(com.google.protobuf.Timestamp value) {
+      if (updatedAtBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0) &&
+          updatedAt_ != null &&
+          updatedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getUpdatedAtBuilder().mergeFrom(value);
+        } else {
+          updatedAt_ = value;
+        }
+      } else {
+        updatedAtBuilder_.mergeFrom(value);
+      }
+      if (updatedAt_ != null) {
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public Builder clearUpdatedAt() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      updatedAt_ = null;
+      if (updatedAtBuilder_ != null) {
+        updatedAtBuilder_.dispose();
+        updatedAtBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getUpdatedAtBuilder() {
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return getUpdatedAtFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder() {
+      if (updatedAtBuilder_ != null) {
+        return updatedAtBuilder_.getMessageOrBuilder();
+      } else {
+        return updatedAt_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getUpdatedAtFieldBuilder() {
+      if (updatedAtBuilder_ == null) {
+        updatedAtBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getUpdatedAt(),
+                getParentForChildren(),
+                isClean());
+        updatedAt_ = null;
+      }
+      return updatedAtBuilder_;
+    }
+
+    private java.lang.Object gitCommit_ = "";
+    /**
+     * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+     * @return The gitCommit.
+     */
+    public java.lang.String getGitCommit() {
+      java.lang.Object ref = gitCommit_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitCommit_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+     * @return The bytes for gitCommit.
+     */
+    public com.google.protobuf.ByteString
+        getGitCommitBytes() {
+      java.lang.Object ref = gitCommit_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitCommit_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+     * @param value The gitCommit to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitCommit(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitCommit_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitCommit() {
+      gitCommit_ = getDefaultInstance().getGitCommit();
+      bitField0_ = (bitField0_ & ~0x00000040);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_commit = 16 [json_name = "gitCommit"];</code>
+     * @param value The bytes for gitCommit to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitCommitBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitCommit_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object baseImageSha_ = "";
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     *  string requirements_files = 22;
+     *  string git_tag = 23;
+     * </pre>
+     *
+     * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+     * @return The baseImageSha.
+     */
+    public java.lang.String getBaseImageSha() {
+      java.lang.Object ref = baseImageSha_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        baseImageSha_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     *  string requirements_files = 22;
+     *  string git_tag = 23;
+     * </pre>
+     *
+     * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+     * @return The bytes for baseImageSha.
+     */
+    public com.google.protobuf.ByteString
+        getBaseImageShaBytes() {
+      java.lang.Object ref = baseImageSha_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        baseImageSha_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     *  string requirements_files = 22;
+     *  string git_tag = 23;
+     * </pre>
+     *
+     * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+     * @param value The baseImageSha to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBaseImageSha(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      baseImageSha_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     *  string requirements_files = 22;
+     *  string git_tag = 23;
+     * </pre>
+     *
+     * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBaseImageSha() {
+      baseImageSha_ = getDefaultInstance().getBaseImageSha();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     *  string requirements_files = 22;
+     *  string git_tag = 23;
+     * </pre>
+     *
+     * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
+     * @param value The bytes for baseImageSha to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBaseImageShaBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      baseImageSha_ = value;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }

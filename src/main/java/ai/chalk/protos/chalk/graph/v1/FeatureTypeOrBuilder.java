@@ -83,5 +83,20 @@ public interface FeatureTypeOrBuilder extends
    */
   ai.chalk.protos.chalk.graph.v1.WindowedFeatureTypeOrBuilder getWindowedOrBuilder();
 
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   * @return Whether the groupBy field is set.
+   */
+  boolean hasGroupBy();
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   * @return The groupBy.
+   */
+  ai.chalk.protos.chalk.graph.v1.GroupByFeatureType getGroupBy();
+  /**
+   * <code>.chalk.graph.v1.GroupByFeatureType group_by = 6 [json_name = "groupBy"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.GroupByFeatureTypeOrBuilder getGroupByOrBuilder();
+
   ai.chalk.protos.chalk.graph.v1.FeatureType.TypeCase getTypeCase();
 }

@@ -12,7 +12,7 @@ The Java client is hosted on Maven Central.
 #### Gradle
 Add the following dependency block to your `build.gradle`. 
 ```java
-implementation 'ai.chalk:chalk-java:0.10.0'
+implementation 'ai.chalk:chalk-java:0.12.0'
 ```
     
 #### Maven
@@ -22,7 +22,7 @@ Add the following dependency block to your `pom.xml`.
     <dependency>
         <groupId>ai.chalk</groupId>
         <artifactId>chalk-java</artifactId>
-        <version>0.10.0</version>
+        <version>0.12.0</version>
     </dependency>
 </dependencies>
 ```
@@ -52,6 +52,21 @@ ChalkClient client = ChalkClient.builder()
                     .withClientSecret("mnxcvuyqwmj7cnwe4mgfnuywe6jnas9sdn")
                     .build();
 ```
+
+#### gRPC client
+To use gRPC as the underlying protocol, simply use the `createGrpc()` method instead.
+```java
+ChalkClient client = ChalkClient.createGrpc();
+```
+Or if using the builder, call the `withGrpc()` method:
+
+```java
+ChalkClient client = ChalkClient.builder()
+                    .withEnvironmentId("tmnma7wesandrsn")
+                    .withGrpc()
+                    .build();
+```
+
 
 ## Memory management
 Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be

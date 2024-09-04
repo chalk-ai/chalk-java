@@ -51,4 +51,28 @@ public interface EnvironmentPermissionsOrBuilder extends
    * <code>.chalk.auth.v1.FeaturePermissions feature_permissions = 3 [json_name = "featurePermissions"];</code>
    */
   ai.chalk.protos.chalk.auth.v1.FeaturePermissionsOrBuilder getFeaturePermissionsOrBuilder();
+
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.auth.v1.CustomClaim> 
+      getCustomerClaimsList();
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  ai.chalk.protos.chalk.auth.v1.CustomClaim getCustomerClaims(int index);
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  int getCustomerClaimsCount();
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder> 
+      getCustomerClaimsOrBuilderList();
+  /**
+   * <code>repeated .chalk.auth.v1.CustomClaim customer_claims = 4 [json_name = "customerClaims"];</code>
+   */
+  ai.chalk.protos.chalk.auth.v1.CustomClaimOrBuilder getCustomerClaimsOrBuilder(
+      int index);
 }

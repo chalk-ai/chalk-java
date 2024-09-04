@@ -353,4 +353,52 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getClusterBytes();
+
+  /**
+   * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+   * @return The totalCpu.
+   */
+  java.lang.String getTotalCpu();
+  /**
+   * <code>string total_cpu = 20 [json_name = "totalCpu"];</code>
+   * @return The bytes for totalCpu.
+   */
+  com.google.protobuf.ByteString
+      getTotalCpuBytes();
+
+  /**
+   * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+   * @return The totalMemory.
+   */
+  java.lang.String getTotalMemory();
+  /**
+   * <code>string total_memory = 21 [json_name = "totalMemory"];</code>
+   * @return The bytes for totalMemory.
+   */
+  com.google.protobuf.ByteString
+      getTotalMemoryBytes();
+
+  /**
+   * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+   * @return The allocatableCpu.
+   */
+  java.lang.String getAllocatableCpu();
+  /**
+   * <code>string allocatable_cpu = 22 [json_name = "allocatableCpu"];</code>
+   * @return The bytes for allocatableCpu.
+   */
+  com.google.protobuf.ByteString
+      getAllocatableCpuBytes();
+
+  /**
+   * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+   * @return The allocatableMemory.
+   */
+  java.lang.String getAllocatableMemory();
+  /**
+   * <code>string allocatable_memory = 23 [json_name = "allocatableMemory"];</code>
+   * @return The bytes for allocatableMemory.
+   */
+  com.google.protobuf.ByteString
+      getAllocatableMemoryBytes();
 }

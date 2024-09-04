@@ -11,14 +11,14 @@ public interface UserAgentOrBuilder extends
   /**
    * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
    * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=15
+   *     See chalk/auth/v1/agent.proto;l=16
    * @return The clientId.
    */
   @java.lang.Deprecated java.lang.String getClientId();
   /**
    * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
    * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=15
+   *     See chalk/auth/v1/agent.proto;l=16
    * @return The bytes for clientId.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString

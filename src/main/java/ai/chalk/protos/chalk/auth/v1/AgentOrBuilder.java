@@ -68,5 +68,20 @@ public interface AgentOrBuilder extends
    */
   ai.chalk.protos.chalk.auth.v1.TenantAgentOrBuilder getTenantAgentOrBuilder();
 
+  /**
+   * <code>.chalk.auth.v1.MetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   * @return Whether the metadataServiceAgent field is set.
+   */
+  boolean hasMetadataServiceAgent();
+  /**
+   * <code>.chalk.auth.v1.MetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   * @return The metadataServiceAgent.
+   */
+  ai.chalk.protos.chalk.auth.v1.MetadataServiceAgent getMetadataServiceAgent();
+  /**
+   * <code>.chalk.auth.v1.MetadataServiceAgent metadata_service_agent = 5 [json_name = "metadataServiceAgent"];</code>
+   */
+  ai.chalk.protos.chalk.auth.v1.MetadataServiceAgentOrBuilder getMetadataServiceAgentOrBuilder();
+
   ai.chalk.protos.chalk.auth.v1.Agent.AgentCase getAgentCase();
 }

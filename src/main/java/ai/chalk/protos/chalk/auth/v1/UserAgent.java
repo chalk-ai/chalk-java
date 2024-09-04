@@ -60,7 +60,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
    * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=15
+   *     See chalk/auth/v1/agent.proto;l=16
    * @return The clientId.
    */
   @java.lang.Override
@@ -79,7 +79,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
    * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=15
+   *     See chalk/auth/v1/agent.proto;l=16
    * @return The bytes for clientId.
    */
   @java.lang.Override
@@ -727,7 +727,7 @@ ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions defaultValue) {
     /**
      * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
      * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=15
+     *     See chalk/auth/v1/agent.proto;l=16
      * @return The clientId.
      */
     @java.lang.Deprecated public java.lang.String getClientId() {
@@ -745,7 +745,7 @@ ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions defaultValue) {
     /**
      * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
      * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=15
+     *     See chalk/auth/v1/agent.proto;l=16
      * @return The bytes for clientId.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -764,7 +764,7 @@ ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions defaultValue) {
     /**
      * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
      * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=15
+     *     See chalk/auth/v1/agent.proto;l=16
      * @param value The clientId to set.
      * @return This builder for chaining.
      */
@@ -779,7 +779,7 @@ ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions defaultValue) {
     /**
      * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
      * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=15
+     *     See chalk/auth/v1/agent.proto;l=16
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearClientId() {
@@ -791,7 +791,7 @@ ai.chalk.protos.chalk.auth.v1.EnvironmentPermissions defaultValue) {
     /**
      * <code>string client_id = 1 [json_name = "clientId", deprecated = true];</code>
      * @deprecated chalk.auth.v1.UserAgent.client_id is deprecated.
-     *     See chalk/auth/v1/agent.proto;l=15
+     *     See chalk/auth/v1/agent.proto;l=16
      * @param value The bytes for clientId to set.
      * @return This builder for chaining.
      */

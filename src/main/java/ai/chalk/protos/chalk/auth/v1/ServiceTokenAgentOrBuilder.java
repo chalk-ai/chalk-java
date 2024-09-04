@@ -88,7 +88,7 @@ public interface ServiceTokenAgentOrBuilder extends
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @return A list containing the customClaims.
    */
   @java.lang.Deprecated java.util.List<java.lang.String>
@@ -96,14 +96,14 @@ public interface ServiceTokenAgentOrBuilder extends
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @return The count of customClaims.
    */
   @java.lang.Deprecated int getCustomClaimsCount();
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @param index The index of the element to return.
    * @return The customClaims at the given index.
    */
@@ -111,7 +111,7 @@ public interface ServiceTokenAgentOrBuilder extends
   /**
    * <code>repeated string custom_claims = 6 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.auth.v1.ServiceTokenAgent.custom_claims is deprecated.
-   *     See chalk/auth/v1/agent.proto;l=33
+   *     See chalk/auth/v1/agent.proto;l=34
    * @param index The index of the value to return.
    * @return The bytes of the customClaims at the given index.
    */

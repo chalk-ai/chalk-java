@@ -53,6 +53,10 @@ public enum DatabaseSourceType
    * <code>DATABASE_SOURCE_TYPE_TRINO = 10;</code>
    */
   DATABASE_SOURCE_TYPE_TRINO(10),
+  /**
+   * <code>DATABASE_SOURCE_TYPE_DYNAMODB = 11;</code>
+   */
+  DATABASE_SOURCE_TYPE_DYNAMODB(11),
   UNRECOGNIZED(-1),
   ;
 
@@ -100,6 +104,10 @@ public enum DatabaseSourceType
    * <code>DATABASE_SOURCE_TYPE_TRINO = 10;</code>
    */
   public static final int DATABASE_SOURCE_TYPE_TRINO_VALUE = 10;
+  /**
+   * <code>DATABASE_SOURCE_TYPE_DYNAMODB = 11;</code>
+   */
+  public static final int DATABASE_SOURCE_TYPE_DYNAMODB_VALUE = 11;
 
 
   public final int getNumber() {
@@ -137,6 +145,7 @@ public enum DatabaseSourceType
       case 8: return DATABASE_SOURCE_TYPE_SQLITE;
       case 9: return DATABASE_SOURCE_TYPE_SPANNER;
       case 10: return DATABASE_SOURCE_TYPE_TRINO;
+      case 11: return DATABASE_SOURCE_TYPE_DYNAMODB;
       default: return null;
     }
   }

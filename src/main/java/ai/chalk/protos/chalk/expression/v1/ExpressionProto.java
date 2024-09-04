@@ -16,6 +16,36 @@ public final class ExpressionProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_Identifier_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_Identifier_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_ExprGetAttribute_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_ExprGetAttribute_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_ExprGetSubscript_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_ExprGetSubscript_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_ExprCall_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_ExprCall_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_ExprCall_KwargsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_ExprCall_KwargsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_ExprLiteral_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_ExprLiteral_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_expression_v1_LogicalExprNode_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -181,6 +211,11 @@ public final class ExpressionProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_expression_v1_AggregateUDFExprNode_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_expression_v1_ScalarUDFExprNode_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -256,649 +291,725 @@ public final class ExpressionProto {
     java.lang.String[] descriptorData = {
       "\n$chalk/expression/v1/expression.proto\022\023" +
       "chalk.expression.v1\032\032chalk/arrow/v1/arro" +
-      "w.proto\"\326\021\n\017LogicalExprNode\0225\n\006column\030\001 " +
-      "\001(\0132\033.chalk.expression.v1.ColumnH\000R\006colu" +
-      "mn\0226\n\005alias\030\002 \001(\0132\036.chalk.expression.v1." +
-      "AliasNodeH\000R\005alias\0227\n\007literal\030\003 \001(\0132\033.ch" +
-      "alk.arrow.v1.ScalarValueH\000R\007literal\022F\n\013b" +
-      "inary_expr\030\004 \001(\0132#.chalk.expression.v1.B" +
-      "inaryExprNodeH\000R\nbinaryExpr\022O\n\016aggregate" +
-      "_expr\030\005 \001(\0132&.chalk.expression.v1.Aggreg" +
-      "ateExprNodeH\000R\raggregateExpr\022?\n\014is_null_" +
-      "expr\030\006 \001(\0132\033.chalk.expression.v1.IsNullH" +
-      "\000R\nisNullExpr\022I\n\020is_not_null_expr\030\007 \001(\0132" +
-      "\036.chalk.expression.v1.IsNotNullH\000R\risNot" +
-      "NullExpr\0225\n\010not_expr\030\010 \001(\0132\030.chalk.expre" +
-      "ssion.v1.NotH\000R\007notExpr\022<\n\007between\030\t \001(\013" +
-      "2 .chalk.expression.v1.BetweenNodeH\000R\007be" +
-      "tween\0223\n\004case\030\n \001(\0132\035.chalk.expression.v" +
-      "1.CaseNodeH\000R\004case\0223\n\004cast\030\013 \001(\0132\035.chalk" +
-      ".expression.v1.CastNodeH\000R\004cast\0227\n\004sort\030" +
-      "\014 \001(\0132!.chalk.expression.v1.SortExprNode" +
-      "H\000R\004sort\022?\n\010negative\030\r \001(\0132!.chalk.expre" +
-      "ssion.v1.NegativeNodeH\000R\010negative\022:\n\007in_" +
-      "list\030\016 \001(\0132\037.chalk.expression.v1.InListN" +
-      "odeH\000R\006inList\022;\n\010wildcard\030\017 \001(\0132\035.chalk." +
-      "expression.v1.WildcardH\000R\010wildcard\022R\n\017sc" +
-      "alar_function\030\020 \001(\0132\'.chalk.expression.v" +
-      "1.ScalarFunctionNodeH\000R\016scalarFunction\022=" +
-      "\n\010try_cast\030\021 \001(\0132 .chalk.expression.v1.T" +
-      "ryCastNodeH\000R\007tryCast\022F\n\013window_expr\030\022 \001" +
-      "(\0132#.chalk.expression.v1.WindowExprNodeH" +
-      "\000R\nwindowExpr\022Y\n\022aggregate_udf_expr\030\023 \001(" +
-      "\0132).chalk.expression.v1.AggregateUDFExpr" +
-      "NodeH\000R\020aggregateUdfExpr\022P\n\017scalar_udf_e" +
-      "xpr\030\024 \001(\0132&.chalk.expression.v1.ScalarUD" +
-      "FExprNodeH\000R\rscalarUdfExpr\022R\n\021get_indexe" +
-      "d_field\030\025 \001(\0132$.chalk.expression.v1.GetI" +
-      "ndexedFieldH\000R\017getIndexedField\022I\n\014groupi" +
-      "ng_set\030\026 \001(\0132$.chalk.expression.v1.Group" +
-      "ingSetNodeH\000R\013groupingSet\0223\n\004cube\030\027 \001(\0132" +
-      "\035.chalk.expression.v1.CubeNodeH\000R\004cube\0229" +
-      "\n\006rollup\030\030 \001(\0132\037.chalk.expression.v1.Rol" +
-      "lupNodeH\000R\006rollup\0226\n\007is_true\030\031 \001(\0132\033.cha" +
-      "lk.expression.v1.IsTrueH\000R\006isTrue\0229\n\010is_" +
-      "false\030\032 \001(\0132\034.chalk.expression.v1.IsFals" +
-      "eH\000R\007isFalse\022?\n\nis_unknown\030\033 \001(\0132\036.chalk" +
-      ".expression.v1.IsUnknownH\000R\tisUnknown\022@\n" +
-      "\013is_not_true\030\034 \001(\0132\036.chalk.expression.v1" +
-      ".IsNotTrueH\000R\tisNotTrue\022C\n\014is_not_false\030" +
-      "\035 \001(\0132\037.chalk.expression.v1.IsNotFalseH\000" +
-      "R\nisNotFalse\022I\n\016is_not_unknown\030\036 \001(\0132!.c" +
-      "halk.expression.v1.IsNotUnknownH\000R\014isNot" +
-      "Unknown\0223\n\004like\030\037 \001(\0132\035.chalk.expression" +
-      ".v1.LikeNodeH\000R\004like\0226\n\005ilike\030  \001(\0132\036.ch" +
-      "alk.expression.v1.ILikeNodeH\000R\005ilike\022C\n\n" +
-      "similar_to\030! \001(\0132\".chalk.expression.v1.S" +
-      "imilarToNodeH\000R\tsimilarTo\022H\n\013placeholder" +
-      "\030\" \001(\0132$.chalk.expression.v1.Placeholder" +
-      "NodeH\000R\013placeholderB\013\n\texpr_type\",\n\016Colu" +
-      "mnRelation\022\032\n\010relation\030\001 \001(\tR\010relation\"]" +
-      "\n\006Column\022\022\n\004name\030\001 \001(\tR\004name\022?\n\010relation" +
-      "\030\002 \001(\0132#.chalk.expression.v1.ColumnRelat" +
-      "ionR\010relation\";\n\010Wildcard\022!\n\tqualifier\030\001" +
-      " \001(\tH\000R\tqualifier\210\001\001B\014\n\n_qualifier\"Y\n\017Pl" +
-      "aceholderNode\022\016\n\002id\030\001 \001(\tR\002id\0226\n\tdata_ty" +
-      "pe\030\002 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\010dat" +
-      "aType\"K\n\017LogicalExprList\0228\n\004expr\030\001 \003(\0132$" +
-      ".chalk.expression.v1.LogicalExprNodeR\004ex" +
-      "pr\"K\n\017GroupingSetNode\0228\n\004expr\030\001 \003(\0132$.ch" +
-      "alk.expression.v1.LogicalExprListR\004expr\"" +
-      "D\n\010CubeNode\0228\n\004expr\030\001 \003(\0132$.chalk.expres" +
-      "sion.v1.LogicalExprNodeR\004expr\"F\n\nRollupN" +
-      "ode\0228\n\004expr\030\001 \003(\0132$.chalk.expression.v1." +
-      "LogicalExprNodeR\004expr\"C\n\020NamedStructFiel" +
-      "d\022/\n\004name\030\001 \001(\0132\033.chalk.arrow.v1.ScalarV" +
-      "alueR\004name\"C\n\tListIndex\0226\n\003key\030\001 \001(\0132$.c" +
-      "halk.expression.v1.LogicalExprNodeR\003key\"" +
-      "\201\001\n\tListRange\022:\n\005start\030\001 \001(\0132$.chalk.exp" +
-      "ression.v1.LogicalExprNodeR\005start\0228\n\004sto" +
-      "p\030\002 \001(\0132$.chalk.expression.v1.LogicalExp" +
-      "rNodeR\004stop\"\255\002\n\017GetIndexedField\0228\n\004expr\030" +
+      "w.proto\" \n\nIdentifier\022\022\n\004name\030\001 \001(\tR\004nam" +
+      "e\"\217\001\n\020ExprGetAttribute\022<\n\006parent\030\001 \001(\0132$" +
+      ".chalk.expression.v1.LogicalExprNodeR\006pa" +
+      "rent\022=\n\tattribute\030\002 \001(\0132\037.chalk.expressi" +
+      "on.v1.IdentifierR\tattribute\"\224\001\n\020ExprGetS" +
+      "ubscript\022<\n\006parent\030\001 \001(\0132$.chalk.express" +
+      "ion.v1.LogicalExprNodeR\006parent\022B\n\tsubscr" +
+      "ipt\030\002 \003(\0132$.chalk.expression.v1.LogicalE" +
+      "xprNodeR\tsubscript\"\242\002\n\010ExprCall\0228\n\004func\030" +
       "\001 \001(\0132$.chalk.expression.v1.LogicalExprN" +
-      "odeR\004expr\022U\n\022named_struct_field\030\002 \001(\0132%." +
-      "chalk.expression.v1.NamedStructFieldH\000R\020" +
-      "namedStructField\022?\n\nlist_index\030\003 \001(\0132\036.c" +
-      "halk.expression.v1.ListIndexH\000R\tlistInde" +
-      "x\022?\n\nlist_range\030\004 \001(\0132\036.chalk.expression" +
-      ".v1.ListRangeH\000R\tlistRangeB\007\n\005field\"B\n\006I" +
-      "sNull\0228\n\004expr\030\001 \001(\0132$.chalk.expression.v" +
-      "1.LogicalExprNodeR\004expr\"E\n\tIsNotNull\0228\n\004" +
-      "expr\030\001 \001(\0132$.chalk.expression.v1.Logical" +
-      "ExprNodeR\004expr\"B\n\006IsTrue\0228\n\004expr\030\001 \001(\0132$" +
-      ".chalk.expression.v1.LogicalExprNodeR\004ex" +
-      "pr\"C\n\007IsFalse\0228\n\004expr\030\001 \001(\0132$.chalk.expr" +
-      "ession.v1.LogicalExprNodeR\004expr\"E\n\tIsUnk" +
-      "nown\0228\n\004expr\030\001 \001(\0132$.chalk.expression.v1" +
-      ".LogicalExprNodeR\004expr\"E\n\tIsNotTrue\0228\n\004e" +
-      "xpr\030\001 \001(\0132$.chalk.expression.v1.LogicalE" +
-      "xprNodeR\004expr\"F\n\nIsNotFalse\0228\n\004expr\030\001 \001(" +
-      "\0132$.chalk.expression.v1.LogicalExprNodeR" +
-      "\004expr\"H\n\014IsNotUnknown\0228\n\004expr\030\001 \001(\0132$.ch" +
-      "alk.expression.v1.LogicalExprNodeR\004expr\"" +
-      "?\n\003Not\0228\n\004expr\030\001 \001(\0132$.chalk.expression." +
-      "v1.LogicalExprNodeR\004expr\"\241\001\n\tAliasNode\0228" +
-      "\n\004expr\030\001 \001(\0132$.chalk.expression.v1.Logic" +
-      "alExprNodeR\004expr\022\024\n\005alias\030\002 \001(\tR\005alias\022D" +
-      "\n\010relation\030\003 \003(\0132(.chalk.expression.v1.O" +
-      "wnedTableReferenceR\010relation\"*\n\022BareTabl" +
-      "eReference\022\024\n\005table\030\001 \001(\tR\005table\"E\n\025Part" +
-      "ialTableReference\022\026\n\006schema\030\001 \001(\tR\006schem" +
-      "a\022\024\n\005table\030\002 \001(\tR\005table\"\\\n\022FullTableRefe" +
-      "rence\022\030\n\007catalog\030\001 \001(\tR\007catalog\022\026\n\006schem" +
-      "a\030\002 \001(\tR\006schema\022\024\n\005table\030\003 \001(\tR\005table\"\363\001" +
-      "\n\023OwnedTableReference\022=\n\004bare\030\001 \001(\0132\'.ch" +
-      "alk.expression.v1.BareTableReferenceH\000R\004" +
-      "bare\022F\n\007partial\030\002 \001(\0132*.chalk.expression" +
-      ".v1.PartialTableReferenceH\000R\007partial\022=\n\004" +
-      "full\030\003 \001(\0132\'.chalk.expression.v1.FullTab" +
-      "leReferenceH\000R\004fullB\026\n\024table_reference_e" +
-      "num\"b\n\016BinaryExprNode\022@\n\010operands\030\001 \003(\0132" +
-      "$.chalk.expression.v1.LogicalExprNodeR\010o" +
-      "perands\022\016\n\002op\030\003 \001(\tR\002op\"H\n\014NegativeNode\022" +
-      "8\n\004expr\030\001 \001(\0132$.chalk.expression.v1.Logi" +
-      "calExprNodeR\004expr\"\232\001\n\nInListNode\0228\n\004expr" +
-      "\030\001 \001(\0132$.chalk.expression.v1.LogicalExpr" +
-      "NodeR\004expr\0228\n\004list\030\002 \003(\0132$.chalk.express" +
-      "ion.v1.LogicalExprNodeR\004list\022\030\n\007negated\030" +
-      "\003 \001(\010R\007negated\"\205\001\n\022ScalarFunctionNode\0225\n" +
-      "\003fun\030\001 \001(\0162#.chalk.expression.v1.ScalarF" +
-      "unctionR\003fun\0228\n\004args\030\002 \003(\0132$.chalk.expre" +
-      "ssion.v1.LogicalExprNodeR\004args\"\265\002\n\021Aggre" +
-      "gateExprNode\022K\n\raggr_function\030\001 \001(\0162&.ch" +
-      "alk.expression.v1.AggregateFunctionR\014agg" +
-      "rFunction\0228\n\004expr\030\002 \003(\0132$.chalk.expressi" +
-      "on.v1.LogicalExprNodeR\004expr\022\032\n\010distinct\030" +
-      "\003 \001(\010R\010distinct\022<\n\006filter\030\004 \001(\0132$.chalk." +
-      "expression.v1.LogicalExprNodeR\006filter\022?\n" +
-      "\010order_by\030\005 \003(\0132$.chalk.expression.v1.Lo" +
-      "gicalExprNodeR\007orderBy\"\352\001\n\024AggregateUDFE" +
-      "xprNode\022\031\n\010fun_name\030\001 \001(\tR\007funName\0228\n\004ar" +
-      "gs\030\002 \003(\0132$.chalk.expression.v1.LogicalEx" +
-      "prNodeR\004args\022<\n\006filter\030\003 \001(\0132$.chalk.exp" +
-      "ression.v1.LogicalExprNodeR\006filter\022?\n\010or" +
-      "der_by\030\004 \003(\0132$.chalk.expression.v1.Logic" +
-      "alExprNodeR\007orderBy\"h\n\021ScalarUDFExprNode" +
-      "\022\031\n\010fun_name\030\001 \001(\tR\007funName\0228\n\004args\030\002 \003(" +
-      "\0132$.chalk.expression.v1.LogicalExprNodeR" +
-      "\004args\"\201\004\n\016WindowExprNode\022M\n\raggr_functio" +
-      "n\030\001 \001(\0162&.chalk.expression.v1.AggregateF" +
-      "unctionH\000R\014aggrFunction\022X\n\021built_in_func" +
-      "tion\030\002 \001(\0162*.chalk.expression.v1.BuiltIn" +
-      "WindowFunctionH\000R\017builtInFunction\022\024\n\004uda" +
-      "f\030\003 \001(\tH\000R\004udaf\022\024\n\004udwf\030\t \001(\tH\000R\004udwf\0228\n" +
-      "\004expr\030\004 \001(\0132$.chalk.expression.v1.Logica" +
-      "lExprNodeR\004expr\022G\n\014partition_by\030\005 \003(\0132$." +
-      "chalk.expression.v1.LogicalExprNodeR\013par" +
-      "titionBy\022?\n\010order_by\030\006 \003(\0132$.chalk.expre" +
-      "ssion.v1.LogicalExprNodeR\007orderBy\022C\n\014win" +
-      "dow_frame\030\010 \001(\0132 .chalk.expression.v1.Wi" +
-      "ndowFrameR\013windowFrameB\021\n\017window_functio" +
-      "n\"\323\001\n\013BetweenNode\0228\n\004expr\030\001 \001(\0132$.chalk." +
-      "expression.v1.LogicalExprNodeR\004expr\022\030\n\007n" +
-      "egated\030\002 \001(\010R\007negated\0226\n\003low\030\003 \001(\0132$.cha" +
-      "lk.expression.v1.LogicalExprNodeR\003low\0228\n" +
-      "\004high\030\004 \001(\0132$.chalk.expression.v1.Logica" +
-      "lExprNodeR\004high\"\277\001\n\010LikeNode\022\030\n\007negated\030" +
-      "\001 \001(\010R\007negated\0228\n\004expr\030\002 \001(\0132$.chalk.exp" +
-      "ression.v1.LogicalExprNodeR\004expr\022>\n\007patt" +
-      "ern\030\003 \001(\0132$.chalk.expression.v1.LogicalE" +
-      "xprNodeR\007pattern\022\037\n\013escape_char\030\004 \001(\tR\ne" +
-      "scapeChar\"\300\001\n\tILikeNode\022\030\n\007negated\030\001 \001(\010" +
-      "R\007negated\0228\n\004expr\030\002 \001(\0132$.chalk.expressi" +
-      "on.v1.LogicalExprNodeR\004expr\022>\n\007pattern\030\003" +
-      " \001(\0132$.chalk.expression.v1.LogicalExprNo" +
-      "deR\007pattern\022\037\n\013escape_char\030\004 \001(\tR\nescape" +
-      "Char\"\304\001\n\rSimilarToNode\022\030\n\007negated\030\001 \001(\010R" +
-      "\007negated\0228\n\004expr\030\002 \001(\0132$.chalk.expressio" +
-      "n.v1.LogicalExprNodeR\004expr\022>\n\007pattern\030\003 " +
-      "\001(\0132$.chalk.expression.v1.LogicalExprNod" +
-      "eR\007pattern\022\037\n\013escape_char\030\004 \001(\tR\nescapeC" +
-      "har\"\314\001\n\010CaseNode\0228\n\004expr\030\001 \001(\0132$.chalk.e" +
-      "xpression.v1.LogicalExprNodeR\004expr\022C\n\016wh" +
-      "en_then_expr\030\002 \003(\0132\035.chalk.expression.v1" +
-      ".WhenThenR\014whenThenExpr\022A\n\telse_expr\030\003 \001" +
-      "(\0132$.chalk.expression.v1.LogicalExprNode" +
-      "R\010elseExpr\"\220\001\n\010WhenThen\022A\n\twhen_expr\030\001 \001" +
-      "(\0132$.chalk.expression.v1.LogicalExprNode" +
-      "R\010whenExpr\022A\n\tthen_expr\030\002 \001(\0132$.chalk.ex" +
-      "pression.v1.LogicalExprNodeR\010thenExpr\"~\n" +
-      "\010CastNode\0228\n\004expr\030\001 \001(\0132$.chalk.expressi" +
-      "on.v1.LogicalExprNodeR\004expr\0228\n\narrow_typ" +
-      "e\030\002 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\tarro" +
-      "wType\"\201\001\n\013TryCastNode\0228\n\004expr\030\001 \001(\0132$.ch" +
-      "alk.expression.v1.LogicalExprNodeR\004expr\022" +
-      "8\n\narrow_type\030\002 \001(\0132\031.chalk.arrow.v1.Arr" +
-      "owTypeR\tarrowType\"{\n\014SortExprNode\0228\n\004exp" +
+      "odeR\004func\0228\n\004args\030\002 \003(\0132$.chalk.expressi" +
+      "on.v1.LogicalExprNodeR\004args\022A\n\006kwargs\030\003 " +
+      "\003(\0132).chalk.expression.v1.ExprCall.Kwarg" +
+      "sEntryR\006kwargs\032_\n\013KwargsEntry\022\020\n\003key\030\001 \001" +
+      "(\tR\003key\022:\n\005value\030\002 \001(\0132$.chalk.expressio" +
+      "n.v1.LogicalExprNodeR\005value:\0028\001\"@\n\013ExprL" +
+      "iteral\0221\n\005value\030\001 \001(\0132\033.chalk.arrow.v1.S" +
+      "calarValueR\005value\"\310\025\n\017LogicalExprNode\022A\n" +
+      "\nidentifier\030# \001(\0132\037.chalk.expression.v1." +
+      "IdentifierH\000R\nidentifier\022L\n\rget_attribut" +
+      "e\030$ \001(\0132%.chalk.expression.v1.ExprGetAtt" +
+      "ributeH\000R\014getAttribute\022L\n\rget_subscript\030" +
+      "% \001(\0132%.chalk.expression.v1.ExprGetSubsc" +
+      "riptH\000R\014getSubscript\0223\n\004call\030& \001(\0132\035.cha" +
+      "lk.expression.v1.ExprCallH\000R\004call\022G\n\rlit" +
+      "eral_value\030\' \001(\0132 .chalk.expression.v1.E" +
+      "xprLiteralH\000R\014literalValue\0229\n\006column\030\001 \001" +
+      "(\0132\033.chalk.expression.v1.ColumnB\002\030\001H\001R\006c" +
+      "olumn\022:\n\005alias\030\002 \001(\0132\036.chalk.expression." +
+      "v1.AliasNodeB\002\030\001H\001R\005alias\022;\n\007literal\030\003 \001" +
+      "(\0132\033.chalk.arrow.v1.ScalarValueB\002\030\001H\001R\007l" +
+      "iteral\022J\n\013binary_expr\030\004 \001(\0132#.chalk.expr" +
+      "ession.v1.BinaryExprNodeB\002\030\001H\001R\nbinaryEx" +
+      "pr\022S\n\016aggregate_expr\030\005 \001(\0132&.chalk.expre" +
+      "ssion.v1.AggregateExprNodeB\002\030\001H\001R\raggreg" +
+      "ateExpr\022C\n\014is_null_expr\030\006 \001(\0132\033.chalk.ex" +
+      "pression.v1.IsNullB\002\030\001H\001R\nisNullExpr\022M\n\020" +
+      "is_not_null_expr\030\007 \001(\0132\036.chalk.expressio" +
+      "n.v1.IsNotNullB\002\030\001H\001R\risNotNullExpr\0229\n\010n" +
+      "ot_expr\030\010 \001(\0132\030.chalk.expression.v1.NotB" +
+      "\002\030\001H\001R\007notExpr\022@\n\007between\030\t \001(\0132 .chalk." +
+      "expression.v1.BetweenNodeB\002\030\001H\001R\007between" +
+      "\0227\n\004case\030\n \001(\0132\035.chalk.expression.v1.Cas" +
+      "eNodeB\002\030\001H\001R\004case\0227\n\004cast\030\013 \001(\0132\035.chalk." +
+      "expression.v1.CastNodeB\002\030\001H\001R\004cast\022;\n\004so" +
+      "rt\030\014 \001(\0132!.chalk.expression.v1.SortExprN" +
+      "odeB\002\030\001H\001R\004sort\022C\n\010negative\030\r \001(\0132!.chal" +
+      "k.expression.v1.NegativeNodeB\002\030\001H\001R\010nega" +
+      "tive\022>\n\007in_list\030\016 \001(\0132\037.chalk.expression" +
+      ".v1.InListNodeB\002\030\001H\001R\006inList\022?\n\010wildcard" +
+      "\030\017 \001(\0132\035.chalk.expression.v1.WildcardB\002\030" +
+      "\001H\001R\010wildcard\022V\n\017scalar_function\030\020 \001(\0132\'" +
+      ".chalk.expression.v1.ScalarFunctionNodeB" +
+      "\002\030\001H\001R\016scalarFunction\022A\n\010try_cast\030\021 \001(\0132" +
+      " .chalk.expression.v1.TryCastNodeB\002\030\001H\001R" +
+      "\007tryCast\022J\n\013window_expr\030\022 \001(\0132#.chalk.ex" +
+      "pression.v1.WindowExprNodeB\002\030\001H\001R\nwindow" +
+      "Expr\022]\n\022aggregate_udf_expr\030\023 \001(\0132).chalk" +
+      ".expression.v1.AggregateUDFExprNodeB\002\030\001H" +
+      "\001R\020aggregateUdfExpr\022T\n\017scalar_udf_expr\030\024" +
+      " \001(\0132&.chalk.expression.v1.ScalarUDFExpr" +
+      "NodeB\002\030\001H\001R\rscalarUdfExpr\022V\n\021get_indexed" +
+      "_field\030\025 \001(\0132$.chalk.expression.v1.GetIn" +
+      "dexedFieldB\002\030\001H\001R\017getIndexedField\022M\n\014gro" +
+      "uping_set\030\026 \001(\0132$.chalk.expression.v1.Gr" +
+      "oupingSetNodeB\002\030\001H\001R\013groupingSet\0227\n\004cube" +
+      "\030\027 \001(\0132\035.chalk.expression.v1.CubeNodeB\002\030" +
+      "\001H\001R\004cube\022=\n\006rollup\030\030 \001(\0132\037.chalk.expres" +
+      "sion.v1.RollupNodeB\002\030\001H\001R\006rollup\022:\n\007is_t" +
+      "rue\030\031 \001(\0132\033.chalk.expression.v1.IsTrueB\002" +
+      "\030\001H\001R\006isTrue\022=\n\010is_false\030\032 \001(\0132\034.chalk.e" +
+      "xpression.v1.IsFalseB\002\030\001H\001R\007isFalse\022C\n\ni" +
+      "s_unknown\030\033 \001(\0132\036.chalk.expression.v1.Is" +
+      "UnknownB\002\030\001H\001R\tisUnknown\022D\n\013is_not_true\030" +
+      "\034 \001(\0132\036.chalk.expression.v1.IsNotTrueB\002\030" +
+      "\001H\001R\tisNotTrue\022G\n\014is_not_false\030\035 \001(\0132\037.c" +
+      "halk.expression.v1.IsNotFalseB\002\030\001H\001R\nisN" +
+      "otFalse\022M\n\016is_not_unknown\030\036 \001(\0132!.chalk." +
+      "expression.v1.IsNotUnknownB\002\030\001H\001R\014isNotU" +
+      "nknown\0227\n\004like\030\037 \001(\0132\035.chalk.expression." +
+      "v1.LikeNodeB\002\030\001H\001R\004like\022:\n\005ilike\030  \001(\0132\036" +
+      ".chalk.expression.v1.ILikeNodeB\002\030\001H\001R\005il" +
+      "ike\022G\n\nsimilar_to\030! \001(\0132\".chalk.expressi" +
+      "on.v1.SimilarToNodeB\002\030\001H\001R\tsimilarTo\022L\n\013" +
+      "placeholder\030\" \001(\0132$.chalk.expression.v1." +
+      "PlaceholderNodeB\002\030\001H\001R\013placeholderB\013\n\tex" +
+      "pr_formB\013\n\texpr_type\",\n\016ColumnRelation\022\032" +
+      "\n\010relation\030\001 \001(\tR\010relation\"]\n\006Column\022\022\n\004" +
+      "name\030\001 \001(\tR\004name\022?\n\010relation\030\002 \001(\0132#.cha" +
+      "lk.expression.v1.ColumnRelationR\010relatio" +
+      "n\";\n\010Wildcard\022!\n\tqualifier\030\001 \001(\tH\000R\tqual" +
+      "ifier\210\001\001B\014\n\n_qualifier\"Y\n\017PlaceholderNod" +
+      "e\022\016\n\002id\030\001 \001(\tR\002id\0226\n\tdata_type\030\002 \001(\0132\031.c" +
+      "halk.arrow.v1.ArrowTypeR\010dataType\"K\n\017Log" +
+      "icalExprList\0228\n\004expr\030\001 \003(\0132$.chalk.expre" +
+      "ssion.v1.LogicalExprNodeR\004expr\"K\n\017Groupi" +
+      "ngSetNode\0228\n\004expr\030\001 \003(\0132$.chalk.expressi" +
+      "on.v1.LogicalExprListR\004expr\"D\n\010CubeNode\022" +
+      "8\n\004expr\030\001 \003(\0132$.chalk.expression.v1.Logi" +
+      "calExprNodeR\004expr\"F\n\nRollupNode\0228\n\004expr\030" +
+      "\001 \003(\0132$.chalk.expression.v1.LogicalExprN" +
+      "odeR\004expr\"C\n\020NamedStructField\022/\n\004name\030\001 " +
+      "\001(\0132\033.chalk.arrow.v1.ScalarValueR\004name\"C" +
+      "\n\tListIndex\0226\n\003key\030\001 \001(\0132$.chalk.express" +
+      "ion.v1.LogicalExprNodeR\003key\"\201\001\n\tListRang" +
+      "e\022:\n\005start\030\001 \001(\0132$.chalk.expression.v1.L" +
+      "ogicalExprNodeR\005start\0228\n\004stop\030\002 \001(\0132$.ch" +
+      "alk.expression.v1.LogicalExprNodeR\004stop\"" +
+      "\255\002\n\017GetIndexedField\0228\n\004expr\030\001 \001(\0132$.chal" +
+      "k.expression.v1.LogicalExprNodeR\004expr\022U\n" +
+      "\022named_struct_field\030\002 \001(\0132%.chalk.expres" +
+      "sion.v1.NamedStructFieldH\000R\020namedStructF" +
+      "ield\022?\n\nlist_index\030\003 \001(\0132\036.chalk.express" +
+      "ion.v1.ListIndexH\000R\tlistIndex\022?\n\nlist_ra" +
+      "nge\030\004 \001(\0132\036.chalk.expression.v1.ListRang" +
+      "eH\000R\tlistRangeB\007\n\005field\"B\n\006IsNull\0228\n\004exp" +
       "r\030\001 \001(\0132$.chalk.expression.v1.LogicalExp" +
-      "rNodeR\004expr\022\020\n\003asc\030\002 \001(\010R\003asc\022\037\n\013nulls_f" +
-      "irst\030\003 \001(\010R\nnullsFirst\"\366\001\n\013WindowFrame\022S" +
-      "\n\022window_frame_units\030\001 \001(\0162%.chalk.expre" +
-      "ssion.v1.WindowFrameUnitsR\020windowFrameUn" +
-      "its\022F\n\013start_bound\030\002 \001(\0132%.chalk.express" +
-      "ion.v1.WindowFrameBoundR\nstartBound\022@\n\005b" +
-      "ound\030\003 \001(\0132%.chalk.expression.v1.WindowF" +
-      "rameBoundH\000R\005bound\210\001\001B\010\n\006_bound\"\262\001\n\020Wind" +
-      "owFrameBound\022`\n\027window_frame_bound_type\030" +
-      "\001 \001(\0162).chalk.expression.v1.WindowFrameB" +
-      "oundTypeR\024windowFrameBoundType\022<\n\013bound_" +
-      "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
-      "R\nboundValue*\240\037\n\016ScalarFunction\022\037\n\033SCALA" +
-      "R_FUNCTION_UNSPECIFIED\020\000\022\027\n\023SCALAR_FUNCT" +
-      "ION_ABS\020\001\022\030\n\024SCALAR_FUNCTION_ACOS\020\002\022\030\n\024S" +
-      "CALAR_FUNCTION_ASIN\020\003\022\030\n\024SCALAR_FUNCTION" +
-      "_ATAN\020\004\022\031\n\025SCALAR_FUNCTION_ASCII\020\005\022\030\n\024SC" +
-      "ALAR_FUNCTION_CEIL\020\006\022\027\n\023SCALAR_FUNCTION_" +
-      "COS\020\007\022\032\n\026SCALAR_FUNCTION_DIGEST\020\010\022\027\n\023SCA" +
-      "LAR_FUNCTION_EXP\020\t\022\031\n\025SCALAR_FUNCTION_FL" +
-      "OOR\020\n\022\026\n\022SCALAR_FUNCTION_LN\020\013\022\027\n\023SCALAR_" +
-      "FUNCTION_LOG\020\014\022\031\n\025SCALAR_FUNCTION_LOG10\020" +
-      "\r\022\030\n\024SCALAR_FUNCTION_LOG2\020\016\022\031\n\025SCALAR_FU" +
-      "NCTION_ROUND\020\017\022\032\n\026SCALAR_FUNCTION_SIGNUM" +
-      "\020\020\022\027\n\023SCALAR_FUNCTION_SIN\020\021\022\030\n\024SCALAR_FU" +
-      "NCTION_SQRT\020\022\022\027\n\023SCALAR_FUNCTION_TAN\020\023\022\031" +
-      "\n\025SCALAR_FUNCTION_TRUNC\020\024\022\031\n\025SCALAR_FUNC" +
-      "TION_ARRAY\020\025\022 \n\034SCALAR_FUNCTION_REGEXP_M" +
-      "ATCH\020\026\022\036\n\032SCALAR_FUNCTION_BIT_LENGTH\020\027\022\031" +
-      "\n\025SCALAR_FUNCTION_BTRIM\020\030\022$\n SCALAR_FUNC" +
-      "TION_CHARACTER_LENGTH\020\031\022\027\n\023SCALAR_FUNCTI" +
-      "ON_CHR\020\032\022\032\n\026SCALAR_FUNCTION_CONCAT\020\033\022)\n%" +
-      "SCALAR_FUNCTION_CONCAT_WITH_SEPARATOR\020\034\022" +
-      "\035\n\031SCALAR_FUNCTION_DATE_PART\020\035\022\036\n\032SCALAR" +
-      "_FUNCTION_DATE_TRUNC\020\036\022\034\n\030SCALAR_FUNCTIO" +
-      "N_INIT_CAP\020\037\022\030\n\024SCALAR_FUNCTION_LEFT\020 \022\030" +
-      "\n\024SCALAR_FUNCTION_LPAD\020!\022\031\n\025SCALAR_FUNCT" +
-      "ION_LOWER\020\"\022\031\n\025SCALAR_FUNCTION_LTRIM\020#\022\027" +
-      "\n\023SCALAR_FUNCTION_MD5\020$\022\033\n\027SCALAR_FUNCTI" +
-      "ON_NULL_IF\020%\022 \n\034SCALAR_FUNCTION_OCTET_LE" +
-      "NGTH\020&\022\032\n\026SCALAR_FUNCTION_RANDOM\020\'\022\"\n\036SC" +
-      "ALAR_FUNCTION_REGEXP_REPLACE\020(\022\032\n\026SCALAR" +
-      "_FUNCTION_REPEAT\020)\022\033\n\027SCALAR_FUNCTION_RE" +
-      "PLACE\020*\022\033\n\027SCALAR_FUNCTION_REVERSE\020+\022\031\n\025" +
-      "SCALAR_FUNCTION_RIGHT\020,\022\030\n\024SCALAR_FUNCTI" +
-      "ON_RPAD\020-\022\031\n\025SCALAR_FUNCTION_RTRIM\020.\022\032\n\026" +
-      "SCALAR_FUNCTION_SHA224\020/\022\032\n\026SCALAR_FUNCT" +
-      "ION_SHA256\0200\022\032\n\026SCALAR_FUNCTION_SHA384\0201" +
-      "\022\032\n\026SCALAR_FUNCTION_SHA512\0202\022\036\n\032SCALAR_F" +
-      "UNCTION_SPLIT_PART\0203\022\037\n\033SCALAR_FUNCTION_" +
-      "STARTS_WITH\0204\022\032\n\026SCALAR_FUNCTION_STRPOS\020" +
-      "5\022\032\n\026SCALAR_FUNCTION_SUBSTR\0206\022\032\n\026SCALAR_" +
-      "FUNCTION_TO_HEX\0207\022 \n\034SCALAR_FUNCTION_TO_" +
-      "TIMESTAMP\0208\022\'\n#SCALAR_FUNCTION_TO_TIMEST" +
-      "AMP_MILLIS\0209\022\'\n#SCALAR_FUNCTION_TO_TIMES" +
-      "TAMP_MICROS\020:\022(\n$SCALAR_FUNCTION_TO_TIME" +
-      "STAMP_SECONDS\020;\022\027\n\023SCALAR_FUNCTION_NOW\020<" +
-      "\022\035\n\031SCALAR_FUNCTION_TRANSLATE\020=\022\030\n\024SCALA" +
-      "R_FUNCTION_TRIM\020>\022\031\n\025SCALAR_FUNCTION_UPP" +
-      "ER\020?\022\034\n\030SCALAR_FUNCTION_COALESCE\020@\022\031\n\025SC" +
-      "ALAR_FUNCTION_POWER\020A\022\036\n\032SCALAR_FUNCTION" +
-      "_STRUCT_FUN\020B\022!\n\035SCALAR_FUNCTION_FROM_UN" +
-      "IXTIME\020C\022\031\n\025SCALAR_FUNCTION_ATAN2\020D\022\034\n\030S" +
-      "CALAR_FUNCTION_DATE_BIN\020E\022 \n\034SCALAR_FUNC" +
-      "TION_ARROW_TYPEOF\020F\022 \n\034SCALAR_FUNCTION_C" +
-      "URRENT_DATE\020G\022 \n\034SCALAR_FUNCTION_CURRENT" +
-      "_TIME\020H\022\030\n\024SCALAR_FUNCTION_UUID\020I\022\030\n\024SCA" +
-      "LAR_FUNCTION_CBRT\020J\022\031\n\025SCALAR_FUNCTION_A" +
-      "COSH\020K\022\031\n\025SCALAR_FUNCTION_ASINH\020L\022\031\n\025SCA" +
-      "LAR_FUNCTION_ATANH\020M\022\030\n\024SCALAR_FUNCTION_" +
-      "SINH\020N\022\030\n\024SCALAR_FUNCTION_COSH\020O\022\030\n\024SCAL" +
-      "AR_FUNCTION_TANH\020P\022\026\n\022SCALAR_FUNCTION_PI" +
-      "\020Q\022\033\n\027SCALAR_FUNCTION_DEGREES\020R\022\033\n\027SCALA" +
-      "R_FUNCTION_RADIANS\020S\022\035\n\031SCALAR_FUNCTION_" +
-      "FACTORIAL\020T\022\027\n\023SCALAR_FUNCTION_LCM\020U\022\027\n\023" +
-      "SCALAR_FUNCTION_GCD\020V\022 \n\034SCALAR_FUNCTION" +
-      "_ARRAY_APPEND\020W\022 \n\034SCALAR_FUNCTION_ARRAY" +
-      "_CONCAT\020X\022\036\n\032SCALAR_FUNCTION_ARRAY_DIMS\020" +
-      "Y\022 \n\034SCALAR_FUNCTION_ARRAY_REPEAT\020Z\022 \n\034S" +
-      "CALAR_FUNCTION_ARRAY_LENGTH\020[\022\037\n\033SCALAR_" +
-      "FUNCTION_ARRAY_NDIMS\020\\\022\"\n\036SCALAR_FUNCTIO" +
-      "N_ARRAY_POSITION\020]\022#\n\037SCALAR_FUNCTION_AR" +
-      "RAY_POSITIONS\020^\022!\n\035SCALAR_FUNCTION_ARRAY" +
-      "_PREPEND\020_\022 \n\034SCALAR_FUNCTION_ARRAY_REMO" +
-      "VE\020`\022!\n\035SCALAR_FUNCTION_ARRAY_REPLACE\020a\022" +
-      "#\n\037SCALAR_FUNCTION_ARRAY_TO_STRING\020b\022\037\n\033" +
-      "SCALAR_FUNCTION_CARDINALITY\020c\022!\n\035SCALAR_" +
-      "FUNCTION_ARRAY_ELEMENT\020d\022\037\n\033SCALAR_FUNCT" +
-      "ION_ARRAY_SLICE\020e\022\032\n\026SCALAR_FUNCTION_ENC" +
-      "ODE\020f\022\032\n\026SCALAR_FUNCTION_DECODE\020g\022\027\n\023SCA" +
-      "LAR_FUNCTION_COT\020h\022\035\n\031SCALAR_FUNCTION_AR" +
-      "RAY_HAS\020i\022!\n\035SCALAR_FUNCTION_ARRAY_HAS_A" +
-      "NY\020j\022!\n\035SCALAR_FUNCTION_ARRAY_HAS_ALL\020k\022" +
-      "\"\n\036SCALAR_FUNCTION_ARRAY_REMOVE_N\020l\022#\n\037S" +
-      "CALAR_FUNCTION_ARRAY_REPLACE_N\020m\022$\n SCAL" +
-      "AR_FUNCTION_ARRAY_REMOVE_ALL\020n\022%\n!SCALAR" +
-      "_FUNCTION_ARRAY_REPLACE_ALL\020o\022\031\n\025SCALAR_" +
-      "FUNCTION_NANVL\020p\022\033\n\027SCALAR_FUNCTION_FLAT" +
-      "TEN\020q\022\031\n\025SCALAR_FUNCTION_ISNAN\020r\022\032\n\026SCAL" +
-      "AR_FUNCTION_ISZERO\020s\022\037\n\033SCALAR_FUNCTION_" +
-      "ARRAY_EMPTY\020t\022\"\n\036SCALAR_FUNCTION_ARRAY_P" +
-      "OP_BACK\020u\022#\n\037SCALAR_FUNCTION_STRING_TO_A" +
-      "RRAY\020v\022&\n\"SCALAR_FUNCTION_TO_TIMESTAMP_N" +
-      "ANOS\020w\022#\n\037SCALAR_FUNCTION_ARRAY_INTERSEC" +
-      "T\020x\022\037\n\033SCALAR_FUNCTION_ARRAY_UNION\020y\022\034\n\030" +
-      "SCALAR_FUNCTION_OVER_LAY\020z\022\031\n\025SCALAR_FUN" +
-      "CTION_RANGE\020{\022 \n\034SCALAR_FUNCTION_ARRAY_E" +
-      "XCEPT\020|\022#\n\037SCALAR_FUNCTION_ARRAY_POP_FRO" +
-      "NT\020}\022\037\n\033SCALAR_FUNCTION_LEVENSHTEIN\020~\022 \n" +
-      "\034SCALAR_FUNCTION_SUBSTR_INDEX\020\177\022 \n\033SCALA" +
-      "R_FUNCTION_FIND_IN_SET\020\200\001\022\037\n\032SCALAR_FUNC" +
-      "TION_ARRAY_SORT\020\201\001\022#\n\036SCALAR_FUNCTION_AR" +
-      "RAY_DISTINCT\020\202\001*\213\n\n\021AggregateFunction\022\"\n" +
-      "\036AGGREGATE_FUNCTION_UNSPECIFIED\020\000\022\032\n\026AGG" +
-      "REGATE_FUNCTION_MIN\020\001\022\032\n\026AGGREGATE_FUNCT" +
-      "ION_MAX\020\002\022\032\n\026AGGREGATE_FUNCTION_SUM\020\003\022\032\n" +
-      "\026AGGREGATE_FUNCTION_AVG\020\004\022\034\n\030AGGREGATE_F" +
-      "UNCTION_COUNT\020\005\022&\n\"AGGREGATE_FUNCTION_AP" +
-      "PROX_DISTINCT\020\006\022\034\n\030AGGREGATE_FUNCTION_AR" +
-      "RAY\020\007\022\037\n\033AGGREGATE_FUNCTION_VARIANCE\020\010\022#" +
-      "\n\037AGGREGATE_FUNCTION_VARIANCE_POP\020\t\022!\n\035A" +
-      "GGREGATE_FUNCTION_COVARIANCE\020\n\022%\n!AGGREG" +
-      "ATE_FUNCTION_COVARIANCE_POP\020\013\022\035\n\031AGGREGA" +
-      "TE_FUNCTION_STDDEV\020\014\022!\n\035AGGREGATE_FUNCTI" +
-      "ON_STDDEV_POP\020\r\022\"\n\036AGGREGATE_FUNCTION_CO" +
-      "RRELATION\020\016\022-\n)AGGREGATE_FUNCTION_APPROX" +
-      "_PERCENTILE_CONT\020\017\022$\n AGGREGATE_FUNCTION" +
-      "_APPROX_MEDIAN\020\020\0229\n5AGGREGATE_FUNCTION_A" +
-      "PPROX_PERCENTILE_CONT_WITH_WEIGHT\020\021\022\037\n\033A" +
-      "GGREGATE_FUNCTION_GROUPING\020\022\022\035\n\031AGGREGAT" +
-      "E_FUNCTION_MEDIAN\020\023\022\036\n\032AGGREGATE_FUNCTIO" +
-      "N_BIT_AND\020\024\022\035\n\031AGGREGATE_FUNCTION_BIT_OR" +
-      "\020\025\022\036\n\032AGGREGATE_FUNCTION_BIT_XOR\020\026\022\037\n\033AG" +
-      "GREGATE_FUNCTION_BOOL_AND\020\027\022\036\n\032AGGREGATE" +
-      "_FUNCTION_BOOL_OR\020\030\022\"\n\036AGGREGATE_FUNCTIO" +
-      "N_FIRST_VALUE\020\031\022!\n\035AGGREGATE_FUNCTION_LA" +
-      "ST_VALUE\020\032\022!\n\035AGGREGATE_FUNCTION_REGR_SL" +
-      "OPE\020\033\022%\n!AGGREGATE_FUNCTION_REGR_INTERCE" +
-      "PT\020\034\022!\n\035AGGREGATE_FUNCTION_REGR_COUNT\020\035\022" +
-      "\036\n\032AGGREGATE_FUNCTION_REGR_R2\020\036\022 \n\034AGGRE" +
-      "GATE_FUNCTION_REGR_AVGX\020\037\022 \n\034AGGREGATE_F" +
-      "UNCTION_REGR_AVGY\020 \022\037\n\033AGGREGATE_FUNCTIO" +
-      "N_REGR_SXX\020!\022\037\n\033AGGREGATE_FUNCTION_REGR_" +
-      "SYY\020\"\022\037\n\033AGGREGATE_FUNCTION_REGR_SXY\020#\022\035" +
-      "\n\031AGGREGATE_FUNCTION_STRING\020$*\355\003\n\025BuiltI" +
-      "nWindowFunction\022(\n$BUILT_IN_WINDOW_FUNCT" +
-      "ION_UNSPECIFIED\020\000\022\'\n#BUILT_IN_WINDOW_FUN" +
-      "CTION_ROW_NUMBER\020\001\022!\n\035BUILT_IN_WINDOW_FU" +
-      "NCTION_RANK\020\002\022\'\n#BUILT_IN_WINDOW_FUNCTIO" +
-      "N_DENSE_RANK\020\003\022)\n%BUILT_IN_WINDOW_FUNCTI" +
-      "ON_PERCENT_RANK\020\004\022&\n\"BUILT_IN_WINDOW_FUN" +
-      "CTION_CUME_DIST\020\005\022\"\n\036BUILT_IN_WINDOW_FUN" +
-      "CTION_NTILE\020\006\022 \n\034BUILT_IN_WINDOW_FUNCTIO" +
-      "N_LAG\020\007\022!\n\035BUILT_IN_WINDOW_FUNCTION_LEAD" +
-      "\020\010\022(\n$BUILT_IN_WINDOW_FUNCTION_FIRST_VAL" +
-      "UE\020\t\022\'\n#BUILT_IN_WINDOW_FUNCTION_LAST_VA" +
-      "LUE\020\n\022&\n\"BUILT_IN_WINDOW_FUNCTION_NTH_VA" +
-      "LUE\020\013*\220\001\n\020WindowFrameUnits\022\"\n\036WINDOW_FRA" +
-      "ME_UNITS_UNSPECIFIED\020\000\022\033\n\027WINDOW_FRAME_U" +
-      "NITS_ROWS\020\001\022\034\n\030WINDOW_FRAME_UNITS_RANGE\020" +
-      "\002\022\035\n\031WINDOW_FRAME_UNITS_GROUPS\020\003*\266\001\n\024Win" +
-      "dowFrameBoundType\022\'\n#WINDOW_FRAME_BOUND_" +
-      "TYPE_UNSPECIFIED\020\000\022\'\n#WINDOW_FRAME_BOUND" +
-      "_TYPE_CURRENT_ROW\020\001\022%\n!WINDOW_FRAME_BOUN" +
-      "D_TYPE_PRECEDING\020\002\022%\n!WINDOW_FRAME_BOUND" +
-      "_TYPE_FOLLOWING\020\003B\244\001\n#ai.chalk.protos.ch" +
-      "alk.expression.v1B\017ExpressionProtoP\001\242\002\003C" +
-      "EX\252\002\023Chalk.Expression.V1\312\002\023Chalk\\Express" +
-      "ion\\V1\342\002\037Chalk\\Expression\\V1\\GPBMetadata" +
-      "\352\002\025Chalk::Expression::V1b\006proto3"
+      "rNodeR\004expr\"E\n\tIsNotNull\0228\n\004expr\030\001 \001(\0132$" +
+      ".chalk.expression.v1.LogicalExprNodeR\004ex" +
+      "pr\"B\n\006IsTrue\0228\n\004expr\030\001 \001(\0132$.chalk.expre" +
+      "ssion.v1.LogicalExprNodeR\004expr\"C\n\007IsFals" +
+      "e\0228\n\004expr\030\001 \001(\0132$.chalk.expression.v1.Lo" +
+      "gicalExprNodeR\004expr\"E\n\tIsUnknown\0228\n\004expr" +
+      "\030\001 \001(\0132$.chalk.expression.v1.LogicalExpr" +
+      "NodeR\004expr\"E\n\tIsNotTrue\0228\n\004expr\030\001 \001(\0132$." +
+      "chalk.expression.v1.LogicalExprNodeR\004exp" +
+      "r\"F\n\nIsNotFalse\0228\n\004expr\030\001 \001(\0132$.chalk.ex" +
+      "pression.v1.LogicalExprNodeR\004expr\"H\n\014IsN" +
+      "otUnknown\0228\n\004expr\030\001 \001(\0132$.chalk.expressi" +
+      "on.v1.LogicalExprNodeR\004expr\"?\n\003Not\0228\n\004ex" +
+      "pr\030\001 \001(\0132$.chalk.expression.v1.LogicalEx" +
+      "prNodeR\004expr\"\241\001\n\tAliasNode\0228\n\004expr\030\001 \001(\013" +
+      "2$.chalk.expression.v1.LogicalExprNodeR\004" +
+      "expr\022\024\n\005alias\030\002 \001(\tR\005alias\022D\n\010relation\030\003" +
+      " \003(\0132(.chalk.expression.v1.OwnedTableRef" +
+      "erenceR\010relation\"*\n\022BareTableReference\022\024" +
+      "\n\005table\030\001 \001(\tR\005table\"E\n\025PartialTableRefe" +
+      "rence\022\026\n\006schema\030\001 \001(\tR\006schema\022\024\n\005table\030\002" +
+      " \001(\tR\005table\"\\\n\022FullTableReference\022\030\n\007cat" +
+      "alog\030\001 \001(\tR\007catalog\022\026\n\006schema\030\002 \001(\tR\006sch" +
+      "ema\022\024\n\005table\030\003 \001(\tR\005table\"\363\001\n\023OwnedTable" +
+      "Reference\022=\n\004bare\030\001 \001(\0132\'.chalk.expressi" +
+      "on.v1.BareTableReferenceH\000R\004bare\022F\n\007part" +
+      "ial\030\002 \001(\0132*.chalk.expression.v1.PartialT" +
+      "ableReferenceH\000R\007partial\022=\n\004full\030\003 \001(\0132\'" +
+      ".chalk.expression.v1.FullTableReferenceH" +
+      "\000R\004fullB\026\n\024table_reference_enum\"b\n\016Binar" +
+      "yExprNode\022@\n\010operands\030\001 \003(\0132$.chalk.expr" +
+      "ession.v1.LogicalExprNodeR\010operands\022\016\n\002o" +
+      "p\030\003 \001(\tR\002op\"H\n\014NegativeNode\0228\n\004expr\030\001 \001(" +
+      "\0132$.chalk.expression.v1.LogicalExprNodeR" +
+      "\004expr\"\232\001\n\nInListNode\0228\n\004expr\030\001 \001(\0132$.cha" +
+      "lk.expression.v1.LogicalExprNodeR\004expr\0228" +
+      "\n\004list\030\002 \003(\0132$.chalk.expression.v1.Logic" +
+      "alExprNodeR\004list\022\030\n\007negated\030\003 \001(\010R\007negat" +
+      "ed\"\205\001\n\022ScalarFunctionNode\0225\n\003fun\030\001 \001(\0162#" +
+      ".chalk.expression.v1.ScalarFunctionR\003fun" +
+      "\0228\n\004args\030\002 \003(\0132$.chalk.expression.v1.Log" +
+      "icalExprNodeR\004args\"\265\002\n\021AggregateExprNode" +
+      "\022K\n\raggr_function\030\001 \001(\0162&.chalk.expressi" +
+      "on.v1.AggregateFunctionR\014aggrFunction\0228\n" +
+      "\004expr\030\002 \003(\0132$.chalk.expression.v1.Logica" +
+      "lExprNodeR\004expr\022\032\n\010distinct\030\003 \001(\010R\010disti" +
+      "nct\022<\n\006filter\030\004 \001(\0132$.chalk.expression.v" +
+      "1.LogicalExprNodeR\006filter\022?\n\010order_by\030\005 " +
+      "\003(\0132$.chalk.expression.v1.LogicalExprNod" +
+      "eR\007orderBy\"\232\003\n\024AggregateUDFExprNode\022\031\n\010f" +
+      "un_name\030\001 \001(\tR\007funName\0228\n\004args\030\002 \003(\0132$.c" +
+      "halk.expression.v1.LogicalExprNodeR\004args" +
+      "\022<\n\006filter\030\003 \001(\0132$.chalk.expression.v1.L" +
+      "ogicalExprNodeR\006filter\022?\n\010order_by\030\004 \003(\013" +
+      "2$.chalk.expression.v1.LogicalExprNodeR\007" +
+      "orderBy\022M\n\006kwargs\030\005 \003(\01325.chalk.expressi" +
+      "on.v1.AggregateUDFExprNode.KwargsEntryR\006" +
+      "kwargs\032_\n\013KwargsEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
+      ":\n\005value\030\002 \001(\0132$.chalk.expression.v1.Log" +
+      "icalExprNodeR\005value:\0028\001\"h\n\021ScalarUDFExpr" +
+      "Node\022\031\n\010fun_name\030\001 \001(\tR\007funName\0228\n\004args\030" +
+      "\002 \003(\0132$.chalk.expression.v1.LogicalExprN" +
+      "odeR\004args\"\201\004\n\016WindowExprNode\022M\n\raggr_fun" +
+      "ction\030\001 \001(\0162&.chalk.expression.v1.Aggreg" +
+      "ateFunctionH\000R\014aggrFunction\022X\n\021built_in_" +
+      "function\030\002 \001(\0162*.chalk.expression.v1.Bui" +
+      "ltInWindowFunctionH\000R\017builtInFunction\022\024\n" +
+      "\004udaf\030\003 \001(\tH\000R\004udaf\022\024\n\004udwf\030\t \001(\tH\000R\004udw" +
+      "f\0228\n\004expr\030\004 \001(\0132$.chalk.expression.v1.Lo" +
+      "gicalExprNodeR\004expr\022G\n\014partition_by\030\005 \003(" +
+      "\0132$.chalk.expression.v1.LogicalExprNodeR" +
+      "\013partitionBy\022?\n\010order_by\030\006 \003(\0132$.chalk.e" +
+      "xpression.v1.LogicalExprNodeR\007orderBy\022C\n" +
+      "\014window_frame\030\010 \001(\0132 .chalk.expression.v" +
+      "1.WindowFrameR\013windowFrameB\021\n\017window_fun" +
+      "ction\"\323\001\n\013BetweenNode\0228\n\004expr\030\001 \001(\0132$.ch" +
+      "alk.expression.v1.LogicalExprNodeR\004expr\022" +
+      "\030\n\007negated\030\002 \001(\010R\007negated\0226\n\003low\030\003 \001(\0132$" +
+      ".chalk.expression.v1.LogicalExprNodeR\003lo" +
+      "w\0228\n\004high\030\004 \001(\0132$.chalk.expression.v1.Lo" +
+      "gicalExprNodeR\004high\"\277\001\n\010LikeNode\022\030\n\007nega" +
+      "ted\030\001 \001(\010R\007negated\0228\n\004expr\030\002 \001(\0132$.chalk" +
+      ".expression.v1.LogicalExprNodeR\004expr\022>\n\007" +
+      "pattern\030\003 \001(\0132$.chalk.expression.v1.Logi" +
+      "calExprNodeR\007pattern\022\037\n\013escape_char\030\004 \001(" +
+      "\tR\nescapeChar\"\300\001\n\tILikeNode\022\030\n\007negated\030\001" +
+      " \001(\010R\007negated\0228\n\004expr\030\002 \001(\0132$.chalk.expr" +
+      "ession.v1.LogicalExprNodeR\004expr\022>\n\007patte" +
+      "rn\030\003 \001(\0132$.chalk.expression.v1.LogicalEx" +
+      "prNodeR\007pattern\022\037\n\013escape_char\030\004 \001(\tR\nes" +
+      "capeChar\"\304\001\n\rSimilarToNode\022\030\n\007negated\030\001 " +
+      "\001(\010R\007negated\0228\n\004expr\030\002 \001(\0132$.chalk.expre" +
+      "ssion.v1.LogicalExprNodeR\004expr\022>\n\007patter" +
+      "n\030\003 \001(\0132$.chalk.expression.v1.LogicalExp" +
+      "rNodeR\007pattern\022\037\n\013escape_char\030\004 \001(\tR\nesc" +
+      "apeChar\"\314\001\n\010CaseNode\0228\n\004expr\030\001 \001(\0132$.cha" +
+      "lk.expression.v1.LogicalExprNodeR\004expr\022C" +
+      "\n\016when_then_expr\030\002 \003(\0132\035.chalk.expressio" +
+      "n.v1.WhenThenR\014whenThenExpr\022A\n\telse_expr" +
+      "\030\003 \001(\0132$.chalk.expression.v1.LogicalExpr" +
+      "NodeR\010elseExpr\"\220\001\n\010WhenThen\022A\n\twhen_expr" +
+      "\030\001 \001(\0132$.chalk.expression.v1.LogicalExpr" +
+      "NodeR\010whenExpr\022A\n\tthen_expr\030\002 \001(\0132$.chal" +
+      "k.expression.v1.LogicalExprNodeR\010thenExp" +
+      "r\"~\n\010CastNode\0228\n\004expr\030\001 \001(\0132$.chalk.expr" +
+      "ession.v1.LogicalExprNodeR\004expr\0228\n\narrow" +
+      "_type\030\002 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\t" +
+      "arrowType\"\201\001\n\013TryCastNode\0228\n\004expr\030\001 \001(\0132" +
+      "$.chalk.expression.v1.LogicalExprNodeR\004e" +
+      "xpr\0228\n\narrow_type\030\002 \001(\0132\031.chalk.arrow.v1" +
+      ".ArrowTypeR\tarrowType\"{\n\014SortExprNode\0228\n" +
+      "\004expr\030\001 \001(\0132$.chalk.expression.v1.Logica" +
+      "lExprNodeR\004expr\022\020\n\003asc\030\002 \001(\010R\003asc\022\037\n\013nul" +
+      "ls_first\030\003 \001(\010R\nnullsFirst\"\366\001\n\013WindowFra" +
+      "me\022S\n\022window_frame_units\030\001 \001(\0162%.chalk.e" +
+      "xpression.v1.WindowFrameUnitsR\020windowFra" +
+      "meUnits\022F\n\013start_bound\030\002 \001(\0132%.chalk.exp" +
+      "ression.v1.WindowFrameBoundR\nstartBound\022" +
+      "@\n\005bound\030\003 \001(\0132%.chalk.expression.v1.Win" +
+      "dowFrameBoundH\000R\005bound\210\001\001B\010\n\006_bound\"\262\001\n\020" +
+      "WindowFrameBound\022`\n\027window_frame_bound_t" +
+      "ype\030\001 \001(\0162).chalk.expression.v1.WindowFr" +
+      "ameBoundTypeR\024windowFrameBoundType\022<\n\013bo" +
+      "und_value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarV" +
+      "alueR\nboundValue*\240\037\n\016ScalarFunction\022\037\n\033S" +
+      "CALAR_FUNCTION_UNSPECIFIED\020\000\022\027\n\023SCALAR_F" +
+      "UNCTION_ABS\020\001\022\030\n\024SCALAR_FUNCTION_ACOS\020\002\022" +
+      "\030\n\024SCALAR_FUNCTION_ASIN\020\003\022\030\n\024SCALAR_FUNC" +
+      "TION_ATAN\020\004\022\031\n\025SCALAR_FUNCTION_ASCII\020\005\022\030" +
+      "\n\024SCALAR_FUNCTION_CEIL\020\006\022\027\n\023SCALAR_FUNCT" +
+      "ION_COS\020\007\022\032\n\026SCALAR_FUNCTION_DIGEST\020\010\022\027\n" +
+      "\023SCALAR_FUNCTION_EXP\020\t\022\031\n\025SCALAR_FUNCTIO" +
+      "N_FLOOR\020\n\022\026\n\022SCALAR_FUNCTION_LN\020\013\022\027\n\023SCA" +
+      "LAR_FUNCTION_LOG\020\014\022\031\n\025SCALAR_FUNCTION_LO" +
+      "G10\020\r\022\030\n\024SCALAR_FUNCTION_LOG2\020\016\022\031\n\025SCALA" +
+      "R_FUNCTION_ROUND\020\017\022\032\n\026SCALAR_FUNCTION_SI" +
+      "GNUM\020\020\022\027\n\023SCALAR_FUNCTION_SIN\020\021\022\030\n\024SCALA" +
+      "R_FUNCTION_SQRT\020\022\022\027\n\023SCALAR_FUNCTION_TAN" +
+      "\020\023\022\031\n\025SCALAR_FUNCTION_TRUNC\020\024\022\031\n\025SCALAR_" +
+      "FUNCTION_ARRAY\020\025\022 \n\034SCALAR_FUNCTION_REGE" +
+      "XP_MATCH\020\026\022\036\n\032SCALAR_FUNCTION_BIT_LENGTH" +
+      "\020\027\022\031\n\025SCALAR_FUNCTION_BTRIM\020\030\022$\n SCALAR_" +
+      "FUNCTION_CHARACTER_LENGTH\020\031\022\027\n\023SCALAR_FU" +
+      "NCTION_CHR\020\032\022\032\n\026SCALAR_FUNCTION_CONCAT\020\033" +
+      "\022)\n%SCALAR_FUNCTION_CONCAT_WITH_SEPARATO" +
+      "R\020\034\022\035\n\031SCALAR_FUNCTION_DATE_PART\020\035\022\036\n\032SC" +
+      "ALAR_FUNCTION_DATE_TRUNC\020\036\022\034\n\030SCALAR_FUN" +
+      "CTION_INIT_CAP\020\037\022\030\n\024SCALAR_FUNCTION_LEFT" +
+      "\020 \022\030\n\024SCALAR_FUNCTION_LPAD\020!\022\031\n\025SCALAR_F" +
+      "UNCTION_LOWER\020\"\022\031\n\025SCALAR_FUNCTION_LTRIM" +
+      "\020#\022\027\n\023SCALAR_FUNCTION_MD5\020$\022\033\n\027SCALAR_FU" +
+      "NCTION_NULL_IF\020%\022 \n\034SCALAR_FUNCTION_OCTE" +
+      "T_LENGTH\020&\022\032\n\026SCALAR_FUNCTION_RANDOM\020\'\022\"" +
+      "\n\036SCALAR_FUNCTION_REGEXP_REPLACE\020(\022\032\n\026SC" +
+      "ALAR_FUNCTION_REPEAT\020)\022\033\n\027SCALAR_FUNCTIO" +
+      "N_REPLACE\020*\022\033\n\027SCALAR_FUNCTION_REVERSE\020+" +
+      "\022\031\n\025SCALAR_FUNCTION_RIGHT\020,\022\030\n\024SCALAR_FU" +
+      "NCTION_RPAD\020-\022\031\n\025SCALAR_FUNCTION_RTRIM\020." +
+      "\022\032\n\026SCALAR_FUNCTION_SHA224\020/\022\032\n\026SCALAR_F" +
+      "UNCTION_SHA256\0200\022\032\n\026SCALAR_FUNCTION_SHA3" +
+      "84\0201\022\032\n\026SCALAR_FUNCTION_SHA512\0202\022\036\n\032SCAL" +
+      "AR_FUNCTION_SPLIT_PART\0203\022\037\n\033SCALAR_FUNCT" +
+      "ION_STARTS_WITH\0204\022\032\n\026SCALAR_FUNCTION_STR" +
+      "POS\0205\022\032\n\026SCALAR_FUNCTION_SUBSTR\0206\022\032\n\026SCA" +
+      "LAR_FUNCTION_TO_HEX\0207\022 \n\034SCALAR_FUNCTION" +
+      "_TO_TIMESTAMP\0208\022\'\n#SCALAR_FUNCTION_TO_TI" +
+      "MESTAMP_MILLIS\0209\022\'\n#SCALAR_FUNCTION_TO_T" +
+      "IMESTAMP_MICROS\020:\022(\n$SCALAR_FUNCTION_TO_" +
+      "TIMESTAMP_SECONDS\020;\022\027\n\023SCALAR_FUNCTION_N" +
+      "OW\020<\022\035\n\031SCALAR_FUNCTION_TRANSLATE\020=\022\030\n\024S" +
+      "CALAR_FUNCTION_TRIM\020>\022\031\n\025SCALAR_FUNCTION" +
+      "_UPPER\020?\022\034\n\030SCALAR_FUNCTION_COALESCE\020@\022\031" +
+      "\n\025SCALAR_FUNCTION_POWER\020A\022\036\n\032SCALAR_FUNC" +
+      "TION_STRUCT_FUN\020B\022!\n\035SCALAR_FUNCTION_FRO" +
+      "M_UNIXTIME\020C\022\031\n\025SCALAR_FUNCTION_ATAN2\020D\022" +
+      "\034\n\030SCALAR_FUNCTION_DATE_BIN\020E\022 \n\034SCALAR_" +
+      "FUNCTION_ARROW_TYPEOF\020F\022 \n\034SCALAR_FUNCTI" +
+      "ON_CURRENT_DATE\020G\022 \n\034SCALAR_FUNCTION_CUR" +
+      "RENT_TIME\020H\022\030\n\024SCALAR_FUNCTION_UUID\020I\022\030\n" +
+      "\024SCALAR_FUNCTION_CBRT\020J\022\031\n\025SCALAR_FUNCTI" +
+      "ON_ACOSH\020K\022\031\n\025SCALAR_FUNCTION_ASINH\020L\022\031\n" +
+      "\025SCALAR_FUNCTION_ATANH\020M\022\030\n\024SCALAR_FUNCT" +
+      "ION_SINH\020N\022\030\n\024SCALAR_FUNCTION_COSH\020O\022\030\n\024" +
+      "SCALAR_FUNCTION_TANH\020P\022\026\n\022SCALAR_FUNCTIO" +
+      "N_PI\020Q\022\033\n\027SCALAR_FUNCTION_DEGREES\020R\022\033\n\027S" +
+      "CALAR_FUNCTION_RADIANS\020S\022\035\n\031SCALAR_FUNCT" +
+      "ION_FACTORIAL\020T\022\027\n\023SCALAR_FUNCTION_LCM\020U" +
+      "\022\027\n\023SCALAR_FUNCTION_GCD\020V\022 \n\034SCALAR_FUNC" +
+      "TION_ARRAY_APPEND\020W\022 \n\034SCALAR_FUNCTION_A" +
+      "RRAY_CONCAT\020X\022\036\n\032SCALAR_FUNCTION_ARRAY_D" +
+      "IMS\020Y\022 \n\034SCALAR_FUNCTION_ARRAY_REPEAT\020Z\022" +
+      " \n\034SCALAR_FUNCTION_ARRAY_LENGTH\020[\022\037\n\033SCA" +
+      "LAR_FUNCTION_ARRAY_NDIMS\020\\\022\"\n\036SCALAR_FUN" +
+      "CTION_ARRAY_POSITION\020]\022#\n\037SCALAR_FUNCTIO" +
+      "N_ARRAY_POSITIONS\020^\022!\n\035SCALAR_FUNCTION_A" +
+      "RRAY_PREPEND\020_\022 \n\034SCALAR_FUNCTION_ARRAY_" +
+      "REMOVE\020`\022!\n\035SCALAR_FUNCTION_ARRAY_REPLAC" +
+      "E\020a\022#\n\037SCALAR_FUNCTION_ARRAY_TO_STRING\020b" +
+      "\022\037\n\033SCALAR_FUNCTION_CARDINALITY\020c\022!\n\035SCA" +
+      "LAR_FUNCTION_ARRAY_ELEMENT\020d\022\037\n\033SCALAR_F" +
+      "UNCTION_ARRAY_SLICE\020e\022\032\n\026SCALAR_FUNCTION" +
+      "_ENCODE\020f\022\032\n\026SCALAR_FUNCTION_DECODE\020g\022\027\n" +
+      "\023SCALAR_FUNCTION_COT\020h\022\035\n\031SCALAR_FUNCTIO" +
+      "N_ARRAY_HAS\020i\022!\n\035SCALAR_FUNCTION_ARRAY_H" +
+      "AS_ANY\020j\022!\n\035SCALAR_FUNCTION_ARRAY_HAS_AL" +
+      "L\020k\022\"\n\036SCALAR_FUNCTION_ARRAY_REMOVE_N\020l\022" +
+      "#\n\037SCALAR_FUNCTION_ARRAY_REPLACE_N\020m\022$\n " +
+      "SCALAR_FUNCTION_ARRAY_REMOVE_ALL\020n\022%\n!SC" +
+      "ALAR_FUNCTION_ARRAY_REPLACE_ALL\020o\022\031\n\025SCA" +
+      "LAR_FUNCTION_NANVL\020p\022\033\n\027SCALAR_FUNCTION_" +
+      "FLATTEN\020q\022\031\n\025SCALAR_FUNCTION_ISNAN\020r\022\032\n\026" +
+      "SCALAR_FUNCTION_ISZERO\020s\022\037\n\033SCALAR_FUNCT" +
+      "ION_ARRAY_EMPTY\020t\022\"\n\036SCALAR_FUNCTION_ARR" +
+      "AY_POP_BACK\020u\022#\n\037SCALAR_FUNCTION_STRING_" +
+      "TO_ARRAY\020v\022&\n\"SCALAR_FUNCTION_TO_TIMESTA" +
+      "MP_NANOS\020w\022#\n\037SCALAR_FUNCTION_ARRAY_INTE" +
+      "RSECT\020x\022\037\n\033SCALAR_FUNCTION_ARRAY_UNION\020y" +
+      "\022\034\n\030SCALAR_FUNCTION_OVER_LAY\020z\022\031\n\025SCALAR" +
+      "_FUNCTION_RANGE\020{\022 \n\034SCALAR_FUNCTION_ARR" +
+      "AY_EXCEPT\020|\022#\n\037SCALAR_FUNCTION_ARRAY_POP" +
+      "_FRONT\020}\022\037\n\033SCALAR_FUNCTION_LEVENSHTEIN\020" +
+      "~\022 \n\034SCALAR_FUNCTION_SUBSTR_INDEX\020\177\022 \n\033S" +
+      "CALAR_FUNCTION_FIND_IN_SET\020\200\001\022\037\n\032SCALAR_" +
+      "FUNCTION_ARRAY_SORT\020\201\001\022#\n\036SCALAR_FUNCTIO" +
+      "N_ARRAY_DISTINCT\020\202\001*\213\n\n\021AggregateFunctio" +
+      "n\022\"\n\036AGGREGATE_FUNCTION_UNSPECIFIED\020\000\022\032\n" +
+      "\026AGGREGATE_FUNCTION_MIN\020\001\022\032\n\026AGGREGATE_F" +
+      "UNCTION_MAX\020\002\022\032\n\026AGGREGATE_FUNCTION_SUM\020" +
+      "\003\022\032\n\026AGGREGATE_FUNCTION_AVG\020\004\022\034\n\030AGGREGA" +
+      "TE_FUNCTION_COUNT\020\005\022&\n\"AGGREGATE_FUNCTIO" +
+      "N_APPROX_DISTINCT\020\006\022\034\n\030AGGREGATE_FUNCTIO" +
+      "N_ARRAY\020\007\022\037\n\033AGGREGATE_FUNCTION_VARIANCE" +
+      "\020\010\022#\n\037AGGREGATE_FUNCTION_VARIANCE_POP\020\t\022" +
+      "!\n\035AGGREGATE_FUNCTION_COVARIANCE\020\n\022%\n!AG" +
+      "GREGATE_FUNCTION_COVARIANCE_POP\020\013\022\035\n\031AGG" +
+      "REGATE_FUNCTION_STDDEV\020\014\022!\n\035AGGREGATE_FU" +
+      "NCTION_STDDEV_POP\020\r\022\"\n\036AGGREGATE_FUNCTIO" +
+      "N_CORRELATION\020\016\022-\n)AGGREGATE_FUNCTION_AP" +
+      "PROX_PERCENTILE_CONT\020\017\022$\n AGGREGATE_FUNC" +
+      "TION_APPROX_MEDIAN\020\020\0229\n5AGGREGATE_FUNCTI" +
+      "ON_APPROX_PERCENTILE_CONT_WITH_WEIGHT\020\021\022" +
+      "\037\n\033AGGREGATE_FUNCTION_GROUPING\020\022\022\035\n\031AGGR" +
+      "EGATE_FUNCTION_MEDIAN\020\023\022\036\n\032AGGREGATE_FUN" +
+      "CTION_BIT_AND\020\024\022\035\n\031AGGREGATE_FUNCTION_BI" +
+      "T_OR\020\025\022\036\n\032AGGREGATE_FUNCTION_BIT_XOR\020\026\022\037" +
+      "\n\033AGGREGATE_FUNCTION_BOOL_AND\020\027\022\036\n\032AGGRE" +
+      "GATE_FUNCTION_BOOL_OR\020\030\022\"\n\036AGGREGATE_FUN" +
+      "CTION_FIRST_VALUE\020\031\022!\n\035AGGREGATE_FUNCTIO" +
+      "N_LAST_VALUE\020\032\022!\n\035AGGREGATE_FUNCTION_REG" +
+      "R_SLOPE\020\033\022%\n!AGGREGATE_FUNCTION_REGR_INT" +
+      "ERCEPT\020\034\022!\n\035AGGREGATE_FUNCTION_REGR_COUN" +
+      "T\020\035\022\036\n\032AGGREGATE_FUNCTION_REGR_R2\020\036\022 \n\034A" +
+      "GGREGATE_FUNCTION_REGR_AVGX\020\037\022 \n\034AGGREGA" +
+      "TE_FUNCTION_REGR_AVGY\020 \022\037\n\033AGGREGATE_FUN" +
+      "CTION_REGR_SXX\020!\022\037\n\033AGGREGATE_FUNCTION_R" +
+      "EGR_SYY\020\"\022\037\n\033AGGREGATE_FUNCTION_REGR_SXY" +
+      "\020#\022\035\n\031AGGREGATE_FUNCTION_STRING\020$*\355\003\n\025Bu" +
+      "iltInWindowFunction\022(\n$BUILT_IN_WINDOW_F" +
+      "UNCTION_UNSPECIFIED\020\000\022\'\n#BUILT_IN_WINDOW" +
+      "_FUNCTION_ROW_NUMBER\020\001\022!\n\035BUILT_IN_WINDO" +
+      "W_FUNCTION_RANK\020\002\022\'\n#BUILT_IN_WINDOW_FUN" +
+      "CTION_DENSE_RANK\020\003\022)\n%BUILT_IN_WINDOW_FU" +
+      "NCTION_PERCENT_RANK\020\004\022&\n\"BUILT_IN_WINDOW" +
+      "_FUNCTION_CUME_DIST\020\005\022\"\n\036BUILT_IN_WINDOW" +
+      "_FUNCTION_NTILE\020\006\022 \n\034BUILT_IN_WINDOW_FUN" +
+      "CTION_LAG\020\007\022!\n\035BUILT_IN_WINDOW_FUNCTION_" +
+      "LEAD\020\010\022(\n$BUILT_IN_WINDOW_FUNCTION_FIRST" +
+      "_VALUE\020\t\022\'\n#BUILT_IN_WINDOW_FUNCTION_LAS" +
+      "T_VALUE\020\n\022&\n\"BUILT_IN_WINDOW_FUNCTION_NT" +
+      "H_VALUE\020\013*\220\001\n\020WindowFrameUnits\022\"\n\036WINDOW" +
+      "_FRAME_UNITS_UNSPECIFIED\020\000\022\033\n\027WINDOW_FRA" +
+      "ME_UNITS_ROWS\020\001\022\034\n\030WINDOW_FRAME_UNITS_RA" +
+      "NGE\020\002\022\035\n\031WINDOW_FRAME_UNITS_GROUPS\020\003*\266\001\n" +
+      "\024WindowFrameBoundType\022\'\n#WINDOW_FRAME_BO" +
+      "UND_TYPE_UNSPECIFIED\020\000\022\'\n#WINDOW_FRAME_B" +
+      "OUND_TYPE_CURRENT_ROW\020\001\022%\n!WINDOW_FRAME_" +
+      "BOUND_TYPE_PRECEDING\020\002\022%\n!WINDOW_FRAME_B" +
+      "OUND_TYPE_FOLLOWING\020\003B\244\001\n#ai.chalk.proto" +
+      "s.chalk.expression.v1B\017ExpressionProtoP\001" +
+      "\242\002\003CEX\252\002\023Chalk.Expression.V1\312\002\023Chalk\\Exp" +
+      "ression\\V1\342\002\037Chalk\\Expression\\V1\\GPBMeta",
+      "data\352\002\025Chalk::Expression::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.arrow.v1.ArrowProto.getDescriptor(),
         });
-    internal_static_chalk_expression_v1_LogicalExprNode_descriptor =
+    internal_static_chalk_expression_v1_Identifier_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_chalk_expression_v1_Identifier_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_Identifier_descriptor,
+        new java.lang.String[] { "Name", });
+    internal_static_chalk_expression_v1_ExprGetAttribute_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_chalk_expression_v1_ExprGetAttribute_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_ExprGetAttribute_descriptor,
+        new java.lang.String[] { "Parent", "Attribute", });
+    internal_static_chalk_expression_v1_ExprGetSubscript_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_chalk_expression_v1_ExprGetSubscript_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_ExprGetSubscript_descriptor,
+        new java.lang.String[] { "Parent", "Subscript", });
+    internal_static_chalk_expression_v1_ExprCall_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_chalk_expression_v1_ExprCall_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_ExprCall_descriptor,
+        new java.lang.String[] { "Func", "Args", "Kwargs", });
+    internal_static_chalk_expression_v1_ExprCall_KwargsEntry_descriptor =
+      internal_static_chalk_expression_v1_ExprCall_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_expression_v1_ExprCall_KwargsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_ExprCall_KwargsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_expression_v1_ExprLiteral_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_expression_v1_ExprLiteral_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_ExprLiteral_descriptor,
+        new java.lang.String[] { "Value", });
+    internal_static_chalk_expression_v1_LogicalExprNode_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_expression_v1_LogicalExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_LogicalExprNode_descriptor,
-        new java.lang.String[] { "Column", "Alias", "Literal", "BinaryExpr", "AggregateExpr", "IsNullExpr", "IsNotNullExpr", "NotExpr", "Between", "Case", "Cast", "Sort", "Negative", "InList", "Wildcard", "ScalarFunction", "TryCast", "WindowExpr", "AggregateUdfExpr", "ScalarUdfExpr", "GetIndexedField", "GroupingSet", "Cube", "Rollup", "IsTrue", "IsFalse", "IsUnknown", "IsNotTrue", "IsNotFalse", "IsNotUnknown", "Like", "Ilike", "SimilarTo", "Placeholder", "ExprType", });
+        new java.lang.String[] { "Identifier", "GetAttribute", "GetSubscript", "Call", "LiteralValue", "Column", "Alias", "Literal", "BinaryExpr", "AggregateExpr", "IsNullExpr", "IsNotNullExpr", "NotExpr", "Between", "Case", "Cast", "Sort", "Negative", "InList", "Wildcard", "ScalarFunction", "TryCast", "WindowExpr", "AggregateUdfExpr", "ScalarUdfExpr", "GetIndexedField", "GroupingSet", "Cube", "Rollup", "IsTrue", "IsFalse", "IsUnknown", "IsNotTrue", "IsNotFalse", "IsNotUnknown", "Like", "Ilike", "SimilarTo", "Placeholder", "ExprForm", "ExprType", });
     internal_static_chalk_expression_v1_ColumnRelation_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_chalk_expression_v1_ColumnRelation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ColumnRelation_descriptor,
         new java.lang.String[] { "Relation", });
     internal_static_chalk_expression_v1_Column_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_expression_v1_Column_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_Column_descriptor,
         new java.lang.String[] { "Name", "Relation", });
     internal_static_chalk_expression_v1_Wildcard_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_chalk_expression_v1_Wildcard_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_Wildcard_descriptor,
         new java.lang.String[] { "Qualifier", });
     internal_static_chalk_expression_v1_PlaceholderNode_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_chalk_expression_v1_PlaceholderNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_PlaceholderNode_descriptor,
         new java.lang.String[] { "Id", "DataType", });
     internal_static_chalk_expression_v1_LogicalExprList_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_chalk_expression_v1_LogicalExprList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_LogicalExprList_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_GroupingSetNode_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_chalk_expression_v1_GroupingSetNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_GroupingSetNode_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_CubeNode_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_chalk_expression_v1_CubeNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_CubeNode_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_RollupNode_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_chalk_expression_v1_RollupNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_RollupNode_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_NamedStructField_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_chalk_expression_v1_NamedStructField_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_NamedStructField_descriptor,
         new java.lang.String[] { "Name", });
     internal_static_chalk_expression_v1_ListIndex_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_chalk_expression_v1_ListIndex_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ListIndex_descriptor,
         new java.lang.String[] { "Key", });
     internal_static_chalk_expression_v1_ListRange_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_chalk_expression_v1_ListRange_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ListRange_descriptor,
         new java.lang.String[] { "Start", "Stop", });
     internal_static_chalk_expression_v1_GetIndexedField_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_chalk_expression_v1_GetIndexedField_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_GetIndexedField_descriptor,
         new java.lang.String[] { "Expr", "NamedStructField", "ListIndex", "ListRange", "Field", });
     internal_static_chalk_expression_v1_IsNull_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_chalk_expression_v1_IsNull_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsNull_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsNotNull_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_expression_v1_IsNotNull_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsNotNull_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsTrue_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_expression_v1_IsTrue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsTrue_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsFalse_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_chalk_expression_v1_IsFalse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsFalse_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsUnknown_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_chalk_expression_v1_IsUnknown_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsUnknown_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsNotTrue_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_chalk_expression_v1_IsNotTrue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsNotTrue_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsNotFalse_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_chalk_expression_v1_IsNotFalse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsNotFalse_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_IsNotUnknown_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_chalk_expression_v1_IsNotUnknown_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_IsNotUnknown_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_Not_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_chalk_expression_v1_Not_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_Not_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_AliasNode_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_chalk_expression_v1_AliasNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_AliasNode_descriptor,
         new java.lang.String[] { "Expr", "Alias", "Relation", });
     internal_static_chalk_expression_v1_BareTableReference_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_chalk_expression_v1_BareTableReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_BareTableReference_descriptor,
         new java.lang.String[] { "Table", });
     internal_static_chalk_expression_v1_PartialTableReference_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_chalk_expression_v1_PartialTableReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_PartialTableReference_descriptor,
         new java.lang.String[] { "Schema", "Table", });
     internal_static_chalk_expression_v1_FullTableReference_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_chalk_expression_v1_FullTableReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_FullTableReference_descriptor,
         new java.lang.String[] { "Catalog", "Schema", "Table", });
     internal_static_chalk_expression_v1_OwnedTableReference_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_chalk_expression_v1_OwnedTableReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_OwnedTableReference_descriptor,
         new java.lang.String[] { "Bare", "Partial", "Full", "TableReferenceEnum", });
     internal_static_chalk_expression_v1_BinaryExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_chalk_expression_v1_BinaryExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_BinaryExprNode_descriptor,
         new java.lang.String[] { "Operands", "Op", });
     internal_static_chalk_expression_v1_NegativeNode_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_chalk_expression_v1_NegativeNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_NegativeNode_descriptor,
         new java.lang.String[] { "Expr", });
     internal_static_chalk_expression_v1_InListNode_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_chalk_expression_v1_InListNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_InListNode_descriptor,
         new java.lang.String[] { "Expr", "List", "Negated", });
     internal_static_chalk_expression_v1_ScalarFunctionNode_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(35);
     internal_static_chalk_expression_v1_ScalarFunctionNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ScalarFunctionNode_descriptor,
         new java.lang.String[] { "Fun", "Args", });
     internal_static_chalk_expression_v1_AggregateExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(36);
     internal_static_chalk_expression_v1_AggregateExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_AggregateExprNode_descriptor,
         new java.lang.String[] { "AggrFunction", "Expr", "Distinct", "Filter", "OrderBy", });
     internal_static_chalk_expression_v1_AggregateUDFExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(37);
     internal_static_chalk_expression_v1_AggregateUDFExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_AggregateUDFExprNode_descriptor,
-        new java.lang.String[] { "FunName", "Args", "Filter", "OrderBy", });
+        new java.lang.String[] { "FunName", "Args", "Filter", "OrderBy", "Kwargs", });
+    internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_descriptor =
+      internal_static_chalk_expression_v1_AggregateUDFExprNode_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_expression_v1_AggregateUDFExprNode_KwargsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_expression_v1_ScalarUDFExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(38);
     internal_static_chalk_expression_v1_ScalarUDFExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ScalarUDFExprNode_descriptor,
         new java.lang.String[] { "FunName", "Args", });
     internal_static_chalk_expression_v1_WindowExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(39);
     internal_static_chalk_expression_v1_WindowExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_WindowExprNode_descriptor,
         new java.lang.String[] { "AggrFunction", "BuiltInFunction", "Udaf", "Udwf", "Expr", "PartitionBy", "OrderBy", "WindowFrame", "WindowFunction", });
     internal_static_chalk_expression_v1_BetweenNode_descriptor =
-      getDescriptor().getMessageTypes().get(35);
+      getDescriptor().getMessageTypes().get(40);
     internal_static_chalk_expression_v1_BetweenNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_BetweenNode_descriptor,
         new java.lang.String[] { "Expr", "Negated", "Low", "High", });
     internal_static_chalk_expression_v1_LikeNode_descriptor =
-      getDescriptor().getMessageTypes().get(36);
+      getDescriptor().getMessageTypes().get(41);
     internal_static_chalk_expression_v1_LikeNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_LikeNode_descriptor,
         new java.lang.String[] { "Negated", "Expr", "Pattern", "EscapeChar", });
     internal_static_chalk_expression_v1_ILikeNode_descriptor =
-      getDescriptor().getMessageTypes().get(37);
+      getDescriptor().getMessageTypes().get(42);
     internal_static_chalk_expression_v1_ILikeNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_ILikeNode_descriptor,
         new java.lang.String[] { "Negated", "Expr", "Pattern", "EscapeChar", });
     internal_static_chalk_expression_v1_SimilarToNode_descriptor =
-      getDescriptor().getMessageTypes().get(38);
+      getDescriptor().getMessageTypes().get(43);
     internal_static_chalk_expression_v1_SimilarToNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_SimilarToNode_descriptor,
         new java.lang.String[] { "Negated", "Expr", "Pattern", "EscapeChar", });
     internal_static_chalk_expression_v1_CaseNode_descriptor =
-      getDescriptor().getMessageTypes().get(39);
+      getDescriptor().getMessageTypes().get(44);
     internal_static_chalk_expression_v1_CaseNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_CaseNode_descriptor,
         new java.lang.String[] { "Expr", "WhenThenExpr", "ElseExpr", });
     internal_static_chalk_expression_v1_WhenThen_descriptor =
-      getDescriptor().getMessageTypes().get(40);
+      getDescriptor().getMessageTypes().get(45);
     internal_static_chalk_expression_v1_WhenThen_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_WhenThen_descriptor,
         new java.lang.String[] { "WhenExpr", "ThenExpr", });
     internal_static_chalk_expression_v1_CastNode_descriptor =
-      getDescriptor().getMessageTypes().get(41);
+      getDescriptor().getMessageTypes().get(46);
     internal_static_chalk_expression_v1_CastNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_CastNode_descriptor,
         new java.lang.String[] { "Expr", "ArrowType", });
     internal_static_chalk_expression_v1_TryCastNode_descriptor =
-      getDescriptor().getMessageTypes().get(42);
+      getDescriptor().getMessageTypes().get(47);
     internal_static_chalk_expression_v1_TryCastNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_TryCastNode_descriptor,
         new java.lang.String[] { "Expr", "ArrowType", });
     internal_static_chalk_expression_v1_SortExprNode_descriptor =
-      getDescriptor().getMessageTypes().get(43);
+      getDescriptor().getMessageTypes().get(48);
     internal_static_chalk_expression_v1_SortExprNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_SortExprNode_descriptor,
         new java.lang.String[] { "Expr", "Asc", "NullsFirst", });
     internal_static_chalk_expression_v1_WindowFrame_descriptor =
-      getDescriptor().getMessageTypes().get(44);
+      getDescriptor().getMessageTypes().get(49);
     internal_static_chalk_expression_v1_WindowFrame_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_WindowFrame_descriptor,
         new java.lang.String[] { "WindowFrameUnits", "StartBound", "Bound", });
     internal_static_chalk_expression_v1_WindowFrameBound_descriptor =
-      getDescriptor().getMessageTypes().get(45);
+      getDescriptor().getMessageTypes().get(50);
     internal_static_chalk_expression_v1_WindowFrameBound_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_expression_v1_WindowFrameBound_descriptor,

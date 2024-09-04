@@ -113,4 +113,28 @@ public interface DisplayUserAgentOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTeamNameBytes();
+
+  /**
+   * <code>repeated .chalk.auth.v1.DisplayCustomClaim customer_claims = 9 [json_name = "customerClaims"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.auth.v1.DisplayCustomClaim> 
+      getCustomerClaimsList();
+  /**
+   * <code>repeated .chalk.auth.v1.DisplayCustomClaim customer_claims = 9 [json_name = "customerClaims"];</code>
+   */
+  ai.chalk.protos.chalk.auth.v1.DisplayCustomClaim getCustomerClaims(int index);
+  /**
+   * <code>repeated .chalk.auth.v1.DisplayCustomClaim customer_claims = 9 [json_name = "customerClaims"];</code>
+   */
+  int getCustomerClaimsCount();
+  /**
+   * <code>repeated .chalk.auth.v1.DisplayCustomClaim customer_claims = 9 [json_name = "customerClaims"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.auth.v1.DisplayCustomClaimOrBuilder> 
+      getCustomerClaimsOrBuilderList();
+  /**
+   * <code>repeated .chalk.auth.v1.DisplayCustomClaim customer_claims = 9 [json_name = "customerClaims"];</code>
+   */
+  ai.chalk.protos.chalk.auth.v1.DisplayCustomClaimOrBuilder getCustomerClaimsOrBuilder(
+      int index);
 }

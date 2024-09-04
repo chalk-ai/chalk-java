@@ -53,6 +53,8 @@ private static final long serialVersionUID = 0L;
     defaultPlanner_ = "";
     privatePipRepositories_ = "";
     cloudProvider_ = 0;
+    metadataServerMetricsStoreSecret_ = "";
+    queryServerMetricsStoreSecret_ = "";
   }
 
   @java.lang.Override
@@ -92,6 +94,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
+  private int bitField1_;
   public static final int NAME_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
@@ -2044,6 +2047,126 @@ com.google.protobuf.Value defaultValue) {
     return map.get(key);
   }
 
+  public static final int ARCHIVED_AT_FIELD_NUMBER = 43;
+  private com.google.protobuf.Timestamp archivedAt_;
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   * @return Whether the archivedAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasArchivedAt() {
+    return ((bitField1_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   * @return The archivedAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getArchivedAt() {
+    return archivedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : archivedAt_;
+  }
+  /**
+   * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getArchivedAtOrBuilder() {
+    return archivedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : archivedAt_;
+  }
+
+  public static final int METADATA_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER = 44;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object metadataServerMetricsStoreSecret_ = "";
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return Whether the metadataServerMetricsStoreSecret field is set.
+   */
+  @java.lang.Override
+  public boolean hasMetadataServerMetricsStoreSecret() {
+    return ((bitField1_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The metadataServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public java.lang.String getMetadataServerMetricsStoreSecret() {
+    java.lang.Object ref = metadataServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      metadataServerMetricsStoreSecret_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+   * @return The bytes for metadataServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMetadataServerMetricsStoreSecretBytes() {
+    java.lang.Object ref = metadataServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      metadataServerMetricsStoreSecret_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int QUERY_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER = 45;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object queryServerMetricsStoreSecret_ = "";
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return Whether the queryServerMetricsStoreSecret field is set.
+   */
+  @java.lang.Override
+  public boolean hasQueryServerMetricsStoreSecret() {
+    return ((bitField1_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The queryServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public java.lang.String getQueryServerMetricsStoreSecret() {
+    java.lang.Object ref = queryServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      queryServerMetricsStoreSecret_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+   * @return The bytes for queryServerMetricsStoreSecret.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getQueryServerMetricsStoreSecretBytes() {
+    java.lang.Object ref = queryServerMetricsStoreSecret_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      queryServerMetricsStoreSecret_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2192,6 +2315,15 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField0_ & 0x80000000) != 0)) {
       output.writeMessage(42, getCloudConfig());
+    }
+    if (((bitField1_ & 0x00000001) != 0)) {
+      output.writeMessage(43, getArchivedAt());
+    }
+    if (((bitField1_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 44, metadataServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 45, queryServerMetricsStoreSecret_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -2352,6 +2484,16 @@ com.google.protobuf.Value defaultValue) {
     if (((bitField0_ & 0x80000000) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(42, getCloudConfig());
+    }
+    if (((bitField1_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(43, getArchivedAt());
+    }
+    if (((bitField1_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(44, metadataServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(45, queryServerMetricsStoreSecret_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -2547,6 +2689,21 @@ com.google.protobuf.Value defaultValue) {
     }
     if (!internalGetSpecConfigJson().equals(
         other.internalGetSpecConfigJson())) return false;
+    if (hasArchivedAt() != other.hasArchivedAt()) return false;
+    if (hasArchivedAt()) {
+      if (!getArchivedAt()
+          .equals(other.getArchivedAt())) return false;
+    }
+    if (hasMetadataServerMetricsStoreSecret() != other.hasMetadataServerMetricsStoreSecret()) return false;
+    if (hasMetadataServerMetricsStoreSecret()) {
+      if (!getMetadataServerMetricsStoreSecret()
+          .equals(other.getMetadataServerMetricsStoreSecret())) return false;
+    }
+    if (hasQueryServerMetricsStoreSecret() != other.hasQueryServerMetricsStoreSecret()) return false;
+    if (hasQueryServerMetricsStoreSecret()) {
+      if (!getQueryServerMetricsStoreSecret()
+          .equals(other.getQueryServerMetricsStoreSecret())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -2714,6 +2871,18 @@ com.google.protobuf.Value defaultValue) {
       hash = (37 * hash) + SPEC_CONFIG_JSON_FIELD_NUMBER;
       hash = (53 * hash) + internalGetSpecConfigJson().hashCode();
     }
+    if (hasArchivedAt()) {
+      hash = (37 * hash) + ARCHIVED_AT_FIELD_NUMBER;
+      hash = (53 * hash) + getArchivedAt().hashCode();
+    }
+    if (hasMetadataServerMetricsStoreSecret()) {
+      hash = (37 * hash) + METADATA_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER;
+      hash = (53 * hash) + getMetadataServerMetricsStoreSecret().hashCode();
+    }
+    if (hasQueryServerMetricsStoreSecret()) {
+      hash = (37 * hash) + QUERY_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER;
+      hash = (53 * hash) + getQueryServerMetricsStoreSecret().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -2875,6 +3044,7 @@ com.google.protobuf.Value defaultValue) {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getCloudConfigFieldBuilder();
+        getArchivedAtFieldBuilder();
       }
     }
     @java.lang.Override
@@ -2928,6 +3098,13 @@ com.google.protobuf.Value defaultValue) {
         cloudConfigBuilder_ = null;
       }
       internalGetMutableSpecConfigJson().clear();
+      archivedAt_ = null;
+      if (archivedAtBuilder_ != null) {
+        archivedAtBuilder_.dispose();
+        archivedAtBuilder_ = null;
+      }
+      metadataServerMetricsStoreSecret_ = "";
+      queryServerMetricsStoreSecret_ = "";
       return this;
     }
 
@@ -3131,7 +3308,23 @@ com.google.protobuf.Value defaultValue) {
       if (((from_bitField1_ & 0x00000200) != 0)) {
         result.specConfigJson_ = internalGetSpecConfigJson().build(SpecConfigJsonDefaultEntryHolder.defaultEntry);
       }
+      int to_bitField1_ = 0;
+      if (((from_bitField1_ & 0x00000400) != 0)) {
+        result.archivedAt_ = archivedAtBuilder_ == null
+            ? archivedAt_
+            : archivedAtBuilder_.build();
+        to_bitField1_ |= 0x00000001;
+      }
+      if (((from_bitField1_ & 0x00000800) != 0)) {
+        result.metadataServerMetricsStoreSecret_ = metadataServerMetricsStoreSecret_;
+        to_bitField1_ |= 0x00000002;
+      }
+      if (((from_bitField1_ & 0x00001000) != 0)) {
+        result.queryServerMetricsStoreSecret_ = queryServerMetricsStoreSecret_;
+        to_bitField1_ |= 0x00000004;
+      }
       result.bitField0_ |= to_bitField0_;
+      result.bitField1_ |= to_bitField1_;
     }
 
     @java.lang.Override
@@ -3374,6 +3567,19 @@ com.google.protobuf.Value defaultValue) {
       internalGetMutableSpecConfigJson().mergeFrom(
           other.internalGetSpecConfigJson());
       bitField1_ |= 0x00000200;
+      if (other.hasArchivedAt()) {
+        mergeArchivedAt(other.getArchivedAt());
+      }
+      if (other.hasMetadataServerMetricsStoreSecret()) {
+        metadataServerMetricsStoreSecret_ = other.metadataServerMetricsStoreSecret_;
+        bitField1_ |= 0x00000800;
+        onChanged();
+      }
+      if (other.hasQueryServerMetricsStoreSecret()) {
+        queryServerMetricsStoreSecret_ = other.queryServerMetricsStoreSecret_;
+        bitField1_ |= 0x00001000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -3624,6 +3830,23 @@ com.google.protobuf.Value defaultValue) {
               bitField1_ |= 0x00000100;
               break;
             } // case 338
+            case 346: {
+              input.readMessage(
+                  getArchivedAtFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField1_ |= 0x00000400;
+              break;
+            } // case 346
+            case 354: {
+              metadataServerMetricsStoreSecret_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00000800;
+              break;
+            } // case 354
+            case 362: {
+              queryServerMetricsStoreSecret_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00001000;
+              break;
+            } // case 362
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -7112,6 +7335,285 @@ com.google.protobuf.Value defaultValue) {
         builderMap.put(key, entry);
       }
       return (com.google.protobuf.Value.Builder) entry;
+    }
+
+    private com.google.protobuf.Timestamp archivedAt_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> archivedAtBuilder_;
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     * @return Whether the archivedAt field is set.
+     */
+    public boolean hasArchivedAt() {
+      return ((bitField1_ & 0x00000400) != 0);
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     * @return The archivedAt.
+     */
+    public com.google.protobuf.Timestamp getArchivedAt() {
+      if (archivedAtBuilder_ == null) {
+        return archivedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : archivedAt_;
+      } else {
+        return archivedAtBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public Builder setArchivedAt(com.google.protobuf.Timestamp value) {
+      if (archivedAtBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        archivedAt_ = value;
+      } else {
+        archivedAtBuilder_.setMessage(value);
+      }
+      bitField1_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public Builder setArchivedAt(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (archivedAtBuilder_ == null) {
+        archivedAt_ = builderForValue.build();
+      } else {
+        archivedAtBuilder_.setMessage(builderForValue.build());
+      }
+      bitField1_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public Builder mergeArchivedAt(com.google.protobuf.Timestamp value) {
+      if (archivedAtBuilder_ == null) {
+        if (((bitField1_ & 0x00000400) != 0) &&
+          archivedAt_ != null &&
+          archivedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getArchivedAtBuilder().mergeFrom(value);
+        } else {
+          archivedAt_ = value;
+        }
+      } else {
+        archivedAtBuilder_.mergeFrom(value);
+      }
+      if (archivedAt_ != null) {
+        bitField1_ |= 0x00000400;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public Builder clearArchivedAt() {
+      bitField1_ = (bitField1_ & ~0x00000400);
+      archivedAt_ = null;
+      if (archivedAtBuilder_ != null) {
+        archivedAtBuilder_.dispose();
+        archivedAtBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getArchivedAtBuilder() {
+      bitField1_ |= 0x00000400;
+      onChanged();
+      return getArchivedAtFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getArchivedAtOrBuilder() {
+      if (archivedAtBuilder_ != null) {
+        return archivedAtBuilder_.getMessageOrBuilder();
+      } else {
+        return archivedAt_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : archivedAt_;
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Timestamp archived_at = 43 [json_name = "archivedAt"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getArchivedAtFieldBuilder() {
+      if (archivedAtBuilder_ == null) {
+        archivedAtBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getArchivedAt(),
+                getParentForChildren(),
+                isClean());
+        archivedAt_ = null;
+      }
+      return archivedAtBuilder_;
+    }
+
+    private java.lang.Object metadataServerMetricsStoreSecret_ = "";
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return Whether the metadataServerMetricsStoreSecret field is set.
+     */
+    public boolean hasMetadataServerMetricsStoreSecret() {
+      return ((bitField1_ & 0x00000800) != 0);
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return The metadataServerMetricsStoreSecret.
+     */
+    public java.lang.String getMetadataServerMetricsStoreSecret() {
+      java.lang.Object ref = metadataServerMetricsStoreSecret_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        metadataServerMetricsStoreSecret_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return The bytes for metadataServerMetricsStoreSecret.
+     */
+    public com.google.protobuf.ByteString
+        getMetadataServerMetricsStoreSecretBytes() {
+      java.lang.Object ref = metadataServerMetricsStoreSecret_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        metadataServerMetricsStoreSecret_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @param value The metadataServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetadataServerMetricsStoreSecret(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      metadataServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMetadataServerMetricsStoreSecret() {
+      metadataServerMetricsStoreSecret_ = getDefaultInstance().getMetadataServerMetricsStoreSecret();
+      bitField1_ = (bitField1_ & ~0x00000800);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string metadata_server_metrics_store_secret = 44 [json_name = "metadataServerMetricsStoreSecret"];</code>
+     * @param value The bytes for metadataServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetadataServerMetricsStoreSecretBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      metadataServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object queryServerMetricsStoreSecret_ = "";
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return Whether the queryServerMetricsStoreSecret field is set.
+     */
+    public boolean hasQueryServerMetricsStoreSecret() {
+      return ((bitField1_ & 0x00001000) != 0);
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return The queryServerMetricsStoreSecret.
+     */
+    public java.lang.String getQueryServerMetricsStoreSecret() {
+      java.lang.Object ref = queryServerMetricsStoreSecret_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        queryServerMetricsStoreSecret_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return The bytes for queryServerMetricsStoreSecret.
+     */
+    public com.google.protobuf.ByteString
+        getQueryServerMetricsStoreSecretBytes() {
+      java.lang.Object ref = queryServerMetricsStoreSecret_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        queryServerMetricsStoreSecret_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @param value The queryServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryServerMetricsStoreSecret(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      queryServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearQueryServerMetricsStoreSecret() {
+      queryServerMetricsStoreSecret_ = getDefaultInstance().getQueryServerMetricsStoreSecret();
+      bitField1_ = (bitField1_ & ~0x00001000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string query_server_metrics_store_secret = 45 [json_name = "queryServerMetricsStoreSecret"];</code>
+     * @param value The bytes for queryServerMetricsStoreSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryServerMetricsStoreSecretBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      queryServerMetricsStoreSecret_ = value;
+      bitField1_ |= 0x00001000;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

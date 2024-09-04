@@ -81,6 +81,26 @@ public final class PodStatusProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_pubsub_v1_PodStatusPubSub_ContainerStatus_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_pubsub_v1_PodStatusPubSub_PodCondition_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -116,7 +136,7 @@ public final class PodStatusProto {
     java.lang.String[] descriptorData = {
       "\n chalk/pubsub/v1/pod_status.proto\022\017chal" +
       "k.pubsub.v1\032\034gen_bq_schema/bq_field.prot" +
-      "o\032\034gen_bq_schema/bq_table.proto\"\2010\n\017PodS" +
+      "o\032\034gen_bq_schema/bq_table.proto\"\2045\n\017PodS" +
       "tatusPubSub\022\022\n\004team\030\001 \001(\tR\004team\022\020\n\003app\030\002" +
       " \001(\tR\003app\022\034\n\tcomponent\030\003 \001(\tR\tcomponent\022" +
       "\'\n\017datadog_service\030\004 \001(\tR\016datadogService" +
@@ -134,147 +154,163 @@ public final class PodStatusProto {
       "odStatusPubSub.LabelsEntryR\006labels\022S\n\013an" +
       "notations\030\026 \003(\01321.chalk.pubsub.v1.PodSta" +
       "tusPubSub.AnnotationsEntryR\013annotations\022" +
-      "\030\n\007cluster\030\027 \001(\tR\007cluster\032\034\n\006Volume\022\022\n\004n" +
-      "ame\030\001 \001(\tR\004name\032\301\001\n\013ClaimSource\0223\n\023resou" +
-      "rce_claim_name\030\001 \001(\tH\000R\021resourceClaimNam" +
-      "e\210\001\001\022D\n\034resource_claim_template_name\030\002 \001" +
-      "(\tH\001R\031resourceClaimTemplateName\210\001\001B\026\n\024_r" +
-      "esource_claim_nameB\037\n\035_resource_claim_te" +
-      "mplate_name\032|\n\020PodResourceClaim\022\022\n\004name\030" +
-      "\001 \001(\tR\004name\022I\n\006source\030\002 \001(\0132,.chalk.pubs" +
-      "ub.v1.PodStatusPubSub.ClaimSourceH\000R\006sou" +
-      "rce\210\001\001B\t\n\007_source\032\330\r\n\007PodSpec\022A\n\007volumes" +
-      "\030\001 \003(\0132\'.chalk.pubsub.v1.PodStatusPubSub" +
-      ".VolumeR\007volumes\022S\n\017init_containers\030\024 \003(" +
-      "\0132*.chalk.pubsub.v1.PodStatusPubSub.Cont" +
-      "ainerR\016initContainers\022J\n\ncontainers\030\002 \003(" +
-      "\0132*.chalk.pubsub.v1.PodStatusPubSub.Cont" +
-      "ainerR\ncontainers\022*\n\016restart_policy\030\003 \001(" +
-      "\tH\000R\rrestartPolicy\210\001\001\022L\n termination_gra" +
-      "ce_period_seconds\030\004 \001(\003H\001R\035terminationGr" +
-      "acePeriodSeconds\210\001\001\022;\n\027active_deadline_s" +
-      "econds\030\005 \001(\003H\002R\025activeDeadlineSeconds\210\001\001" +
-      "\022\"\n\ndns_policy\030\006 \001(\tH\003R\tdnsPolicy\210\001\001\022_\n\r" +
-      "node_selector\030\007 \003(\0132:.chalk.pubsub.v1.Po" +
-      "dStatusPubSub.PodSpec.NodeSelectorEntryR" +
-      "\014nodeSelector\0225\n\024service_account_name\030\010 " +
-      "\001(\tH\004R\022serviceAccountName\210\001\001\022J\n\037automoun" +
-      "t_service_account_token\030\025 \001(\010H\005R\034automou" +
-      "ntServiceAccountToken\210\001\001\022 \n\tnode_name\030\n " +
-      "\001(\tH\006R\010nodeName\210\001\001\022!\n\014host_network\030\013 \001(\010" +
-      "R\013hostNetwork\022\031\n\010host_pid\030\014 \001(\010R\007hostPid" +
-      "\022\031\n\010host_ipc\030\r \001(\010R\007hostIpc\0226\n\027share_pro" +
-      "cess_namespace\030\033 \001(\010R\025shareProcessNamesp" +
-      "ace\022\037\n\010hostname\030\020 \001(\tH\007R\010hostname\210\001\001\022!\n\t" +
-      "subdomain\030\021 \001(\tH\010R\tsubdomain\210\001\001\022*\n\016sched" +
-      "uler_name\030\023 \001(\tH\tR\rschedulerName\210\001\001\0223\n\023p" +
-      "riority_class_name\030\030 \001(\tH\nR\021priorityClas" +
-      "sName\210\001\001\022\037\n\010priority\030\031 \001(\005H\013R\010priority\210\001" +
-      "\001\0221\n\022runtime_class_name\030\035 \001(\tH\014R\020runtime" +
-      "ClassName\210\001\001\0225\n\024enable_service_links\030\036 \001" +
-      "(\010H\rR\022enableServiceLinks\210\001\001\0220\n\021preemptio" +
-      "n_policy\030\037 \001(\tH\016R\020preemptionPolicy\210\001\001\022\"\n" +
-      "\nhost_users\030% \001(\010H\017R\thostUsers\210\001\001\022Z\n\017res" +
-      "ource_claims\030\' \003(\01321.chalk.pubsub.v1.Pod" +
-      "StatusPubSub.PodResourceClaimR\016resourceC" +
-      "laims\032?\n\021NodeSelectorEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\021\n\017_resta" +
-      "rt_policyB#\n!_termination_grace_period_s" +
-      "econdsB\032\n\030_active_deadline_secondsB\r\n\013_d" +
-      "ns_policyB\027\n\025_service_account_nameB\"\n _a" +
-      "utomount_service_account_tokenB\014\n\n_node_" +
-      "nameB\013\n\t_hostnameB\014\n\n_subdomainB\021\n\017_sche" +
-      "duler_nameB\026\n\024_priority_class_nameB\013\n\t_p" +
-      "riorityB\025\n\023_runtime_class_nameB\027\n\025_enabl" +
-      "e_service_linksB\024\n\022_preemption_policyB\r\n" +
-      "\013_host_users\032\305\002\n\016ContainerState\022U\n\007waiti" +
-      "ng\030\001 \001(\01326.chalk.pubsub.v1.PodStatusPubS" +
-      "ub.ContainerStateWaitingH\000R\007waiting\210\001\001\022U" +
-      "\n\007running\030\002 \001(\01326.chalk.pubsub.v1.PodSta" +
-      "tusPubSub.ContainerStateRunningH\001R\007runni" +
-      "ng\210\001\001\022^\n\nterminated\030\003 \001(\01329.chalk.pubsub" +
-      ".v1.PodStatusPubSub.ContainerStateTermin" +
-      "atedH\002R\nterminated\210\001\001B\n\n\010_waitingB\n\n\010_ru" +
-      "nningB\r\n\013_terminated\032F\n\025ContainerStateRu" +
-      "nning\022-\n\nstarted_at\030\001 \001(\003B\016\352?\013\022\tTIMESTAM" +
-      "PR\tstartedAt\032\364\002\n\030ContainerStateTerminate" +
-      "d\022\033\n\texit_code\030\001 \001(\005R\010exitCode\022\033\n\006signal" +
-      "\030\002 \001(\005H\000R\006signal\210\001\001\022\033\n\006reason\030\003 \001(\tH\001R\006r" +
-      "eason\210\001\001\022\035\n\007message\030\004 \001(\tH\002R\007message\210\001\001\022" +
-      "2\n\nstarted_at\030\005 \001(\003B\016\352?\013\022\tTIMESTAMPH\003R\ts" +
-      "tartedAt\210\001\001\0224\n\013finished_at\030\006 \001(\003B\016\352?\013\022\tT" +
-      "IMESTAMPH\004R\nfinishedAt\210\001\001\022&\n\014container_i" +
-      "d\030\007 \001(\tH\005R\013containerId\210\001\001B\t\n\007_signalB\t\n\007" +
-      "_reasonB\n\n\010_messageB\r\n\013_started_atB\016\n\014_f" +
-      "inished_atB\017\n\r_container_id\0322\n\006EnvVar\022\022\n" +
-      "\004name\030\001 \001(\tR\004name\022\024\n\005value\030\002 \001(\tR\005value\032" +
-      "\356\004\n\tContainer\022\022\n\004name\030\001 \001(\tR\004name\022\031\n\005ima" +
-      "ge\030\002 \001(\tH\000R\005image\210\001\001\022\030\n\007command\030\003 \003(\tR\007c" +
-      "ommand\022\022\n\004args\030\004 \003(\tR\004args\022$\n\013working_di" +
-      "r\030\005 \001(\tH\001R\nworkingDir\210\001\001\0229\n\003env\030\007 \003(\0132\'." +
-      "chalk.pubsub.v1.PodStatusPubSub.EnvVarR\003" +
-      "env\022*\n\016restart_policy\030\030 \001(\tH\002R\rrestartPo" +
-      "licy\210\001\001\022=\n\030termination_message_path\030\r \001(" +
-      "\tH\003R\026terminationMessagePath\210\001\001\022A\n\032termin" +
-      "ation_message_policy\030\024 \001(\tH\004R\030terminatio" +
-      "nMessagePolicy\210\001\001\022/\n\021image_pull_policy\030\016" +
-      " \001(\tH\005R\017imagePullPolicy\210\001\001\022\024\n\005stdin\030\020 \001(" +
-      "\010R\005stdin\022\035\n\nstdin_once\030\021 \001(\010R\tstdinOnce\022" +
-      "\020\n\003tty\030\022 \001(\010R\003ttyB\010\n\006_imageB\016\n\014_working_" +
-      "dirB\021\n\017_restart_policyB\033\n\031_termination_m" +
-      "essage_pathB\035\n\033_termination_message_poli" +
-      "cyB\024\n\022_image_pull_policy\032j\n\025ContainerSta" +
-      "teWaiting\022\033\n\006reason\030\001 \001(\tH\000R\006reason\210\001\001\022\035" +
-      "\n\007message\030\002 \001(\tH\001R\007message\210\001\001B\t\n\007_reason" +
-      "B\n\n\010_message\032\227\003\n\017ContainerStatus\022\022\n\004name" +
-      "\030\001 \001(\tR\004name\022J\n\005state\030\002 \001(\0132/.chalk.pubs" +
-      "ub.v1.PodStatusPubSub.ContainerStateH\000R\005" +
-      "state\210\001\001\022S\n\nlast_state\030\003 \001(\0132/.chalk.pub" +
-      "sub.v1.PodStatusPubSub.ContainerStateH\001R" +
-      "\tlastState\210\001\001\022\031\n\005ready\030\004 \001(\010H\002R\005ready\210\001\001" +
-      "\022#\n\rrestart_count\030\005 \001(\005R\014restartCount\022\024\n" +
-      "\005image\030\006 \001(\tR\005image\022\031\n\010image_id\030\007 \001(\tR\007i" +
-      "mageId\022!\n\014container_id\030\010 \001(\tR\013containerI" +
-      "d\022\030\n\007started\030\t \001(\010R\007startedB\010\n\006_stateB\r\n" +
-      "\013_last_stateB\010\n\006_ready\032\207\002\n\014PodCondition\022" +
-      "\022\n\004type\030\001 \001(\tR\004type\022\026\n\006status\030\002 \001(\tR\006sta" +
-      "tus\0226\n\017last_probe_time\030\003 \001(\003B\016\352?\013\022\tTIMES" +
-      "TAMPR\rlastProbeTime\022@\n\024last_transition_t" +
-      "ime\030\004 \001(\003B\016\352?\013\022\tTIMESTAMPR\022lastTransitio" +
-      "nTime\022\033\n\006reason\030\005 \001(\tH\000R\006reason\210\001\001\022\035\n\007me" +
-      "ssage\030\006 \001(\tH\001R\007message\210\001\001B\t\n\007_reasonB\n\n\010" +
-      "_message\032$\n\006HostIP\022\023\n\002ip\030\001 \001(\tH\000R\002ip\210\001\001B" +
-      "\005\n\003_ip\032\216\007\n\tPodStatus\022\031\n\005phase\030\001 \001(\tH\000R\005p" +
-      "hase\210\001\001\022M\n\nconditions\030\002 \003(\0132-.chalk.pubs" +
-      "ub.v1.PodStatusPubSub.PodConditionR\ncond" +
-      "itions\022\035\n\007message\030\003 \001(\tH\001R\007message\210\001\001\022\033\n" +
-      "\006reason\030\004 \001(\tH\002R\006reason\210\001\001\0223\n\023nominated_" +
-      "node_name\030\013 \001(\tH\003R\021nominatedNodeName\210\001\001\022" +
-      "\034\n\007host_ip\030\005 \001(\tH\004R\006hostIp\210\001\001\022B\n\010host_ip" +
-      "s\030\020 \003(\0132\'.chalk.pubsub.v1.PodStatusPubSu" +
-      "b.HostIPR\007hostIps\022\032\n\006pod_ip\030\006 \001(\tH\005R\005pod" +
-      "Ip\210\001\001\0222\n\nstart_time\030\007 \001(\003B\016\352?\013\022\tTIMESTAM" +
-      "PH\006R\tstartTime\210\001\001\022h\n\027init_container_stat" +
-      "uses\030\n \003(\01320.chalk.pubsub.v1.PodStatusPu" +
-      "bSub.ContainerStatusR\025initContainerStatu" +
-      "ses\022_\n\022container_statuses\030\010 \003(\01320.chalk." +
-      "pubsub.v1.PodStatusPubSub.ContainerStatu" +
-      "sR\021containerStatuses\022 \n\tqos_class\030\t \001(\tH" +
-      "\007R\010qosClass\210\001\001\022r\n\034ephemeral_container_st" +
-      "atuses\030\r \003(\01320.chalk.pubsub.v1.PodStatus" +
-      "PubSub.ContainerStatusR\032ephemeralContain" +
-      "erStatuses\022\033\n\006resize\030\016 \001(\tH\010R\006resize\210\001\001B" +
-      "\010\n\006_phaseB\n\n\010_messageB\t\n\007_reasonB\026\n\024_nom" +
-      "inated_node_nameB\n\n\010_host_ipB\t\n\007_pod_ipB" +
-      "\r\n\013_start_timeB\014\n\n_qos_classB\t\n\007_resize\032" +
-      "9\n\013LabelsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
-      "e\030\002 \001(\tR\005value:\0028\001\032>\n\020AnnotationsEntry\022\020" +
-      "\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\002" +
-      "8\001:\017\352?\014\n\npod_statusB\243\001\n\037ai.chalk.protos." +
-      "chalk.pubsub.v1B\016PodStatusProtoP\001Z\022pubsu" +
-      "b/v1;pubsubv1\242\002\003CPX\252\002\017Chalk.Pubsub.V1\312\002\017" +
-      "Chalk\\Pubsub\\V1\342\002\033Chalk\\Pubsub\\V1\\GPBMet" +
-      "adata\352\002\021Chalk::Pubsub::V1b\006proto3"
+      "\030\n\007cluster\030\027 \001(\tR\007cluster\022\020\n\003uid\030\030 \001(\tR\003" +
+      "uid\022\022\n\004name\030\031 \001(\tR\004name\022\034\n\tnamespace\030\032 \001" +
+      "(\tR\tnamespace\032\034\n\006Volume\022\022\n\004name\030\001 \001(\tR\004n" +
+      "ame\032\301\001\n\013ClaimSource\0223\n\023resource_claim_na" +
+      "me\030\001 \001(\tH\000R\021resourceClaimName\210\001\001\022D\n\034reso" +
+      "urce_claim_template_name\030\002 \001(\tH\001R\031resour" +
+      "ceClaimTemplateName\210\001\001B\026\n\024_resource_clai" +
+      "m_nameB\037\n\035_resource_claim_template_name\032" +
+      "|\n\020PodResourceClaim\022\022\n\004name\030\001 \001(\tR\004name\022" +
+      "I\n\006source\030\002 \001(\0132,.chalk.pubsub.v1.PodSta" +
+      "tusPubSub.ClaimSourceH\000R\006source\210\001\001B\t\n\007_s" +
+      "ource\032\330\r\n\007PodSpec\022A\n\007volumes\030\001 \003(\0132\'.cha" +
+      "lk.pubsub.v1.PodStatusPubSub.VolumeR\007vol" +
+      "umes\022S\n\017init_containers\030\024 \003(\0132*.chalk.pu" +
+      "bsub.v1.PodStatusPubSub.ContainerR\016initC" +
+      "ontainers\022J\n\ncontainers\030\002 \003(\0132*.chalk.pu" +
+      "bsub.v1.PodStatusPubSub.ContainerR\nconta" +
+      "iners\022*\n\016restart_policy\030\003 \001(\tH\000R\rrestart" +
+      "Policy\210\001\001\022L\n termination_grace_period_se" +
+      "conds\030\004 \001(\003H\001R\035terminationGracePeriodSec" +
+      "onds\210\001\001\022;\n\027active_deadline_seconds\030\005 \001(\003" +
+      "H\002R\025activeDeadlineSeconds\210\001\001\022\"\n\ndns_poli" +
+      "cy\030\006 \001(\tH\003R\tdnsPolicy\210\001\001\022_\n\rnode_selecto" +
+      "r\030\007 \003(\0132:.chalk.pubsub.v1.PodStatusPubSu" +
+      "b.PodSpec.NodeSelectorEntryR\014nodeSelecto" +
+      "r\0225\n\024service_account_name\030\010 \001(\tH\004R\022servi" +
+      "ceAccountName\210\001\001\022J\n\037automount_service_ac" +
+      "count_token\030\025 \001(\010H\005R\034automountServiceAcc" +
+      "ountToken\210\001\001\022 \n\tnode_name\030\n \001(\tH\006R\010nodeN" +
+      "ame\210\001\001\022!\n\014host_network\030\013 \001(\010R\013hostNetwor" +
+      "k\022\031\n\010host_pid\030\014 \001(\010R\007hostPid\022\031\n\010host_ipc" +
+      "\030\r \001(\010R\007hostIpc\0226\n\027share_process_namespa" +
+      "ce\030\033 \001(\010R\025shareProcessNamespace\022\037\n\010hostn" +
+      "ame\030\020 \001(\tH\007R\010hostname\210\001\001\022!\n\tsubdomain\030\021 " +
+      "\001(\tH\010R\tsubdomain\210\001\001\022*\n\016scheduler_name\030\023 " +
+      "\001(\tH\tR\rschedulerName\210\001\001\0223\n\023priority_clas" +
+      "s_name\030\030 \001(\tH\nR\021priorityClassName\210\001\001\022\037\n\010" +
+      "priority\030\031 \001(\005H\013R\010priority\210\001\001\0221\n\022runtime" +
+      "_class_name\030\035 \001(\tH\014R\020runtimeClassName\210\001\001" +
+      "\0225\n\024enable_service_links\030\036 \001(\010H\rR\022enable" +
+      "ServiceLinks\210\001\001\0220\n\021preemption_policy\030\037 \001" +
+      "(\tH\016R\020preemptionPolicy\210\001\001\022\"\n\nhost_users\030" +
+      "% \001(\010H\017R\thostUsers\210\001\001\022Z\n\017resource_claims" +
+      "\030\' \003(\01321.chalk.pubsub.v1.PodStatusPubSub" +
+      ".PodResourceClaimR\016resourceClaims\032?\n\021Nod" +
+      "eSelectorEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
+      "e\030\002 \001(\tR\005value:\0028\001B\021\n\017_restart_policyB#\n" +
+      "!_termination_grace_period_secondsB\032\n\030_a" +
+      "ctive_deadline_secondsB\r\n\013_dns_policyB\027\n" +
+      "\025_service_account_nameB\"\n _automount_ser" +
+      "vice_account_tokenB\014\n\n_node_nameB\013\n\t_hos" +
+      "tnameB\014\n\n_subdomainB\021\n\017_scheduler_nameB\026" +
+      "\n\024_priority_class_nameB\013\n\t_priorityB\025\n\023_" +
+      "runtime_class_nameB\027\n\025_enable_service_li" +
+      "nksB\024\n\022_preemption_policyB\r\n\013_host_users" +
+      "\032\305\002\n\016ContainerState\022U\n\007waiting\030\001 \001(\01326.c" +
+      "halk.pubsub.v1.PodStatusPubSub.Container" +
+      "StateWaitingH\000R\007waiting\210\001\001\022U\n\007running\030\002 " +
+      "\001(\01326.chalk.pubsub.v1.PodStatusPubSub.Co" +
+      "ntainerStateRunningH\001R\007running\210\001\001\022^\n\nter" +
+      "minated\030\003 \001(\01329.chalk.pubsub.v1.PodStatu" +
+      "sPubSub.ContainerStateTerminatedH\002R\nterm" +
+      "inated\210\001\001B\n\n\010_waitingB\n\n\010_runningB\r\n\013_te" +
+      "rminated\032F\n\025ContainerStateRunning\022-\n\nsta" +
+      "rted_at\030\001 \001(\003B\016\352?\013\022\tTIMESTAMPR\tstartedAt" +
+      "\032\364\002\n\030ContainerStateTerminated\022\033\n\texit_co" +
+      "de\030\001 \001(\005R\010exitCode\022\033\n\006signal\030\002 \001(\005H\000R\006si" +
+      "gnal\210\001\001\022\033\n\006reason\030\003 \001(\tH\001R\006reason\210\001\001\022\035\n\007" +
+      "message\030\004 \001(\tH\002R\007message\210\001\001\0222\n\nstarted_a" +
+      "t\030\005 \001(\003B\016\352?\013\022\tTIMESTAMPH\003R\tstartedAt\210\001\001\022" +
+      "4\n\013finished_at\030\006 \001(\003B\016\352?\013\022\tTIMESTAMPH\004R\n" +
+      "finishedAt\210\001\001\022&\n\014container_id\030\007 \001(\tH\005R\013c" +
+      "ontainerId\210\001\001B\t\n\007_signalB\t\n\007_reasonB\n\n\010_" +
+      "messageB\r\n\013_started_atB\016\n\014_finished_atB\017" +
+      "\n\r_container_id\0322\n\006EnvVar\022\022\n\004name\030\001 \001(\tR" +
+      "\004name\022\024\n\005value\030\002 \001(\tR\005value\032\326\005\n\tContaine" +
+      "r\022\022\n\004name\030\001 \001(\tR\004name\022\031\n\005image\030\002 \001(\tH\000R\005" +
+      "image\210\001\001\022\030\n\007command\030\003 \003(\tR\007command\022\022\n\004ar" +
+      "gs\030\004 \003(\tR\004args\022$\n\013working_dir\030\005 \001(\tH\001R\nw" +
+      "orkingDir\210\001\001\0229\n\003env\030\007 \003(\0132\'.chalk.pubsub" +
+      ".v1.PodStatusPubSub.EnvVarR\003env\022X\n\tresou" +
+      "rces\030\010 \001(\01325.chalk.pubsub.v1.PodStatusPu" +
+      "bSub.ResourceRequirementsH\002R\tresources\210\001" +
+      "\001\022*\n\016restart_policy\030\030 \001(\tH\003R\rrestartPoli" +
+      "cy\210\001\001\022=\n\030termination_message_path\030\r \001(\tH" +
+      "\004R\026terminationMessagePath\210\001\001\022A\n\032terminat" +
+      "ion_message_policy\030\024 \001(\tH\005R\030terminationM" +
+      "essagePolicy\210\001\001\022/\n\021image_pull_policy\030\016 \001" +
+      "(\tH\006R\017imagePullPolicy\210\001\001\022\024\n\005stdin\030\020 \001(\010R" +
+      "\005stdin\022\035\n\nstdin_once\030\021 \001(\010R\tstdinOnce\022\020\n" +
+      "\003tty\030\022 \001(\010R\003ttyB\010\n\006_imageB\016\n\014_working_di" +
+      "rB\014\n\n_resourcesB\021\n\017_restart_policyB\033\n\031_t" +
+      "ermination_message_pathB\035\n\033_termination_" +
+      "message_policyB\024\n\022_image_pull_policy\032j\n\025" +
+      "ContainerStateWaiting\022\033\n\006reason\030\001 \001(\tH\000R" +
+      "\006reason\210\001\001\022\035\n\007message\030\002 \001(\tH\001R\007message\210\001" +
+      "\001B\t\n\007_reasonB\n\n\010_message\032\227\003\n\017ContainerSt" +
+      "atus\022\022\n\004name\030\001 \001(\tR\004name\022J\n\005state\030\002 \001(\0132" +
+      "/.chalk.pubsub.v1.PodStatusPubSub.Contai" +
+      "nerStateH\000R\005state\210\001\001\022S\n\nlast_state\030\003 \001(\013" +
+      "2/.chalk.pubsub.v1.PodStatusPubSub.Conta" +
+      "inerStateH\001R\tlastState\210\001\001\022\031\n\005ready\030\004 \001(\010" +
+      "H\002R\005ready\210\001\001\022#\n\rrestart_count\030\005 \001(\005R\014res" +
+      "tartCount\022\024\n\005image\030\006 \001(\tR\005image\022\031\n\010image" +
+      "_id\030\007 \001(\tR\007imageId\022!\n\014container_id\030\010 \001(\t" +
+      "R\013containerId\022\030\n\007started\030\t \001(\010R\007startedB" +
+      "\010\n\006_stateB\r\n\013_last_stateB\010\n\006_ready\0322\n\010Qu" +
+      "antity\022\033\n\006string\030\001 \001(\tH\000R\006string\210\001\001B\t\n\007_" +
+      "string\032\240\003\n\024ResourceRequirements\022Y\n\006limit" +
+      "s\030\001 \003(\0132A.chalk.pubsub.v1.PodStatusPubSu" +
+      "b.ResourceRequirements.LimitsEntryR\006limi" +
+      "ts\022_\n\010requests\030\002 \003(\0132C.chalk.pubsub.v1.P" +
+      "odStatusPubSub.ResourceRequirements.Requ" +
+      "estsEntryR\010requests\032d\n\013LimitsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\022?\n\005value\030\002 \001(\0132).chalk.pubs" +
+      "ub.v1.PodStatusPubSub.QuantityR\005value:\0028" +
+      "\001\032f\n\rRequestsEntry\022\020\n\003key\030\001 \001(\tR\003key\022?\n\005" +
+      "value\030\002 \001(\0132).chalk.pubsub.v1.PodStatusP" +
+      "ubSub.QuantityR\005value:\0028\001\032\207\002\n\014PodConditi" +
+      "on\022\022\n\004type\030\001 \001(\tR\004type\022\026\n\006status\030\002 \001(\tR\006" +
+      "status\0226\n\017last_probe_time\030\003 \001(\003B\016\352?\013\022\tTI" +
+      "MESTAMPR\rlastProbeTime\022@\n\024last_transitio" +
+      "n_time\030\004 \001(\003B\016\352?\013\022\tTIMESTAMPR\022lastTransi" +
+      "tionTime\022\033\n\006reason\030\005 \001(\tH\000R\006reason\210\001\001\022\035\n" +
+      "\007message\030\006 \001(\tH\001R\007message\210\001\001B\t\n\007_reasonB" +
+      "\n\n\010_message\032$\n\006HostIP\022\023\n\002ip\030\001 \001(\tH\000R\002ip\210" +
+      "\001\001B\005\n\003_ip\032\216\007\n\tPodStatus\022\031\n\005phase\030\001 \001(\tH\000" +
+      "R\005phase\210\001\001\022M\n\nconditions\030\002 \003(\0132-.chalk.p" +
+      "ubsub.v1.PodStatusPubSub.PodConditionR\nc" +
+      "onditions\022\035\n\007message\030\003 \001(\tH\001R\007message\210\001\001" +
+      "\022\033\n\006reason\030\004 \001(\tH\002R\006reason\210\001\001\0223\n\023nominat" +
+      "ed_node_name\030\013 \001(\tH\003R\021nominatedNodeName\210" +
+      "\001\001\022\034\n\007host_ip\030\005 \001(\tH\004R\006hostIp\210\001\001\022B\n\010host" +
+      "_ips\030\020 \003(\0132\'.chalk.pubsub.v1.PodStatusPu" +
+      "bSub.HostIPR\007hostIps\022\032\n\006pod_ip\030\006 \001(\tH\005R\005" +
+      "podIp\210\001\001\0222\n\nstart_time\030\007 \001(\003B\016\352?\013\022\tTIMES" +
+      "TAMPH\006R\tstartTime\210\001\001\022h\n\027init_container_s" +
+      "tatuses\030\n \003(\01320.chalk.pubsub.v1.PodStatu" +
+      "sPubSub.ContainerStatusR\025initContainerSt" +
+      "atuses\022_\n\022container_statuses\030\010 \003(\01320.cha" +
+      "lk.pubsub.v1.PodStatusPubSub.ContainerSt" +
+      "atusR\021containerStatuses\022 \n\tqos_class\030\t \001" +
+      "(\tH\007R\010qosClass\210\001\001\022r\n\034ephemeral_container" +
+      "_statuses\030\r \003(\01320.chalk.pubsub.v1.PodSta" +
+      "tusPubSub.ContainerStatusR\032ephemeralCont" +
+      "ainerStatuses\022\033\n\006resize\030\016 \001(\tH\010R\006resize\210" +
+      "\001\001B\010\n\006_phaseB\n\n\010_messageB\t\n\007_reasonB\026\n\024_" +
+      "nominated_node_nameB\n\n\010_host_ipB\t\n\007_pod_" +
+      "ipB\r\n\013_start_timeB\014\n\n_qos_classB\t\n\007_resi" +
+      "ze\0329\n\013LabelsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005v" +
+      "alue\030\002 \001(\tR\005value:\0028\001\032>\n\020AnnotationsEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001:\017\352?\014\n\npod_statusB\243\001\n\037ai.chalk.prot" +
+      "os.chalk.pubsub.v1B\016PodStatusProtoP\001Z\022pu" +
+      "bsub/v1;pubsubv1\242\002\003CPX\252\002\017Chalk.Pubsub.V1" +
+      "\312\002\017Chalk\\Pubsub\\V1\342\002\033Chalk\\Pubsub\\V1\\GPB" +
+      "Metadata\352\002\021Chalk::Pubsub::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -287,7 +323,7 @@ public final class PodStatusProto {
     internal_static_chalk_pubsub_v1_PodStatusPubSub_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor,
-        new java.lang.String[] { "Team", "App", "Component", "DatadogService", "DatadogVersion", "PodTemplateHash", "Status", "Spec", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "Cluster", });
+        new java.lang.String[] { "Team", "App", "Component", "DatadogService", "DatadogVersion", "PodTemplateHash", "Status", "Spec", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "Cluster", "Uid", "Name", "Namespace", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_Volume_descriptor =
       internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(0);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_Volume_fieldAccessorTable = new
@@ -347,7 +383,7 @@ public final class PodStatusProto {
     internal_static_chalk_pubsub_v1_PodStatusPubSub_Container_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_Container_descriptor,
-        new java.lang.String[] { "Name", "Image", "Command", "Args", "WorkingDir", "Env", "RestartPolicy", "TerminationMessagePath", "TerminationMessagePolicy", "ImagePullPolicy", "Stdin", "StdinOnce", "Tty", });
+        new java.lang.String[] { "Name", "Image", "Command", "Args", "WorkingDir", "Env", "Resources", "RestartPolicy", "TerminationMessagePath", "TerminationMessagePolicy", "ImagePullPolicy", "Stdin", "StdinOnce", "Tty", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_ContainerStateWaiting_descriptor =
       internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(9);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_ContainerStateWaiting_fieldAccessorTable = new
@@ -360,32 +396,56 @@ public final class PodStatusProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_ContainerStatus_descriptor,
         new java.lang.String[] { "Name", "State", "LastState", "Ready", "RestartCount", "Image", "ImageId", "ContainerId", "Started", });
-    internal_static_chalk_pubsub_v1_PodStatusPubSub_PodCondition_descriptor =
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor =
       internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(11);
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_pubsub_v1_PodStatusPubSub_Quantity_descriptor,
+        new java.lang.String[] { "String", });
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor =
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(12);
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor,
+        new java.lang.String[] { "Limits", "Requests", });
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_descriptor =
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_LimitsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_descriptor =
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_descriptor.getNestedTypes().get(1);
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_pubsub_v1_PodStatusPubSub_ResourceRequirements_RequestsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_pubsub_v1_PodStatusPubSub_PodCondition_descriptor =
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(13);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_PodCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_PodCondition_descriptor,
         new java.lang.String[] { "Type", "Status", "LastProbeTime", "LastTransitionTime", "Reason", "Message", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_HostIP_descriptor =
-      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(12);
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(14);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_HostIP_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_HostIP_descriptor,
         new java.lang.String[] { "Ip", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_PodStatus_descriptor =
-      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(13);
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(15);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_PodStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_PodStatus_descriptor,
         new java.lang.String[] { "Phase", "Conditions", "Message", "Reason", "NominatedNodeName", "HostIp", "HostIps", "PodIp", "StartTime", "InitContainerStatuses", "ContainerStatuses", "QosClass", "EphemeralContainerStatuses", "Resize", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_LabelsEntry_descriptor =
-      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(14);
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(16);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_LabelsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_LabelsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_pubsub_v1_PodStatusPubSub_AnnotationsEntry_descriptor =
-      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(15);
+      internal_static_chalk_pubsub_v1_PodStatusPubSub_descriptor.getNestedTypes().get(17);
     internal_static_chalk_pubsub_v1_PodStatusPubSub_AnnotationsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_pubsub_v1_PodStatusPubSub_AnnotationsEntry_descriptor,

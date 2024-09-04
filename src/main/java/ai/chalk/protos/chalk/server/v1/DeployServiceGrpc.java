@@ -77,6 +77,130 @@ public final class DeployServiceGrpc {
     return getGetDeploymentMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest,
+      ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> getListDeploymentsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListDeployments",
+      requestType = ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest,
+      ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> getListDeploymentsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest, ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> getListDeploymentsMethod;
+    if ((getListDeploymentsMethod = DeployServiceGrpc.getListDeploymentsMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getListDeploymentsMethod = DeployServiceGrpc.getListDeploymentsMethod) == null) {
+          DeployServiceGrpc.getListDeploymentsMethod = getListDeploymentsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest, ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListDeployments"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("ListDeployments"))
+              .build();
+        }
+      }
+    }
+    return getListDeploymentsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> getSuspendDeploymentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SuspendDeployment",
+      requestType = ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> getSuspendDeploymentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest, ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> getSuspendDeploymentMethod;
+    if ((getSuspendDeploymentMethod = DeployServiceGrpc.getSuspendDeploymentMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getSuspendDeploymentMethod = DeployServiceGrpc.getSuspendDeploymentMethod) == null) {
+          DeployServiceGrpc.getSuspendDeploymentMethod = getSuspendDeploymentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest, ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SuspendDeployment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("SuspendDeployment"))
+              .build();
+        }
+      }
+    }
+    return getSuspendDeploymentMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> getScaleDeploymentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ScaleDeployment",
+      requestType = ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> getScaleDeploymentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest, ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> getScaleDeploymentMethod;
+    if ((getScaleDeploymentMethod = DeployServiceGrpc.getScaleDeploymentMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getScaleDeploymentMethod = DeployServiceGrpc.getScaleDeploymentMethod) == null) {
+          DeployServiceGrpc.getScaleDeploymentMethod = getScaleDeploymentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest, ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ScaleDeployment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("ScaleDeployment"))
+              .build();
+        }
+      }
+    }
+    return getScaleDeploymentMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.TagDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> getTagDeploymentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TagDeployment",
+      requestType = ai.chalk.protos.chalk.server.v1.TagDeploymentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.TagDeploymentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.TagDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> getTagDeploymentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.TagDeploymentRequest, ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> getTagDeploymentMethod;
+    if ((getTagDeploymentMethod = DeployServiceGrpc.getTagDeploymentMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getTagDeploymentMethod = DeployServiceGrpc.getTagDeploymentMethod) == null) {
+          DeployServiceGrpc.getTagDeploymentMethod = getTagDeploymentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.TagDeploymentRequest, ai.chalk.protos.chalk.server.v1.TagDeploymentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TagDeployment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.TagDeploymentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.TagDeploymentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("TagDeployment"))
+              .build();
+        }
+      }
+    }
+    return getTagDeploymentMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +262,34 @@ public final class DeployServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetDeploymentResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetDeploymentMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void listDeployments(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListDeploymentsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void suspendDeployment(ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSuspendDeploymentMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void scaleDeployment(ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getScaleDeploymentMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void tagDeployment(ai.chalk.protos.chalk.server.v1.TagDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTagDeploymentMethod(), responseObserver);
+    }
   }
 
   /**
@@ -182,6 +334,38 @@ public final class DeployServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetDeploymentMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void listDeployments(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListDeploymentsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void suspendDeployment(ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSuspendDeploymentMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void scaleDeployment(ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getScaleDeploymentMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void tagDeployment(ai.chalk.protos.chalk.server.v1.TagDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTagDeploymentMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -212,6 +396,34 @@ public final class DeployServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.GetDeploymentResponse getDeployment(ai.chalk.protos.chalk.server.v1.GetDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse listDeployments(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListDeploymentsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse suspendDeployment(ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSuspendDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse scaleDeployment(ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getScaleDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.TagDeploymentResponse tagDeployment(ai.chalk.protos.chalk.server.v1.TagDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTagDeploymentMethod(), getCallOptions(), request);
     }
   }
 
@@ -246,10 +458,46 @@ public final class DeployServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetDeploymentMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse> listDeployments(
+        ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListDeploymentsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> suspendDeployment(
+        ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSuspendDeploymentMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse> scaleDeployment(
+        ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getScaleDeploymentMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.TagDeploymentResponse> tagDeployment(
+        ai.chalk.protos.chalk.server.v1.TagDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTagDeploymentMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DEPLOY_BRANCH = 0;
   private static final int METHODID_GET_DEPLOYMENT = 1;
+  private static final int METHODID_LIST_DEPLOYMENTS = 2;
+  private static final int METHODID_SUSPEND_DEPLOYMENT = 3;
+  private static final int METHODID_SCALE_DEPLOYMENT = 4;
+  private static final int METHODID_TAG_DEPLOYMENT = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -275,6 +523,22 @@ public final class DeployServiceGrpc {
         case METHODID_GET_DEPLOYMENT:
           serviceImpl.getDeployment((ai.chalk.protos.chalk.server.v1.GetDeploymentRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetDeploymentResponse>) responseObserver);
+          break;
+        case METHODID_LIST_DEPLOYMENTS:
+          serviceImpl.listDeployments((ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse>) responseObserver);
+          break;
+        case METHODID_SUSPEND_DEPLOYMENT:
+          serviceImpl.suspendDeployment((ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse>) responseObserver);
+          break;
+        case METHODID_SCALE_DEPLOYMENT:
+          serviceImpl.scaleDeployment((ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse>) responseObserver);
+          break;
+        case METHODID_TAG_DEPLOYMENT:
+          serviceImpl.tagDeployment((ai.chalk.protos.chalk.server.v1.TagDeploymentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.TagDeploymentResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -308,6 +572,34 @@ public final class DeployServiceGrpc {
               ai.chalk.protos.chalk.server.v1.GetDeploymentRequest,
               ai.chalk.protos.chalk.server.v1.GetDeploymentResponse>(
                 service, METHODID_GET_DEPLOYMENT)))
+        .addMethod(
+          getListDeploymentsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest,
+              ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse>(
+                service, METHODID_LIST_DEPLOYMENTS)))
+        .addMethod(
+          getSuspendDeploymentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest,
+              ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse>(
+                service, METHODID_SUSPEND_DEPLOYMENT)))
+        .addMethod(
+          getScaleDeploymentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.ScaleDeploymentRequest,
+              ai.chalk.protos.chalk.server.v1.ScaleDeploymentResponse>(
+                service, METHODID_SCALE_DEPLOYMENT)))
+        .addMethod(
+          getTagDeploymentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.TagDeploymentRequest,
+              ai.chalk.protos.chalk.server.v1.TagDeploymentResponse>(
+                service, METHODID_TAG_DEPLOYMENT)))
         .build();
   }
 
@@ -358,6 +650,10 @@ public final class DeployServiceGrpc {
               .setSchemaDescriptor(new DeployServiceFileDescriptorSupplier())
               .addMethod(getDeployBranchMethod())
               .addMethod(getGetDeploymentMethod())
+              .addMethod(getListDeploymentsMethod())
+              .addMethod(getSuspendDeploymentMethod())
+              .addMethod(getScaleDeploymentMethod())
+              .addMethod(getTagDeploymentMethod())
               .build();
         }
       }

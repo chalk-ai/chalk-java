@@ -27,7 +27,7 @@ import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList
 
 public class Unmarshaller {
     public static List<String> fqnsToSkip = List.of(Constants.tsFeatureFqn, Constants.indexFqn);
-    public static List<String> prefixToSkip = List.of(Constants.metadataPrefix);
+    public static List<String> prefixToSkip = List.of(Constants.chalkDunderPrefix);
 
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
         try {
