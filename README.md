@@ -41,6 +41,12 @@ import ai.chalk.client.ChalkClient;
 ChalkClient client = ChalkClient.create();
 ```
 
+#### gRPC client
+To use gRPC as the underlying protocol, simply use the `createGrpc()` method instead.
+```java
+ChalkClient client = ChalkClient.createGrpc();
+```
+
 Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
 import ai.chalk.client.ChalkClient;
