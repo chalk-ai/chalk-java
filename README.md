@@ -41,12 +41,6 @@ import ai.chalk.client.ChalkClient;
 ChalkClient client = ChalkClient.create();
 ```
 
-#### gRPC client
-To use gRPC as the underlying protocol, simply use the `createGrpc()` method instead.
-```java
-ChalkClient client = ChalkClient.createGrpc();
-```
-
 Alternatively, create a client using specific overrides. The overrides will take precedence over (1) and (2) above.
 ```java
 import ai.chalk.client.ChalkClient;
@@ -58,6 +52,21 @@ ChalkClient client = ChalkClient.builder()
                     .withClientSecret("mnxcvuyqwmj7cnwe4mgfnuywe6jnas9sdn")
                     .build();
 ```
+
+#### gRPC client
+To use gRPC as the underlying protocol, simply use the `createGrpc()` method instead.
+```java
+ChalkClient client = ChalkClient.createGrpc();
+```
+Or if using the builder, call the `withGrpc()` method:
+
+```java
+ChalkClient client = ChalkClient.builder()
+                    .withEnvironmentId("tmnma7wesandrsn")
+                    .withGrpc()
+                    .build();
+```
+
 
 ## Memory management
 Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be
