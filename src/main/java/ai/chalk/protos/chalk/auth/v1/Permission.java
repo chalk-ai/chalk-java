@@ -26,6 +26,10 @@ public enum Permission
    */
   PERMISSION_INSECURE_UNAUTHENTICATED(1),
   /**
+   * <pre>
+   * User is authenticated FOR THE ENVIRONMENT. This permissions should be used sparingly (e.g. for ping checks that shouldn't be exposed to the public)
+   * </pre>
+   *
    * <code>PERMISSION_AUTHENTICATED = 2;</code>
    */
   PERMISSION_AUTHENTICATED(2),
@@ -249,6 +253,10 @@ public enum Permission
    */
   public static final int PERMISSION_INSECURE_UNAUTHENTICATED_VALUE = 1;
   /**
+   * <pre>
+   * User is authenticated FOR THE ENVIRONMENT. This permissions should be used sparingly (e.g. for ping checks that shouldn't be exposed to the public)
+   * </pre>
+   *
    * <code>PERMISSION_AUTHENTICATED = 2;</code>
    */
   public static final int PERMISSION_AUTHENTICATED_VALUE = 2;

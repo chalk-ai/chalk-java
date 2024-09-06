@@ -33,6 +33,7 @@ public final class QueryServiceGrpc {
               io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.engine.v1.PingRequest, ai.chalk.protos.chalk.engine.v1.PingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Ping"))
+              .setSafe(true)
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ai.chalk.protos.chalk.engine.v1.PingRequest.getDefaultInstance()))

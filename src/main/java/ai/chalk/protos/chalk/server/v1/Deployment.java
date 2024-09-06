@@ -22,7 +22,12 @@ private static final long serialVersionUID = 0L;
     status_ = 0;
     deploymentTags_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    requirementsFilepath_ = "";
+    dockerfileFilepath_ = "";
+    runtime_ = "";
+    finalDependencyHash_ = "";
     gitCommit_ = "";
+    requirementsFiles_ = "";
     baseImageSha_ = "";
   }
 
@@ -180,28 +185,22 @@ private static final long serialVersionUID = 0L;
     return deploymentTags_.getByteString(index);
   }
 
-  public static final int CREATED_AT_FIELD_NUMBER = 14;
-  private com.google.protobuf.Timestamp createdAt_;
+  public static final int REQUIREMENTS_FILEPATH_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object requirementsFilepath_ = "";
   /**
    * <pre>
    *  We know a bunch more things about the deployment. Deal with them when we're ready.
    *  string cloud_build_id = 4;
    *  string triggered_by = 5;
    *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
-   * @return Whether the createdAt field is set.
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return Whether the requirementsFilepath field is set.
    */
   @java.lang.Override
-  public boolean hasCreatedAt() {
+  public boolean hasRequirementsFilepath() {
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
@@ -210,15 +209,236 @@ private static final long serialVersionUID = 0L;
    *  string cloud_build_id = 4;
    *  string triggered_by = 5;
    *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
    * </pre>
    *
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return The requirementsFilepath.
+   */
+  @java.lang.Override
+  public java.lang.String getRequirementsFilepath() {
+    java.lang.Object ref = requirementsFilepath_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      requirementsFilepath_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   * </pre>
+   *
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return The bytes for requirementsFilepath.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRequirementsFilepathBytes() {
+    java.lang.Object ref = requirementsFilepath_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      requirementsFilepath_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DOCKERFILE_FILEPATH_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object dockerfileFilepath_ = "";
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return Whether the dockerfileFilepath field is set.
+   */
+  @java.lang.Override
+  public boolean hasDockerfileFilepath() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return The dockerfileFilepath.
+   */
+  @java.lang.Override
+  public java.lang.String getDockerfileFilepath() {
+    java.lang.Object ref = dockerfileFilepath_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      dockerfileFilepath_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return The bytes for dockerfileFilepath.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDockerfileFilepathBytes() {
+    java.lang.Object ref = dockerfileFilepath_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      dockerfileFilepath_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int RUNTIME_FIELD_NUMBER = 9;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object runtime_ = "";
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return Whether the runtime field is set.
+   */
+  @java.lang.Override
+  public boolean hasRuntime() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return The runtime.
+   */
+  @java.lang.Override
+  public java.lang.String getRuntime() {
+    java.lang.Object ref = runtime_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      runtime_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return The bytes for runtime.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRuntimeBytes() {
+    java.lang.Object ref = runtime_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      runtime_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int FINAL_DEPENDENCY_HASH_FIELD_NUMBER = 12;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object finalDependencyHash_ = "";
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return Whether the finalDependencyHash field is set.
+   */
+  @java.lang.Override
+  public boolean hasFinalDependencyHash() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return The finalDependencyHash.
+   */
+  @java.lang.Override
+  public java.lang.String getFinalDependencyHash() {
+    java.lang.Object ref = finalDependencyHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      finalDependencyHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return The bytes for finalDependencyHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getFinalDependencyHashBytes() {
+    java.lang.Object ref = finalDependencyHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      finalDependencyHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IS_PREVIEW_DEPLOYMENT_FIELD_NUMBER = 13;
+  private boolean isPreviewDeployment_ = false;
+  /**
+   * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+   * @return Whether the isPreviewDeployment field is set.
+   */
+  @java.lang.Override
+  public boolean hasIsPreviewDeployment() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+   * @return The isPreviewDeployment.
+   */
+  @java.lang.Override
+  public boolean getIsPreviewDeployment() {
+    return isPreviewDeployment_;
+  }
+
+  public static final int CREATED_AT_FIELD_NUMBER = 14;
+  private com.google.protobuf.Timestamp createdAt_;
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasCreatedAt() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
    * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
@@ -227,20 +447,6 @@ private static final long serialVersionUID = 0L;
     return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
   }
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
-   * </pre>
-   *
    * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
    */
   @java.lang.Override
@@ -256,7 +462,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasUpdatedAt() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000040) != 0);
   }
   /**
    * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
@@ -313,9 +519,9 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int BASE_IMAGE_SHA_FIELD_NUMBER = 24;
+  public static final int REQUIREMENTS_FILES_FIELD_NUMBER = 22;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object baseImageSha_ = "";
+  private volatile java.lang.Object requirementsFiles_ = "";
   /**
    * <pre>
    *  string git_pr = 17;
@@ -323,7 +529,72 @@ private static final long serialVersionUID = 0L;
    *  string git_author_email = 19;
    *  string branch = 20;
    *  string project_settings = 21;
-   *  string requirements_files = 22;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return Whether the requirementsFiles field is set.
+   */
+  @java.lang.Override
+  public boolean hasRequirementsFiles() {
+    return ((bitField0_ & 0x00000080) != 0);
+  }
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return The requirementsFiles.
+   */
+  @java.lang.Override
+  public java.lang.String getRequirementsFiles() {
+    java.lang.Object ref = requirementsFiles_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      requirementsFiles_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return The bytes for requirementsFiles.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRequirementsFilesBytes() {
+    java.lang.Object ref = requirementsFiles_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      requirementsFiles_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int BASE_IMAGE_SHA_FIELD_NUMBER = 24;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object baseImageSha_ = "";
+  /**
+   * <pre>
    *  string git_tag = 23;
    * </pre>
    *
@@ -345,12 +616,6 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   *  string requirements_files = 22;
    *  string git_tag = 23;
    * </pre>
    *
@@ -399,13 +664,31 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, deploymentTags_.getRaw(i));
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(14, getCreatedAt());
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, requirementsFilepath_);
     }
     if (((bitField0_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, dockerfileFilepath_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, runtime_);
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 12, finalDependencyHash_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeBool(13, isPreviewDeployment_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeMessage(14, getCreatedAt());
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
       output.writeMessage(15, getUpdatedAt());
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 16, gitCommit_);
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 22, requirementsFiles_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 24, baseImageSha_);
@@ -438,15 +721,34 @@ private static final long serialVersionUID = 0L;
       size += 1 * getDeploymentTagsList().size();
     }
     if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, requirementsFilepath_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, dockerfileFilepath_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, runtime_);
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, finalDependencyHash_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(13, isPreviewDeployment_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(14, getCreatedAt());
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (((bitField0_ & 0x00000040) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(15, getUpdatedAt());
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, gitCommit_);
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(22, requirementsFiles_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, baseImageSha_);
@@ -473,6 +775,31 @@ private static final long serialVersionUID = 0L;
     if (status_ != other.status_) return false;
     if (!getDeploymentTagsList()
         .equals(other.getDeploymentTagsList())) return false;
+    if (hasRequirementsFilepath() != other.hasRequirementsFilepath()) return false;
+    if (hasRequirementsFilepath()) {
+      if (!getRequirementsFilepath()
+          .equals(other.getRequirementsFilepath())) return false;
+    }
+    if (hasDockerfileFilepath() != other.hasDockerfileFilepath()) return false;
+    if (hasDockerfileFilepath()) {
+      if (!getDockerfileFilepath()
+          .equals(other.getDockerfileFilepath())) return false;
+    }
+    if (hasRuntime() != other.hasRuntime()) return false;
+    if (hasRuntime()) {
+      if (!getRuntime()
+          .equals(other.getRuntime())) return false;
+    }
+    if (hasFinalDependencyHash() != other.hasFinalDependencyHash()) return false;
+    if (hasFinalDependencyHash()) {
+      if (!getFinalDependencyHash()
+          .equals(other.getFinalDependencyHash())) return false;
+    }
+    if (hasIsPreviewDeployment() != other.hasIsPreviewDeployment()) return false;
+    if (hasIsPreviewDeployment()) {
+      if (getIsPreviewDeployment()
+          != other.getIsPreviewDeployment()) return false;
+    }
     if (hasCreatedAt() != other.hasCreatedAt()) return false;
     if (hasCreatedAt()) {
       if (!getCreatedAt()
@@ -485,6 +812,11 @@ private static final long serialVersionUID = 0L;
     }
     if (!getGitCommit()
         .equals(other.getGitCommit())) return false;
+    if (hasRequirementsFiles() != other.hasRequirementsFiles()) return false;
+    if (hasRequirementsFiles()) {
+      if (!getRequirementsFiles()
+          .equals(other.getRequirementsFiles())) return false;
+    }
     if (!getBaseImageSha()
         .equals(other.getBaseImageSha())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -508,6 +840,27 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + DEPLOYMENT_TAGS_FIELD_NUMBER;
       hash = (53 * hash) + getDeploymentTagsList().hashCode();
     }
+    if (hasRequirementsFilepath()) {
+      hash = (37 * hash) + REQUIREMENTS_FILEPATH_FIELD_NUMBER;
+      hash = (53 * hash) + getRequirementsFilepath().hashCode();
+    }
+    if (hasDockerfileFilepath()) {
+      hash = (37 * hash) + DOCKERFILE_FILEPATH_FIELD_NUMBER;
+      hash = (53 * hash) + getDockerfileFilepath().hashCode();
+    }
+    if (hasRuntime()) {
+      hash = (37 * hash) + RUNTIME_FIELD_NUMBER;
+      hash = (53 * hash) + getRuntime().hashCode();
+    }
+    if (hasFinalDependencyHash()) {
+      hash = (37 * hash) + FINAL_DEPENDENCY_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getFinalDependencyHash().hashCode();
+    }
+    if (hasIsPreviewDeployment()) {
+      hash = (37 * hash) + IS_PREVIEW_DEPLOYMENT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsPreviewDeployment());
+    }
     if (hasCreatedAt()) {
       hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
       hash = (53 * hash) + getCreatedAt().hashCode();
@@ -518,6 +871,10 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + GIT_COMMIT_FIELD_NUMBER;
     hash = (53 * hash) + getGitCommit().hashCode();
+    if (hasRequirementsFiles()) {
+      hash = (37 * hash) + REQUIREMENTS_FILES_FIELD_NUMBER;
+      hash = (53 * hash) + getRequirementsFiles().hashCode();
+    }
     hash = (37 * hash) + BASE_IMAGE_SHA_FIELD_NUMBER;
     hash = (53 * hash) + getBaseImageSha().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -663,6 +1020,11 @@ private static final long serialVersionUID = 0L;
       status_ = 0;
       deploymentTags_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      requirementsFilepath_ = "";
+      dockerfileFilepath_ = "";
+      runtime_ = "";
+      finalDependencyHash_ = "";
+      isPreviewDeployment_ = false;
       createdAt_ = null;
       if (createdAtBuilder_ != null) {
         createdAtBuilder_.dispose();
@@ -674,6 +1036,7 @@ private static final long serialVersionUID = 0L;
         updatedAtBuilder_ = null;
       }
       gitCommit_ = "";
+      requirementsFiles_ = "";
       baseImageSha_ = "";
       return this;
     }
@@ -723,21 +1086,45 @@ private static final long serialVersionUID = 0L;
       }
       int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.createdAt_ = createdAtBuilder_ == null
-            ? createdAt_
-            : createdAtBuilder_.build();
+        result.requirementsFilepath_ = requirementsFilepath_;
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.updatedAt_ = updatedAtBuilder_ == null
-            ? updatedAt_
-            : updatedAtBuilder_.build();
+        result.dockerfileFilepath_ = dockerfileFilepath_;
         to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.gitCommit_ = gitCommit_;
+        result.runtime_ = runtime_;
+        to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.finalDependencyHash_ = finalDependencyHash_;
+        to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.isPreviewDeployment_ = isPreviewDeployment_;
+        to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.createdAt_ = createdAtBuilder_ == null
+            ? createdAt_
+            : createdAtBuilder_.build();
+        to_bitField0_ |= 0x00000020;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.updatedAt_ = updatedAtBuilder_ == null
+            ? updatedAt_
+            : updatedAtBuilder_.build();
+        to_bitField0_ |= 0x00000040;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.gitCommit_ = gitCommit_;
+      }
+      if (((from_bitField0_ & 0x00001000) != 0)) {
+        result.requirementsFiles_ = requirementsFiles_;
+        to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         result.baseImageSha_ = baseImageSha_;
       }
       result.bitField0_ |= to_bitField0_;
@@ -810,6 +1197,29 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       }
+      if (other.hasRequirementsFilepath()) {
+        requirementsFilepath_ = other.requirementsFilepath_;
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      if (other.hasDockerfileFilepath()) {
+        dockerfileFilepath_ = other.dockerfileFilepath_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      if (other.hasRuntime()) {
+        runtime_ = other.runtime_;
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
+      if (other.hasFinalDependencyHash()) {
+        finalDependencyHash_ = other.finalDependencyHash_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
+      if (other.hasIsPreviewDeployment()) {
+        setIsPreviewDeployment(other.getIsPreviewDeployment());
+      }
       if (other.hasCreatedAt()) {
         mergeCreatedAt(other.getCreatedAt());
       }
@@ -818,12 +1228,17 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getGitCommit().isEmpty()) {
         gitCommit_ = other.gitCommit_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
+      if (other.hasRequirementsFiles()) {
+        requirementsFiles_ = other.requirementsFiles_;
+        bitField0_ |= 0x00001000;
         onChanged();
       }
       if (!other.getBaseImageSha().isEmpty()) {
         baseImageSha_ = other.baseImageSha_;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00002000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -873,28 +1288,58 @@ private static final long serialVersionUID = 0L;
               deploymentTags_.add(s);
               break;
             } // case 34
+            case 58: {
+              requirementsFilepath_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 58
+            case 66: {
+              dockerfileFilepath_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 66
+            case 74: {
+              runtime_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 74
+            case 98: {
+              finalDependencyHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 98
+            case 104: {
+              isPreviewDeployment_ = input.readBool();
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 104
             case 114: {
               input.readMessage(
                   getCreatedAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000200;
               break;
             } // case 114
             case 122: {
               input.readMessage(
                   getUpdatedAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000400;
               break;
             } // case 122
             case 130: {
               gitCommit_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000800;
               break;
             } // case 130
+            case 178: {
+              requirementsFiles_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00001000;
+              break;
+            } // case 178
             case 194: {
               baseImageSha_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00002000;
               break;
             } // case 194
             default: {
@@ -1222,28 +1667,19 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.Timestamp createdAt_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> createdAtBuilder_;
+    private java.lang.Object requirementsFilepath_ = "";
     /**
      * <pre>
      *  We know a bunch more things about the deployment. Deal with them when we're ready.
      *  string cloud_build_id = 4;
      *  string triggered_by = 5;
      *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
-     * @return Whether the createdAt field is set.
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @return Whether the requirementsFilepath field is set.
      */
-    public boolean hasCreatedAt() {
+    public boolean hasRequirementsFilepath() {
       return ((bitField0_ & 0x00000010) != 0);
     }
     /**
@@ -1252,15 +1688,424 @@ private static final long serialVersionUID = 0L;
      *  string cloud_build_id = 4;
      *  string triggered_by = 5;
      *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
      * </pre>
      *
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @return The requirementsFilepath.
+     */
+    public java.lang.String getRequirementsFilepath() {
+      java.lang.Object ref = requirementsFilepath_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        requirementsFilepath_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     * </pre>
+     *
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @return The bytes for requirementsFilepath.
+     */
+    public com.google.protobuf.ByteString
+        getRequirementsFilepathBytes() {
+      java.lang.Object ref = requirementsFilepath_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requirementsFilepath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     * </pre>
+     *
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @param value The requirementsFilepath to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequirementsFilepath(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      requirementsFilepath_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     * </pre>
+     *
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRequirementsFilepath() {
+      requirementsFilepath_ = getDefaultInstance().getRequirementsFilepath();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  We know a bunch more things about the deployment. Deal with them when we're ready.
+     *  string cloud_build_id = 4;
+     *  string triggered_by = 5;
+     *  google.protobuf.Timestamp status_changed_at = 6;
+     * </pre>
+     *
+     * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+     * @param value The bytes for requirementsFilepath to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequirementsFilepathBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      requirementsFilepath_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object dockerfileFilepath_ = "";
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @return Whether the dockerfileFilepath field is set.
+     */
+    public boolean hasDockerfileFilepath() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @return The dockerfileFilepath.
+     */
+    public java.lang.String getDockerfileFilepath() {
+      java.lang.Object ref = dockerfileFilepath_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dockerfileFilepath_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @return The bytes for dockerfileFilepath.
+     */
+    public com.google.protobuf.ByteString
+        getDockerfileFilepathBytes() {
+      java.lang.Object ref = dockerfileFilepath_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dockerfileFilepath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @param value The dockerfileFilepath to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDockerfileFilepath(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      dockerfileFilepath_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDockerfileFilepath() {
+      dockerfileFilepath_ = getDefaultInstance().getDockerfileFilepath();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+     * @param value The bytes for dockerfileFilepath to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDockerfileFilepathBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      dockerfileFilepath_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object runtime_ = "";
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @return Whether the runtime field is set.
+     */
+    public boolean hasRuntime() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @return The runtime.
+     */
+    public java.lang.String getRuntime() {
+      java.lang.Object ref = runtime_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        runtime_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @return The bytes for runtime.
+     */
+    public com.google.protobuf.ByteString
+        getRuntimeBytes() {
+      java.lang.Object ref = runtime_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        runtime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @param value The runtime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRuntime(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      runtime_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRuntime() {
+      runtime_ = getDefaultInstance().getRuntime();
+      bitField0_ = (bitField0_ & ~0x00000040);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+     * @param value The bytes for runtime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRuntimeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      runtime_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object finalDependencyHash_ = "";
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @return Whether the finalDependencyHash field is set.
+     */
+    public boolean hasFinalDependencyHash() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @return The finalDependencyHash.
+     */
+    public java.lang.String getFinalDependencyHash() {
+      java.lang.Object ref = finalDependencyHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        finalDependencyHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @return The bytes for finalDependencyHash.
+     */
+    public com.google.protobuf.ByteString
+        getFinalDependencyHashBytes() {
+      java.lang.Object ref = finalDependencyHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        finalDependencyHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @param value The finalDependencyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFinalDependencyHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      finalDependencyHash_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFinalDependencyHash() {
+      finalDependencyHash_ = getDefaultInstance().getFinalDependencyHash();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string chalkpy_version = 10;
+     *  string raw_dependency_hash = 11;
+     * </pre>
+     *
+     * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+     * @param value The bytes for finalDependencyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFinalDependencyHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      finalDependencyHash_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+
+    private boolean isPreviewDeployment_ ;
+    /**
+     * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+     * @return Whether the isPreviewDeployment field is set.
+     */
+    @java.lang.Override
+    public boolean hasIsPreviewDeployment() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+     * @return The isPreviewDeployment.
+     */
+    @java.lang.Override
+    public boolean getIsPreviewDeployment() {
+      return isPreviewDeployment_;
+    }
+    /**
+     * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+     * @param value The isPreviewDeployment to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIsPreviewDeployment(boolean value) {
+
+      isPreviewDeployment_ = value;
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIsPreviewDeployment() {
+      bitField0_ = (bitField0_ & ~0x00000100);
+      isPreviewDeployment_ = false;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Timestamp createdAt_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> createdAtBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
+     * @return Whether the createdAt field is set.
+     */
+    public boolean hasCreatedAt() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      * @return The createdAt.
      */
@@ -1272,20 +2117,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public Builder setCreatedAt(com.google.protobuf.Timestamp value) {
@@ -1297,25 +2128,11 @@ private static final long serialVersionUID = 0L;
       } else {
         createdAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public Builder setCreatedAt(
@@ -1325,30 +2142,16 @@ private static final long serialVersionUID = 0L;
       } else {
         createdAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public Builder mergeCreatedAt(com.google.protobuf.Timestamp value) {
       if (createdAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) != 0) &&
+        if (((bitField0_ & 0x00000200) != 0) &&
           createdAt_ != null &&
           createdAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getCreatedAtBuilder().mergeFrom(value);
@@ -1359,30 +2162,16 @@ private static final long serialVersionUID = 0L;
         createdAtBuilder_.mergeFrom(value);
       }
       if (createdAt_ != null) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000200;
         onChanged();
       }
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public Builder clearCreatedAt() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000200);
       createdAt_ = null;
       if (createdAtBuilder_ != null) {
         createdAtBuilder_.dispose();
@@ -1392,42 +2181,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getCreatedAtBuilder() {
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000200;
       onChanged();
       return getCreatedAtFieldBuilder().getBuilder();
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
@@ -1439,20 +2200,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     *  string requirements_filepath = 7;
-     *  string dockerfile_filepath = 8;
-     *  string runtime = 9;
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     *  string final_dependency_hash = 12;
-     *  bool is_preview_deployment = 13;
-     * </pre>
-     *
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
@@ -1477,7 +2224,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the updatedAt field is set.
      */
     public boolean hasUpdatedAt() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000400) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
@@ -1502,7 +2249,7 @@ private static final long serialVersionUID = 0L;
       } else {
         updatedAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -1516,7 +2263,7 @@ private static final long serialVersionUID = 0L;
       } else {
         updatedAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -1525,7 +2272,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeUpdatedAt(com.google.protobuf.Timestamp value) {
       if (updatedAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0) &&
+        if (((bitField0_ & 0x00000400) != 0) &&
           updatedAt_ != null &&
           updatedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getUpdatedAtBuilder().mergeFrom(value);
@@ -1536,7 +2283,7 @@ private static final long serialVersionUID = 0L;
         updatedAtBuilder_.mergeFrom(value);
       }
       if (updatedAt_ != null) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000400;
         onChanged();
       }
       return this;
@@ -1545,7 +2292,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
      */
     public Builder clearUpdatedAt() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000400);
       updatedAt_ = null;
       if (updatedAtBuilder_ != null) {
         updatedAtBuilder_.dispose();
@@ -1558,7 +2305,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getUpdatedAtBuilder() {
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000400;
       onChanged();
       return getUpdatedAtFieldBuilder().getBuilder();
     }
@@ -1633,7 +2380,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       gitCommit_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -1643,7 +2390,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearGitCommit() {
       gitCommit_ = getDefaultInstance().getGitCommit();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000800);
       onChanged();
       return this;
     }
@@ -1657,12 +2404,12 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       gitCommit_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
 
-    private java.lang.Object baseImageSha_ = "";
+    private java.lang.Object requirementsFiles_ = "";
     /**
      * <pre>
      *  string git_pr = 17;
@@ -1670,7 +2417,128 @@ private static final long serialVersionUID = 0L;
      *  string git_author_email = 19;
      *  string branch = 20;
      *  string project_settings = 21;
-     *  string requirements_files = 22;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @return Whether the requirementsFiles field is set.
+     */
+    public boolean hasRequirementsFiles() {
+      return ((bitField0_ & 0x00001000) != 0);
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @return The requirementsFiles.
+     */
+    public java.lang.String getRequirementsFiles() {
+      java.lang.Object ref = requirementsFiles_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        requirementsFiles_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @return The bytes for requirementsFiles.
+     */
+    public com.google.protobuf.ByteString
+        getRequirementsFilesBytes() {
+      java.lang.Object ref = requirementsFiles_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requirementsFiles_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @param value The requirementsFiles to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequirementsFiles(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      requirementsFiles_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRequirementsFiles() {
+      requirementsFiles_ = getDefaultInstance().getRequirementsFiles();
+      bitField0_ = (bitField0_ & ~0x00001000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *  string git_pr = 17;
+     *  string git_branch = 18;
+     *  string git_author_email = 19;
+     *  string branch = 20;
+     *  string project_settings = 21;
+     * </pre>
+     *
+     * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+     * @param value The bytes for requirementsFiles to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequirementsFilesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      requirementsFiles_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object baseImageSha_ = "";
+    /**
+     * <pre>
      *  string git_tag = 23;
      * </pre>
      *
@@ -1691,12 +2559,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     *  string requirements_files = 22;
      *  string git_tag = 23;
      * </pre>
      *
@@ -1718,12 +2580,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     *  string requirements_files = 22;
      *  string git_tag = 23;
      * </pre>
      *
@@ -1735,18 +2591,12 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       baseImageSha_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     *  string requirements_files = 22;
      *  string git_tag = 23;
      * </pre>
      *
@@ -1755,18 +2605,12 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearBaseImageSha() {
       baseImageSha_ = getDefaultInstance().getBaseImageSha();
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00002000);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     *  string requirements_files = 22;
      *  string git_tag = 23;
      * </pre>
      *
@@ -1779,7 +2623,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       baseImageSha_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }

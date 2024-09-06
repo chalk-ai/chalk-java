@@ -160,7 +160,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=96
+   *     See chalk/server/v1/team.proto;l=103
    * @return A list containing the customClaims.
    */
   @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
@@ -170,7 +170,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=96
+   *     See chalk/server/v1/team.proto;l=103
    * @return The count of customClaims.
    */
   @java.lang.Deprecated public int getCustomClaimsCount() {
@@ -179,7 +179,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=96
+   *     See chalk/server/v1/team.proto;l=103
    * @param index The index of the element to return.
    * @return The customClaims at the given index.
    */
@@ -189,7 +189,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=96
+   *     See chalk/server/v1/team.proto;l=103
    * @param index The index of the value to return.
    * @return The bytes of the customClaims at the given index.
    */
@@ -1158,7 +1158,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @return A list containing the customClaims.
      */
     @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
@@ -1169,7 +1169,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @return The count of customClaims.
      */
     @java.lang.Deprecated public int getCustomClaimsCount() {
@@ -1178,7 +1178,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param index The index of the element to return.
      * @return The customClaims at the given index.
      */
@@ -1188,7 +1188,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param index The index of the value to return.
      * @return The bytes of the customClaims at the given index.
      */
@@ -1199,7 +1199,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param index The index to set the value at.
      * @param value The customClaims to set.
      * @return This builder for chaining.
@@ -1216,7 +1216,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param value The customClaims to add.
      * @return This builder for chaining.
      */
@@ -1232,7 +1232,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param values The customClaims to add.
      * @return This builder for chaining.
      */
@@ -1248,7 +1248,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearCustomClaims() {
@@ -1261,7 +1261,7 @@ ai.chalk.protos.chalk.auth.v1.FeaturePermission defaultValue) {
     /**
      * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
      * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-     *     See chalk/server/v1/team.proto;l=96
+     *     See chalk/server/v1/team.proto;l=103
      * @param value The bytes of the customClaims to add.
      * @return This builder for chaining.
      */

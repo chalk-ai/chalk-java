@@ -84,4 +84,75 @@ public interface TeamOrBuilder extends
    */
   ai.chalk.protos.chalk.server.v1.ProjectOrBuilder getProjectsOrBuilder(
       int index);
+
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return Whether the scimProvider field is set.
+   */
+  boolean hasScimProvider();
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return The scimProvider.
+   */
+  java.lang.String getScimProvider();
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return The bytes for scimProvider.
+   */
+  com.google.protobuf.ByteString
+      getScimProviderBytes();
+
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  int getSpecConfigJsonCount();
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  boolean containsSpecConfigJson(
+      java.lang.String key);
+  /**
+   * Use {@link #getSpecConfigJsonMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getSpecConfigJson();
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getSpecConfigJsonMap();
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  /* nullable */
+com.google.protobuf.Value getSpecConfigJsonOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue);
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  com.google.protobuf.Value getSpecConfigJsonOrThrow(
+      java.lang.String key);
 }

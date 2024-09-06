@@ -22,6 +22,7 @@ private static final long serialVersionUID = 0L;
     slug_ = "";
     logo_ = "";
     projects_ = java.util.Collections.emptyList();
+    scimProvider_ = "";
   }
 
   @java.lang.Override
@@ -36,6 +37,18 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.server.v1.TeamProto.internal_static_chalk_server_v1_Team_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+      int number) {
+    switch (number) {
+      case 7:
+        return internalGetSpecConfigJson();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -250,6 +263,148 @@ private static final long serialVersionUID = 0L;
     return projects_.get(index);
   }
 
+  public static final int SCIM_PROVIDER_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object scimProvider_ = "";
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return Whether the scimProvider field is set.
+   */
+  @java.lang.Override
+  public boolean hasScimProvider() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return The scimProvider.
+   */
+  @java.lang.Override
+  public java.lang.String getScimProvider() {
+    java.lang.Object ref = scimProvider_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      scimProvider_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+   * @return The bytes for scimProvider.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getScimProviderBytes() {
+    java.lang.Object ref = scimProvider_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      scimProvider_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SPEC_CONFIG_JSON_FIELD_NUMBER = 7;
+  private static final class SpecConfigJsonDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, com.google.protobuf.Value> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, com.google.protobuf.Value>newDefaultInstance(
+                ai.chalk.protos.chalk.server.v1.TeamProto.internal_static_chalk_server_v1_Team_SpecConfigJsonEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                com.google.protobuf.Value.getDefaultInstance());
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, com.google.protobuf.Value> specConfigJson_;
+  private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.Value>
+  internalGetSpecConfigJson() {
+    if (specConfigJson_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          SpecConfigJsonDefaultEntryHolder.defaultEntry);
+    }
+    return specConfigJson_;
+  }
+  public int getSpecConfigJsonCount() {
+    return internalGetSpecConfigJson().getMap().size();
+  }
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  @java.lang.Override
+  public boolean containsSpecConfigJson(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetSpecConfigJson().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getSpecConfigJsonMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getSpecConfigJson() {
+    return getSpecConfigJsonMap();
+  }
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getSpecConfigJsonMap() {
+    return internalGetSpecConfigJson().getMap();
+  }
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+com.google.protobuf.Value getSpecConfigJsonOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetSpecConfigJson().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <pre>
+   * TODO: really a structured object.
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.Value getSpecConfigJsonOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetSpecConfigJson().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -279,6 +434,15 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < projects_.size(); i++) {
       output.writeMessage(5, projects_.get(i));
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, scimProvider_);
+    }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetSpecConfigJson(),
+        SpecConfigJsonDefaultEntryHolder.defaultEntry,
+        7);
     getUnknownFields().writeTo(output);
   }
 
@@ -303,6 +467,19 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < projects_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, projects_.get(i));
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, scimProvider_);
+    }
+    for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> entry
+         : internalGetSpecConfigJson().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+      specConfigJson__ = SpecConfigJsonDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, specConfigJson__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -332,6 +509,13 @@ private static final long serialVersionUID = 0L;
     }
     if (!getProjectsList()
         .equals(other.getProjectsList())) return false;
+    if (hasScimProvider() != other.hasScimProvider()) return false;
+    if (hasScimProvider()) {
+      if (!getScimProvider()
+          .equals(other.getScimProvider())) return false;
+    }
+    if (!internalGetSpecConfigJson().equals(
+        other.internalGetSpecConfigJson())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -356,6 +540,14 @@ private static final long serialVersionUID = 0L;
     if (getProjectsCount() > 0) {
       hash = (37 * hash) + PROJECTS_FIELD_NUMBER;
       hash = (53 * hash) + getProjectsList().hashCode();
+    }
+    if (hasScimProvider()) {
+      hash = (37 * hash) + SCIM_PROVIDER_FIELD_NUMBER;
+      hash = (53 * hash) + getScimProvider().hashCode();
+    }
+    if (!internalGetSpecConfigJson().getMap().isEmpty()) {
+      hash = (37 * hash) + SPEC_CONFIG_JSON_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetSpecConfigJson().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -466,6 +658,28 @@ private static final long serialVersionUID = 0L;
       return ai.chalk.protos.chalk.server.v1.TeamProto.internal_static_chalk_server_v1_Team_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 7:
+          return internalGetSpecConfigJson();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 7:
+          return internalGetMutableSpecConfigJson();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -499,6 +713,8 @@ private static final long serialVersionUID = 0L;
         projectsBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000010);
+      scimProvider_ = "";
+      internalGetMutableSpecConfigJson().clear();
       return this;
     }
 
@@ -558,6 +774,13 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.logo_ = logo_;
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.scimProvider_ = scimProvider_;
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.specConfigJson_ = internalGetSpecConfigJson().build(SpecConfigJsonDefaultEntryHolder.defaultEntry);
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -652,6 +875,14 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (other.hasScimProvider()) {
+        scimProvider_ = other.scimProvider_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      internalGetMutableSpecConfigJson().mergeFrom(
+          other.internalGetSpecConfigJson());
+      bitField0_ |= 0x00000040;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -711,6 +942,20 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 42
+            case 50: {
+              scimProvider_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
+            case 58: {
+              com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+              specConfigJson__ = input.readMessage(
+                  SpecConfigJsonDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableSpecConfigJson().ensureBuilderMap().put(
+                  specConfigJson__.getKey(), specConfigJson__.getValue());
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1261,6 +1506,272 @@ private static final long serialVersionUID = 0L;
         projects_ = null;
       }
       return projectsBuilder_;
+    }
+
+    private java.lang.Object scimProvider_ = "";
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @return Whether the scimProvider field is set.
+     */
+    public boolean hasScimProvider() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @return The scimProvider.
+     */
+    public java.lang.String getScimProvider() {
+      java.lang.Object ref = scimProvider_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        scimProvider_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @return The bytes for scimProvider.
+     */
+    public com.google.protobuf.ByteString
+        getScimProviderBytes() {
+      java.lang.Object ref = scimProvider_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        scimProvider_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @param value The scimProvider to set.
+     * @return This builder for chaining.
+     */
+    public Builder setScimProvider(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      scimProvider_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearScimProvider() {
+      scimProvider_ = getDefaultInstance().getScimProvider();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string scim_provider = 6 [json_name = "scimProvider"];</code>
+     * @param value The bytes for scimProvider to set.
+     * @return This builder for chaining.
+     */
+    public Builder setScimProviderBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      scimProvider_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
+    private static final class SpecConfigJsonConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value> {
+      @java.lang.Override
+      public com.google.protobuf.Value build(com.google.protobuf.ValueOrBuilder val) {
+        if (val instanceof com.google.protobuf.Value) { return (com.google.protobuf.Value) val; }
+        return ((com.google.protobuf.Value.Builder) val).build();
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value> defaultEntry() {
+        return SpecConfigJsonDefaultEntryHolder.defaultEntry;
+      }
+    };
+    private static final SpecConfigJsonConverter specConfigJsonConverter = new SpecConfigJsonConverter();
+
+    private com.google.protobuf.MapFieldBuilder<
+        java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder> specConfigJson_;
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetSpecConfigJson() {
+      if (specConfigJson_ == null) {
+        return new com.google.protobuf.MapFieldBuilder<>(specConfigJsonConverter);
+      }
+      return specConfigJson_;
+    }
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetMutableSpecConfigJson() {
+      if (specConfigJson_ == null) {
+        specConfigJson_ = new com.google.protobuf.MapFieldBuilder<>(specConfigJsonConverter);
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return specConfigJson_;
+    }
+    public int getSpecConfigJsonCount() {
+      return internalGetSpecConfigJson().ensureBuilderMap().size();
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    @java.lang.Override
+    public boolean containsSpecConfigJson(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetSpecConfigJson().ensureBuilderMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getSpecConfigJsonMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getSpecConfigJson() {
+      return getSpecConfigJsonMap();
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getSpecConfigJsonMap() {
+      return internalGetSpecConfigJson().getImmutableMap();
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+com.google.protobuf.Value getSpecConfigJsonOrDefault(
+        java.lang.String key,
+        /* nullable */
+com.google.protobuf.Value defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableSpecConfigJson().ensureBuilderMap();
+      return map.containsKey(key) ? specConfigJsonConverter.build(map.get(key)) : defaultValue;
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.Value getSpecConfigJsonOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableSpecConfigJson().ensureBuilderMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return specConfigJsonConverter.build(map.get(key));
+    }
+    public Builder clearSpecConfigJson() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      internalGetMutableSpecConfigJson().clear();
+      return this;
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    public Builder removeSpecConfigJson(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableSpecConfigJson().ensureBuilderMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value>
+        getMutableSpecConfigJson() {
+      bitField0_ |= 0x00000040;
+      return internalGetMutableSpecConfigJson().ensureMessageMap();
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    public Builder putSpecConfigJson(
+        java.lang.String key,
+        com.google.protobuf.Value value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableSpecConfigJson().ensureBuilderMap()
+          .put(key, value);
+      bitField0_ |= 0x00000040;
+      return this;
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    public Builder putAllSpecConfigJson(
+        java.util.Map<java.lang.String, com.google.protobuf.Value> values) {
+      for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> e : values.entrySet()) {
+        if (e.getKey() == null || e.getValue() == null) {
+          throw new NullPointerException();
+        }
+      }
+      internalGetMutableSpecConfigJson().ensureBuilderMap()
+          .putAll(values);
+      bitField0_ |= 0x00000040;
+      return this;
+    }
+    /**
+     * <pre>
+     * TODO: really a structured object.
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; spec_config_json = 7 [json_name = "specConfigJson"];</code>
+     */
+    public com.google.protobuf.Value.Builder putSpecConfigJsonBuilderIfAbsent(
+        java.lang.String key) {
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> builderMap = internalGetMutableSpecConfigJson().ensureBuilderMap();
+      com.google.protobuf.ValueOrBuilder entry = builderMap.get(key);
+      if (entry == null) {
+        entry = com.google.protobuf.Value.newBuilder();
+        builderMap.put(key, entry);
+      }
+      if (entry instanceof com.google.protobuf.Value) {
+        entry = ((com.google.protobuf.Value) entry).toBuilder();
+        builderMap.put(key, entry);
+      }
+      return (com.google.protobuf.Value.Builder) entry;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

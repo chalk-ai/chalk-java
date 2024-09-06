@@ -811,4 +811,21 @@ com.google.protobuf.Value defaultValue);
    */
   com.google.protobuf.ByteString
       getQueryServerMetricsStoreSecretBytes();
+
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return Whether the pinnedBaseImage field is set.
+   */
+  boolean hasPinnedBaseImage();
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return The pinnedBaseImage.
+   */
+  java.lang.String getPinnedBaseImage();
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return The bytes for pinnedBaseImage.
+   */
+  com.google.protobuf.ByteString
+      getPinnedBaseImageBytes();
 }

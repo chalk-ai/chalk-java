@@ -455,6 +455,68 @@ public final class TeamServiceGrpc {
     return getInviteTeamMemberMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest,
+      ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> getExpireTeamInviteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ExpireTeamInvite",
+      requestType = ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest,
+      ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> getExpireTeamInviteMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest, ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> getExpireTeamInviteMethod;
+    if ((getExpireTeamInviteMethod = TeamServiceGrpc.getExpireTeamInviteMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getExpireTeamInviteMethod = TeamServiceGrpc.getExpireTeamInviteMethod) == null) {
+          TeamServiceGrpc.getExpireTeamInviteMethod = getExpireTeamInviteMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest, ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ExpireTeamInvite"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("ExpireTeamInvite"))
+              .build();
+        }
+      }
+    }
+    return getExpireTeamInviteMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest,
+      ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> getListTeamInvitesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListTeamInvites",
+      requestType = ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest,
+      ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> getListTeamInvitesMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest, ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> getListTeamInvitesMethod;
+    if ((getListTeamInvitesMethod = TeamServiceGrpc.getListTeamInvitesMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getListTeamInvitesMethod = TeamServiceGrpc.getListTeamInvitesMethod) == null) {
+          TeamServiceGrpc.getListTeamInvitesMethod = getListTeamInvitesMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest, ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListTeamInvites"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("ListTeamInvites"))
+              .build();
+        }
+      }
+    }
+    return getListTeamInvitesMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest,
       ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> getUpsertFeaturePermissionsMethod;
 
@@ -665,6 +727,20 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    default void expireTeamInvite(ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getExpireTeamInviteMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void listTeamInvites(ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListTeamInvitesMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void upsertFeaturePermissions(ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpsertFeaturePermissionsMethod(), responseObserver);
@@ -819,6 +895,22 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public void expireTeamInvite(ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getExpireTeamInviteMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void listTeamInvites(ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListTeamInvitesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void upsertFeaturePermissions(ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -946,6 +1038,20 @@ public final class TeamServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.InviteTeamMemberResponse inviteTeamMember(ai.chalk.protos.chalk.server.v1.InviteTeamMemberRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getInviteTeamMemberMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse expireTeamInvite(ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getExpireTeamInviteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse listTeamInvites(ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListTeamInvitesMethod(), getCallOptions(), request);
     }
 
     /**
@@ -1093,6 +1199,22 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse> expireTeamInvite(
+        ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getExpireTeamInviteMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse> listTeamInvites(
+        ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListTeamInvitesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsResponse> upsertFeaturePermissions(
         ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -1122,8 +1244,10 @@ public final class TeamServiceGrpc {
   private static final int METHODID_LIST_SERVICE_TOKENS = 11;
   private static final int METHODID_UPDATE_SERVICE_TOKEN = 12;
   private static final int METHODID_INVITE_TEAM_MEMBER = 13;
-  private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 14;
-  private static final int METHODID_UPDATE_SCIM_GROUP_SETTINGS = 15;
+  private static final int METHODID_EXPIRE_TEAM_INVITE = 14;
+  private static final int METHODID_LIST_TEAM_INVITES = 15;
+  private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 16;
+  private static final int METHODID_UPDATE_SCIM_GROUP_SETTINGS = 17;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1197,6 +1321,14 @@ public final class TeamServiceGrpc {
         case METHODID_INVITE_TEAM_MEMBER:
           serviceImpl.inviteTeamMember((ai.chalk.protos.chalk.server.v1.InviteTeamMemberRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.InviteTeamMemberResponse>) responseObserver);
+          break;
+        case METHODID_EXPIRE_TEAM_INVITE:
+          serviceImpl.expireTeamInvite((ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse>) responseObserver);
+          break;
+        case METHODID_LIST_TEAM_INVITES:
+          serviceImpl.listTeamInvites((ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse>) responseObserver);
           break;
         case METHODID_UPSERT_FEATURE_PERMISSIONS:
           serviceImpl.upsertFeaturePermissions((ai.chalk.protos.chalk.server.v1.UpsertFeaturePermissionsRequest) request,
@@ -1323,6 +1455,20 @@ public final class TeamServiceGrpc {
               ai.chalk.protos.chalk.server.v1.InviteTeamMemberResponse>(
                 service, METHODID_INVITE_TEAM_MEMBER)))
         .addMethod(
+          getExpireTeamInviteMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.ExpireTeamInviteRequest,
+              ai.chalk.protos.chalk.server.v1.ExpireTeamInviteResponse>(
+                service, METHODID_EXPIRE_TEAM_INVITE)))
+        .addMethod(
+          getListTeamInvitesMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.ListTeamInvitesRequest,
+              ai.chalk.protos.chalk.server.v1.ListTeamInvitesResponse>(
+                service, METHODID_LIST_TEAM_INVITES)))
+        .addMethod(
           getUpsertFeaturePermissionsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1398,6 +1544,8 @@ public final class TeamServiceGrpc {
               .addMethod(getListServiceTokensMethod())
               .addMethod(getUpdateServiceTokenMethod())
               .addMethod(getInviteTeamMemberMethod())
+              .addMethod(getExpireTeamInviteMethod())
+              .addMethod(getListTeamInvitesMethod())
               .addMethod(getUpsertFeaturePermissionsMethod())
               .addMethod(getUpdateScimGroupSettingsMethod())
               .build();
