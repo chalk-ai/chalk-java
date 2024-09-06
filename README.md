@@ -339,12 +339,26 @@ public class Main {
             for (Row row : result.getScalarsTable()) {
                 long userId = row.getVarCharObj("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
-                System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
+                System.out.println(
+                    "User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days"
+                );
+            }
+
+            // Or get the values by first obtaining a FieldVector copy
+            try (
+                FieldVector idCol = result.getScalarsTable().getVectorCopy("card_user.id");
+                FieldVector spendingCol = result.getScalarsTable().getVectorCopy("card_user.spending_mean_30d");
+            ) {
+                System.out.println(
+                    "User " + idCol.getObject(0) + " spent an average of $" +
+                    spendingCol.getObject(0) + " per day in the last 30 days"
+                );
             }
                 
             Table txnTable = result.getGroupsTables().get("card_user.transactions");
-            FieldVector txnAmountVector = txnTable.getColumn("amount");
-            // Do something with the transaction amount vector
+            try (FieldVector txnAmountVector = txnTable.getVectorCopy("transaction.amount")) {
+                // Do something with the transaction amount vector
+            };
             
             
         } catch (ChalkException e) {
