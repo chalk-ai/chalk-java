@@ -74,53 +74,126 @@ public interface DeploymentOrBuilder extends
    *  string cloud_build_id = 4;
    *  string triggered_by = 5;
    *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
    * </pre>
    *
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return Whether the requirementsFilepath field is set.
+   */
+  boolean hasRequirementsFilepath();
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   * </pre>
+   *
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return The requirementsFilepath.
+   */
+  java.lang.String getRequirementsFilepath();
+  /**
+   * <pre>
+   *  We know a bunch more things about the deployment. Deal with them when we're ready.
+   *  string cloud_build_id = 4;
+   *  string triggered_by = 5;
+   *  google.protobuf.Timestamp status_changed_at = 6;
+   * </pre>
+   *
+   * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
+   * @return The bytes for requirementsFilepath.
+   */
+  com.google.protobuf.ByteString
+      getRequirementsFilepathBytes();
+
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return Whether the dockerfileFilepath field is set.
+   */
+  boolean hasDockerfileFilepath();
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return The dockerfileFilepath.
+   */
+  java.lang.String getDockerfileFilepath();
+  /**
+   * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
+   * @return The bytes for dockerfileFilepath.
+   */
+  com.google.protobuf.ByteString
+      getDockerfileFilepathBytes();
+
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return Whether the runtime field is set.
+   */
+  boolean hasRuntime();
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return The runtime.
+   */
+  java.lang.String getRuntime();
+  /**
+   * <code>optional string runtime = 9 [json_name = "runtime"];</code>
+   * @return The bytes for runtime.
+   */
+  com.google.protobuf.ByteString
+      getRuntimeBytes();
+
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return Whether the finalDependencyHash field is set.
+   */
+  boolean hasFinalDependencyHash();
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return The finalDependencyHash.
+   */
+  java.lang.String getFinalDependencyHash();
+  /**
+   * <pre>
+   *  string chalkpy_version = 10;
+   *  string raw_dependency_hash = 11;
+   * </pre>
+   *
+   * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
+   * @return The bytes for finalDependencyHash.
+   */
+  com.google.protobuf.ByteString
+      getFinalDependencyHashBytes();
+
+  /**
+   * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+   * @return Whether the isPreviewDeployment field is set.
+   */
+  boolean hasIsPreviewDeployment();
+  /**
+   * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
+   * @return The isPreviewDeployment.
+   */
+  boolean getIsPreviewDeployment();
+
+  /**
    * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
-   * </pre>
-   *
    * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   *  string requirements_filepath = 7;
-   *  string dockerfile_filepath = 8;
-   *  string runtime = 9;
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   *  string final_dependency_hash = 12;
-   *  bool is_preview_deployment = 13;
-   * </pre>
-   *
    * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
@@ -159,7 +232,42 @@ public interface DeploymentOrBuilder extends
    *  string git_author_email = 19;
    *  string branch = 20;
    *  string project_settings = 21;
-   *  string requirements_files = 22;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return Whether the requirementsFiles field is set.
+   */
+  boolean hasRequirementsFiles();
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return The requirementsFiles.
+   */
+  java.lang.String getRequirementsFiles();
+  /**
+   * <pre>
+   *  string git_pr = 17;
+   *  string git_branch = 18;
+   *  string git_author_email = 19;
+   *  string branch = 20;
+   *  string project_settings = 21;
+   * </pre>
+   *
+   * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
+   * @return The bytes for requirementsFiles.
+   */
+  com.google.protobuf.ByteString
+      getRequirementsFilesBytes();
+
+  /**
+   * <pre>
    *  string git_tag = 23;
    * </pre>
    *
@@ -169,12 +277,6 @@ public interface DeploymentOrBuilder extends
   java.lang.String getBaseImageSha();
   /**
    * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   *  string requirements_files = 22;
    *  string git_tag = 23;
    * </pre>
    *

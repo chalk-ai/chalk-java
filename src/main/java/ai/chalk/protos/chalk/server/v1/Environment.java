@@ -55,6 +55,7 @@ private static final long serialVersionUID = 0L;
     cloudProvider_ = 0;
     metadataServerMetricsStoreSecret_ = "";
     queryServerMetricsStoreSecret_ = "";
+    pinnedBaseImage_ = "";
   }
 
   @java.lang.Override
@@ -2167,6 +2168,53 @@ com.google.protobuf.Value defaultValue) {
     }
   }
 
+  public static final int PINNED_BASE_IMAGE_FIELD_NUMBER = 46;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object pinnedBaseImage_ = "";
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return Whether the pinnedBaseImage field is set.
+   */
+  @java.lang.Override
+  public boolean hasPinnedBaseImage() {
+    return ((bitField1_ & 0x00000008) != 0);
+  }
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return The pinnedBaseImage.
+   */
+  @java.lang.Override
+  public java.lang.String getPinnedBaseImage() {
+    java.lang.Object ref = pinnedBaseImage_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      pinnedBaseImage_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+   * @return The bytes for pinnedBaseImage.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPinnedBaseImageBytes() {
+    java.lang.Object ref = pinnedBaseImage_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      pinnedBaseImage_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2324,6 +2372,9 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000004) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 45, queryServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000008) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 46, pinnedBaseImage_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -2494,6 +2545,9 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000004) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(45, queryServerMetricsStoreSecret_);
+    }
+    if (((bitField1_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(46, pinnedBaseImage_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -2704,6 +2758,11 @@ com.google.protobuf.Value defaultValue) {
       if (!getQueryServerMetricsStoreSecret()
           .equals(other.getQueryServerMetricsStoreSecret())) return false;
     }
+    if (hasPinnedBaseImage() != other.hasPinnedBaseImage()) return false;
+    if (hasPinnedBaseImage()) {
+      if (!getPinnedBaseImage()
+          .equals(other.getPinnedBaseImage())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -2882,6 +2941,10 @@ com.google.protobuf.Value defaultValue) {
     if (hasQueryServerMetricsStoreSecret()) {
       hash = (37 * hash) + QUERY_SERVER_METRICS_STORE_SECRET_FIELD_NUMBER;
       hash = (53 * hash) + getQueryServerMetricsStoreSecret().hashCode();
+    }
+    if (hasPinnedBaseImage()) {
+      hash = (37 * hash) + PINNED_BASE_IMAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getPinnedBaseImage().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -3105,6 +3168,7 @@ com.google.protobuf.Value defaultValue) {
       }
       metadataServerMetricsStoreSecret_ = "";
       queryServerMetricsStoreSecret_ = "";
+      pinnedBaseImage_ = "";
       return this;
     }
 
@@ -3322,6 +3386,10 @@ com.google.protobuf.Value defaultValue) {
       if (((from_bitField1_ & 0x00001000) != 0)) {
         result.queryServerMetricsStoreSecret_ = queryServerMetricsStoreSecret_;
         to_bitField1_ |= 0x00000004;
+      }
+      if (((from_bitField1_ & 0x00002000) != 0)) {
+        result.pinnedBaseImage_ = pinnedBaseImage_;
+        to_bitField1_ |= 0x00000008;
       }
       result.bitField0_ |= to_bitField0_;
       result.bitField1_ |= to_bitField1_;
@@ -3578,6 +3646,11 @@ com.google.protobuf.Value defaultValue) {
       if (other.hasQueryServerMetricsStoreSecret()) {
         queryServerMetricsStoreSecret_ = other.queryServerMetricsStoreSecret_;
         bitField1_ |= 0x00001000;
+        onChanged();
+      }
+      if (other.hasPinnedBaseImage()) {
+        pinnedBaseImage_ = other.pinnedBaseImage_;
+        bitField1_ |= 0x00002000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -3847,6 +3920,11 @@ com.google.protobuf.Value defaultValue) {
               bitField1_ |= 0x00001000;
               break;
             } // case 362
+            case 370: {
+              pinnedBaseImage_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00002000;
+              break;
+            } // case 370
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -7612,6 +7690,85 @@ com.google.protobuf.Value defaultValue) {
       checkByteStringIsUtf8(value);
       queryServerMetricsStoreSecret_ = value;
       bitField1_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object pinnedBaseImage_ = "";
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @return Whether the pinnedBaseImage field is set.
+     */
+    public boolean hasPinnedBaseImage() {
+      return ((bitField1_ & 0x00002000) != 0);
+    }
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @return The pinnedBaseImage.
+     */
+    public java.lang.String getPinnedBaseImage() {
+      java.lang.Object ref = pinnedBaseImage_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        pinnedBaseImage_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @return The bytes for pinnedBaseImage.
+     */
+    public com.google.protobuf.ByteString
+        getPinnedBaseImageBytes() {
+      java.lang.Object ref = pinnedBaseImage_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        pinnedBaseImage_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @param value The pinnedBaseImage to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPinnedBaseImage(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      pinnedBaseImage_ = value;
+      bitField1_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPinnedBaseImage() {
+      pinnedBaseImage_ = getDefaultInstance().getPinnedBaseImage();
+      bitField1_ = (bitField1_ & ~0x00002000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string pinned_base_image = 46 [json_name = "pinnedBaseImage"];</code>
+     * @param value The bytes for pinnedBaseImage to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPinnedBaseImageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      pinnedBaseImage_ = value;
+      bitField1_ |= 0x00002000;
       onChanged();
       return this;
     }

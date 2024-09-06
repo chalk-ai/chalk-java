@@ -140,7 +140,7 @@ public final class EnvironmentProto {
       "ce_account\"\201\001\n\013CloudConfig\0223\n\003aws\030\001 \001(\0132" +
       "\037.chalk.server.v1.AWSCloudConfigH\000R\003aws\022" +
       "3\n\003gcp\030\002 \001(\0132\037.chalk.server.v1.GCPCloudC" +
-      "onfigH\000R\003gcpB\010\n\006config\"\274\034\n\013Environment\022\022" +
+      "onfigH\000R\003gcpB\010\n\006config\"\203\035\n\013Environment\022\022" +
       "\n\004name\030\001 \001(\tR\004name\022\035\n\nproject_id\030\002 \001(\tR\t" +
       "projectId\022\016\n\002id\030\003 \001(\tR\002id\022\027\n\007team_id\030\004 \001" +
       "(\tR\006teamId\0225\n\024active_deployment_id\030\005 \001(\t" +
@@ -204,42 +204,44 @@ public final class EnvironmentProto {
       "ics_store_secret\030, \001(\tH!R metadataServer" +
       "MetricsStoreSecret\210\001\001\022M\n!query_server_me" +
       "trics_store_secret\030- \001(\tH\"R\035queryServerM" +
-      "etricsStoreSecret\210\001\001\032D\n\026AdditionalEnvVar" +
-      "sEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
-      "\005value:\0028\001\032H\n\032AdditionalCronEnvVarsEntry" +
-      "\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value" +
-      ":\0028\001\032Y\n\023SpecConfigJsonEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022,\n\005value\030\002 \001(\0132\026.google.protobuf.V" +
-      "alueR\005value:\0028\001B\027\n\025_active_deployment_id" +
-      "B\r\n\013_worker_urlB\016\n\014_service_urlB\r\n\013_bran" +
-      "ch_urlB\027\n\025_offline_store_secretB\026\n\024_onli" +
-      "ne_store_secretB\027\n\025_feature_store_secret" +
-      "B\022\n\020_postgres_secretB\024\n\022_online_store_ki" +
-      "ndB\n\n\010_emq_uriB\025\n\023_vpc_connector_nameB\024\n" +
-      "\022_kube_cluster_nameB\033\n\031_branch_kube_clus" +
-      "ter_nameB\033\n\031_engine_kube_cluster_nameB\"\n" +
-      " _shadow_engine_kube_cluster_nameB\025\n\023_ku" +
-      "be_job_namespaceB\031\n\027_kube_preview_namesp" +
-      "aceB\034\n\032_kube_service_account_nameB\036\n\034_st" +
-      "reaming_query_service_uriB\023\n\021_result_bus" +
-      "_topicB\032\n\030_online_persistence_modeB\024\n\022_m" +
-      "etrics_bus_topicB\031\n\027_bigtable_instance_n" +
-      "ameB\026\n\024_bigtable_table_nameB\030\n\026_cloud_ac" +
-      "count_locatorB\017\n\r_cloud_regionB\023\n\021_cloud" +
-      "_tenancy_idB\027\n\025_source_bundle_bucketB\036\n\034" +
-      "_engine_docker_registry_pathB\022\n\020_default" +
-      "_plannerB\033\n\031_private_pip_repositoriesB\017\n" +
-      "\r_cloud_configB\016\n\014_archived_atB\'\n%_metad" +
-      "ata_server_metrics_store_secretB$\n\"_quer" +
-      "y_server_metrics_store_secret*\223\001\n\021CloudP" +
-      "roviderKind\022#\n\037CLOUD_PROVIDER_KIND_UNSPE" +
-      "CIFIED\020\000\022\037\n\033CLOUD_PROVIDER_KIND_UNKNOWN\020" +
-      "\001\022\033\n\027CLOUD_PROVIDER_KIND_GCP\020\002\022\033\n\027CLOUD_" +
-      "PROVIDER_KIND_AWS\020\003B\245\001\n\037ai.chalk.protos." +
-      "chalk.server.v1B\020EnvironmentProtoP\001Z\022ser" +
-      "ver/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312" +
-      "\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBM" +
-      "etadata\352\002\021Chalk::Server::V1b\006proto3"
+      "etricsStoreSecret\210\001\001\022/\n\021pinned_base_imag" +
+      "e\030. \001(\tH#R\017pinnedBaseImage\210\001\001\032D\n\026Additio" +
+      "nalEnvVarsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005val" +
+      "ue\030\002 \001(\tR\005value:\0028\001\032H\n\032AdditionalCronEnv" +
+      "VarsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001" +
+      "(\tR\005value:\0028\001\032Y\n\023SpecConfigJsonEntry\022\020\n\003" +
+      "key\030\001 \001(\tR\003key\022,\n\005value\030\002 \001(\0132\026.google.p" +
+      "rotobuf.ValueR\005value:\0028\001B\027\n\025_active_depl" +
+      "oyment_idB\r\n\013_worker_urlB\016\n\014_service_url" +
+      "B\r\n\013_branch_urlB\027\n\025_offline_store_secret" +
+      "B\026\n\024_online_store_secretB\027\n\025_feature_sto" +
+      "re_secretB\022\n\020_postgres_secretB\024\n\022_online" +
+      "_store_kindB\n\n\010_emq_uriB\025\n\023_vpc_connecto" +
+      "r_nameB\024\n\022_kube_cluster_nameB\033\n\031_branch_" +
+      "kube_cluster_nameB\033\n\031_engine_kube_cluste" +
+      "r_nameB\"\n _shadow_engine_kube_cluster_na" +
+      "meB\025\n\023_kube_job_namespaceB\031\n\027_kube_previ" +
+      "ew_namespaceB\034\n\032_kube_service_account_na" +
+      "meB\036\n\034_streaming_query_service_uriB\023\n\021_r" +
+      "esult_bus_topicB\032\n\030_online_persistence_m" +
+      "odeB\024\n\022_metrics_bus_topicB\031\n\027_bigtable_i" +
+      "nstance_nameB\026\n\024_bigtable_table_nameB\030\n\026" +
+      "_cloud_account_locatorB\017\n\r_cloud_regionB" +
+      "\023\n\021_cloud_tenancy_idB\027\n\025_source_bundle_b" +
+      "ucketB\036\n\034_engine_docker_registry_pathB\022\n" +
+      "\020_default_plannerB\033\n\031_private_pip_reposi" +
+      "toriesB\017\n\r_cloud_configB\016\n\014_archived_atB" +
+      "\'\n%_metadata_server_metrics_store_secret" +
+      "B$\n\"_query_server_metrics_store_secretB\024" +
+      "\n\022_pinned_base_image*\223\001\n\021CloudProviderKi" +
+      "nd\022#\n\037CLOUD_PROVIDER_KIND_UNSPECIFIED\020\000\022" +
+      "\037\n\033CLOUD_PROVIDER_KIND_UNKNOWN\020\001\022\033\n\027CLOU" +
+      "D_PROVIDER_KIND_GCP\020\002\022\033\n\027CLOUD_PROVIDER_" +
+      "KIND_AWS\020\003B\245\001\n\037ai.chalk.protos.chalk.ser" +
+      "ver.v1B\020EnvironmentProtoP\001Z\022server/v1;se" +
+      "rverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\S" +
+      "erver\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002" +
+      "\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -306,7 +308,7 @@ public final class EnvironmentProto {
     internal_static_chalk_server_v1_Environment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_Environment_descriptor,
-        new java.lang.String[] { "Name", "ProjectId", "Id", "TeamId", "ActiveDeploymentId", "WorkerUrl", "ServiceUrl", "BranchUrl", "OfflineStoreSecret", "OnlineStoreSecret", "FeatureStoreSecret", "PostgresSecret", "OnlineStoreKind", "EmqUri", "VpcConnectorName", "KubeClusterName", "BranchKubeClusterName", "EngineKubeClusterName", "ShadowEngineKubeClusterName", "KubeJobNamespace", "KubePreviewNamespace", "KubeServiceAccountName", "StreamingQueryServiceUri", "SkipOfflineWritesForOnlineCachedFeatures", "ResultBusTopic", "OnlinePersistenceMode", "MetricsBusTopic", "BigtableInstanceName", "BigtableTableName", "CloudAccountLocator", "CloudRegion", "CloudTenancyId", "SourceBundleBucket", "EngineDockerRegistryPath", "DefaultPlanner", "AdditionalEnvVars", "AdditionalCronEnvVars", "PrivatePipRepositories", "IsSandbox", "CloudProvider", "CloudConfig", "SpecConfigJson", "ArchivedAt", "MetadataServerMetricsStoreSecret", "QueryServerMetricsStoreSecret", });
+        new java.lang.String[] { "Name", "ProjectId", "Id", "TeamId", "ActiveDeploymentId", "WorkerUrl", "ServiceUrl", "BranchUrl", "OfflineStoreSecret", "OnlineStoreSecret", "FeatureStoreSecret", "PostgresSecret", "OnlineStoreKind", "EmqUri", "VpcConnectorName", "KubeClusterName", "BranchKubeClusterName", "EngineKubeClusterName", "ShadowEngineKubeClusterName", "KubeJobNamespace", "KubePreviewNamespace", "KubeServiceAccountName", "StreamingQueryServiceUri", "SkipOfflineWritesForOnlineCachedFeatures", "ResultBusTopic", "OnlinePersistenceMode", "MetricsBusTopic", "BigtableInstanceName", "BigtableTableName", "CloudAccountLocator", "CloudRegion", "CloudTenancyId", "SourceBundleBucket", "EngineDockerRegistryPath", "DefaultPlanner", "AdditionalEnvVars", "AdditionalCronEnvVars", "PrivatePipRepositories", "IsSandbox", "CloudProvider", "CloudConfig", "SpecConfigJson", "ArchivedAt", "MetadataServerMetricsStoreSecret", "QueryServerMetricsStoreSecret", "PinnedBaseImage", });
     internal_static_chalk_server_v1_Environment_AdditionalEnvVarsEntry_descriptor =
       internal_static_chalk_server_v1_Environment_descriptor.getNestedTypes().get(0);
     internal_static_chalk_server_v1_Environment_AdditionalEnvVarsEntry_fieldAccessorTable = new
