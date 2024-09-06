@@ -344,7 +344,7 @@ public class Main {
                 );
             }
 
-            // Or get the value by first obtaining a FieldVector copy
+            // Or get the values by first obtaining a FieldVector copy
             try (
                 FieldVector idCol = result.getScalarsTable().getVectorCopy("card_user.id");
                 FieldVector spendingCol = result.getScalarsTable().getVectorCopy("card_user.spending_mean_30d");
