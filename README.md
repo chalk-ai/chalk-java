@@ -350,8 +350,8 @@ public class Main {
                 FieldVector spendingCol = result.getScalarsTable().getVectorCopy("card_user.spending_mean_30d");
             ) {
                 System.out.println(
-                        "User " + idCol.getObject(0) + " spent an average of $" +
-                        spendingCol.getObject(0) + " per day in the last 30 days"
+                    "User " + idCol.getObject(0) + " spent an average of $" +
+                    spendingCol.getObject(0) + " per day in the last 30 days"
                 );
             }
                 
