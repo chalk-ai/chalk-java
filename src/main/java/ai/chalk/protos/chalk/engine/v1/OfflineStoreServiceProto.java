@@ -31,24 +31,30 @@ public final class OfflineStoreServiceProto {
     java.lang.String[] descriptorData = {
       "\n+chalk/engine/v1/offline_store_service." +
       "proto\022\017chalk.engine.v1\032\037chalk/auth/v1/pe" +
-      "rmissions.proto\032\037chalk/common/v1/query_l" +
-      "og.proto\032\"chalk/common/v1/query_values.p" +
-      "roto\"\032\n\030OfflineStoreServiceDummy2\361\001\n\023Off" +
-      "lineStoreService\022r\n\022GetQueryLogEntries\022*" +
-      ".chalk.common.v1.GetQueryLogEntriesReque" +
-      "st\032+.chalk.common.v1.GetQueryLogEntriesR" +
-      "esponse\"\003\200}\004\022f\n\016GetQueryValues\022&.chalk.c" +
-      "ommon.v1.GetQueryValuesRequest\032\'.chalk.c" +
-      "ommon.v1.GetQueryValuesResponse\"\003\200}\004B\231\001\n" +
-      "\037ai.chalk.protos.chalk.engine.v1B\030Offlin" +
-      "eStoreServiceProtoP\001\242\002\003CEX\252\002\017Chalk.Engin" +
-      "e.V1\312\002\017Chalk\\Engine\\V1\342\002\033Chalk\\Engine\\V1" +
-      "\\GPBMetadata\352\002\021Chalk::Engine::V1b\006proto3"
+      "rmissions.proto\032$chalk/common/v1/feature" +
+      "_values.proto\032\037chalk/common/v1/query_log" +
+      ".proto\032\"chalk/common/v1/query_values.pro" +
+      "to\"\032\n\030OfflineStoreServiceDummy2\356\002\n\023Offli" +
+      "neStoreService\022r\n\022GetQueryLogEntries\022*.c" +
+      "halk.common.v1.GetQueryLogEntriesRequest" +
+      "\032+.chalk.common.v1.GetQueryLogEntriesRes" +
+      "ponse\"\003\200}\004\022f\n\016GetQueryValues\022&.chalk.com" +
+      "mon.v1.GetQueryValuesRequest\032\'.chalk.com" +
+      "mon.v1.GetQueryValuesResponse\"\003\200}\004\022{\n\025Ge" +
+      "tFeatureValuesChart\022-.chalk.common.v1.Ge" +
+      "tFeatureValuesChartRequest\032..chalk.commo" +
+      "n.v1.GetFeatureValuesChartResponse\"\003\200}\004B" +
+      "\231\001\n\037ai.chalk.protos.chalk.engine.v1B\030Off" +
+      "lineStoreServiceProtoP\001\242\002\003CEX\252\002\017Chalk.En" +
+      "gine.V1\312\002\017Chalk\\Engine\\V1\342\002\033Chalk\\Engine" +
+      "\\V1\\GPBMetadata\352\002\021Chalk::Engine::V1b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
+          ai.chalk.protos.chalk.common.v1.FeatureValuesProto.getDescriptor(),
           ai.chalk.protos.chalk.common.v1.QueryLogProto.getDescriptor(),
           ai.chalk.protos.chalk.common.v1.QueryValuesProto.getDescriptor(),
         });
@@ -64,6 +70,7 @@ public final class OfflineStoreServiceProto {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
+    ai.chalk.protos.chalk.common.v1.FeatureValuesProto.getDescriptor();
     ai.chalk.protos.chalk.common.v1.QueryLogProto.getDescriptor();
     ai.chalk.protos.chalk.common.v1.QueryValuesProto.getDescriptor();
   }
