@@ -46,6 +46,37 @@ public final class BuilderServiceGrpc {
     return getActivateDeploymentMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest,
+      ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> getDeployKubeComponentsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeployKubeComponents",
+      requestType = ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest,
+      ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> getDeployKubeComponentsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest, ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> getDeployKubeComponentsMethod;
+    if ((getDeployKubeComponentsMethod = BuilderServiceGrpc.getDeployKubeComponentsMethod) == null) {
+      synchronized (BuilderServiceGrpc.class) {
+        if ((getDeployKubeComponentsMethod = BuilderServiceGrpc.getDeployKubeComponentsMethod) == null) {
+          BuilderServiceGrpc.getDeployKubeComponentsMethod = getDeployKubeComponentsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest, ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeployKubeComponents"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BuilderServiceMethodDescriptorSupplier("DeployKubeComponents"))
+              .build();
+        }
+      }
+    }
+    return getDeployKubeComponentsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -104,6 +135,17 @@ public final class BuilderServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getActivateDeploymentMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * Intermediate step in the deployment activation process. Allows for partial migration to the new
+     * go-api-server builder service.
+     * </pre>
+     */
+    default void deployKubeComponents(ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeployKubeComponentsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -144,6 +186,18 @@ public final class BuilderServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getActivateDeploymentMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Intermediate step in the deployment activation process. Allows for partial migration to the new
+     * go-api-server builder service.
+     * </pre>
+     */
+    public void deployKubeComponents(ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeployKubeComponentsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -171,6 +225,17 @@ public final class BuilderServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse activateDeployment(ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getActivateDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Intermediate step in the deployment activation process. Allows for partial migration to the new
+     * go-api-server builder service.
+     * </pre>
+     */
+    public ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse deployKubeComponents(ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeployKubeComponentsMethod(), getCallOptions(), request);
     }
   }
 
@@ -201,9 +266,22 @@ public final class BuilderServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getActivateDeploymentMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Intermediate step in the deployment activation process. Allows for partial migration to the new
+     * go-api-server builder service.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> deployKubeComponents(
+        ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeployKubeComponentsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ACTIVATE_DEPLOYMENT = 0;
+  private static final int METHODID_DEPLOY_KUBE_COMPONENTS = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -225,6 +303,10 @@ public final class BuilderServiceGrpc {
         case METHODID_ACTIVATE_DEPLOYMENT:
           serviceImpl.activateDeployment((ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse>) responseObserver);
+          break;
+        case METHODID_DEPLOY_KUBE_COMPONENTS:
+          serviceImpl.deployKubeComponents((ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -251,6 +333,13 @@ public final class BuilderServiceGrpc {
               ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest,
               ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse>(
                 service, METHODID_ACTIVATE_DEPLOYMENT)))
+        .addMethod(
+          getDeployKubeComponentsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest,
+              ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse>(
+                service, METHODID_DEPLOY_KUBE_COMPONENTS)))
         .build();
   }
 
@@ -300,6 +389,7 @@ public final class BuilderServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new BuilderServiceFileDescriptorSupplier())
               .addMethod(getActivateDeploymentMethod())
+              .addMethod(getDeployKubeComponentsMethod())
               .build();
         }
       }

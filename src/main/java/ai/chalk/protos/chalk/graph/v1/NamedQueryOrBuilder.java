@@ -288,4 +288,19 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getDeploymentIdBytes();
+
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   * @return Whether the sourceFileReference field is set.
+   */
+  boolean hasSourceFileReference();
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   * @return The sourceFileReference.
+   */
+  ai.chalk.protos.chalk.graph.v1.SourceFileReference getSourceFileReference();
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder getSourceFileReferenceOrBuilder();
 }

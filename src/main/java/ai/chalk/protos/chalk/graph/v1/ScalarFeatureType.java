@@ -668,6 +668,21 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int IS_DEPRECATED_FIELD_NUMBER = 24;
+  private boolean isDeprecated_ = false;
+  /**
+   * <pre>
+   * Whether the user marked the feature as deprecated.
+   * </pre>
+   *
+   * <code>bool is_deprecated = 24 [json_name = "isDeprecated"];</code>
+   * @return The isDeprecated.
+   */
+  @java.lang.Override
+  public boolean getIsDeprecated() {
+    return isDeprecated_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -747,6 +762,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attributeName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 23, attributeName_);
+    }
+    if (isDeprecated_ != false) {
+      output.writeBool(24, isDeprecated_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -844,6 +862,10 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attributeName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, attributeName_);
     }
+    if (isDeprecated_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(24, isDeprecated_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -939,6 +961,8 @@ private static final long serialVersionUID = 0L;
         != other.getIsDistancePseudofeature()) return false;
     if (!getAttributeName()
         .equals(other.getAttributeName())) return false;
+    if (getIsDeprecated()
+        != other.getIsDeprecated()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1029,6 +1053,9 @@ private static final long serialVersionUID = 0L;
         getIsDistancePseudofeature());
     hash = (37 * hash) + ATTRIBUTE_NAME_FIELD_NUMBER;
     hash = (53 * hash) + getAttributeName().hashCode();
+    hash = (37 * hash) + IS_DEPRECATED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIsDeprecated());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1235,6 +1262,7 @@ private static final long serialVersionUID = 0L;
       etlOfflineToOnline_ = false;
       isDistancePseudofeature_ = false;
       attributeName_ = "";
+      isDeprecated_ = false;
       return this;
     }
 
@@ -1373,6 +1401,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00200000) != 0)) {
         result.attributeName_ = attributeName_;
+      }
+      if (((from_bitField0_ & 0x00400000) != 0)) {
+        result.isDeprecated_ = isDeprecated_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1526,6 +1557,9 @@ private static final long serialVersionUID = 0L;
         attributeName_ = other.attributeName_;
         bitField0_ |= 0x00200000;
         onChanged();
+      }
+      if (other.getIsDeprecated() != false) {
+        setIsDeprecated(other.getIsDeprecated());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1688,6 +1722,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00200000;
               break;
             } // case 186
+            case 192: {
+              isDeprecated_ = input.readBool();
+              bitField0_ |= 0x00400000;
+              break;
+            } // case 192
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3712,6 +3751,50 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       attributeName_ = value;
       bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+
+    private boolean isDeprecated_ ;
+    /**
+     * <pre>
+     * Whether the user marked the feature as deprecated.
+     * </pre>
+     *
+     * <code>bool is_deprecated = 24 [json_name = "isDeprecated"];</code>
+     * @return The isDeprecated.
+     */
+    @java.lang.Override
+    public boolean getIsDeprecated() {
+      return isDeprecated_;
+    }
+    /**
+     * <pre>
+     * Whether the user marked the feature as deprecated.
+     * </pre>
+     *
+     * <code>bool is_deprecated = 24 [json_name = "isDeprecated"];</code>
+     * @param value The isDeprecated to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIsDeprecated(boolean value) {
+
+      isDeprecated_ = value;
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Whether the user marked the feature as deprecated.
+     * </pre>
+     *
+     * <code>bool is_deprecated = 24 [json_name = "isDeprecated"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIsDeprecated() {
+      bitField0_ = (bitField0_ & ~0x00400000);
+      isDeprecated_ = false;
       onChanged();
       return this;
     }

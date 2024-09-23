@@ -328,4 +328,14 @@ public interface ScalarFeatureTypeOrBuilder extends
    */
   com.google.protobuf.ByteString
       getAttributeNameBytes();
+
+  /**
+   * <pre>
+   * Whether the user marked the feature as deprecated.
+   * </pre>
+   *
+   * <code>bool is_deprecated = 24 [json_name = "isDeprecated"];</code>
+   * @return The isDeprecated.
+   */
+  boolean getIsDeprecated();
 }

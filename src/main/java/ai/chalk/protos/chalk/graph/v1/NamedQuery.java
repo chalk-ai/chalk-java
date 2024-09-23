@@ -694,6 +694,32 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int SOURCE_FILE_REFERENCE_FIELD_NUMBER = 13;
+  private ai.chalk.protos.chalk.graph.v1.SourceFileReference sourceFileReference_;
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   * @return Whether the sourceFileReference field is set.
+   */
+  @java.lang.Override
+  public boolean hasSourceFileReference() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   * @return The sourceFileReference.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.SourceFileReference getSourceFileReference() {
+    return sourceFileReference_ == null ? ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance() : sourceFileReference_;
+  }
+  /**
+   * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder getSourceFileReferenceOrBuilder() {
+    return sourceFileReference_ == null ? ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance() : sourceFileReference_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -752,6 +778,9 @@ java.lang.String defaultValue) {
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 12, deploymentId_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeMessage(13, getSourceFileReference());
     }
     getUnknownFields().writeTo(output);
   }
@@ -834,6 +863,10 @@ java.lang.String defaultValue) {
     if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, deploymentId_);
     }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(13, getSourceFileReference());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -884,6 +917,11 @@ java.lang.String defaultValue) {
     if (hasDeploymentId()) {
       if (!getDeploymentId()
           .equals(other.getDeploymentId())) return false;
+    }
+    if (hasSourceFileReference() != other.hasSourceFileReference()) return false;
+    if (hasSourceFileReference()) {
+      if (!getSourceFileReference()
+          .equals(other.getSourceFileReference())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -939,6 +977,10 @@ java.lang.String defaultValue) {
     if (hasDeploymentId()) {
       hash = (37 * hash) + DEPLOYMENT_ID_FIELD_NUMBER;
       hash = (53 * hash) + getDeploymentId().hashCode();
+    }
+    if (hasSourceFileReference()) {
+      hash = (37 * hash) + SOURCE_FILE_REFERENCE_FIELD_NUMBER;
+      hash = (53 * hash) + getSourceFileReference().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1089,13 +1131,19 @@ java.lang.String defaultValue) {
 
     // Construct using ai.chalk.protos.chalk.graph.v1.NamedQuery.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getSourceFileReferenceFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -1116,6 +1164,11 @@ java.lang.String defaultValue) {
       internalGetMutablePlannerOptions().clear();
       fileName_ = "";
       deploymentId_ = "";
+      sourceFileReference_ = null;
+      if (sourceFileReferenceBuilder_ != null) {
+        sourceFileReferenceBuilder_.dispose();
+        sourceFileReferenceBuilder_ = null;
+      }
       return this;
     }
 
@@ -1194,6 +1247,12 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000800) != 0)) {
         result.deploymentId_ = deploymentId_;
         to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00001000) != 0)) {
+        result.sourceFileReference_ = sourceFileReferenceBuilder_ == null
+            ? sourceFileReference_
+            : sourceFileReferenceBuilder_.build();
+        to_bitField0_ |= 0x00000010;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1311,6 +1370,9 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000800;
         onChanged();
       }
+      if (other.hasSourceFileReference()) {
+        mergeSourceFileReference(other.getSourceFileReference());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1412,6 +1474,13 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000800;
               break;
             } // case 98
+            case 106: {
+              input.readMessage(
+                  getSourceFileReferenceFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00001000;
+              break;
+            } // case 106
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2653,6 +2722,127 @@ java.lang.String defaultValue) {
       bitField0_ |= 0x00000800;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.graph.v1.SourceFileReference sourceFileReference_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.SourceFileReference, ai.chalk.protos.chalk.graph.v1.SourceFileReference.Builder, ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder> sourceFileReferenceBuilder_;
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     * @return Whether the sourceFileReference field is set.
+     */
+    public boolean hasSourceFileReference() {
+      return ((bitField0_ & 0x00001000) != 0);
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     * @return The sourceFileReference.
+     */
+    public ai.chalk.protos.chalk.graph.v1.SourceFileReference getSourceFileReference() {
+      if (sourceFileReferenceBuilder_ == null) {
+        return sourceFileReference_ == null ? ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance() : sourceFileReference_;
+      } else {
+        return sourceFileReferenceBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public Builder setSourceFileReference(ai.chalk.protos.chalk.graph.v1.SourceFileReference value) {
+      if (sourceFileReferenceBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        sourceFileReference_ = value;
+      } else {
+        sourceFileReferenceBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public Builder setSourceFileReference(
+        ai.chalk.protos.chalk.graph.v1.SourceFileReference.Builder builderForValue) {
+      if (sourceFileReferenceBuilder_ == null) {
+        sourceFileReference_ = builderForValue.build();
+      } else {
+        sourceFileReferenceBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public Builder mergeSourceFileReference(ai.chalk.protos.chalk.graph.v1.SourceFileReference value) {
+      if (sourceFileReferenceBuilder_ == null) {
+        if (((bitField0_ & 0x00001000) != 0) &&
+          sourceFileReference_ != null &&
+          sourceFileReference_ != ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance()) {
+          getSourceFileReferenceBuilder().mergeFrom(value);
+        } else {
+          sourceFileReference_ = value;
+        }
+      } else {
+        sourceFileReferenceBuilder_.mergeFrom(value);
+      }
+      if (sourceFileReference_ != null) {
+        bitField0_ |= 0x00001000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public Builder clearSourceFileReference() {
+      bitField0_ = (bitField0_ & ~0x00001000);
+      sourceFileReference_ = null;
+      if (sourceFileReferenceBuilder_ != null) {
+        sourceFileReferenceBuilder_.dispose();
+        sourceFileReferenceBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.SourceFileReference.Builder getSourceFileReferenceBuilder() {
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return getSourceFileReferenceFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder getSourceFileReferenceOrBuilder() {
+      if (sourceFileReferenceBuilder_ != null) {
+        return sourceFileReferenceBuilder_.getMessageOrBuilder();
+      } else {
+        return sourceFileReference_ == null ?
+            ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance() : sourceFileReference_;
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.SourceFileReference, ai.chalk.protos.chalk.graph.v1.SourceFileReference.Builder, ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder> 
+        getSourceFileReferenceFieldBuilder() {
+      if (sourceFileReferenceBuilder_ == null) {
+        sourceFileReferenceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.SourceFileReference, ai.chalk.protos.chalk.graph.v1.SourceFileReference.Builder, ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder>(
+                getSourceFileReference(),
+                getParentForChildren(),
+                isClean());
+        sourceFileReference_ = null;
+      }
+      return sourceFileReferenceBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
