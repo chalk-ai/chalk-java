@@ -686,27 +686,69 @@ public class TestOnlineQueryParams extends AllocatorTest {
     public void testNullInInputList() throws Exception {
         // Serialize into bytes
         var inputs = new HashMap<String, List<?>>();
-        var userIds = Arrays.asList("1", "2", "4", "3");
-        var wealth = Arrays.asList(1.0, 2.0, 4.0, 3.0);
+        var userIds = Arrays.asList("1", "2", null, "3");
+        var wealth = Arrays.asList(1.0, 2.0, null, 3.0);
         inputs.put("user.id", userIds);
         inputs.put("user.wealth", wealth);
         var outputs = new String[]{"user.today", "user.socure_score"};
         OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
-        var inputBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
+        var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
 
         // Deserialize back into a table and inspect values
-        var inputTable = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
-        var userIdVector = inputTable.toVectorSchemaRoot().getVector("user.id");
-        var wealthVector = inputTable.toVectorSchemaRoot().getVector("user.wealth");
+        try (
+            var inputTable = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
+            var vsr = inputTable.toVectorSchemaRoot();
+            var userIdVector = vsr.getVector("user.id");
+            var wealthVector = vsr.getVector("user.wealth");
+        ) {
+            assert userIdVector.getObject(0).toString().equals("1");
+            assert userIdVector.getObject(1).toString().equals("2");
+            assert userIdVector.getObject(2) == null;
+            assert userIdVector.getObject(3).toString().equals("3");
 
-        assert userIdVector.getObject(0).equals("1");
-        assert userIdVector.getObject(1).equals("2");
-        assert userIdVector.getObject(2) == null;
-        assert userIdVector.getObject(3).equals("3");
+            assert wealthVector.getObject(0).equals(1.0);
+            assert wealthVector.getObject(1).equals(2.0);
+            assert wealthVector.getObject(2) == null;
+            assert wealthVector.getObject(3).equals(3.0);
+        }
+    }
 
-        assert wealthVector.getObject(0).equals(1.0);
-        assert wealthVector.getObject(1).equals(2.0);
-        assert wealthVector.getObject(2) == null;
-        assert wealthVector.getObject(3).equals(3.0);
+
+    /*
+     * Tests that when one of our feature values is a list containing ALL nulls,
+     * we correctly serialize the inputs.
+     */
+    @Test
+    public void testNullVectorInInputs() throws Exception {
+        var inputs = new HashMap<String, List<?>>();
+        var userIds = Arrays.asList("1", "2", null, "3");
+        var child = Arrays.asList(null, null, null, null);
+        inputs.put("user.id", userIds);
+        inputs.put("user.child", child);
+        var outputs = new String[]{"user.today", "user.socure_score"};
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
+
+        // Fails to be converted into a table because of a bug in the java Arrow library
+        //      `java.lang.UnsupportedOperationException: Tried to get allocator from NullVector`
+        // where it doesn't support deserializing tables with NullVectors.
+
+        // var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+        //
+        // try (
+        //         var inputTable = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
+        //         var vsr = inputTable.toVectorSchemaRoot();
+        //         var userIdVector = vsr.getVector("user.id");
+        //         var childVector = vsr.getVector("user.child");
+        // ) {
+        //     assert userIdVector.getObject(0).toString().equals("1");
+        //     assert userIdVector.getObject(1).toString().equals("2");
+        //     assert userIdVector.getObject(2) == null;
+        //     assert userIdVector.getObject(3).toString().equals("3");
+        //
+        //     assert childVector.getObject(0) == null;
+        //     assert childVector.getObject(1) == null;
+        //     assert childVector.getObject(2) == null;
+        //     assert childVector.getObject(3) == null;
+        // }
     }
 }

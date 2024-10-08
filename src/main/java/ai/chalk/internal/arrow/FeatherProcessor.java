@@ -245,23 +245,19 @@ public class FeatherProcessor {
                 throw new Exception(String.format("Input values have different lengths - expected %d but got %d: %s", uniformListLength, values.size(), values));
             }
             
-//            Object firstNonNull = null;
-//            for (Object item : values) {
-//                if (item != null) {
-//                    firstNonNull = item;
-//                    break;
-//                }
-//            }
-
-//            if (firstNonNull == null) {
-//                NullVector nullVector = new NullVector(entry.getKey(), values.size());
-//                fieldVectors.add(nullVector);
-//            }
-
-            var firstNonNull = values.get(0);
+            Object firstNonNull = null;
+            for (Object item : values) {
+                if (item != null) {
+                    firstNonNull = item;
+                    break;
+                }
+            }
 
             var fqn = entry.getKey();
-            if (firstNonNull instanceof Integer) {
+            if (firstNonNull == null) {
+                NullVector nullVector = new NullVector(entry.getKey(), values.size());
+                fieldVectors.add(nullVector);
+            } else if (firstNonNull instanceof Integer) {
                 BigIntVector intVector = new BigIntVector(fqn, allocator);
                 fieldVectors.add(intVector);
                 var writer = new BigIntWriterImpl(intVector);
