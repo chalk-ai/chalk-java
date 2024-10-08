@@ -136,7 +136,7 @@ public class TestGrpcClient {
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 // TODO: CHA-4791
                 // .withIncludeMeta(true)
-                .withExplain(true)
+                // .withExplain(true)
                 .withQueryName("chalk-java::testOnlineQueryOptionalParamsSanity")
                 .withQueryNameVersion("1.0.0")
                 .withStorePlanStages(true)
