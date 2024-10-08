@@ -1,12 +1,12 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
-import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 
 import java.net.http.HttpClient;
+import java.nio.file.Path;
 
 public interface ChalkClient extends AutoCloseable {
 
@@ -140,6 +140,12 @@ public interface ChalkClient extends AutoCloseable {
 
         public Builder withGrpc();
 
+        /**
+         * Sets the root CA certificate file.
+         * @param rootCa The path to the root CA
+         */
+        public Builder withRootCa(Path rootCa);
+
         public String getClientId();
 
         public String getClientSecret();
@@ -152,11 +158,10 @@ public interface ChalkClient extends AutoCloseable {
 
         public String getDeploymentTag();
 
+        public Path getRootCa();
+
         public HttpClient getHttpClient();
 
         ChalkClient build() throws ChalkException;
     }
 }
-
-
-

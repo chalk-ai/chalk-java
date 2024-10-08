@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     namespace_ = "";
     groupBy_ = java.util.Collections.emptyList();
     aggregation_ = "";
+    filters_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -240,6 +241,47 @@ private static final long serialVersionUID = 0L;
     return arrowType_ == null ? ai.chalk.protos.chalk.arrow.v1.ArrowType.getDefaultInstance() : arrowType_;
   }
 
+  public static final int FILTERS_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode> filters_;
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getFiltersList() {
+    return filters_;
+  }
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> 
+      getFiltersOrBuilderList() {
+    return filters_;
+  }
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public int getFiltersCount() {
+    return filters_.size();
+  }
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getFilters(int index) {
+    return filters_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getFiltersOrBuilder(
+      int index) {
+    return filters_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -272,6 +314,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000004) != 0)) {
       output.writeMessage(6, getArrowType());
     }
+    for (int i = 0; i < filters_.size(); i++) {
+      output.writeMessage(7, filters_.get(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -302,6 +347,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getArrowType());
+    }
+    for (int i = 0; i < filters_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, filters_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -339,6 +388,8 @@ private static final long serialVersionUID = 0L;
       if (!getArrowType()
           .equals(other.getArrowType())) return false;
     }
+    if (!getFiltersList()
+        .equals(other.getFiltersList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -369,6 +420,10 @@ private static final long serialVersionUID = 0L;
     if (hasArrowType()) {
       hash = (37 * hash) + ARROW_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getArrowType().hashCode();
+    }
+    if (getFiltersCount() > 0) {
+      hash = (37 * hash) + FILTERS_FIELD_NUMBER;
+      hash = (53 * hash) + getFiltersList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -504,6 +559,7 @@ private static final long serialVersionUID = 0L;
         getBucketDurationFieldBuilder();
         getAggregateOnFieldBuilder();
         getArrowTypeFieldBuilder();
+        getFiltersFieldBuilder();
       }
     }
     @java.lang.Override
@@ -534,6 +590,13 @@ private static final long serialVersionUID = 0L;
         arrowTypeBuilder_.dispose();
         arrowTypeBuilder_ = null;
       }
+      if (filtersBuilder_ == null) {
+        filters_ = java.util.Collections.emptyList();
+      } else {
+        filters_ = null;
+        filtersBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000040);
       return this;
     }
 
@@ -575,6 +638,15 @@ private static final long serialVersionUID = 0L;
         result.groupBy_ = groupBy_;
       } else {
         result.groupBy_ = groupByBuilder_.build();
+      }
+      if (filtersBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0)) {
+          filters_ = java.util.Collections.unmodifiableList(filters_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.filters_ = filters_;
+      } else {
+        result.filters_ = filtersBuilder_.build();
       }
     }
 
@@ -697,6 +769,32 @@ private static final long serialVersionUID = 0L;
       if (other.hasArrowType()) {
         mergeArrowType(other.getArrowType());
       }
+      if (filtersBuilder_ == null) {
+        if (!other.filters_.isEmpty()) {
+          if (filters_.isEmpty()) {
+            filters_ = other.filters_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureFiltersIsMutable();
+            filters_.addAll(other.filters_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.filters_.isEmpty()) {
+          if (filtersBuilder_.isEmpty()) {
+            filtersBuilder_.dispose();
+            filtersBuilder_ = null;
+            filters_ = other.filters_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+            filtersBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getFiltersFieldBuilder() : null;
+          } else {
+            filtersBuilder_.addAllMessages(other.filters_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -767,6 +865,19 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 58: {
+              ai.chalk.protos.chalk.expression.v1.LogicalExprNode m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.expression.v1.LogicalExprNode.parser(),
+                      extensionRegistry);
+              if (filtersBuilder_ == null) {
+                ensureFiltersIsMutable();
+                filters_.add(m);
+              } else {
+                filtersBuilder_.addMessage(m);
+              }
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1529,6 +1640,246 @@ private static final long serialVersionUID = 0L;
         arrowType_ = null;
       }
       return arrowTypeBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode> filters_ =
+      java.util.Collections.emptyList();
+    private void ensureFiltersIsMutable() {
+      if (!((bitField0_ & 0x00000040) != 0)) {
+        filters_ = new java.util.ArrayList<ai.chalk.protos.chalk.expression.v1.LogicalExprNode>(filters_);
+        bitField0_ |= 0x00000040;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> filtersBuilder_;
+
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode> getFiltersList() {
+      if (filtersBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(filters_);
+      } else {
+        return filtersBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public int getFiltersCount() {
+      if (filtersBuilder_ == null) {
+        return filters_.size();
+      } else {
+        return filtersBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getFilters(int index) {
+      if (filtersBuilder_ == null) {
+        return filters_.get(index);
+      } else {
+        return filtersBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder setFilters(
+        int index, ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (filtersBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureFiltersIsMutable();
+        filters_.set(index, value);
+        onChanged();
+      } else {
+        filtersBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder setFilters(
+        int index, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder builderForValue) {
+      if (filtersBuilder_ == null) {
+        ensureFiltersIsMutable();
+        filters_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        filtersBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder addFilters(ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (filtersBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureFiltersIsMutable();
+        filters_.add(value);
+        onChanged();
+      } else {
+        filtersBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder addFilters(
+        int index, ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (filtersBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureFiltersIsMutable();
+        filters_.add(index, value);
+        onChanged();
+      } else {
+        filtersBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder addFilters(
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder builderForValue) {
+      if (filtersBuilder_ == null) {
+        ensureFiltersIsMutable();
+        filters_.add(builderForValue.build());
+        onChanged();
+      } else {
+        filtersBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder addFilters(
+        int index, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder builderForValue) {
+      if (filtersBuilder_ == null) {
+        ensureFiltersIsMutable();
+        filters_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        filtersBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder addAllFilters(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.expression.v1.LogicalExprNode> values) {
+      if (filtersBuilder_ == null) {
+        ensureFiltersIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, filters_);
+        onChanged();
+      } else {
+        filtersBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder clearFilters() {
+      if (filtersBuilder_ == null) {
+        filters_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+      } else {
+        filtersBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public Builder removeFilters(int index) {
+      if (filtersBuilder_ == null) {
+        ensureFiltersIsMutable();
+        filters_.remove(index);
+        onChanged();
+      } else {
+        filtersBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder getFiltersBuilder(
+        int index) {
+      return getFiltersFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getFiltersOrBuilder(
+        int index) {
+      if (filtersBuilder_ == null) {
+        return filters_.get(index);  } else {
+        return filtersBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> 
+         getFiltersOrBuilderList() {
+      if (filtersBuilder_ != null) {
+        return filtersBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(filters_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder addFiltersBuilder() {
+      return getFiltersFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder addFiltersBuilder(
+        int index) {
+      return getFiltersFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder> 
+         getFiltersBuilderList() {
+      return getFiltersFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> 
+        getFiltersFieldBuilder() {
+      if (filtersBuilder_ == null) {
+        filtersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder>(
+                filters_,
+                ((bitField0_ & 0x00000040) != 0),
+                getParentForChildren(),
+                isClean());
+        filters_ = null;
+      }
+      return filtersBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

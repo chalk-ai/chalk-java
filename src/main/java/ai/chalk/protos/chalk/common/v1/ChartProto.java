@@ -35,15 +35,15 @@ public final class ChartProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\033chalk/common/v1/chart.proto\022\017chalk.com" +
-      "mon.v1\"L\n\006Series\022\026\n\006points\030\001 \003(\001R\006points" +
+      "mon.v1\"P\n\006Series\022\026\n\006points\030\001 \003(\001R\006points" +
       "\022\024\n\005label\030\002 \001(\tR\005label\022\024\n\005units\030\003 \001(\tR\005u" +
-      "nits\"t\n\005Chart\022\024\n\005title\030\001 \001(\tR\005title\022/\n\006s" +
-      "eries\030\002 \003(\0132\027.chalk.common.v1.SeriesR\006se" +
-      "ries\022$\n\016x_timestamp_ms\030\004 \003(\003R\014xTimestamp" +
-      "MsB\213\001\n\037ai.chalk.protos.chalk.common.v1B\n" +
-      "ChartProtoP\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017C" +
-      "halk\\Common\\V1\342\002\033Chalk\\Common\\V1\\GPBMeta" +
-      "data\352\002\021Chalk::Common::V1b\006proto3"
+      "nits:\002\030\001\"x\n\005Chart\022\024\n\005title\030\001 \001(\tR\005title\022" +
+      "/\n\006series\030\002 \003(\0132\027.chalk.common.v1.Series" +
+      "R\006series\022$\n\016x_timestamp_ms\030\004 \003(\003R\014xTimes" +
+      "tampMs:\002\030\001B\213\001\n\037ai.chalk.protos.chalk.com" +
+      "mon.v1B\nChartProtoP\001\242\002\003CCX\252\002\017Chalk.Commo" +
+      "n.V1\312\002\017Chalk\\Common\\V1\342\002\033Chalk\\Common\\V1" +
+      "\\GPBMetadata\352\002\021Chalk::Common::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

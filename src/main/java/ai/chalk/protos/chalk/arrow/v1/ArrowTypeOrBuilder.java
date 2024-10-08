@@ -505,5 +505,20 @@ public interface ArrowTypeOrBuilder extends
    */
   ai.chalk.protos.chalk.arrow.v1.MapOrBuilder getMapOrBuilder();
 
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   * @return Whether the extension field is set.
+   */
+  boolean hasExtension();
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   * @return The extension.
+   */
+  ai.chalk.protos.chalk.arrow.v1.Extension getExtension();
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder getExtensionOrBuilder();
+
   ai.chalk.protos.chalk.arrow.v1.ArrowType.ArrowTypeEnumCase getArrowTypeEnumCase();
 }

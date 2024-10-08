@@ -8,18 +8,33 @@ import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
-import ai.chalk.protos.chalk.common.v1.*;
+import ai.chalk.protos.chalk.common.v1.ExplainOptions;
+import ai.chalk.protos.chalk.common.v1.FeatherBodyType;
+import ai.chalk.protos.chalk.common.v1.FeatureEncodingOptions;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryContext;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryResponseOptions;
+import ai.chalk.protos.chalk.common.v1.OutputExpr;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
-import io.grpc.*;
+import io.grpc.Channel;
+import io.grpc.ChannelCredentials;
+import io.grpc.Grpc;
+import io.grpc.InsecureChannelCredentials;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.Metadata;
+import io.grpc.TlsChannelCredentials;
 import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,9 +71,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         String grpcHost = resolvedConfig.grpcHost();
-        ChannelCredentials channelCreds = grpcHost.startsWith("localhost") || grpcHost.startsWith("127.0.0.1")
-                ? InsecureChannelCredentials.create()
-                : TlsChannelCredentials.create();
+        final ChannelCredentials channelCreds = getChannelCredentials(grpcHost, resolvedConfig);
         ManagedChannelBuilder<?> unauthenticatedChannelBuilder = Grpc.newChannelBuilder(
                 grpcHost,
                 channelCreds
@@ -99,40 +112,56 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
-            .maxInboundMessageSize(1024 * 1024 * 100)
-            .intercept(
-                new AuthenticatedHeaderClientInterceptor(
-                        ServerType.SERVER,
-                        Map.of(),
-                        tokenRefresher,
-                        environmentId,
-                        null
+                .maxInboundMessageSize(1024 * 1024 * 100)
+                .intercept(
+                        new AuthenticatedHeaderClientInterceptor(
+                                ServerType.SERVER,
+                                Map.of(),
+                                tokenRefresher,
+                                environmentId,
+                                null
+                        )
                 )
-            )
-            .build();
+                .build();
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
         String engineHost;
         try {
             engineHost = token
-                .getEnginesOrThrow(environmentId)
-                .replaceFirst("^https?://", "");
+                    .getEnginesOrThrow(environmentId)
+                    .replaceFirst("^https?://", "");
         } catch (Exception e) {
             throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
         }
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
-            .maxInboundMessageSize(1024 * 1024 * 500)
-            .intercept(
-                new AuthenticatedHeaderClientInterceptor(
-                        ServerType.ENGINE,
-                        Map.of(),
-                        tokenRefresher,
-                        environmentId,
-                        builder.getDeploymentTag()
+                .maxInboundMessageSize(1024 * 1024 * 500)
+                .intercept(
+                        new AuthenticatedHeaderClientInterceptor(
+                                ServerType.ENGINE,
+                                Map.of(),
+                                tokenRefresher,
+                                environmentId,
+                                builder.getDeploymentTag()
+                        )
                 )
-            )
-            .build();
+                .build();
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+    }
+
+    private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
+        if (grpcHost.startsWith("localhost") || grpcHost.startsWith("127.0.0.1")) {
+            return InsecureChannelCredentials.create();
+        } else {
+            var channelBuilder = TlsChannelCredentials.newBuilder();
+            if (!resolvedConfig.rootCa().value().isEmpty()) {
+                try {
+                    channelBuilder.trustManager(Path.of(resolvedConfig.rootCa().value()).toFile());
+                } catch (IOException ex) {
+                    throw new ClientException("Error loading root CA file", ex);
+                }
+            }
+            return channelBuilder.build();
+        }
     }
 
     private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
@@ -150,11 +179,11 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try (
-            var childAllocator = allocator.newChildAllocator(
-                "grpc_online_query_params",
-                0,
-                FeatherProcessor.ALLOCATOR_SIZE_REQUEST
-            )
+                var childAllocator = allocator.newChildAllocator(
+                        "grpc_online_query_params",
+                        0,
+                        FeatherProcessor.ALLOCATOR_SIZE_REQUEST
+                )
         ) {
             bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
         } catch (Exception e) {
@@ -170,10 +199,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         if (params.getNow() != null) {
             for (var n : params.getNow()) {
                 now.add(
-                    Timestamp.newBuilder()
-                        .setSeconds(n.toEpochSecond())
-                        .setNanos(n.getNano())
-                        .build()
+                        Timestamp.newBuilder()
+                                .setSeconds(n.toEpochSecond())
+                                .setNanos(n.getNano())
+                                .build()
                 );
             }
         }
@@ -207,9 +236,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         var options = OnlineQueryResponseOptions.newBuilder()
                 .setIncludeMeta(params.isIncludeMeta() || params.isExplain())
                 .setEncodingOptions(
-                    FeatureEncodingOptions.newBuilder()
-                        .setEncodeStructsAsObjects(true)
-                        .build()
+                        FeatureEncodingOptions.newBuilder()
+                                .setEncodeStructsAsObjects(true)
+                                .build()
                 );
         if (params.isExplain()) {
             options.setExplain(ExplainOptions.newBuilder().build());
@@ -219,13 +248,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         var request = OnlineQueryBulkRequest.newBuilder()
-            .setInputsFeather(ByteString.copyFrom(bodyBytes))
-            .addAllOutputs(outputs)
-            .addAllNow(now)
-            .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
-            .setContext(context)
-            .setResponseOptions(options)
-            .build();
+                .setInputsFeather(ByteString.copyFrom(bodyBytes))
+                .addAllOutputs(outputs)
+                .addAllNow(now)
+                .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
+                .setContext(context)
+                .setResponseOptions(options)
+                .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
         OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
@@ -243,14 +272,14 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         Table scalars = null;
         Map<String, Table> groups = new HashMap<>();
         var responseAlloc = this.allocator.newChildAllocator(
-            "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
+                "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
         );
         try {
             if (!response.getScalarsData().isEmpty()) {
                 try {
                     scalars = FeatherProcessor.convertBytesToTable(
-                        response.getScalarsData().toByteArray(),
-                        responseAlloc
+                            response.getScalarsData().toByteArray(),
+                            responseAlloc
                     );
                 } catch (Exception e) {
                     throw new ClientException("Failed to convert scalar data bytes to table", e);
@@ -261,12 +290,12 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 String fqn = entry.getKey();
                 try {
                     groups.put(
-                        fqn,
-                        FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), responseAlloc)
+                            fqn,
+                            FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), responseAlloc)
                     );
                 } catch (Exception e) {
                     throw new ClientException(
-                        String.format("Failed to convert bytes to table for feature '%s'", fqn), e
+                            String.format("Failed to convert bytes to table for feature '%s'", fqn), e
                     );
                 }
             }
@@ -281,11 +310,11 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         return new OnlineQueryResult(
-            scalars,
-            groups,
-            errors,
-            meta,
-            responseAlloc
+                scalars,
+                groups,
+                errors,
+                meta,
+                responseAlloc
         );
     }
 

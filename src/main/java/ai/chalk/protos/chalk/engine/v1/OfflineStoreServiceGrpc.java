@@ -111,6 +111,68 @@ public final class OfflineStoreServiceGrpc {
     return getGetFeatureValuesChartMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest,
+      ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> getGetFeatureValuesTimeSeriesChartMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetFeatureValuesTimeSeriesChart",
+      requestType = ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest.class,
+      responseType = ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest,
+      ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> getGetFeatureValuesTimeSeriesChartMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest, ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> getGetFeatureValuesTimeSeriesChartMethod;
+    if ((getGetFeatureValuesTimeSeriesChartMethod = OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartMethod) == null) {
+      synchronized (OfflineStoreServiceGrpc.class) {
+        if ((getGetFeatureValuesTimeSeriesChartMethod = OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartMethod) == null) {
+          OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartMethod = getGetFeatureValuesTimeSeriesChartMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest, ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetFeatureValuesTimeSeriesChart"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new OfflineStoreServiceMethodDescriptorSupplier("GetFeatureValuesTimeSeriesChart"))
+              .build();
+        }
+      }
+    }
+    return getGetFeatureValuesTimeSeriesChartMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request,
+      ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> getGetFeatureValuesTimeSeriesChartV2Method;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetFeatureValuesTimeSeriesChartV2",
+      requestType = ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request.class,
+      responseType = ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request,
+      ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> getGetFeatureValuesTimeSeriesChartV2Method() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request, ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> getGetFeatureValuesTimeSeriesChartV2Method;
+    if ((getGetFeatureValuesTimeSeriesChartV2Method = OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartV2Method) == null) {
+      synchronized (OfflineStoreServiceGrpc.class) {
+        if ((getGetFeatureValuesTimeSeriesChartV2Method = OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartV2Method) == null) {
+          OfflineStoreServiceGrpc.getGetFeatureValuesTimeSeriesChartV2Method = getGetFeatureValuesTimeSeriesChartV2Method =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request, ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetFeatureValuesTimeSeriesChartV2"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response.getDefaultInstance()))
+              .setSchemaDescriptor(new OfflineStoreServiceMethodDescriptorSupplier("GetFeatureValuesTimeSeriesChartV2"))
+              .build();
+        }
+      }
+    }
+    return getGetFeatureValuesTimeSeriesChartV2Method;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -178,9 +240,25 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     default void getFeatureValuesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetFeatureValuesChartMethod(), responseObserver);
+    }
+
+    /**
+     */
+    @java.lang.Deprecated
+    default void getFeatureValuesTimeSeriesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetFeatureValuesTimeSeriesChartMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetFeatureValuesTimeSeriesChartV2Method(), responseObserver);
     }
   }
 
@@ -235,10 +313,28 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public void getFeatureValuesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetFeatureValuesChartMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    @java.lang.Deprecated
+    public void getFeatureValuesTimeSeriesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetFeatureValuesTimeSeriesChartMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetFeatureValuesTimeSeriesChartV2Method(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -277,9 +373,25 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse getFeatureValuesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetFeatureValuesChartMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    @java.lang.Deprecated
+    public ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse getFeatureValuesTimeSeriesChart(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetFeatureValuesTimeSeriesChartMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetFeatureValuesTimeSeriesChartV2Method(), getCallOptions(), request);
     }
   }
 
@@ -320,16 +432,36 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse> getFeatureValuesChart(
         ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetFeatureValuesChartMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    @java.lang.Deprecated
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse> getFeatureValuesTimeSeriesChart(
+        ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetFeatureValuesTimeSeriesChartMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> getFeatureValuesTimeSeriesChartV2(
+        ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetFeatureValuesTimeSeriesChartV2Method(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GET_QUERY_LOG_ENTRIES = 0;
   private static final int METHODID_GET_QUERY_VALUES = 1;
   private static final int METHODID_GET_FEATURE_VALUES_CHART = 2;
+  private static final int METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART = 3;
+  private static final int METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART_V2 = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -359,6 +491,14 @@ public final class OfflineStoreServiceGrpc {
         case METHODID_GET_FEATURE_VALUES_CHART:
           serviceImpl.getFeatureValuesChart((ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse>) responseObserver);
+          break;
+        case METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART:
+          serviceImpl.getFeatureValuesTimeSeriesChart((ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse>) responseObserver);
+          break;
+        case METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART_V2:
+          serviceImpl.getFeatureValuesTimeSeriesChartV2((ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -399,6 +539,20 @@ public final class OfflineStoreServiceGrpc {
               ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartRequest,
               ai.chalk.protos.chalk.common.v1.GetFeatureValuesChartResponse>(
                 service, METHODID_GET_FEATURE_VALUES_CHART)))
+        .addMethod(
+          getGetFeatureValuesTimeSeriesChartMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartRequest,
+              ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse>(
+                service, METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART)))
+        .addMethod(
+          getGetFeatureValuesTimeSeriesChartV2Method(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request,
+              ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response>(
+                service, METHODID_GET_FEATURE_VALUES_TIME_SERIES_CHART_V2)))
         .build();
   }
 
@@ -450,6 +604,8 @@ public final class OfflineStoreServiceGrpc {
               .addMethod(getGetQueryLogEntriesMethod())
               .addMethod(getGetQueryValuesMethod())
               .addMethod(getGetFeatureValuesChartMethod())
+              .addMethod(getGetFeatureValuesTimeSeriesChartMethod())
+              .addMethod(getGetFeatureValuesTimeSeriesChartV2Method())
               .build();
         }
       }

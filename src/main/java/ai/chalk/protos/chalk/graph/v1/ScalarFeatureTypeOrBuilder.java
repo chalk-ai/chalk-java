@@ -338,4 +338,15 @@ public interface ScalarFeatureTypeOrBuilder extends
    * @return The isDeprecated.
    */
   boolean getIsDeprecated();
+
+  /**
+   * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+   * @return The enum numeric value on the wire for cacheStrategy.
+   */
+  int getCacheStrategyValue();
+  /**
+   * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+   * @return The cacheStrategy.
+   */
+  ai.chalk.protos.chalk.graph.v1.CacheStrategy getCacheStrategy();
 }

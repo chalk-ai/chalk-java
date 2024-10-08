@@ -5,10 +5,6 @@
 package ai.chalk.protos.chalk.server.v1;
 
 /**
- * <pre>
- * Deprecated - whenever possible, use `common/v1/chart.proto`
- * </pre>
- *
  * Protobuf type {@code chalk.server.v1.Chart}
  */
 public final class Chart extends
@@ -354,10 +350,6 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   * Deprecated - whenever possible, use `common/v1/chart.proto`
-   * </pre>
-   *
    * Protobuf type {@code chalk.server.v1.Chart}
    */
   public static final class Builder extends

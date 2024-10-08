@@ -25,6 +25,21 @@ public final class ChartProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_Chart_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_Point_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_Point_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_TimeSeries_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_TimeSeries_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_TimeSeriesChart_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_TimeSeriesChart_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -35,20 +50,33 @@ public final class ChartProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\033chalk/server/v1/chart.proto\022\017chalk.ser" +
-      "ver.v1\"L\n\006Series\022\026\n\006points\030\001 \003(\001R\006points" +
-      "\022\024\n\005label\030\002 \001(\tR\005label\022\024\n\005units\030\003 \001(\tR\005u" +
-      "nits\"t\n\005Chart\022\024\n\005title\030\001 \001(\tR\005title\022/\n\006s" +
-      "eries\030\002 \003(\0132\027.chalk.server.v1.SeriesR\006se" +
-      "ries\022$\n\016x_timestamp_ms\030\004 \003(\003R\014xTimestamp" +
-      "MsB\237\001\n\037ai.chalk.protos.chalk.server.v1B\n" +
-      "ChartProtoP\001Z\022server/v1;serverv1\242\002\003CSX\252\002" +
-      "\017Chalk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033Cha" +
-      "lk\\Server\\V1\\GPBMetadata\352\002\021Chalk::Server" +
-      "::V1b\006proto3"
+      "ver.v1\032\036google/protobuf/duration.proto\032\037" +
+      "google/protobuf/timestamp.proto\"L\n\006Serie" +
+      "s\022\026\n\006points\030\001 \003(\001R\006points\022\024\n\005label\030\002 \001(\t" +
+      "R\005label\022\024\n\005units\030\003 \001(\tR\005units\"t\n\005Chart\022\024" +
+      "\n\005title\030\001 \001(\tR\005title\022/\n\006series\030\002 \003(\0132\027.c" +
+      "halk.server.v1.SeriesR\006series\022$\n\016x_times" +
+      "tamp_ms\030\004 \003(\003R\014xTimestampMs\"0\n\005Point\022\031\n\005" +
+      "value\030\001 \001(\003H\000R\005value\210\001\001:\002\030\001B\010\n\006_value\"l\n" +
+      "\nTimeSeries\022.\n\006points\030\001 \003(\0132\026.chalk.serv" +
+      "er.v1.PointR\006points\022\024\n\005label\030\002 \001(\tR\005labe" +
+      "l\022\024\n\005units\030\003 \001(\tR\005units:\002\030\001\"\327\001\n\017TimeSeri" +
+      "esChart\022\024\n\005title\030\001 \001(\tR\005title\0223\n\006series\030" +
+      "\002 \003(\0132\033.chalk.server.v1.TimeSeriesR\006seri" +
+      "es\0225\n\010x_series\030\003 \003(\0132\032.google.protobuf.T" +
+      "imestampR\007xSeries\022>\n\rwindow_period\030\004 \001(\013" +
+      "2\031.google.protobuf.DurationR\014windowPerio" +
+      "d:\002\030\001B\237\001\n\037ai.chalk.protos.chalk.server.v" +
+      "1B\nChartProtoP\001Z\022server/v1;serverv1\242\002\003CS" +
+      "X\252\002\017Chalk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033" +
+      "Chalk\\Server\\V1\\GPBMetadata\352\002\021Chalk::Ser" +
+      "ver::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.DurationProto.getDescriptor(),
+          com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_Series_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -62,6 +90,26 @@ public final class ChartProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_Chart_descriptor,
         new java.lang.String[] { "Title", "Series", "XTimestampMs", });
+    internal_static_chalk_server_v1_Point_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_chalk_server_v1_Point_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_Point_descriptor,
+        new java.lang.String[] { "Value", });
+    internal_static_chalk_server_v1_TimeSeries_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_chalk_server_v1_TimeSeries_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_TimeSeries_descriptor,
+        new java.lang.String[] { "Points", "Label", "Units", });
+    internal_static_chalk_server_v1_TimeSeriesChart_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_server_v1_TimeSeriesChart_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_TimeSeriesChart_descriptor,
+        new java.lang.String[] { "Title", "Series", "XSeries", "WindowPeriod", });
+    com.google.protobuf.DurationProto.getDescriptor();
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

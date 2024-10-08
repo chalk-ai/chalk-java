@@ -8,7 +8,8 @@ public record ResolvedConfig(
         @NonNull SourcedConfig apiServer,
         @NonNull SourcedConfig clientId,
         @NonNull SourcedConfig clientSecret,
-        @NonNull SourcedConfig environmentId
+        @NonNull SourcedConfig environmentId,
+        @NonNull SourcedConfig rootCa
 ) {
 
     public static ResolvedConfig fromBuilder(
@@ -36,6 +37,11 @@ public record ResolvedConfig(
                         SourcedConfig.fromBuilder(builder.getEnvironmentId()),
                         SourcedConfig.fromEnvVar(ConfigEnvVars.environmentIdKey),
                         SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment())
+                ),
+                SourcedConfig.firstNonEmpty(
+                        SourcedConfig.fromBuilder(builder.getRootCa() == null ? "" : builder.getRootCa().toString()),
+                        SourcedConfig.fromEnvVar(ConfigEnvVars.rootCaKey),
+                        SourcedConfig.fromConfigFile(chalkYamlConfig.getRootCa())
                 )
         );
     }

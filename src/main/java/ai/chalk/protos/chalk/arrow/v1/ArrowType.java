@@ -76,6 +76,7 @@ private static final long serialVersionUID = 0L;
     DECIMAL_128(34),
     DECIMAL_256(35),
     MAP(36),
+    EXTENSION(37),
     ARROWTYPEENUM_NOT_SET(0);
     private final int value;
     private ArrowTypeEnumCase(int value) {
@@ -124,6 +125,7 @@ private static final long serialVersionUID = 0L;
         case 34: return DECIMAL_128;
         case 35: return DECIMAL_256;
         case 36: return MAP;
+        case 37: return EXTENSION;
         case 0: return ARROWTYPEENUM_NOT_SET;
         default: return null;
       }
@@ -1123,6 +1125,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.arrow.v1.Map.getDefaultInstance();
   }
 
+  public static final int EXTENSION_FIELD_NUMBER = 37;
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   * @return Whether the extension field is set.
+   */
+  @java.lang.Override
+  public boolean hasExtension() {
+    return arrowTypeEnumCase_ == 37;
+  }
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   * @return The extension.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.Extension getExtension() {
+    if (arrowTypeEnumCase_ == 37) {
+       return (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder getExtensionOrBuilder() {
+    if (arrowTypeEnumCase_ == 37) {
+       return (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1230,6 +1263,9 @@ private static final long serialVersionUID = 0L;
     }
     if (arrowTypeEnumCase_ == 36) {
       output.writeMessage(36, (ai.chalk.protos.chalk.arrow.v1.Map) arrowTypeEnum_);
+    }
+    if (arrowTypeEnumCase_ == 37) {
+      output.writeMessage(37, (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1364,6 +1400,10 @@ private static final long serialVersionUID = 0L;
     if (arrowTypeEnumCase_ == 36) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(36, (ai.chalk.protos.chalk.arrow.v1.Map) arrowTypeEnum_);
+    }
+    if (arrowTypeEnumCase_ == 37) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(37, (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -1506,6 +1546,10 @@ private static final long serialVersionUID = 0L;
         if (!getMap()
             .equals(other.getMap())) return false;
         break;
+      case 37:
+        if (!getExtension()
+            .equals(other.getExtension())) return false;
+        break;
       case 0:
       default:
     }
@@ -1644,6 +1688,10 @@ private static final long serialVersionUID = 0L;
       case 36:
         hash = (37 * hash) + MAP_FIELD_NUMBER;
         hash = (53 * hash) + getMap().hashCode();
+        break;
+      case 37:
+        hash = (37 * hash) + EXTENSION_FIELD_NUMBER;
+        hash = (53 * hash) + getExtension().hashCode();
         break;
       case 0:
       default:
@@ -1860,6 +1908,9 @@ private static final long serialVersionUID = 0L;
       if (mapBuilder_ != null) {
         mapBuilder_.clear();
       }
+      if (extensionBuilder_ != null) {
+        extensionBuilder_.clear();
+      }
       arrowTypeEnumCase_ = 0;
       arrowTypeEnum_ = null;
       return this;
@@ -2008,6 +2059,10 @@ private static final long serialVersionUID = 0L;
       if (arrowTypeEnumCase_ == 36 &&
           mapBuilder_ != null) {
         result.arrowTypeEnum_ = mapBuilder_.build();
+      }
+      if (arrowTypeEnumCase_ == 37 &&
+          extensionBuilder_ != null) {
+        result.arrowTypeEnum_ = extensionBuilder_.build();
       }
     }
 
@@ -2178,6 +2233,10 @@ private static final long serialVersionUID = 0L;
         }
         case MAP: {
           mergeMap(other.getMap());
+          break;
+        }
+        case EXTENSION: {
+          mergeExtension(other.getExtension());
           break;
         }
         case ARROWTYPEENUM_NOT_SET: {
@@ -2422,6 +2481,13 @@ private static final long serialVersionUID = 0L;
               arrowTypeEnumCase_ = 36;
               break;
             } // case 290
+            case 298: {
+              input.readMessage(
+                  getExtensionFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              arrowTypeEnumCase_ = 37;
+              break;
+            } // case 298
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -6622,6 +6688,148 @@ private static final long serialVersionUID = 0L;
       arrowTypeEnumCase_ = 36;
       onChanged();
       return mapBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.Extension, ai.chalk.protos.chalk.arrow.v1.Extension.Builder, ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder> extensionBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     * @return Whether the extension field is set.
+     */
+    @java.lang.Override
+    public boolean hasExtension() {
+      return arrowTypeEnumCase_ == 37;
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     * @return The extension.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.Extension getExtension() {
+      if (extensionBuilder_ == null) {
+        if (arrowTypeEnumCase_ == 37) {
+          return (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+      } else {
+        if (arrowTypeEnumCase_ == 37) {
+          return extensionBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    public Builder setExtension(ai.chalk.protos.chalk.arrow.v1.Extension value) {
+      if (extensionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        arrowTypeEnum_ = value;
+        onChanged();
+      } else {
+        extensionBuilder_.setMessage(value);
+      }
+      arrowTypeEnumCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    public Builder setExtension(
+        ai.chalk.protos.chalk.arrow.v1.Extension.Builder builderForValue) {
+      if (extensionBuilder_ == null) {
+        arrowTypeEnum_ = builderForValue.build();
+        onChanged();
+      } else {
+        extensionBuilder_.setMessage(builderForValue.build());
+      }
+      arrowTypeEnumCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    public Builder mergeExtension(ai.chalk.protos.chalk.arrow.v1.Extension value) {
+      if (extensionBuilder_ == null) {
+        if (arrowTypeEnumCase_ == 37 &&
+            arrowTypeEnum_ != ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance()) {
+          arrowTypeEnum_ = ai.chalk.protos.chalk.arrow.v1.Extension.newBuilder((ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          arrowTypeEnum_ = value;
+        }
+        onChanged();
+      } else {
+        if (arrowTypeEnumCase_ == 37) {
+          extensionBuilder_.mergeFrom(value);
+        } else {
+          extensionBuilder_.setMessage(value);
+        }
+      }
+      arrowTypeEnumCase_ = 37;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    public Builder clearExtension() {
+      if (extensionBuilder_ == null) {
+        if (arrowTypeEnumCase_ == 37) {
+          arrowTypeEnumCase_ = 0;
+          arrowTypeEnum_ = null;
+          onChanged();
+        }
+      } else {
+        if (arrowTypeEnumCase_ == 37) {
+          arrowTypeEnumCase_ = 0;
+          arrowTypeEnum_ = null;
+        }
+        extensionBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.Extension.Builder getExtensionBuilder() {
+      return getExtensionFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder getExtensionOrBuilder() {
+      if ((arrowTypeEnumCase_ == 37) && (extensionBuilder_ != null)) {
+        return extensionBuilder_.getMessageOrBuilder();
+      } else {
+        if (arrowTypeEnumCase_ == 37) {
+          return (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.Extension extension = 37 [json_name = "extension"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.Extension, ai.chalk.protos.chalk.arrow.v1.Extension.Builder, ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder> 
+        getExtensionFieldBuilder() {
+      if (extensionBuilder_ == null) {
+        if (!(arrowTypeEnumCase_ == 37)) {
+          arrowTypeEnum_ = ai.chalk.protos.chalk.arrow.v1.Extension.getDefaultInstance();
+        }
+        extensionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.Extension, ai.chalk.protos.chalk.arrow.v1.Extension.Builder, ai.chalk.protos.chalk.arrow.v1.ExtensionOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.Extension) arrowTypeEnum_,
+                getParentForChildren(),
+                isClean());
+        arrowTypeEnum_ = null;
+      }
+      arrowTypeEnumCase_ = 37;
+      onChanged();
+      return extensionBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
