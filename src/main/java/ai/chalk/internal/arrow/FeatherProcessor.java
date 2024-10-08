@@ -66,7 +66,9 @@ public class FeatherProcessor {
     }
 
     public static void writeValue(BaseWriter writer, Object value, BufferAllocator allocator) throws Exception {
-        if (value instanceof Integer) {
+        if (value == null) {
+            writer.writeNull();
+        } else if (value instanceof Integer) {
             if (!(writer instanceof BigIntWriter intWriter)) {
                 throw new Exception(String.format("Have `Integer` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
             }
@@ -241,11 +243,20 @@ public class FeatherProcessor {
             } else if (uniformListLength != values.size()) {
                 throw new Exception(String.format("Input values have different lengths - expected %d but got %d: %s", uniformListLength, values.size(), values));
             }
+            
+            Object firstNonNull = null;
+            for (Object item : values) {
+                if (item != null) {
+                    firstNonNull = item;
+                    break;
+                }
+            }
 
-            var clazz = values.get(0).getClass();
-            var firstVal = values.get(0);
             var fqn = entry.getKey();
-            if (firstVal instanceof Integer) {
+            if (firstNonNull == null) {
+                NullVector nullVector = new NullVector(entry.getKey(), values.size());
+                fieldVectors.add(nullVector);
+            } else if (firstNonNull instanceof Integer) {
                 BigIntVector intVector = new BigIntVector(fqn, allocator);
                 fieldVectors.add(intVector);
                 var writer = new BigIntWriterImpl(intVector);
@@ -253,7 +264,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof Long) {
+            } else if (firstNonNull instanceof Long) {
                 BigIntVector longVector = new BigIntVector(fqn, allocator);
                 fieldVectors.add(longVector);
                 var writer = new BigIntWriterImpl(longVector);
@@ -261,7 +272,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof Double) {
+            } else if (firstNonNull instanceof Double) {
                 Float8Vector doubleVector = new Float8Vector(fqn, allocator);
                 fieldVectors.add(doubleVector);
                 var writer = new Float8WriterImpl(doubleVector);
@@ -269,7 +280,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof String) {
+            } else if (firstNonNull instanceof String) {
                 LargeVarCharVector stringVector = new LargeVarCharVector(fqn, allocator);
                 fieldVectors.add(stringVector);
                 var writer = new LargeVarCharWriterImpl(stringVector);
@@ -277,7 +288,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof Boolean) {
+            } else if (firstNonNull instanceof Boolean) {
                 BitVector boolVector = new BitVector(fqn, allocator);
                 fieldVectors.add(boolVector);
                 var writer = new BitWriterImpl(boolVector);
@@ -285,7 +296,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof byte[]) {
+            } else if (firstNonNull instanceof byte[]) {
                 LargeVarBinaryVector binaryVector = new LargeVarBinaryVector(fqn, allocator);
                 fieldVectors.add(binaryVector);
                 var writer = new LargeVarBinaryWriterImpl(binaryVector);
@@ -293,7 +304,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof ZonedDateTime zonedDt) {
+            } else if (firstNonNull instanceof ZonedDateTime zonedDt) {
                 String tz = zonedDt.getZone().toString();
                 TimeStampMicroTZVector timestampVector = new TimeStampMicroTZVector(fqn, allocator, tz);
                 fieldVectors.add(timestampVector);
@@ -302,7 +313,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof LocalDateTime localDt) {
+            } else if (firstNonNull instanceof LocalDateTime localDt) {
                 TimeStampMicroVector timestampVector = new TimeStampMicroVector(fqn, allocator);
                 fieldVectors.add(timestampVector);
                 var writer = new TimeStampMicroWriterImpl(timestampVector);
@@ -310,7 +321,7 @@ public class FeatherProcessor {
                     writer.setPosition(i);
                     writeValue(writer, values.get(i), allocator);
                 }
-            } else if (firstVal instanceof List) {
+            } else if (firstNonNull instanceof List) {
                 var listVector = LargeListVector.empty(fqn, allocator);
                 fieldVectors.add(listVector);
                 var writer = listVector.getWriter();
@@ -318,7 +329,7 @@ public class FeatherProcessor {
                     writeValue(writer, o, allocator);
                 }
                 writer.setValueCount(values.size());
-            } else if (firstVal instanceof Map) {
+            } else if (firstNonNull instanceof Map) {
                 var structVector = StructVector.empty(fqn, allocator);
                 fieldVectors.add(structVector);
                 var writer = structVector.getWriter();
@@ -328,7 +339,7 @@ public class FeatherProcessor {
                 // Importante to `setValueCount` otherwise values all null.
                 writer.setValueCount(values.size());
             } else {
-                throw new Exception("Unsupported data type: " + clazz.getSimpleName());
+                throw new Exception("Unsupported data type: " + firstNonNull.getClass().getSimpleName());
             }
         }
 

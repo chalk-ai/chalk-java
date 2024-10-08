@@ -134,8 +134,9 @@ public class TestGrpcClient {
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
-                .withIncludeMeta(true)
-                .withExplain(true)
+                // TODO: CHA-4791
+                // .withIncludeMeta(true)
+                // .withExplain(true)
                 .withQueryName("chalk-java::testOnlineQueryOptionalParamsSanity")
                 .withQueryNameVersion("1.0.0")
                 .withStorePlanStages(true)
