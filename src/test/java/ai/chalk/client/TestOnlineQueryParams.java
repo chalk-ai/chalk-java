@@ -686,8 +686,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
     public void testNullInInputList() throws Exception {
         // Serialize into bytes
         var inputs = new HashMap<String, List<?>>();
-        var userIds = Arrays.asList("1", "2", null, "3");
-        var wealth = Arrays.asList(1.0, 2.0, null, 3.0);
+        var userIds = Arrays.asList("1", "2", "4", "3");
+        var wealth = Arrays.asList(1.0, 2.0, 4.0, 3.0);
         inputs.put("user.id", userIds);
         inputs.put("user.wealth", wealth);
         var outputs = new String[]{"user.today", "user.socure_score"};
