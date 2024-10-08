@@ -679,7 +679,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
 
 
     /**
-     * Tests that when one of our feature values is a list containing nulls,
+     * Tests that when one of our feature values is a list containing *some* nulls,
      * we correctly serialize the inputs
      */
     @Test
@@ -729,8 +729,10 @@ public class TestOnlineQueryParams extends AllocatorTest {
         OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
 
         // Fails to be converted into a table because of a bug in the java Arrow library
-        //      `java.lang.UnsupportedOperationException: Tried to get allocator from NullVector`
         // where it doesn't support deserializing tables with NullVectors.
+        //
+        //      `java.lang.UnsupportedOperationException: Tried to get allocator from NullVector`
+        //
 
         // var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
         //
