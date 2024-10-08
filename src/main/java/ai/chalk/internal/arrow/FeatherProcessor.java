@@ -226,7 +226,6 @@ public class FeatherProcessor {
 
 
     public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs, BufferAllocator allocator) throws Exception {
-        // TODO: refactor to become determining from the first non-null value, otherwise fallback to Feature<X>.
         List<FieldVector> fieldVectors = new ArrayList<>();
         var uniformListLength = -1;
         for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
