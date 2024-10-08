@@ -676,4 +676,37 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert InitFeaturesTestFeatures.user.getFqn().equals("test_user");
         assert InitFeaturesTestFeatures.user.burrys_membership.getFqn().equals("test_user.burrys_membership");
     }
+
+
+    /**
+     * Tests that when one of our feature values is a list containing nulls,
+     * we correctly serialize the inputs
+     */
+    @Test
+    public void testNullInInputList() throws Exception {
+        // Serialize into bytes
+        var inputs = new HashMap<String, List<?>>();
+        var userIds = Arrays.asList("1", "2", null, "3");
+        var wealth = Arrays.asList(1.0, 2.0, null, 3.0);
+        inputs.put("user.id", userIds);
+        inputs.put("user.wealth", wealth);
+        var outputs = new String[]{"user.today", "user.socure_score"};
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
+        var inputBytes = BytesProducer.convertOnlineQueryParamsToBytes(params, allocator);
+
+        // Deserialize back into a table and inspect values
+        var inputTable = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
+        var userIdVector = inputTable.toVectorSchemaRoot().getVector("user.id");
+        var wealthVector = inputTable.toVectorSchemaRoot().getVector("user.wealth");
+
+        assert userIdVector.getObject(0).equals("1");
+        assert userIdVector.getObject(1).equals("2");
+        assert userIdVector.getObject(2) == null;
+        assert userIdVector.getObject(3).equals("3");
+
+        assert wealthVector.getObject(0).equals(1.0);
+        assert wealthVector.getObject(1).equals(2.0);
+        assert wealthVector.getObject(2) == null;
+        assert wealthVector.getObject(3).equals(3.0);
+    }
 }
