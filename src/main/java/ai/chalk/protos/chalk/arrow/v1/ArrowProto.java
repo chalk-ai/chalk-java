@@ -106,6 +106,16 @@ public final class ArrowProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_arrow_v1_DecimalValue_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_arrow_v1_Extension_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_arrow_v1_Extension_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_arrow_v1_ExtensionValue_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_arrow_v1_ExtensionValue_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_arrow_v1_ScalarValue_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -180,108 +190,117 @@ public final class ArrowProto {
       "y\022\026\n\006values\030\001 \001(\014R\006values\022\026\n\006length\030\002 \001(" +
       "\005R\006length\"X\n\014DecimalValue\022\024\n\005value\030\001 \001(\014" +
       "R\005value\022\034\n\tprecision\030\002 \001(\005R\tprecision\022\024\n" +
-      "\005scale\030\003 \001(\005R\005scale\"\244\016\n\013ScalarValue\022:\n\nn" +
-      "ull_value\030\001 \001(\0132\031.chalk.arrow.v1.ArrowTy" +
-      "peH\000R\tnullValue\022\037\n\nbool_value\030\002 \001(\010H\000R\tb" +
-      "oolValue\022%\n\rfloat64_value\030\003 \001(\001H\000R\014float" +
-      "64Value\022!\n\013int64_value\030\004 \001(\003H\000R\nint64Val" +
-      "ue\022*\n\020large_utf8_value\030\005 \001(\tH\000R\016largeUtf" +
-      "8Value\022O\n\017timestamp_value\030\006 \001(\0132$.chalk." +
-      "arrow.v1.ScalarTimestampValueH\000R\016timesta" +
-      "mpValue\022$\n\rdate_64_value\030\007 \001(\003H\000R\013date64" +
-      "Value\022@\n\014struct_value\030\010 \001(\0132\033.chalk.arro" +
-      "w.v1.StructValueH\000R\013structValue\022K\n\020large" +
-      "_list_value\030\t \001(\0132\037.chalk.arrow.v1.Scala" +
-      "rListValueH\000R\016largeListValue\022F\n\014time64_v" +
-      "alue\030\n \001(\0132!.chalk.arrow.v1.ScalarTime64" +
-      "ValueH\000R\013time64Value\0224\n\025duration_second_" +
-      "value\030\020 \001(\003H\000R\023durationSecondValue\022>\n\032du" +
-      "ration_millisecond_value\030\021 \001(\003H\000R\030durati" +
-      "onMillisecondValue\022>\n\032duration_microseco" +
-      "nd_value\030\022 \001(\003H\000R\030durationMicrosecondVal" +
-      "ue\022<\n\031duration_nanosecond_value\030\023 \001(\003H\000R" +
-      "\027durationNanosecondValue\022\037\n\nutf8_value\030\024" +
-      " \001(\tH\000R\tutf8Value\022\037\n\nint8_value\030\025 \001(\005H\000R" +
-      "\tint8Value\022!\n\013int16_value\030\026 \001(\005H\000R\nint16" +
-      "Value\022!\n\013int32_value\030\027 \001(\005H\000R\nint32Value" +
-      "\022!\n\013uint8_value\030\030 \001(\rH\000R\nuint8Value\022#\n\014u" +
-      "int16_value\030\031 \001(\rH\000R\013uint16Value\022#\n\014uint" +
-      "32_value\030\032 \001(\rH\000R\013uint32Value\022#\n\014uint64_" +
-      "value\030\033 \001(\004H\000R\013uint64Value\022%\n\rfloat16_va" +
-      "lue\030\034 \001(\002H\000R\014float16Value\022%\n\rfloat32_val" +
-      "ue\030\035 \001(\002H\000R\014float32Value\022$\n\rdate_32_valu" +
-      "e\030\036 \001(\005H\000R\013date32Value\022F\n\014time32_value\030\037" +
-      " \001(\0132!.chalk.arrow.v1.ScalarTime32ValueH" +
-      "\000R\013time32Value\022@\n\nlist_value\030  \001(\0132\037.cha" +
-      "lk.arrow.v1.ScalarListValueH\000R\tlistValue" +
-      "\022T\n\025fixed_size_list_value\030! \001(\0132\037.chalk." +
-      "arrow.v1.ScalarListValueH\000R\022fixedSizeLis" +
-      "tValue\022>\n\tmap_value\030\" \001(\0132\037.chalk.arrow." +
-      "v1.ScalarListValueH\000R\010mapValue\022#\n\014binary" +
-      "_value\030# \001(\014H\000R\013binaryValue\022.\n\022large_bin" +
-      "ary_value\030$ \001(\014H\000R\020largeBinaryValue\022^\n\027f" +
-      "ixed_size_binary_value\030% \001(\0132%.chalk.arr" +
-      "ow.v1.ScalarFixedSizeBinaryH\000R\024fixedSize" +
-      "BinaryValue\022I\n\020decimal128_value\030& \001(\0132\034." +
-      "chalk.arrow.v1.DecimalValueH\000R\017decimal12" +
-      "8Value\022I\n\020decimal256_value\030\' \001(\0132\034.chalk" +
-      ".arrow.v1.DecimalValueH\000R\017decimal256Valu" +
-      "eB\007\n\005value\"\316\r\n\tArrowType\0222\n\004none\030\001 \001(\0132\034" +
-      ".chalk.arrow.v1.EmptyMessageH\000R\004none\0222\n\004" +
-      "bool\030\002 \001(\0132\034.chalk.arrow.v1.EmptyMessage" +
-      "H\000R\004bool\0228\n\007float64\030\003 \001(\0132\034.chalk.arrow." +
-      "v1.EmptyMessageH\000R\007float64\0224\n\005int64\030\004 \001(" +
-      "\0132\034.chalk.arrow.v1.EmptyMessageH\000R\005int64" +
-      "\022=\n\nlarge_utf8\030\005 \001(\0132\034.chalk.arrow.v1.Em" +
-      "ptyMessageH\000R\tlargeUtf8\0229\n\ttimestamp\030\006 \001" +
-      "(\0132\031.chalk.arrow.v1.TimestampH\000R\ttimesta" +
-      "mp\0226\n\006date64\030\007 \001(\0132\034.chalk.arrow.v1.Empt" +
-      "yMessageH\000R\006date64\0220\n\006struct\030\010 \001(\0132\026.cha" +
-      "lk.arrow.v1.StructH\000R\006struct\0225\n\nlarge_li" +
-      "st\030\t \001(\0132\024.chalk.arrow.v1.ListH\000R\tlargeL" +
-      "ist\0222\n\006time64\030\n \001(\0162\030.chalk.arrow.v1.Tim" +
-      "eUnitH\000R\006time64\0226\n\010duration\030\020 \001(\0162\030.chal" +
-      "k.arrow.v1.TimeUnitH\000R\010duration\0222\n\004utf8\030" +
-      "\021 \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\004u" +
-      "tf8\0222\n\004int8\030\022 \001(\0132\034.chalk.arrow.v1.Empty" +
-      "MessageH\000R\004int8\0224\n\005int16\030\023 \001(\0132\034.chalk.a" +
-      "rrow.v1.EmptyMessageH\000R\005int16\0224\n\005int32\030\024" +
-      " \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\005in" +
-      "t32\0224\n\005uint8\030\025 \001(\0132\034.chalk.arrow.v1.Empt" +
-      "yMessageH\000R\005uint8\0226\n\006uint16\030\026 \001(\0132\034.chal" +
-      "k.arrow.v1.EmptyMessageH\000R\006uint16\0226\n\006uin" +
-      "t32\030\027 \001(\0132\034.chalk.arrow.v1.EmptyMessageH" +
-      "\000R\006uint32\0226\n\006uint64\030\030 \001(\0132\034.chalk.arrow." +
-      "v1.EmptyMessageH\000R\006uint64\0228\n\007float16\030\031 \001" +
-      "(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\007floa" +
-      "t16\0228\n\007float32\030\032 \001(\0132\034.chalk.arrow.v1.Em" +
-      "ptyMessageH\000R\007float32\0226\n\006date32\030\033 \001(\0132\034." +
-      "chalk.arrow.v1.EmptyMessageH\000R\006date32\0222\n" +
-      "\006time32\030\034 \001(\0162\030.chalk.arrow.v1.TimeUnitH" +
-      "\000R\006time32\022*\n\004list\030\035 \001(\0132\024.chalk.arrow.v1" +
-      ".ListH\000R\004list\022G\n\017fixed_size_list\030\036 \001(\0132\035" +
-      ".chalk.arrow.v1.FixedSizeListH\000R\rfixedSi" +
-      "zeList\0226\n\006binary\030\037 \001(\0132\034.chalk.arrow.v1." +
-      "EmptyMessageH\000R\006binary\022A\n\014large_binary\030 " +
-      " \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\013la" +
-      "rgeBinary\022,\n\021fixed_size_binary\030! \001(\005H\000R\017" +
-      "fixedSizeBinary\022:\n\013decimal_128\030\" \001(\0132\027.c" +
-      "halk.arrow.v1.DecimalH\000R\ndecimal128\022:\n\013d" +
-      "ecimal_256\030# \001(\0132\027.chalk.arrow.v1.Decima" +
-      "lH\000R\ndecimal256\022\'\n\003map\030$ \001(\0132\023.chalk.arr" +
-      "ow.v1.MapH\000R\003mapB\021\n\017arrow_type_enum\"\016\n\014E" +
-      "mptyMessage*\213\001\n\010TimeUnit\022\031\n\025TIME_UNIT_UN" +
-      "SPECIFIED\020\000\022\024\n\020TIME_UNIT_SECOND\020\001\022\031\n\025TIM" +
-      "E_UNIT_MILLISECOND\020\002\022\031\n\025TIME_UNIT_MICROS" +
-      "ECOND\020\003\022\030\n\024TIME_UNIT_NANOSECOND\020\004*\232\001\n\022Fe" +
-      "atherCompression\022#\n\037FEATHER_COMPRESSION_" +
-      "UNSPECIFIED\020\000\022$\n FEATHER_COMPRESSION_UNC" +
-      "OMPRESSED\020\001\022\033\n\027FEATHER_COMPRESSION_LZ4\020\002" +
-      "\022\034\n\030FEATHER_COMPRESSION_ZSTD\020\003B\206\001\n\036ai.ch" +
-      "alk.protos.chalk.arrow.v1B\nArrowProtoP\001\242" +
-      "\002\003CAX\252\002\016Chalk.Arrow.V1\312\002\016Chalk\\Arrow\\V1\342" +
-      "\002\032Chalk\\Arrow\\V1\\GPBMetadata\352\002\020Chalk::Ar" +
-      "row::V1b\006proto3"
+      "\005scale\030\003 \001(\005R\005scale\"]\n\tExtension\022\022\n\004name" +
+      "\030\001 \001(\tR\004name\022<\n\014storage_type\030\002 \001(\0132\031.cha" +
+      "lk.arrow.v1.ArrowTypeR\013storageType\"\224\001\n\016E" +
+      "xtensionValue\022@\n\016extension_type\030\001 \001(\0132\031." +
+      "chalk.arrow.v1.ExtensionR\rextensionType\022" +
+      "@\n\rstorage_value\030\002 \001(\0132\033.chalk.arrow.v1." +
+      "ScalarValueR\014storageValue\"\357\016\n\013ScalarValu" +
+      "e\022:\n\nnull_value\030\001 \001(\0132\031.chalk.arrow.v1.A" +
+      "rrowTypeH\000R\tnullValue\022\037\n\nbool_value\030\002 \001(" +
+      "\010H\000R\tboolValue\022%\n\rfloat64_value\030\003 \001(\001H\000R" +
+      "\014float64Value\022!\n\013int64_value\030\004 \001(\003H\000R\nin" +
+      "t64Value\022*\n\020large_utf8_value\030\005 \001(\tH\000R\016la" +
+      "rgeUtf8Value\022O\n\017timestamp_value\030\006 \001(\0132$." +
+      "chalk.arrow.v1.ScalarTimestampValueH\000R\016t" +
+      "imestampValue\022$\n\rdate_64_value\030\007 \001(\003H\000R\013" +
+      "date64Value\022@\n\014struct_value\030\010 \001(\0132\033.chal" +
+      "k.arrow.v1.StructValueH\000R\013structValue\022K\n" +
+      "\020large_list_value\030\t \001(\0132\037.chalk.arrow.v1" +
+      ".ScalarListValueH\000R\016largeListValue\022F\n\014ti" +
+      "me64_value\030\n \001(\0132!.chalk.arrow.v1.Scalar" +
+      "Time64ValueH\000R\013time64Value\0224\n\025duration_s" +
+      "econd_value\030\020 \001(\003H\000R\023durationSecondValue" +
+      "\022>\n\032duration_millisecond_value\030\021 \001(\003H\000R\030" +
+      "durationMillisecondValue\022>\n\032duration_mic" +
+      "rosecond_value\030\022 \001(\003H\000R\030durationMicrosec" +
+      "ondValue\022<\n\031duration_nanosecond_value\030\023 " +
+      "\001(\003H\000R\027durationNanosecondValue\022\037\n\nutf8_v" +
+      "alue\030\024 \001(\tH\000R\tutf8Value\022\037\n\nint8_value\030\025 " +
+      "\001(\005H\000R\tint8Value\022!\n\013int16_value\030\026 \001(\005H\000R" +
+      "\nint16Value\022!\n\013int32_value\030\027 \001(\005H\000R\nint3" +
+      "2Value\022!\n\013uint8_value\030\030 \001(\rH\000R\nuint8Valu" +
+      "e\022#\n\014uint16_value\030\031 \001(\rH\000R\013uint16Value\022#" +
+      "\n\014uint32_value\030\032 \001(\rH\000R\013uint32Value\022#\n\014u" +
+      "int64_value\030\033 \001(\004H\000R\013uint64Value\022%\n\rfloa" +
+      "t16_value\030\034 \001(\002H\000R\014float16Value\022%\n\rfloat" +
+      "32_value\030\035 \001(\002H\000R\014float32Value\022$\n\rdate_3" +
+      "2_value\030\036 \001(\005H\000R\013date32Value\022F\n\014time32_v" +
+      "alue\030\037 \001(\0132!.chalk.arrow.v1.ScalarTime32" +
+      "ValueH\000R\013time32Value\022@\n\nlist_value\030  \001(\013" +
+      "2\037.chalk.arrow.v1.ScalarListValueH\000R\tlis" +
+      "tValue\022T\n\025fixed_size_list_value\030! \001(\0132\037." +
+      "chalk.arrow.v1.ScalarListValueH\000R\022fixedS" +
+      "izeListValue\022>\n\tmap_value\030\" \001(\0132\037.chalk." +
+      "arrow.v1.ScalarListValueH\000R\010mapValue\022#\n\014" +
+      "binary_value\030# \001(\014H\000R\013binaryValue\022.\n\022lar" +
+      "ge_binary_value\030$ \001(\014H\000R\020largeBinaryValu" +
+      "e\022^\n\027fixed_size_binary_value\030% \001(\0132%.cha" +
+      "lk.arrow.v1.ScalarFixedSizeBinaryH\000R\024fix" +
+      "edSizeBinaryValue\022I\n\020decimal128_value\030& " +
+      "\001(\0132\034.chalk.arrow.v1.DecimalValueH\000R\017dec" +
+      "imal128Value\022I\n\020decimal256_value\030\' \001(\0132\034" +
+      ".chalk.arrow.v1.DecimalValueH\000R\017decimal2" +
+      "56Value\022I\n\017extension_value\030( \001(\0132\036.chalk" +
+      ".arrow.v1.ExtensionValueH\000R\016extensionVal" +
+      "ueB\007\n\005value\"\211\016\n\tArrowType\0222\n\004none\030\001 \001(\0132" +
+      "\034.chalk.arrow.v1.EmptyMessageH\000R\004none\0222\n" +
+      "\004bool\030\002 \001(\0132\034.chalk.arrow.v1.EmptyMessag" +
+      "eH\000R\004bool\0228\n\007float64\030\003 \001(\0132\034.chalk.arrow" +
+      ".v1.EmptyMessageH\000R\007float64\0224\n\005int64\030\004 \001" +
+      "(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\005int6" +
+      "4\022=\n\nlarge_utf8\030\005 \001(\0132\034.chalk.arrow.v1.E" +
+      "mptyMessageH\000R\tlargeUtf8\0229\n\ttimestamp\030\006 " +
+      "\001(\0132\031.chalk.arrow.v1.TimestampH\000R\ttimest" +
+      "amp\0226\n\006date64\030\007 \001(\0132\034.chalk.arrow.v1.Emp" +
+      "tyMessageH\000R\006date64\0220\n\006struct\030\010 \001(\0132\026.ch" +
+      "alk.arrow.v1.StructH\000R\006struct\0225\n\nlarge_l" +
+      "ist\030\t \001(\0132\024.chalk.arrow.v1.ListH\000R\tlarge" +
+      "List\0222\n\006time64\030\n \001(\0162\030.chalk.arrow.v1.Ti" +
+      "meUnitH\000R\006time64\0226\n\010duration\030\020 \001(\0162\030.cha" +
+      "lk.arrow.v1.TimeUnitH\000R\010duration\0222\n\004utf8" +
+      "\030\021 \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\004" +
+      "utf8\0222\n\004int8\030\022 \001(\0132\034.chalk.arrow.v1.Empt" +
+      "yMessageH\000R\004int8\0224\n\005int16\030\023 \001(\0132\034.chalk." +
+      "arrow.v1.EmptyMessageH\000R\005int16\0224\n\005int32\030" +
+      "\024 \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\005i" +
+      "nt32\0224\n\005uint8\030\025 \001(\0132\034.chalk.arrow.v1.Emp" +
+      "tyMessageH\000R\005uint8\0226\n\006uint16\030\026 \001(\0132\034.cha" +
+      "lk.arrow.v1.EmptyMessageH\000R\006uint16\0226\n\006ui" +
+      "nt32\030\027 \001(\0132\034.chalk.arrow.v1.EmptyMessage" +
+      "H\000R\006uint32\0226\n\006uint64\030\030 \001(\0132\034.chalk.arrow" +
+      ".v1.EmptyMessageH\000R\006uint64\0228\n\007float16\030\031 " +
+      "\001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\007flo" +
+      "at16\0228\n\007float32\030\032 \001(\0132\034.chalk.arrow.v1.E" +
+      "mptyMessageH\000R\007float32\0226\n\006date32\030\033 \001(\0132\034" +
+      ".chalk.arrow.v1.EmptyMessageH\000R\006date32\0222" +
+      "\n\006time32\030\034 \001(\0162\030.chalk.arrow.v1.TimeUnit" +
+      "H\000R\006time32\022*\n\004list\030\035 \001(\0132\024.chalk.arrow.v" +
+      "1.ListH\000R\004list\022G\n\017fixed_size_list\030\036 \001(\0132" +
+      "\035.chalk.arrow.v1.FixedSizeListH\000R\rfixedS" +
+      "izeList\0226\n\006binary\030\037 \001(\0132\034.chalk.arrow.v1" +
+      ".EmptyMessageH\000R\006binary\022A\n\014large_binary\030" +
+      "  \001(\0132\034.chalk.arrow.v1.EmptyMessageH\000R\013l" +
+      "argeBinary\022,\n\021fixed_size_binary\030! \001(\005H\000R" +
+      "\017fixedSizeBinary\022:\n\013decimal_128\030\" \001(\0132\027." +
+      "chalk.arrow.v1.DecimalH\000R\ndecimal128\022:\n\013" +
+      "decimal_256\030# \001(\0132\027.chalk.arrow.v1.Decim" +
+      "alH\000R\ndecimal256\022\'\n\003map\030$ \001(\0132\023.chalk.ar" +
+      "row.v1.MapH\000R\003map\0229\n\textension\030% \001(\0132\031.c" +
+      "halk.arrow.v1.ExtensionH\000R\textensionB\021\n\017" +
+      "arrow_type_enum\"\016\n\014EmptyMessage*\213\001\n\010Time" +
+      "Unit\022\031\n\025TIME_UNIT_UNSPECIFIED\020\000\022\024\n\020TIME_" +
+      "UNIT_SECOND\020\001\022\031\n\025TIME_UNIT_MILLISECOND\020\002" +
+      "\022\031\n\025TIME_UNIT_MICROSECOND\020\003\022\030\n\024TIME_UNIT" +
+      "_NANOSECOND\020\004*\232\001\n\022FeatherCompression\022#\n\037" +
+      "FEATHER_COMPRESSION_UNSPECIFIED\020\000\022$\n FEA" +
+      "THER_COMPRESSION_UNCOMPRESSED\020\001\022\033\n\027FEATH" +
+      "ER_COMPRESSION_LZ4\020\002\022\034\n\030FEATHER_COMPRESS" +
+      "ION_ZSTD\020\003B\206\001\n\036ai.chalk.protos.chalk.arr" +
+      "ow.v1B\nArrowProtoP\001\242\002\003CAX\252\002\016Chalk.Arrow." +
+      "V1\312\002\016Chalk\\Arrow\\V1\342\002\032Chalk\\Arrow\\V1\\GPB" +
+      "Metadata\352\002\020Chalk::Arrow::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -395,20 +414,32 @@ public final class ArrowProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_arrow_v1_DecimalValue_descriptor,
         new java.lang.String[] { "Value", "Precision", "Scale", });
-    internal_static_chalk_arrow_v1_ScalarValue_descriptor =
+    internal_static_chalk_arrow_v1_Extension_descriptor =
       getDescriptor().getMessageTypes().get(16);
+    internal_static_chalk_arrow_v1_Extension_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_arrow_v1_Extension_descriptor,
+        new java.lang.String[] { "Name", "StorageType", });
+    internal_static_chalk_arrow_v1_ExtensionValue_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_chalk_arrow_v1_ExtensionValue_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_arrow_v1_ExtensionValue_descriptor,
+        new java.lang.String[] { "ExtensionType", "StorageValue", });
+    internal_static_chalk_arrow_v1_ScalarValue_descriptor =
+      getDescriptor().getMessageTypes().get(18);
     internal_static_chalk_arrow_v1_ScalarValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_arrow_v1_ScalarValue_descriptor,
-        new java.lang.String[] { "NullValue", "BoolValue", "Float64Value", "Int64Value", "LargeUtf8Value", "TimestampValue", "Date64Value", "StructValue", "LargeListValue", "Time64Value", "DurationSecondValue", "DurationMillisecondValue", "DurationMicrosecondValue", "DurationNanosecondValue", "Utf8Value", "Int8Value", "Int16Value", "Int32Value", "Uint8Value", "Uint16Value", "Uint32Value", "Uint64Value", "Float16Value", "Float32Value", "Date32Value", "Time32Value", "ListValue", "FixedSizeListValue", "MapValue", "BinaryValue", "LargeBinaryValue", "FixedSizeBinaryValue", "Decimal128Value", "Decimal256Value", "Value", });
+        new java.lang.String[] { "NullValue", "BoolValue", "Float64Value", "Int64Value", "LargeUtf8Value", "TimestampValue", "Date64Value", "StructValue", "LargeListValue", "Time64Value", "DurationSecondValue", "DurationMillisecondValue", "DurationMicrosecondValue", "DurationNanosecondValue", "Utf8Value", "Int8Value", "Int16Value", "Int32Value", "Uint8Value", "Uint16Value", "Uint32Value", "Uint64Value", "Float16Value", "Float32Value", "Date32Value", "Time32Value", "ListValue", "FixedSizeListValue", "MapValue", "BinaryValue", "LargeBinaryValue", "FixedSizeBinaryValue", "Decimal128Value", "Decimal256Value", "ExtensionValue", "Value", });
     internal_static_chalk_arrow_v1_ArrowType_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_arrow_v1_ArrowType_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_arrow_v1_ArrowType_descriptor,
-        new java.lang.String[] { "None", "Bool", "Float64", "Int64", "LargeUtf8", "Timestamp", "Date64", "Struct", "LargeList", "Time64", "Duration", "Utf8", "Int8", "Int16", "Int32", "Uint8", "Uint16", "Uint32", "Uint64", "Float16", "Float32", "Date32", "Time32", "List", "FixedSizeList", "Binary", "LargeBinary", "FixedSizeBinary", "Decimal128", "Decimal256", "Map", "ArrowTypeEnum", });
+        new java.lang.String[] { "None", "Bool", "Float64", "Int64", "LargeUtf8", "Timestamp", "Date64", "Struct", "LargeList", "Time64", "Duration", "Utf8", "Int8", "Int16", "Int32", "Uint8", "Uint16", "Uint32", "Uint64", "Float16", "Float32", "Date32", "Time32", "List", "FixedSizeList", "Binary", "LargeBinary", "FixedSizeBinary", "Decimal128", "Decimal256", "Map", "Extension", "ArrowTypeEnum", });
     internal_static_chalk_arrow_v1_EmptyMessage_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_arrow_v1_EmptyMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_arrow_v1_EmptyMessage_descriptor,

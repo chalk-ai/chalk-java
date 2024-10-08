@@ -15,4 +15,5 @@ public class ProjectToken {
     private String apiServer;
     private String activeEnvironment;
     private JWT jwt;
+    private String rootCa;
 }

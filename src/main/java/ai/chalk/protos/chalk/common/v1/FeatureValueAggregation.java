@@ -37,6 +37,30 @@ public enum FeatureValueAggregation
    * <code>FEATURE_VALUE_AGGREGATION_AVERAGE = 6;</code>
    */
   FEATURE_VALUE_AGGREGATION_AVERAGE(6),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_UNIQUE_PKEYS = 7;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_UNIQUE_PKEYS(7),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P95 = 8;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_P95(8),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P75 = 9;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_P75(9),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P50 = 10;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_P50(10),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P25 = 11;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_P25(11),
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P05 = 12;</code>
+   */
+  FEATURE_VALUE_AGGREGATION_P05(12),
   UNRECOGNIZED(-1),
   ;
 
@@ -68,6 +92,30 @@ public enum FeatureValueAggregation
    * <code>FEATURE_VALUE_AGGREGATION_AVERAGE = 6;</code>
    */
   public static final int FEATURE_VALUE_AGGREGATION_AVERAGE_VALUE = 6;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_UNIQUE_PKEYS = 7;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_UNIQUE_PKEYS_VALUE = 7;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P95 = 8;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_P95_VALUE = 8;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P75 = 9;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_P75_VALUE = 9;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P50 = 10;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_P50_VALUE = 10;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P25 = 11;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_P25_VALUE = 11;
+  /**
+   * <code>FEATURE_VALUE_AGGREGATION_P05 = 12;</code>
+   */
+  public static final int FEATURE_VALUE_AGGREGATION_P05_VALUE = 12;
 
 
   public final int getNumber() {
@@ -101,6 +149,12 @@ public enum FeatureValueAggregation
       case 4: return FEATURE_VALUE_AGGREGATION_MAX_VALUE;
       case 5: return FEATURE_VALUE_AGGREGATION_MIN_VALUE;
       case 6: return FEATURE_VALUE_AGGREGATION_AVERAGE;
+      case 7: return FEATURE_VALUE_AGGREGATION_UNIQUE_PKEYS;
+      case 8: return FEATURE_VALUE_AGGREGATION_P95;
+      case 9: return FEATURE_VALUE_AGGREGATION_P75;
+      case 10: return FEATURE_VALUE_AGGREGATION_P50;
+      case 11: return FEATURE_VALUE_AGGREGATION_P25;
+      case 12: return FEATURE_VALUE_AGGREGATION_P05;
       default: return null;
     }
   }

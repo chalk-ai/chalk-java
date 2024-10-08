@@ -22,4 +22,8 @@ public class ConfigEnvVars {
      * environments in your Chalk project.
      */
     public static String environmentIdKey = "CHALK_ACTIVE_ENVIRONMENT";
+    /**
+     * The path to the root CA certificate file.
+     */
+    public static String rootCaKey = "CHALK_ROOT_CA_PATH";
 }

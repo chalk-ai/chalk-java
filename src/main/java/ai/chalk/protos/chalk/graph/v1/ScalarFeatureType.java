@@ -25,6 +25,7 @@ private static final long serialVersionUID = 0L;
     owner_ = "";
     validations_ = java.util.Collections.emptyList();
     attributeName_ = "";
+    cacheStrategy_ = 0;
   }
 
   @java.lang.Override
@@ -683,6 +684,24 @@ private static final long serialVersionUID = 0L;
     return isDeprecated_;
   }
 
+  public static final int CACHE_STRATEGY_FIELD_NUMBER = 25;
+  private int cacheStrategy_ = 0;
+  /**
+   * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+   * @return The enum numeric value on the wire for cacheStrategy.
+   */
+  @java.lang.Override public int getCacheStrategyValue() {
+    return cacheStrategy_;
+  }
+  /**
+   * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+   * @return The cacheStrategy.
+   */
+  @java.lang.Override public ai.chalk.protos.chalk.graph.v1.CacheStrategy getCacheStrategy() {
+    ai.chalk.protos.chalk.graph.v1.CacheStrategy result = ai.chalk.protos.chalk.graph.v1.CacheStrategy.forNumber(cacheStrategy_);
+    return result == null ? ai.chalk.protos.chalk.graph.v1.CacheStrategy.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -765,6 +784,9 @@ private static final long serialVersionUID = 0L;
     }
     if (isDeprecated_ != false) {
       output.writeBool(24, isDeprecated_);
+    }
+    if (cacheStrategy_ != ai.chalk.protos.chalk.graph.v1.CacheStrategy.CACHE_STRATEGY_UNSPECIFIED.getNumber()) {
+      output.writeEnum(25, cacheStrategy_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -866,6 +888,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(24, isDeprecated_);
     }
+    if (cacheStrategy_ != ai.chalk.protos.chalk.graph.v1.CacheStrategy.CACHE_STRATEGY_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(25, cacheStrategy_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -963,6 +989,7 @@ private static final long serialVersionUID = 0L;
         .equals(other.getAttributeName())) return false;
     if (getIsDeprecated()
         != other.getIsDeprecated()) return false;
+    if (cacheStrategy_ != other.cacheStrategy_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1056,6 +1083,8 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + IS_DEPRECATED_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getIsDeprecated());
+    hash = (37 * hash) + CACHE_STRATEGY_FIELD_NUMBER;
+    hash = (53 * hash) + cacheStrategy_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1263,6 +1292,7 @@ private static final long serialVersionUID = 0L;
       isDistancePseudofeature_ = false;
       attributeName_ = "";
       isDeprecated_ = false;
+      cacheStrategy_ = 0;
       return this;
     }
 
@@ -1404,6 +1434,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00400000) != 0)) {
         result.isDeprecated_ = isDeprecated_;
+      }
+      if (((from_bitField0_ & 0x00800000) != 0)) {
+        result.cacheStrategy_ = cacheStrategy_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1560,6 +1593,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getIsDeprecated() != false) {
         setIsDeprecated(other.getIsDeprecated());
+      }
+      if (other.cacheStrategy_ != 0) {
+        setCacheStrategyValue(other.getCacheStrategyValue());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1727,6 +1763,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00400000;
               break;
             } // case 192
+            case 200: {
+              cacheStrategy_ = input.readEnum();
+              bitField0_ |= 0x00800000;
+              break;
+            } // case 200
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3795,6 +3836,59 @@ private static final long serialVersionUID = 0L;
     public Builder clearIsDeprecated() {
       bitField0_ = (bitField0_ & ~0x00400000);
       isDeprecated_ = false;
+      onChanged();
+      return this;
+    }
+
+    private int cacheStrategy_ = 0;
+    /**
+     * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+     * @return The enum numeric value on the wire for cacheStrategy.
+     */
+    @java.lang.Override public int getCacheStrategyValue() {
+      return cacheStrategy_;
+    }
+    /**
+     * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+     * @param value The enum numeric value on the wire for cacheStrategy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCacheStrategyValue(int value) {
+      cacheStrategy_ = value;
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+     * @return The cacheStrategy.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.CacheStrategy getCacheStrategy() {
+      ai.chalk.protos.chalk.graph.v1.CacheStrategy result = ai.chalk.protos.chalk.graph.v1.CacheStrategy.forNumber(cacheStrategy_);
+      return result == null ? ai.chalk.protos.chalk.graph.v1.CacheStrategy.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+     * @param value The cacheStrategy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCacheStrategy(ai.chalk.protos.chalk.graph.v1.CacheStrategy value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00800000;
+      cacheStrategy_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.CacheStrategy cache_strategy = 25 [json_name = "cacheStrategy"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCacheStrategy() {
+      bitField0_ = (bitField0_ & ~0x00800000);
+      cacheStrategy_ = 0;
       onChanged();
       return this;
     }

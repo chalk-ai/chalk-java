@@ -7,7 +7,7 @@ package ai.chalk.protos.chalk.common.v1;
 /**
  * Protobuf type {@code chalk.common.v1.GetFeatureValuesChartResponse}
  */
-public final class GetFeatureValuesChartResponse extends
+@java.lang.Deprecated public final class GetFeatureValuesChartResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:chalk.common.v1.GetFeatureValuesChartResponse)
     GetFeatureValuesChartResponseOrBuilder {

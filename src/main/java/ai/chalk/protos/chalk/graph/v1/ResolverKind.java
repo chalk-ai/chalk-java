@@ -95,7 +95,7 @@ public enum ResolverKind
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor().getEnumTypes().get(0);
+    return ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor().getEnumTypes().get(1);
   }
 
   private static final ResolverKind[] VALUES = values();

@@ -475,5 +475,20 @@ public interface ScalarValueOrBuilder extends
    */
   ai.chalk.protos.chalk.arrow.v1.DecimalValueOrBuilder getDecimal256ValueOrBuilder();
 
+  /**
+   * <code>.chalk.arrow.v1.ExtensionValue extension_value = 40 [json_name = "extensionValue"];</code>
+   * @return Whether the extensionValue field is set.
+   */
+  boolean hasExtensionValue();
+  /**
+   * <code>.chalk.arrow.v1.ExtensionValue extension_value = 40 [json_name = "extensionValue"];</code>
+   * @return The extensionValue.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ExtensionValue getExtensionValue();
+  /**
+   * <code>.chalk.arrow.v1.ExtensionValue extension_value = 40 [json_name = "extensionValue"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ExtensionValueOrBuilder getExtensionValueOrBuilder();
+
   ai.chalk.protos.chalk.arrow.v1.ScalarValue.ValueCase getValueCase();
 }

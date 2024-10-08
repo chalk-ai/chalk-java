@@ -100,4 +100,28 @@ public interface WindowAggregationOrBuilder extends
    * <code>.chalk.arrow.v1.ArrowType arrow_type = 6 [json_name = "arrowType"];</code>
    */
   ai.chalk.protos.chalk.arrow.v1.ArrowTypeOrBuilder getArrowTypeOrBuilder();
+
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.expression.v1.LogicalExprNode> 
+      getFiltersList();
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNode getFilters(int index);
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  int getFiltersCount();
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> 
+      getFiltersOrBuilderList();
+  /**
+   * <code>repeated .chalk.expression.v1.LogicalExprNode filters = 7 [json_name = "filters"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getFiltersOrBuilder(
+      int index);
 }
