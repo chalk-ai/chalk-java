@@ -728,29 +728,13 @@ public class TestOnlineQueryParams extends AllocatorTest {
         var outputs = new String[]{"user.today", "user.socure_score"};
         OnlineQueryParamsComplete params = OnlineQueryParams.builder().withInputs(inputs).withOutputs(outputs).build();
 
-        // Fails to be converted into a table because of a bug in the java Arrow library
-        // where it doesn't support deserializing tables with NullVectors.
+        // We don't deserialize the params back into a table to inspect the values because
+        // of a bug in the java Arrow library where it doesn't support deserializing tables
+        // with NullVectors:
         //
         //      `java.lang.UnsupportedOperationException: Tried to get allocator from NullVector`
         //
-
-        // var inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
-        //
-        // try (
-        //         var inputTable = FeatherProcessor.convertBytesToTable(inputBytes, allocator);
-        //         var vsr = inputTable.toVectorSchemaRoot();
-        //         var userIdVector = vsr.getVector("user.id");
-        //         var childVector = vsr.getVector("user.child");
-        // ) {
-        //     assert userIdVector.getObject(0).toString().equals("1");
-        //     assert userIdVector.getObject(1).toString().equals("2");
-        //     assert userIdVector.getObject(2) == null;
-        //     assert userIdVector.getObject(3).toString().equals("3");
-        //
-        //     assert childVector.getObject(0) == null;
-        //     assert childVector.getObject(1) == null;
-        //     assert childVector.getObject(2) == null;
-        //     assert childVector.getObject(3) == null;
-        // }
+        // But this is okay because our backend handles and casts null vectors to vectors
+        // of the appropriate type just fine.
     }
 }
