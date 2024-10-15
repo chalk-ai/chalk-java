@@ -425,6 +425,32 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int INTERNAL_METADATA_FIELD_NUMBER = 10;
+  private ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal internalMetadata_;
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * @return Whether the internalMetadata field is set.
+   */
+  @java.lang.Override
+  public boolean hasInternalMetadata() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * @return The internalMetadata.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata() {
+    return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+  }
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder() {
+    return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -469,6 +495,9 @@ java.lang.String defaultValue) {
         internalGetMetadata(),
         MetadataDefaultEntryHolder.defaultEntry,
         9);
+    if (((bitField0_ & 0x00000008) != 0)) {
+      output.writeMessage(10, getInternalMetadata());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -515,6 +544,10 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, metadata__);
     }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, getInternalMetadata());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -557,6 +590,11 @@ java.lang.String defaultValue) {
     }
     if (!internalGetMetadata().equals(
         other.internalGetMetadata())) return false;
+    if (hasInternalMetadata() != other.hasInternalMetadata()) return false;
+    if (hasInternalMetadata()) {
+      if (!getInternalMetadata()
+          .equals(other.getInternalMetadata())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -593,6 +631,10 @@ java.lang.String defaultValue) {
     if (!internalGetMetadata().getMap().isEmpty()) {
       hash = (37 * hash) + METADATA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetMetadata().hashCode();
+    }
+    if (hasInternalMetadata()) {
+      hash = (37 * hash) + INTERNAL_METADATA_FIELD_NUMBER;
+      hash = (53 * hash) + getInternalMetadata().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -749,6 +791,7 @@ java.lang.String defaultValue) {
         getExecutionDurationFieldBuilder();
         getQueryTimestampFieldBuilder();
         getExplainOutputFieldBuilder();
+        getInternalMetadataFieldBuilder();
       }
     }
     @java.lang.Override
@@ -776,6 +819,11 @@ java.lang.String defaultValue) {
         explainOutputBuilder_ = null;
       }
       internalGetMutableMetadata().clear();
+      internalMetadata_ = null;
+      if (internalMetadataBuilder_ != null) {
+        internalMetadataBuilder_.dispose();
+        internalMetadataBuilder_ = null;
+      }
       return this;
     }
 
@@ -846,6 +894,12 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000100) != 0)) {
         result.metadata_ = internalGetMetadata();
         result.metadata_.makeImmutable();
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.internalMetadata_ = internalMetadataBuilder_ == null
+            ? internalMetadata_
+            : internalMetadataBuilder_.build();
+        to_bitField0_ |= 0x00000008;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -931,6 +985,9 @@ java.lang.String defaultValue) {
       internalGetMutableMetadata().mergeFrom(
           other.internalGetMetadata());
       bitField0_ |= 0x00000100;
+      if (other.hasInternalMetadata()) {
+        mergeInternalMetadata(other.getInternalMetadata());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1012,6 +1069,13 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              input.readMessage(
+                  getInternalMetadataFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1905,6 +1969,127 @@ java.lang.String defaultValue) {
           .putAll(values);
       bitField0_ |= 0x00000100;
       return this;
+    }
+
+    private ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal internalMetadata_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder> internalMetadataBuilder_;
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     * @return Whether the internalMetadata field is set.
+     */
+    public boolean hasInternalMetadata() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     * @return The internalMetadata.
+     */
+    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata() {
+      if (internalMetadataBuilder_ == null) {
+        return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+      } else {
+        return internalMetadataBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public Builder setInternalMetadata(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal value) {
+      if (internalMetadataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        internalMetadata_ = value;
+      } else {
+        internalMetadataBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public Builder setInternalMetadata(
+        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder builderForValue) {
+      if (internalMetadataBuilder_ == null) {
+        internalMetadata_ = builderForValue.build();
+      } else {
+        internalMetadataBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public Builder mergeInternalMetadata(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal value) {
+      if (internalMetadataBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0) &&
+          internalMetadata_ != null &&
+          internalMetadata_ != ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance()) {
+          getInternalMetadataBuilder().mergeFrom(value);
+        } else {
+          internalMetadata_ = value;
+        }
+      } else {
+        internalMetadataBuilder_.mergeFrom(value);
+      }
+      if (internalMetadata_ != null) {
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public Builder clearInternalMetadata() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      internalMetadata_ = null;
+      if (internalMetadataBuilder_ != null) {
+        internalMetadataBuilder_.dispose();
+        internalMetadataBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder getInternalMetadataBuilder() {
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return getInternalMetadataFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder() {
+      if (internalMetadataBuilder_ != null) {
+        return internalMetadataBuilder_.getMessageOrBuilder();
+      } else {
+        return internalMetadata_ == null ?
+            ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+      }
+    }
+    /**
+     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder> 
+        getInternalMetadataFieldBuilder() {
+      if (internalMetadataBuilder_ == null) {
+        internalMetadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder>(
+                getInternalMetadata(),
+                getParentForChildren(),
+                isClean());
+        internalMetadata_ = null;
+      }
+      return internalMetadataBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

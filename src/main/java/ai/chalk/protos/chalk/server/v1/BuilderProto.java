@@ -26,6 +26,16 @@ public final class BuilderProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_ActivateDeploymentResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_IndexDeploymentRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_IndexDeploymentRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_IndexDeploymentResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_IndexDeploymentResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -48,21 +58,26 @@ public final class BuilderProto {
       "erver.v1\032\037chalk/auth/v1/permissions.prot" +
       "o\"Q\n\031ActivateDeploymentRequest\0224\n\026existi" +
       "ng_deployment_id\030\001 \001(\tR\024existingDeployme" +
-      "ntId\"\034\n\032ActivateDeploymentResponse\"S\n\033De" +
-      "ployKubeComponentsRequest\0224\n\026existing_de" +
-      "ployment_id\030\001 \001(\tR\024existingDeploymentId\"" +
-      "\036\n\034DeployKubeComponentsResponse2\376\001\n\016Buil" +
-      "derService\022r\n\022ActivateDeployment\022*.chalk" +
-      ".server.v1.ActivateDeploymentRequest\032+.c" +
-      "halk.server.v1.ActivateDeploymentRespons" +
-      "e\"\003\200}\016\022x\n\024DeployKubeComponents\022,.chalk.s" +
-      "erver.v1.DeployKubeComponentsRequest\032-.c" +
-      "halk.server.v1.DeployKubeComponentsRespo" +
-      "nse\"\003\200}\014B\241\001\n\037ai.chalk.protos.chalk.serve" +
-      "r.v1B\014BuilderProtoP\001Z\022server/v1;serverv1" +
-      "\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Server\\" +
-      "V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Chalk" +
-      "::Server::V1b\006proto3"
+      "ntId\"\034\n\032ActivateDeploymentResponse\"N\n\026In" +
+      "dexDeploymentRequest\0224\n\026existing_deploym" +
+      "ent_id\030\001 \001(\tR\024existingDeploymentId\"\031\n\027In" +
+      "dexDeploymentResponse\"S\n\033DeployKubeCompo" +
+      "nentsRequest\0224\n\026existing_deployment_id\030\001" +
+      " \001(\tR\024existingDeploymentId\"\036\n\034DeployKube" +
+      "ComponentsResponse2\351\002\n\016BuilderService\022r\n" +
+      "\022ActivateDeployment\022*.chalk.server.v1.Ac" +
+      "tivateDeploymentRequest\032+.chalk.server.v" +
+      "1.ActivateDeploymentResponse\"\003\200}\016\022i\n\017Ind" +
+      "exDeployment\022\'.chalk.server.v1.IndexDepl" +
+      "oymentRequest\032(.chalk.server.v1.IndexDep" +
+      "loymentResponse\"\003\200}\016\022x\n\024DeployKubeCompon" +
+      "ents\022,.chalk.server.v1.DeployKubeCompone" +
+      "ntsRequest\032-.chalk.server.v1.DeployKubeC" +
+      "omponentsResponse\"\003\200}\014B\241\001\n\037ai.chalk.prot" +
+      "os.chalk.server.v1B\014BuilderProtoP\001Z\022serv" +
+      "er/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002" +
+      "\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMe" +
+      "tadata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -81,14 +96,26 @@ public final class BuilderProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ActivateDeploymentResponse_descriptor,
         new java.lang.String[] { });
-    internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor =
+    internal_static_chalk_server_v1_IndexDeploymentRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_chalk_server_v1_IndexDeploymentRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_IndexDeploymentRequest_descriptor,
+        new java.lang.String[] { "ExistingDeploymentId", });
+    internal_static_chalk_server_v1_IndexDeploymentResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_chalk_server_v1_IndexDeploymentResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_IndexDeploymentResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_chalk_server_v1_DeployKubeComponentsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor,
         new java.lang.String[] { "ExistingDeploymentId", });
     internal_static_chalk_server_v1_DeployKubeComponentsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_server_v1_DeployKubeComponentsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeployKubeComponentsResponse_descriptor,

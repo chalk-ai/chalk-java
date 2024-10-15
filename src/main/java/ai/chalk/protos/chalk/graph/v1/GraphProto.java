@@ -503,21 +503,22 @@ public final class GraphProto {
       "\007maximum\"\223\001\n\020StrictValidation\022:\n\007feature" +
       "\030\001 \001(\0132 .chalk.graph.v1.FeatureReference" +
       "R\007feature\022C\n\013validations\030\002 \003(\0132!.chalk.g" +
-      "raph.v1.FeatureValidationR\013validations*d" +
-      "\n\rCacheStrategy\022\036\n\032CACHE_STRATEGY_UNSPEC" +
-      "IFIED\020\000\022\026\n\022CACHE_STRATEGY_ALL\020\001\022\033\n\027CACHE" +
-      "_STRATEGY_NO_NULLS\020\002*b\n\014ResolverKind\022\035\n\031" +
-      "RESOLVER_KIND_UNSPECIFIED\020\000\022\030\n\024RESOLVER_" +
-      "KIND_ONLINE\020\001\022\031\n\025RESOLVER_KIND_OFFLINE\020\002" +
-      "*Z\n\014ResourceHint\022\035\n\031RESOURCE_HINT_UNSPEC" +
-      "IFIED\020\000\022\025\n\021RESOURCE_HINT_CPU\020\001\022\024\n\020RESOUR" +
-      "CE_HINT_IO\020\002*t\n\nWindowMode\022\033\n\027WINDOW_MOD" +
-      "E_UNSPECIFIED\020\000\022\032\n\026WINDOW_MODE_CONTINUOU" +
-      "S\020\001\022\030\n\024WINDOW_MODE_TUMBLING\020\002\022\023\n\017WINDOW_" +
-      "MODE_CDC\020\003B\206\001\n\036ai.chalk.protos.chalk.gra" +
-      "ph.v1B\nGraphProtoP\001\242\002\003CGX\252\002\016Chalk.Graph." +
-      "V1\312\002\016Chalk\\Graph\\V1\342\002\032Chalk\\Graph\\V1\\GPB" +
-      "Metadata\352\002\020Chalk::Graph::V1b\006proto3"
+      "raph.v1.FeatureValidationR\013validations*\204" +
+      "\001\n\rCacheStrategy\022\036\n\032CACHE_STRATEGY_UNSPE" +
+      "CIFIED\020\000\022\026\n\022CACHE_STRATEGY_ALL\020\001\022\033\n\027CACH" +
+      "E_STRATEGY_NO_NULLS\020\002\022\036\n\032CACHE_STRATEGY_" +
+      "EVICT_NULLS\020\003*b\n\014ResolverKind\022\035\n\031RESOLVE" +
+      "R_KIND_UNSPECIFIED\020\000\022\030\n\024RESOLVER_KIND_ON" +
+      "LINE\020\001\022\031\n\025RESOLVER_KIND_OFFLINE\020\002*Z\n\014Res" +
+      "ourceHint\022\035\n\031RESOURCE_HINT_UNSPECIFIED\020\000" +
+      "\022\025\n\021RESOURCE_HINT_CPU\020\001\022\024\n\020RESOURCE_HINT" +
+      "_IO\020\002*t\n\nWindowMode\022\033\n\027WINDOW_MODE_UNSPE" +
+      "CIFIED\020\000\022\032\n\026WINDOW_MODE_CONTINUOUS\020\001\022\030\n\024" +
+      "WINDOW_MODE_TUMBLING\020\002\022\023\n\017WINDOW_MODE_CD" +
+      "C\020\003B\206\001\n\036ai.chalk.protos.chalk.graph.v1B\n" +
+      "GraphProtoP\001\242\002\003CGX\252\002\016Chalk.Graph.V1\312\002\016Ch" +
+      "alk\\Graph\\V1\342\002\032Chalk\\Graph\\V1\\GPBMetadat" +
+      "a\352\002\020Chalk::Graph::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

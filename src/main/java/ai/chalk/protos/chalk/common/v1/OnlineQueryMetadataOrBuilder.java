@@ -166,4 +166,19 @@ java.lang.String defaultValue);
    */
   java.lang.String getMetadataOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * @return Whether the internalMetadata field is set.
+   */
+  boolean hasInternalMetadata();
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * @return The internalMetadata.
+   */
+  ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata();
+  /**
+   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder();
 }

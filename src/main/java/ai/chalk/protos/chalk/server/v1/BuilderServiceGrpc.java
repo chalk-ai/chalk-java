@@ -46,6 +46,37 @@ public final class BuilderServiceGrpc {
     return getActivateDeploymentMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> getIndexDeploymentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "IndexDeployment",
+      requestType = ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> getIndexDeploymentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest, ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> getIndexDeploymentMethod;
+    if ((getIndexDeploymentMethod = BuilderServiceGrpc.getIndexDeploymentMethod) == null) {
+      synchronized (BuilderServiceGrpc.class) {
+        if ((getIndexDeploymentMethod = BuilderServiceGrpc.getIndexDeploymentMethod) == null) {
+          BuilderServiceGrpc.getIndexDeploymentMethod = getIndexDeploymentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest, ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "IndexDeployment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BuilderServiceMethodDescriptorSupplier("IndexDeployment"))
+              .build();
+        }
+      }
+    }
+    return getIndexDeploymentMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest,
       ai.chalk.protos.chalk.server.v1.DeployKubeComponentsResponse> getDeployKubeComponentsMethod;
 
@@ -137,6 +168,13 @@ public final class BuilderServiceGrpc {
     }
 
     /**
+     */
+    default void indexDeployment(ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getIndexDeploymentMethod(), responseObserver);
+    }
+
+    /**
      * <pre>
      * Intermediate step in the deployment activation process. Allows for partial migration to the new
      * go-api-server builder service.
@@ -188,6 +226,14 @@ public final class BuilderServiceGrpc {
     }
 
     /**
+     */
+    public void indexDeployment(ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getIndexDeploymentMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      * <pre>
      * Intermediate step in the deployment activation process. Allows for partial migration to the new
      * go-api-server builder service.
@@ -225,6 +271,13 @@ public final class BuilderServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse activateDeployment(ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getActivateDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse indexDeployment(ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getIndexDeploymentMethod(), getCallOptions(), request);
     }
 
     /**
@@ -268,6 +321,14 @@ public final class BuilderServiceGrpc {
     }
 
     /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse> indexDeployment(
+        ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getIndexDeploymentMethod(), getCallOptions()), request);
+    }
+
+    /**
      * <pre>
      * Intermediate step in the deployment activation process. Allows for partial migration to the new
      * go-api-server builder service.
@@ -281,7 +342,8 @@ public final class BuilderServiceGrpc {
   }
 
   private static final int METHODID_ACTIVATE_DEPLOYMENT = 0;
-  private static final int METHODID_DEPLOY_KUBE_COMPONENTS = 1;
+  private static final int METHODID_INDEX_DEPLOYMENT = 1;
+  private static final int METHODID_DEPLOY_KUBE_COMPONENTS = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -303,6 +365,10 @@ public final class BuilderServiceGrpc {
         case METHODID_ACTIVATE_DEPLOYMENT:
           serviceImpl.activateDeployment((ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse>) responseObserver);
+          break;
+        case METHODID_INDEX_DEPLOYMENT:
+          serviceImpl.indexDeployment((ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse>) responseObserver);
           break;
         case METHODID_DEPLOY_KUBE_COMPONENTS:
           serviceImpl.deployKubeComponents((ai.chalk.protos.chalk.server.v1.DeployKubeComponentsRequest) request,
@@ -333,6 +399,13 @@ public final class BuilderServiceGrpc {
               ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest,
               ai.chalk.protos.chalk.server.v1.ActivateDeploymentResponse>(
                 service, METHODID_ACTIVATE_DEPLOYMENT)))
+        .addMethod(
+          getIndexDeploymentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.IndexDeploymentRequest,
+              ai.chalk.protos.chalk.server.v1.IndexDeploymentResponse>(
+                service, METHODID_INDEX_DEPLOYMENT)))
         .addMethod(
           getDeployKubeComponentsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -389,6 +462,7 @@ public final class BuilderServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new BuilderServiceFileDescriptorSupplier())
               .addMethod(getActivateDeploymentMethod())
+              .addMethod(getIndexDeploymentMethod())
               .addMethod(getDeployKubeComponentsMethod())
               .build();
         }
