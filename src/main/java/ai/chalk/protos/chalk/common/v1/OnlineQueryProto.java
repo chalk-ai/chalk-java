@@ -136,6 +136,21 @@ public final class OnlineQueryProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_common_v1_OnlineQueryMetadata_MetadataEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_OnlineQueryMetadataInternal_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_PlannerOptionsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_OnlineQueryMetadataInternal_PlannerOptionsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_BusMessageIDs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_BusMessageIDs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_common_v1_QueryExplainInfo_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -262,7 +277,7 @@ public final class OnlineQueryProto {
       "ureMeta\022.\n\023chosen_resolver_fqn\030\001 \001(\tR\021ch" +
       "osenResolverFqn\022\033\n\tcache_hit\030\002 \001(\010R\010cach" +
       "eHit\022%\n\016primitive_type\030\003 \001(\tR\rprimitiveT" +
-      "ype\022\030\n\007version\030\004 \001(\003R\007version\"\254\004\n\023Online" +
+      "ype\022\030\n\007version\030\004 \001(\003R\007version\"\242\005\n\023Online" +
       "QueryMetadata\022H\n\022execution_duration\030\001 \001(" +
       "\0132\031.google.protobuf.DurationR\021executionD" +
       "uration\022#\n\rdeployment_id\030\002 \001(\tR\014deployme" +
@@ -275,22 +290,52 @@ public final class OnlineQueryProto {
       "chalk.common.v1.QueryExplainInfoR\rexplai" +
       "nOutput\022N\n\010metadata\030\t \003(\01322.chalk.common" +
       ".v1.OnlineQueryMetadata.MetadataEntryR\010m" +
-      "etadata\032;\n\rMetadataEntry\022\020\n\003key\030\001 \001(\tR\003k" +
-      "ey\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"H\n\020QueryExp" +
-      "lainInfo\022$\n\013plan_string\030\001 \001(\tH\000R\nplanStr" +
-      "ing\210\001\001B\016\n\014_plan_string\"\201\001\n\031UploadFeature" +
-      "sBulkRequest\022%\n\016inputs_feather\030\001 \001(\014R\rin" +
-      "putsFeather\022=\n\tbody_type\030\007 \001(\0162 .chalk.c" +
-      "ommon.v1.FeatherBodyTypeR\010bodyType\"Q\n\032Up" +
-      "loadFeaturesBulkResponse\0223\n\006errors\030\001 \003(\013" +
-      "2\033.chalk.common.v1.ChalkErrorR\006errors*w\n" +
-      "\017FeatherBodyType\022!\n\035FEATHER_BODY_TYPE_UN" +
-      "SPECIFIED\020\000\022\033\n\027FEATHER_BODY_TYPE_TABLE\020\001" +
-      "\022$\n FEATHER_BODY_TYPE_RECORD_BATCHES\020\002B\221" +
-      "\001\n\037ai.chalk.protos.chalk.common.v1B\020Onli" +
-      "neQueryProtoP\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002" +
-      "\017Chalk\\Common\\V1\342\002\033Chalk\\Common\\V1\\GPBMe" +
-      "tadata\352\002\021Chalk::Common::V1b\006proto3"
+      "etadata\022^\n\021internal_metadata\030\n \001(\0132,.cha" +
+      "lk.common.v1.OnlineQueryMetadataInternal" +
+      "H\000R\020internalMetadata\210\001\001\032;\n\rMetadataEntry" +
+      "\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value" +
+      ":\0028\001B\024\n\022_internal_metadata\"\267\006\n\033OnlineQue" +
+      "ryMetadataInternal\022 \n\tjson_plan\030\001 \001(\tH\000R" +
+      "\010jsonPlan\210\001\001\022,\n\017serialized_plan\030\002 \001(\tH\001R" +
+      "\016serializedPlan\210\001\001\0229\n\026serialized_static_" +
+      "plan\030\003 \001(\tH\002R\024serializedStaticPlan\210\001\001\022J\n" +
+      "\037serialized_static_physical_plan\030\004 \001(\tH\003" +
+      "R\034serializedStaticPhysicalPlan\210\001\001\022i\n\017pla" +
+      "nner_options\030\005 \003(\0132@.chalk.common.v1.Onl" +
+      "ineQueryMetadataInternal.PlannerOptionsE" +
+      "ntryR\016plannerOptions\0221\n\022plan_stages_stor" +
+      "ed\030\006 \001(\010H\004R\020planStagesStored\210\001\001\0224\n\023perfo" +
+      "rmance_summary\030\007 \001(\tH\005R\022performanceSumma" +
+      "ry\210\001\001\022K\n\017bus_message_ids\030\010 \001(\0132\036.chalk.c" +
+      "ommon.v1.BusMessageIDsH\006R\rbusMessageIds\210" +
+      "\001\001\022!\n\014value_tables\030\t \003(\tR\013valueTables\032Y\n" +
+      "\023PlannerOptionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022," +
+      "\n\005value\030\002 \001(\0132\026.google.protobuf.ValueR\005v" +
+      "alue:\0028\001B\014\n\n_json_planB\022\n\020_serialized_pl" +
+      "anB\031\n\027_serialized_static_planB\"\n _serial" +
+      "ized_static_physical_planB\025\n\023_plan_stage" +
+      "s_storedB\026\n\024_performance_summaryB\022\n\020_bus" +
+      "_message_ids\"\370\001\n\rBusMessageIDs\0225\n\027metric" +
+      "s_bus_message_ids\030\001 \003(\tR\024metricsBusMessa" +
+      "geIds\0223\n\026result_bus_message_ids\030\002 \003(\tR\023r" +
+      "esultBusMessageIds\0225\n\027gcs_parquet_messag" +
+      "e_ids\030\003 \003(\tR\024gcsParquetMessageIds\022D\n\037pub" +
+      "sub_body_parquet_message_ids\030\004 \003(\tR\033pubs" +
+      "ubBodyParquetMessageIds\"H\n\020QueryExplainI" +
+      "nfo\022$\n\013plan_string\030\001 \001(\tH\000R\nplanString\210\001" +
+      "\001B\016\n\014_plan_string\"\201\001\n\031UploadFeaturesBulk" +
+      "Request\022%\n\016inputs_feather\030\001 \001(\014R\rinputsF" +
+      "eather\022=\n\tbody_type\030\007 \001(\0162 .chalk.common" +
+      ".v1.FeatherBodyTypeR\010bodyType\"Q\n\032UploadF" +
+      "eaturesBulkResponse\0223\n\006errors\030\001 \003(\0132\033.ch" +
+      "alk.common.v1.ChalkErrorR\006errors*w\n\017Feat" +
+      "herBodyType\022!\n\035FEATHER_BODY_TYPE_UNSPECI" +
+      "FIED\020\000\022\033\n\027FEATHER_BODY_TYPE_TABLE\020\001\022$\n F" +
+      "EATHER_BODY_TYPE_RECORD_BATCHES\020\002B\221\001\n\037ai" +
+      ".chalk.protos.chalk.common.v1B\020OnlineQue" +
+      "ryProtoP\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017Chal" +
+      "k\\Common\\V1\342\002\033Chalk\\Common\\V1\\GPBMetadat" +
+      "a\352\002\021Chalk::Common::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -437,27 +482,45 @@ public final class OnlineQueryProto {
     internal_static_chalk_common_v1_OnlineQueryMetadata_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryMetadata_descriptor,
-        new java.lang.String[] { "ExecutionDuration", "DeploymentId", "EnvironmentId", "EnvironmentName", "QueryId", "QueryTimestamp", "QueryHash", "ExplainOutput", "Metadata", });
+        new java.lang.String[] { "ExecutionDuration", "DeploymentId", "EnvironmentId", "EnvironmentName", "QueryId", "QueryTimestamp", "QueryHash", "ExplainOutput", "Metadata", "InternalMetadata", });
     internal_static_chalk_common_v1_OnlineQueryMetadata_MetadataEntry_descriptor =
       internal_static_chalk_common_v1_OnlineQueryMetadata_descriptor.getNestedTypes().get(0);
     internal_static_chalk_common_v1_OnlineQueryMetadata_MetadataEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryMetadata_MetadataEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_chalk_common_v1_QueryExplainInfo_descriptor =
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_descriptor =
       getDescriptor().getMessageTypes().get(17);
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_OnlineQueryMetadataInternal_descriptor,
+        new java.lang.String[] { "JsonPlan", "SerializedPlan", "SerializedStaticPlan", "SerializedStaticPhysicalPlan", "PlannerOptions", "PlanStagesStored", "PerformanceSummary", "BusMessageIds", "ValueTables", });
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_PlannerOptionsEntry_descriptor =
+      internal_static_chalk_common_v1_OnlineQueryMetadataInternal_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_common_v1_OnlineQueryMetadataInternal_PlannerOptionsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_OnlineQueryMetadataInternal_PlannerOptionsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_common_v1_BusMessageIDs_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_chalk_common_v1_BusMessageIDs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_BusMessageIDs_descriptor,
+        new java.lang.String[] { "MetricsBusMessageIds", "ResultBusMessageIds", "GcsParquetMessageIds", "PubsubBodyParquetMessageIds", });
+    internal_static_chalk_common_v1_QueryExplainInfo_descriptor =
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_common_v1_QueryExplainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_QueryExplainInfo_descriptor,
         new java.lang.String[] { "PlanString", });
     internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_common_v1_UploadFeaturesBulkRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor,
         new java.lang.String[] { "InputsFeather", "BodyType", });
     internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_chalk_common_v1_UploadFeaturesBulkResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor,

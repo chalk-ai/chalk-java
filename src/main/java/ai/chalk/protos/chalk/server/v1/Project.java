@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     teamId_ = "";
     name_ = "";
     environments_ = java.util.Collections.emptyList();
+    gitRepo_ = "";
   }
 
   @java.lang.Override
@@ -43,6 +44,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.Project.class, ai.chalk.protos.chalk.server.v1.Project.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -201,6 +203,53 @@ private static final long serialVersionUID = 0L;
     return environments_.get(index);
   }
 
+  public static final int GIT_REPO_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitRepo_ = "";
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return Whether the gitRepo field is set.
+   */
+  @java.lang.Override
+  public boolean hasGitRepo() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return The gitRepo.
+   */
+  @java.lang.Override
+  public java.lang.String getGitRepo() {
+    java.lang.Object ref = gitRepo_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitRepo_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return The bytes for gitRepo.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitRepoBytes() {
+    java.lang.Object ref = gitRepo_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitRepo_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -227,6 +276,9 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < environments_.size(); i++) {
       output.writeMessage(4, environments_.get(i));
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, gitRepo_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -248,6 +300,9 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < environments_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, environments_.get(i));
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, gitRepo_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -272,6 +327,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getName())) return false;
     if (!getEnvironmentsList()
         .equals(other.getEnvironmentsList())) return false;
+    if (hasGitRepo() != other.hasGitRepo()) return false;
+    if (hasGitRepo()) {
+      if (!getGitRepo()
+          .equals(other.getGitRepo())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -292,6 +352,10 @@ private static final long serialVersionUID = 0L;
     if (getEnvironmentsCount() > 0) {
       hash = (37 * hash) + ENVIRONMENTS_FIELD_NUMBER;
       hash = (53 * hash) + getEnvironmentsList().hashCode();
+    }
+    if (hasGitRepo()) {
+      hash = (37 * hash) + GIT_REPO_FIELD_NUMBER;
+      hash = (53 * hash) + getGitRepo().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -434,6 +498,7 @@ private static final long serialVersionUID = 0L;
         environmentsBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000008);
+      gitRepo_ = "";
       return this;
     }
 
@@ -489,6 +554,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.name_ = name_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.gitRepo_ = gitRepo_;
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -576,6 +647,11 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (other.hasGitRepo()) {
+        gitRepo_ = other.gitRepo_;
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -630,6 +706,11 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 34
+            case 42: {
+              gitRepo_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1101,6 +1182,85 @@ private static final long serialVersionUID = 0L;
         environments_ = null;
       }
       return environmentsBuilder_;
+    }
+
+    private java.lang.Object gitRepo_ = "";
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @return Whether the gitRepo field is set.
+     */
+    public boolean hasGitRepo() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @return The gitRepo.
+     */
+    public java.lang.String getGitRepo() {
+      java.lang.Object ref = gitRepo_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitRepo_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @return The bytes for gitRepo.
+     */
+    public com.google.protobuf.ByteString
+        getGitRepoBytes() {
+      java.lang.Object ref = gitRepo_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitRepo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @param value The gitRepo to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitRepo(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitRepo_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitRepo() {
+      gitRepo_ = getDefaultInstance().getGitRepo();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+     * @param value The bytes for gitRepo to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitRepoBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitRepo_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

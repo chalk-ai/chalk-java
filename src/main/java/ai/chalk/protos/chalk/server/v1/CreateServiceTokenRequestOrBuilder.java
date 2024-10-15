@@ -52,7 +52,7 @@ public interface CreateServiceTokenRequestOrBuilder extends
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=103
+   *     See chalk/server/v1/team.proto;l=104
    * @return A list containing the customClaims.
    */
   @java.lang.Deprecated java.util.List<java.lang.String>
@@ -60,14 +60,14 @@ public interface CreateServiceTokenRequestOrBuilder extends
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=103
+   *     See chalk/server/v1/team.proto;l=104
    * @return The count of customClaims.
    */
   @java.lang.Deprecated int getCustomClaimsCount();
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=103
+   *     See chalk/server/v1/team.proto;l=104
    * @param index The index of the element to return.
    * @return The customClaims at the given index.
    */
@@ -75,7 +75,7 @@ public interface CreateServiceTokenRequestOrBuilder extends
   /**
    * <code>repeated string custom_claims = 3 [json_name = "customClaims", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateServiceTokenRequest.custom_claims is deprecated.
-   *     See chalk/server/v1/team.proto;l=103
+   *     See chalk/server/v1/team.proto;l=104
    * @param index The index of the value to return.
    * @return The bytes of the customClaims at the given index.
    */

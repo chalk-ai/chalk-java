@@ -75,6 +75,16 @@ public final class DeployProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_TagDeploymentResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetActiveDeploymentsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetActiveDeploymentsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetActiveDeploymentsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetActiveDeploymentsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -114,28 +124,34 @@ public final class DeployProto {
       "esponse\022;\n\ndeployment\030\001 \001(\0132\033.chalk.serv" +
       "er.v1.DeploymentR\ndeployment\0229\n\026untagged" +
       "_deployment_id\030\002 \001(\tH\000R\024untaggedDeployme" +
-      "ntId\210\001\001B\031\n\027_untagged_deployment_id2\224\005\n\rD" +
-      "eployService\022`\n\014DeployBranch\022$.chalk.ser" +
-      "ver.v1.DeployBranchRequest\032%.chalk.serve" +
-      "r.v1.DeployBranchResponse\"\003\200}\r\022c\n\rGetDep" +
-      "loyment\022%.chalk.server.v1.GetDeploymentR" +
-      "equest\032&.chalk.server.v1.GetDeploymentRe" +
-      "sponse\"\003\200}\013\022i\n\017ListDeployments\022\'.chalk.s" +
-      "erver.v1.ListDeploymentsRequest\032(.chalk." +
-      "server.v1.ListDeploymentsResponse\"\003\200}\013\022u" +
-      "\n\021SuspendDeployment\022).chalk.server.v1.Su" +
-      "spendDeploymentRequest\032*.chalk.server.v1" +
-      ".SuspendDeploymentResponse\"\t\200}\014\212\323\016\002\010\002\022o\n" +
-      "\017ScaleDeployment\022\'.chalk.server.v1.Scale" +
-      "DeploymentRequest\032(.chalk.server.v1.Scal" +
-      "eDeploymentResponse\"\t\200}\014\212\323\016\002\010\002\022i\n\rTagDep" +
-      "loyment\022%.chalk.server.v1.TagDeploymentR" +
-      "equest\032&.chalk.server.v1.TagDeploymentRe" +
-      "sponse\"\t\200}\014\212\323\016\002\010\002B\240\001\n\037ai.chalk.protos.ch" +
-      "alk.server.v1B\013DeployProtoP\001Z\022server/v1;" +
-      "serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk" +
-      "\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata" +
-      "\352\002\021Chalk::Server::V1b\006proto3"
+      "ntId\210\001\001B\031\n\027_untagged_deployment_id\"\035\n\033Ge" +
+      "tActiveDeploymentsRequest\"]\n\034GetActiveDe" +
+      "ploymentsResponse\022=\n\013deployments\030\001 \003(\0132\033" +
+      ".chalk.server.v1.DeploymentR\013deployments" +
+      "2\216\006\n\rDeployService\022`\n\014DeployBranch\022$.cha" +
+      "lk.server.v1.DeployBranchRequest\032%.chalk" +
+      ".server.v1.DeployBranchResponse\"\003\200}\r\022c\n\r" +
+      "GetDeployment\022%.chalk.server.v1.GetDeplo" +
+      "ymentRequest\032&.chalk.server.v1.GetDeploy" +
+      "mentResponse\"\003\200}\013\022i\n\017ListDeployments\022\'.c" +
+      "halk.server.v1.ListDeploymentsRequest\032(." +
+      "chalk.server.v1.ListDeploymentsResponse\"" +
+      "\003\200}\013\022x\n\024GetActiveDeployments\022,.chalk.ser" +
+      "ver.v1.GetActiveDeploymentsRequest\032-.cha" +
+      "lk.server.v1.GetActiveDeploymentsRespons" +
+      "e\"\003\200}\002\022u\n\021SuspendDeployment\022).chalk.serv" +
+      "er.v1.SuspendDeploymentRequest\032*.chalk.s" +
+      "erver.v1.SuspendDeploymentResponse\"\t\200}\014\212" +
+      "\323\016\002\010\002\022o\n\017ScaleDeployment\022\'.chalk.server." +
+      "v1.ScaleDeploymentRequest\032(.chalk.server" +
+      ".v1.ScaleDeploymentResponse\"\t\200}\014\212\323\016\002\010\002\022i" +
+      "\n\rTagDeployment\022%.chalk.server.v1.TagDep" +
+      "loymentRequest\032&.chalk.server.v1.TagDepl" +
+      "oymentResponse\"\t\200}\014\212\323\016\002\010\002B\240\001\n\037ai.chalk.p" +
+      "rotos.chalk.server.v1B\013DeployProtoP\001Z\022se" +
+      "rver/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1" +
+      "\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPB" +
+      "Metadata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -216,6 +232,18 @@ public final class DeployProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_TagDeploymentResponse_descriptor,
         new java.lang.String[] { "Deployment", "UntaggedDeploymentId", });
+    internal_static_chalk_server_v1_GetActiveDeploymentsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_chalk_server_v1_GetActiveDeploymentsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetActiveDeploymentsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetActiveDeploymentsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_chalk_server_v1_GetActiveDeploymentsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetActiveDeploymentsResponse_descriptor,
+        new java.lang.String[] { "Deployments", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.AuditProto.audit);

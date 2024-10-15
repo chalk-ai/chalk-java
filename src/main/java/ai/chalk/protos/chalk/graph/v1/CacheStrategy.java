@@ -21,6 +21,10 @@ public enum CacheStrategy
    * <code>CACHE_STRATEGY_NO_NULLS = 2;</code>
    */
   CACHE_STRATEGY_NO_NULLS(2),
+  /**
+   * <code>CACHE_STRATEGY_EVICT_NULLS = 3;</code>
+   */
+  CACHE_STRATEGY_EVICT_NULLS(3),
   UNRECOGNIZED(-1),
   ;
 
@@ -36,6 +40,10 @@ public enum CacheStrategy
    * <code>CACHE_STRATEGY_NO_NULLS = 2;</code>
    */
   public static final int CACHE_STRATEGY_NO_NULLS_VALUE = 2;
+  /**
+   * <code>CACHE_STRATEGY_EVICT_NULLS = 3;</code>
+   */
+  public static final int CACHE_STRATEGY_EVICT_NULLS_VALUE = 3;
 
 
   public final int getNumber() {
@@ -65,6 +73,7 @@ public enum CacheStrategy
       case 0: return CACHE_STRATEGY_UNSPECIFIED;
       case 1: return CACHE_STRATEGY_ALL;
       case 2: return CACHE_STRATEGY_NO_NULLS;
+      case 3: return CACHE_STRATEGY_EVICT_NULLS;
       default: return null;
     }
   }

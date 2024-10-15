@@ -108,6 +108,37 @@ public final class DeployServiceGrpc {
     return getListDeploymentsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest,
+      ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> getGetActiveDeploymentsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetActiveDeployments",
+      requestType = ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest,
+      ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> getGetActiveDeploymentsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest, ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> getGetActiveDeploymentsMethod;
+    if ((getGetActiveDeploymentsMethod = DeployServiceGrpc.getGetActiveDeploymentsMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getGetActiveDeploymentsMethod = DeployServiceGrpc.getGetActiveDeploymentsMethod) == null) {
+          DeployServiceGrpc.getGetActiveDeploymentsMethod = getGetActiveDeploymentsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest, ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetActiveDeployments"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("GetActiveDeployments"))
+              .build();
+        }
+      }
+    }
+    return getGetActiveDeploymentsMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest,
       ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> getSuspendDeploymentMethod;
 
@@ -272,6 +303,13 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    default void getActiveDeployments(ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetActiveDeploymentsMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void suspendDeployment(ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSuspendDeploymentMethod(), responseObserver);
@@ -345,6 +383,14 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    public void getActiveDeployments(ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetActiveDeploymentsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void suspendDeployment(ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -403,6 +449,13 @@ public final class DeployServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse listDeployments(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListDeploymentsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse getActiveDeployments(ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetActiveDeploymentsMethod(), getCallOptions(), request);
     }
 
     /**
@@ -469,6 +522,14 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse> getActiveDeployments(
+        ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetActiveDeploymentsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.SuspendDeploymentResponse> suspendDeployment(
         ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -495,9 +556,10 @@ public final class DeployServiceGrpc {
   private static final int METHODID_DEPLOY_BRANCH = 0;
   private static final int METHODID_GET_DEPLOYMENT = 1;
   private static final int METHODID_LIST_DEPLOYMENTS = 2;
-  private static final int METHODID_SUSPEND_DEPLOYMENT = 3;
-  private static final int METHODID_SCALE_DEPLOYMENT = 4;
-  private static final int METHODID_TAG_DEPLOYMENT = 5;
+  private static final int METHODID_GET_ACTIVE_DEPLOYMENTS = 3;
+  private static final int METHODID_SUSPEND_DEPLOYMENT = 4;
+  private static final int METHODID_SCALE_DEPLOYMENT = 5;
+  private static final int METHODID_TAG_DEPLOYMENT = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -527,6 +589,10 @@ public final class DeployServiceGrpc {
         case METHODID_LIST_DEPLOYMENTS:
           serviceImpl.listDeployments((ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse>) responseObserver);
+          break;
+        case METHODID_GET_ACTIVE_DEPLOYMENTS:
+          serviceImpl.getActiveDeployments((ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse>) responseObserver);
           break;
         case METHODID_SUSPEND_DEPLOYMENT:
           serviceImpl.suspendDeployment((ai.chalk.protos.chalk.server.v1.SuspendDeploymentRequest) request,
@@ -579,6 +645,13 @@ public final class DeployServiceGrpc {
               ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest,
               ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse>(
                 service, METHODID_LIST_DEPLOYMENTS)))
+        .addMethod(
+          getGetActiveDeploymentsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsRequest,
+              ai.chalk.protos.chalk.server.v1.GetActiveDeploymentsResponse>(
+                service, METHODID_GET_ACTIVE_DEPLOYMENTS)))
         .addMethod(
           getSuspendDeploymentMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -651,6 +724,7 @@ public final class DeployServiceGrpc {
               .addMethod(getDeployBranchMethod())
               .addMethod(getGetDeploymentMethod())
               .addMethod(getListDeploymentsMethod())
+              .addMethod(getGetActiveDeploymentsMethod())
               .addMethod(getSuspendDeploymentMethod())
               .addMethod(getScaleDeploymentMethod())
               .addMethod(getTagDeploymentMethod())

@@ -579,6 +579,37 @@ public final class TeamServiceGrpc {
     return getUpdateScimGroupSettingsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest,
+      ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> getGetTeamPermissionsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetTeamPermissions",
+      requestType = ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest,
+      ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> getGetTeamPermissionsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest, ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> getGetTeamPermissionsMethod;
+    if ((getGetTeamPermissionsMethod = TeamServiceGrpc.getGetTeamPermissionsMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getGetTeamPermissionsMethod = TeamServiceGrpc.getGetTeamPermissionsMethod) == null) {
+          TeamServiceGrpc.getGetTeamPermissionsMethod = getGetTeamPermissionsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest, ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetTeamPermissions"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("GetTeamPermissions"))
+              .build();
+        }
+      }
+    }
+    return getGetTeamPermissionsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -752,6 +783,13 @@ public final class TeamServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateScimGroupSettingsMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getTeamPermissions(ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTeamPermissionsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -924,6 +962,14 @@ public final class TeamServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUpdateScimGroupSettingsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getTeamPermissions(ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetTeamPermissionsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -1066,6 +1112,13 @@ public final class TeamServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsResponse updateScimGroupSettings(ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUpdateScimGroupSettingsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse getTeamPermissions(ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetTeamPermissionsMethod(), getCallOptions(), request);
     }
   }
 
@@ -1228,6 +1281,14 @@ public final class TeamServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getUpdateScimGroupSettingsMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse> getTeamPermissions(
+        ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetTeamPermissionsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_ENV = 0;
@@ -1248,6 +1309,7 @@ public final class TeamServiceGrpc {
   private static final int METHODID_LIST_TEAM_INVITES = 15;
   private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 16;
   private static final int METHODID_UPDATE_SCIM_GROUP_SETTINGS = 17;
+  private static final int METHODID_GET_TEAM_PERMISSIONS = 18;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1337,6 +1399,10 @@ public final class TeamServiceGrpc {
         case METHODID_UPDATE_SCIM_GROUP_SETTINGS:
           serviceImpl.updateScimGroupSettings((ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsResponse>) responseObserver);
+          break;
+        case METHODID_GET_TEAM_PERMISSIONS:
+          serviceImpl.getTeamPermissions((ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1482,6 +1548,13 @@ public final class TeamServiceGrpc {
               ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsRequest,
               ai.chalk.protos.chalk.server.v1.UpdateScimGroupSettingsResponse>(
                 service, METHODID_UPDATE_SCIM_GROUP_SETTINGS)))
+        .addMethod(
+          getGetTeamPermissionsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetTeamPermissionsRequest,
+              ai.chalk.protos.chalk.server.v1.GetTeamPermissionsResponse>(
+                service, METHODID_GET_TEAM_PERMISSIONS)))
         .build();
   }
 
@@ -1548,6 +1621,7 @@ public final class TeamServiceGrpc {
               .addMethod(getListTeamInvitesMethod())
               .addMethod(getUpsertFeaturePermissionsMethod())
               .addMethod(getUpdateScimGroupSettingsMethod())
+              .addMethod(getGetTeamPermissionsMethod())
               .build();
         }
       }

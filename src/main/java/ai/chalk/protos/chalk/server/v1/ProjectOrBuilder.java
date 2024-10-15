@@ -67,4 +67,21 @@ public interface ProjectOrBuilder extends
    */
   ai.chalk.protos.chalk.server.v1.EnvironmentOrBuilder getEnvironmentsOrBuilder(
       int index);
+
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return Whether the gitRepo field is set.
+   */
+  boolean hasGitRepo();
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return The gitRepo.
+   */
+  java.lang.String getGitRepo();
+  /**
+   * <code>optional string git_repo = 5 [json_name = "gitRepo"];</code>
+   * @return The bytes for gitRepo.
+   */
+  com.google.protobuf.ByteString
+      getGitRepoBytes();
 }
