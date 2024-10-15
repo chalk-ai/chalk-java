@@ -43,6 +43,8 @@ private static final long serialVersionUID = 0L;
     switch (number) {
       case 9:
         return internalGetMetadata();
+      case 10:
+        return internalGetAdditionalMetadata();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -425,30 +427,83 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
-  public static final int INTERNAL_METADATA_FIELD_NUMBER = 10;
-  private ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal internalMetadata_;
-  /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-   * @return Whether the internalMetadata field is set.
-   */
-  @java.lang.Override
-  public boolean hasInternalMetadata() {
-    return ((bitField0_ & 0x00000008) != 0);
+  public static final int ADDITIONAL_METADATA_FIELD_NUMBER = 10;
+  private static final class AdditionalMetadataDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, com.google.protobuf.Value> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, com.google.protobuf.Value>newDefaultInstance(
+                ai.chalk.protos.chalk.common.v1.OnlineQueryProto.internal_static_chalk_common_v1_OnlineQueryMetadata_AdditionalMetadataEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                com.google.protobuf.Value.getDefaultInstance());
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, com.google.protobuf.Value> additionalMetadata_;
+  private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.Value>
+  internalGetAdditionalMetadata() {
+    if (additionalMetadata_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          AdditionalMetadataDefaultEntryHolder.defaultEntry);
+    }
+    return additionalMetadata_;
+  }
+  public int getAdditionalMetadataCount() {
+    return internalGetAdditionalMetadata().getMap().size();
   }
   /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-   * @return The internalMetadata.
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata() {
-    return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+  public boolean containsAdditionalMetadata(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetAdditionalMetadata().getMap().containsKey(key);
   }
   /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * Use {@link #getAdditionalMetadataMap()} instead.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder() {
-    return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getAdditionalMetadata() {
+    return getAdditionalMetadataMap();
+  }
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getAdditionalMetadataMap() {
+    return internalGetAdditionalMetadata().getMap();
+  }
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+com.google.protobuf.Value getAdditionalMetadataOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetAdditionalMetadata().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.Value getAdditionalMetadataOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetAdditionalMetadata().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -495,9 +550,12 @@ java.lang.String defaultValue) {
         internalGetMetadata(),
         MetadataDefaultEntryHolder.defaultEntry,
         9);
-    if (((bitField0_ & 0x00000008) != 0)) {
-      output.writeMessage(10, getInternalMetadata());
-    }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetAdditionalMetadata(),
+        AdditionalMetadataDefaultEntryHolder.defaultEntry,
+        10);
     getUnknownFields().writeTo(output);
   }
 
@@ -544,9 +602,15 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, metadata__);
     }
-    if (((bitField0_ & 0x00000008) != 0)) {
+    for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> entry
+         : internalGetAdditionalMetadata().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+      additionalMetadata__ = AdditionalMetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(10, getInternalMetadata());
+          .computeMessageSize(10, additionalMetadata__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -590,11 +654,8 @@ java.lang.String defaultValue) {
     }
     if (!internalGetMetadata().equals(
         other.internalGetMetadata())) return false;
-    if (hasInternalMetadata() != other.hasInternalMetadata()) return false;
-    if (hasInternalMetadata()) {
-      if (!getInternalMetadata()
-          .equals(other.getInternalMetadata())) return false;
-    }
+    if (!internalGetAdditionalMetadata().equals(
+        other.internalGetAdditionalMetadata())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -632,9 +693,9 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + METADATA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetMetadata().hashCode();
     }
-    if (hasInternalMetadata()) {
-      hash = (37 * hash) + INTERNAL_METADATA_FIELD_NUMBER;
-      hash = (53 * hash) + getInternalMetadata().hashCode();
+    if (!internalGetAdditionalMetadata().getMap().isEmpty()) {
+      hash = (37 * hash) + ADDITIONAL_METADATA_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetAdditionalMetadata().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -751,6 +812,8 @@ java.lang.String defaultValue) {
       switch (number) {
         case 9:
           return internalGetMetadata();
+        case 10:
+          return internalGetAdditionalMetadata();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -762,6 +825,8 @@ java.lang.String defaultValue) {
       switch (number) {
         case 9:
           return internalGetMutableMetadata();
+        case 10:
+          return internalGetMutableAdditionalMetadata();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -791,7 +856,6 @@ java.lang.String defaultValue) {
         getExecutionDurationFieldBuilder();
         getQueryTimestampFieldBuilder();
         getExplainOutputFieldBuilder();
-        getInternalMetadataFieldBuilder();
       }
     }
     @java.lang.Override
@@ -819,11 +883,7 @@ java.lang.String defaultValue) {
         explainOutputBuilder_ = null;
       }
       internalGetMutableMetadata().clear();
-      internalMetadata_ = null;
-      if (internalMetadataBuilder_ != null) {
-        internalMetadataBuilder_.dispose();
-        internalMetadataBuilder_ = null;
-      }
+      internalGetMutableAdditionalMetadata().clear();
       return this;
     }
 
@@ -896,10 +956,7 @@ java.lang.String defaultValue) {
         result.metadata_.makeImmutable();
       }
       if (((from_bitField0_ & 0x00000200) != 0)) {
-        result.internalMetadata_ = internalMetadataBuilder_ == null
-            ? internalMetadata_
-            : internalMetadataBuilder_.build();
-        to_bitField0_ |= 0x00000008;
+        result.additionalMetadata_ = internalGetAdditionalMetadata().build(AdditionalMetadataDefaultEntryHolder.defaultEntry);
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -985,9 +1042,9 @@ java.lang.String defaultValue) {
       internalGetMutableMetadata().mergeFrom(
           other.internalGetMetadata());
       bitField0_ |= 0x00000100;
-      if (other.hasInternalMetadata()) {
-        mergeInternalMetadata(other.getInternalMetadata());
-      }
+      internalGetMutableAdditionalMetadata().mergeFrom(
+          other.internalGetAdditionalMetadata());
+      bitField0_ |= 0x00000200;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1070,9 +1127,11 @@ java.lang.String defaultValue) {
               break;
             } // case 74
             case 82: {
-              input.readMessage(
-                  getInternalMetadataFieldBuilder().getBuilder(),
-                  extensionRegistry);
+              com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+              additionalMetadata__ = input.readMessage(
+                  AdditionalMetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableAdditionalMetadata().ensureBuilderMap().put(
+                  additionalMetadata__.getKey(), additionalMetadata__.getValue());
               bitField0_ |= 0x00000200;
               break;
             } // case 82
@@ -1971,125 +2030,159 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal internalMetadata_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder> internalMetadataBuilder_;
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     * @return Whether the internalMetadata field is set.
-     */
-    public boolean hasInternalMetadata() {
-      return ((bitField0_ & 0x00000200) != 0);
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     * @return The internalMetadata.
-     */
-    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata() {
-      if (internalMetadataBuilder_ == null) {
-        return internalMetadata_ == null ? ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
-      } else {
-        return internalMetadataBuilder_.getMessage();
+    private static final class AdditionalMetadataConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value> {
+      @java.lang.Override
+      public com.google.protobuf.Value build(com.google.protobuf.ValueOrBuilder val) {
+        if (val instanceof com.google.protobuf.Value) { return (com.google.protobuf.Value) val; }
+        return ((com.google.protobuf.Value.Builder) val).build();
       }
+
+      @java.lang.Override
+      public com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value> defaultEntry() {
+        return AdditionalMetadataDefaultEntryHolder.defaultEntry;
+      }
+    };
+    private static final AdditionalMetadataConverter additionalMetadataConverter = new AdditionalMetadataConverter();
+
+    private com.google.protobuf.MapFieldBuilder<
+        java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder> additionalMetadata_;
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetAdditionalMetadata() {
+      if (additionalMetadata_ == null) {
+        return new com.google.protobuf.MapFieldBuilder<>(additionalMetadataConverter);
+      }
+      return additionalMetadata_;
+    }
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetMutableAdditionalMetadata() {
+      if (additionalMetadata_ == null) {
+        additionalMetadata_ = new com.google.protobuf.MapFieldBuilder<>(additionalMetadataConverter);
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return additionalMetadata_;
+    }
+    public int getAdditionalMetadataCount() {
+      return internalGetAdditionalMetadata().ensureBuilderMap().size();
     }
     /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
      */
-    public Builder setInternalMetadata(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal value) {
-      if (internalMetadataBuilder_ == null) {
-        if (value == null) {
+    @java.lang.Override
+    public boolean containsAdditionalMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetAdditionalMetadata().ensureBuilderMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getAdditionalMetadataMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getAdditionalMetadata() {
+      return getAdditionalMetadataMap();
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getAdditionalMetadataMap() {
+      return internalGetAdditionalMetadata().getImmutableMap();
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+com.google.protobuf.Value getAdditionalMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+com.google.protobuf.Value defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableAdditionalMetadata().ensureBuilderMap();
+      return map.containsKey(key) ? additionalMetadataConverter.build(map.get(key)) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.Value getAdditionalMetadataOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableAdditionalMetadata().ensureBuilderMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return additionalMetadataConverter.build(map.get(key));
+    }
+    public Builder clearAdditionalMetadata() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      internalGetMutableAdditionalMetadata().clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    public Builder removeAdditionalMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableAdditionalMetadata().ensureBuilderMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value>
+        getMutableAdditionalMetadata() {
+      bitField0_ |= 0x00000200;
+      return internalGetMutableAdditionalMetadata().ensureMessageMap();
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    public Builder putAdditionalMetadata(
+        java.lang.String key,
+        com.google.protobuf.Value value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableAdditionalMetadata().ensureBuilderMap()
+          .put(key, value);
+      bitField0_ |= 0x00000200;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+     */
+    public Builder putAllAdditionalMetadata(
+        java.util.Map<java.lang.String, com.google.protobuf.Value> values) {
+      for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> e : values.entrySet()) {
+        if (e.getKey() == null || e.getValue() == null) {
           throw new NullPointerException();
         }
-        internalMetadata_ = value;
-      } else {
-        internalMetadataBuilder_.setMessage(value);
       }
+      internalGetMutableAdditionalMetadata().ensureBuilderMap()
+          .putAll(values);
       bitField0_ |= 0x00000200;
-      onChanged();
       return this;
     }
     /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+     * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
      */
-    public Builder setInternalMetadata(
-        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder builderForValue) {
-      if (internalMetadataBuilder_ == null) {
-        internalMetadata_ = builderForValue.build();
-      } else {
-        internalMetadataBuilder_.setMessage(builderForValue.build());
+    public com.google.protobuf.Value.Builder putAdditionalMetadataBuilderIfAbsent(
+        java.lang.String key) {
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> builderMap = internalGetMutableAdditionalMetadata().ensureBuilderMap();
+      com.google.protobuf.ValueOrBuilder entry = builderMap.get(key);
+      if (entry == null) {
+        entry = com.google.protobuf.Value.newBuilder();
+        builderMap.put(key, entry);
       }
-      bitField0_ |= 0x00000200;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     */
-    public Builder mergeInternalMetadata(ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal value) {
-      if (internalMetadataBuilder_ == null) {
-        if (((bitField0_ & 0x00000200) != 0) &&
-          internalMetadata_ != null &&
-          internalMetadata_ != ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance()) {
-          getInternalMetadataBuilder().mergeFrom(value);
-        } else {
-          internalMetadata_ = value;
-        }
-      } else {
-        internalMetadataBuilder_.mergeFrom(value);
+      if (entry instanceof com.google.protobuf.Value) {
+        entry = ((com.google.protobuf.Value) entry).toBuilder();
+        builderMap.put(key, entry);
       }
-      if (internalMetadata_ != null) {
-        bitField0_ |= 0x00000200;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     */
-    public Builder clearInternalMetadata() {
-      bitField0_ = (bitField0_ & ~0x00000200);
-      internalMetadata_ = null;
-      if (internalMetadataBuilder_ != null) {
-        internalMetadataBuilder_.dispose();
-        internalMetadataBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     */
-    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder getInternalMetadataBuilder() {
-      bitField0_ |= 0x00000200;
-      onChanged();
-      return getInternalMetadataFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     */
-    public ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder() {
-      if (internalMetadataBuilder_ != null) {
-        return internalMetadataBuilder_.getMessageOrBuilder();
-      } else {
-        return internalMetadata_ == null ?
-            ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.getDefaultInstance() : internalMetadata_;
-      }
-    }
-    /**
-     * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder> 
-        getInternalMetadataFieldBuilder() {
-      if (internalMetadataBuilder_ == null) {
-        internalMetadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal.Builder, ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder>(
-                getInternalMetadata(),
-                getParentForChildren(),
-                isClean());
-        internalMetadata_ = null;
-      }
-      return internalMetadataBuilder_;
+      return (com.google.protobuf.Value.Builder) entry;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -168,17 +168,36 @@ java.lang.String defaultValue);
       java.lang.String key);
 
   /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-   * @return Whether the internalMetadata field is set.
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
    */
-  boolean hasInternalMetadata();
+  int getAdditionalMetadataCount();
   /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
-   * @return The internalMetadata.
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
    */
-  ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternal getInternalMetadata();
+  boolean containsAdditionalMetadata(
+      java.lang.String key);
   /**
-   * <code>optional .chalk.common.v1.OnlineQueryMetadataInternal internal_metadata = 10 [json_name = "internalMetadata"];</code>
+   * Use {@link #getAdditionalMetadataMap()} instead.
    */
-  ai.chalk.protos.chalk.common.v1.OnlineQueryMetadataInternalOrBuilder getInternalMetadataOrBuilder();
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getAdditionalMetadata();
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getAdditionalMetadataMap();
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  /* nullable */
+com.google.protobuf.Value getAdditionalMetadataOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue);
+  /**
+   * <code>map&lt;string, .google.protobuf.Value&gt; additional_metadata = 10 [json_name = "additionalMetadata"];</code>
+   */
+  com.google.protobuf.Value getAdditionalMetadataOrThrow(
+      java.lang.String key);
 }
