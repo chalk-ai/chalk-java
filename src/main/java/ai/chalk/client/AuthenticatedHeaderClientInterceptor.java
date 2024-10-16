@@ -1,9 +1,13 @@
 package ai.chalk.client;
 
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
-import io.grpc.*;
+import io.grpc.CallOptions;
+import io.grpc.Channel;
+import io.grpc.ClientCall;
+import io.grpc.ClientInterceptor;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
-import io.grpc.stub.MetadataUtils;
+import io.grpc.Metadata;
+import io.grpc.MethodDescriptor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -12,6 +16,9 @@ import java.util.Map;
 
 
 public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
+    private final Map<Metadata.Key<String>, String> allHeaders;
+    private final TokenRefresher tokenRefresher;
+
     public AuthenticatedHeaderClientInterceptor(
             @NonNull ServerType serverType,
             @NonNull Map<String, String> additionalHeaders,
@@ -20,24 +27,20 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
             @Nullable String deploymentTag
     ) {
         this.tokenRefresher = tokenRefresher;
-        this.allHeaders = new HashMap<>(Map.of(
+        allHeaders = new HashMap<>(Map.of(
                 GrpcHeaders.SERVER_TYPE_KEY, serverType.headerName(),
                 GrpcHeaders.ENVIRONMENT_ID_KEY, environmentId
         ));
         for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
-            this.allHeaders.put(Metadata.Key.of(entry.getKey(), Metadata.ASCII_STRING_MARSHALLER), entry.getValue());
+            allHeaders.put(Metadata.Key.of(entry.getKey(), Metadata.ASCII_STRING_MARSHALLER), entry.getValue());
         }
         if (serverType.equals(ServerType.ENGINE)) {
-            this.allHeaders.put(GrpcHeaders.DEPLOYMENT_TYPE, "engine-grpc");
+            allHeaders.put(GrpcHeaders.DEPLOYMENT_TYPE, "engine-grpc");
         }
         if (deploymentTag != null) {
-            this.allHeaders.put(GrpcHeaders.DEPLOYMENT_TAG, deploymentTag);
+            allHeaders.put(GrpcHeaders.DEPLOYMENT_TAG, deploymentTag);
         }
-
     }
-
-    private final Map<Metadata.Key<String>, String> allHeaders;
-    private final TokenRefresher tokenRefresher;
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(

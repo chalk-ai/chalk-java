@@ -13,6 +13,7 @@ import java.util.Map;
 
 /**
  * OnlineQueryResult holds the result of an online query.
+ * @apiNote OnlineQueryResult is an AutoCloseable object. Callers are required to close it to return memory back to the system.
  */
 @Data
 @AllArgsConstructor

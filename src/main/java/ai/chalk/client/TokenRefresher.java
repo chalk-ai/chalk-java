@@ -8,33 +8,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 
 public class TokenRefresher {
-    public TokenRefresher(
-            @NonNull String clientId,
-            @NonNull String clientSecret,
-            AuthServiceGrpc.AuthServiceBlockingStub blockingStub
-    ) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.blockingStub = blockingStub;
-        this.lastToken = null;
-    }
-
-    public @NonNull GetTokenResponse getToken() {
-        if (
-                this.lastToken == null ||
-                        this.lastToken.getExpiresAt().getSeconds() < System.currentTimeMillis() / 1000 + 60
-        ) {
-            this.lastToken = this.blockingStub.getToken(
-                    GetTokenRequest.newBuilder()
-                            .setClientId(this.clientId)
-                            .setClientSecret(this.clientSecret)
-                            .build()
-            );
-        }
-        return this.lastToken;
-    }
-
-    private final AuthServiceGrpc.AuthServiceBlockingStub blockingStub;
+    private final AuthServiceGrpc.@NonNull AuthServiceBlockingStub blockingStub;
 
     @NonNull
     private final String clientId;
@@ -43,5 +17,38 @@ public class TokenRefresher {
     private final String clientSecret;
 
     @Nullable
-    private GetTokenResponse lastToken;
+    private volatile GetTokenResponse lastToken;
+
+    public TokenRefresher(
+            @NonNull String clientId,
+            @NonNull String clientSecret,
+            AuthServiceGrpc.AuthServiceBlockingStub blockingStub
+    ) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.blockingStub = blockingStub;
+        lastToken = null;
+    }
+
+    public @NonNull GetTokenResponse getToken() {
+        if (isTokenExpired()) {
+            refreshToken();
+        }
+        return lastToken;
+    }
+
+    private boolean isTokenExpired() {
+        return lastToken == null || (lastToken.getExpiresAt().getSeconds() - (System.currentTimeMillis() / 1000) < 60);
+    }
+
+    private synchronized void refreshToken() {
+        if (isTokenExpired()) {
+            lastToken = blockingStub.getToken(
+                    GetTokenRequest.newBuilder()
+                            .setClientId(clientId)
+                            .setClientSecret(clientSecret)
+                            .build()
+            );
+        }
+    }
 }

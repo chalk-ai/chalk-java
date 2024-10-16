@@ -19,7 +19,6 @@ import ai.chalk.protos.chalk.common.v1.OutputExpr;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
-import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import io.grpc.Channel;
@@ -44,13 +43,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
 public class GRPCClient implements ChalkClient, AutoCloseable {
-    private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
-    private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
-    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
-
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
+
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
+    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -76,14 +73,14 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 grpcHost,
                 channelCreds
         ).maxInboundMessageSize(1024 * 1024 * 100);
-        this.authStub = AuthServiceGrpc.newBlockingStub(
+        AuthServiceGrpc.AuthServiceBlockingStub authStub = AuthServiceGrpc.newBlockingStub(
                 unauthenticatedChannelBuilder.intercept(new UnauthenticatedHeaderClientInterceptor(Map.of())).build()
         );
 
         TokenRefresher tokenRefresher = new TokenRefresher(
                 resolvedConfig.clientId().value(),
                 resolvedConfig.clientSecret().value(),
-                this.authStub
+                authStub
         );
 
         GetTokenResponse token = tokenRefresher.getToken();
@@ -111,20 +108,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             environmentId = environmentIds.get(0);
         }
 
-        Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
-                .maxInboundMessageSize(1024 * 1024 * 100)
-                .intercept(
-                        new AuthenticatedHeaderClientInterceptor(
-                                ServerType.SERVER,
-                                Map.of(),
-                                tokenRefresher,
-                                environmentId,
-                                null
-                        )
-                )
-                .build();
-        this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
-
         String engineHost;
         try {
             engineHost = token
@@ -145,7 +128,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                         )
                 )
                 .build();
-        this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+        queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -166,7 +149,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
         AtomicReference<Metadata> headersRef = new AtomicReference<>();
-        return this.queryStub.withInterceptors(
+        return queryStub.withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef)
         );
     }
@@ -176,6 +159,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
     }
 
+    @Override
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try (
@@ -257,7 +241,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
+        OnlineQueryBulkResponse response = queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
                 response.getResponseMeta(),
@@ -271,7 +255,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         Table scalars = null;
         Map<String, Table> groups = new HashMap<>();
-        var responseAlloc = this.allocator.newChildAllocator(
+        // Don't close this unless we get an exception
+        // This will become owned by the caller
+        var responseAlloc = allocator.newChildAllocator(
                 "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
         );
         try {
@@ -320,6 +306,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     @Override
     public void close() {
-        this.allocator.close();
+        allocator.close();
     }
 }

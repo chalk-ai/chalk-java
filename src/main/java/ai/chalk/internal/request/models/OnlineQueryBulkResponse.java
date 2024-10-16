@@ -2,6 +2,7 @@ package ai.chalk.internal.request.models;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.InternalException;
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.memory.BufferAllocator;
@@ -44,10 +45,15 @@ public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> quer
     }
 
     public OnlineQueryResult toResult() throws ChalkException {
-        if (!(this.queryResults.containsKey("0"))) {
+        if (!(queryResults.containsKey("0"))) {
             throw new ClientException("malformed online query bulk response");
         }
-        OnlineQueryResultFeather internalResult = this.queryResults.get("0");
+
+        if (queryResults.size() > 1) {
+            throw new InternalException("Internal error: multiple results were returned, only one was expected.");
+        }
+
+        OnlineQueryResultFeather internalResult = queryResults.get("0");
         return new OnlineQueryResult(
             internalResult.scalarData(),
             internalResult.groupsData(),

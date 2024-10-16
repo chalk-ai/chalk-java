@@ -18,23 +18,24 @@ import org.apache.arrow.memory.RootAllocator;
 import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
+import java.lang.System.Logger.Level;
 
 public class ChalkClientImpl implements ChalkClient {
+    private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
+    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
+
     private final SourcedConfig apiServer;
     private final SourcedConfig clientId;
     private final SourcedConfig environmentId;
     private final SourcedConfig clientSecret;
     private final RequestHandler handler;
 
-    private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
-    private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
-
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
-        ResolvedConfig resolvedConfig = this.resolveConfig(config);
-        this.apiServer = resolvedConfig.apiServer();
-        this.clientId = resolvedConfig.clientId();
-        this.clientSecret = resolvedConfig.clientSecret();
-        this.environmentId = resolvedConfig.environmentId();
+        ResolvedConfig resolvedConfig = resolveConfig(config);
+        apiServer = resolvedConfig.apiServer();
+        clientId = resolvedConfig.clientId();
+        clientSecret = resolvedConfig.clientSecret();
+        environmentId = resolvedConfig.environmentId();
         SourcedConfig initialEnvironment = resolvedConfig.environmentId();
         String branch = config.getBranch();
         String deploymentTag = config.getDeploymentTag();
@@ -42,18 +43,19 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Cannot set both branch and deploymentTag");
         }
 
-        this.handler = new RequestHandler(
+        handler = new RequestHandler(
                 config.getHttpClient(),
-                this.apiServer,
-                this.environmentId,
+                apiServer,
+                environmentId,
                 initialEnvironment,
-                this.clientId,
-                this.clientSecret,
+                clientId,
+                clientSecret,
                 branch,
                 deploymentTag
         );
     }
 
+    @Override
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try (
@@ -79,14 +81,14 @@ public class ChalkClientImpl implements ChalkClient {
                 .queryName(params.getQueryName())
                 .build();
 
-        HttpResponse<byte[]> response = this.handler.sendRequest(request);
-        var allocator = this.allocator.newChildAllocator(
+        HttpResponse<byte[]> response = handler.sendRequest(request);
+        var childAllocator = allocator.newChildAllocator(
             "online_query_response",
             0,
             FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
         );
         // ignore the warning here, because we don't want to free the memory yet
-        var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
+        var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), childAllocator);
         return bulkResponse.toResult();
     }
 
@@ -108,7 +110,7 @@ public class ChalkClientImpl implements ChalkClient {
                 config.clientSecret().value().isEmpty() ||
                 config.apiServer().value().isEmpty() ||
                 config.environmentId().value().isEmpty()) {
-            System.err.println(this.getConfigStr());
+            logger.log(Level.ERROR, getConfigStr());
             String msg = "Chalk's config variables are not set correctly. See error log or stacktrace for more details.";
             if (chalkYamlExc != null) {
                 throw new ClientException(msg, chalkYamlExc);
@@ -146,11 +148,11 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     public void printConfig() {
-        logger.log(System.Logger.Level.INFO, this.getConfigStr());
+        logger.log(Level.INFO, getConfigStr());
     }
 
     @Override
     public void close() {
-        this.allocator.close();
+        allocator.close();
     }
 }

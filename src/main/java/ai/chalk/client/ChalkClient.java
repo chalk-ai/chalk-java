@@ -83,6 +83,7 @@ public interface ChalkClient extends AutoCloseable {
      *
      * @return {@link OnlineQueryResult }
      * @throws ChalkException
+     * @apiNote The returned {@link OnlineQueryResult} must be closed after use, to return memory back to the system.
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      */
     OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
@@ -142,6 +143,7 @@ public interface ChalkClient extends AutoCloseable {
 
         /**
          * Sets the root CA certificate file.
+         *
          * @param rootCa The path to the root CA
          */
         public Builder withRootCa(Path rootCa);
