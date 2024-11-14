@@ -314,6 +314,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        if (params.getEnvironmentId() != null) {
+            throw new UnsupportedOperationException("Environment ID override via param is not yet supported");
+        }
         byte[] tableBytes;
         try {
             tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);

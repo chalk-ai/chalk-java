@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
 @AllArgsConstructor @Getter
 public class UploadFeaturesParams {
     private final Map<String, List<?>> inputs;
+    @Nullable
     private final String environmentId;
 
     @AllArgsConstructor
