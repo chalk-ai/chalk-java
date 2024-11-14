@@ -34,6 +34,18 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.server.v1.StatusProto.internal_static_chalk_server_v1_HealthCheck_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+      int number) {
+    switch (number) {
+      case 6:
+        return internalGetMetadata();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -147,6 +159,137 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int LATENCY_FIELD_NUMBER = 4;
+  private com.google.protobuf.Duration latency_;
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   * @return Whether the latency field is set.
+   */
+  @java.lang.Override
+  public boolean hasLatency() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   * @return The latency.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Duration getLatency() {
+    return latency_ == null ? com.google.protobuf.Duration.getDefaultInstance() : latency_;
+  }
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.DurationOrBuilder getLatencyOrBuilder() {
+    return latency_ == null ? com.google.protobuf.Duration.getDefaultInstance() : latency_;
+  }
+
+  public static final int KUBE_DATA_FIELD_NUMBER = 5;
+  private com.google.protobuf.Struct kubeData_;
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   * @return Whether the kubeData field is set.
+   */
+  @java.lang.Override
+  public boolean hasKubeData() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   * @return The kubeData.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Struct getKubeData() {
+    return kubeData_ == null ? com.google.protobuf.Struct.getDefaultInstance() : kubeData_;
+  }
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.StructOrBuilder getKubeDataOrBuilder() {
+    return kubeData_ == null ? com.google.protobuf.Struct.getDefaultInstance() : kubeData_;
+  }
+
+  public static final int METADATA_FIELD_NUMBER = 6;
+  private static final class MetadataDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, java.lang.String> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, java.lang.String>newDefaultInstance(
+                ai.chalk.protos.chalk.server.v1.StatusProto.internal_static_chalk_server_v1_HealthCheck_MetadataEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "");
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, java.lang.String> metadata_;
+  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+  internalGetMetadata() {
+    if (metadata_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          MetadataDefaultEntryHolder.defaultEntry);
+    }
+    return metadata_;
+  }
+  public int getMetadataCount() {
+    return internalGetMetadata().getMap().size();
+  }
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  @java.lang.Override
+  public boolean containsMetadata(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetMetadata().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getMetadataMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, java.lang.String> getMetadata() {
+    return getMetadataMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, java.lang.String> getMetadataMap() {
+    return internalGetMetadata().getMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+java.lang.String getMetadataOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetMetadata().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  @java.lang.Override
+  public java.lang.String getMetadataOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetMetadata().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -170,6 +313,18 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(4, getLatency());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(5, getKubeData());
+    }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetMetadata(),
+        MetadataDefaultEntryHolder.defaultEntry,
+        6);
     getUnknownFields().writeTo(output);
   }
 
@@ -188,6 +343,24 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getLatency());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getKubeData());
+    }
+    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+         : internalGetMetadata().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+      metadata__ = MetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, metadata__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -212,6 +385,18 @@ private static final long serialVersionUID = 0L;
       if (!getMessage()
           .equals(other.getMessage())) return false;
     }
+    if (hasLatency() != other.hasLatency()) return false;
+    if (hasLatency()) {
+      if (!getLatency()
+          .equals(other.getLatency())) return false;
+    }
+    if (hasKubeData() != other.hasKubeData()) return false;
+    if (hasKubeData()) {
+      if (!getKubeData()
+          .equals(other.getKubeData())) return false;
+    }
+    if (!internalGetMetadata().equals(
+        other.internalGetMetadata())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -230,6 +415,18 @@ private static final long serialVersionUID = 0L;
     if (hasMessage()) {
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+    }
+    if (hasLatency()) {
+      hash = (37 * hash) + LATENCY_FIELD_NUMBER;
+      hash = (53 * hash) + getLatency().hashCode();
+    }
+    if (hasKubeData()) {
+      hash = (37 * hash) + KUBE_DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getKubeData().hashCode();
+    }
+    if (!internalGetMetadata().getMap().isEmpty()) {
+      hash = (37 * hash) + METADATA_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetMetadata().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -340,6 +537,28 @@ private static final long serialVersionUID = 0L;
       return ai.chalk.protos.chalk.server.v1.StatusProto.internal_static_chalk_server_v1_HealthCheck_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 6:
+          return internalGetMetadata();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 6:
+          return internalGetMutableMetadata();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -350,13 +569,20 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.HealthCheck.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getLatencyFieldBuilder();
+        getKubeDataFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -365,6 +591,17 @@ private static final long serialVersionUID = 0L;
       name_ = "";
       status_ = 0;
       message_ = "";
+      latency_ = null;
+      if (latencyBuilder_ != null) {
+        latencyBuilder_.dispose();
+        latencyBuilder_ = null;
+      }
+      kubeData_ = null;
+      if (kubeDataBuilder_ != null) {
+        kubeDataBuilder_.dispose();
+        kubeDataBuilder_ = null;
+      }
+      internalGetMutableMetadata().clear();
       return this;
     }
 
@@ -408,6 +645,22 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.message_ = message_;
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.latency_ = latencyBuilder_ == null
+            ? latency_
+            : latencyBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.kubeData_ = kubeDataBuilder_ == null
+            ? kubeData_
+            : kubeDataBuilder_.build();
+        to_bitField0_ |= 0x00000004;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.metadata_ = internalGetMetadata();
+        result.metadata_.makeImmutable();
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -469,6 +722,15 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000004;
         onChanged();
       }
+      if (other.hasLatency()) {
+        mergeLatency(other.getLatency());
+      }
+      if (other.hasKubeData()) {
+        mergeKubeData(other.getKubeData());
+      }
+      internalGetMutableMetadata().mergeFrom(
+          other.internalGetMetadata());
+      bitField0_ |= 0x00000020;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -510,6 +772,29 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 34: {
+              input.readMessage(
+                  getLatencyFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
+            case 42: {
+              input.readMessage(
+                  getKubeDataFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
+            case 50: {
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              metadata__ = input.readMessage(
+                  MetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableMetadata().getMutableMap().put(
+                  metadata__.getKey(), metadata__.getValue());
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -728,6 +1013,375 @@ private static final long serialVersionUID = 0L;
       message_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Duration latency_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> latencyBuilder_;
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     * @return Whether the latency field is set.
+     */
+    public boolean hasLatency() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     * @return The latency.
+     */
+    public com.google.protobuf.Duration getLatency() {
+      if (latencyBuilder_ == null) {
+        return latency_ == null ? com.google.protobuf.Duration.getDefaultInstance() : latency_;
+      } else {
+        return latencyBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public Builder setLatency(com.google.protobuf.Duration value) {
+      if (latencyBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        latency_ = value;
+      } else {
+        latencyBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public Builder setLatency(
+        com.google.protobuf.Duration.Builder builderForValue) {
+      if (latencyBuilder_ == null) {
+        latency_ = builderForValue.build();
+      } else {
+        latencyBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public Builder mergeLatency(com.google.protobuf.Duration value) {
+      if (latencyBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          latency_ != null &&
+          latency_ != com.google.protobuf.Duration.getDefaultInstance()) {
+          getLatencyBuilder().mergeFrom(value);
+        } else {
+          latency_ = value;
+        }
+      } else {
+        latencyBuilder_.mergeFrom(value);
+      }
+      if (latency_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public Builder clearLatency() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      latency_ = null;
+      if (latencyBuilder_ != null) {
+        latencyBuilder_.dispose();
+        latencyBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public com.google.protobuf.Duration.Builder getLatencyBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getLatencyFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    public com.google.protobuf.DurationOrBuilder getLatencyOrBuilder() {
+      if (latencyBuilder_ != null) {
+        return latencyBuilder_.getMessageOrBuilder();
+      } else {
+        return latency_ == null ?
+            com.google.protobuf.Duration.getDefaultInstance() : latency_;
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> 
+        getLatencyFieldBuilder() {
+      if (latencyBuilder_ == null) {
+        latencyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder>(
+                getLatency(),
+                getParentForChildren(),
+                isClean());
+        latency_ = null;
+      }
+      return latencyBuilder_;
+    }
+
+    private com.google.protobuf.Struct kubeData_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> kubeDataBuilder_;
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     * @return Whether the kubeData field is set.
+     */
+    public boolean hasKubeData() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     * @return The kubeData.
+     */
+    public com.google.protobuf.Struct getKubeData() {
+      if (kubeDataBuilder_ == null) {
+        return kubeData_ == null ? com.google.protobuf.Struct.getDefaultInstance() : kubeData_;
+      } else {
+        return kubeDataBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public Builder setKubeData(com.google.protobuf.Struct value) {
+      if (kubeDataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        kubeData_ = value;
+      } else {
+        kubeDataBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public Builder setKubeData(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (kubeDataBuilder_ == null) {
+        kubeData_ = builderForValue.build();
+      } else {
+        kubeDataBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public Builder mergeKubeData(com.google.protobuf.Struct value) {
+      if (kubeDataBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          kubeData_ != null &&
+          kubeData_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getKubeDataBuilder().mergeFrom(value);
+        } else {
+          kubeData_ = value;
+        }
+      } else {
+        kubeDataBuilder_.mergeFrom(value);
+      }
+      if (kubeData_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public Builder clearKubeData() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      kubeData_ = null;
+      if (kubeDataBuilder_ != null) {
+        kubeDataBuilder_.dispose();
+        kubeDataBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public com.google.protobuf.Struct.Builder getKubeDataBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return getKubeDataFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    public com.google.protobuf.StructOrBuilder getKubeDataOrBuilder() {
+      if (kubeDataBuilder_ != null) {
+        return kubeDataBuilder_.getMessageOrBuilder();
+      } else {
+        return kubeData_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : kubeData_;
+      }
+    }
+    /**
+     * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        getKubeDataFieldBuilder() {
+      if (kubeDataBuilder_ == null) {
+        kubeDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getKubeData(),
+                getParentForChildren(),
+                isClean());
+        kubeData_ = null;
+      }
+      return kubeDataBuilder_;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> metadata_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetMetadata() {
+      if (metadata_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            MetadataDefaultEntryHolder.defaultEntry);
+      }
+      return metadata_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetMutableMetadata() {
+      if (metadata_ == null) {
+        metadata_ = com.google.protobuf.MapField.newMapField(
+            MetadataDefaultEntryHolder.defaultEntry);
+      }
+      if (!metadata_.isMutable()) {
+        metadata_ = metadata_.copy();
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return metadata_;
+    }
+    public int getMetadataCount() {
+      return internalGetMetadata().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    @java.lang.Override
+    public boolean containsMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetMetadata().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getMetadataMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getMetadata() {
+      return getMetadataMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getMetadataMap() {
+      return internalGetMetadata().getMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetMetadata().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getMetadataOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetMetadata().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+    public Builder clearMetadata() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      internalGetMutableMetadata().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    public Builder removeMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableMetadata().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String>
+        getMutableMetadata() {
+      bitField0_ |= 0x00000020;
+      return internalGetMutableMetadata().getMutableMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    public Builder putMetadata(
+        java.lang.String key,
+        java.lang.String value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableMetadata().getMutableMap()
+          .put(key, value);
+      bitField0_ |= 0x00000020;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+     */
+    public Builder putAllMetadata(
+        java.util.Map<java.lang.String, java.lang.String> values) {
+      internalGetMutableMetadata().getMutableMap()
+          .putAll(values);
+      bitField0_ |= 0x00000020;
       return this;
     }
     @java.lang.Override

@@ -21,6 +21,16 @@ public final class StatusProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_HealthCheck_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_HealthCheck_MetadataEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_HealthCheck_MetadataEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_HealthCheckFilters_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_HealthCheckFilters_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_CheckHealthRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -30,6 +40,16 @@ public final class StatusProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_CheckHealthResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetHealthRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetHealthRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetHealthResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetHealthResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -41,46 +61,91 @@ public final class StatusProto {
     java.lang.String[] descriptorData = {
       "\n\034chalk/server/v1/status.proto\022\017chalk.se" +
       "rver.v1\032\037chalk/auth/v1/permissions.proto" +
-      "\"\210\001\n\013HealthCheck\022\022\n\004name\030\001 \001(\tR\004name\022:\n\006" +
-      "status\030\002 \001(\0162\".chalk.server.v1.HealthChe" +
-      "ckStatusR\006status\022\035\n\007message\030\003 \001(\tH\000R\007mes" +
-      "sage\210\001\001B\n\n\010_message\"\024\n\022CheckHealthReques" +
-      "t\"K\n\023CheckHealthResponse\0224\n\006checks\030\001 \003(\013" +
-      "2\034.chalk.server.v1.HealthCheckR\006checks*u" +
-      "\n\021HealthCheckStatus\022#\n\037HEALTH_CHECK_STAT" +
-      "US_UNSPECIFIED\020\000\022\032\n\026HEALTH_CHECK_STATUS_" +
-      "OK\020\001\022\037\n\033HEALTH_CHECK_STATUS_FAILING\020\0022q\n" +
-      "\rHealthService\022`\n\013CheckHealth\022#.chalk.se" +
-      "rver.v1.CheckHealthRequest\032$.chalk.serve" +
-      "r.v1.CheckHealthResponse\"\006\220\002\001\200}\001B\240\001\n\037ai." +
-      "chalk.protos.chalk.server.v1B\013StatusProt" +
-      "oP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Se" +
-      "rver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server" +
-      "\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pro" +
-      "to3"
+      "\032\036google/protobuf/duration.proto\032\034google" +
+      "/protobuf/struct.proto\"\234\003\n\013HealthCheck\022\022" +
+      "\n\004name\030\001 \001(\tR\004name\022:\n\006status\030\002 \001(\0162\".cha" +
+      "lk.server.v1.HealthCheckStatusR\006status\022\035" +
+      "\n\007message\030\003 \001(\tH\000R\007message\210\001\001\0228\n\007latency" +
+      "\030\004 \001(\0132\031.google.protobuf.DurationH\001R\007lat" +
+      "ency\210\001\001\0229\n\tkube_data\030\005 \001(\0132\027.google.prot" +
+      "obuf.StructH\002R\010kubeData\210\001\001\022F\n\010metadata\030\006" +
+      " \003(\0132*.chalk.server.v1.HealthCheck.Metad" +
+      "ataEntryR\010metadata\032;\n\rMetadataEntry\022\020\n\003k" +
+      "ey\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B" +
+      "\n\n\010_messageB\n\n\010_latencyB\014\n\n_kube_data\"d\n" +
+      "\022HealthCheckFilters\022\022\n\004name\030\001 \003(\tR\004name\022" +
+      ":\n\006status\030\002 \003(\0162\".chalk.server.v1.Health" +
+      "CheckStatusR\006status\"d\n\022CheckHealthReques" +
+      "t\022B\n\007filters\030\001 \001(\0132#.chalk.server.v1.Hea" +
+      "lthCheckFiltersH\000R\007filters\210\001\001B\n\n\010_filter" +
+      "s\"K\n\023CheckHealthResponse\0224\n\006checks\030\001 \003(\013" +
+      "2\034.chalk.server.v1.HealthCheckR\006checks\"b" +
+      "\n\020GetHealthRequest\022B\n\007filters\030\001 \001(\0132#.ch" +
+      "alk.server.v1.HealthCheckFiltersH\000R\007filt" +
+      "ers\210\001\001B\n\n\010_filters\"I\n\021GetHealthResponse\022" +
+      "4\n\006checks\030\001 \003(\0132\034.chalk.server.v1.Health" +
+      "CheckR\006checks*u\n\021HealthCheckStatus\022#\n\037HE" +
+      "ALTH_CHECK_STATUS_UNSPECIFIED\020\000\022\032\n\026HEALT" +
+      "H_CHECK_STATUS_OK\020\001\022\037\n\033HEALTH_CHECK_STAT" +
+      "US_FAILING\020\0022\315\001\n\rHealthService\022`\n\013CheckH" +
+      "ealth\022#.chalk.server.v1.CheckHealthReque" +
+      "st\032$.chalk.server.v1.CheckHealthResponse" +
+      "\"\006\220\002\001\200}\001\022Z\n\tGetHealth\022!.chalk.server.v1." +
+      "GetHealthRequest\032\".chalk.server.v1.GetHe" +
+      "althResponse\"\006\220\002\001\200}\002B\240\001\n\037ai.chalk.protos" +
+      ".chalk.server.v1B\013StatusProtoP\001Z\022server/" +
+      "v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Ch" +
+      "alk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetad" +
+      "ata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
+          com.google.protobuf.DurationProto.getDescriptor(),
+          com.google.protobuf.StructProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_HealthCheck_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_chalk_server_v1_HealthCheck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_HealthCheck_descriptor,
-        new java.lang.String[] { "Name", "Status", "Message", });
-    internal_static_chalk_server_v1_CheckHealthRequest_descriptor =
+        new java.lang.String[] { "Name", "Status", "Message", "Latency", "KubeData", "Metadata", });
+    internal_static_chalk_server_v1_HealthCheck_MetadataEntry_descriptor =
+      internal_static_chalk_server_v1_HealthCheck_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_server_v1_HealthCheck_MetadataEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_HealthCheck_MetadataEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_server_v1_HealthCheckFilters_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_chalk_server_v1_HealthCheckFilters_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_HealthCheckFilters_descriptor,
+        new java.lang.String[] { "Name", "Status", });
+    internal_static_chalk_server_v1_CheckHealthRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_server_v1_CheckHealthRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CheckHealthRequest_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Filters", });
     internal_static_chalk_server_v1_CheckHealthResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_chalk_server_v1_CheckHealthResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CheckHealthResponse_descriptor,
+        new java.lang.String[] { "Checks", });
+    internal_static_chalk_server_v1_GetHealthRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_server_v1_GetHealthRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetHealthRequest_descriptor,
+        new java.lang.String[] { "Filters", });
+    internal_static_chalk_server_v1_GetHealthResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_chalk_server_v1_GetHealthResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetHealthResponse_descriptor,
         new java.lang.String[] { "Checks", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
@@ -88,6 +153,8 @@ public final class StatusProto {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
+    com.google.protobuf.DurationProto.getDescriptor();
+    com.google.protobuf.StructProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -56,6 +56,10 @@ private static final long serialVersionUID = 0L;
     metadataServerMetricsStoreSecret_ = "";
     queryServerMetricsStoreSecret_ = "";
     pinnedBaseImage_ = "";
+    clusterGatewayId_ = "";
+    clusterTimescaledbId_ = "";
+    backgroundPersistenceDeploymentId_ = "";
+    clusterTimescaledbSecret_ = "";
   }
 
   @java.lang.Override
@@ -2215,6 +2219,220 @@ com.google.protobuf.Value defaultValue) {
     }
   }
 
+  public static final int CLUSTER_GATEWAY_ID_FIELD_NUMBER = 47;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object clusterGatewayId_ = "";
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return Whether the clusterGatewayId field is set.
+   */
+  @java.lang.Override
+  public boolean hasClusterGatewayId() {
+    return ((bitField1_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return The clusterGatewayId.
+   */
+  @java.lang.Override
+  public java.lang.String getClusterGatewayId() {
+    java.lang.Object ref = clusterGatewayId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clusterGatewayId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return The bytes for clusterGatewayId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getClusterGatewayIdBytes() {
+    java.lang.Object ref = clusterGatewayId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clusterGatewayId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int CLUSTER_TIMESCALEDB_ID_FIELD_NUMBER = 48;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object clusterTimescaledbId_ = "";
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return Whether the clusterTimescaledbId field is set.
+   */
+  @java.lang.Override
+  public boolean hasClusterTimescaledbId() {
+    return ((bitField1_ & 0x00000020) != 0);
+  }
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return The clusterTimescaledbId.
+   */
+  @java.lang.Override
+  public java.lang.String getClusterTimescaledbId() {
+    java.lang.Object ref = clusterTimescaledbId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clusterTimescaledbId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return The bytes for clusterTimescaledbId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getClusterTimescaledbIdBytes() {
+    java.lang.Object ref = clusterTimescaledbId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clusterTimescaledbId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int BACKGROUND_PERSISTENCE_DEPLOYMENT_ID_FIELD_NUMBER = 49;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object backgroundPersistenceDeploymentId_ = "";
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return Whether the backgroundPersistenceDeploymentId field is set.
+   */
+  @java.lang.Override
+  public boolean hasBackgroundPersistenceDeploymentId() {
+    return ((bitField1_ & 0x00000040) != 0);
+  }
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return The backgroundPersistenceDeploymentId.
+   */
+  @java.lang.Override
+  public java.lang.String getBackgroundPersistenceDeploymentId() {
+    java.lang.Object ref = backgroundPersistenceDeploymentId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      backgroundPersistenceDeploymentId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return The bytes for backgroundPersistenceDeploymentId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBackgroundPersistenceDeploymentIdBytes() {
+    java.lang.Object ref = backgroundPersistenceDeploymentId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      backgroundPersistenceDeploymentId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ENVIRONMENT_BUCKETS_FIELD_NUMBER = 50;
+  private ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig environmentBuckets_;
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   * @return Whether the environmentBuckets field is set.
+   */
+  @java.lang.Override
+  public boolean hasEnvironmentBuckets() {
+    return ((bitField1_ & 0x00000080) != 0);
+  }
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   * @return The environmentBuckets.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig getEnvironmentBuckets() {
+    return environmentBuckets_ == null ? ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.getDefaultInstance() : environmentBuckets_;
+  }
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder getEnvironmentBucketsOrBuilder() {
+    return environmentBuckets_ == null ? ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.getDefaultInstance() : environmentBuckets_;
+  }
+
+  public static final int CLUSTER_TIMESCALEDB_SECRET_FIELD_NUMBER = 51;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object clusterTimescaledbSecret_ = "";
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return Whether the clusterTimescaledbSecret field is set.
+   */
+  @java.lang.Override
+  public boolean hasClusterTimescaledbSecret() {
+    return ((bitField1_ & 0x00000100) != 0);
+  }
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return The clusterTimescaledbSecret.
+   */
+  @java.lang.Override
+  public java.lang.String getClusterTimescaledbSecret() {
+    java.lang.Object ref = clusterTimescaledbSecret_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clusterTimescaledbSecret_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return The bytes for clusterTimescaledbSecret.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getClusterTimescaledbSecretBytes() {
+    java.lang.Object ref = clusterTimescaledbSecret_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clusterTimescaledbSecret_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2375,6 +2593,21 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000008) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 46, pinnedBaseImage_);
+    }
+    if (((bitField1_ & 0x00000010) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 47, clusterGatewayId_);
+    }
+    if (((bitField1_ & 0x00000020) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 48, clusterTimescaledbId_);
+    }
+    if (((bitField1_ & 0x00000040) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 49, backgroundPersistenceDeploymentId_);
+    }
+    if (((bitField1_ & 0x00000080) != 0)) {
+      output.writeMessage(50, getEnvironmentBuckets());
+    }
+    if (((bitField1_ & 0x00000100) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 51, clusterTimescaledbSecret_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -2548,6 +2781,22 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000008) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(46, pinnedBaseImage_);
+    }
+    if (((bitField1_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(47, clusterGatewayId_);
+    }
+    if (((bitField1_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(48, clusterTimescaledbId_);
+    }
+    if (((bitField1_ & 0x00000040) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(49, backgroundPersistenceDeploymentId_);
+    }
+    if (((bitField1_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(50, getEnvironmentBuckets());
+    }
+    if (((bitField1_ & 0x00000100) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(51, clusterTimescaledbSecret_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -2763,6 +3012,31 @@ com.google.protobuf.Value defaultValue) {
       if (!getPinnedBaseImage()
           .equals(other.getPinnedBaseImage())) return false;
     }
+    if (hasClusterGatewayId() != other.hasClusterGatewayId()) return false;
+    if (hasClusterGatewayId()) {
+      if (!getClusterGatewayId()
+          .equals(other.getClusterGatewayId())) return false;
+    }
+    if (hasClusterTimescaledbId() != other.hasClusterTimescaledbId()) return false;
+    if (hasClusterTimescaledbId()) {
+      if (!getClusterTimescaledbId()
+          .equals(other.getClusterTimescaledbId())) return false;
+    }
+    if (hasBackgroundPersistenceDeploymentId() != other.hasBackgroundPersistenceDeploymentId()) return false;
+    if (hasBackgroundPersistenceDeploymentId()) {
+      if (!getBackgroundPersistenceDeploymentId()
+          .equals(other.getBackgroundPersistenceDeploymentId())) return false;
+    }
+    if (hasEnvironmentBuckets() != other.hasEnvironmentBuckets()) return false;
+    if (hasEnvironmentBuckets()) {
+      if (!getEnvironmentBuckets()
+          .equals(other.getEnvironmentBuckets())) return false;
+    }
+    if (hasClusterTimescaledbSecret() != other.hasClusterTimescaledbSecret()) return false;
+    if (hasClusterTimescaledbSecret()) {
+      if (!getClusterTimescaledbSecret()
+          .equals(other.getClusterTimescaledbSecret())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -2946,6 +3220,26 @@ com.google.protobuf.Value defaultValue) {
       hash = (37 * hash) + PINNED_BASE_IMAGE_FIELD_NUMBER;
       hash = (53 * hash) + getPinnedBaseImage().hashCode();
     }
+    if (hasClusterGatewayId()) {
+      hash = (37 * hash) + CLUSTER_GATEWAY_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getClusterGatewayId().hashCode();
+    }
+    if (hasClusterTimescaledbId()) {
+      hash = (37 * hash) + CLUSTER_TIMESCALEDB_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getClusterTimescaledbId().hashCode();
+    }
+    if (hasBackgroundPersistenceDeploymentId()) {
+      hash = (37 * hash) + BACKGROUND_PERSISTENCE_DEPLOYMENT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getBackgroundPersistenceDeploymentId().hashCode();
+    }
+    if (hasEnvironmentBuckets()) {
+      hash = (37 * hash) + ENVIRONMENT_BUCKETS_FIELD_NUMBER;
+      hash = (53 * hash) + getEnvironmentBuckets().hashCode();
+    }
+    if (hasClusterTimescaledbSecret()) {
+      hash = (37 * hash) + CLUSTER_TIMESCALEDB_SECRET_FIELD_NUMBER;
+      hash = (53 * hash) + getClusterTimescaledbSecret().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -3108,6 +3402,7 @@ com.google.protobuf.Value defaultValue) {
               .alwaysUseFieldBuilders) {
         getCloudConfigFieldBuilder();
         getArchivedAtFieldBuilder();
+        getEnvironmentBucketsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -3169,6 +3464,15 @@ com.google.protobuf.Value defaultValue) {
       metadataServerMetricsStoreSecret_ = "";
       queryServerMetricsStoreSecret_ = "";
       pinnedBaseImage_ = "";
+      clusterGatewayId_ = "";
+      clusterTimescaledbId_ = "";
+      backgroundPersistenceDeploymentId_ = "";
+      environmentBuckets_ = null;
+      if (environmentBucketsBuilder_ != null) {
+        environmentBucketsBuilder_.dispose();
+        environmentBucketsBuilder_ = null;
+      }
+      clusterTimescaledbSecret_ = "";
       return this;
     }
 
@@ -3390,6 +3694,28 @@ com.google.protobuf.Value defaultValue) {
       if (((from_bitField1_ & 0x00002000) != 0)) {
         result.pinnedBaseImage_ = pinnedBaseImage_;
         to_bitField1_ |= 0x00000008;
+      }
+      if (((from_bitField1_ & 0x00004000) != 0)) {
+        result.clusterGatewayId_ = clusterGatewayId_;
+        to_bitField1_ |= 0x00000010;
+      }
+      if (((from_bitField1_ & 0x00008000) != 0)) {
+        result.clusterTimescaledbId_ = clusterTimescaledbId_;
+        to_bitField1_ |= 0x00000020;
+      }
+      if (((from_bitField1_ & 0x00010000) != 0)) {
+        result.backgroundPersistenceDeploymentId_ = backgroundPersistenceDeploymentId_;
+        to_bitField1_ |= 0x00000040;
+      }
+      if (((from_bitField1_ & 0x00020000) != 0)) {
+        result.environmentBuckets_ = environmentBucketsBuilder_ == null
+            ? environmentBuckets_
+            : environmentBucketsBuilder_.build();
+        to_bitField1_ |= 0x00000080;
+      }
+      if (((from_bitField1_ & 0x00040000) != 0)) {
+        result.clusterTimescaledbSecret_ = clusterTimescaledbSecret_;
+        to_bitField1_ |= 0x00000100;
       }
       result.bitField0_ |= to_bitField0_;
       result.bitField1_ |= to_bitField1_;
@@ -3651,6 +3977,29 @@ com.google.protobuf.Value defaultValue) {
       if (other.hasPinnedBaseImage()) {
         pinnedBaseImage_ = other.pinnedBaseImage_;
         bitField1_ |= 0x00002000;
+        onChanged();
+      }
+      if (other.hasClusterGatewayId()) {
+        clusterGatewayId_ = other.clusterGatewayId_;
+        bitField1_ |= 0x00004000;
+        onChanged();
+      }
+      if (other.hasClusterTimescaledbId()) {
+        clusterTimescaledbId_ = other.clusterTimescaledbId_;
+        bitField1_ |= 0x00008000;
+        onChanged();
+      }
+      if (other.hasBackgroundPersistenceDeploymentId()) {
+        backgroundPersistenceDeploymentId_ = other.backgroundPersistenceDeploymentId_;
+        bitField1_ |= 0x00010000;
+        onChanged();
+      }
+      if (other.hasEnvironmentBuckets()) {
+        mergeEnvironmentBuckets(other.getEnvironmentBuckets());
+      }
+      if (other.hasClusterTimescaledbSecret()) {
+        clusterTimescaledbSecret_ = other.clusterTimescaledbSecret_;
+        bitField1_ |= 0x00040000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -3925,6 +4274,33 @@ com.google.protobuf.Value defaultValue) {
               bitField1_ |= 0x00002000;
               break;
             } // case 370
+            case 378: {
+              clusterGatewayId_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00004000;
+              break;
+            } // case 378
+            case 386: {
+              clusterTimescaledbId_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00008000;
+              break;
+            } // case 386
+            case 394: {
+              backgroundPersistenceDeploymentId_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00010000;
+              break;
+            } // case 394
+            case 402: {
+              input.readMessage(
+                  getEnvironmentBucketsFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField1_ |= 0x00020000;
+              break;
+            } // case 402
+            case 410: {
+              clusterTimescaledbSecret_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00040000;
+              break;
+            } // case 410
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -7769,6 +8145,443 @@ com.google.protobuf.Value defaultValue) {
       checkByteStringIsUtf8(value);
       pinnedBaseImage_ = value;
       bitField1_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object clusterGatewayId_ = "";
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @return Whether the clusterGatewayId field is set.
+     */
+    public boolean hasClusterGatewayId() {
+      return ((bitField1_ & 0x00004000) != 0);
+    }
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @return The clusterGatewayId.
+     */
+    public java.lang.String getClusterGatewayId() {
+      java.lang.Object ref = clusterGatewayId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clusterGatewayId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @return The bytes for clusterGatewayId.
+     */
+    public com.google.protobuf.ByteString
+        getClusterGatewayIdBytes() {
+      java.lang.Object ref = clusterGatewayId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clusterGatewayId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @param value The clusterGatewayId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterGatewayId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      clusterGatewayId_ = value;
+      bitField1_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearClusterGatewayId() {
+      clusterGatewayId_ = getDefaultInstance().getClusterGatewayId();
+      bitField1_ = (bitField1_ & ~0x00004000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+     * @param value The bytes for clusterGatewayId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterGatewayIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      clusterGatewayId_ = value;
+      bitField1_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object clusterTimescaledbId_ = "";
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @return Whether the clusterTimescaledbId field is set.
+     */
+    public boolean hasClusterTimescaledbId() {
+      return ((bitField1_ & 0x00008000) != 0);
+    }
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @return The clusterTimescaledbId.
+     */
+    public java.lang.String getClusterTimescaledbId() {
+      java.lang.Object ref = clusterTimescaledbId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clusterTimescaledbId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @return The bytes for clusterTimescaledbId.
+     */
+    public com.google.protobuf.ByteString
+        getClusterTimescaledbIdBytes() {
+      java.lang.Object ref = clusterTimescaledbId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clusterTimescaledbId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @param value The clusterTimescaledbId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterTimescaledbId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      clusterTimescaledbId_ = value;
+      bitField1_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearClusterTimescaledbId() {
+      clusterTimescaledbId_ = getDefaultInstance().getClusterTimescaledbId();
+      bitField1_ = (bitField1_ & ~0x00008000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+     * @param value The bytes for clusterTimescaledbId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterTimescaledbIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      clusterTimescaledbId_ = value;
+      bitField1_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object backgroundPersistenceDeploymentId_ = "";
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @return Whether the backgroundPersistenceDeploymentId field is set.
+     */
+    public boolean hasBackgroundPersistenceDeploymentId() {
+      return ((bitField1_ & 0x00010000) != 0);
+    }
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @return The backgroundPersistenceDeploymentId.
+     */
+    public java.lang.String getBackgroundPersistenceDeploymentId() {
+      java.lang.Object ref = backgroundPersistenceDeploymentId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        backgroundPersistenceDeploymentId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @return The bytes for backgroundPersistenceDeploymentId.
+     */
+    public com.google.protobuf.ByteString
+        getBackgroundPersistenceDeploymentIdBytes() {
+      java.lang.Object ref = backgroundPersistenceDeploymentId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        backgroundPersistenceDeploymentId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @param value The backgroundPersistenceDeploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackgroundPersistenceDeploymentId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      backgroundPersistenceDeploymentId_ = value;
+      bitField1_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBackgroundPersistenceDeploymentId() {
+      backgroundPersistenceDeploymentId_ = getDefaultInstance().getBackgroundPersistenceDeploymentId();
+      bitField1_ = (bitField1_ & ~0x00010000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+     * @param value The bytes for backgroundPersistenceDeploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackgroundPersistenceDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      backgroundPersistenceDeploymentId_ = value;
+      bitField1_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig environmentBuckets_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.Builder, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder> environmentBucketsBuilder_;
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     * @return Whether the environmentBuckets field is set.
+     */
+    public boolean hasEnvironmentBuckets() {
+      return ((bitField1_ & 0x00020000) != 0);
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     * @return The environmentBuckets.
+     */
+    public ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig getEnvironmentBuckets() {
+      if (environmentBucketsBuilder_ == null) {
+        return environmentBuckets_ == null ? ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.getDefaultInstance() : environmentBuckets_;
+      } else {
+        return environmentBucketsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public Builder setEnvironmentBuckets(ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig value) {
+      if (environmentBucketsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        environmentBuckets_ = value;
+      } else {
+        environmentBucketsBuilder_.setMessage(value);
+      }
+      bitField1_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public Builder setEnvironmentBuckets(
+        ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.Builder builderForValue) {
+      if (environmentBucketsBuilder_ == null) {
+        environmentBuckets_ = builderForValue.build();
+      } else {
+        environmentBucketsBuilder_.setMessage(builderForValue.build());
+      }
+      bitField1_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public Builder mergeEnvironmentBuckets(ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig value) {
+      if (environmentBucketsBuilder_ == null) {
+        if (((bitField1_ & 0x00020000) != 0) &&
+          environmentBuckets_ != null &&
+          environmentBuckets_ != ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.getDefaultInstance()) {
+          getEnvironmentBucketsBuilder().mergeFrom(value);
+        } else {
+          environmentBuckets_ = value;
+        }
+      } else {
+        environmentBucketsBuilder_.mergeFrom(value);
+      }
+      if (environmentBuckets_ != null) {
+        bitField1_ |= 0x00020000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public Builder clearEnvironmentBuckets() {
+      bitField1_ = (bitField1_ & ~0x00020000);
+      environmentBuckets_ = null;
+      if (environmentBucketsBuilder_ != null) {
+        environmentBucketsBuilder_.dispose();
+        environmentBucketsBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.Builder getEnvironmentBucketsBuilder() {
+      bitField1_ |= 0x00020000;
+      onChanged();
+      return getEnvironmentBucketsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder getEnvironmentBucketsOrBuilder() {
+      if (environmentBucketsBuilder_ != null) {
+        return environmentBucketsBuilder_.getMessageOrBuilder();
+      } else {
+        return environmentBuckets_ == null ?
+            ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.getDefaultInstance() : environmentBuckets_;
+      }
+    }
+    /**
+     * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.Builder, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder> 
+        getEnvironmentBucketsFieldBuilder() {
+      if (environmentBucketsBuilder_ == null) {
+        environmentBucketsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig.Builder, ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder>(
+                getEnvironmentBuckets(),
+                getParentForChildren(),
+                isClean());
+        environmentBuckets_ = null;
+      }
+      return environmentBucketsBuilder_;
+    }
+
+    private java.lang.Object clusterTimescaledbSecret_ = "";
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @return Whether the clusterTimescaledbSecret field is set.
+     */
+    public boolean hasClusterTimescaledbSecret() {
+      return ((bitField1_ & 0x00040000) != 0);
+    }
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @return The clusterTimescaledbSecret.
+     */
+    public java.lang.String getClusterTimescaledbSecret() {
+      java.lang.Object ref = clusterTimescaledbSecret_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clusterTimescaledbSecret_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @return The bytes for clusterTimescaledbSecret.
+     */
+    public com.google.protobuf.ByteString
+        getClusterTimescaledbSecretBytes() {
+      java.lang.Object ref = clusterTimescaledbSecret_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clusterTimescaledbSecret_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @param value The clusterTimescaledbSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterTimescaledbSecret(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      clusterTimescaledbSecret_ = value;
+      bitField1_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearClusterTimescaledbSecret() {
+      clusterTimescaledbSecret_ = getDefaultInstance().getClusterTimescaledbSecret();
+      bitField1_ = (bitField1_ & ~0x00040000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+     * @param value The bytes for clusterTimescaledbSecret to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClusterTimescaledbSecretBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      clusterTimescaledbSecret_ = value;
+      bitField1_ |= 0x00040000;
       onChanged();
       return this;
     }

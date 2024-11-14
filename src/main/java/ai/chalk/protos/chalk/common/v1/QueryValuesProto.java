@@ -52,37 +52,38 @@ public final class QueryValuesProto {
       "\n\"chalk/common/v1/query_values.proto\022\017ch" +
       "alk.common.v1\032\037chalk/common/v1/query_log" +
       ".proto\032\037google/protobuf/timestamp.proto\"" +
-      "?\n\032OperationIdTableIdentifier\022!\n\014operati" +
-      "on_id\030\001 \001(\tR\013operationId\"u\n\030TableNameTab" +
-      "leIdentifier\022\035\n\ntable_name\030\001 \001(\tR\ttableN" +
-      "ame\022:\n\007filters\030\002 \001(\0132 .chalk.common.v1.Q" +
-      "ueryLogFiltersR\007filters\"\255\001\n\027GetQueryValu" +
-      "esPageToken\022J\n\023query_timestamp_hwm\030\001 \001(\013" +
-      "2\032.google.protobuf.TimestampR\021queryTimes" +
-      "tampHwm\022(\n\020operation_id_hwm\030\002 \001(\tR\016opera" +
-      "tionIdHwm\022\034\n\nrow_id_hwm\030\003 \001(\003R\010rowIdHwm\"" +
-      "\326\004\n\025GetQueryValuesRequest\022e\n\027operation_i" +
-      "d_identifier\030\001 \001(\0132+.chalk.common.v1.Ope" +
-      "rationIdTableIdentifierH\000R\025operationIdId" +
-      "entifier\022_\n\025table_name_identifier\030\002 \001(\0132" +
-      ").chalk.common.v1.TableNameTableIdentifi" +
-      "erH\000R\023tableNameIdentifier\022l\n%query_times" +
-      "tamp_lower_bound_inclusive\030\003 \001(\0132\032.googl" +
-      "e.protobuf.TimestampR!queryTimestampLowe" +
-      "rBoundInclusive\022q\n%query_timestamp_upper" +
-      "_bound_exclusive\030\004 \001(\0132\032.google.protobuf" +
-      ".TimestampH\001R!queryTimestampUpperBoundEx" +
-      "clusive\210\001\001\022\032\n\010features\030\005 \003(\tR\010features\022\033" +
-      "\n\tpage_size\030\007 \001(\005R\010pageSize\022\035\n\npage_toke" +
-      "n\030\010 \001(\tR\tpageTokenB\022\n\020table_identifierB(" +
-      "\n&_query_timestamp_upper_bound_exclusive" +
-      "\"g\n\026GetQueryValuesResponse\022&\n\017next_page_" +
-      "token\030\001 \001(\tR\rnextPageToken\022\032\n\007parquet\030\002 " +
-      "\001(\014H\000R\007parquetB\t\n\007payloadB\221\001\n\037ai.chalk.p" +
-      "rotos.chalk.common.v1B\020QueryValuesProtoP" +
-      "\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017Chalk\\Common" +
-      "\\V1\342\002\033Chalk\\Common\\V1\\GPBMetadata\352\002\021Chal" +
-      "k::Common::V1b\006proto3"
+      "C\n\032OperationIdTableIdentifier\022!\n\014operati" +
+      "on_id\030\001 \001(\tR\013operationId:\002\030\001\"y\n\030TableNam" +
+      "eTableIdentifier\022\035\n\ntable_name\030\001 \001(\tR\tta" +
+      "bleName\022:\n\007filters\030\002 \001(\0132 .chalk.common." +
+      "v1.QueryLogFiltersR\007filters:\002\030\001\"\261\001\n\027GetQ" +
+      "ueryValuesPageToken\022J\n\023query_timestamp_h" +
+      "wm\030\001 \001(\0132\032.google.protobuf.TimestampR\021qu" +
+      "eryTimestampHwm\022(\n\020operation_id_hwm\030\002 \001(" +
+      "\tR\016operationIdHwm\022\034\n\nrow_id_hwm\030\003 \001(\003R\010r" +
+      "owIdHwm:\002\030\001\"\332\004\n\025GetQueryValuesRequest\022e\n" +
+      "\027operation_id_identifier\030\001 \001(\0132+.chalk.c" +
+      "ommon.v1.OperationIdTableIdentifierH\000R\025o" +
+      "perationIdIdentifier\022_\n\025table_name_ident" +
+      "ifier\030\002 \001(\0132).chalk.common.v1.TableNameT" +
+      "ableIdentifierH\000R\023tableNameIdentifier\022l\n" +
+      "%query_timestamp_lower_bound_inclusive\030\003" +
+      " \001(\0132\032.google.protobuf.TimestampR!queryT" +
+      "imestampLowerBoundInclusive\022q\n%query_tim" +
+      "estamp_upper_bound_exclusive\030\004 \001(\0132\032.goo" +
+      "gle.protobuf.TimestampH\001R!queryTimestamp" +
+      "UpperBoundExclusive\210\001\001\022\032\n\010features\030\005 \003(\t" +
+      "R\010features\022\033\n\tpage_size\030\007 \001(\005R\010pageSize\022" +
+      "\035\n\npage_token\030\010 \001(\tR\tpageToken:\002\030\001B\022\n\020ta" +
+      "ble_identifierB(\n&_query_timestamp_upper" +
+      "_bound_exclusive\"k\n\026GetQueryValuesRespon" +
+      "se\022&\n\017next_page_token\030\001 \001(\tR\rnextPageTok" +
+      "en\022\032\n\007parquet\030\002 \001(\014H\000R\007parquet:\002\030\001B\t\n\007pa" +
+      "yloadB\221\001\n\037ai.chalk.protos.chalk.common.v" +
+      "1B\020QueryValuesProtoP\001\242\002\003CCX\252\002\017Chalk.Comm" +
+      "on.V1\312\002\017Chalk\\Common\\V1\342\002\033Chalk\\Common\\V" +
+      "1\\GPBMetadata\352\002\021Chalk::Common::V1b\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

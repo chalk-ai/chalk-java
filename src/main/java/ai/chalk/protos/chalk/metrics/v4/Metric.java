@@ -22,6 +22,7 @@ private static final long serialVersionUID = 0L;
     source_ = "";
     name_ = 0;
     type_ = 0;
+    deploymentId_ = "";
   }
 
   @java.lang.Override
@@ -256,6 +257,45 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override public ai.chalk.protos.chalk.metrics.v4.MetricType getType() {
     ai.chalk.protos.chalk.metrics.v4.MetricType result = ai.chalk.protos.chalk.metrics.v4.MetricType.forNumber(type_);
     return result == null ? ai.chalk.protos.chalk.metrics.v4.MetricType.UNRECOGNIZED : result;
+  }
+
+  public static final int DEPLOYMENT_ID_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object deploymentId_ = "";
+  /**
+   * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+   * @return The deploymentId.
+   */
+  @java.lang.Override
+  public java.lang.String getDeploymentId() {
+    java.lang.Object ref = deploymentId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      deploymentId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+   * @return The bytes for deploymentId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDeploymentIdBytes() {
+    java.lang.Object ref = deploymentId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      deploymentId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int SKETCH_FIELD_NUMBER = 10;
@@ -494,6 +534,9 @@ java.lang.String defaultValue) {
     if (type_ != ai.chalk.protos.chalk.metrics.v4.MetricType.METRIC_TYPE_UNSPECIFIED.getNumber()) {
       output.writeEnum(6, type_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deploymentId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, deploymentId_);
+    }
     if (valueCase_ == 10) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 10, value_);
     }
@@ -543,6 +586,9 @@ java.lang.String defaultValue) {
     if (type_ != ai.chalk.protos.chalk.metrics.v4.MetricType.METRIC_TYPE_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(6, type_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deploymentId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, deploymentId_);
     }
     if (valueCase_ == 10) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, value_);
@@ -597,6 +643,8 @@ java.lang.String defaultValue) {
         .equals(other.getSource())) return false;
     if (name_ != other.name_) return false;
     if (type_ != other.type_) return false;
+    if (!getDeploymentId()
+        .equals(other.getDeploymentId())) return false;
     if (hasStatistics() != other.hasStatistics()) return false;
     if (hasStatistics()) {
       if (!getStatistics()
@@ -649,6 +697,8 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + name_;
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + type_;
+    hash = (37 * hash) + DEPLOYMENT_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getDeploymentId().hashCode();
     if (hasStatistics()) {
       hash = (37 * hash) + STATISTICS_FIELD_NUMBER;
       hash = (53 * hash) + getStatistics().hashCode();
@@ -840,6 +890,7 @@ java.lang.String defaultValue) {
       source_ = "";
       name_ = 0;
       type_ = 0;
+      deploymentId_ = "";
       statistics_ = null;
       if (statisticsBuilder_ != null) {
         statisticsBuilder_.dispose();
@@ -907,19 +958,22 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.type_ = type_;
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.deploymentId_ = deploymentId_;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.statistics_ = statisticsBuilder_ == null
             ? statistics_
             : statisticsBuilder_.build();
         to_bitField0_ |= 0x00000002;
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00000400) != 0)) {
         result.observedAt_ = observedAtBuilder_ == null
             ? observedAt_
             : observedAtBuilder_.build();
         to_bitField0_ |= 0x00000004;
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
+      if (((from_bitField0_ & 0x00000800) != 0)) {
         result.additionalTags_ = internalGetAdditionalTags();
         result.additionalTags_.makeImmutable();
       }
@@ -997,6 +1051,11 @@ java.lang.String defaultValue) {
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
       }
+      if (!other.getDeploymentId().isEmpty()) {
+        deploymentId_ = other.deploymentId_;
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
       if (other.hasStatistics()) {
         mergeStatistics(other.getStatistics());
       }
@@ -1005,7 +1064,7 @@ java.lang.String defaultValue) {
       }
       internalGetMutableAdditionalTags().mergeFrom(
           other.internalGetAdditionalTags());
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       switch (other.getValueCase()) {
         case SKETCH: {
           valueCase_ = 10;
@@ -1077,6 +1136,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000020;
               break;
             } // case 48
+            case 58: {
+              deploymentId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             case 82: {
               java.lang.String s = input.readStringRequireUtf8();
               valueCase_ = 10;
@@ -1092,14 +1156,14 @@ java.lang.String defaultValue) {
               input.readMessage(
                   getStatisticsFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               break;
             } // case 98
             case 162: {
               input.readMessage(
                   getObservedAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               break;
             } // case 162
             case 242: {
@@ -1108,7 +1172,7 @@ java.lang.String defaultValue) {
                   AdditionalTagsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableAdditionalTags().getMutableMap().put(
                   additionalTags__.getKey(), additionalTags__.getValue());
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               break;
             } // case 242
             default: {
@@ -1502,6 +1566,78 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object deploymentId_ = "";
+    /**
+     * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+     * @return The deploymentId.
+     */
+    public java.lang.String getDeploymentId() {
+      java.lang.Object ref = deploymentId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        deploymentId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+     * @return The bytes for deploymentId.
+     */
+    public com.google.protobuf.ByteString
+        getDeploymentIdBytes() {
+      java.lang.Object ref = deploymentId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deploymentId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+     * @param value The deploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      deploymentId_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDeploymentId() {
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+      bitField0_ = (bitField0_ & ~0x00000040);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+     * @param value The bytes for deploymentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
     /**
      * <code>string sketch = 10 [json_name = "sketch"];</code>
      * @return Whether the sketch field is set.
@@ -1645,7 +1781,7 @@ java.lang.String defaultValue) {
      * @return Whether the statistics field is set.
      */
     public boolean hasStatistics() {
-      return ((bitField0_ & 0x00000100) != 0);
+      return ((bitField0_ & 0x00000200) != 0);
     }
     /**
      * <code>optional .chalk.metrics.v4.MetricStatistics statistics = 12 [json_name = "statistics"];</code>
@@ -1670,7 +1806,7 @@ java.lang.String defaultValue) {
       } else {
         statisticsBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
@@ -1684,7 +1820,7 @@ java.lang.String defaultValue) {
       } else {
         statisticsBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
@@ -1693,7 +1829,7 @@ java.lang.String defaultValue) {
      */
     public Builder mergeStatistics(ai.chalk.protos.chalk.metrics.v4.MetricStatistics value) {
       if (statisticsBuilder_ == null) {
-        if (((bitField0_ & 0x00000100) != 0) &&
+        if (((bitField0_ & 0x00000200) != 0) &&
           statistics_ != null &&
           statistics_ != ai.chalk.protos.chalk.metrics.v4.MetricStatistics.getDefaultInstance()) {
           getStatisticsBuilder().mergeFrom(value);
@@ -1704,7 +1840,7 @@ java.lang.String defaultValue) {
         statisticsBuilder_.mergeFrom(value);
       }
       if (statistics_ != null) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         onChanged();
       }
       return this;
@@ -1713,7 +1849,7 @@ java.lang.String defaultValue) {
      * <code>optional .chalk.metrics.v4.MetricStatistics statistics = 12 [json_name = "statistics"];</code>
      */
     public Builder clearStatistics() {
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000200);
       statistics_ = null;
       if (statisticsBuilder_ != null) {
         statisticsBuilder_.dispose();
@@ -1726,7 +1862,7 @@ java.lang.String defaultValue) {
      * <code>optional .chalk.metrics.v4.MetricStatistics statistics = 12 [json_name = "statistics"];</code>
      */
     public ai.chalk.protos.chalk.metrics.v4.MetricStatistics.Builder getStatisticsBuilder() {
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return getStatisticsFieldBuilder().getBuilder();
     }
@@ -1766,7 +1902,7 @@ java.lang.String defaultValue) {
      * @return Whether the observedAt field is set.
      */
     public boolean hasObservedAt() {
-      return ((bitField0_ & 0x00000200) != 0);
+      return ((bitField0_ & 0x00000400) != 0);
     }
     /**
      * <code>optional .google.protobuf.Timestamp observed_at = 20 [json_name = "observedAt"];</code>
@@ -1791,7 +1927,7 @@ java.lang.String defaultValue) {
       } else {
         observedAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -1805,7 +1941,7 @@ java.lang.String defaultValue) {
       } else {
         observedAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -1814,7 +1950,7 @@ java.lang.String defaultValue) {
      */
     public Builder mergeObservedAt(com.google.protobuf.Timestamp value) {
       if (observedAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000200) != 0) &&
+        if (((bitField0_ & 0x00000400) != 0) &&
           observedAt_ != null &&
           observedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getObservedAtBuilder().mergeFrom(value);
@@ -1825,7 +1961,7 @@ java.lang.String defaultValue) {
         observedAtBuilder_.mergeFrom(value);
       }
       if (observedAt_ != null) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         onChanged();
       }
       return this;
@@ -1834,7 +1970,7 @@ java.lang.String defaultValue) {
      * <code>optional .google.protobuf.Timestamp observed_at = 20 [json_name = "observedAt"];</code>
      */
     public Builder clearObservedAt() {
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00000400);
       observedAt_ = null;
       if (observedAtBuilder_ != null) {
         observedAtBuilder_.dispose();
@@ -1847,7 +1983,7 @@ java.lang.String defaultValue) {
      * <code>optional .google.protobuf.Timestamp observed_at = 20 [json_name = "observedAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getObservedAtBuilder() {
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return getObservedAtFieldBuilder().getBuilder();
     }
@@ -1898,7 +2034,7 @@ java.lang.String defaultValue) {
       if (!additionalTags_.isMutable()) {
         additionalTags_ = additionalTags_.copy();
       }
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       onChanged();
       return additionalTags_;
     }
@@ -1958,7 +2094,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearAdditionalTags() {
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00000800);
       internalGetMutableAdditionalTags().getMutableMap()
           .clear();
       return this;
@@ -1979,7 +2115,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableAdditionalTags() {
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       return internalGetMutableAdditionalTags().getMutableMap();
     }
     /**
@@ -1992,7 +2128,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableAdditionalTags().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       return this;
     }
     /**
@@ -2002,7 +2138,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableAdditionalTags().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       return this;
     }
     @java.lang.Override

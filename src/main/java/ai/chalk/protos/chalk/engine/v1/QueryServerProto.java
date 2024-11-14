@@ -37,32 +37,36 @@ public final class QueryServerProto {
       "\n\"chalk/engine/v1/query_server.proto\022\017ch" +
       "alk.engine.v1\032 chalk/aggregate/v1/servic" +
       "e.proto\032\037chalk/auth/v1/permissions.proto" +
-      "\032\"chalk/common/v1/online_query.proto\"\037\n\013" +
-      "PingRequest\022\020\n\003num\030\001 \001(\005R\003num\" \n\014PingRes" +
-      "ponse\022\020\n\003num\030\001 \001(\005R\003num2\374\005\n\014QueryService" +
-      "\022K\n\004Ping\022\034.chalk.engine.v1.PingRequest\032\035" +
-      ".chalk.engine.v1.PingResponse\"\006\220\002\001\200}\001\022]\n" +
-      "\013OnlineQuery\022#.chalk.common.v1.OnlineQue" +
-      "ryRequest\032$.chalk.common.v1.OnlineQueryR" +
-      "esponse\"\003\200}\003\022i\n\017OnlineQueryBulk\022\'.chalk." +
-      "common.v1.OnlineQueryBulkRequest\032(.chalk" +
-      ".common.v1.OnlineQueryBulkResponse\"\003\200}\003\022" +
-      "l\n\020OnlineQueryMulti\022(.chalk.common.v1.On" +
-      "lineQueryMultiRequest\032).chalk.common.v1." +
-      "OnlineQueryMultiResponse\"\003\200}\003\022r\n\022UploadF" +
-      "eaturesBulk\022*.chalk.common.v1.UploadFeat" +
-      "uresBulkRequest\032+.chalk.common.v1.Upload" +
-      "FeaturesBulkResponse\"\003\200}\003\022\204\001\n\025PlanAggreg" +
-      "ateBackfill\0220.chalk.aggregate.v1.PlanAgg" +
-      "regateBackfillRequest\0321.chalk.aggregate." +
-      "v1.PlanAggregateBackfillResponse\"\006\220\002\001\200}\014" +
-      "\022l\n\rGetAggregates\022(.chalk.aggregate.v1.G" +
-      "etAggregatesRequest\032).chalk.aggregate.v1" +
-      ".GetAggregatesResponse\"\006\220\002\001\200}\013B\221\001\n\037ai.ch" +
-      "alk.protos.chalk.engine.v1B\020QueryServerP" +
-      "rotoP\001\242\002\003CEX\252\002\017Chalk.Engine.V1\312\002\017Chalk\\E" +
-      "ngine\\V1\342\002\033Chalk\\Engine\\V1\\GPBMetadata\352\002" +
-      "\021Chalk::Engine::V1b\006proto3"
+      "\032\"chalk/common/v1/online_query.proto\032%ch" +
+      "alk/common/v1/upload_features.proto\"\037\n\013P" +
+      "ingRequest\022\020\n\003num\030\001 \001(\005R\003num\" \n\014PingResp" +
+      "onse\022\020\n\003num\030\001 \001(\005R\003num2\344\006\n\014QueryService\022" +
+      "K\n\004Ping\022\034.chalk.engine.v1.PingRequest\032\035." +
+      "chalk.engine.v1.PingResponse\"\006\220\002\001\200}\001\022]\n\013" +
+      "OnlineQuery\022#.chalk.common.v1.OnlineQuer" +
+      "yRequest\032$.chalk.common.v1.OnlineQueryRe" +
+      "sponse\"\003\200}\003\022i\n\017OnlineQueryBulk\022\'.chalk.c" +
+      "ommon.v1.OnlineQueryBulkRequest\032(.chalk." +
+      "common.v1.OnlineQueryBulkResponse\"\003\200}\003\022l" +
+      "\n\020OnlineQueryMulti\022(.chalk.common.v1.Onl" +
+      "ineQueryMultiRequest\032).chalk.common.v1.O" +
+      "nlineQueryMultiResponse\"\003\200}\003\022r\n\022UploadFe" +
+      "aturesBulk\022*.chalk.common.v1.UploadFeatu" +
+      "resBulkRequest\032+.chalk.common.v1.UploadF" +
+      "eaturesBulkResponse\"\003\200}\003\022f\n\016UploadFeatur" +
+      "es\022&.chalk.common.v1.UploadFeaturesReque" +
+      "st\032\'.chalk.common.v1.UploadFeaturesRespo" +
+      "nse\"\003\200}\003\022\204\001\n\025PlanAggregateBackfill\0220.cha" +
+      "lk.aggregate.v1.PlanAggregateBackfillReq" +
+      "uest\0321.chalk.aggregate.v1.PlanAggregateB" +
+      "ackfillResponse\"\006\220\002\001\200}\014\022l\n\rGetAggregates" +
+      "\022(.chalk.aggregate.v1.GetAggregatesReque" +
+      "st\032).chalk.aggregate.v1.GetAggregatesRes" +
+      "ponse\"\006\220\002\001\200}\013B\221\001\n\037ai.chalk.protos.chalk." +
+      "engine.v1B\020QueryServerProtoP\001\242\002\003CEX\252\002\017Ch" +
+      "alk.Engine.V1\312\002\017Chalk\\Engine\\V1\342\002\033Chalk\\" +
+      "Engine\\V1\\GPBMetadata\352\002\021Chalk::Engine::V" +
+      "1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -70,6 +74,7 @@ public final class QueryServerProto {
           ai.chalk.protos.chalk.aggregate.v1.ServiceProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           ai.chalk.protos.chalk.common.v1.OnlineQueryProto.getDescriptor(),
+          ai.chalk.protos.chalk.common.v1.UploadFeaturesProto.getDescriptor(),
         });
     internal_static_chalk_engine_v1_PingRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -91,6 +96,7 @@ public final class QueryServerProto {
     ai.chalk.protos.chalk.aggregate.v1.ServiceProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     ai.chalk.protos.chalk.common.v1.OnlineQueryProto.getDescriptor();
+    ai.chalk.protos.chalk.common.v1.UploadFeaturesProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

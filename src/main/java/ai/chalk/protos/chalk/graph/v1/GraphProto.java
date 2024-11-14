@@ -208,317 +208,332 @@ public final class GraphProto {
       "h.v1\032\032chalk/arrow/v1/arrow.proto\032$chalk/" +
       "expression/v1/expression.proto\032\034chalk/gr" +
       "aph/v1/sources.proto\032\026chalk/lsp/v1/lsp.p" +
-      "roto\032\036google/protobuf/duration.proto\"\337\003\n" +
-      "\005Graph\022=\n\014feature_sets\030\001 \003(\0132\032.chalk.gra" +
-      "ph.v1.FeatureSetR\013featureSets\0226\n\tresolve" +
-      "rs\030\002 \003(\0132\030.chalk.graph.v1.ResolverR\treso" +
-      "lvers\022I\n\020stream_resolvers\030\003 \003(\0132\036.chalk." +
-      "graph.v1.StreamResolverR\017streamResolvers" +
-      "\022C\n\016sink_resolvers\030\004 \003(\0132\034.chalk.graph.v" +
-      "1.SinkResolverR\rsinkResolvers\022I\n\020databas" +
-      "e_sources\030\005 \003(\0132\036.chalk.graph.v1.Databas" +
-      "eSourceR\017databaseSources\022C\n\016stream_sourc" +
-      "es\030\006 \003(\0132\034.chalk.graph.v1.StreamSourceR\r" +
-      "streamSources\022?\n\rnamed_queries\030\007 \003(\0132\032.c" +
-      "halk.graph.v1.NamedQueryR\014namedQueries\"\374" +
-      "\006\n\nNamedQuery\022\022\n\004name\030\001 \001(\tR\004name\022(\n\rque" +
-      "ry_version\030\002 \001(\tH\000R\014queryVersion\210\001\001\022\024\n\005i" +
-      "nput\030\003 \003(\tR\005input\022\026\n\006output\030\004 \003(\tR\006outpu" +
-      "t\022\022\n\004tags\030\005 \003(\tR\004tags\022%\n\013description\030\006 \001" +
-      "(\tH\001R\013description\210\001\001\022\031\n\005owner\030\007 \001(\tH\002R\005o" +
-      "wner\210\001\001\0228\n\004meta\030\010 \003(\0132$.chalk.graph.v1.N" +
-      "amedQuery.MetaEntryR\004meta\022G\n\tstaleness\030\t" +
-      " \003(\0132).chalk.graph.v1.NamedQuery.Stalene" +
-      "ssEntryR\tstaleness\022W\n\017planner_options\030\n " +
-      "\003(\0132..chalk.graph.v1.NamedQuery.PlannerO" +
-      "ptionsEntryR\016plannerOptions\022\033\n\tfile_name" +
-      "\030\013 \001(\tR\010fileName\022(\n\rdeployment_id\030\014 \001(\tH" +
-      "\003R\014deploymentId\210\001\001\022\\\n\025source_file_refere" +
-      "nce\030\r \001(\0132#.chalk.graph.v1.SourceFileRef" +
-      "erenceH\004R\023sourceFileReference\210\001\001\0327\n\tMeta" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\032W\n\016StalenessEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022/\n\005value\030\002 \001(\0132\031.google.protobuf.D" +
-      "urationR\005value:\0028\001\032A\n\023PlannerOptionsEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
-      "e:\0028\001B\020\n\016_query_versionB\016\n\014_descriptionB" +
-      "\010\n\006_ownerB\020\n\016_deployment_idB\030\n\026_source_f" +
-      "ile_reference\"\252\003\n\nFeatureSet\022\022\n\004name\030\001 \001" +
-      "(\tR\004name\0227\n\010features\030\002 \003(\0132\033.chalk.graph" +
-      ".v1.FeatureTypeR\010features\022O\n\026max_stalene" +
-      "ss_duration\030\003 \001(\0132\031.google.protobuf.Dura" +
-      "tionR\024maxStalenessDuration\022!\n\014is_singlet" +
-      "on\030\004 \001(\010R\013isSingleton\022\022\n\004tags\030\005 \003(\tR\004tag" +
-      "s\022\031\n\005owner\030\006 \001(\tH\000R\005owner\210\001\001\022\025\n\003doc\030\007 \001(" +
-      "\tH\001R\003doc\210\001\001\0226\n\025etl_offline_to_online\030\010 \001" +
-      "(\010H\002R\022etlOfflineToOnline\210\001\001\022\"\n\nclass_pat" +
-      "h\030\t \001(\tH\003R\tclassPath\210\001\001B\010\n\006_ownerB\006\n\004_do" +
-      "cB\030\n\026_etl_offline_to_onlineB\r\n\013_class_pa" +
-      "th\"\242\003\n\013FeatureType\022;\n\006scalar\030\001 \001(\0132!.cha" +
-      "lk.graph.v1.ScalarFeatureTypeH\000R\006scalar\022" +
-      "<\n\007has_one\030\002 \001(\0132!.chalk.graph.v1.HasOne" +
-      "FeatureTypeH\000R\006hasOne\022?\n\010has_many\030\003 \001(\0132" +
-      "\".chalk.graph.v1.HasManyFeatureTypeH\000R\007h" +
-      "asMany\022K\n\014feature_time\030\004 \001(\0132&.chalk.gra" +
-      "ph.v1.FeatureTimeFeatureTypeH\000R\013featureT" +
-      "ime\022A\n\010windowed\030\005 \001(\0132#.chalk.graph.v1.W" +
-      "indowedFeatureTypeH\000R\010windowed\022?\n\010group_" +
-      "by\030\006 \001(\0132\".chalk.graph.v1.GroupByFeature" +
-      "TypeH\000R\007groupByB\006\n\004type\"\251\001\n\020FeatureRefer" +
-      "ence\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnamespace\030\002 " +
-      "\001(\tR\tnamespace\0224\n\004path\030\003 \003(\0132 .chalk.gra" +
-      "ph.v1.FeatureReferenceR\004path\022-\n\002df\030\004 \001(\013" +
-      "2\035.chalk.graph.v1.DataFrameTypeR\002df\"\263\002\n\r" +
-      "DataFrameType\022%\n\016root_namespace\030\001 \001(\tR\rr" +
-      "ootNamespace\022K\n\020required_columns\030\002 \003(\0132 " +
-      ".chalk.graph.v1.FeatureReferenceR\017requir" +
-      "edColumns\022K\n\020optional_columns\030\003 \003(\0132 .ch" +
-      "alk.graph.v1.FeatureReferenceR\017optionalC" +
-      "olumns\022<\n\006filter\030\004 \001(\0132$.chalk.expressio" +
-      "n.v1.LogicalExprNodeR\006filter\022\031\n\005limit\030\005 " +
-      "\001(\004H\000R\005limit\210\001\001B\010\n\006_limit\"\325\005\n\022GroupByFea" +
+      "roto\032\036google/protobuf/duration.proto\032\037go" +
+      "ogle/protobuf/timestamp.proto\"\337\003\n\005Graph\022" +
+      "=\n\014feature_sets\030\001 \003(\0132\032.chalk.graph.v1.F" +
+      "eatureSetR\013featureSets\0226\n\tresolvers\030\002 \003(" +
+      "\0132\030.chalk.graph.v1.ResolverR\tresolvers\022I" +
+      "\n\020stream_resolvers\030\003 \003(\0132\036.chalk.graph.v" +
+      "1.StreamResolverR\017streamResolvers\022C\n\016sin" +
+      "k_resolvers\030\004 \003(\0132\034.chalk.graph.v1.SinkR" +
+      "esolverR\rsinkResolvers\022I\n\020database_sourc" +
+      "es\030\005 \003(\0132\036.chalk.graph.v1.DatabaseSource" +
+      "R\017databaseSources\022C\n\016stream_sources\030\006 \003(" +
+      "\0132\034.chalk.graph.v1.StreamSourceR\rstreamS" +
+      "ources\022?\n\rnamed_queries\030\007 \003(\0132\032.chalk.gr" +
+      "aph.v1.NamedQueryR\014namedQueries\"\374\006\n\nName" +
+      "dQuery\022\022\n\004name\030\001 \001(\tR\004name\022(\n\rquery_vers" +
+      "ion\030\002 \001(\tH\000R\014queryVersion\210\001\001\022\024\n\005input\030\003 " +
+      "\003(\tR\005input\022\026\n\006output\030\004 \003(\tR\006output\022\022\n\004ta" +
+      "gs\030\005 \003(\tR\004tags\022%\n\013description\030\006 \001(\tH\001R\013d" +
+      "escription\210\001\001\022\031\n\005owner\030\007 \001(\tH\002R\005owner\210\001\001" +
+      "\0228\n\004meta\030\010 \003(\0132$.chalk.graph.v1.NamedQue" +
+      "ry.MetaEntryR\004meta\022G\n\tstaleness\030\t \003(\0132)." +
+      "chalk.graph.v1.NamedQuery.StalenessEntry" +
+      "R\tstaleness\022W\n\017planner_options\030\n \003(\0132..c" +
+      "halk.graph.v1.NamedQuery.PlannerOptionsE" +
+      "ntryR\016plannerOptions\022\033\n\tfile_name\030\013 \001(\tR" +
+      "\010fileName\022(\n\rdeployment_id\030\014 \001(\tH\003R\014depl" +
+      "oymentId\210\001\001\022\\\n\025source_file_reference\030\r \001" +
+      "(\0132#.chalk.graph.v1.SourceFileReferenceH" +
+      "\004R\023sourceFileReference\210\001\001\0327\n\tMetaEntry\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\002" +
+      "8\001\032W\n\016StalenessEntry\022\020\n\003key\030\001 \001(\tR\003key\022/" +
+      "\n\005value\030\002 \001(\0132\031.google.protobuf.Duration" +
+      "R\005value:\0028\001\032A\n\023PlannerOptionsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\020" +
+      "\n\016_query_versionB\016\n\014_descriptionB\010\n\006_own" +
+      "erB\020\n\016_deployment_idB\030\n\026_source_file_ref" +
+      "erence\"\252\003\n\nFeatureSet\022\022\n\004name\030\001 \001(\tR\004nam" +
+      "e\0227\n\010features\030\002 \003(\0132\033.chalk.graph.v1.Fea" +
+      "tureTypeR\010features\022O\n\026max_staleness_dura" +
+      "tion\030\003 \001(\0132\031.google.protobuf.DurationR\024m" +
+      "axStalenessDuration\022!\n\014is_singleton\030\004 \001(" +
+      "\010R\013isSingleton\022\022\n\004tags\030\005 \003(\tR\004tags\022\031\n\005ow" +
+      "ner\030\006 \001(\tH\000R\005owner\210\001\001\022\025\n\003doc\030\007 \001(\tH\001R\003do" +
+      "c\210\001\001\0226\n\025etl_offline_to_online\030\010 \001(\010H\002R\022e" +
+      "tlOfflineToOnline\210\001\001\022\"\n\nclass_path\030\t \001(\t" +
+      "H\003R\tclassPath\210\001\001B\010\n\006_ownerB\006\n\004_docB\030\n\026_e" +
+      "tl_offline_to_onlineB\r\n\013_class_path\"\242\003\n\013" +
+      "FeatureType\022;\n\006scalar\030\001 \001(\0132!.chalk.grap" +
+      "h.v1.ScalarFeatureTypeH\000R\006scalar\022<\n\007has_" +
+      "one\030\002 \001(\0132!.chalk.graph.v1.HasOneFeature" +
+      "TypeH\000R\006hasOne\022?\n\010has_many\030\003 \001(\0132\".chalk" +
+      ".graph.v1.HasManyFeatureTypeH\000R\007hasMany\022" +
+      "K\n\014feature_time\030\004 \001(\0132&.chalk.graph.v1.F" +
+      "eatureTimeFeatureTypeH\000R\013featureTime\022A\n\010" +
+      "windowed\030\005 \001(\0132#.chalk.graph.v1.Windowed" +
+      "FeatureTypeH\000R\010windowed\022?\n\010group_by\030\006 \001(" +
+      "\0132\".chalk.graph.v1.GroupByFeatureTypeH\000R" +
+      "\007groupByB\006\n\004type\"\251\001\n\020FeatureReference\022\022\n" +
+      "\004name\030\001 \001(\tR\004name\022\034\n\tnamespace\030\002 \001(\tR\tna" +
+      "mespace\0224\n\004path\030\003 \003(\0132 .chalk.graph.v1.F" +
+      "eatureReferenceR\004path\022-\n\002df\030\004 \001(\0132\035.chal" +
+      "k.graph.v1.DataFrameTypeR\002df\"\263\002\n\rDataFra" +
+      "meType\022%\n\016root_namespace\030\001 \001(\tR\rrootName" +
+      "space\022K\n\020required_columns\030\002 \003(\0132 .chalk." +
+      "graph.v1.FeatureReferenceR\017requiredColum" +
+      "ns\022K\n\020optional_columns\030\003 \003(\0132 .chalk.gra" +
+      "ph.v1.FeatureReferenceR\017optionalColumns\022" +
+      "<\n\006filter\030\004 \001(\0132$.chalk.expression.v1.Lo" +
+      "gicalExprNodeR\006filter\022\031\n\005limit\030\005 \001(\004H\000R\005" +
+      "limit\210\001\001B\010\n\006_limit\"\325\005\n\022GroupByFeatureTyp" +
+      "e\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnamespace\030\002 \001(\t" +
+      "R\tnamespace\022\037\n\013is_nullable\030\003 \001(\010R\nisNull" +
+      "able\022.\n\020internal_version\030\004 \001(\004H\000R\017intern" +
+      "alVersion\210\001\001\0228\n\narrow_type\030\005 \001(\0132\031.chalk" +
+      ".arrow.v1.ArrowTypeR\tarrowType\022C\n\013aggreg" +
+      "ation\030\006 \001(\0132!.chalk.graph.v1.WindowAggre" +
+      "gationR\013aggregation\022D\n\020window_durations\030" +
+      "\007 \003(\0132\031.google.protobuf.DurationR\017window" +
+      "Durations\022D\n\nexpression\030\010 \001(\0132$.chalk.ex" +
+      "pression.v1.LogicalExprNodeR\nexpression\022" +
+      "@\n\rdefault_value\030\t \001(\0132\033.chalk.arrow.v1." +
+      "ScalarValueR\014defaultValue\022\022\n\004tags\030\n \003(\tR" +
+      "\004tags\022%\n\013description\030\013 \001(\tH\001R\013descriptio" +
+      "n\210\001\001\022\031\n\005owner\030\014 \001(\tH\002R\005owner\210\001\001\022C\n\013valid" +
+      "ations\030\r \003(\0132!.chalk.graph.v1.FeatureVal" +
+      "idationR\013validations\022%\n\016attribute_name\030\016" +
+      " \001(\tR\rattributeNameB\023\n\021_internal_version" +
+      "B\016\n\014_descriptionB\010\n\006_owner\"\372\t\n\021ScalarFea" +
       "tureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnamespac" +
-      "e\030\002 \001(\tR\tnamespace\022\037\n\013is_nullable\030\003 \001(\010R" +
-      "\nisNullable\022.\n\020internal_version\030\004 \001(\004H\000R" +
-      "\017internalVersion\210\001\001\0228\n\narrow_type\030\005 \001(\0132" +
-      "\031.chalk.arrow.v1.ArrowTypeR\tarrowType\022C\n" +
-      "\013aggregation\030\006 \001(\0132!.chalk.graph.v1.Wind" +
-      "owAggregationR\013aggregation\022D\n\020window_dur" +
-      "ations\030\007 \003(\0132\031.google.protobuf.DurationR" +
-      "\017windowDurations\022D\n\nexpression\030\010 \001(\0132$.c" +
-      "halk.expression.v1.LogicalExprNodeR\nexpr" +
-      "ession\022@\n\rdefault_value\030\t \001(\0132\033.chalk.ar" +
-      "row.v1.ScalarValueR\014defaultValue\022\022\n\004tags" +
-      "\030\n \003(\tR\004tags\022%\n\013description\030\013 \001(\tH\001R\013des" +
-      "cription\210\001\001\022\031\n\005owner\030\014 \001(\tH\002R\005owner\210\001\001\022C" +
-      "\n\013validations\030\r \003(\0132!.chalk.graph.v1.Fea" +
-      "tureValidationR\013validations\022%\n\016attribute" +
-      "_name\030\016 \001(\tR\rattributeNameB\023\n\021_internal_" +
-      "versionB\016\n\014_descriptionB\010\n\006_owner\"\372\t\n\021Sc" +
-      "alarFeatureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tn" +
-      "amespace\030\002 \001(\tR\tnamespace\022)\n\020is_autogene" +
-      "rated\030\003 \001(\010R\017isAutogenerated\022\035\n\nno_displ" +
-      "ay\030\004 \001(\010R\tnoDisplay\022\035\n\nis_primary\030\005 \001(\010R" +
-      "\tisPrimary\022\037\n\013is_nullable\030\006 \001(\010R\nisNulla" +
-      "ble\022.\n\020internal_version\030\007 \001(\004H\000R\017interna" +
-      "lVersion\210\001\001\022O\n\026max_staleness_duration\030\010 " +
-      "\001(\0132\031.google.protobuf.DurationR\024maxStale" +
-      "nessDuration\022K\n\024offline_ttl_duration\030\n \001" +
-      "(\0132\031.google.protobuf.DurationR\022offlineTt" +
-      "lDuration\0228\n\narrow_type\030\013 \001(\0132\031.chalk.ar" +
-      "row.v1.ArrowTypeR\tarrowType\0225\n\007version\030\014" +
-      " \001(\0132\033.chalk.graph.v1.VersionInfoR\007versi" +
-      "on\022;\n\013window_info\030\r \001(\0132\032.chalk.graph.v1" +
-      ".WindowInfoR\nwindowInfo\022@\n\rdefault_value" +
-      "\030\016 \001(\0132\033.chalk.arrow.v1.ScalarValueR\014def" +
-      "aultValue\022\022\n\004tags\030\017 \003(\tR\004tags\022%\n\013descrip" +
-      "tion\030\020 \001(\tH\001R\013description\210\001\001\022\031\n\005owner\030\021 " +
-      "\001(\tH\002R\005owner\210\001\001\022D\n\nexpression\030\022 \001(\0132$.ch" +
-      "alk.expression.v1.LogicalExprNodeR\nexpre" +
-      "ssion\022C\n\013validations\030\023 \003(\0132!.chalk.graph" +
-      ".v1.FeatureValidationR\013validations\022;\n\010la" +
-      "st_for\030\024 \001(\0132 .chalk.graph.v1.FeatureRef" +
-      "erenceR\007lastFor\0226\n\025etl_offline_to_online" +
-      "\030\025 \001(\010H\003R\022etlOfflineToOnline\210\001\001\022:\n\031is_di" +
-      "stance_pseudofeature\030\026 \001(\010R\027isDistancePs" +
-      "eudofeature\022%\n\016attribute_name\030\027 \001(\tR\ratt" +
-      "ributeName\022#\n\ris_deprecated\030\030 \001(\010R\014isDep" +
-      "recated\022D\n\016cache_strategy\030\031 \001(\0162\035.chalk." +
-      "graph.v1.CacheStrategyR\rcacheStrategyB\023\n" +
-      "\021_internal_versionB\016\n\014_descriptionB\010\n\006_o" +
-      "wnerB\030\n\026_etl_offline_to_online\"\217\003\n\021HasOn" +
-      "eFeatureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tname" +
-      "space\030\002 \001(\tR\tnamespace\022+\n\021foreign_namesp" +
-      "ace\030\003 \001(\tR\020foreignNamespace\0228\n\004join\030\004 \001(" +
-      "\0132$.chalk.expression.v1.LogicalExprNodeR" +
-      "\004join\022\037\n\013is_nullable\030\005 \001(\010R\nisNullable\022)" +
-      "\n\020is_autogenerated\030\006 \001(\010R\017isAutogenerate" +
-      "d\022\022\n\004tags\030\007 \003(\tR\004tags\022%\n\013description\030\010 \001" +
-      "(\tH\000R\013description\210\001\001\022\031\n\005owner\030\t \001(\tH\001R\005o" +
-      "wner\210\001\001\022%\n\016attribute_name\030\n \001(\tR\rattribu" +
-      "teNameB\016\n\014_descriptionB\010\n\006_owner\"\300\003\n\022Has" +
-      "ManyFeatureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tn" +
-      "amespace\030\002 \001(\tR\tnamespace\022+\n\021foreign_nam" +
-      "espace\030\003 \001(\tR\020foreignNamespace\0228\n\004join\030\004" +
-      " \001(\0132$.chalk.expression.v1.LogicalExprNo" +
-      "deR\004join\022)\n\020is_autogenerated\030\005 \001(\010R\017isAu" +
-      "togenerated\022O\n\026max_staleness_duration\030\006 " +
-      "\001(\0132\031.google.protobuf.DurationR\024maxStale" +
-      "nessDuration\022\022\n\004tags\030\007 \003(\tR\004tags\022%\n\013desc" +
-      "ription\030\010 \001(\tH\000R\013description\210\001\001\022\031\n\005owner" +
-      "\030\t \001(\tH\001R\005owner\210\001\001\022%\n\016attribute_name\030\n \001" +
-      "(\tR\rattributeNameB\016\n\014_descriptionB\010\n\006_ow" +
-      "ner\"\214\002\n\026FeatureTimeFeatureType\022\022\n\004name\030\001" +
-      " \001(\tR\004name\022\034\n\tnamespace\030\002 \001(\tR\tnamespace" +
-      "\022)\n\020is_autogenerated\030\003 \001(\010R\017isAutogenera" +
-      "ted\022\022\n\004tags\030\004 \003(\tR\004tags\022%\n\013description\030\005" +
-      " \001(\tH\000R\013description\210\001\001\022\031\n\005owner\030\006 \001(\tH\001R" +
-      "\005owner\210\001\001\022%\n\016attribute_name\030\007 \001(\tR\rattri" +
-      "buteNameB\016\n\014_descriptionB\010\n\006_owner\"\337\001\n\023W" +
-      "indowedFeatureType\022\022\n\004name\030\001 \001(\tR\004name\022\034" +
-      "\n\tnamespace\030\002 \001(\tR\tnamespace\022)\n\020is_autog" +
-      "enerated\030\003 \001(\010R\017isAutogenerated\022D\n\020windo" +
-      "w_durations\030\004 \003(\0132\031.google.protobuf.Dura" +
-      "tionR\017windowDurations\022%\n\016attribute_name\030" +
-      "\005 \001(\tR\rattributeName\"\251\003\n\021WindowAggregati" +
-      "on\022\034\n\tnamespace\030\001 \001(\tR\tnamespace\022;\n\010grou" +
-      "p_by\030\002 \003(\0132 .chalk.graph.v1.FeatureRefer" +
-      "enceR\007groupBy\022B\n\017bucket_duration\030\003 \001(\0132\031" +
-      ".google.protobuf.DurationR\016bucketDuratio" +
-      "n\022 \n\013aggregation\030\004 \001(\tR\013aggregation\022H\n\014a" +
-      "ggregate_on\030\005 \001(\0132 .chalk.graph.v1.Featu" +
-      "reReferenceH\000R\013aggregateOn\210\001\001\0228\n\narrow_t" +
-      "ype\030\006 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\tar" +
-      "rowType\022>\n\007filters\030\007 \003(\0132$.chalk.express" +
-      "ion.v1.LogicalExprNodeR\007filtersB\017\n\r_aggr" +
-      "egate_on\"\235\001\n\nWindowInfo\0225\n\010duration\030\001 \001(" +
-      "\0132\031.google.protobuf.DurationR\010duration\022H" +
-      "\n\013aggregation\030\002 \001(\0132!.chalk.graph.v1.Win" +
-      "dowAggregationH\000R\013aggregation\210\001\001B\016\n\014_agg" +
-      "regation\"\214\001\n\014FeatureInput\022:\n\007feature\030\001 \001" +
-      "(\0132 .chalk.graph.v1.FeatureReferenceR\007fe" +
-      "ature\022@\n\rdefault_value\030\002 \001(\0132\033.chalk.arr" +
-      "ow.v1.ScalarValueR\014defaultValue\"\277\001\n\rReso" +
-      "lverInput\0228\n\007feature\030\001 \001(\0132\034.chalk.graph" +
-      ".v1.FeatureInputH\000R\007feature\022/\n\002df\030\002 \001(\0132" +
-      "\035.chalk.graph.v1.DataFrameTypeH\000R\002df\0225\n\005" +
-      "state\030\003 \001(\0132\035.chalk.graph.v1.ResolverSta" +
-      "teH\000R\005stateB\014\n\nannotation\"\215\001\n\016ResolverOu" +
-      "tput\022<\n\007feature\030\001 \001(\0132 .chalk.graph.v1.F" +
-      "eatureReferenceH\000R\007feature\022/\n\002df\030\002 \001(\0132\035" +
-      ".chalk.graph.v1.DataFrameTypeH\000R\002dfB\014\n\na" +
-      "nnotation\"\261\007\n\010Resolver\022\020\n\003fqn\030\001 \001(\tR\003fqn" +
-      "\0220\n\004kind\030\002 \001(\0162\034.chalk.graph.v1.Resolver" +
-      "KindR\004kind\0225\n\006inputs\030\003 \003(\0132\035.chalk.graph" +
-      ".v1.ResolverInputR\006inputs\0228\n\007outputs\030\004 \003" +
+      "e\030\002 \001(\tR\tnamespace\022)\n\020is_autogenerated\030\003" +
+      " \001(\010R\017isAutogenerated\022\035\n\nno_display\030\004 \001(" +
+      "\010R\tnoDisplay\022\035\n\nis_primary\030\005 \001(\010R\tisPrim" +
+      "ary\022\037\n\013is_nullable\030\006 \001(\010R\nisNullable\022.\n\020" +
+      "internal_version\030\007 \001(\004H\000R\017internalVersio" +
+      "n\210\001\001\022O\n\026max_staleness_duration\030\010 \001(\0132\031.g" +
+      "oogle.protobuf.DurationR\024maxStalenessDur" +
+      "ation\022K\n\024offline_ttl_duration\030\n \001(\0132\031.go" +
+      "ogle.protobuf.DurationR\022offlineTtlDurati" +
+      "on\0228\n\narrow_type\030\013 \001(\0132\031.chalk.arrow.v1." +
+      "ArrowTypeR\tarrowType\0225\n\007version\030\014 \001(\0132\033." +
+      "chalk.graph.v1.VersionInfoR\007version\022;\n\013w" +
+      "indow_info\030\r \001(\0132\032.chalk.graph.v1.Window" +
+      "InfoR\nwindowInfo\022@\n\rdefault_value\030\016 \001(\0132" +
+      "\033.chalk.arrow.v1.ScalarValueR\014defaultVal" +
+      "ue\022\022\n\004tags\030\017 \003(\tR\004tags\022%\n\013description\030\020 " +
+      "\001(\tH\001R\013description\210\001\001\022\031\n\005owner\030\021 \001(\tH\002R\005" +
+      "owner\210\001\001\022D\n\nexpression\030\022 \001(\0132$.chalk.exp" +
+      "ression.v1.LogicalExprNodeR\nexpression\022C" +
+      "\n\013validations\030\023 \003(\0132!.chalk.graph.v1.Fea" +
+      "tureValidationR\013validations\022;\n\010last_for\030" +
+      "\024 \001(\0132 .chalk.graph.v1.FeatureReferenceR" +
+      "\007lastFor\0226\n\025etl_offline_to_online\030\025 \001(\010H" +
+      "\003R\022etlOfflineToOnline\210\001\001\022:\n\031is_distance_" +
+      "pseudofeature\030\026 \001(\010R\027isDistancePseudofea" +
+      "ture\022%\n\016attribute_name\030\027 \001(\tR\rattributeN" +
+      "ame\022#\n\ris_deprecated\030\030 \001(\010R\014isDeprecated" +
+      "\022D\n\016cache_strategy\030\031 \001(\0162\035.chalk.graph.v" +
+      "1.CacheStrategyR\rcacheStrategyB\023\n\021_inter" +
+      "nal_versionB\016\n\014_descriptionB\010\n\006_ownerB\030\n" +
+      "\026_etl_offline_to_online\"\217\003\n\021HasOneFeatur" +
+      "eType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnamespace\030\002" +
+      " \001(\tR\tnamespace\022+\n\021foreign_namespace\030\003 \001" +
+      "(\tR\020foreignNamespace\0228\n\004join\030\004 \001(\0132$.cha" +
+      "lk.expression.v1.LogicalExprNodeR\004join\022\037" +
+      "\n\013is_nullable\030\005 \001(\010R\nisNullable\022)\n\020is_au" +
+      "togenerated\030\006 \001(\010R\017isAutogenerated\022\022\n\004ta" +
+      "gs\030\007 \003(\tR\004tags\022%\n\013description\030\010 \001(\tH\000R\013d" +
+      "escription\210\001\001\022\031\n\005owner\030\t \001(\tH\001R\005owner\210\001\001" +
+      "\022%\n\016attribute_name\030\n \001(\tR\rattributeNameB" +
+      "\016\n\014_descriptionB\010\n\006_owner\"\300\003\n\022HasManyFea" +
+      "tureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnamespac" +
+      "e\030\002 \001(\tR\tnamespace\022+\n\021foreign_namespace\030" +
+      "\003 \001(\tR\020foreignNamespace\0228\n\004join\030\004 \001(\0132$." +
+      "chalk.expression.v1.LogicalExprNodeR\004joi" +
+      "n\022)\n\020is_autogenerated\030\005 \001(\010R\017isAutogener" +
+      "ated\022O\n\026max_staleness_duration\030\006 \001(\0132\031.g" +
+      "oogle.protobuf.DurationR\024maxStalenessDur" +
+      "ation\022\022\n\004tags\030\007 \003(\tR\004tags\022%\n\013description" +
+      "\030\010 \001(\tH\000R\013description\210\001\001\022\031\n\005owner\030\t \001(\tH" +
+      "\001R\005owner\210\001\001\022%\n\016attribute_name\030\n \001(\tR\ratt" +
+      "ributeNameB\016\n\014_descriptionB\010\n\006_owner\"\214\002\n" +
+      "\026FeatureTimeFeatureType\022\022\n\004name\030\001 \001(\tR\004n" +
+      "ame\022\034\n\tnamespace\030\002 \001(\tR\tnamespace\022)\n\020is_" +
+      "autogenerated\030\003 \001(\010R\017isAutogenerated\022\022\n\004" +
+      "tags\030\004 \003(\tR\004tags\022%\n\013description\030\005 \001(\tH\000R" +
+      "\013description\210\001\001\022\031\n\005owner\030\006 \001(\tH\001R\005owner\210" +
+      "\001\001\022%\n\016attribute_name\030\007 \001(\tR\rattributeNam" +
+      "eB\016\n\014_descriptionB\010\n\006_owner\"\337\001\n\023Windowed" +
+      "FeatureType\022\022\n\004name\030\001 \001(\tR\004name\022\034\n\tnames" +
+      "pace\030\002 \001(\tR\tnamespace\022)\n\020is_autogenerate" +
+      "d\030\003 \001(\010R\017isAutogenerated\022D\n\020window_durat" +
+      "ions\030\004 \003(\0132\031.google.protobuf.DurationR\017w" +
+      "indowDurations\022%\n\016attribute_name\030\005 \001(\tR\r" +
+      "attributeName\"\352\007\n\021WindowAggregation\022\034\n\tn" +
+      "amespace\030\001 \001(\tR\tnamespace\022;\n\010group_by\030\002 " +
+      "\003(\0132 .chalk.graph.v1.FeatureReferenceR\007g" +
+      "roupBy\022B\n\017bucket_duration\030\003 \001(\0132\031.google" +
+      ".protobuf.DurationR\016bucketDuration\022 \n\013ag" +
+      "gregation\030\004 \001(\tR\013aggregation\022H\n\014aggregat" +
+      "e_on\030\005 \001(\0132 .chalk.graph.v1.FeatureRefer" +
+      "enceH\000R\013aggregateOn\210\001\001\0228\n\narrow_type\030\006 \001" +
+      "(\0132\031.chalk.arrow.v1.ArrowTypeR\tarrowType" +
+      "\022>\n\007filters\030\007 \003(\0132$.chalk.expression.v1." +
+      "LogicalExprNodeR\007filters\0220\n\021backfill_res" +
+      "olver\030\010 \001(\tH\001R\020backfillResolver\210\001\001\022\\\n\032ba" +
+      "ckfill_lookback_duration\030\t \001(\0132\031.google." +
+      "protobuf.DurationH\002R\030backfillLookbackDur" +
+      "ation\210\001\001\022O\n\023backfill_start_time\030\n \001(\0132\032." +
+      "google.protobuf.TimestampH\003R\021backfillSta" +
+      "rtTime\210\001\001\0224\n\023continuous_resolver\030\013 \001(\tH\004" +
+      "R\022continuousResolver\210\001\001\022\\\n\032continuous_bu" +
+      "ffer_duration\030\014 \001(\0132\031.google.protobuf.Du" +
+      "rationH\005R\030continuousBufferDuration\210\001\001\0220\n" +
+      "\021backfill_schedule\030\r \001(\tH\006R\020backfillSche" +
+      "dule\210\001\001B\017\n\r_aggregate_onB\024\n\022_backfill_re" +
+      "solverB\035\n\033_backfill_lookback_durationB\026\n" +
+      "\024_backfill_start_timeB\026\n\024_continuous_res" +
+      "olverB\035\n\033_continuous_buffer_durationB\024\n\022" +
+      "_backfill_schedule\"\235\001\n\nWindowInfo\0225\n\010dur" +
+      "ation\030\001 \001(\0132\031.google.protobuf.DurationR\010" +
+      "duration\022H\n\013aggregation\030\002 \001(\0132!.chalk.gr" +
+      "aph.v1.WindowAggregationH\000R\013aggregation\210" +
+      "\001\001B\016\n\014_aggregation\"\214\001\n\014FeatureInput\022:\n\007f" +
+      "eature\030\001 \001(\0132 .chalk.graph.v1.FeatureRef" +
+      "erenceR\007feature\022@\n\rdefault_value\030\002 \001(\0132\033" +
+      ".chalk.arrow.v1.ScalarValueR\014defaultValu" +
+      "e\"\277\001\n\rResolverInput\0228\n\007feature\030\001 \001(\0132\034.c" +
+      "halk.graph.v1.FeatureInputH\000R\007feature\022/\n" +
+      "\002df\030\002 \001(\0132\035.chalk.graph.v1.DataFrameType" +
+      "H\000R\002df\0225\n\005state\030\003 \001(\0132\035.chalk.graph.v1.R" +
+      "esolverStateH\000R\005stateB\014\n\nannotation\"\215\001\n\016" +
+      "ResolverOutput\022<\n\007feature\030\001 \001(\0132 .chalk." +
+      "graph.v1.FeatureReferenceH\000R\007feature\022/\n\002" +
+      "df\030\002 \001(\0132\035.chalk.graph.v1.DataFrameTypeH" +
+      "\000R\002dfB\014\n\nannotation\"\261\007\n\010Resolver\022\020\n\003fqn\030" +
+      "\001 \001(\tR\003fqn\0220\n\004kind\030\002 \001(\0162\034.chalk.graph.v" +
+      "1.ResolverKindR\004kind\0225\n\006inputs\030\003 \003(\0132\035.c" +
+      "halk.graph.v1.ResolverInputR\006inputs\0228\n\007o" +
+      "utputs\030\004 \003(\0132\036.chalk.graph.v1.ResolverOu" +
+      "tputR\007outputs\022!\n\014is_generator\030\005 \001(\010R\013isG" +
+      "enerator\022J\n\014data_sources\030\006 \003(\0132\'.chalk.g" +
+      "raph.v1.DatabaseSourceReferenceR\013dataSou" +
+      "rces\022&\n\014machine_type\030\007 \001(\tH\000R\013machineTyp" +
+      "e\210\001\001\022\022\n\004tags\030\010 \003(\tR\004tags\022\031\n\005owner\030\t \001(\tH" +
+      "\001R\005owner\210\001\001\022\025\n\003doc\030\n \001(\tH\002R\003doc\210\001\001\022\"\n\014en" +
+      "vironments\030\013 \003(\tR\014environments\022D\n\020timeou" +
+      "t_duration\030\014 \001(\0132\031.google.protobuf.Durat" +
+      "ionR\017timeoutDuration\0224\n\010schedule\030\r \001(\0132\030" +
+      ".chalk.graph.v1.ScheduleR\010schedule\0228\n\004wh" +
+      "en\030\016 \001(\0132$.chalk.expression.v1.LogicalEx" +
+      "prNodeR\004when\022J\n\013cron_filter\030\017 \001(\0132).chal" +
+      "k.graph.v1.CronFilterWithFeatureArgsR\ncr" +
+      "onFilter\022=\n\010function\030\020 \001(\0132!.chalk.graph" +
+      ".v1.FunctionReferenceR\010function\022A\n\rresou" +
+      "rce_hint\030\021 \001(\0162\034.chalk.graph.v1.Resource" +
+      "HintR\014resourceHint\022\033\n\tis_static\030\022 \001(\010R\010i" +
+      "sStatic\022\036\n\010is_total\030\023 \001(\010H\003R\007isTotal\210\001\001B" +
+      "\017\n\r_machine_typeB\010\n\006_ownerB\006\n\004_docB\013\n\t_i" +
+      "s_total\"\215\006\n\014SinkResolver\022\020\n\003fqn\030\001 \001(\tR\003f" +
+      "qn\0225\n\006inputs\030\002 \003(\0132\035.chalk.graph.v1.Reso" +
+      "lverInputR\006inputs\022$\n\013buffer_size\030\003 \001(\004H\001" +
+      "R\nbufferSize\210\001\001\022F\n\021debounce_duration\030\004 \001" +
+      "(\0132\031.google.protobuf.DurationR\020debounceD" +
+      "uration\022G\n\022max_delay_duration\030\005 \001(\0132\031.go" +
+      "ogle.protobuf.DurationR\020maxDelayDuration" +
+      "\022\026\n\006upsert\030\006 \001(\010R\006upsert\022L\n\rstream_sourc" +
+      "e\030\007 \001(\0132%.chalk.graph.v1.StreamSourceRef" +
+      "erenceH\000R\014streamSource\022R\n\017database_sourc" +
+      "e\030\010 \001(\0132\'.chalk.graph.v1.DatabaseSourceR" +
+      "eferenceH\000R\016databaseSource\022&\n\014machine_ty" +
+      "pe\030\t \001(\tH\002R\013machineType\210\001\001\022\025\n\003doc\030\n \001(\tH" +
+      "\003R\003doc\210\001\001\022\031\n\005owner\030\013 \001(\tH\004R\005owner\210\001\001\022\"\n\014" +
+      "environments\030\014 \003(\tR\014environments\022D\n\020time" +
+      "out_duration\030\r \001(\0132\031.google.protobuf.Dur" +
+      "ationR\017timeoutDuration\022=\n\010function\030\016 \001(\013" +
+      "2!.chalk.graph.v1.FunctionReferenceR\010fun" +
+      "ctionB\r\n\013integrationB\016\n\014_buffer_sizeB\017\n\r" +
+      "_machine_typeB\006\n\004_docB\010\n\006_owner\"\315\002\n\tPars" +
+      "eInfo\022H\n\016parse_function\030\001 \001(\0132!.chalk.gr" +
+      "aph.v1.FunctionReferenceR\rparseFunction\022" +
+      "T\n\031parse_function_input_type\030\002 \001(\0132\031.cha" +
+      "lk.arrow.v1.ArrowTypeR\026parseFunctionInpu" +
+      "tType\022V\n\032parse_function_output_type\030\003 \001(" +
+      "\0132\031.chalk.arrow.v1.ArrowTypeR\027parseFunct" +
+      "ionOutputType\022H\n!is_parse_function_outpu" +
+      "t_optional\030\004 \001(\010R\035isParseFunctionOutputO" +
+      "ptional\"\267\006\n\016StreamResolver\022\020\n\003fqn\030\001 \001(\tR" +
+      "\003fqn\022;\n\006params\030\002 \003(\0132#.chalk.graph.v1.St" +
+      "reamResolverParamR\006params\0228\n\007outputs\030\003 \003" +
       "(\0132\036.chalk.graph.v1.ResolverOutputR\007outp" +
-      "uts\022!\n\014is_generator\030\005 \001(\010R\013isGenerator\022J" +
-      "\n\014data_sources\030\006 \003(\0132\'.chalk.graph.v1.Da" +
-      "tabaseSourceReferenceR\013dataSources\022&\n\014ma" +
-      "chine_type\030\007 \001(\tH\000R\013machineType\210\001\001\022\022\n\004ta" +
-      "gs\030\010 \003(\tR\004tags\022\031\n\005owner\030\t \001(\tH\001R\005owner\210\001" +
-      "\001\022\025\n\003doc\030\n \001(\tH\002R\003doc\210\001\001\022\"\n\014environments" +
-      "\030\013 \003(\tR\014environments\022D\n\020timeout_duration" +
-      "\030\014 \001(\0132\031.google.protobuf.DurationR\017timeo" +
-      "utDuration\0224\n\010schedule\030\r \001(\0132\030.chalk.gra" +
-      "ph.v1.ScheduleR\010schedule\0228\n\004when\030\016 \001(\0132$" +
-      ".chalk.expression.v1.LogicalExprNodeR\004wh" +
-      "en\022J\n\013cron_filter\030\017 \001(\0132).chalk.graph.v1" +
-      ".CronFilterWithFeatureArgsR\ncronFilter\022=" +
-      "\n\010function\030\020 \001(\0132!.chalk.graph.v1.Functi" +
-      "onReferenceR\010function\022A\n\rresource_hint\030\021" +
-      " \001(\0162\034.chalk.graph.v1.ResourceHintR\014reso" +
-      "urceHint\022\033\n\tis_static\030\022 \001(\010R\010isStatic\022\036\n" +
-      "\010is_total\030\023 \001(\010H\003R\007isTotal\210\001\001B\017\n\r_machin" +
-      "e_typeB\010\n\006_ownerB\006\n\004_docB\013\n\t_is_total\"\215\006" +
-      "\n\014SinkResolver\022\020\n\003fqn\030\001 \001(\tR\003fqn\0225\n\006inpu" +
-      "ts\030\002 \003(\0132\035.chalk.graph.v1.ResolverInputR" +
-      "\006inputs\022$\n\013buffer_size\030\003 \001(\004H\001R\nbufferSi" +
-      "ze\210\001\001\022F\n\021debounce_duration\030\004 \001(\0132\031.googl" +
-      "e.protobuf.DurationR\020debounceDuration\022G\n" +
-      "\022max_delay_duration\030\005 \001(\0132\031.google.proto" +
-      "buf.DurationR\020maxDelayDuration\022\026\n\006upsert" +
-      "\030\006 \001(\010R\006upsert\022L\n\rstream_source\030\007 \001(\0132%." +
-      "chalk.graph.v1.StreamSourceReferenceH\000R\014" +
-      "streamSource\022R\n\017database_source\030\010 \001(\0132\'." +
-      "chalk.graph.v1.DatabaseSourceReferenceH\000" +
-      "R\016databaseSource\022&\n\014machine_type\030\t \001(\tH\002" +
-      "R\013machineType\210\001\001\022\025\n\003doc\030\n \001(\tH\003R\003doc\210\001\001\022" +
-      "\031\n\005owner\030\013 \001(\tH\004R\005owner\210\001\001\022\"\n\014environmen" +
-      "ts\030\014 \003(\tR\014environments\022D\n\020timeout_durati" +
-      "on\030\r \001(\0132\031.google.protobuf.DurationR\017tim" +
-      "eoutDuration\022=\n\010function\030\016 \001(\0132!.chalk.g" +
-      "raph.v1.FunctionReferenceR\010functionB\r\n\013i" +
-      "ntegrationB\016\n\014_buffer_sizeB\017\n\r_machine_t" +
-      "ypeB\006\n\004_docB\010\n\006_owner\"\315\002\n\tParseInfo\022H\n\016p" +
-      "arse_function\030\001 \001(\0132!.chalk.graph.v1.Fun" +
-      "ctionReferenceR\rparseFunction\022T\n\031parse_f" +
-      "unction_input_type\030\002 \001(\0132\031.chalk.arrow.v" +
-      "1.ArrowTypeR\026parseFunctionInputType\022V\n\032p" +
-      "arse_function_output_type\030\003 \001(\0132\031.chalk." +
-      "arrow.v1.ArrowTypeR\027parseFunctionOutputT" +
-      "ype\022H\n!is_parse_function_output_optional" +
-      "\030\004 \001(\010R\035isParseFunctionOutputOptional\"\267\006" +
-      "\n\016StreamResolver\022\020\n\003fqn\030\001 \001(\tR\003fqn\022;\n\006pa" +
-      "rams\030\002 \003(\0132#.chalk.graph.v1.StreamResolv" +
-      "erParamR\006params\0228\n\007outputs\030\003 \003(\0132\036.chalk" +
-      ".graph.v1.ResolverOutputR\007outputs\022B\n\017exp" +
-      "licit_schema\030\004 \001(\0132\031.chalk.arrow.v1.Arro" +
-      "wTypeR\016explicitSchema\022-\n\004keys\030\005 \003(\0132\031.ch" +
-      "alk.graph.v1.StreamKeyR\004keys\022=\n\006source\030\006" +
-      " \001(\0132%.chalk.graph.v1.StreamSourceRefere" +
-      "nceR\006source\0228\n\nparse_info\030\007 \001(\0132\031.chalk." +
-      "graph.v1.ParseInfoR\tparseInfo\022.\n\004mode\030\010 " +
-      "\001(\0162\032.chalk.graph.v1.WindowModeR\004mode\022\"\n" +
-      "\014environments\030\t \003(\tR\014environments\022D\n\020tim" +
-      "eout_duration\030\n \001(\0132\031.google.protobuf.Du" +
-      "rationR\017timeoutDuration\022=\n\030timestamp_att" +
-      "ribute_name\030\013 \001(\tH\000R\026timestampAttributeN" +
-      "ame\210\001\001\022\031\n\005owner\030\014 \001(\tH\001R\005owner\210\001\001\022\025\n\003doc" +
-      "\030\r \001(\tH\002R\003doc\210\001\001\022&\n\014machine_type\030\016 \001(\tH\003" +
-      "R\013machineType\210\001\001\022=\n\010function\030\017 \001(\0132!.cha" +
-      "lk.graph.v1.FunctionReferenceR\010functionB" +
-      "\033\n\031_timestamp_attribute_nameB\010\n\006_ownerB\006" +
-      "\n\004_docB\017\n\r_machine_type\"\200\001\n\rResolverStat" +
-      "e\0225\n\007initial\030\001 \001(\0132\033.chalk.arrow.v1.Scal" +
-      "arValueR\007initial\0228\n\narrow_type\030\002 \001(\0132\031.c" +
-      "halk.arrow.v1.ArrowTypeR\tarrowType\"\367\001\n\023S" +
-      "treamResolverParam\022F\n\007message\030\001 \001(\0132*.ch" +
-      "alk.graph.v1.StreamResolverParamMessageH" +
-      "\000R\007message\022Y\n\016message_window\030\002 \001(\01320.cha" +
-      "lk.graph.v1.StreamResolverParamMessageWi" +
-      "ndowH\000R\rmessageWindow\0225\n\005state\030\003 \001(\0132\035.c" +
-      "halk.graph.v1.ResolverStateH\000R\005stateB\006\n\004" +
-      "type\"p\n StreamResolverParamMessageWindow" +
-      "\022\022\n\004name\030\001 \001(\tR\004name\0228\n\narrow_type\030\002 \001(\013" +
-      "2\031.chalk.arrow.v1.ArrowTypeR\tarrowType\"j" +
-      "\n\032StreamResolverParamMessage\022\022\n\004name\030\001 \001" +
-      "(\tR\004name\0228\n\narrow_type\030\002 \001(\0132\031.chalk.arr" +
-      "ow.v1.ArrowTypeR\tarrowType\"\303\001\n\021FunctionR" +
-      "eference\022\022\n\004name\030\001 \001(\tR\004name\022\026\n\006module\030\002" +
-      " \001(\tR\006module\022\033\n\tfile_name\030\003 \001(\tR\010fileNam" +
-      "e\022/\n\023function_definition\030\004 \001(\tR\022function" +
-      "Definition\022$\n\013source_line\030\005 \001(\005H\000R\nsourc" +
-      "eLine\210\001\001B\016\n\014_source_line\"\177\n\023SourceFileRe" +
-      "ference\022)\n\005range\030\001 \001(\0132\023.chalk.lsp.v1.Ra" +
-      "ngeR\005range\022\027\n\004code\030\002 \001(\tH\000R\004code\210\001\001\022\033\n\tf" +
-      "ile_name\030\003 \001(\tR\010fileNameB\007\n\005_code\"Y\n\tStr" +
-      "eamKey\022\020\n\003key\030\001 \001(\tR\003key\022:\n\007feature\030\002 \001(" +
-      "\0132 .chalk.graph.v1.FeatureReferenceR\007fea" +
-      "ture\"\214\001\n\031CronFilterWithFeatureArgs\0229\n\006fi" +
-      "lter\030\001 \001(\0132!.chalk.graph.v1.FunctionRefe" +
-      "renceR\006filter\0224\n\004args\030\002 \003(\0132 .chalk.grap" +
-      "h.v1.FeatureReferenceR\004args\"\341\001\n\010Schedule" +
-      "\022\032\n\007crontab\030\001 \001(\tH\000R\007crontab\0227\n\010duration" +
-      "\030\002 \001(\0132\031.google.protobuf.DurationH\000R\010dur" +
-      "ation\0229\n\006filter\030\003 \001(\0132!.chalk.graph.v1.F" +
-      "unctionReferenceR\006filter\0229\n\006sample\030\004 \001(\013" +
-      "2!.chalk.graph.v1.FunctionReferenceR\006sam" +
-      "pleB\n\n\010schedule\"\243\001\n\021FeatureValidation\022\022\n" +
-      "\003min\030\001 \001(\002H\000R\003min\022\022\n\003max\030\002 \001(\002H\000R\003max\022\037\n" +
-      "\nmin_length\030\003 \001(\rH\000R\tminLength\022\037\n\nmax_le" +
-      "ngth\030\004 \001(\rH\000R\tmaxLength\022\026\n\006strict\030\005 \001(\010R" +
-      "\006strictB\014\n\nvalidation\"A\n\013VersionInfo\022\030\n\007" +
-      "default\030\001 \001(\rR\007default\022\030\n\007maximum\030\002 \001(\rR" +
-      "\007maximum\"\223\001\n\020StrictValidation\022:\n\007feature" +
-      "\030\001 \001(\0132 .chalk.graph.v1.FeatureReference" +
-      "R\007feature\022C\n\013validations\030\002 \003(\0132!.chalk.g" +
-      "raph.v1.FeatureValidationR\013validations*\204" +
-      "\001\n\rCacheStrategy\022\036\n\032CACHE_STRATEGY_UNSPE" +
-      "CIFIED\020\000\022\026\n\022CACHE_STRATEGY_ALL\020\001\022\033\n\027CACH" +
-      "E_STRATEGY_NO_NULLS\020\002\022\036\n\032CACHE_STRATEGY_" +
-      "EVICT_NULLS\020\003*b\n\014ResolverKind\022\035\n\031RESOLVE" +
-      "R_KIND_UNSPECIFIED\020\000\022\030\n\024RESOLVER_KIND_ON" +
-      "LINE\020\001\022\031\n\025RESOLVER_KIND_OFFLINE\020\002*Z\n\014Res" +
-      "ourceHint\022\035\n\031RESOURCE_HINT_UNSPECIFIED\020\000" +
-      "\022\025\n\021RESOURCE_HINT_CPU\020\001\022\024\n\020RESOURCE_HINT" +
-      "_IO\020\002*t\n\nWindowMode\022\033\n\027WINDOW_MODE_UNSPE" +
-      "CIFIED\020\000\022\032\n\026WINDOW_MODE_CONTINUOUS\020\001\022\030\n\024" +
-      "WINDOW_MODE_TUMBLING\020\002\022\023\n\017WINDOW_MODE_CD" +
-      "C\020\003B\206\001\n\036ai.chalk.protos.chalk.graph.v1B\n" +
-      "GraphProtoP\001\242\002\003CGX\252\002\016Chalk.Graph.V1\312\002\016Ch" +
-      "alk\\Graph\\V1\342\002\032Chalk\\Graph\\V1\\GPBMetadat" +
-      "a\352\002\020Chalk::Graph::V1b\006proto3"
+      "uts\022B\n\017explicit_schema\030\004 \001(\0132\031.chalk.arr" +
+      "ow.v1.ArrowTypeR\016explicitSchema\022-\n\004keys\030" +
+      "\005 \003(\0132\031.chalk.graph.v1.StreamKeyR\004keys\022=" +
+      "\n\006source\030\006 \001(\0132%.chalk.graph.v1.StreamSo" +
+      "urceReferenceR\006source\0228\n\nparse_info\030\007 \001(" +
+      "\0132\031.chalk.graph.v1.ParseInfoR\tparseInfo\022" +
+      ".\n\004mode\030\010 \001(\0162\032.chalk.graph.v1.WindowMod" +
+      "eR\004mode\022\"\n\014environments\030\t \003(\tR\014environme" +
+      "nts\022D\n\020timeout_duration\030\n \001(\0132\031.google.p" +
+      "rotobuf.DurationR\017timeoutDuration\022=\n\030tim" +
+      "estamp_attribute_name\030\013 \001(\tH\000R\026timestamp" +
+      "AttributeName\210\001\001\022\031\n\005owner\030\014 \001(\tH\001R\005owner" +
+      "\210\001\001\022\025\n\003doc\030\r \001(\tH\002R\003doc\210\001\001\022&\n\014machine_ty" +
+      "pe\030\016 \001(\tH\003R\013machineType\210\001\001\022=\n\010function\030\017" +
+      " \001(\0132!.chalk.graph.v1.FunctionReferenceR" +
+      "\010functionB\033\n\031_timestamp_attribute_nameB\010" +
+      "\n\006_ownerB\006\n\004_docB\017\n\r_machine_type\"\200\001\n\rRe" +
+      "solverState\0225\n\007initial\030\001 \001(\0132\033.chalk.arr" +
+      "ow.v1.ScalarValueR\007initial\0228\n\narrow_type" +
+      "\030\002 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\tarrow" +
+      "Type\"\367\001\n\023StreamResolverParam\022F\n\007message\030" +
+      "\001 \001(\0132*.chalk.graph.v1.StreamResolverPar" +
+      "amMessageH\000R\007message\022Y\n\016message_window\030\002" +
+      " \001(\01320.chalk.graph.v1.StreamResolverPara" +
+      "mMessageWindowH\000R\rmessageWindow\0225\n\005state" +
+      "\030\003 \001(\0132\035.chalk.graph.v1.ResolverStateH\000R" +
+      "\005stateB\006\n\004type\"p\n StreamResolverParamMes" +
+      "sageWindow\022\022\n\004name\030\001 \001(\tR\004name\0228\n\narrow_" +
+      "type\030\002 \001(\0132\031.chalk.arrow.v1.ArrowTypeR\ta" +
+      "rrowType\"j\n\032StreamResolverParamMessage\022\022" +
+      "\n\004name\030\001 \001(\tR\004name\0228\n\narrow_type\030\002 \001(\0132\031" +
+      ".chalk.arrow.v1.ArrowTypeR\tarrowType\"\303\001\n" +
+      "\021FunctionReference\022\022\n\004name\030\001 \001(\tR\004name\022\026" +
+      "\n\006module\030\002 \001(\tR\006module\022\033\n\tfile_name\030\003 \001(" +
+      "\tR\010fileName\022/\n\023function_definition\030\004 \001(\t" +
+      "R\022functionDefinition\022$\n\013source_line\030\005 \001(" +
+      "\005H\000R\nsourceLine\210\001\001B\016\n\014_source_line\"\177\n\023So" +
+      "urceFileReference\022)\n\005range\030\001 \001(\0132\023.chalk" +
+      ".lsp.v1.RangeR\005range\022\027\n\004code\030\002 \001(\tH\000R\004co" +
+      "de\210\001\001\022\033\n\tfile_name\030\003 \001(\tR\010fileNameB\007\n\005_c" +
+      "ode\"Y\n\tStreamKey\022\020\n\003key\030\001 \001(\tR\003key\022:\n\007fe" +
+      "ature\030\002 \001(\0132 .chalk.graph.v1.FeatureRefe" +
+      "renceR\007feature\"\214\001\n\031CronFilterWithFeature" +
+      "Args\0229\n\006filter\030\001 \001(\0132!.chalk.graph.v1.Fu" +
+      "nctionReferenceR\006filter\0224\n\004args\030\002 \003(\0132 ." +
+      "chalk.graph.v1.FeatureReferenceR\004args\"\341\001" +
+      "\n\010Schedule\022\032\n\007crontab\030\001 \001(\tH\000R\007crontab\0227" +
+      "\n\010duration\030\002 \001(\0132\031.google.protobuf.Durat" +
+      "ionH\000R\010duration\0229\n\006filter\030\003 \001(\0132!.chalk." +
+      "graph.v1.FunctionReferenceR\006filter\0229\n\006sa" +
+      "mple\030\004 \001(\0132!.chalk.graph.v1.FunctionRefe" +
+      "renceR\006sampleB\n\n\010schedule\"\243\001\n\021FeatureVal" +
+      "idation\022\022\n\003min\030\001 \001(\002H\000R\003min\022\022\n\003max\030\002 \001(\002" +
+      "H\000R\003max\022\037\n\nmin_length\030\003 \001(\rH\000R\tminLength" +
+      "\022\037\n\nmax_length\030\004 \001(\rH\000R\tmaxLength\022\026\n\006str" +
+      "ict\030\005 \001(\010R\006strictB\014\n\nvalidation\"A\n\013Versi" +
+      "onInfo\022\030\n\007default\030\001 \001(\rR\007default\022\030\n\007maxi" +
+      "mum\030\002 \001(\rR\007maximum\"\223\001\n\020StrictValidation\022" +
+      ":\n\007feature\030\001 \001(\0132 .chalk.graph.v1.Featur" +
+      "eReferenceR\007feature\022C\n\013validations\030\002 \003(\013" +
+      "2!.chalk.graph.v1.FeatureValidationR\013val" +
+      "idations*\204\001\n\rCacheStrategy\022\036\n\032CACHE_STRA" +
+      "TEGY_UNSPECIFIED\020\000\022\026\n\022CACHE_STRATEGY_ALL" +
+      "\020\001\022\033\n\027CACHE_STRATEGY_NO_NULLS\020\002\022\036\n\032CACHE" +
+      "_STRATEGY_EVICT_NULLS\020\003*b\n\014ResolverKind\022" +
+      "\035\n\031RESOLVER_KIND_UNSPECIFIED\020\000\022\030\n\024RESOLV" +
+      "ER_KIND_ONLINE\020\001\022\031\n\025RESOLVER_KIND_OFFLIN" +
+      "E\020\002*Z\n\014ResourceHint\022\035\n\031RESOURCE_HINT_UNS" +
+      "PECIFIED\020\000\022\025\n\021RESOURCE_HINT_CPU\020\001\022\024\n\020RES" +
+      "OURCE_HINT_IO\020\002*t\n\nWindowMode\022\033\n\027WINDOW_" +
+      "MODE_UNSPECIFIED\020\000\022\032\n\026WINDOW_MODE_CONTIN" +
+      "UOUS\020\001\022\030\n\024WINDOW_MODE_TUMBLING\020\002\022\023\n\017WIND" +
+      "OW_MODE_CDC\020\003B\206\001\n\036ai.chalk.protos.chalk." +
+      "graph.v1B\nGraphProtoP\001\242\002\003CGX\252\002\016Chalk.Gra" +
+      "ph.V1\312\002\016Chalk\\Graph\\V1\342\002\032Chalk\\Graph\\V1\\" +
+      "GPBMetadata\352\002\020Chalk::Graph::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -528,6 +543,7 @@ public final class GraphProto {
           ai.chalk.protos.chalk.graph.v1.SourcesProto.getDescriptor(),
           ai.chalk.protos.chalk.lsp.v1.LspProto.getDescriptor(),
           com.google.protobuf.DurationProto.getDescriptor(),
+          com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_graph_v1_Graph_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -624,7 +640,7 @@ public final class GraphProto {
     internal_static_chalk_graph_v1_WindowAggregation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_WindowAggregation_descriptor,
-        new java.lang.String[] { "Namespace", "GroupBy", "BucketDuration", "Aggregation", "AggregateOn", "ArrowType", "Filters", });
+        new java.lang.String[] { "Namespace", "GroupBy", "BucketDuration", "Aggregation", "AggregateOn", "ArrowType", "Filters", "BackfillResolver", "BackfillLookbackDuration", "BackfillStartTime", "ContinuousResolver", "ContinuousBufferDuration", "BackfillSchedule", });
     internal_static_chalk_graph_v1_WindowInfo_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_chalk_graph_v1_WindowInfo_fieldAccessorTable = new
@@ -750,6 +766,7 @@ public final class GraphProto {
     ai.chalk.protos.chalk.graph.v1.SourcesProto.getDescriptor();
     ai.chalk.protos.chalk.lsp.v1.LspProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

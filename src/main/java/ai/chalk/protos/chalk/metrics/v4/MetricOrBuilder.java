@@ -85,6 +85,18 @@ public interface MetricOrBuilder extends
   ai.chalk.protos.chalk.metrics.v4.MetricType getType();
 
   /**
+   * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+   * @return The deploymentId.
+   */
+  java.lang.String getDeploymentId();
+  /**
+   * <code>string deployment_id = 7 [json_name = "deploymentId"];</code>
+   * @return The bytes for deploymentId.
+   */
+  com.google.protobuf.ByteString
+      getDeploymentIdBytes();
+
+  /**
    * <code>string sketch = 10 [json_name = "sketch"];</code>
    * @return Whether the sketch field is set.
    */

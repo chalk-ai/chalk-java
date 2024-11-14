@@ -22,13 +22,24 @@ private static final long serialVersionUID = 0L;
     status_ = 0;
     deploymentTags_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    cloudBuildId_ = "";
+    triggeredBy_ = "";
     requirementsFilepath_ = "";
     dockerfileFilepath_ = "";
     runtime_ = "";
+    chalkpyVersion_ = "";
+    rawDependencyHash_ = "";
     finalDependencyHash_ = "";
     gitCommit_ = "";
+    gitPr_ = "";
+    gitBranch_ = "";
+    gitAuthorEmail_ = "";
+    branch_ = "";
+    projectSettings_ = "";
     requirementsFiles_ = "";
+    gitTag_ = "";
     baseImageSha_ = "";
+    pinnedPlatformVersion_ = "";
   }
 
   @java.lang.Override
@@ -185,17 +196,88 @@ private static final long serialVersionUID = 0L;
     return deploymentTags_.getByteString(index);
   }
 
+  public static final int CLOUD_BUILD_ID_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object cloudBuildId_ = "";
+  /**
+   * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+   * @return The cloudBuildId.
+   */
+  @java.lang.Override
+  public java.lang.String getCloudBuildId() {
+    java.lang.Object ref = cloudBuildId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      cloudBuildId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+   * @return The bytes for cloudBuildId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCloudBuildIdBytes() {
+    java.lang.Object ref = cloudBuildId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      cloudBuildId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TRIGGERED_BY_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object triggeredBy_ = "";
+  /**
+   * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+   * @return The triggeredBy.
+   */
+  @java.lang.Override
+  public java.lang.String getTriggeredBy() {
+    java.lang.Object ref = triggeredBy_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      triggeredBy_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+   * @return The bytes for triggeredBy.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getTriggeredByBytes() {
+    java.lang.Object ref = triggeredBy_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      triggeredBy_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int REQUIREMENTS_FILEPATH_FIELD_NUMBER = 7;
   @SuppressWarnings("serial")
   private volatile java.lang.Object requirementsFilepath_ = "";
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return Whether the requirementsFilepath field is set.
    */
@@ -204,13 +286,6 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return The requirementsFilepath.
    */
@@ -228,13 +303,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return The bytes for requirementsFilepath.
    */
@@ -347,15 +415,88 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int CHALKPY_VERSION_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object chalkpyVersion_ = "";
+  /**
+   * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+   * @return The chalkpyVersion.
+   */
+  @java.lang.Override
+  public java.lang.String getChalkpyVersion() {
+    java.lang.Object ref = chalkpyVersion_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      chalkpyVersion_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+   * @return The bytes for chalkpyVersion.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getChalkpyVersionBytes() {
+    java.lang.Object ref = chalkpyVersion_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      chalkpyVersion_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int RAW_DEPENDENCY_HASH_FIELD_NUMBER = 11;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object rawDependencyHash_ = "";
+  /**
+   * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+   * @return The rawDependencyHash.
+   */
+  @java.lang.Override
+  public java.lang.String getRawDependencyHash() {
+    java.lang.Object ref = rawDependencyHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      rawDependencyHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+   * @return The bytes for rawDependencyHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRawDependencyHashBytes() {
+    java.lang.Object ref = rawDependencyHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      rawDependencyHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int FINAL_DEPENDENCY_HASH_FIELD_NUMBER = 12;
   @SuppressWarnings("serial")
   private volatile java.lang.Object finalDependencyHash_ = "";
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return Whether the finalDependencyHash field is set.
    */
@@ -364,11 +505,6 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000008) != 0);
   }
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return The finalDependencyHash.
    */
@@ -386,11 +522,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return The bytes for finalDependencyHash.
    */
@@ -519,18 +650,205 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int GIT_PR_FIELD_NUMBER = 17;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitPr_ = "";
+  /**
+   * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+   * @return The gitPr.
+   */
+  @java.lang.Override
+  public java.lang.String getGitPr() {
+    java.lang.Object ref = gitPr_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitPr_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+   * @return The bytes for gitPr.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitPrBytes() {
+    java.lang.Object ref = gitPr_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitPr_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int GIT_BRANCH_FIELD_NUMBER = 18;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitBranch_ = "";
+  /**
+   * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+   * @return The gitBranch.
+   */
+  @java.lang.Override
+  public java.lang.String getGitBranch() {
+    java.lang.Object ref = gitBranch_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitBranch_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+   * @return The bytes for gitBranch.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitBranchBytes() {
+    java.lang.Object ref = gitBranch_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitBranch_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int GIT_AUTHOR_EMAIL_FIELD_NUMBER = 19;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitAuthorEmail_ = "";
+  /**
+   * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+   * @return The gitAuthorEmail.
+   */
+  @java.lang.Override
+  public java.lang.String getGitAuthorEmail() {
+    java.lang.Object ref = gitAuthorEmail_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitAuthorEmail_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+   * @return The bytes for gitAuthorEmail.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitAuthorEmailBytes() {
+    java.lang.Object ref = gitAuthorEmail_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitAuthorEmail_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int BRANCH_FIELD_NUMBER = 20;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object branch_ = "";
+  /**
+   * <code>string branch = 20 [json_name = "branch"];</code>
+   * @return The branch.
+   */
+  @java.lang.Override
+  public java.lang.String getBranch() {
+    java.lang.Object ref = branch_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      branch_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string branch = 20 [json_name = "branch"];</code>
+   * @return The bytes for branch.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBranchBytes() {
+    java.lang.Object ref = branch_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      branch_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int PROJECT_SETTINGS_FIELD_NUMBER = 21;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object projectSettings_ = "";
+  /**
+   * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+   * @return The projectSettings.
+   */
+  @java.lang.Override
+  public java.lang.String getProjectSettings() {
+    java.lang.Object ref = projectSettings_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      projectSettings_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+   * @return The bytes for projectSettings.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getProjectSettingsBytes() {
+    java.lang.Object ref = projectSettings_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      projectSettings_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int REQUIREMENTS_FILES_FIELD_NUMBER = 22;
   @SuppressWarnings("serial")
   private volatile java.lang.Object requirementsFiles_ = "";
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return Whether the requirementsFiles field is set.
    */
@@ -539,14 +857,6 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000080) != 0);
   }
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return The requirementsFiles.
    */
@@ -564,14 +874,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return The bytes for requirementsFiles.
    */
@@ -590,14 +892,49 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int GIT_TAG_FIELD_NUMBER = 23;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object gitTag_ = "";
+  /**
+   * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+   * @return The gitTag.
+   */
+  @java.lang.Override
+  public java.lang.String getGitTag() {
+    java.lang.Object ref = gitTag_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gitTag_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+   * @return The bytes for gitTag.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGitTagBytes() {
+    java.lang.Object ref = gitTag_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gitTag_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int BASE_IMAGE_SHA_FIELD_NUMBER = 24;
   @SuppressWarnings("serial")
   private volatile java.lang.Object baseImageSha_ = "";
   /**
-   * <pre>
-   *  string git_tag = 23;
-   * </pre>
-   *
    * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
    * @return The baseImageSha.
    */
@@ -615,10 +952,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *  string git_tag = 23;
-   * </pre>
-   *
    * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
    * @return The bytes for baseImageSha.
    */
@@ -631,6 +964,79 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       baseImageSha_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int STATUS_CHANGED_AT_FIELD_NUMBER = 25;
+  private com.google.protobuf.Timestamp statusChangedAt_;
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   * @return Whether the statusChangedAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasStatusChangedAt() {
+    return ((bitField0_ & 0x00000100) != 0);
+  }
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   * @return The statusChangedAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getStatusChangedAt() {
+    return statusChangedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : statusChangedAt_;
+  }
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getStatusChangedAtOrBuilder() {
+    return statusChangedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : statusChangedAt_;
+  }
+
+  public static final int PINNED_PLATFORM_VERSION_FIELD_NUMBER = 26;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object pinnedPlatformVersion_ = "";
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return Whether the pinnedPlatformVersion field is set.
+   */
+  @java.lang.Override
+  public boolean hasPinnedPlatformVersion() {
+    return ((bitField0_ & 0x00000200) != 0);
+  }
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return The pinnedPlatformVersion.
+   */
+  @java.lang.Override
+  public java.lang.String getPinnedPlatformVersion() {
+    java.lang.Object ref = pinnedPlatformVersion_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      pinnedPlatformVersion_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return The bytes for pinnedPlatformVersion.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPinnedPlatformVersionBytes() {
+    java.lang.Object ref = pinnedPlatformVersion_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      pinnedPlatformVersion_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -663,6 +1069,12 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < deploymentTags_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, deploymentTags_.getRaw(i));
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cloudBuildId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, cloudBuildId_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(triggeredBy_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, triggeredBy_);
+    }
     if (((bitField0_ & 0x00000001) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 7, requirementsFilepath_);
     }
@@ -671,6 +1083,12 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000004) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 9, runtime_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(chalkpyVersion_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 10, chalkpyVersion_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(rawDependencyHash_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 11, rawDependencyHash_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 12, finalDependencyHash_);
@@ -687,11 +1105,35 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 16, gitCommit_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitPr_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 17, gitPr_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitBranch_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 18, gitBranch_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitAuthorEmail_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 19, gitAuthorEmail_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(branch_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 20, branch_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(projectSettings_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 21, projectSettings_);
+    }
     if (((bitField0_ & 0x00000080) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 22, requirementsFiles_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitTag_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 23, gitTag_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 24, baseImageSha_);
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      output.writeMessage(25, getStatusChangedAt());
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 26, pinnedPlatformVersion_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -720,6 +1162,12 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getDeploymentTagsList().size();
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cloudBuildId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, cloudBuildId_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(triggeredBy_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, triggeredBy_);
+    }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, requirementsFilepath_);
     }
@@ -728,6 +1176,12 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, runtime_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(chalkpyVersion_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, chalkpyVersion_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(rawDependencyHash_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, rawDependencyHash_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, finalDependencyHash_);
@@ -747,11 +1201,36 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitCommit_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, gitCommit_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitPr_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, gitPr_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitBranch_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, gitBranch_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitAuthorEmail_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, gitAuthorEmail_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(branch_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(20, branch_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(projectSettings_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(21, projectSettings_);
+    }
     if (((bitField0_ & 0x00000080) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(22, requirementsFiles_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gitTag_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, gitTag_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(baseImageSha_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, baseImageSha_);
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(25, getStatusChangedAt());
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(26, pinnedPlatformVersion_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -775,6 +1254,10 @@ private static final long serialVersionUID = 0L;
     if (status_ != other.status_) return false;
     if (!getDeploymentTagsList()
         .equals(other.getDeploymentTagsList())) return false;
+    if (!getCloudBuildId()
+        .equals(other.getCloudBuildId())) return false;
+    if (!getTriggeredBy()
+        .equals(other.getTriggeredBy())) return false;
     if (hasRequirementsFilepath() != other.hasRequirementsFilepath()) return false;
     if (hasRequirementsFilepath()) {
       if (!getRequirementsFilepath()
@@ -790,6 +1273,10 @@ private static final long serialVersionUID = 0L;
       if (!getRuntime()
           .equals(other.getRuntime())) return false;
     }
+    if (!getChalkpyVersion()
+        .equals(other.getChalkpyVersion())) return false;
+    if (!getRawDependencyHash()
+        .equals(other.getRawDependencyHash())) return false;
     if (hasFinalDependencyHash() != other.hasFinalDependencyHash()) return false;
     if (hasFinalDependencyHash()) {
       if (!getFinalDependencyHash()
@@ -812,13 +1299,35 @@ private static final long serialVersionUID = 0L;
     }
     if (!getGitCommit()
         .equals(other.getGitCommit())) return false;
+    if (!getGitPr()
+        .equals(other.getGitPr())) return false;
+    if (!getGitBranch()
+        .equals(other.getGitBranch())) return false;
+    if (!getGitAuthorEmail()
+        .equals(other.getGitAuthorEmail())) return false;
+    if (!getBranch()
+        .equals(other.getBranch())) return false;
+    if (!getProjectSettings()
+        .equals(other.getProjectSettings())) return false;
     if (hasRequirementsFiles() != other.hasRequirementsFiles()) return false;
     if (hasRequirementsFiles()) {
       if (!getRequirementsFiles()
           .equals(other.getRequirementsFiles())) return false;
     }
+    if (!getGitTag()
+        .equals(other.getGitTag())) return false;
     if (!getBaseImageSha()
         .equals(other.getBaseImageSha())) return false;
+    if (hasStatusChangedAt() != other.hasStatusChangedAt()) return false;
+    if (hasStatusChangedAt()) {
+      if (!getStatusChangedAt()
+          .equals(other.getStatusChangedAt())) return false;
+    }
+    if (hasPinnedPlatformVersion() != other.hasPinnedPlatformVersion()) return false;
+    if (hasPinnedPlatformVersion()) {
+      if (!getPinnedPlatformVersion()
+          .equals(other.getPinnedPlatformVersion())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -840,6 +1349,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + DEPLOYMENT_TAGS_FIELD_NUMBER;
       hash = (53 * hash) + getDeploymentTagsList().hashCode();
     }
+    hash = (37 * hash) + CLOUD_BUILD_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getCloudBuildId().hashCode();
+    hash = (37 * hash) + TRIGGERED_BY_FIELD_NUMBER;
+    hash = (53 * hash) + getTriggeredBy().hashCode();
     if (hasRequirementsFilepath()) {
       hash = (37 * hash) + REQUIREMENTS_FILEPATH_FIELD_NUMBER;
       hash = (53 * hash) + getRequirementsFilepath().hashCode();
@@ -852,6 +1365,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + RUNTIME_FIELD_NUMBER;
       hash = (53 * hash) + getRuntime().hashCode();
     }
+    hash = (37 * hash) + CHALKPY_VERSION_FIELD_NUMBER;
+    hash = (53 * hash) + getChalkpyVersion().hashCode();
+    hash = (37 * hash) + RAW_DEPENDENCY_HASH_FIELD_NUMBER;
+    hash = (53 * hash) + getRawDependencyHash().hashCode();
     if (hasFinalDependencyHash()) {
       hash = (37 * hash) + FINAL_DEPENDENCY_HASH_FIELD_NUMBER;
       hash = (53 * hash) + getFinalDependencyHash().hashCode();
@@ -871,12 +1388,32 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + GIT_COMMIT_FIELD_NUMBER;
     hash = (53 * hash) + getGitCommit().hashCode();
+    hash = (37 * hash) + GIT_PR_FIELD_NUMBER;
+    hash = (53 * hash) + getGitPr().hashCode();
+    hash = (37 * hash) + GIT_BRANCH_FIELD_NUMBER;
+    hash = (53 * hash) + getGitBranch().hashCode();
+    hash = (37 * hash) + GIT_AUTHOR_EMAIL_FIELD_NUMBER;
+    hash = (53 * hash) + getGitAuthorEmail().hashCode();
+    hash = (37 * hash) + BRANCH_FIELD_NUMBER;
+    hash = (53 * hash) + getBranch().hashCode();
+    hash = (37 * hash) + PROJECT_SETTINGS_FIELD_NUMBER;
+    hash = (53 * hash) + getProjectSettings().hashCode();
     if (hasRequirementsFiles()) {
       hash = (37 * hash) + REQUIREMENTS_FILES_FIELD_NUMBER;
       hash = (53 * hash) + getRequirementsFiles().hashCode();
     }
+    hash = (37 * hash) + GIT_TAG_FIELD_NUMBER;
+    hash = (53 * hash) + getGitTag().hashCode();
     hash = (37 * hash) + BASE_IMAGE_SHA_FIELD_NUMBER;
     hash = (53 * hash) + getBaseImageSha().hashCode();
+    if (hasStatusChangedAt()) {
+      hash = (37 * hash) + STATUS_CHANGED_AT_FIELD_NUMBER;
+      hash = (53 * hash) + getStatusChangedAt().hashCode();
+    }
+    if (hasPinnedPlatformVersion()) {
+      hash = (37 * hash) + PINNED_PLATFORM_VERSION_FIELD_NUMBER;
+      hash = (53 * hash) + getPinnedPlatformVersion().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1009,6 +1546,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
         getCreatedAtFieldBuilder();
         getUpdatedAtFieldBuilder();
+        getStatusChangedAtFieldBuilder();
       }
     }
     @java.lang.Override
@@ -1020,9 +1558,13 @@ private static final long serialVersionUID = 0L;
       status_ = 0;
       deploymentTags_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      cloudBuildId_ = "";
+      triggeredBy_ = "";
       requirementsFilepath_ = "";
       dockerfileFilepath_ = "";
       runtime_ = "";
+      chalkpyVersion_ = "";
+      rawDependencyHash_ = "";
       finalDependencyHash_ = "";
       isPreviewDeployment_ = false;
       createdAt_ = null;
@@ -1036,8 +1578,20 @@ private static final long serialVersionUID = 0L;
         updatedAtBuilder_ = null;
       }
       gitCommit_ = "";
+      gitPr_ = "";
+      gitBranch_ = "";
+      gitAuthorEmail_ = "";
+      branch_ = "";
+      projectSettings_ = "";
       requirementsFiles_ = "";
+      gitTag_ = "";
       baseImageSha_ = "";
+      statusChangedAt_ = null;
+      if (statusChangedAtBuilder_ != null) {
+        statusChangedAtBuilder_.dispose();
+        statusChangedAtBuilder_ = null;
+      }
+      pinnedPlatformVersion_ = "";
       return this;
     }
 
@@ -1084,48 +1638,88 @@ private static final long serialVersionUID = 0L;
         deploymentTags_.makeImmutable();
         result.deploymentTags_ = deploymentTags_;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.cloudBuildId_ = cloudBuildId_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.triggeredBy_ = triggeredBy_;
+      }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         result.requirementsFilepath_ = requirementsFilepath_;
         to_bitField0_ |= 0x00000001;
       }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
+      if (((from_bitField0_ & 0x00000080) != 0)) {
         result.dockerfileFilepath_ = dockerfileFilepath_;
         to_bitField0_ |= 0x00000002;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         result.runtime_ = runtime_;
         to_bitField0_ |= 0x00000004;
       }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.chalkpyVersion_ = chalkpyVersion_;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.rawDependencyHash_ = rawDependencyHash_;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
         result.finalDependencyHash_ = finalDependencyHash_;
         to_bitField0_ |= 0x00000008;
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00001000) != 0)) {
         result.isPreviewDeployment_ = isPreviewDeployment_;
         to_bitField0_ |= 0x00000010;
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         result.createdAt_ = createdAtBuilder_ == null
             ? createdAt_
             : createdAtBuilder_.build();
         to_bitField0_ |= 0x00000020;
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
+      if (((from_bitField0_ & 0x00004000) != 0)) {
         result.updatedAt_ = updatedAtBuilder_ == null
             ? updatedAt_
             : updatedAtBuilder_.build();
         to_bitField0_ |= 0x00000040;
       }
-      if (((from_bitField0_ & 0x00000800) != 0)) {
+      if (((from_bitField0_ & 0x00008000) != 0)) {
         result.gitCommit_ = gitCommit_;
       }
-      if (((from_bitField0_ & 0x00001000) != 0)) {
+      if (((from_bitField0_ & 0x00010000) != 0)) {
+        result.gitPr_ = gitPr_;
+      }
+      if (((from_bitField0_ & 0x00020000) != 0)) {
+        result.gitBranch_ = gitBranch_;
+      }
+      if (((from_bitField0_ & 0x00040000) != 0)) {
+        result.gitAuthorEmail_ = gitAuthorEmail_;
+      }
+      if (((from_bitField0_ & 0x00080000) != 0)) {
+        result.branch_ = branch_;
+      }
+      if (((from_bitField0_ & 0x00100000) != 0)) {
+        result.projectSettings_ = projectSettings_;
+      }
+      if (((from_bitField0_ & 0x00200000) != 0)) {
         result.requirementsFiles_ = requirementsFiles_;
         to_bitField0_ |= 0x00000080;
       }
-      if (((from_bitField0_ & 0x00002000) != 0)) {
+      if (((from_bitField0_ & 0x00400000) != 0)) {
+        result.gitTag_ = gitTag_;
+      }
+      if (((from_bitField0_ & 0x00800000) != 0)) {
         result.baseImageSha_ = baseImageSha_;
+      }
+      if (((from_bitField0_ & 0x01000000) != 0)) {
+        result.statusChangedAt_ = statusChangedAtBuilder_ == null
+            ? statusChangedAt_
+            : statusChangedAtBuilder_.build();
+        to_bitField0_ |= 0x00000100;
+      }
+      if (((from_bitField0_ & 0x02000000) != 0)) {
+        result.pinnedPlatformVersion_ = pinnedPlatformVersion_;
+        to_bitField0_ |= 0x00000200;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1197,24 +1791,44 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       }
+      if (!other.getCloudBuildId().isEmpty()) {
+        cloudBuildId_ = other.cloudBuildId_;
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      if (!other.getTriggeredBy().isEmpty()) {
+        triggeredBy_ = other.triggeredBy_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
       if (other.hasRequirementsFilepath()) {
         requirementsFilepath_ = other.requirementsFilepath_;
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         onChanged();
       }
       if (other.hasDockerfileFilepath()) {
         dockerfileFilepath_ = other.dockerfileFilepath_;
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         onChanged();
       }
       if (other.hasRuntime()) {
         runtime_ = other.runtime_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000100;
+        onChanged();
+      }
+      if (!other.getChalkpyVersion().isEmpty()) {
+        chalkpyVersion_ = other.chalkpyVersion_;
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      if (!other.getRawDependencyHash().isEmpty()) {
+        rawDependencyHash_ = other.rawDependencyHash_;
+        bitField0_ |= 0x00000400;
         onChanged();
       }
       if (other.hasFinalDependencyHash()) {
         finalDependencyHash_ = other.finalDependencyHash_;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000800;
         onChanged();
       }
       if (other.hasIsPreviewDeployment()) {
@@ -1228,17 +1842,55 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getGitCommit().isEmpty()) {
         gitCommit_ = other.gitCommit_;
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00008000;
+        onChanged();
+      }
+      if (!other.getGitPr().isEmpty()) {
+        gitPr_ = other.gitPr_;
+        bitField0_ |= 0x00010000;
+        onChanged();
+      }
+      if (!other.getGitBranch().isEmpty()) {
+        gitBranch_ = other.gitBranch_;
+        bitField0_ |= 0x00020000;
+        onChanged();
+      }
+      if (!other.getGitAuthorEmail().isEmpty()) {
+        gitAuthorEmail_ = other.gitAuthorEmail_;
+        bitField0_ |= 0x00040000;
+        onChanged();
+      }
+      if (!other.getBranch().isEmpty()) {
+        branch_ = other.branch_;
+        bitField0_ |= 0x00080000;
+        onChanged();
+      }
+      if (!other.getProjectSettings().isEmpty()) {
+        projectSettings_ = other.projectSettings_;
+        bitField0_ |= 0x00100000;
         onChanged();
       }
       if (other.hasRequirementsFiles()) {
         requirementsFiles_ = other.requirementsFiles_;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00200000;
+        onChanged();
+      }
+      if (!other.getGitTag().isEmpty()) {
+        gitTag_ = other.gitTag_;
+        bitField0_ |= 0x00400000;
         onChanged();
       }
       if (!other.getBaseImageSha().isEmpty()) {
         baseImageSha_ = other.baseImageSha_;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00800000;
+        onChanged();
+      }
+      if (other.hasStatusChangedAt()) {
+        mergeStatusChangedAt(other.getStatusChangedAt());
+      }
+      if (other.hasPinnedPlatformVersion()) {
+        pinnedPlatformVersion_ = other.pinnedPlatformVersion_;
+        bitField0_ |= 0x02000000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -1288,60 +1940,122 @@ private static final long serialVersionUID = 0L;
               deploymentTags_.add(s);
               break;
             } // case 34
+            case 42: {
+              cloudBuildId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
+            case 50: {
+              triggeredBy_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             case 58: {
               requirementsFilepath_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000040;
               break;
             } // case 58
             case 66: {
               dockerfileFilepath_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000080;
               break;
             } // case 66
             case 74: {
               runtime_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              chalkpyVersion_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
+            case 90: {
+              rawDependencyHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
             case 98: {
               finalDependencyHash_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000800;
               break;
             } // case 98
             case 104: {
               isPreviewDeployment_ = input.readBool();
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00001000;
               break;
             } // case 104
             case 114: {
               input.readMessage(
                   getCreatedAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00002000;
               break;
             } // case 114
             case 122: {
               input.readMessage(
                   getUpdatedAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00004000;
               break;
             } // case 122
             case 130: {
               gitCommit_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00008000;
               break;
             } // case 130
+            case 138: {
+              gitPr_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00010000;
+              break;
+            } // case 138
+            case 146: {
+              gitBranch_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00020000;
+              break;
+            } // case 146
+            case 154: {
+              gitAuthorEmail_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00040000;
+              break;
+            } // case 154
+            case 162: {
+              branch_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00080000;
+              break;
+            } // case 162
+            case 170: {
+              projectSettings_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00100000;
+              break;
+            } // case 170
             case 178: {
               requirementsFiles_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00200000;
               break;
             } // case 178
+            case 186: {
+              gitTag_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00400000;
+              break;
+            } // case 186
             case 194: {
               baseImageSha_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00800000;
               break;
             } // case 194
+            case 202: {
+              input.readMessage(
+                  getStatusChangedAtFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x01000000;
+              break;
+            } // case 202
+            case 210: {
+              pinnedPlatformVersion_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x02000000;
+              break;
+            } // case 210
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1667,29 +2381,159 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object cloudBuildId_ = "";
+    /**
+     * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+     * @return The cloudBuildId.
+     */
+    public java.lang.String getCloudBuildId() {
+      java.lang.Object ref = cloudBuildId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cloudBuildId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+     * @return The bytes for cloudBuildId.
+     */
+    public com.google.protobuf.ByteString
+        getCloudBuildIdBytes() {
+      java.lang.Object ref = cloudBuildId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cloudBuildId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+     * @param value The cloudBuildId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCloudBuildId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      cloudBuildId_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCloudBuildId() {
+      cloudBuildId_ = getDefaultInstance().getCloudBuildId();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+     * @param value The bytes for cloudBuildId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCloudBuildIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      cloudBuildId_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object triggeredBy_ = "";
+    /**
+     * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+     * @return The triggeredBy.
+     */
+    public java.lang.String getTriggeredBy() {
+      java.lang.Object ref = triggeredBy_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        triggeredBy_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+     * @return The bytes for triggeredBy.
+     */
+    public com.google.protobuf.ByteString
+        getTriggeredByBytes() {
+      java.lang.Object ref = triggeredBy_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        triggeredBy_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+     * @param value The triggeredBy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTriggeredBy(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      triggeredBy_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTriggeredBy() {
+      triggeredBy_ = getDefaultInstance().getTriggeredBy();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+     * @param value The bytes for triggeredBy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTriggeredByBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      triggeredBy_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object requirementsFilepath_ = "";
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @return Whether the requirementsFilepath field is set.
      */
     public boolean hasRequirementsFilepath() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000040) != 0);
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @return The requirementsFilepath.
      */
@@ -1706,13 +2550,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @return The bytes for requirementsFilepath.
      */
@@ -1730,13 +2567,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @param value The requirementsFilepath to set.
      * @return This builder for chaining.
@@ -1745,35 +2575,21 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       requirementsFilepath_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @return This builder for chaining.
      */
     public Builder clearRequirementsFilepath() {
       requirementsFilepath_ = getDefaultInstance().getRequirementsFilepath();
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000040);
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  We know a bunch more things about the deployment. Deal with them when we're ready.
-     *  string cloud_build_id = 4;
-     *  string triggered_by = 5;
-     *  google.protobuf.Timestamp status_changed_at = 6;
-     * </pre>
-     *
      * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
      * @param value The bytes for requirementsFilepath to set.
      * @return This builder for chaining.
@@ -1783,7 +2599,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       requirementsFilepath_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -1794,7 +2610,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the dockerfileFilepath field is set.
      */
     public boolean hasDockerfileFilepath() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000080) != 0);
     }
     /**
      * <code>optional string dockerfile_filepath = 8 [json_name = "dockerfileFilepath"];</code>
@@ -1838,7 +2654,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       dockerfileFilepath_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -1848,7 +2664,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearDockerfileFilepath() {
       dockerfileFilepath_ = getDefaultInstance().getDockerfileFilepath();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000080);
       onChanged();
       return this;
     }
@@ -1862,7 +2678,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       dockerfileFilepath_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -1873,7 +2689,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the runtime field is set.
      */
     public boolean hasRuntime() {
-      return ((bitField0_ & 0x00000040) != 0);
+      return ((bitField0_ & 0x00000100) != 0);
     }
     /**
      * <code>optional string runtime = 9 [json_name = "runtime"];</code>
@@ -1917,7 +2733,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       runtime_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -1927,7 +2743,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearRuntime() {
       runtime_ = getDefaultInstance().getRuntime();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000100);
       onChanged();
       return this;
     }
@@ -1941,30 +2757,164 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       runtime_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object chalkpyVersion_ = "";
+    /**
+     * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+     * @return The chalkpyVersion.
+     */
+    public java.lang.String getChalkpyVersion() {
+      java.lang.Object ref = chalkpyVersion_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chalkpyVersion_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+     * @return The bytes for chalkpyVersion.
+     */
+    public com.google.protobuf.ByteString
+        getChalkpyVersionBytes() {
+      java.lang.Object ref = chalkpyVersion_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chalkpyVersion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+     * @param value The chalkpyVersion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setChalkpyVersion(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      chalkpyVersion_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearChalkpyVersion() {
+      chalkpyVersion_ = getDefaultInstance().getChalkpyVersion();
+      bitField0_ = (bitField0_ & ~0x00000200);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+     * @param value The bytes for chalkpyVersion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setChalkpyVersionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      chalkpyVersion_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object rawDependencyHash_ = "";
+    /**
+     * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+     * @return The rawDependencyHash.
+     */
+    public java.lang.String getRawDependencyHash() {
+      java.lang.Object ref = rawDependencyHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        rawDependencyHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+     * @return The bytes for rawDependencyHash.
+     */
+    public com.google.protobuf.ByteString
+        getRawDependencyHashBytes() {
+      java.lang.Object ref = rawDependencyHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rawDependencyHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+     * @param value The rawDependencyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRawDependencyHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      rawDependencyHash_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRawDependencyHash() {
+      rawDependencyHash_ = getDefaultInstance().getRawDependencyHash();
+      bitField0_ = (bitField0_ & ~0x00000400);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+     * @param value The bytes for rawDependencyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRawDependencyHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      rawDependencyHash_ = value;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
 
     private java.lang.Object finalDependencyHash_ = "";
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @return Whether the finalDependencyHash field is set.
      */
     public boolean hasFinalDependencyHash() {
-      return ((bitField0_ & 0x00000080) != 0);
+      return ((bitField0_ & 0x00000800) != 0);
     }
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @return The finalDependencyHash.
      */
@@ -1981,11 +2931,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @return The bytes for finalDependencyHash.
      */
@@ -2003,11 +2948,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @param value The finalDependencyHash to set.
      * @return This builder for chaining.
@@ -2016,31 +2956,21 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       finalDependencyHash_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @return This builder for chaining.
      */
     public Builder clearFinalDependencyHash() {
       finalDependencyHash_ = getDefaultInstance().getFinalDependencyHash();
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000800);
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string chalkpy_version = 10;
-     *  string raw_dependency_hash = 11;
-     * </pre>
-     *
      * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
      * @param value The bytes for finalDependencyHash to set.
      * @return This builder for chaining.
@@ -2050,7 +2980,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       finalDependencyHash_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2062,7 +2992,7 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Override
     public boolean hasIsPreviewDeployment() {
-      return ((bitField0_ & 0x00000100) != 0);
+      return ((bitField0_ & 0x00001000) != 0);
     }
     /**
      * <code>optional bool is_preview_deployment = 13 [json_name = "isPreviewDeployment"];</code>
@@ -2080,7 +3010,7 @@ private static final long serialVersionUID = 0L;
     public Builder setIsPreviewDeployment(boolean value) {
 
       isPreviewDeployment_ = value;
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00001000;
       onChanged();
       return this;
     }
@@ -2089,7 +3019,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearIsPreviewDeployment() {
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00001000);
       isPreviewDeployment_ = false;
       onChanged();
       return this;
@@ -2103,7 +3033,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the createdAt field is set.
      */
     public boolean hasCreatedAt() {
-      return ((bitField0_ & 0x00000200) != 0);
+      return ((bitField0_ & 0x00002000) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
@@ -2128,7 +3058,7 @@ private static final long serialVersionUID = 0L;
       } else {
         createdAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2142,7 +3072,7 @@ private static final long serialVersionUID = 0L;
       } else {
         createdAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2151,7 +3081,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeCreatedAt(com.google.protobuf.Timestamp value) {
       if (createdAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000200) != 0) &&
+        if (((bitField0_ & 0x00002000) != 0) &&
           createdAt_ != null &&
           createdAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getCreatedAtBuilder().mergeFrom(value);
@@ -2162,7 +3092,7 @@ private static final long serialVersionUID = 0L;
         createdAtBuilder_.mergeFrom(value);
       }
       if (createdAt_ != null) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00002000;
         onChanged();
       }
       return this;
@@ -2171,7 +3101,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public Builder clearCreatedAt() {
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00002000);
       createdAt_ = null;
       if (createdAtBuilder_ != null) {
         createdAtBuilder_.dispose();
@@ -2184,7 +3114,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp created_at = 14 [json_name = "createdAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getCreatedAtBuilder() {
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00002000;
       onChanged();
       return getCreatedAtFieldBuilder().getBuilder();
     }
@@ -2224,7 +3154,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the updatedAt field is set.
      */
     public boolean hasUpdatedAt() {
-      return ((bitField0_ & 0x00000400) != 0);
+      return ((bitField0_ & 0x00004000) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
@@ -2249,7 +3179,7 @@ private static final long serialVersionUID = 0L;
       } else {
         updatedAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -2263,7 +3193,7 @@ private static final long serialVersionUID = 0L;
       } else {
         updatedAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -2272,7 +3202,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeUpdatedAt(com.google.protobuf.Timestamp value) {
       if (updatedAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000400) != 0) &&
+        if (((bitField0_ & 0x00004000) != 0) &&
           updatedAt_ != null &&
           updatedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getUpdatedAtBuilder().mergeFrom(value);
@@ -2283,7 +3213,7 @@ private static final long serialVersionUID = 0L;
         updatedAtBuilder_.mergeFrom(value);
       }
       if (updatedAt_ != null) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00004000;
         onChanged();
       }
       return this;
@@ -2292,7 +3222,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
      */
     public Builder clearUpdatedAt() {
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00004000);
       updatedAt_ = null;
       if (updatedAtBuilder_ != null) {
         updatedAtBuilder_.dispose();
@@ -2305,7 +3235,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp updated_at = 15 [json_name = "updatedAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getUpdatedAtBuilder() {
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00004000;
       onChanged();
       return getUpdatedAtFieldBuilder().getBuilder();
     }
@@ -2380,7 +3310,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       gitCommit_ = value;
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -2390,7 +3320,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearGitCommit() {
       gitCommit_ = getDefaultInstance().getGitCommit();
-      bitField0_ = (bitField0_ & ~0x00000800);
+      bitField0_ = (bitField0_ & ~0x00008000);
       onChanged();
       return this;
     }
@@ -2404,36 +3334,380 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       gitCommit_ = value;
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object gitPr_ = "";
+    /**
+     * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+     * @return The gitPr.
+     */
+    public java.lang.String getGitPr() {
+      java.lang.Object ref = gitPr_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitPr_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+     * @return The bytes for gitPr.
+     */
+    public com.google.protobuf.ByteString
+        getGitPrBytes() {
+      java.lang.Object ref = gitPr_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitPr_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+     * @param value The gitPr to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitPr(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitPr_ = value;
+      bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitPr() {
+      gitPr_ = getDefaultInstance().getGitPr();
+      bitField0_ = (bitField0_ & ~0x00010000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+     * @param value The bytes for gitPr to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitPrBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitPr_ = value;
+      bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object gitBranch_ = "";
+    /**
+     * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+     * @return The gitBranch.
+     */
+    public java.lang.String getGitBranch() {
+      java.lang.Object ref = gitBranch_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitBranch_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+     * @return The bytes for gitBranch.
+     */
+    public com.google.protobuf.ByteString
+        getGitBranchBytes() {
+      java.lang.Object ref = gitBranch_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitBranch_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+     * @param value The gitBranch to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitBranch(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitBranch_ = value;
+      bitField0_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitBranch() {
+      gitBranch_ = getDefaultInstance().getGitBranch();
+      bitField0_ = (bitField0_ & ~0x00020000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+     * @param value The bytes for gitBranch to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitBranchBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitBranch_ = value;
+      bitField0_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object gitAuthorEmail_ = "";
+    /**
+     * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+     * @return The gitAuthorEmail.
+     */
+    public java.lang.String getGitAuthorEmail() {
+      java.lang.Object ref = gitAuthorEmail_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitAuthorEmail_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+     * @return The bytes for gitAuthorEmail.
+     */
+    public com.google.protobuf.ByteString
+        getGitAuthorEmailBytes() {
+      java.lang.Object ref = gitAuthorEmail_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitAuthorEmail_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+     * @param value The gitAuthorEmail to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitAuthorEmail(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitAuthorEmail_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitAuthorEmail() {
+      gitAuthorEmail_ = getDefaultInstance().getGitAuthorEmail();
+      bitField0_ = (bitField0_ & ~0x00040000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+     * @param value The bytes for gitAuthorEmail to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitAuthorEmailBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitAuthorEmail_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object branch_ = "";
+    /**
+     * <code>string branch = 20 [json_name = "branch"];</code>
+     * @return The branch.
+     */
+    public java.lang.String getBranch() {
+      java.lang.Object ref = branch_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        branch_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string branch = 20 [json_name = "branch"];</code>
+     * @return The bytes for branch.
+     */
+    public com.google.protobuf.ByteString
+        getBranchBytes() {
+      java.lang.Object ref = branch_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        branch_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string branch = 20 [json_name = "branch"];</code>
+     * @param value The branch to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBranch(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      branch_ = value;
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string branch = 20 [json_name = "branch"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBranch() {
+      branch_ = getDefaultInstance().getBranch();
+      bitField0_ = (bitField0_ & ~0x00080000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string branch = 20 [json_name = "branch"];</code>
+     * @param value The bytes for branch to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBranchBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      branch_ = value;
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object projectSettings_ = "";
+    /**
+     * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+     * @return The projectSettings.
+     */
+    public java.lang.String getProjectSettings() {
+      java.lang.Object ref = projectSettings_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        projectSettings_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+     * @return The bytes for projectSettings.
+     */
+    public com.google.protobuf.ByteString
+        getProjectSettingsBytes() {
+      java.lang.Object ref = projectSettings_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        projectSettings_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+     * @param value The projectSettings to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProjectSettings(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      projectSettings_ = value;
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProjectSettings() {
+      projectSettings_ = getDefaultInstance().getProjectSettings();
+      bitField0_ = (bitField0_ & ~0x00100000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+     * @param value The bytes for projectSettings to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProjectSettingsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      projectSettings_ = value;
+      bitField0_ |= 0x00100000;
       onChanged();
       return this;
     }
 
     private java.lang.Object requirementsFiles_ = "";
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @return Whether the requirementsFiles field is set.
      */
     public boolean hasRequirementsFiles() {
-      return ((bitField0_ & 0x00001000) != 0);
+      return ((bitField0_ & 0x00200000) != 0);
     }
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @return The requirementsFiles.
      */
@@ -2450,14 +3724,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @return The bytes for requirementsFiles.
      */
@@ -2475,14 +3741,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @param value The requirementsFiles to set.
      * @return This builder for chaining.
@@ -2491,37 +3749,21 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       requirementsFiles_ = value;
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00200000;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @return This builder for chaining.
      */
     public Builder clearRequirementsFiles() {
       requirementsFiles_ = getDefaultInstance().getRequirementsFiles();
-      bitField0_ = (bitField0_ & ~0x00001000);
+      bitField0_ = (bitField0_ & ~0x00200000);
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string git_pr = 17;
-     *  string git_branch = 18;
-     *  string git_author_email = 19;
-     *  string branch = 20;
-     *  string project_settings = 21;
-     * </pre>
-     *
      * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
      * @param value The bytes for requirementsFiles to set.
      * @return This builder for chaining.
@@ -2531,17 +3773,85 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       requirementsFiles_ = value;
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object gitTag_ = "";
+    /**
+     * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+     * @return The gitTag.
+     */
+    public java.lang.String getGitTag() {
+      java.lang.Object ref = gitTag_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gitTag_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+     * @return The bytes for gitTag.
+     */
+    public com.google.protobuf.ByteString
+        getGitTagBytes() {
+      java.lang.Object ref = gitTag_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gitTag_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+     * @param value The gitTag to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitTag(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      gitTag_ = value;
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGitTag() {
+      gitTag_ = getDefaultInstance().getGitTag();
+      bitField0_ = (bitField0_ & ~0x00400000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+     * @param value The bytes for gitTag to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGitTagBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      gitTag_ = value;
+      bitField0_ |= 0x00400000;
       onChanged();
       return this;
     }
 
     private java.lang.Object baseImageSha_ = "";
     /**
-     * <pre>
-     *  string git_tag = 23;
-     * </pre>
-     *
      * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
      * @return The baseImageSha.
      */
@@ -2558,10 +3868,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string git_tag = 23;
-     * </pre>
-     *
      * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
      * @return The bytes for baseImageSha.
      */
@@ -2579,10 +3885,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string git_tag = 23;
-     * </pre>
-     *
      * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
      * @param value The baseImageSha to set.
      * @return This builder for chaining.
@@ -2591,29 +3893,21 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       baseImageSha_ = value;
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00800000;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string git_tag = 23;
-     * </pre>
-     *
      * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
      * @return This builder for chaining.
      */
     public Builder clearBaseImageSha() {
       baseImageSha_ = getDefaultInstance().getBaseImageSha();
-      bitField0_ = (bitField0_ & ~0x00002000);
+      bitField0_ = (bitField0_ & ~0x00800000);
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *  string git_tag = 23;
-     * </pre>
-     *
      * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
      * @param value The bytes for baseImageSha to set.
      * @return This builder for chaining.
@@ -2623,7 +3917,207 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       baseImageSha_ = value;
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Timestamp statusChangedAt_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> statusChangedAtBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     * @return Whether the statusChangedAt field is set.
+     */
+    public boolean hasStatusChangedAt() {
+      return ((bitField0_ & 0x01000000) != 0);
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     * @return The statusChangedAt.
+     */
+    public com.google.protobuf.Timestamp getStatusChangedAt() {
+      if (statusChangedAtBuilder_ == null) {
+        return statusChangedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : statusChangedAt_;
+      } else {
+        return statusChangedAtBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public Builder setStatusChangedAt(com.google.protobuf.Timestamp value) {
+      if (statusChangedAtBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        statusChangedAt_ = value;
+      } else {
+        statusChangedAtBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x01000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public Builder setStatusChangedAt(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (statusChangedAtBuilder_ == null) {
+        statusChangedAt_ = builderForValue.build();
+      } else {
+        statusChangedAtBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x01000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public Builder mergeStatusChangedAt(com.google.protobuf.Timestamp value) {
+      if (statusChangedAtBuilder_ == null) {
+        if (((bitField0_ & 0x01000000) != 0) &&
+          statusChangedAt_ != null &&
+          statusChangedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getStatusChangedAtBuilder().mergeFrom(value);
+        } else {
+          statusChangedAt_ = value;
+        }
+      } else {
+        statusChangedAtBuilder_.mergeFrom(value);
+      }
+      if (statusChangedAt_ != null) {
+        bitField0_ |= 0x01000000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public Builder clearStatusChangedAt() {
+      bitField0_ = (bitField0_ & ~0x01000000);
+      statusChangedAt_ = null;
+      if (statusChangedAtBuilder_ != null) {
+        statusChangedAtBuilder_.dispose();
+        statusChangedAtBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getStatusChangedAtBuilder() {
+      bitField0_ |= 0x01000000;
+      onChanged();
+      return getStatusChangedAtFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getStatusChangedAtOrBuilder() {
+      if (statusChangedAtBuilder_ != null) {
+        return statusChangedAtBuilder_.getMessageOrBuilder();
+      } else {
+        return statusChangedAt_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : statusChangedAt_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getStatusChangedAtFieldBuilder() {
+      if (statusChangedAtBuilder_ == null) {
+        statusChangedAtBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getStatusChangedAt(),
+                getParentForChildren(),
+                isClean());
+        statusChangedAt_ = null;
+      }
+      return statusChangedAtBuilder_;
+    }
+
+    private java.lang.Object pinnedPlatformVersion_ = "";
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @return Whether the pinnedPlatformVersion field is set.
+     */
+    public boolean hasPinnedPlatformVersion() {
+      return ((bitField0_ & 0x02000000) != 0);
+    }
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @return The pinnedPlatformVersion.
+     */
+    public java.lang.String getPinnedPlatformVersion() {
+      java.lang.Object ref = pinnedPlatformVersion_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        pinnedPlatformVersion_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @return The bytes for pinnedPlatformVersion.
+     */
+    public com.google.protobuf.ByteString
+        getPinnedPlatformVersionBytes() {
+      java.lang.Object ref = pinnedPlatformVersion_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        pinnedPlatformVersion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @param value The pinnedPlatformVersion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPinnedPlatformVersion(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      pinnedPlatformVersion_ = value;
+      bitField0_ |= 0x02000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPinnedPlatformVersion() {
+      pinnedPlatformVersion_ = getDefaultInstance().getPinnedPlatformVersion();
+      bitField0_ = (bitField0_ & ~0x02000000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+     * @param value The bytes for pinnedPlatformVersion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPinnedPlatformVersionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      pinnedPlatformVersion_ = value;
+      bitField0_ |= 0x02000000;
       onChanged();
       return this;
     }

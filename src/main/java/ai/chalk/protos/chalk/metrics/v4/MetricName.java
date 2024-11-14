@@ -53,6 +53,22 @@ public enum MetricName
    * <code>METRIC_NAME_VALUES_DISTRIBUTION = 10;</code>
    */
   METRIC_NAME_VALUES_DISTRIBUTION(10),
+  /**
+   * <code>METRIC_NAME_RESOLVER_LATENCY = 11;</code>
+   */
+  METRIC_NAME_RESOLVER_LATENCY(11),
+  /**
+   * <code>METRIC_NAME_BYTES_DOWNLOADED = 12;</code>
+   */
+  METRIC_NAME_BYTES_DOWNLOADED(12),
+  /**
+   * <code>METRIC_NAME_NUM_ROWS = 13;</code>
+   */
+  METRIC_NAME_NUM_ROWS(13),
+  /**
+   * <code>METRIC_NAME_NUM_FEATURES = 14;</code>
+   */
+  METRIC_NAME_NUM_FEATURES(14),
   UNRECOGNIZED(-1),
   ;
 
@@ -100,6 +116,22 @@ public enum MetricName
    * <code>METRIC_NAME_VALUES_DISTRIBUTION = 10;</code>
    */
   public static final int METRIC_NAME_VALUES_DISTRIBUTION_VALUE = 10;
+  /**
+   * <code>METRIC_NAME_RESOLVER_LATENCY = 11;</code>
+   */
+  public static final int METRIC_NAME_RESOLVER_LATENCY_VALUE = 11;
+  /**
+   * <code>METRIC_NAME_BYTES_DOWNLOADED = 12;</code>
+   */
+  public static final int METRIC_NAME_BYTES_DOWNLOADED_VALUE = 12;
+  /**
+   * <code>METRIC_NAME_NUM_ROWS = 13;</code>
+   */
+  public static final int METRIC_NAME_NUM_ROWS_VALUE = 13;
+  /**
+   * <code>METRIC_NAME_NUM_FEATURES = 14;</code>
+   */
+  public static final int METRIC_NAME_NUM_FEATURES_VALUE = 14;
 
 
   public final int getNumber() {
@@ -137,6 +169,10 @@ public enum MetricName
       case 8: return METRIC_NAME_MISSING_COUNT;
       case 9: return METRIC_NAME_ZERO_COUNT;
       case 10: return METRIC_NAME_VALUES_DISTRIBUTION;
+      case 11: return METRIC_NAME_RESOLVER_LATENCY;
+      case 12: return METRIC_NAME_BYTES_DOWNLOADED;
+      case 13: return METRIC_NAME_NUM_ROWS;
+      case 14: return METRIC_NAME_NUM_FEATURES;
       default: return null;
     }
   }

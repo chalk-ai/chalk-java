@@ -62,49 +62,61 @@ public interface AWSCloudConfigOrBuilder extends
       getExternalIdBytes();
 
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-   * @return Whether the cloudWatchConfig field is set.
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=52
+   * @return Whether the deprecatedCloudWatchConfig field is set.
    */
-  boolean hasCloudWatchConfig();
+  @java.lang.Deprecated boolean hasDeprecatedCloudWatchConfig();
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-   * @return The cloudWatchConfig.
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=52
+   * @return The deprecatedCloudWatchConfig.
    */
-  ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudWatchConfig();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getDeprecatedCloudWatchConfig();
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudWatchConfigOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getDeprecatedCloudWatchConfigOrBuilder();
 
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-   * @return Whether the secretManagerConfig field is set.
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=53
+   * @return Whether the deprecatedSecretManagerConfig field is set.
    */
-  boolean hasSecretManagerConfig();
+  @java.lang.Deprecated boolean hasDeprecatedSecretManagerConfig();
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-   * @return The secretManagerConfig.
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=53
+   * @return The deprecatedSecretManagerConfig.
    */
-  ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretManagerConfig();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getDeprecatedSecretManagerConfig();
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretManagerConfigOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getDeprecatedSecretManagerConfigOrBuilder();
 
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+   *     See chalk/server/v1/environment.proto;l=54
    * @return Whether the workloadIdentity field is set.
    */
-  boolean hasWorkloadIdentity();
+  @java.lang.Deprecated boolean hasWorkloadIdentity();
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+   *     See chalk/server/v1/environment.proto;l=54
    * @return The workloadIdentity.
    */
-  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity();
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder();
 
   /**
    * <code>.chalk.server.v1.DockerBuildConfig docker_build_config = 8 [json_name = "dockerBuildConfig"];</code>
@@ -135,4 +147,49 @@ public interface AWSCloudConfigOrBuilder extends
    * <code>.chalk.server.v1.ElasticsearchLogConfig elasticsearch_log_config = 9 [json_name = "elasticsearchLogConfig"];</code>
    */
   ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfigOrBuilder getElasticsearchLogConfigOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   * @return Whether the cloudwatchConfig field is set.
+   */
+  boolean hasCloudwatchConfig();
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   * @return The cloudwatchConfig.
+   */
+  ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudwatchConfig();
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudwatchConfigOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   * @return Whether the secretmanagerConfig field is set.
+   */
+  boolean hasSecretmanagerConfig();
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   * @return The secretmanagerConfig.
+   */
+  ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretmanagerConfig();
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretmanagerConfigOrBuilder();
+
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   * @return Whether the gcpWorkloadIdentity field is set.
+   */
+  boolean hasGcpWorkloadIdentity();
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   * @return The gcpWorkloadIdentity.
+   */
+  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getGcpWorkloadIdentity();
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getGcpWorkloadIdentityOrBuilder();
 }

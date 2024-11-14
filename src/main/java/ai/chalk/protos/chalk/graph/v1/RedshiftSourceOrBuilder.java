@@ -171,4 +171,16 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue);
    */
   ai.chalk.protos.chalk.arrow.v1.ScalarValue getAsyncEngineArgsOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+   * @return The unloadIamRole.
+   */
+  java.lang.String getUnloadIamRole();
+  /**
+   * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+   * @return The bytes for unloadIamRole.
+   */
+  com.google.protobuf.ByteString
+      getUnloadIamRoleBytes();
 }

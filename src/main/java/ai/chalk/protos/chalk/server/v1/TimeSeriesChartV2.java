@@ -7,7 +7,7 @@ package ai.chalk.protos.chalk.server.v1;
 /**
  * Protobuf type {@code chalk.server.v1.TimeSeriesChartV2}
  */
-public final class TimeSeriesChartV2 extends
+@java.lang.Deprecated public final class TimeSeriesChartV2 extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:chalk.server.v1.TimeSeriesChartV2)
     TimeSeriesChartV2OrBuilder {
