@@ -321,7 +321,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
-        throw new UnsupportedOperationException("Upload features not yet implemented for GRPC client");
+        throw new ClientException("Upload features not yet implemented for GRPC client");
     }
 
     @Override
