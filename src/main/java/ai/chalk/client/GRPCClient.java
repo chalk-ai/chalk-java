@@ -317,18 +317,25 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         if (params.getEnvironmentId() != null) {
             throw new UnsupportedOperationException("Environment ID override via param is not yet supported");
         }
+
         byte[] tableBytes;
         try {
             tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
         } catch (Exception e) {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
-        var request = UploadFeaturesRequest.newBuilder().setInputsTable(ByteString.copyFrom(tableBytes)).build();
-        UploadFeaturesResponse response = this.queryStub.uploadFeatures(request);
+
+        UploadFeaturesResponse response = this.queryStub.uploadFeatures(
+            UploadFeaturesRequest.newBuilder()
+                .setInputsTable(ByteString.copyFrom(tableBytes))
+                .build()
+        );
+        
         List<ServerError> errors = new ArrayList<>();
         for (int i = 0; i < response.getErrorsCount(); i++) {
             errors.add(GrpcSerializer.toServerError(response.getErrors(i)));
         }
+
         return new UploadFeaturesResult(response.getOperationId(), errors);
     }
 
