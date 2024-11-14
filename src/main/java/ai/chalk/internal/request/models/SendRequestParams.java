@@ -19,7 +19,7 @@ public class SendRequestParams {
     private String queryName;
     private Boolean isEngineRequest;
 
-    public static class Builder<T> {
+    public static class Builder {
         private Object body;
         private String method;
         private String path;

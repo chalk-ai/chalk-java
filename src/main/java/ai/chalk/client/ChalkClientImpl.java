@@ -10,6 +10,7 @@ import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
+import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
@@ -70,7 +71,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+        SendRequestParams request = new SendRequestParams.Builder()
                 .path("/v1/query/feather")
                 .body(bodyBytes)
                 .method("POST")
@@ -112,14 +113,15 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize UploadFeaturesParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder<UploadFeaturesResult>()
+        SendRequestParams request = new SendRequestParams.Builder()
                 .path("/v1/upload_features/multi")
                 .body(body)
                 .method("POST")
                 .environmentOverride(params.getEnvironmentId())
                 .build();
 
-        return new UploadFeaturesResult("abc", new ArrayList<>());
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), UploadFeaturesResult.class);
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
