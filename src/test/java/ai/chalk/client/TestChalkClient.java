@@ -2,14 +2,16 @@ package ai.chalk.client;
 
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
-import ai.chalk.models.OnlineQueryParams;
-import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class TestChalkClient {
@@ -99,9 +101,35 @@ public class TestChalkClient {
                 var users = result.unmarshal(User.class);
                 assert users.length == userIds.length;
                 assert users[0].socure_score.getValue().equals(123.0);
-            }
-            ;
+            };
         }
+    }
+
+    @Test
+    public void testUploadFeatures() throws Exception {
+        var userIds = Arrays.asList("777", "888", "999");
+        var scoreList = Arrays.asList(Math.random(), Math.random(), Math.random());
+
+        var inputs = new HashMap<String, List<?>>();
+        inputs.put("user.id", userIds);
+        inputs.put("user.socure_score", scoreList);
+        UploadFeaturesResult res = client.uploadFeatures(UploadFeaturesParams.builder().withInputs(inputs).build());
+        assert res.getErrors().size() == 0;
+        assert !res.getOperationId().equals("");
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+            .withInput(FraudTemplateFeatures.user.id, Arrays.asList("777", "888", "999"))
+            .withOutputs(FraudTemplateFeatures.user.socure_score)
+            .build();
+
+        try (OnlineQueryResult queryRes = client.onlineQuery(params)) {
+            assert queryRes.getErrors().length == 0;
+            User[] users = queryRes.unmarshal(User.class);
+            assert users.length == 3;
+            assert users[0].socure_score.getValue().equals(scoreList.get(0));
+            assert users[1].socure_score.getValue().equals(scoreList.get(1));
+            assert users[2].socure_score.getValue().equals(scoreList.get(2));
+        };
     }
 
     @Disabled("Branch server issue")
