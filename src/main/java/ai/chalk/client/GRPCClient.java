@@ -330,7 +330,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .setInputsTable(ByteString.copyFrom(tableBytes))
                 .build()
         );
-        
+
         List<ServerError> errors = new ArrayList<>();
         for (int i = 0; i < response.getErrorsCount(); i++) {
             errors.add(GrpcSerializer.toServerError(response.getErrors(i)));

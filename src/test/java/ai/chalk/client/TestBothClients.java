@@ -13,19 +13,19 @@ import java.util.Map;
 
 
 class TestBothClients {
-    private static ChalkClient httpClient;
+    private static ChalkClient restClient;
     private static ChalkClient grpcClient;
 
     @BeforeAll
     static void setUp() throws ChalkException {
         grpcClient = ChalkClient.createGrpc();
-        httpClient = ChalkClient.create();
+        restClient = ChalkClient.create();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"grpc", "http"})
+    @ValueSource(strings = {"gRPC", "REST"})
     public void testUploadFeatures(String clientVersion) throws Exception {
-        ChalkClient c = clientVersion.equals("grpc") ? grpcClient : httpClient;
+        ChalkClient c = clientVersion.equals("gRPC") ? grpcClient : restClient;
         var userIds = Arrays.asList("777", "888", "999");
         var scoreList = Arrays.asList(Math.random(), Math.random(), Math.random());
 
