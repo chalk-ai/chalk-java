@@ -3,6 +3,7 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
@@ -13,9 +14,13 @@ import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
 import org.apache.arrow.memory.RootAllocator;
 
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -88,6 +93,10 @@ public class ChalkClientImpl implements ChalkClient {
         // ignore the warning here, because we don't want to free the memory yet
         var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
         return bulkResponse.toResult();
+    }
+
+    public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        return new UploadFeaturesResult("abc", new ArrayList<>());
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {

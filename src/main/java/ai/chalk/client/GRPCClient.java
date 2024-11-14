@@ -8,6 +8,8 @@ import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
 import ai.chalk.protos.chalk.common.v1.ExplainOptions;
 import ai.chalk.protos.chalk.common.v1.FeatherBodyType;
 import ai.chalk.protos.chalk.common.v1.FeatureEncodingOptions;
@@ -316,6 +318,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 meta,
                 responseAlloc
         );
+    }
+
+    public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        throw new UnsupportedOperationException("Upload features not yet implemented for GRPC client");
     }
 
     @Override

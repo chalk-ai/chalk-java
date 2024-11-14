@@ -1,9 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
-import ai.chalk.models.OnlineQueryParams;
-import ai.chalk.models.OnlineQueryParamsComplete;
-import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.*;
 
 import java.net.http.HttpClient;
 import java.nio.file.Path;
@@ -86,6 +84,15 @@ public interface ChalkClient extends AutoCloseable {
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      */
     OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
+
+    /**
+     * UploadFeatures synchronously persists feature values to the online store and
+     * offline store.
+     */
+    UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException;
+
+
+
 
     /**
      * Prints the current ChalkClient configuration and its sources to stdout.
