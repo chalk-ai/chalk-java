@@ -7,6 +7,7 @@ import ai.chalk.models.ErrorCode;
 import ai.chalk.models.ErrorCodeCategory;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,11 @@ public class TestGrpcClient {
                 throw FraudTemplateFeatures.getInitException();
             }
             client = ChalkClient.createGrpc();
+        }
+
+        @AfterAll
+        public static void tearDown() throws Exception {
+            client.close();
         }
 
         @Test

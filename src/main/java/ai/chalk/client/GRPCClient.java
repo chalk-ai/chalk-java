@@ -10,14 +10,7 @@ import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
-import ai.chalk.protos.chalk.common.v1.ExplainOptions;
-import ai.chalk.protos.chalk.common.v1.FeatherBodyType;
-import ai.chalk.protos.chalk.common.v1.FeatureEncodingOptions;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryContext;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryResponseOptions;
-import ai.chalk.protos.chalk.common.v1.OutputExpr;
+import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -321,7 +314,19 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
-        throw new ClientException("Upload features not yet implemented for GRPC client");
+        byte[] tableBytes;
+        try {
+            tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to convert inputs to Arrow bytes", e);
+        }
+        var request = UploadFeaturesRequest.newBuilder().setInputsTable(ByteString.copyFrom(tableBytes)).build();
+        UploadFeaturesResponse response = this.queryStub.uploadFeatures(request);
+        List<ServerError> errors = new ArrayList<>();
+        for (int i = 0; i < response.getErrorsCount(); i++) {
+            errors.add(GrpcSerializer.toServerError(response.getErrors(i)));
+        }
+        return new UploadFeaturesResult(response.getOperationId(), errors);
     }
 
     @Override
