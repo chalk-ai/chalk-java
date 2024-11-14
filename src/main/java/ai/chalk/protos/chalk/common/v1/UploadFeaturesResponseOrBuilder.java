@@ -31,4 +31,16 @@ public interface UploadFeaturesResponseOrBuilder extends
    */
   ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder getErrorsOrBuilder(
       int index);
+
+  /**
+   * <code>string operation_id = 2 [json_name = "operationId"];</code>
+   * @return The operationId.
+   */
+  java.lang.String getOperationId();
+  /**
+   * <code>string operation_id = 2 [json_name = "operationId"];</code>
+   * @return The bytes for operationId.
+   */
+  com.google.protobuf.ByteString
+      getOperationIdBytes();
 }

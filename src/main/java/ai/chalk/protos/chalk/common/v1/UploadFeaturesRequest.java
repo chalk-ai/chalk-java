@@ -18,8 +18,6 @@ private static final long serialVersionUID = 0L;
   }
   private UploadFeaturesRequest() {
     inputsTable_ = com.google.protobuf.ByteString.EMPTY;
-    correlationId_ = "";
-    queryName_ = "";
   }
 
   @java.lang.Override
@@ -34,18 +32,6 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.common.v1.UploadFeaturesProto.internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 4:
-        return internalGetCustomerMetadata();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -54,7 +40,6 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.class, ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.Builder.class);
   }
 
-  private int bitField0_;
   public static final int INPUTS_TABLE_FIELD_NUMBER = 1;
   private com.google.protobuf.ByteString inputsTable_ = com.google.protobuf.ByteString.EMPTY;
   /**
@@ -64,179 +49,6 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public com.google.protobuf.ByteString getInputsTable() {
     return inputsTable_;
-  }
-
-  public static final int CORRELATION_ID_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object correlationId_ = "";
-  /**
-   * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-   * @return Whether the correlationId field is set.
-   */
-  @java.lang.Override
-  public boolean hasCorrelationId() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-   * @return The correlationId.
-   */
-  @java.lang.Override
-  public java.lang.String getCorrelationId() {
-    java.lang.Object ref = correlationId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      correlationId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-   * @return The bytes for correlationId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getCorrelationIdBytes() {
-    java.lang.Object ref = correlationId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      correlationId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int QUERY_NAME_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object queryName_ = "";
-  /**
-   * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-   * @return Whether the queryName field is set.
-   */
-  @java.lang.Override
-  public boolean hasQueryName() {
-    return ((bitField0_ & 0x00000002) != 0);
-  }
-  /**
-   * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-   * @return The queryName.
-   */
-  @java.lang.Override
-  public java.lang.String getQueryName() {
-    java.lang.Object ref = queryName_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      queryName_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-   * @return The bytes for queryName.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getQueryNameBytes() {
-    java.lang.Object ref = queryName_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      queryName_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int CUSTOMER_METADATA_FIELD_NUMBER = 4;
-  private static final class CustomerMetadataDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                ai.chalk.protos.chalk.common.v1.UploadFeaturesProto.internal_static_chalk_common_v1_UploadFeaturesRequest_CustomerMetadataEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> customerMetadata_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetCustomerMetadata() {
-    if (customerMetadata_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          CustomerMetadataDefaultEntryHolder.defaultEntry);
-    }
-    return customerMetadata_;
-  }
-  public int getCustomerMetadataCount() {
-    return internalGetCustomerMetadata().getMap().size();
-  }
-  /**
-   * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-   */
-  @java.lang.Override
-  public boolean containsCustomerMetadata(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetCustomerMetadata().getMap().containsKey(key);
-  }
-  /**
-   * Use {@link #getCustomerMetadataMap()} instead.
-   */
-  @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getCustomerMetadata() {
-    return getCustomerMetadataMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-   */
-  @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getCustomerMetadataMap() {
-    return internalGetCustomerMetadata().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getCustomerMetadataOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetCustomerMetadata().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getCustomerMetadataOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetCustomerMetadata().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -256,18 +68,6 @@ java.lang.String defaultValue) {
     if (!inputsTable_.isEmpty()) {
       output.writeBytes(1, inputsTable_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, correlationId_);
-    }
-    if (((bitField0_ & 0x00000002) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, queryName_);
-    }
-    com.google.protobuf.GeneratedMessageV3
-      .serializeStringMapTo(
-        output,
-        internalGetCustomerMetadata(),
-        CustomerMetadataDefaultEntryHolder.defaultEntry,
-        4);
     getUnknownFields().writeTo(output);
   }
 
@@ -280,22 +80,6 @@ java.lang.String defaultValue) {
     if (!inputsTable_.isEmpty()) {
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(1, inputsTable_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, correlationId_);
-    }
-    if (((bitField0_ & 0x00000002) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, queryName_);
-    }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetCustomerMetadata().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      customerMetadata__ = CustomerMetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
-      size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, customerMetadata__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -314,18 +98,6 @@ java.lang.String defaultValue) {
 
     if (!getInputsTable()
         .equals(other.getInputsTable())) return false;
-    if (hasCorrelationId() != other.hasCorrelationId()) return false;
-    if (hasCorrelationId()) {
-      if (!getCorrelationId()
-          .equals(other.getCorrelationId())) return false;
-    }
-    if (hasQueryName() != other.hasQueryName()) return false;
-    if (hasQueryName()) {
-      if (!getQueryName()
-          .equals(other.getQueryName())) return false;
-    }
-    if (!internalGetCustomerMetadata().equals(
-        other.internalGetCustomerMetadata())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -339,18 +111,6 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + INPUTS_TABLE_FIELD_NUMBER;
     hash = (53 * hash) + getInputsTable().hashCode();
-    if (hasCorrelationId()) {
-      hash = (37 * hash) + CORRELATION_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getCorrelationId().hashCode();
-    }
-    if (hasQueryName()) {
-      hash = (37 * hash) + QUERY_NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getQueryName().hashCode();
-    }
-    if (!internalGetCustomerMetadata().getMap().isEmpty()) {
-      hash = (37 * hash) + CUSTOMER_METADATA_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetCustomerMetadata().hashCode();
-    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -460,28 +220,6 @@ java.lang.String defaultValue) {
       return ai.chalk.protos.chalk.common.v1.UploadFeaturesProto.internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 4:
-          return internalGetCustomerMetadata();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 4:
-          return internalGetMutableCustomerMetadata();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -505,9 +243,6 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       inputsTable_ = com.google.protobuf.ByteString.EMPTY;
-      correlationId_ = "";
-      queryName_ = "";
-      internalGetMutableCustomerMetadata().clear();
       return this;
     }
 
@@ -544,20 +279,6 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.inputsTable_ = inputsTable_;
       }
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.correlationId_ = correlationId_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.queryName_ = queryName_;
-        to_bitField0_ |= 0x00000002;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.customerMetadata_ = internalGetCustomerMetadata();
-        result.customerMetadata_.makeImmutable();
-      }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -607,19 +328,6 @@ java.lang.String defaultValue) {
       if (other.getInputsTable() != com.google.protobuf.ByteString.EMPTY) {
         setInputsTable(other.getInputsTable());
       }
-      if (other.hasCorrelationId()) {
-        correlationId_ = other.correlationId_;
-        bitField0_ |= 0x00000002;
-        onChanged();
-      }
-      if (other.hasQueryName()) {
-        queryName_ = other.queryName_;
-        bitField0_ |= 0x00000004;
-        onChanged();
-      }
-      internalGetMutableCustomerMetadata().mergeFrom(
-          other.internalGetCustomerMetadata());
-      bitField0_ |= 0x00000008;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -651,25 +359,6 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 18: {
-              correlationId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 18
-            case 26: {
-              queryName_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 26
-            case 34: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              customerMetadata__ = input.readMessage(
-                  CustomerMetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableCustomerMetadata().getMutableMap().put(
-                  customerMetadata__.getKey(), customerMetadata__.getValue());
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -716,291 +405,6 @@ java.lang.String defaultValue) {
       bitField0_ = (bitField0_ & ~0x00000001);
       inputsTable_ = getDefaultInstance().getInputsTable();
       onChanged();
-      return this;
-    }
-
-    private java.lang.Object correlationId_ = "";
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @return Whether the correlationId field is set.
-     */
-    public boolean hasCorrelationId() {
-      return ((bitField0_ & 0x00000002) != 0);
-    }
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @return The correlationId.
-     */
-    public java.lang.String getCorrelationId() {
-      java.lang.Object ref = correlationId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        correlationId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @return The bytes for correlationId.
-     */
-    public com.google.protobuf.ByteString
-        getCorrelationIdBytes() {
-      java.lang.Object ref = correlationId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        correlationId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @param value The correlationId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCorrelationId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      correlationId_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearCorrelationId() {
-      correlationId_ = getDefaultInstance().getCorrelationId();
-      bitField0_ = (bitField0_ & ~0x00000002);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional string correlation_id = 2 [json_name = "correlationId"];</code>
-     * @param value The bytes for correlationId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCorrelationIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      correlationId_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object queryName_ = "";
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @return Whether the queryName field is set.
-     */
-    public boolean hasQueryName() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @return The queryName.
-     */
-    public java.lang.String getQueryName() {
-      java.lang.Object ref = queryName_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        queryName_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @return The bytes for queryName.
-     */
-    public com.google.protobuf.ByteString
-        getQueryNameBytes() {
-      java.lang.Object ref = queryName_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        queryName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @param value The queryName to set.
-     * @return This builder for chaining.
-     */
-    public Builder setQueryName(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      queryName_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearQueryName() {
-      queryName_ = getDefaultInstance().getQueryName();
-      bitField0_ = (bitField0_ & ~0x00000004);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>optional string query_name = 3 [json_name = "queryName"];</code>
-     * @param value The bytes for queryName to set.
-     * @return This builder for chaining.
-     */
-    public Builder setQueryNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      queryName_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> customerMetadata_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetCustomerMetadata() {
-      if (customerMetadata_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            CustomerMetadataDefaultEntryHolder.defaultEntry);
-      }
-      return customerMetadata_;
-    }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableCustomerMetadata() {
-      if (customerMetadata_ == null) {
-        customerMetadata_ = com.google.protobuf.MapField.newMapField(
-            CustomerMetadataDefaultEntryHolder.defaultEntry);
-      }
-      if (!customerMetadata_.isMutable()) {
-        customerMetadata_ = customerMetadata_.copy();
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return customerMetadata_;
-    }
-    public int getCustomerMetadataCount() {
-      return internalGetCustomerMetadata().getMap().size();
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    @java.lang.Override
-    public boolean containsCustomerMetadata(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetCustomerMetadata().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getCustomerMetadataMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getCustomerMetadata() {
-      return getCustomerMetadataMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getCustomerMetadataMap() {
-      return internalGetCustomerMetadata().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getCustomerMetadataOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetCustomerMetadata().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getCustomerMetadataOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetCustomerMetadata().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
-      }
-      return map.get(key);
-    }
-    public Builder clearCustomerMetadata() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      internalGetMutableCustomerMetadata().getMutableMap()
-          .clear();
-      return this;
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    public Builder removeCustomerMetadata(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableCustomerMetadata().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableCustomerMetadata() {
-      bitField0_ |= 0x00000008;
-      return internalGetMutableCustomerMetadata().getMutableMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    public Builder putCustomerMetadata(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableCustomerMetadata().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000008;
-      return this;
-    }
-    /**
-     * <code>map&lt;string, string&gt; customer_metadata = 4 [json_name = "customerMetadata"];</code>
-     */
-    public Builder putAllCustomerMetadata(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableCustomerMetadata().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000008;
       return this;
     }
     @java.lang.Override
