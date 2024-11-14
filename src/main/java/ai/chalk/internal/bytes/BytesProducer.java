@@ -16,6 +16,8 @@ import java.util.Map;
 import static ai.chalk.internal.Utils.toChalkDuration;
 
 public class BytesProducer {
+    private static final ObjectMapper mapper = new ObjectMapper();
+
     public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params, BufferAllocator allocator) throws Exception {
         byte[] arrowBytes;
         if (params.getInputs() == null) {
@@ -94,5 +96,62 @@ public class BytesProducer {
         wrapped.putLong(magicStringBytes.length + 8 + jsonBytes.length, bodyLength);
 
         return wrapped.array();
+    }
+
+    private static void produceLen(int length, DataOutputStream ioWriter) throws Exception {
+        byte[] lengthBytes = ByteBuffer.allocate(8).putLong(length).array();
+        ioWriter.write(lengthBytes);
+    }
+
+    private static void produceJsonAttrs(Map<String, Object> jsonAttrs, DataOutputStream ioWriter) throws Exception {
+        byte[] jsonBytes = mapper.writeValueAsBytes(jsonAttrs);
+        produceLen(jsonBytes.length, ioWriter);
+        ioWriter.write(jsonBytes);
+    }
+
+    private static void produceByteAttrs(Map<String, byte[]> byteAttrs, DataOutputStream ioWriter) throws Exception {
+        Map<String, Object> byteAttrsMap = new HashMap<>();
+        for (Map.Entry<String, byte[]> entry : byteAttrs.entrySet()) {
+            byteAttrsMap.put(entry.getKey(), entry.getValue().length);
+        }
+        produceJsonAttrs(byteAttrsMap, ioWriter);
+        for (byte[] value : byteAttrs.values()) {
+            ioWriter.write(value);
+        }
+    }
+
+    public static byte[] chalkMarshal(Map<String, Object> attrs) throws Exception {
+        Map<String, Object> jsonAttrs = new HashMap<>();
+        Map<String, byte[]> byteAttrs = new HashMap<>();
+
+        for (Map.Entry<String, Object> entry : attrs.entrySet()) {
+            if (entry.getValue() instanceof byte[]) {
+                byteAttrs.put(entry.getKey(), (byte[]) entry.getValue());
+            } else {
+                jsonAttrs.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        try (ByteArrayOutputStream result = new ByteArrayOutputStream();
+             DataOutputStream ioWriter = new DataOutputStream(result)) {
+
+            // Magic string header
+            ioWriter.writeBytes("CHALK_BYTE_TRANSMISSION");
+
+            // JSON attrs
+            produceJsonAttrs(jsonAttrs, ioWriter);
+
+            // Pydantic attrs (empty map)
+            produceJsonAttrs(new HashMap<>(), ioWriter);
+
+            // Byte attrs
+            produceByteAttrs(byteAttrs, ioWriter);
+
+            // ByteSerializables (empty map)
+            produceJsonAttrs(new HashMap<>(), ioWriter);
+
+            ioWriter.flush();
+            return result.toByteArray();
+        }
     }
 }

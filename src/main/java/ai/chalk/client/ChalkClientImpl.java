@@ -19,10 +19,7 @@ import ai.chalk.models.UploadFeaturesResult;
 import org.apache.arrow.memory.RootAllocator;
 
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig apiServer;
@@ -96,6 +93,32 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        byte[] tableBytes;
+        try {
+            tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to convert inputs to Arrow bytes", e);
+        }
+
+        var attrs = new HashMap<String, Object>();
+        attrs.put("features", params.getInputs().keySet().stream().toList());
+        attrs.put("table_compression", "uncompressed");
+        attrs.put("table_bytes", tableBytes);
+
+        byte[] body;
+        try {
+            body = BytesProducer.chalkMarshal(attrs);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize UploadFeaturesParams", e);
+        }
+
+        SendRequestParams request = new SendRequestParams.Builder<UploadFeaturesResult>()
+                .path("/v1/upload_features/multi")
+                .body(body)
+                .method("POST")
+                .environmentOverride(params.getEnvironmentId())
+                .build();
+
         return new UploadFeaturesResult("abc", new ArrayList<>());
     }
 
