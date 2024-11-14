@@ -25,6 +25,7 @@ private static final long serialVersionUID = 0L;
     password_ = "";
     s3Client_ = "";
     s3Bucket_ = "";
+    unloadIamRole_ = "";
   }
 
   @java.lang.Override
@@ -531,6 +532,45 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
     return map.get(key);
   }
 
+  public static final int UNLOAD_IAM_ROLE_FIELD_NUMBER = 11;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object unloadIamRole_ = "";
+  /**
+   * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+   * @return The unloadIamRole.
+   */
+  @java.lang.Override
+  public java.lang.String getUnloadIamRole() {
+    java.lang.Object ref = unloadIamRole_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      unloadIamRole_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+   * @return The bytes for unloadIamRole.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getUnloadIamRoleBytes() {
+    java.lang.Object ref = unloadIamRole_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      unloadIamRole_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -581,6 +621,9 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
         internalGetAsyncEngineArgs(),
         AsyncEngineArgsDefaultEntryHolder.defaultEntry,
         10);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(unloadIamRole_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 11, unloadIamRole_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -634,6 +677,9 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, asyncEngineArgs__);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(unloadIamRole_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, unloadIamRole_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -669,6 +715,8 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
         other.internalGetEngineArgs())) return false;
     if (!internalGetAsyncEngineArgs().equals(
         other.internalGetAsyncEngineArgs())) return false;
+    if (!getUnloadIamRole()
+        .equals(other.getUnloadIamRole())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -704,6 +752,8 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
       hash = (37 * hash) + ASYNC_ENGINE_ARGS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetAsyncEngineArgs().hashCode();
     }
+    hash = (37 * hash) + UNLOAD_IAM_ROLE_FIELD_NUMBER;
+    hash = (53 * hash) + getUnloadIamRole().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -871,6 +921,7 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
       s3Bucket_ = "";
       internalGetMutableEngineArgs().clear();
       internalGetMutableAsyncEngineArgs().clear();
+      unloadIamRole_ = "";
       return this;
     }
 
@@ -933,6 +984,9 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
       }
       if (((from_bitField0_ & 0x00000200) != 0)) {
         result.asyncEngineArgs_ = internalGetAsyncEngineArgs().build(AsyncEngineArgsDefaultEntryHolder.defaultEntry);
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.unloadIamRole_ = unloadIamRole_;
       }
     }
 
@@ -1026,6 +1080,11 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
       internalGetMutableAsyncEngineArgs().mergeFrom(
           other.internalGetAsyncEngineArgs());
       bitField0_ |= 0x00000200;
+      if (!other.getUnloadIamRole().isEmpty()) {
+        unloadIamRole_ = other.unloadIamRole_;
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1110,6 +1169,11 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
               bitField0_ |= 0x00000200;
               break;
             } // case 82
+            case 90: {
+              unloadIamRole_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2011,6 +2075,78 @@ ai.chalk.protos.chalk.arrow.v1.ScalarValue defaultValue) {
         builderMap.put(key, entry);
       }
       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder) entry;
+    }
+
+    private java.lang.Object unloadIamRole_ = "";
+    /**
+     * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+     * @return The unloadIamRole.
+     */
+    public java.lang.String getUnloadIamRole() {
+      java.lang.Object ref = unloadIamRole_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        unloadIamRole_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+     * @return The bytes for unloadIamRole.
+     */
+    public com.google.protobuf.ByteString
+        getUnloadIamRoleBytes() {
+      java.lang.Object ref = unloadIamRole_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        unloadIamRole_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+     * @param value The unloadIamRole to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUnloadIamRole(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      unloadIamRole_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUnloadIamRole() {
+      unloadIamRole_ = getDefaultInstance().getUnloadIamRole();
+      bitField0_ = (bitField0_ & ~0x00000400);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string unload_iam_role = 11 [json_name = "unloadIamRole"];</code>
+     * @param value The bytes for unloadIamRole to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUnloadIamRoleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      unloadIamRole_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -47,4 +47,68 @@ public interface HealthCheckOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
+
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   * @return Whether the latency field is set.
+   */
+  boolean hasLatency();
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   * @return The latency.
+   */
+  com.google.protobuf.Duration getLatency();
+  /**
+   * <code>optional .google.protobuf.Duration latency = 4 [json_name = "latency"];</code>
+   */
+  com.google.protobuf.DurationOrBuilder getLatencyOrBuilder();
+
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   * @return Whether the kubeData field is set.
+   */
+  boolean hasKubeData();
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   * @return The kubeData.
+   */
+  com.google.protobuf.Struct getKubeData();
+  /**
+   * <code>optional .google.protobuf.Struct kube_data = 5 [json_name = "kubeData"];</code>
+   */
+  com.google.protobuf.StructOrBuilder getKubeDataOrBuilder();
+
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  int getMetadataCount();
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  boolean containsMetadata(
+      java.lang.String key);
+  /**
+   * Use {@link #getMetadataMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getMetadata();
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getMetadataMap();
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  /* nullable */
+java.lang.String getMetadataOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue);
+  /**
+   * <code>map&lt;string, string&gt; metadata = 6 [json_name = "metadata"];</code>
+   */
+  java.lang.String getMetadataOrThrow(
+      java.lang.String key);
 }

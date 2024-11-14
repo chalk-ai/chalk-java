@@ -57,64 +57,65 @@ public final class QueryLogProto {
       "\n\037chalk/common/v1/query_log.proto\022\017chalk" +
       ".common.v1\032$chalk/common/v1/operation_ki" +
       "nd.proto\032\"chalk/common/v1/query_status.p" +
-      "roto\032\037google/protobuf/timestamp.proto\"}\n" +
-      "\022VersionedQueryName\022\035\n\nquery_name\030\001 \001(\tR" +
-      "\tqueryName\0221\n\022query_name_version\030\002 \001(\tH\000" +
-      "R\020queryNameVersion\210\001\001B\025\n\023_query_name_ver" +
-      "sion\"\357\003\n\017QueryLogFilters\022!\n\014operation_id" +
-      "\030\001 \003(\tR\013operationId\022E\n\016operation_kind\030\002 " +
-      "\003(\0162\036.chalk.common.v1.OperationKindR\rope" +
-      "rationKind\022B\n\nquery_name\030\003 \003(\0132#.chalk.c" +
-      "ommon.v1.VersionedQueryNameR\tqueryName\022\031" +
-      "\n\010agent_id\030\005 \003(\tR\007agentId\022\037\n\013branch_name" +
-      "\030\006 \003(\tR\nbranchName\022%\n\016correlation_id\030\007 \003" +
-      "(\tR\rcorrelationId\022\031\n\010trace_id\030\010 \003(\tR\007tra" +
-      "ceId\022\"\n\rquery_plan_id\030\t \003(\tR\013queryPlanId" +
-      "\022#\n\rdeployment_id\030\n \003(\tR\014deploymentId\022?\n" +
-      "\014query_status\030\013 \003(\0162\034.chalk.common.v1.Qu" +
-      "eryStatusR\013queryStatus\022&\n\017meta_query_has" +
-      "h\030\014 \003(\tR\rmetaQueryHash\"\223\001\n\033GetQueryLogEn" +
-      "triesPageToken\022(\n\020operation_id_hwm\030\001 \001(\t" +
-      "R\016operationIdHwm\022J\n\023query_timestamp_hwm\030" +
-      "\002 \001(\0132\032.google.protobuf.TimestampR\021query" +
-      "TimestampHwm\"\236\003\n\031GetQueryLogEntriesReque" +
-      "st\022l\n%query_timestamp_lower_bound_inclus" +
-      "ive\030\001 \001(\0132\032.google.protobuf.TimestampR!q" +
-      "ueryTimestampLowerBoundInclusive\022q\n%quer" +
-      "y_timestamp_upper_bound_exclusive\030\002 \001(\0132" +
-      "\032.google.protobuf.TimestampH\000R!queryTime" +
-      "stampUpperBoundExclusive\210\001\001\022:\n\007filters\030\003" +
-      " \001(\0132 .chalk.common.v1.QueryLogFiltersR\007" +
-      "filters\022\033\n\tpage_size\030\004 \001(\005R\010pageSize\022\035\n\n" +
-      "page_token\030\005 \001(\tR\tpageTokenB(\n&_query_ti" +
-      "mestamp_upper_bound_exclusive\"\243\006\n\rQueryL" +
-      "ogEntry\022!\n\014operation_id\030\001 \001(\tR\013operation" +
-      "Id\022%\n\016environment_id\030\002 \001(\tR\renvironmentI" +
-      "d\022#\n\rdeployment_id\030\003 \001(\tR\014deploymentId\022E" +
-      "\n\016operation_kind\030\004 \001(\0162\036.chalk.common.v1" +
-      ".OperationKindR\roperationKind\022C\n\017query_t" +
-      "imestamp\030\005 \001(\0132\032.google.protobuf.Timesta" +
-      "mpR\016queryTimestamp\022L\n\024execution_started_" +
-      "at\030\006 \001(\0132\032.google.protobuf.TimestampR\022ex" +
-      "ecutionStartedAt\022N\n\025execution_finished_a" +
-      "t\030\007 \001(\0132\032.google.protobuf.TimestampR\023exe" +
-      "cutionFinishedAt\022?\n\014query_status\030\010 \001(\0162\034" +
-      ".chalk.common.v1.QueryStatusR\013queryStatu" +
-      "s\022\035\n\nquery_name\030\t \001(\tR\tqueryName\022,\n\022quer" +
-      "y_name_version\030\n \001(\tR\020queryNameVersion\022\031" +
-      "\n\010agent_id\030\013 \001(\tR\007agentId\022\037\n\013branch_name" +
-      "\030\014 \001(\tR\nbranchName\022%\n\016correlation_id\030\r \001" +
-      "(\tR\rcorrelationId\022\031\n\010trace_id\030\016 \001(\tR\007tra" +
-      "ceId\022\"\n\rquery_plan_id\030\017 \001(\tR\013queryPlanId" +
-      "\022!\n\014value_tables\030\020 \003(\tR\013valueTables\022&\n\017m" +
-      "eta_query_hash\030\021 \001(\tR\rmetaQueryHash\"~\n\032G" +
-      "etQueryLogEntriesResponse\0228\n\007entries\030\001 \003" +
-      "(\0132\036.chalk.common.v1.QueryLogEntryR\007entr" +
-      "ies\022&\n\017next_page_token\030\002 \001(\tR\rnextPageTo" +
-      "kenB\216\001\n\037ai.chalk.protos.chalk.common.v1B" +
-      "\rQueryLogProtoP\001\242\002\003CCX\252\002\017Chalk.Common.V1" +
-      "\312\002\017Chalk\\Common\\V1\342\002\033Chalk\\Common\\V1\\GPB" +
-      "Metadata\352\002\021Chalk::Common::V1b\006proto3"
+      "roto\032\037google/protobuf/timestamp.proto\"\201\001" +
+      "\n\022VersionedQueryName\022\035\n\nquery_name\030\001 \001(\t" +
+      "R\tqueryName\0221\n\022query_name_version\030\002 \001(\tH" +
+      "\000R\020queryNameVersion\210\001\001:\002\030\001B\025\n\023_query_nam" +
+      "e_version\"\363\003\n\017QueryLogFilters\022!\n\014operati" +
+      "on_id\030\001 \003(\tR\013operationId\022E\n\016operation_ki" +
+      "nd\030\002 \003(\0162\036.chalk.common.v1.OperationKind" +
+      "R\roperationKind\022B\n\nquery_name\030\003 \003(\0132#.ch" +
+      "alk.common.v1.VersionedQueryNameR\tqueryN" +
+      "ame\022\031\n\010agent_id\030\005 \003(\tR\007agentId\022\037\n\013branch" +
+      "_name\030\006 \003(\tR\nbranchName\022%\n\016correlation_i" +
+      "d\030\007 \003(\tR\rcorrelationId\022\031\n\010trace_id\030\010 \003(\t" +
+      "R\007traceId\022\"\n\rquery_plan_id\030\t \003(\tR\013queryP" +
+      "lanId\022#\n\rdeployment_id\030\n \003(\tR\014deployment" +
+      "Id\022?\n\014query_status\030\013 \003(\0162\034.chalk.common." +
+      "v1.QueryStatusR\013queryStatus\022&\n\017meta_quer" +
+      "y_hash\030\014 \003(\tR\rmetaQueryHash:\002\030\001\"\227\001\n\033GetQ" +
+      "ueryLogEntriesPageToken\022(\n\020operation_id_" +
+      "hwm\030\001 \001(\tR\016operationIdHwm\022J\n\023query_times" +
+      "tamp_hwm\030\002 \001(\0132\032.google.protobuf.Timesta" +
+      "mpR\021queryTimestampHwm:\002\030\001\"\242\003\n\031GetQueryLo" +
+      "gEntriesRequest\022l\n%query_timestamp_lower" +
+      "_bound_inclusive\030\001 \001(\0132\032.google.protobuf" +
+      ".TimestampR!queryTimestampLowerBoundIncl" +
+      "usive\022q\n%query_timestamp_upper_bound_exc" +
+      "lusive\030\002 \001(\0132\032.google.protobuf.Timestamp" +
+      "H\000R!queryTimestampUpperBoundExclusive\210\001\001" +
+      "\022:\n\007filters\030\003 \001(\0132 .chalk.common.v1.Quer" +
+      "yLogFiltersR\007filters\022\033\n\tpage_size\030\004 \001(\005R" +
+      "\010pageSize\022\035\n\npage_token\030\005 \001(\tR\tpageToken" +
+      ":\002\030\001B(\n&_query_timestamp_upper_bound_exc" +
+      "lusive\"\247\006\n\rQueryLogEntry\022!\n\014operation_id" +
+      "\030\001 \001(\tR\013operationId\022%\n\016environment_id\030\002 " +
+      "\001(\tR\renvironmentId\022#\n\rdeployment_id\030\003 \001(" +
+      "\tR\014deploymentId\022E\n\016operation_kind\030\004 \001(\0162" +
+      "\036.chalk.common.v1.OperationKindR\roperati" +
+      "onKind\022C\n\017query_timestamp\030\005 \001(\0132\032.google" +
+      ".protobuf.TimestampR\016queryTimestamp\022L\n\024e" +
+      "xecution_started_at\030\006 \001(\0132\032.google.proto" +
+      "buf.TimestampR\022executionStartedAt\022N\n\025exe" +
+      "cution_finished_at\030\007 \001(\0132\032.google.protob" +
+      "uf.TimestampR\023executionFinishedAt\022?\n\014que" +
+      "ry_status\030\010 \001(\0162\034.chalk.common.v1.QueryS" +
+      "tatusR\013queryStatus\022\035\n\nquery_name\030\t \001(\tR\t" +
+      "queryName\022,\n\022query_name_version\030\n \001(\tR\020q" +
+      "ueryNameVersion\022\031\n\010agent_id\030\013 \001(\tR\007agent" +
+      "Id\022\037\n\013branch_name\030\014 \001(\tR\nbranchName\022%\n\016c" +
+      "orrelation_id\030\r \001(\tR\rcorrelationId\022\031\n\010tr" +
+      "ace_id\030\016 \001(\tR\007traceId\022\"\n\rquery_plan_id\030\017" +
+      " \001(\tR\013queryPlanId\022!\n\014value_tables\030\020 \003(\tR" +
+      "\013valueTables\022&\n\017meta_query_hash\030\021 \001(\tR\rm" +
+      "etaQueryHash:\002\030\001\"\202\001\n\032GetQueryLogEntriesR" +
+      "esponse\0228\n\007entries\030\001 \003(\0132\036.chalk.common." +
+      "v1.QueryLogEntryR\007entries\022&\n\017next_page_t" +
+      "oken\030\002 \001(\tR\rnextPageToken:\002\030\001B\216\001\n\037ai.cha" +
+      "lk.protos.chalk.common.v1B\rQueryLogProto" +
+      "P\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017Chalk\\Commo" +
+      "n\\V1\342\002\033Chalk\\Common\\V1\\GPBMetadata\352\002\021Cha" +
+      "lk::Common::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

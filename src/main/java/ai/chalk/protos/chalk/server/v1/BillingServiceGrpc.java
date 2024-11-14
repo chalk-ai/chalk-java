@@ -15,6 +15,38 @@ public final class BillingServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "chalk.server.v1.BillingService";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest,
+      ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> getGetNodesAndPodsUIMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetNodesAndPodsUI",
+      requestType = ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest,
+      ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> getGetNodesAndPodsUIMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest, ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> getGetNodesAndPodsUIMethod;
+    if ((getGetNodesAndPodsUIMethod = BillingServiceGrpc.getGetNodesAndPodsUIMethod) == null) {
+      synchronized (BillingServiceGrpc.class) {
+        if ((getGetNodesAndPodsUIMethod = BillingServiceGrpc.getGetNodesAndPodsUIMethod) == null) {
+          BillingServiceGrpc.getGetNodesAndPodsUIMethod = getGetNodesAndPodsUIMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest, ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNodesAndPodsUI"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BillingServiceMethodDescriptorSupplier("GetNodesAndPodsUI"))
+              .build();
+        }
+      }
+    }
+    return getGetNodesAndPodsUIMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest,
       ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse> getGetNodesAndPodsMethod;
 
@@ -111,6 +143,38 @@ public final class BillingServiceGrpc {
     return getGetUtilizationRatesMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest,
+      ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> getGetPodRequestChartsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetPodRequestCharts",
+      requestType = ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest,
+      ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> getGetPodRequestChartsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest, ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> getGetPodRequestChartsMethod;
+    if ((getGetPodRequestChartsMethod = BillingServiceGrpc.getGetPodRequestChartsMethod) == null) {
+      synchronized (BillingServiceGrpc.class) {
+        if ((getGetPodRequestChartsMethod = BillingServiceGrpc.getGetPodRequestChartsMethod) == null) {
+          BillingServiceGrpc.getGetPodRequestChartsMethod = getGetPodRequestChartsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest, ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPodRequestCharts"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BillingServiceMethodDescriptorSupplier("GetPodRequestCharts"))
+              .build();
+        }
+      }
+    }
+    return getGetPodRequestChartsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -161,6 +225,20 @@ public final class BillingServiceGrpc {
 
     /**
      * <pre>
+     * GetNodesAndPodsUI returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * Use this endpoint going forward; GetNodesAndPods should be deprecated because
+     * it reuses PubSub types that are dangerous to update and are not intended for UI use.
+     * </pre>
+     */
+    default void getNodesAndPodsUI(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNodesAndPodsUIMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * GetNodesAndPods returns the nodes and pods for the team by default,
      * not just a single environment. To limit the scope, add filters to
      * the request object.
@@ -193,6 +271,13 @@ public final class BillingServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetUtilizationRatesMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getPodRequestCharts(ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPodRequestChartsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -220,6 +305,21 @@ public final class BillingServiceGrpc {
     protected BillingServiceStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BillingServiceStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * GetNodesAndPodsUI returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * Use this endpoint going forward; GetNodesAndPods should be deprecated because
+     * it reuses PubSub types that are dangerous to update and are not intended for UI use.
+     * </pre>
+     */
+    public void getNodesAndPodsUI(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetNodesAndPodsUIMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -259,6 +359,14 @@ public final class BillingServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetUtilizationRatesMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getPodRequestCharts(ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetPodRequestChartsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -275,6 +383,20 @@ public final class BillingServiceGrpc {
     protected BillingServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BillingServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * GetNodesAndPodsUI returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * Use this endpoint going forward; GetNodesAndPods should be deprecated because
+     * it reuses PubSub types that are dangerous to update and are not intended for UI use.
+     * </pre>
+     */
+    public ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse getNodesAndPodsUI(ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetNodesAndPodsUIMethod(), getCallOptions(), request);
     }
 
     /**
@@ -311,6 +433,13 @@ public final class BillingServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetUtilizationRatesMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse getPodRequestCharts(ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPodRequestChartsMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -327,6 +456,21 @@ public final class BillingServiceGrpc {
     protected BillingServiceFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BillingServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * GetNodesAndPodsUI returns the nodes and pods for the team by default,
+     * not just a single environment. To limit the scope, add filters to
+     * the request object.
+     * Use this endpoint going forward; GetNodesAndPods should be deprecated because
+     * it reuses PubSub types that are dangerous to update and are not intended for UI use.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse> getNodesAndPodsUI(
+        ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetNodesAndPodsUIMethod(), getCallOptions()), request);
     }
 
     /**
@@ -366,11 +510,21 @@ public final class BillingServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetUtilizationRatesMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse> getPodRequestCharts(
+        ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetPodRequestChartsMethod(), getCallOptions()), request);
+    }
   }
 
-  private static final int METHODID_GET_NODES_AND_PODS = 0;
-  private static final int METHODID_GET_USAGE_CHART = 1;
-  private static final int METHODID_GET_UTILIZATION_RATES = 2;
+  private static final int METHODID_GET_NODES_AND_PODS_UI = 0;
+  private static final int METHODID_GET_NODES_AND_PODS = 1;
+  private static final int METHODID_GET_USAGE_CHART = 2;
+  private static final int METHODID_GET_UTILIZATION_RATES = 3;
+  private static final int METHODID_GET_POD_REQUEST_CHARTS = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -389,6 +543,10 @@ public final class BillingServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_NODES_AND_PODS_UI:
+          serviceImpl.getNodesAndPodsUI((ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse>) responseObserver);
+          break;
         case METHODID_GET_NODES_AND_PODS:
           serviceImpl.getNodesAndPods((ai.chalk.protos.chalk.server.v1.GetNodesAndPodsRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetNodesAndPodsResponse>) responseObserver);
@@ -400,6 +558,10 @@ public final class BillingServiceGrpc {
         case METHODID_GET_UTILIZATION_RATES:
           serviceImpl.getUtilizationRates((ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse>) responseObserver);
+          break;
+        case METHODID_GET_POD_REQUEST_CHARTS:
+          serviceImpl.getPodRequestCharts((ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -419,6 +581,13 @@ public final class BillingServiceGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getGetNodesAndPodsUIMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIRequest,
+              ai.chalk.protos.chalk.server.v1.GetNodesAndPodsUIResponse>(
+                service, METHODID_GET_NODES_AND_PODS_UI)))
         .addMethod(
           getGetNodesAndPodsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -440,6 +609,13 @@ public final class BillingServiceGrpc {
               ai.chalk.protos.chalk.server.v1.GetUtilizationRatesRequest,
               ai.chalk.protos.chalk.server.v1.GetUtilizationRatesResponse>(
                 service, METHODID_GET_UTILIZATION_RATES)))
+        .addMethod(
+          getGetPodRequestChartsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetPodRequestChartsRequest,
+              ai.chalk.protos.chalk.server.v1.GetPodRequestChartsResponse>(
+                service, METHODID_GET_POD_REQUEST_CHARTS)))
         .build();
   }
 
@@ -488,9 +664,11 @@ public final class BillingServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new BillingServiceFileDescriptorSupplier())
+              .addMethod(getGetNodesAndPodsUIMethod())
               .addMethod(getGetNodesAndPodsMethod())
               .addMethod(getGetUsageChartMethod())
               .addMethod(getGetUtilizationRatesMethod())
+              .addMethod(getGetPodRequestChartsMethod())
               .build();
         }
       }

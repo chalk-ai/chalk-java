@@ -69,37 +69,40 @@ public interface DeploymentOrBuilder extends
       getDeploymentTagsBytes(int index);
 
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
+   * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+   * @return The cloudBuildId.
+   */
+  java.lang.String getCloudBuildId();
+  /**
+   * <code>string cloud_build_id = 5 [json_name = "cloudBuildId"];</code>
+   * @return The bytes for cloudBuildId.
+   */
+  com.google.protobuf.ByteString
+      getCloudBuildIdBytes();
+
+  /**
+   * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+   * @return The triggeredBy.
+   */
+  java.lang.String getTriggeredBy();
+  /**
+   * <code>string triggered_by = 6 [json_name = "triggeredBy"];</code>
+   * @return The bytes for triggeredBy.
+   */
+  com.google.protobuf.ByteString
+      getTriggeredByBytes();
+
+  /**
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return Whether the requirementsFilepath field is set.
    */
   boolean hasRequirementsFilepath();
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return The requirementsFilepath.
    */
   java.lang.String getRequirementsFilepath();
   /**
-   * <pre>
-   *  We know a bunch more things about the deployment. Deal with them when we're ready.
-   *  string cloud_build_id = 4;
-   *  string triggered_by = 5;
-   *  google.protobuf.Timestamp status_changed_at = 6;
-   * </pre>
-   *
    * <code>optional string requirements_filepath = 7 [json_name = "requirementsFilepath"];</code>
    * @return The bytes for requirementsFilepath.
    */
@@ -141,31 +144,40 @@ public interface DeploymentOrBuilder extends
       getRuntimeBytes();
 
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
+   * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+   * @return The chalkpyVersion.
+   */
+  java.lang.String getChalkpyVersion();
+  /**
+   * <code>string chalkpy_version = 10 [json_name = "chalkpyVersion"];</code>
+   * @return The bytes for chalkpyVersion.
+   */
+  com.google.protobuf.ByteString
+      getChalkpyVersionBytes();
+
+  /**
+   * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+   * @return The rawDependencyHash.
+   */
+  java.lang.String getRawDependencyHash();
+  /**
+   * <code>string raw_dependency_hash = 11 [json_name = "rawDependencyHash"];</code>
+   * @return The bytes for rawDependencyHash.
+   */
+  com.google.protobuf.ByteString
+      getRawDependencyHashBytes();
+
+  /**
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return Whether the finalDependencyHash field is set.
    */
   boolean hasFinalDependencyHash();
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return The finalDependencyHash.
    */
   java.lang.String getFinalDependencyHash();
   /**
-   * <pre>
-   *  string chalkpy_version = 10;
-   *  string raw_dependency_hash = 11;
-   * </pre>
-   *
    * <code>optional string final_dependency_hash = 12 [json_name = "finalDependencyHash"];</code>
    * @return The bytes for finalDependencyHash.
    */
@@ -226,40 +238,76 @@ public interface DeploymentOrBuilder extends
       getGitCommitBytes();
 
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
+   * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+   * @return The gitPr.
+   */
+  java.lang.String getGitPr();
+  /**
+   * <code>string git_pr = 17 [json_name = "gitPr"];</code>
+   * @return The bytes for gitPr.
+   */
+  com.google.protobuf.ByteString
+      getGitPrBytes();
+
+  /**
+   * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+   * @return The gitBranch.
+   */
+  java.lang.String getGitBranch();
+  /**
+   * <code>string git_branch = 18 [json_name = "gitBranch"];</code>
+   * @return The bytes for gitBranch.
+   */
+  com.google.protobuf.ByteString
+      getGitBranchBytes();
+
+  /**
+   * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+   * @return The gitAuthorEmail.
+   */
+  java.lang.String getGitAuthorEmail();
+  /**
+   * <code>string git_author_email = 19 [json_name = "gitAuthorEmail"];</code>
+   * @return The bytes for gitAuthorEmail.
+   */
+  com.google.protobuf.ByteString
+      getGitAuthorEmailBytes();
+
+  /**
+   * <code>string branch = 20 [json_name = "branch"];</code>
+   * @return The branch.
+   */
+  java.lang.String getBranch();
+  /**
+   * <code>string branch = 20 [json_name = "branch"];</code>
+   * @return The bytes for branch.
+   */
+  com.google.protobuf.ByteString
+      getBranchBytes();
+
+  /**
+   * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+   * @return The projectSettings.
+   */
+  java.lang.String getProjectSettings();
+  /**
+   * <code>string project_settings = 21 [json_name = "projectSettings"];</code>
+   * @return The bytes for projectSettings.
+   */
+  com.google.protobuf.ByteString
+      getProjectSettingsBytes();
+
+  /**
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return Whether the requirementsFiles field is set.
    */
   boolean hasRequirementsFiles();
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return The requirementsFiles.
    */
   java.lang.String getRequirementsFiles();
   /**
-   * <pre>
-   *  string git_pr = 17;
-   *  string git_branch = 18;
-   *  string git_author_email = 19;
-   *  string branch = 20;
-   *  string project_settings = 21;
-   * </pre>
-   *
    * <code>optional string requirements_files = 22 [json_name = "requirementsFiles"];</code>
    * @return The bytes for requirementsFiles.
    */
@@ -267,22 +315,58 @@ public interface DeploymentOrBuilder extends
       getRequirementsFilesBytes();
 
   /**
-   * <pre>
-   *  string git_tag = 23;
-   * </pre>
-   *
+   * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+   * @return The gitTag.
+   */
+  java.lang.String getGitTag();
+  /**
+   * <code>string git_tag = 23 [json_name = "gitTag"];</code>
+   * @return The bytes for gitTag.
+   */
+  com.google.protobuf.ByteString
+      getGitTagBytes();
+
+  /**
    * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
    * @return The baseImageSha.
    */
   java.lang.String getBaseImageSha();
   /**
-   * <pre>
-   *  string git_tag = 23;
-   * </pre>
-   *
    * <code>string base_image_sha = 24 [json_name = "baseImageSha"];</code>
    * @return The bytes for baseImageSha.
    */
   com.google.protobuf.ByteString
       getBaseImageShaBytes();
+
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   * @return Whether the statusChangedAt field is set.
+   */
+  boolean hasStatusChangedAt();
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   * @return The statusChangedAt.
+   */
+  com.google.protobuf.Timestamp getStatusChangedAt();
+  /**
+   * <code>.google.protobuf.Timestamp status_changed_at = 25 [json_name = "statusChangedAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getStatusChangedAtOrBuilder();
+
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return Whether the pinnedPlatformVersion field is set.
+   */
+  boolean hasPinnedPlatformVersion();
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return The pinnedPlatformVersion.
+   */
+  java.lang.String getPinnedPlatformVersion();
+  /**
+   * <code>optional string pinned_platform_version = 26 [json_name = "pinnedPlatformVersion"];</code>
+   * @return The bytes for pinnedPlatformVersion.
+   */
+  com.google.protobuf.ByteString
+      getPinnedPlatformVersionBytes();
 }

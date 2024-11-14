@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.common.v1;
 
-public interface GetFeatureValuesTimeSeriesChartV2ResponseOrBuilder extends
+@java.lang.Deprecated public interface GetFeatureValuesTimeSeriesChartV2ResponseOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response)
     com.google.protobuf.MessageOrBuilder {
 

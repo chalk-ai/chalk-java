@@ -828,4 +828,87 @@ com.google.protobuf.Value defaultValue);
    */
   com.google.protobuf.ByteString
       getPinnedBaseImageBytes();
+
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return Whether the clusterGatewayId field is set.
+   */
+  boolean hasClusterGatewayId();
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return The clusterGatewayId.
+   */
+  java.lang.String getClusterGatewayId();
+  /**
+   * <code>optional string cluster_gateway_id = 47 [json_name = "clusterGatewayId"];</code>
+   * @return The bytes for clusterGatewayId.
+   */
+  com.google.protobuf.ByteString
+      getClusterGatewayIdBytes();
+
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return Whether the clusterTimescaledbId field is set.
+   */
+  boolean hasClusterTimescaledbId();
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return The clusterTimescaledbId.
+   */
+  java.lang.String getClusterTimescaledbId();
+  /**
+   * <code>optional string cluster_timescaledb_id = 48 [json_name = "clusterTimescaledbId"];</code>
+   * @return The bytes for clusterTimescaledbId.
+   */
+  com.google.protobuf.ByteString
+      getClusterTimescaledbIdBytes();
+
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return Whether the backgroundPersistenceDeploymentId field is set.
+   */
+  boolean hasBackgroundPersistenceDeploymentId();
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return The backgroundPersistenceDeploymentId.
+   */
+  java.lang.String getBackgroundPersistenceDeploymentId();
+  /**
+   * <code>optional string background_persistence_deployment_id = 49 [json_name = "backgroundPersistenceDeploymentId"];</code>
+   * @return The bytes for backgroundPersistenceDeploymentId.
+   */
+  com.google.protobuf.ByteString
+      getBackgroundPersistenceDeploymentIdBytes();
+
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   * @return Whether the environmentBuckets field is set.
+   */
+  boolean hasEnvironmentBuckets();
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   * @return The environmentBuckets.
+   */
+  ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfig getEnvironmentBuckets();
+  /**
+   * <code>optional .chalk.server.v1.EnvironmentObjectStorageConfig environment_buckets = 50 [json_name = "environmentBuckets"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.EnvironmentObjectStorageConfigOrBuilder getEnvironmentBucketsOrBuilder();
+
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return Whether the clusterTimescaledbSecret field is set.
+   */
+  boolean hasClusterTimescaledbSecret();
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return The clusterTimescaledbSecret.
+   */
+  java.lang.String getClusterTimescaledbSecret();
+  /**
+   * <code>optional string cluster_timescaledb_secret = 51 [json_name = "clusterTimescaledbSecret"];</code>
+   * @return The bytes for clusterTimescaledbSecret.
+   */
+  com.google.protobuf.ByteString
+      getClusterTimescaledbSecretBytes();
 }

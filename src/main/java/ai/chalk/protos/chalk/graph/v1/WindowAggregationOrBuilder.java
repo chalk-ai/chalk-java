@@ -124,4 +124,205 @@ public interface WindowAggregationOrBuilder extends
    */
   ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getFiltersOrBuilder(
       int index);
+
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return Whether the backfillResolver field is set.
+   */
+  boolean hasBackfillResolver();
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return The backfillResolver.
+   */
+  java.lang.String getBackfillResolver();
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return The bytes for backfillResolver.
+   */
+  com.google.protobuf.ByteString
+      getBackfillResolverBytes();
+
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   * @return Whether the backfillLookbackDuration field is set.
+   */
+  boolean hasBackfillLookbackDuration();
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   * @return The backfillLookbackDuration.
+   */
+  com.google.protobuf.Duration getBackfillLookbackDuration();
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   */
+  com.google.protobuf.DurationOrBuilder getBackfillLookbackDurationOrBuilder();
+
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   * @return Whether the backfillStartTime field is set.
+   */
+  boolean hasBackfillStartTime();
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   * @return The backfillStartTime.
+   */
+  com.google.protobuf.Timestamp getBackfillStartTime();
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getBackfillStartTimeOrBuilder();
+
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return Whether the continuousResolver field is set.
+   */
+  boolean hasContinuousResolver();
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return The continuousResolver.
+   */
+  java.lang.String getContinuousResolver();
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return The bytes for continuousResolver.
+   */
+  com.google.protobuf.ByteString
+      getContinuousResolverBytes();
+
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   * @return Whether the continuousBufferDuration field is set.
+   */
+  boolean hasContinuousBufferDuration();
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   * @return The continuousBufferDuration.
+   */
+  com.google.protobuf.Duration getContinuousBufferDuration();
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   */
+  com.google.protobuf.DurationOrBuilder getContinuousBufferDurationOrBuilder();
+
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return Whether the backfillSchedule field is set.
+   */
+  boolean hasBackfillSchedule();
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return The backfillSchedule.
+   */
+  java.lang.String getBackfillSchedule();
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return The bytes for backfillSchedule.
+   */
+  com.google.protobuf.ByteString
+      getBackfillScheduleBytes();
 }

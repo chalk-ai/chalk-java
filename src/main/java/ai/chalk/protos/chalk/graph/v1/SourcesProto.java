@@ -370,7 +370,7 @@ public final class SourcesProto {
       "\001(\0132\033.chalk.arrow.v1.ScalarValueR\005value:" +
       "\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001(\t" +
       "R\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sc" +
-      "alarValueR\005value:\0028\001\"\265\004\n\016RedshiftSource\022" +
+      "alarValueR\005value:\0028\001\"\335\004\n\016RedshiftSource\022" +
       "\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host\022" +
       "\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004u" +
       "ser\030\005 \001(\tR\004user\022\032\n\010password\030\006 \001(\tR\010passw" +
@@ -379,7 +379,8 @@ public final class SourcesProto {
       "(\0132..chalk.graph.v1.RedshiftSource.Engin" +
       "eArgsEntryR\nengineArgs\022_\n\021async_engine_a" +
       "rgs\030\n \003(\01323.chalk.graph.v1.RedshiftSourc" +
-      "e.AsyncEngineArgsEntryR\017asyncEngineArgs\032" +
+      "e.AsyncEngineArgsEntryR\017asyncEngineArgs\022" +
+      "&\n\017unload_iam_role\030\013 \001(\tR\runloadIamRole\032" +
       "Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005" +
       "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
       "R\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003k" +
@@ -619,7 +620,7 @@ public final class SourcesProto {
     internal_static_chalk_graph_v1_RedshiftSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_RedshiftSource_descriptor,
-        new java.lang.String[] { "Name", "Host", "Port", "Db", "User", "Password", "S3Client", "S3Bucket", "EngineArgs", "AsyncEngineArgs", });
+        new java.lang.String[] { "Name", "Host", "Port", "Db", "User", "Password", "S3Client", "S3Bucket", "EngineArgs", "AsyncEngineArgs", "UnloadIamRole", });
     internal_static_chalk_graph_v1_RedshiftSource_EngineArgsEntry_descriptor =
       internal_static_chalk_graph_v1_RedshiftSource_descriptor.getNestedTypes().get(0);
     internal_static_chalk_graph_v1_RedshiftSource_EngineArgsEntry_fieldAccessorTable = new
