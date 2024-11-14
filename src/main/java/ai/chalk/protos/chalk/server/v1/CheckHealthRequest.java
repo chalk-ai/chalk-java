@@ -39,6 +39,33 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.CheckHealthRequest.class, ai.chalk.protos.chalk.server.v1.CheckHealthRequest.Builder.class);
   }
 
+  private int bitField0_;
+  public static final int FILTERS_FIELD_NUMBER = 1;
+  private ai.chalk.protos.chalk.server.v1.HealthCheckFilters filters_;
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   * @return Whether the filters field is set.
+   */
+  @java.lang.Override
+  public boolean hasFilters() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   * @return The filters.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.HealthCheckFilters getFilters() {
+    return filters_ == null ? ai.chalk.protos.chalk.server.v1.HealthCheckFilters.getDefaultInstance() : filters_;
+  }
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder getFiltersOrBuilder() {
+    return filters_ == null ? ai.chalk.protos.chalk.server.v1.HealthCheckFilters.getDefaultInstance() : filters_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -53,6 +80,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(1, getFilters());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -62,6 +92,10 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, getFilters());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -77,6 +111,11 @@ private static final long serialVersionUID = 0L;
     }
     ai.chalk.protos.chalk.server.v1.CheckHealthRequest other = (ai.chalk.protos.chalk.server.v1.CheckHealthRequest) obj;
 
+    if (hasFilters() != other.hasFilters()) return false;
+    if (hasFilters()) {
+      if (!getFilters()
+          .equals(other.getFilters())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -88,6 +127,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    if (hasFilters()) {
+      hash = (37 * hash) + FILTERS_FIELD_NUMBER;
+      hash = (53 * hash) + getFilters().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -207,17 +250,29 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.CheckHealthRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getFiltersFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
+      filters_ = null;
+      if (filtersBuilder_ != null) {
+        filtersBuilder_.dispose();
+        filtersBuilder_ = null;
+      }
       return this;
     }
 
@@ -244,8 +299,21 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.server.v1.CheckHealthRequest buildPartial() {
       ai.chalk.protos.chalk.server.v1.CheckHealthRequest result = new ai.chalk.protos.chalk.server.v1.CheckHealthRequest(this);
+      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartial0(ai.chalk.protos.chalk.server.v1.CheckHealthRequest result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.filters_ = filtersBuilder_ == null
+            ? filters_
+            : filtersBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -292,6 +360,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ai.chalk.protos.chalk.server.v1.CheckHealthRequest other) {
       if (other == ai.chalk.protos.chalk.server.v1.CheckHealthRequest.getDefaultInstance()) return this;
+      if (other.hasFilters()) {
+        mergeFilters(other.getFilters());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -318,6 +389,13 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
+            case 10: {
+              input.readMessage(
+                  getFiltersFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000001;
+              break;
+            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -332,6 +410,128 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } // finally
       return this;
+    }
+    private int bitField0_;
+
+    private ai.chalk.protos.chalk.server.v1.HealthCheckFilters filters_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.HealthCheckFilters, ai.chalk.protos.chalk.server.v1.HealthCheckFilters.Builder, ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder> filtersBuilder_;
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     * @return Whether the filters field is set.
+     */
+    public boolean hasFilters() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     * @return The filters.
+     */
+    public ai.chalk.protos.chalk.server.v1.HealthCheckFilters getFilters() {
+      if (filtersBuilder_ == null) {
+        return filters_ == null ? ai.chalk.protos.chalk.server.v1.HealthCheckFilters.getDefaultInstance() : filters_;
+      } else {
+        return filtersBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public Builder setFilters(ai.chalk.protos.chalk.server.v1.HealthCheckFilters value) {
+      if (filtersBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        filters_ = value;
+      } else {
+        filtersBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public Builder setFilters(
+        ai.chalk.protos.chalk.server.v1.HealthCheckFilters.Builder builderForValue) {
+      if (filtersBuilder_ == null) {
+        filters_ = builderForValue.build();
+      } else {
+        filtersBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public Builder mergeFilters(ai.chalk.protos.chalk.server.v1.HealthCheckFilters value) {
+      if (filtersBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0) &&
+          filters_ != null &&
+          filters_ != ai.chalk.protos.chalk.server.v1.HealthCheckFilters.getDefaultInstance()) {
+          getFiltersBuilder().mergeFrom(value);
+        } else {
+          filters_ = value;
+        }
+      } else {
+        filtersBuilder_.mergeFrom(value);
+      }
+      if (filters_ != null) {
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public Builder clearFilters() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      filters_ = null;
+      if (filtersBuilder_ != null) {
+        filtersBuilder_.dispose();
+        filtersBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.HealthCheckFilters.Builder getFiltersBuilder() {
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return getFiltersFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder getFiltersOrBuilder() {
+      if (filtersBuilder_ != null) {
+        return filtersBuilder_.getMessageOrBuilder();
+      } else {
+        return filters_ == null ?
+            ai.chalk.protos.chalk.server.v1.HealthCheckFilters.getDefaultInstance() : filters_;
+      }
+    }
+    /**
+     * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.HealthCheckFilters, ai.chalk.protos.chalk.server.v1.HealthCheckFilters.Builder, ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder> 
+        getFiltersFieldBuilder() {
+      if (filtersBuilder_ == null) {
+        filtersBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.HealthCheckFilters, ai.chalk.protos.chalk.server.v1.HealthCheckFilters.Builder, ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder>(
+                getFilters(),
+                getParentForChildren(),
+                isClean());
+        filters_ = null;
+      }
+      return filtersBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

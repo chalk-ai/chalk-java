@@ -21,6 +21,9 @@ private static final long serialVersionUID = 0L;
     groupBy_ = java.util.Collections.emptyList();
     aggregation_ = "";
     filters_ = java.util.Collections.emptyList();
+    backfillResolver_ = "";
+    continuousResolver_ = "";
+    backfillSchedule_ = "";
   }
 
   @java.lang.Override
@@ -282,6 +285,330 @@ private static final long serialVersionUID = 0L;
     return filters_.get(index);
   }
 
+  public static final int BACKFILL_RESOLVER_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object backfillResolver_ = "";
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return Whether the backfillResolver field is set.
+   */
+  @java.lang.Override
+  public boolean hasBackfillResolver() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return The backfillResolver.
+   */
+  @java.lang.Override
+  public java.lang.String getBackfillResolver() {
+    java.lang.Object ref = backfillResolver_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      backfillResolver_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The resolver to use for back-filling the materialized aggregate.
+   * If not provided, the data will be back filled using the resolver
+   * that would run for an offline query.
+   * </pre>
+   *
+   * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+   * @return The bytes for backfillResolver.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBackfillResolverBytes() {
+    java.lang.Object ref = backfillResolver_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      backfillResolver_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int BACKFILL_LOOKBACK_DURATION_FIELD_NUMBER = 9;
+  private com.google.protobuf.Duration backfillLookbackDuration_;
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   * @return Whether the backfillLookbackDuration field is set.
+   */
+  @java.lang.Override
+  public boolean hasBackfillLookbackDuration() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   * @return The backfillLookbackDuration.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Duration getBackfillLookbackDuration() {
+    return backfillLookbackDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : backfillLookbackDuration_;
+  }
+  /**
+   * <pre>
+   * The amount of time before the start of the previous backfill
+   * to consider when running the backfill resolver. Set this parameter
+   * to the be equal to the latest arriving data in the backfill window.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.DurationOrBuilder getBackfillLookbackDurationOrBuilder() {
+    return backfillLookbackDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : backfillLookbackDuration_;
+  }
+
+  public static final int BACKFILL_START_TIME_FIELD_NUMBER = 10;
+  private com.google.protobuf.Timestamp backfillStartTime_;
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   * @return Whether the backfillStartTime field is set.
+   */
+  @java.lang.Override
+  public boolean hasBackfillStartTime() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   * @return The backfillStartTime.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getBackfillStartTime() {
+    return backfillStartTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : backfillStartTime_;
+  }
+  /**
+   * <pre>
+   * The time at which to start back filling the materialized aggregate.
+   * If not provided, the backfill consider the earliest available data returned
+   * by the `backfill_resolver`.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getBackfillStartTimeOrBuilder() {
+    return backfillStartTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : backfillStartTime_;
+  }
+
+  public static final int CONTINUOUS_RESOLVER_FIELD_NUMBER = 11;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object continuousResolver_ = "";
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return Whether the continuousResolver field is set.
+   */
+  @java.lang.Override
+  public boolean hasContinuousResolver() {
+    return ((bitField0_ & 0x00000040) != 0);
+  }
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return The continuousResolver.
+   */
+  @java.lang.Override
+  public java.lang.String getContinuousResolver() {
+    java.lang.Object ref = continuousResolver_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      continuousResolver_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The resolver to use for continuous updates to the materialized aggregate.
+   * If not provided, the data will be updated using the resolver that would run
+   * for an online query.
+   * </pre>
+   *
+   * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+   * @return The bytes for continuousResolver.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getContinuousResolverBytes() {
+    java.lang.Object ref = continuousResolver_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      continuousResolver_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int CONTINUOUS_BUFFER_DURATION_FIELD_NUMBER = 12;
+  private com.google.protobuf.Duration continuousBufferDuration_;
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   * @return Whether the continuousBufferDuration field is set.
+   */
+  @java.lang.Override
+  public boolean hasContinuousBufferDuration() {
+    return ((bitField0_ & 0x00000080) != 0);
+  }
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   * @return The continuousBufferDuration.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Duration getContinuousBufferDuration() {
+    return continuousBufferDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : continuousBufferDuration_;
+  }
+  /**
+   * <pre>
+   * The period for which to use the continuous resolver, instead
+   * of relying upon the last backfill. If not provided, and a continuous
+   * resolver is provided, this will be set to backfill_lookback_duration.
+   * </pre>
+   *
+   * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.DurationOrBuilder getContinuousBufferDurationOrBuilder() {
+    return continuousBufferDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : continuousBufferDuration_;
+  }
+
+  public static final int BACKFILL_SCHEDULE_FIELD_NUMBER = 13;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object backfillSchedule_ = "";
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return Whether the backfillSchedule field is set.
+   */
+  @java.lang.Override
+  public boolean hasBackfillSchedule() {
+    return ((bitField0_ & 0x00000100) != 0);
+  }
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return The backfillSchedule.
+   */
+  @java.lang.Override
+  public java.lang.String getBackfillSchedule() {
+    java.lang.Object ref = backfillSchedule_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      backfillSchedule_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * A crontab or duration string to specify the schedule for back filling the
+   * materialized aggregate.
+   * </pre>
+   *
+   * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+   * @return The bytes for backfillSchedule.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBackfillScheduleBytes() {
+    java.lang.Object ref = backfillSchedule_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      backfillSchedule_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -317,6 +644,24 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < filters_.size(); i++) {
       output.writeMessage(7, filters_.get(i));
     }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, backfillResolver_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeMessage(9, getBackfillLookbackDuration());
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeMessage(10, getBackfillStartTime());
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 11, continuousResolver_);
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      output.writeMessage(12, getContinuousBufferDuration());
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 13, backfillSchedule_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -351,6 +696,27 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < filters_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(7, filters_.get(i));
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, backfillResolver_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, getBackfillLookbackDuration());
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, getBackfillStartTime());
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, continuousResolver_);
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(12, getContinuousBufferDuration());
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, backfillSchedule_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -390,6 +756,36 @@ private static final long serialVersionUID = 0L;
     }
     if (!getFiltersList()
         .equals(other.getFiltersList())) return false;
+    if (hasBackfillResolver() != other.hasBackfillResolver()) return false;
+    if (hasBackfillResolver()) {
+      if (!getBackfillResolver()
+          .equals(other.getBackfillResolver())) return false;
+    }
+    if (hasBackfillLookbackDuration() != other.hasBackfillLookbackDuration()) return false;
+    if (hasBackfillLookbackDuration()) {
+      if (!getBackfillLookbackDuration()
+          .equals(other.getBackfillLookbackDuration())) return false;
+    }
+    if (hasBackfillStartTime() != other.hasBackfillStartTime()) return false;
+    if (hasBackfillStartTime()) {
+      if (!getBackfillStartTime()
+          .equals(other.getBackfillStartTime())) return false;
+    }
+    if (hasContinuousResolver() != other.hasContinuousResolver()) return false;
+    if (hasContinuousResolver()) {
+      if (!getContinuousResolver()
+          .equals(other.getContinuousResolver())) return false;
+    }
+    if (hasContinuousBufferDuration() != other.hasContinuousBufferDuration()) return false;
+    if (hasContinuousBufferDuration()) {
+      if (!getContinuousBufferDuration()
+          .equals(other.getContinuousBufferDuration())) return false;
+    }
+    if (hasBackfillSchedule() != other.hasBackfillSchedule()) return false;
+    if (hasBackfillSchedule()) {
+      if (!getBackfillSchedule()
+          .equals(other.getBackfillSchedule())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -424,6 +820,30 @@ private static final long serialVersionUID = 0L;
     if (getFiltersCount() > 0) {
       hash = (37 * hash) + FILTERS_FIELD_NUMBER;
       hash = (53 * hash) + getFiltersList().hashCode();
+    }
+    if (hasBackfillResolver()) {
+      hash = (37 * hash) + BACKFILL_RESOLVER_FIELD_NUMBER;
+      hash = (53 * hash) + getBackfillResolver().hashCode();
+    }
+    if (hasBackfillLookbackDuration()) {
+      hash = (37 * hash) + BACKFILL_LOOKBACK_DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getBackfillLookbackDuration().hashCode();
+    }
+    if (hasBackfillStartTime()) {
+      hash = (37 * hash) + BACKFILL_START_TIME_FIELD_NUMBER;
+      hash = (53 * hash) + getBackfillStartTime().hashCode();
+    }
+    if (hasContinuousResolver()) {
+      hash = (37 * hash) + CONTINUOUS_RESOLVER_FIELD_NUMBER;
+      hash = (53 * hash) + getContinuousResolver().hashCode();
+    }
+    if (hasContinuousBufferDuration()) {
+      hash = (37 * hash) + CONTINUOUS_BUFFER_DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getContinuousBufferDuration().hashCode();
+    }
+    if (hasBackfillSchedule()) {
+      hash = (37 * hash) + BACKFILL_SCHEDULE_FIELD_NUMBER;
+      hash = (53 * hash) + getBackfillSchedule().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -560,6 +980,9 @@ private static final long serialVersionUID = 0L;
         getAggregateOnFieldBuilder();
         getArrowTypeFieldBuilder();
         getFiltersFieldBuilder();
+        getBackfillLookbackDurationFieldBuilder();
+        getBackfillStartTimeFieldBuilder();
+        getContinuousBufferDurationFieldBuilder();
       }
     }
     @java.lang.Override
@@ -597,6 +1020,24 @@ private static final long serialVersionUID = 0L;
         filtersBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000040);
+      backfillResolver_ = "";
+      backfillLookbackDuration_ = null;
+      if (backfillLookbackDurationBuilder_ != null) {
+        backfillLookbackDurationBuilder_.dispose();
+        backfillLookbackDurationBuilder_ = null;
+      }
+      backfillStartTime_ = null;
+      if (backfillStartTimeBuilder_ != null) {
+        backfillStartTimeBuilder_.dispose();
+        backfillStartTimeBuilder_ = null;
+      }
+      continuousResolver_ = "";
+      continuousBufferDuration_ = null;
+      if (continuousBufferDurationBuilder_ != null) {
+        continuousBufferDurationBuilder_.dispose();
+        continuousBufferDurationBuilder_ = null;
+      }
+      backfillSchedule_ = "";
       return this;
     }
 
@@ -676,6 +1117,36 @@ private static final long serialVersionUID = 0L;
             ? arrowType_
             : arrowTypeBuilder_.build();
         to_bitField0_ |= 0x00000004;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.backfillResolver_ = backfillResolver_;
+        to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.backfillLookbackDuration_ = backfillLookbackDurationBuilder_ == null
+            ? backfillLookbackDuration_
+            : backfillLookbackDurationBuilder_.build();
+        to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.backfillStartTime_ = backfillStartTimeBuilder_ == null
+            ? backfillStartTime_
+            : backfillStartTimeBuilder_.build();
+        to_bitField0_ |= 0x00000020;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.continuousResolver_ = continuousResolver_;
+        to_bitField0_ |= 0x00000040;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.continuousBufferDuration_ = continuousBufferDurationBuilder_ == null
+            ? continuousBufferDuration_
+            : continuousBufferDurationBuilder_.build();
+        to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00001000) != 0)) {
+        result.backfillSchedule_ = backfillSchedule_;
+        to_bitField0_ |= 0x00000100;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -795,6 +1266,30 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (other.hasBackfillResolver()) {
+        backfillResolver_ = other.backfillResolver_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
+      if (other.hasBackfillLookbackDuration()) {
+        mergeBackfillLookbackDuration(other.getBackfillLookbackDuration());
+      }
+      if (other.hasBackfillStartTime()) {
+        mergeBackfillStartTime(other.getBackfillStartTime());
+      }
+      if (other.hasContinuousResolver()) {
+        continuousResolver_ = other.continuousResolver_;
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
+      if (other.hasContinuousBufferDuration()) {
+        mergeContinuousBufferDuration(other.getContinuousBufferDuration());
+      }
+      if (other.hasBackfillSchedule()) {
+        backfillSchedule_ = other.backfillSchedule_;
+        bitField0_ |= 0x00001000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -878,6 +1373,42 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 58
+            case 66: {
+              backfillResolver_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
+            case 74: {
+              input.readMessage(
+                  getBackfillLookbackDurationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 74
+            case 82: {
+              input.readMessage(
+                  getBackfillStartTimeFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
+            case 90: {
+              continuousResolver_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
+            case 98: {
+              input.readMessage(
+                  getContinuousBufferDurationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 98
+            case 106: {
+              backfillSchedule_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00001000;
+              break;
+            } // case 106
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1880,6 +2411,870 @@ private static final long serialVersionUID = 0L;
         filters_ = null;
       }
       return filtersBuilder_;
+    }
+
+    private java.lang.Object backfillResolver_ = "";
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @return Whether the backfillResolver field is set.
+     */
+    public boolean hasBackfillResolver() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @return The backfillResolver.
+     */
+    public java.lang.String getBackfillResolver() {
+      java.lang.Object ref = backfillResolver_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        backfillResolver_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @return The bytes for backfillResolver.
+     */
+    public com.google.protobuf.ByteString
+        getBackfillResolverBytes() {
+      java.lang.Object ref = backfillResolver_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        backfillResolver_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @param value The backfillResolver to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackfillResolver(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      backfillResolver_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBackfillResolver() {
+      backfillResolver_ = getDefaultInstance().getBackfillResolver();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The resolver to use for back-filling the materialized aggregate.
+     * If not provided, the data will be back filled using the resolver
+     * that would run for an offline query.
+     * </pre>
+     *
+     * <code>optional string backfill_resolver = 8 [json_name = "backfillResolver"];</code>
+     * @param value The bytes for backfillResolver to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackfillResolverBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      backfillResolver_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Duration backfillLookbackDuration_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> backfillLookbackDurationBuilder_;
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     * @return Whether the backfillLookbackDuration field is set.
+     */
+    public boolean hasBackfillLookbackDuration() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     * @return The backfillLookbackDuration.
+     */
+    public com.google.protobuf.Duration getBackfillLookbackDuration() {
+      if (backfillLookbackDurationBuilder_ == null) {
+        return backfillLookbackDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : backfillLookbackDuration_;
+      } else {
+        return backfillLookbackDurationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public Builder setBackfillLookbackDuration(com.google.protobuf.Duration value) {
+      if (backfillLookbackDurationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        backfillLookbackDuration_ = value;
+      } else {
+        backfillLookbackDurationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public Builder setBackfillLookbackDuration(
+        com.google.protobuf.Duration.Builder builderForValue) {
+      if (backfillLookbackDurationBuilder_ == null) {
+        backfillLookbackDuration_ = builderForValue.build();
+      } else {
+        backfillLookbackDurationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public Builder mergeBackfillLookbackDuration(com.google.protobuf.Duration value) {
+      if (backfillLookbackDurationBuilder_ == null) {
+        if (((bitField0_ & 0x00000100) != 0) &&
+          backfillLookbackDuration_ != null &&
+          backfillLookbackDuration_ != com.google.protobuf.Duration.getDefaultInstance()) {
+          getBackfillLookbackDurationBuilder().mergeFrom(value);
+        } else {
+          backfillLookbackDuration_ = value;
+        }
+      } else {
+        backfillLookbackDurationBuilder_.mergeFrom(value);
+      }
+      if (backfillLookbackDuration_ != null) {
+        bitField0_ |= 0x00000100;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public Builder clearBackfillLookbackDuration() {
+      bitField0_ = (bitField0_ & ~0x00000100);
+      backfillLookbackDuration_ = null;
+      if (backfillLookbackDurationBuilder_ != null) {
+        backfillLookbackDurationBuilder_.dispose();
+        backfillLookbackDurationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public com.google.protobuf.Duration.Builder getBackfillLookbackDurationBuilder() {
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return getBackfillLookbackDurationFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    public com.google.protobuf.DurationOrBuilder getBackfillLookbackDurationOrBuilder() {
+      if (backfillLookbackDurationBuilder_ != null) {
+        return backfillLookbackDurationBuilder_.getMessageOrBuilder();
+      } else {
+        return backfillLookbackDuration_ == null ?
+            com.google.protobuf.Duration.getDefaultInstance() : backfillLookbackDuration_;
+      }
+    }
+    /**
+     * <pre>
+     * The amount of time before the start of the previous backfill
+     * to consider when running the backfill resolver. Set this parameter
+     * to the be equal to the latest arriving data in the backfill window.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration backfill_lookback_duration = 9 [json_name = "backfillLookbackDuration"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> 
+        getBackfillLookbackDurationFieldBuilder() {
+      if (backfillLookbackDurationBuilder_ == null) {
+        backfillLookbackDurationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder>(
+                getBackfillLookbackDuration(),
+                getParentForChildren(),
+                isClean());
+        backfillLookbackDuration_ = null;
+      }
+      return backfillLookbackDurationBuilder_;
+    }
+
+    private com.google.protobuf.Timestamp backfillStartTime_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> backfillStartTimeBuilder_;
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     * @return Whether the backfillStartTime field is set.
+     */
+    public boolean hasBackfillStartTime() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     * @return The backfillStartTime.
+     */
+    public com.google.protobuf.Timestamp getBackfillStartTime() {
+      if (backfillStartTimeBuilder_ == null) {
+        return backfillStartTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : backfillStartTime_;
+      } else {
+        return backfillStartTimeBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public Builder setBackfillStartTime(com.google.protobuf.Timestamp value) {
+      if (backfillStartTimeBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        backfillStartTime_ = value;
+      } else {
+        backfillStartTimeBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public Builder setBackfillStartTime(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (backfillStartTimeBuilder_ == null) {
+        backfillStartTime_ = builderForValue.build();
+      } else {
+        backfillStartTimeBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public Builder mergeBackfillStartTime(com.google.protobuf.Timestamp value) {
+      if (backfillStartTimeBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0) &&
+          backfillStartTime_ != null &&
+          backfillStartTime_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getBackfillStartTimeBuilder().mergeFrom(value);
+        } else {
+          backfillStartTime_ = value;
+        }
+      } else {
+        backfillStartTimeBuilder_.mergeFrom(value);
+      }
+      if (backfillStartTime_ != null) {
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public Builder clearBackfillStartTime() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      backfillStartTime_ = null;
+      if (backfillStartTimeBuilder_ != null) {
+        backfillStartTimeBuilder_.dispose();
+        backfillStartTimeBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getBackfillStartTimeBuilder() {
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return getBackfillStartTimeFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getBackfillStartTimeOrBuilder() {
+      if (backfillStartTimeBuilder_ != null) {
+        return backfillStartTimeBuilder_.getMessageOrBuilder();
+      } else {
+        return backfillStartTime_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : backfillStartTime_;
+      }
+    }
+    /**
+     * <pre>
+     * The time at which to start back filling the materialized aggregate.
+     * If not provided, the backfill consider the earliest available data returned
+     * by the `backfill_resolver`.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Timestamp backfill_start_time = 10 [json_name = "backfillStartTime"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getBackfillStartTimeFieldBuilder() {
+      if (backfillStartTimeBuilder_ == null) {
+        backfillStartTimeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getBackfillStartTime(),
+                getParentForChildren(),
+                isClean());
+        backfillStartTime_ = null;
+      }
+      return backfillStartTimeBuilder_;
+    }
+
+    private java.lang.Object continuousResolver_ = "";
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @return Whether the continuousResolver field is set.
+     */
+    public boolean hasContinuousResolver() {
+      return ((bitField0_ & 0x00000400) != 0);
+    }
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @return The continuousResolver.
+     */
+    public java.lang.String getContinuousResolver() {
+      java.lang.Object ref = continuousResolver_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        continuousResolver_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @return The bytes for continuousResolver.
+     */
+    public com.google.protobuf.ByteString
+        getContinuousResolverBytes() {
+      java.lang.Object ref = continuousResolver_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        continuousResolver_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @param value The continuousResolver to set.
+     * @return This builder for chaining.
+     */
+    public Builder setContinuousResolver(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      continuousResolver_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearContinuousResolver() {
+      continuousResolver_ = getDefaultInstance().getContinuousResolver();
+      bitField0_ = (bitField0_ & ~0x00000400);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The resolver to use for continuous updates to the materialized aggregate.
+     * If not provided, the data will be updated using the resolver that would run
+     * for an online query.
+     * </pre>
+     *
+     * <code>optional string continuous_resolver = 11 [json_name = "continuousResolver"];</code>
+     * @param value The bytes for continuousResolver to set.
+     * @return This builder for chaining.
+     */
+    public Builder setContinuousResolverBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      continuousResolver_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Duration continuousBufferDuration_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> continuousBufferDurationBuilder_;
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     * @return Whether the continuousBufferDuration field is set.
+     */
+    public boolean hasContinuousBufferDuration() {
+      return ((bitField0_ & 0x00000800) != 0);
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     * @return The continuousBufferDuration.
+     */
+    public com.google.protobuf.Duration getContinuousBufferDuration() {
+      if (continuousBufferDurationBuilder_ == null) {
+        return continuousBufferDuration_ == null ? com.google.protobuf.Duration.getDefaultInstance() : continuousBufferDuration_;
+      } else {
+        return continuousBufferDurationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public Builder setContinuousBufferDuration(com.google.protobuf.Duration value) {
+      if (continuousBufferDurationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        continuousBufferDuration_ = value;
+      } else {
+        continuousBufferDurationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public Builder setContinuousBufferDuration(
+        com.google.protobuf.Duration.Builder builderForValue) {
+      if (continuousBufferDurationBuilder_ == null) {
+        continuousBufferDuration_ = builderForValue.build();
+      } else {
+        continuousBufferDurationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public Builder mergeContinuousBufferDuration(com.google.protobuf.Duration value) {
+      if (continuousBufferDurationBuilder_ == null) {
+        if (((bitField0_ & 0x00000800) != 0) &&
+          continuousBufferDuration_ != null &&
+          continuousBufferDuration_ != com.google.protobuf.Duration.getDefaultInstance()) {
+          getContinuousBufferDurationBuilder().mergeFrom(value);
+        } else {
+          continuousBufferDuration_ = value;
+        }
+      } else {
+        continuousBufferDurationBuilder_.mergeFrom(value);
+      }
+      if (continuousBufferDuration_ != null) {
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public Builder clearContinuousBufferDuration() {
+      bitField0_ = (bitField0_ & ~0x00000800);
+      continuousBufferDuration_ = null;
+      if (continuousBufferDurationBuilder_ != null) {
+        continuousBufferDurationBuilder_.dispose();
+        continuousBufferDurationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public com.google.protobuf.Duration.Builder getContinuousBufferDurationBuilder() {
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return getContinuousBufferDurationFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    public com.google.protobuf.DurationOrBuilder getContinuousBufferDurationOrBuilder() {
+      if (continuousBufferDurationBuilder_ != null) {
+        return continuousBufferDurationBuilder_.getMessageOrBuilder();
+      } else {
+        return continuousBufferDuration_ == null ?
+            com.google.protobuf.Duration.getDefaultInstance() : continuousBufferDuration_;
+      }
+    }
+    /**
+     * <pre>
+     * The period for which to use the continuous resolver, instead
+     * of relying upon the last backfill. If not provided, and a continuous
+     * resolver is provided, this will be set to backfill_lookback_duration.
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Duration continuous_buffer_duration = 12 [json_name = "continuousBufferDuration"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder> 
+        getContinuousBufferDurationFieldBuilder() {
+      if (continuousBufferDurationBuilder_ == null) {
+        continuousBufferDurationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Duration, com.google.protobuf.Duration.Builder, com.google.protobuf.DurationOrBuilder>(
+                getContinuousBufferDuration(),
+                getParentForChildren(),
+                isClean());
+        continuousBufferDuration_ = null;
+      }
+      return continuousBufferDurationBuilder_;
+    }
+
+    private java.lang.Object backfillSchedule_ = "";
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @return Whether the backfillSchedule field is set.
+     */
+    public boolean hasBackfillSchedule() {
+      return ((bitField0_ & 0x00001000) != 0);
+    }
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @return The backfillSchedule.
+     */
+    public java.lang.String getBackfillSchedule() {
+      java.lang.Object ref = backfillSchedule_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        backfillSchedule_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @return The bytes for backfillSchedule.
+     */
+    public com.google.protobuf.ByteString
+        getBackfillScheduleBytes() {
+      java.lang.Object ref = backfillSchedule_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        backfillSchedule_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @param value The backfillSchedule to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackfillSchedule(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      backfillSchedule_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBackfillSchedule() {
+      backfillSchedule_ = getDefaultInstance().getBackfillSchedule();
+      bitField0_ = (bitField0_ & ~0x00001000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * A crontab or duration string to specify the schedule for back filling the
+     * materialized aggregate.
+     * </pre>
+     *
+     * <code>optional string backfill_schedule = 13 [json_name = "backfillSchedule"];</code>
+     * @param value The bytes for backfillSchedule to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBackfillScheduleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      backfillSchedule_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

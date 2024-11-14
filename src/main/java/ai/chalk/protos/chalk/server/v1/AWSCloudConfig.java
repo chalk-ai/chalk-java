@@ -208,81 +208,93 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int CLOUD_WATCH_CONFIG_FIELD_NUMBER = 5;
-  private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig cloudWatchConfig_;
+  public static final int DEPRECATED_CLOUD_WATCH_CONFIG_FIELD_NUMBER = 5;
+  private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig deprecatedCloudWatchConfig_;
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-   * @return Whether the cloudWatchConfig field is set.
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=52
+   * @return Whether the deprecatedCloudWatchConfig field is set.
    */
   @java.lang.Override
-  public boolean hasCloudWatchConfig() {
+  @java.lang.Deprecated public boolean hasDeprecatedCloudWatchConfig() {
     return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-   * @return The cloudWatchConfig.
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=52
+   * @return The deprecatedCloudWatchConfig.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudWatchConfig() {
-    return cloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudWatchConfig_;
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getDeprecatedCloudWatchConfig() {
+    return deprecatedCloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : deprecatedCloudWatchConfig_;
   }
   /**
-   * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+   * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudWatchConfigOrBuilder() {
-    return cloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudWatchConfig_;
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getDeprecatedCloudWatchConfigOrBuilder() {
+    return deprecatedCloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : deprecatedCloudWatchConfig_;
   }
 
-  public static final int SECRET_MANAGER_CONFIG_FIELD_NUMBER = 6;
-  private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig secretManagerConfig_;
+  public static final int DEPRECATED_SECRET_MANAGER_CONFIG_FIELD_NUMBER = 6;
+  private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig deprecatedSecretManagerConfig_;
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-   * @return Whether the secretManagerConfig field is set.
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=53
+   * @return Whether the deprecatedSecretManagerConfig field is set.
    */
   @java.lang.Override
-  public boolean hasSecretManagerConfig() {
+  @java.lang.Deprecated public boolean hasDeprecatedSecretManagerConfig() {
     return ((bitField0_ & 0x00000004) != 0);
   }
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-   * @return The secretManagerConfig.
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+   *     See chalk/server/v1/environment.proto;l=53
+   * @return The deprecatedSecretManagerConfig.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretManagerConfig() {
-    return secretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretManagerConfig_;
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getDeprecatedSecretManagerConfig() {
+    return deprecatedSecretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : deprecatedSecretManagerConfig_;
   }
   /**
-   * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+   * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretManagerConfigOrBuilder() {
-    return secretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretManagerConfig_;
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getDeprecatedSecretManagerConfigOrBuilder() {
+    return deprecatedSecretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : deprecatedSecretManagerConfig_;
   }
 
   public static final int WORKLOAD_IDENTITY_FIELD_NUMBER = 7;
   private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity workloadIdentity_;
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+   *     See chalk/server/v1/environment.proto;l=54
    * @return Whether the workloadIdentity field is set.
    */
   @java.lang.Override
-  public boolean hasWorkloadIdentity() {
+  @java.lang.Deprecated public boolean hasWorkloadIdentity() {
     return ((bitField0_ & 0x00000008) != 0);
   }
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+   * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+   *     See chalk/server/v1/environment.proto;l=54
    * @return The workloadIdentity.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
     return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
   }
   /**
-   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+   * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
     return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
   }
 
@@ -338,6 +350,84 @@ private static final long serialVersionUID = 0L;
     return elasticsearchLogConfig_ == null ? ai.chalk.protos.chalk.server.v1.ElasticsearchLogConfig.getDefaultInstance() : elasticsearchLogConfig_;
   }
 
+  public static final int CLOUDWATCH_CONFIG_FIELD_NUMBER = 10;
+  private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig cloudwatchConfig_;
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   * @return Whether the cloudwatchConfig field is set.
+   */
+  @java.lang.Override
+  public boolean hasCloudwatchConfig() {
+    return ((bitField0_ & 0x00000040) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   * @return The cloudwatchConfig.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudwatchConfig() {
+    return cloudwatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudwatchConfig_;
+  }
+  /**
+   * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudwatchConfigOrBuilder() {
+    return cloudwatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudwatchConfig_;
+  }
+
+  public static final int SECRETMANAGER_CONFIG_FIELD_NUMBER = 11;
+  private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig secretmanagerConfig_;
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   * @return Whether the secretmanagerConfig field is set.
+   */
+  @java.lang.Override
+  public boolean hasSecretmanagerConfig() {
+    return ((bitField0_ & 0x00000080) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   * @return The secretmanagerConfig.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretmanagerConfig() {
+    return secretmanagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretmanagerConfig_;
+  }
+  /**
+   * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretmanagerConfigOrBuilder() {
+    return secretmanagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretmanagerConfig_;
+  }
+
+  public static final int GCP_WORKLOAD_IDENTITY_FIELD_NUMBER = 12;
+  private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity gcpWorkloadIdentity_;
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   * @return Whether the gcpWorkloadIdentity field is set.
+   */
+  @java.lang.Override
+  public boolean hasGcpWorkloadIdentity() {
+    return ((bitField0_ & 0x00000100) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   * @return The gcpWorkloadIdentity.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getGcpWorkloadIdentity() {
+    return gcpWorkloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : gcpWorkloadIdentity_;
+  }
+  /**
+   * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getGcpWorkloadIdentityOrBuilder() {
+    return gcpWorkloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : gcpWorkloadIdentity_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -365,10 +455,10 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, externalId_);
     }
     if (((bitField0_ & 0x00000002) != 0)) {
-      output.writeMessage(5, getCloudWatchConfig());
+      output.writeMessage(5, getDeprecatedCloudWatchConfig());
     }
     if (((bitField0_ & 0x00000004) != 0)) {
-      output.writeMessage(6, getSecretManagerConfig());
+      output.writeMessage(6, getDeprecatedSecretManagerConfig());
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(7, getWorkloadIdentity());
@@ -378,6 +468,15 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000020) != 0)) {
       output.writeMessage(9, getElasticsearchLogConfig());
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      output.writeMessage(10, getCloudwatchConfig());
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      output.writeMessage(11, getSecretmanagerConfig());
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      output.writeMessage(12, getGcpWorkloadIdentity());
     }
     getUnknownFields().writeTo(output);
   }
@@ -402,11 +501,11 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getCloudWatchConfig());
+        .computeMessageSize(5, getDeprecatedCloudWatchConfig());
     }
     if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getSecretManagerConfig());
+        .computeMessageSize(6, getDeprecatedSecretManagerConfig());
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.CodedOutputStream
@@ -419,6 +518,18 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000020) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(9, getElasticsearchLogConfig());
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, getCloudwatchConfig());
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(11, getSecretmanagerConfig());
+    }
+    if (((bitField0_ & 0x00000100) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(12, getGcpWorkloadIdentity());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -446,15 +557,15 @@ private static final long serialVersionUID = 0L;
       if (!getExternalId()
           .equals(other.getExternalId())) return false;
     }
-    if (hasCloudWatchConfig() != other.hasCloudWatchConfig()) return false;
-    if (hasCloudWatchConfig()) {
-      if (!getCloudWatchConfig()
-          .equals(other.getCloudWatchConfig())) return false;
+    if (hasDeprecatedCloudWatchConfig() != other.hasDeprecatedCloudWatchConfig()) return false;
+    if (hasDeprecatedCloudWatchConfig()) {
+      if (!getDeprecatedCloudWatchConfig()
+          .equals(other.getDeprecatedCloudWatchConfig())) return false;
     }
-    if (hasSecretManagerConfig() != other.hasSecretManagerConfig()) return false;
-    if (hasSecretManagerConfig()) {
-      if (!getSecretManagerConfig()
-          .equals(other.getSecretManagerConfig())) return false;
+    if (hasDeprecatedSecretManagerConfig() != other.hasDeprecatedSecretManagerConfig()) return false;
+    if (hasDeprecatedSecretManagerConfig()) {
+      if (!getDeprecatedSecretManagerConfig()
+          .equals(other.getDeprecatedSecretManagerConfig())) return false;
     }
     if (hasWorkloadIdentity() != other.hasWorkloadIdentity()) return false;
     if (hasWorkloadIdentity()) {
@@ -470,6 +581,21 @@ private static final long serialVersionUID = 0L;
     if (hasElasticsearchLogConfig()) {
       if (!getElasticsearchLogConfig()
           .equals(other.getElasticsearchLogConfig())) return false;
+    }
+    if (hasCloudwatchConfig() != other.hasCloudwatchConfig()) return false;
+    if (hasCloudwatchConfig()) {
+      if (!getCloudwatchConfig()
+          .equals(other.getCloudwatchConfig())) return false;
+    }
+    if (hasSecretmanagerConfig() != other.hasSecretmanagerConfig()) return false;
+    if (hasSecretmanagerConfig()) {
+      if (!getSecretmanagerConfig()
+          .equals(other.getSecretmanagerConfig())) return false;
+    }
+    if (hasGcpWorkloadIdentity() != other.hasGcpWorkloadIdentity()) return false;
+    if (hasGcpWorkloadIdentity()) {
+      if (!getGcpWorkloadIdentity()
+          .equals(other.getGcpWorkloadIdentity())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -492,13 +618,13 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
       hash = (53 * hash) + getExternalId().hashCode();
     }
-    if (hasCloudWatchConfig()) {
-      hash = (37 * hash) + CLOUD_WATCH_CONFIG_FIELD_NUMBER;
-      hash = (53 * hash) + getCloudWatchConfig().hashCode();
+    if (hasDeprecatedCloudWatchConfig()) {
+      hash = (37 * hash) + DEPRECATED_CLOUD_WATCH_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getDeprecatedCloudWatchConfig().hashCode();
     }
-    if (hasSecretManagerConfig()) {
-      hash = (37 * hash) + SECRET_MANAGER_CONFIG_FIELD_NUMBER;
-      hash = (53 * hash) + getSecretManagerConfig().hashCode();
+    if (hasDeprecatedSecretManagerConfig()) {
+      hash = (37 * hash) + DEPRECATED_SECRET_MANAGER_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getDeprecatedSecretManagerConfig().hashCode();
     }
     if (hasWorkloadIdentity()) {
       hash = (37 * hash) + WORKLOAD_IDENTITY_FIELD_NUMBER;
@@ -511,6 +637,18 @@ private static final long serialVersionUID = 0L;
     if (hasElasticsearchLogConfig()) {
       hash = (37 * hash) + ELASTICSEARCH_LOG_CONFIG_FIELD_NUMBER;
       hash = (53 * hash) + getElasticsearchLogConfig().hashCode();
+    }
+    if (hasCloudwatchConfig()) {
+      hash = (37 * hash) + CLOUDWATCH_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getCloudwatchConfig().hashCode();
+    }
+    if (hasSecretmanagerConfig()) {
+      hash = (37 * hash) + SECRETMANAGER_CONFIG_FIELD_NUMBER;
+      hash = (53 * hash) + getSecretmanagerConfig().hashCode();
+    }
+    if (hasGcpWorkloadIdentity()) {
+      hash = (37 * hash) + GCP_WORKLOAD_IDENTITY_FIELD_NUMBER;
+      hash = (53 * hash) + getGcpWorkloadIdentity().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -642,11 +780,14 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getCloudWatchConfigFieldBuilder();
-        getSecretManagerConfigFieldBuilder();
+        getDeprecatedCloudWatchConfigFieldBuilder();
+        getDeprecatedSecretManagerConfigFieldBuilder();
         getWorkloadIdentityFieldBuilder();
         getDockerBuildConfigFieldBuilder();
         getElasticsearchLogConfigFieldBuilder();
+        getCloudwatchConfigFieldBuilder();
+        getSecretmanagerConfigFieldBuilder();
+        getGcpWorkloadIdentityFieldBuilder();
       }
     }
     @java.lang.Override
@@ -657,15 +798,15 @@ private static final long serialVersionUID = 0L;
       managementRoleArn_ = "";
       region_ = "";
       externalId_ = "";
-      cloudWatchConfig_ = null;
-      if (cloudWatchConfigBuilder_ != null) {
-        cloudWatchConfigBuilder_.dispose();
-        cloudWatchConfigBuilder_ = null;
+      deprecatedCloudWatchConfig_ = null;
+      if (deprecatedCloudWatchConfigBuilder_ != null) {
+        deprecatedCloudWatchConfigBuilder_.dispose();
+        deprecatedCloudWatchConfigBuilder_ = null;
       }
-      secretManagerConfig_ = null;
-      if (secretManagerConfigBuilder_ != null) {
-        secretManagerConfigBuilder_.dispose();
-        secretManagerConfigBuilder_ = null;
+      deprecatedSecretManagerConfig_ = null;
+      if (deprecatedSecretManagerConfigBuilder_ != null) {
+        deprecatedSecretManagerConfigBuilder_.dispose();
+        deprecatedSecretManagerConfigBuilder_ = null;
       }
       workloadIdentity_ = null;
       if (workloadIdentityBuilder_ != null) {
@@ -681,6 +822,21 @@ private static final long serialVersionUID = 0L;
       if (elasticsearchLogConfigBuilder_ != null) {
         elasticsearchLogConfigBuilder_.dispose();
         elasticsearchLogConfigBuilder_ = null;
+      }
+      cloudwatchConfig_ = null;
+      if (cloudwatchConfigBuilder_ != null) {
+        cloudwatchConfigBuilder_.dispose();
+        cloudwatchConfigBuilder_ = null;
+      }
+      secretmanagerConfig_ = null;
+      if (secretmanagerConfigBuilder_ != null) {
+        secretmanagerConfigBuilder_.dispose();
+        secretmanagerConfigBuilder_ = null;
+      }
+      gcpWorkloadIdentity_ = null;
+      if (gcpWorkloadIdentityBuilder_ != null) {
+        gcpWorkloadIdentityBuilder_.dispose();
+        gcpWorkloadIdentityBuilder_ = null;
       }
       return this;
     }
@@ -730,15 +886,15 @@ private static final long serialVersionUID = 0L;
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.cloudWatchConfig_ = cloudWatchConfigBuilder_ == null
-            ? cloudWatchConfig_
-            : cloudWatchConfigBuilder_.build();
+        result.deprecatedCloudWatchConfig_ = deprecatedCloudWatchConfigBuilder_ == null
+            ? deprecatedCloudWatchConfig_
+            : deprecatedCloudWatchConfigBuilder_.build();
         to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.secretManagerConfig_ = secretManagerConfigBuilder_ == null
-            ? secretManagerConfig_
-            : secretManagerConfigBuilder_.build();
+        result.deprecatedSecretManagerConfig_ = deprecatedSecretManagerConfigBuilder_ == null
+            ? deprecatedSecretManagerConfig_
+            : deprecatedSecretManagerConfigBuilder_.build();
         to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000040) != 0)) {
@@ -758,6 +914,24 @@ private static final long serialVersionUID = 0L;
             ? elasticsearchLogConfig_
             : elasticsearchLogConfigBuilder_.build();
         to_bitField0_ |= 0x00000020;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.cloudwatchConfig_ = cloudwatchConfigBuilder_ == null
+            ? cloudwatchConfig_
+            : cloudwatchConfigBuilder_.build();
+        to_bitField0_ |= 0x00000040;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.secretmanagerConfig_ = secretmanagerConfigBuilder_ == null
+            ? secretmanagerConfig_
+            : secretmanagerConfigBuilder_.build();
+        to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.gcpWorkloadIdentity_ = gcpWorkloadIdentityBuilder_ == null
+            ? gcpWorkloadIdentity_
+            : gcpWorkloadIdentityBuilder_.build();
+        to_bitField0_ |= 0x00000100;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -826,11 +1000,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000008;
         onChanged();
       }
-      if (other.hasCloudWatchConfig()) {
-        mergeCloudWatchConfig(other.getCloudWatchConfig());
+      if (other.hasDeprecatedCloudWatchConfig()) {
+        mergeDeprecatedCloudWatchConfig(other.getDeprecatedCloudWatchConfig());
       }
-      if (other.hasSecretManagerConfig()) {
-        mergeSecretManagerConfig(other.getSecretManagerConfig());
+      if (other.hasDeprecatedSecretManagerConfig()) {
+        mergeDeprecatedSecretManagerConfig(other.getDeprecatedSecretManagerConfig());
       }
       if (other.hasWorkloadIdentity()) {
         mergeWorkloadIdentity(other.getWorkloadIdentity());
@@ -840,6 +1014,15 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasElasticsearchLogConfig()) {
         mergeElasticsearchLogConfig(other.getElasticsearchLogConfig());
+      }
+      if (other.hasCloudwatchConfig()) {
+        mergeCloudwatchConfig(other.getCloudwatchConfig());
+      }
+      if (other.hasSecretmanagerConfig()) {
+        mergeSecretmanagerConfig(other.getSecretmanagerConfig());
+      }
+      if (other.hasGcpWorkloadIdentity()) {
+        mergeGcpWorkloadIdentity(other.getGcpWorkloadIdentity());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -889,14 +1072,14 @@ private static final long serialVersionUID = 0L;
             } // case 34
             case 42: {
               input.readMessage(
-                  getCloudWatchConfigFieldBuilder().getBuilder(),
+                  getDeprecatedCloudWatchConfigFieldBuilder().getBuilder(),
                   extensionRegistry);
               bitField0_ |= 0x00000010;
               break;
             } // case 42
             case 50: {
               input.readMessage(
-                  getSecretManagerConfigFieldBuilder().getBuilder(),
+                  getDeprecatedSecretManagerConfigFieldBuilder().getBuilder(),
                   extensionRegistry);
               bitField0_ |= 0x00000020;
               break;
@@ -922,6 +1105,27 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              input.readMessage(
+                  getCloudwatchConfigFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
+            case 90: {
+              input.readMessage(
+                  getSecretmanagerConfigFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
+            case 98: {
+              input.readMessage(
+                  getGcpWorkloadIdentityFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 98
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1234,263 +1438,275 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig cloudWatchConfig_;
+    private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig deprecatedCloudWatchConfig_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder> cloudWatchConfigBuilder_;
+        ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder> deprecatedCloudWatchConfigBuilder_;
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-     * @return Whether the cloudWatchConfig field is set.
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+     *     See chalk/server/v1/environment.proto;l=52
+     * @return Whether the deprecatedCloudWatchConfig field is set.
      */
-    public boolean hasCloudWatchConfig() {
+    @java.lang.Deprecated public boolean hasDeprecatedCloudWatchConfig() {
       return ((bitField0_ & 0x00000010) != 0);
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
-     * @return The cloudWatchConfig.
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_cloud_watch_config is deprecated.
+     *     See chalk/server/v1/environment.proto;l=52
+     * @return The deprecatedCloudWatchConfig.
      */
-    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudWatchConfig() {
-      if (cloudWatchConfigBuilder_ == null) {
-        return cloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudWatchConfig_;
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getDeprecatedCloudWatchConfig() {
+      if (deprecatedCloudWatchConfigBuilder_ == null) {
+        return deprecatedCloudWatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : deprecatedCloudWatchConfig_;
       } else {
-        return cloudWatchConfigBuilder_.getMessage();
+        return deprecatedCloudWatchConfigBuilder_.getMessage();
       }
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public Builder setCloudWatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
-      if (cloudWatchConfigBuilder_ == null) {
+    @java.lang.Deprecated public Builder setDeprecatedCloudWatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
+      if (deprecatedCloudWatchConfigBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        cloudWatchConfig_ = value;
+        deprecatedCloudWatchConfig_ = value;
       } else {
-        cloudWatchConfigBuilder_.setMessage(value);
+        deprecatedCloudWatchConfigBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public Builder setCloudWatchConfig(
+    @java.lang.Deprecated public Builder setDeprecatedCloudWatchConfig(
         ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder builderForValue) {
-      if (cloudWatchConfigBuilder_ == null) {
-        cloudWatchConfig_ = builderForValue.build();
+      if (deprecatedCloudWatchConfigBuilder_ == null) {
+        deprecatedCloudWatchConfig_ = builderForValue.build();
       } else {
-        cloudWatchConfigBuilder_.setMessage(builderForValue.build());
+        deprecatedCloudWatchConfigBuilder_.setMessage(builderForValue.build());
       }
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public Builder mergeCloudWatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
-      if (cloudWatchConfigBuilder_ == null) {
+    @java.lang.Deprecated public Builder mergeDeprecatedCloudWatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
+      if (deprecatedCloudWatchConfigBuilder_ == null) {
         if (((bitField0_ & 0x00000010) != 0) &&
-          cloudWatchConfig_ != null &&
-          cloudWatchConfig_ != ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance()) {
-          getCloudWatchConfigBuilder().mergeFrom(value);
+          deprecatedCloudWatchConfig_ != null &&
+          deprecatedCloudWatchConfig_ != ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance()) {
+          getDeprecatedCloudWatchConfigBuilder().mergeFrom(value);
         } else {
-          cloudWatchConfig_ = value;
+          deprecatedCloudWatchConfig_ = value;
         }
       } else {
-        cloudWatchConfigBuilder_.mergeFrom(value);
+        deprecatedCloudWatchConfigBuilder_.mergeFrom(value);
       }
-      if (cloudWatchConfig_ != null) {
+      if (deprecatedCloudWatchConfig_ != null) {
         bitField0_ |= 0x00000010;
         onChanged();
       }
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public Builder clearCloudWatchConfig() {
+    @java.lang.Deprecated public Builder clearDeprecatedCloudWatchConfig() {
       bitField0_ = (bitField0_ & ~0x00000010);
-      cloudWatchConfig_ = null;
-      if (cloudWatchConfigBuilder_ != null) {
-        cloudWatchConfigBuilder_.dispose();
-        cloudWatchConfigBuilder_ = null;
+      deprecatedCloudWatchConfig_ = null;
+      if (deprecatedCloudWatchConfigBuilder_ != null) {
+        deprecatedCloudWatchConfigBuilder_.dispose();
+        deprecatedCloudWatchConfigBuilder_ = null;
       }
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder getCloudWatchConfigBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder getDeprecatedCloudWatchConfigBuilder() {
       bitField0_ |= 0x00000010;
       onChanged();
-      return getCloudWatchConfigFieldBuilder().getBuilder();
+      return getDeprecatedCloudWatchConfigFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudWatchConfigOrBuilder() {
-      if (cloudWatchConfigBuilder_ != null) {
-        return cloudWatchConfigBuilder_.getMessageOrBuilder();
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getDeprecatedCloudWatchConfigOrBuilder() {
+      if (deprecatedCloudWatchConfigBuilder_ != null) {
+        return deprecatedCloudWatchConfigBuilder_.getMessageOrBuilder();
       } else {
-        return cloudWatchConfig_ == null ?
-            ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudWatchConfig_;
+        return deprecatedCloudWatchConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : deprecatedCloudWatchConfig_;
       }
     }
     /**
-     * <code>.chalk.server.v1.AWSCloudWatchConfig cloud_watch_config = 5 [json_name = "cloudWatchConfig"];</code>
+     * <code>.chalk.server.v1.AWSCloudWatchConfig deprecated_cloud_watch_config = 5 [json_name = "deprecatedCloudWatchConfig", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder> 
-        getCloudWatchConfigFieldBuilder() {
-      if (cloudWatchConfigBuilder_ == null) {
-        cloudWatchConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getDeprecatedCloudWatchConfigFieldBuilder() {
+      if (deprecatedCloudWatchConfigBuilder_ == null) {
+        deprecatedCloudWatchConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder>(
-                getCloudWatchConfig(),
+                getDeprecatedCloudWatchConfig(),
                 getParentForChildren(),
                 isClean());
-        cloudWatchConfig_ = null;
+        deprecatedCloudWatchConfig_ = null;
       }
-      return cloudWatchConfigBuilder_;
+      return deprecatedCloudWatchConfigBuilder_;
     }
 
-    private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig secretManagerConfig_;
+    private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig deprecatedSecretManagerConfig_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder> secretManagerConfigBuilder_;
+        ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder> deprecatedSecretManagerConfigBuilder_;
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-     * @return Whether the secretManagerConfig field is set.
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+     *     See chalk/server/v1/environment.proto;l=53
+     * @return Whether the deprecatedSecretManagerConfig field is set.
      */
-    public boolean hasSecretManagerConfig() {
+    @java.lang.Deprecated public boolean hasDeprecatedSecretManagerConfig() {
       return ((bitField0_ & 0x00000020) != 0);
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
-     * @return The secretManagerConfig.
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.deprecated_secret_manager_config is deprecated.
+     *     See chalk/server/v1/environment.proto;l=53
+     * @return The deprecatedSecretManagerConfig.
      */
-    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretManagerConfig() {
-      if (secretManagerConfigBuilder_ == null) {
-        return secretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretManagerConfig_;
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getDeprecatedSecretManagerConfig() {
+      if (deprecatedSecretManagerConfigBuilder_ == null) {
+        return deprecatedSecretManagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : deprecatedSecretManagerConfig_;
       } else {
-        return secretManagerConfigBuilder_.getMessage();
+        return deprecatedSecretManagerConfigBuilder_.getMessage();
       }
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public Builder setSecretManagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
-      if (secretManagerConfigBuilder_ == null) {
+    @java.lang.Deprecated public Builder setDeprecatedSecretManagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
+      if (deprecatedSecretManagerConfigBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        secretManagerConfig_ = value;
+        deprecatedSecretManagerConfig_ = value;
       } else {
-        secretManagerConfigBuilder_.setMessage(value);
+        deprecatedSecretManagerConfigBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public Builder setSecretManagerConfig(
+    @java.lang.Deprecated public Builder setDeprecatedSecretManagerConfig(
         ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder builderForValue) {
-      if (secretManagerConfigBuilder_ == null) {
-        secretManagerConfig_ = builderForValue.build();
+      if (deprecatedSecretManagerConfigBuilder_ == null) {
+        deprecatedSecretManagerConfig_ = builderForValue.build();
       } else {
-        secretManagerConfigBuilder_.setMessage(builderForValue.build());
+        deprecatedSecretManagerConfigBuilder_.setMessage(builderForValue.build());
       }
       bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public Builder mergeSecretManagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
-      if (secretManagerConfigBuilder_ == null) {
+    @java.lang.Deprecated public Builder mergeDeprecatedSecretManagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
+      if (deprecatedSecretManagerConfigBuilder_ == null) {
         if (((bitField0_ & 0x00000020) != 0) &&
-          secretManagerConfig_ != null &&
-          secretManagerConfig_ != ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance()) {
-          getSecretManagerConfigBuilder().mergeFrom(value);
+          deprecatedSecretManagerConfig_ != null &&
+          deprecatedSecretManagerConfig_ != ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance()) {
+          getDeprecatedSecretManagerConfigBuilder().mergeFrom(value);
         } else {
-          secretManagerConfig_ = value;
+          deprecatedSecretManagerConfig_ = value;
         }
       } else {
-        secretManagerConfigBuilder_.mergeFrom(value);
+        deprecatedSecretManagerConfigBuilder_.mergeFrom(value);
       }
-      if (secretManagerConfig_ != null) {
+      if (deprecatedSecretManagerConfig_ != null) {
         bitField0_ |= 0x00000020;
         onChanged();
       }
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public Builder clearSecretManagerConfig() {
+    @java.lang.Deprecated public Builder clearDeprecatedSecretManagerConfig() {
       bitField0_ = (bitField0_ & ~0x00000020);
-      secretManagerConfig_ = null;
-      if (secretManagerConfigBuilder_ != null) {
-        secretManagerConfigBuilder_.dispose();
-        secretManagerConfigBuilder_ = null;
+      deprecatedSecretManagerConfig_ = null;
+      if (deprecatedSecretManagerConfigBuilder_ != null) {
+        deprecatedSecretManagerConfigBuilder_.dispose();
+        deprecatedSecretManagerConfigBuilder_ = null;
       }
       onChanged();
       return this;
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder getSecretManagerConfigBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder getDeprecatedSecretManagerConfigBuilder() {
       bitField0_ |= 0x00000020;
       onChanged();
-      return getSecretManagerConfigFieldBuilder().getBuilder();
+      return getDeprecatedSecretManagerConfigFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretManagerConfigOrBuilder() {
-      if (secretManagerConfigBuilder_ != null) {
-        return secretManagerConfigBuilder_.getMessageOrBuilder();
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getDeprecatedSecretManagerConfigOrBuilder() {
+      if (deprecatedSecretManagerConfigBuilder_ != null) {
+        return deprecatedSecretManagerConfigBuilder_.getMessageOrBuilder();
       } else {
-        return secretManagerConfig_ == null ?
-            ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretManagerConfig_;
+        return deprecatedSecretManagerConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : deprecatedSecretManagerConfig_;
       }
     }
     /**
-     * <code>.chalk.server.v1.AWSSecretManagerConfig secret_manager_config = 6 [json_name = "secretManagerConfig"];</code>
+     * <code>.chalk.server.v1.AWSSecretManagerConfig deprecated_secret_manager_config = 6 [json_name = "deprecatedSecretManagerConfig", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder> 
-        getSecretManagerConfigFieldBuilder() {
-      if (secretManagerConfigBuilder_ == null) {
-        secretManagerConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getDeprecatedSecretManagerConfigFieldBuilder() {
+      if (deprecatedSecretManagerConfigBuilder_ == null) {
+        deprecatedSecretManagerConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder>(
-                getSecretManagerConfig(),
+                getDeprecatedSecretManagerConfig(),
                 getParentForChildren(),
                 isClean());
-        secretManagerConfig_ = null;
+        deprecatedSecretManagerConfig_ = null;
       }
-      return secretManagerConfigBuilder_;
+      return deprecatedSecretManagerConfigBuilder_;
     }
 
     private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity workloadIdentity_;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> workloadIdentityBuilder_;
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+     *     See chalk/server/v1/environment.proto;l=54
      * @return Whether the workloadIdentity field is set.
      */
-    public boolean hasWorkloadIdentity() {
+    @java.lang.Deprecated public boolean hasWorkloadIdentity() {
       return ((bitField0_ & 0x00000040) != 0);
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
+     * @deprecated chalk.server.v1.AWSCloudConfig.workload_identity is deprecated.
+     *     See chalk/server/v1/environment.proto;l=54
      * @return The workloadIdentity.
      */
-    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getWorkloadIdentity() {
       if (workloadIdentityBuilder_ == null) {
         return workloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : workloadIdentity_;
       } else {
@@ -1498,9 +1714,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public Builder setWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+    @java.lang.Deprecated public Builder setWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
       if (workloadIdentityBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -1514,9 +1730,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public Builder setWorkloadIdentity(
+    @java.lang.Deprecated public Builder setWorkloadIdentity(
         ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder builderForValue) {
       if (workloadIdentityBuilder_ == null) {
         workloadIdentity_ = builderForValue.build();
@@ -1528,9 +1744,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public Builder mergeWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+    @java.lang.Deprecated public Builder mergeWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
       if (workloadIdentityBuilder_ == null) {
         if (((bitField0_ & 0x00000040) != 0) &&
           workloadIdentity_ != null &&
@@ -1549,9 +1765,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public Builder clearWorkloadIdentity() {
+    @java.lang.Deprecated public Builder clearWorkloadIdentity() {
       bitField0_ = (bitField0_ & ~0x00000040);
       workloadIdentity_ = null;
       if (workloadIdentityBuilder_ != null) {
@@ -1562,17 +1778,17 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder getWorkloadIdentityBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder getWorkloadIdentityBuilder() {
       bitField0_ |= 0x00000040;
       onChanged();
       return getWorkloadIdentityFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getWorkloadIdentityOrBuilder() {
       if (workloadIdentityBuilder_ != null) {
         return workloadIdentityBuilder_.getMessageOrBuilder();
       } else {
@@ -1581,7 +1797,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity"];</code>
+     * <code>.chalk.server.v1.GCPWorkloadIdentity workload_identity = 7 [json_name = "workloadIdentity", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> 
@@ -1837,6 +2053,369 @@ private static final long serialVersionUID = 0L;
         elasticsearchLogConfig_ = null;
       }
       return elasticsearchLogConfigBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig cloudwatchConfig_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder> cloudwatchConfigBuilder_;
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     * @return Whether the cloudwatchConfig field is set.
+     */
+    public boolean hasCloudwatchConfig() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     * @return The cloudwatchConfig.
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig getCloudwatchConfig() {
+      if (cloudwatchConfigBuilder_ == null) {
+        return cloudwatchConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudwatchConfig_;
+      } else {
+        return cloudwatchConfigBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public Builder setCloudwatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
+      if (cloudwatchConfigBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        cloudwatchConfig_ = value;
+      } else {
+        cloudwatchConfigBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public Builder setCloudwatchConfig(
+        ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder builderForValue) {
+      if (cloudwatchConfigBuilder_ == null) {
+        cloudwatchConfig_ = builderForValue.build();
+      } else {
+        cloudwatchConfigBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public Builder mergeCloudwatchConfig(ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig value) {
+      if (cloudwatchConfigBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0) &&
+          cloudwatchConfig_ != null &&
+          cloudwatchConfig_ != ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance()) {
+          getCloudwatchConfigBuilder().mergeFrom(value);
+        } else {
+          cloudwatchConfig_ = value;
+        }
+      } else {
+        cloudwatchConfigBuilder_.mergeFrom(value);
+      }
+      if (cloudwatchConfig_ != null) {
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public Builder clearCloudwatchConfig() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      cloudwatchConfig_ = null;
+      if (cloudwatchConfigBuilder_ != null) {
+        cloudwatchConfigBuilder_.dispose();
+        cloudwatchConfigBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder getCloudwatchConfigBuilder() {
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return getCloudwatchConfigFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder getCloudwatchConfigOrBuilder() {
+      if (cloudwatchConfigBuilder_ != null) {
+        return cloudwatchConfigBuilder_.getMessageOrBuilder();
+      } else {
+        return cloudwatchConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.getDefaultInstance() : cloudwatchConfig_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.AWSCloudWatchConfig cloudwatch_config = 10 [json_name = "cloudwatchConfig"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder> 
+        getCloudwatchConfigFieldBuilder() {
+      if (cloudwatchConfigBuilder_ == null) {
+        cloudwatchConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSCloudWatchConfigOrBuilder>(
+                getCloudwatchConfig(),
+                getParentForChildren(),
+                isClean());
+        cloudwatchConfig_ = null;
+      }
+      return cloudwatchConfigBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig secretmanagerConfig_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder> secretmanagerConfigBuilder_;
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     * @return Whether the secretmanagerConfig field is set.
+     */
+    public boolean hasSecretmanagerConfig() {
+      return ((bitField0_ & 0x00000400) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     * @return The secretmanagerConfig.
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig getSecretmanagerConfig() {
+      if (secretmanagerConfigBuilder_ == null) {
+        return secretmanagerConfig_ == null ? ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretmanagerConfig_;
+      } else {
+        return secretmanagerConfigBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public Builder setSecretmanagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
+      if (secretmanagerConfigBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        secretmanagerConfig_ = value;
+      } else {
+        secretmanagerConfigBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public Builder setSecretmanagerConfig(
+        ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder builderForValue) {
+      if (secretmanagerConfigBuilder_ == null) {
+        secretmanagerConfig_ = builderForValue.build();
+      } else {
+        secretmanagerConfigBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public Builder mergeSecretmanagerConfig(ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig value) {
+      if (secretmanagerConfigBuilder_ == null) {
+        if (((bitField0_ & 0x00000400) != 0) &&
+          secretmanagerConfig_ != null &&
+          secretmanagerConfig_ != ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance()) {
+          getSecretmanagerConfigBuilder().mergeFrom(value);
+        } else {
+          secretmanagerConfig_ = value;
+        }
+      } else {
+        secretmanagerConfigBuilder_.mergeFrom(value);
+      }
+      if (secretmanagerConfig_ != null) {
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public Builder clearSecretmanagerConfig() {
+      bitField0_ = (bitField0_ & ~0x00000400);
+      secretmanagerConfig_ = null;
+      if (secretmanagerConfigBuilder_ != null) {
+        secretmanagerConfigBuilder_.dispose();
+        secretmanagerConfigBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder getSecretmanagerConfigBuilder() {
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return getSecretmanagerConfigFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder getSecretmanagerConfigOrBuilder() {
+      if (secretmanagerConfigBuilder_ != null) {
+        return secretmanagerConfigBuilder_.getMessageOrBuilder();
+      } else {
+        return secretmanagerConfig_ == null ?
+            ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.getDefaultInstance() : secretmanagerConfig_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.AWSSecretManagerConfig secretmanager_config = 11 [json_name = "secretmanagerConfig"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder> 
+        getSecretmanagerConfigFieldBuilder() {
+      if (secretmanagerConfigBuilder_ == null) {
+        secretmanagerConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfig.Builder, ai.chalk.protos.chalk.server.v1.AWSSecretManagerConfigOrBuilder>(
+                getSecretmanagerConfig(),
+                getParentForChildren(),
+                isClean());
+        secretmanagerConfig_ = null;
+      }
+      return secretmanagerConfigBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity gcpWorkloadIdentity_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> gcpWorkloadIdentityBuilder_;
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     * @return Whether the gcpWorkloadIdentity field is set.
+     */
+    public boolean hasGcpWorkloadIdentity() {
+      return ((bitField0_ & 0x00000800) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     * @return The gcpWorkloadIdentity.
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity getGcpWorkloadIdentity() {
+      if (gcpWorkloadIdentityBuilder_ == null) {
+        return gcpWorkloadIdentity_ == null ? ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : gcpWorkloadIdentity_;
+      } else {
+        return gcpWorkloadIdentityBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public Builder setGcpWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+      if (gcpWorkloadIdentityBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        gcpWorkloadIdentity_ = value;
+      } else {
+        gcpWorkloadIdentityBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public Builder setGcpWorkloadIdentity(
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder builderForValue) {
+      if (gcpWorkloadIdentityBuilder_ == null) {
+        gcpWorkloadIdentity_ = builderForValue.build();
+      } else {
+        gcpWorkloadIdentityBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public Builder mergeGcpWorkloadIdentity(ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity value) {
+      if (gcpWorkloadIdentityBuilder_ == null) {
+        if (((bitField0_ & 0x00000800) != 0) &&
+          gcpWorkloadIdentity_ != null &&
+          gcpWorkloadIdentity_ != ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance()) {
+          getGcpWorkloadIdentityBuilder().mergeFrom(value);
+        } else {
+          gcpWorkloadIdentity_ = value;
+        }
+      } else {
+        gcpWorkloadIdentityBuilder_.mergeFrom(value);
+      }
+      if (gcpWorkloadIdentity_ != null) {
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public Builder clearGcpWorkloadIdentity() {
+      bitField0_ = (bitField0_ & ~0x00000800);
+      gcpWorkloadIdentity_ = null;
+      if (gcpWorkloadIdentityBuilder_ != null) {
+        gcpWorkloadIdentityBuilder_.dispose();
+        gcpWorkloadIdentityBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder getGcpWorkloadIdentityBuilder() {
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return getGcpWorkloadIdentityFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder getGcpWorkloadIdentityOrBuilder() {
+      if (gcpWorkloadIdentityBuilder_ != null) {
+        return gcpWorkloadIdentityBuilder_.getMessageOrBuilder();
+      } else {
+        return gcpWorkloadIdentity_ == null ?
+            ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.getDefaultInstance() : gcpWorkloadIdentity_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.GCPWorkloadIdentity gcp_workload_identity = 12 [json_name = "gcpWorkloadIdentity"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder> 
+        getGcpWorkloadIdentityFieldBuilder() {
+      if (gcpWorkloadIdentityBuilder_ == null) {
+        gcpWorkloadIdentityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentity.Builder, ai.chalk.protos.chalk.server.v1.GCPWorkloadIdentityOrBuilder>(
+                getGcpWorkloadIdentity(),
+                getParentForChildren(),
+                isClean());
+        gcpWorkloadIdentity_ = null;
+      }
+      return gcpWorkloadIdentityBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

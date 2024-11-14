@@ -171,6 +171,37 @@ public final class QueryServiceGrpc {
     return getUploadFeaturesBulkMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest,
+      ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> getUploadFeaturesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UploadFeatures",
+      requestType = ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.class,
+      responseType = ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest,
+      ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> getUploadFeaturesMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest, ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> getUploadFeaturesMethod;
+    if ((getUploadFeaturesMethod = QueryServiceGrpc.getUploadFeaturesMethod) == null) {
+      synchronized (QueryServiceGrpc.class) {
+        if ((getUploadFeaturesMethod = QueryServiceGrpc.getUploadFeaturesMethod) == null) {
+          QueryServiceGrpc.getUploadFeaturesMethod = getUploadFeaturesMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest, ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UploadFeatures"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new QueryServiceMethodDescriptorSupplier("UploadFeatures"))
+              .build();
+        }
+      }
+    }
+    return getUploadFeaturesMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.PlanAggregateBackfillRequest,
       ai.chalk.protos.chalk.aggregate.v1.PlanAggregateBackfillResponse> getPlanAggregateBackfillMethod;
 
@@ -319,6 +350,13 @@ public final class QueryServiceGrpc {
     }
 
     /**
+     */
+    default void uploadFeatures(ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUploadFeaturesMethod(), responseObserver);
+    }
+
+    /**
      * <pre>
      * PlanAggregateBackfill determines the estimated resources needed to backfill
      * an aggregate.
@@ -415,6 +453,14 @@ public final class QueryServiceGrpc {
     }
 
     /**
+     */
+    public void uploadFeatures(ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUploadFeaturesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      * <pre>
      * PlanAggregateBackfill determines the estimated resources needed to backfill
      * an aggregate.
@@ -494,6 +540,13 @@ public final class QueryServiceGrpc {
     public ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse uploadFeaturesBulk(ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUploadFeaturesBulkMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse uploadFeatures(ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUploadFeaturesMethod(), getCallOptions(), request);
     }
 
     /**
@@ -582,6 +635,14 @@ public final class QueryServiceGrpc {
     }
 
     /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse> uploadFeatures(
+        ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUploadFeaturesMethod(), getCallOptions()), request);
+    }
+
+    /**
      * <pre>
      * PlanAggregateBackfill determines the estimated resources needed to backfill
      * an aggregate.
@@ -617,8 +678,9 @@ public final class QueryServiceGrpc {
   private static final int METHODID_ONLINE_QUERY_BULK = 2;
   private static final int METHODID_ONLINE_QUERY_MULTI = 3;
   private static final int METHODID_UPLOAD_FEATURES_BULK = 4;
-  private static final int METHODID_PLAN_AGGREGATE_BACKFILL = 5;
-  private static final int METHODID_GET_AGGREGATES = 6;
+  private static final int METHODID_UPLOAD_FEATURES = 5;
+  private static final int METHODID_PLAN_AGGREGATE_BACKFILL = 6;
+  private static final int METHODID_GET_AGGREGATES = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -656,6 +718,10 @@ public final class QueryServiceGrpc {
         case METHODID_UPLOAD_FEATURES_BULK:
           serviceImpl.uploadFeaturesBulk((ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse>) responseObserver);
+          break;
+        case METHODID_UPLOAD_FEATURES:
+          serviceImpl.uploadFeatures((ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse>) responseObserver);
           break;
         case METHODID_PLAN_AGGREGATE_BACKFILL:
           serviceImpl.planAggregateBackfill((ai.chalk.protos.chalk.aggregate.v1.PlanAggregateBackfillRequest) request,
@@ -718,6 +784,13 @@ public final class QueryServiceGrpc {
               ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkRequest,
               ai.chalk.protos.chalk.common.v1.UploadFeaturesBulkResponse>(
                 service, METHODID_UPLOAD_FEATURES_BULK)))
+        .addMethod(
+          getUploadFeaturesMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest,
+              ai.chalk.protos.chalk.common.v1.UploadFeaturesResponse>(
+                service, METHODID_UPLOAD_FEATURES)))
         .addMethod(
           getPlanAggregateBackfillMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -785,6 +858,7 @@ public final class QueryServiceGrpc {
               .addMethod(getOnlineQueryBulkMethod())
               .addMethod(getOnlineQueryMultiMethod())
               .addMethod(getUploadFeaturesBulkMethod())
+              .addMethod(getUploadFeaturesMethod())
               .addMethod(getPlanAggregateBackfillMethod())
               .addMethod(getGetAggregatesMethod())
               .build();

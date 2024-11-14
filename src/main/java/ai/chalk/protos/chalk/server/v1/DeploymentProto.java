@@ -39,43 +39,55 @@ public final class DeploymentProto {
       "roto\"\210\001\n\016InstanceSizing\022(\n\rmin_instances" +
       "\030\001 \001(\rH\000R\014minInstances\210\001\001\022(\n\rmax_instanc" +
       "es\030\002 \001(\rH\001R\014maxInstances\210\001\001B\020\n\016_min_inst" +
-      "ancesB\020\n\016_max_instances\"\240\006\n\nDeployment\022\016" +
+      "ancesB\020\n\016_max_instances\"\237\n\n\nDeployment\022\016" +
       "\n\002id\030\001 \001(\tR\002id\022%\n\016environment_id\030\002 \001(\tR\r" +
       "environmentId\0229\n\006status\030\003 \001(\0162!.chalk.se" +
       "rver.v1.DeploymentStatusR\006status\022\'\n\017depl" +
-      "oyment_tags\030\004 \003(\tR\016deploymentTags\0228\n\025req" +
-      "uirements_filepath\030\007 \001(\tH\000R\024requirements" +
-      "Filepath\210\001\001\0224\n\023dockerfile_filepath\030\010 \001(\t" +
-      "H\001R\022dockerfileFilepath\210\001\001\022\035\n\007runtime\030\t \001" +
-      "(\tH\002R\007runtime\210\001\001\0227\n\025final_dependency_has" +
-      "h\030\014 \001(\tH\003R\023finalDependencyHash\210\001\001\0227\n\025is_" +
-      "preview_deployment\030\r \001(\010H\004R\023isPreviewDep" +
-      "loyment\210\001\001\0229\n\ncreated_at\030\016 \001(\0132\032.google." +
-      "protobuf.TimestampR\tcreatedAt\0229\n\nupdated" +
-      "_at\030\017 \001(\0132\032.google.protobuf.TimestampR\tu" +
-      "pdatedAt\022\035\n\ngit_commit\030\020 \001(\tR\tgitCommit\022" +
-      "2\n\022requirements_files\030\026 \001(\tH\005R\021requireme" +
-      "ntsFiles\210\001\001\022$\n\016base_image_sha\030\030 \001(\tR\014bas" +
-      "eImageShaB\030\n\026_requirements_filepathB\026\n\024_" +
-      "dockerfile_filepathB\n\n\010_runtimeB\030\n\026_fina" +
-      "l_dependency_hashB\030\n\026_is_preview_deploym" +
-      "entB\025\n\023_requirements_files*\275\003\n\020Deploymen" +
-      "tStatus\022!\n\035DEPLOYMENT_STATUS_UNSPECIFIED" +
-      "\020\000\022\035\n\031DEPLOYMENT_STATUS_UNKNOWN\020\001\022\035\n\031DEP" +
-      "LOYMENT_STATUS_PENDING\020\002\022\034\n\030DEPLOYMENT_S" +
-      "TATUS_QUEUED\020\003\022\035\n\031DEPLOYMENT_STATUS_WORK" +
-      "ING\020\004\022\035\n\031DEPLOYMENT_STATUS_SUCCESS\020\005\022\035\n\031" +
-      "DEPLOYMENT_STATUS_FAILURE\020\006\022$\n DEPLOYMEN" +
-      "T_STATUS_INTERNAL_ERROR\020\007\022\035\n\031DEPLOYMENT_" +
-      "STATUS_TIMEOUT\020\010\022\037\n\033DEPLOYMENT_STATUS_CA" +
-      "NCELLED\020\t\022\035\n\031DEPLOYMENT_STATUS_EXPIRED\020\n" +
-      "\022!\n\035DEPLOYMENT_STATUS_BOOT_ERRORS\020\013\022%\n!D" +
-      "EPLOYMENT_STATUS_AWAITING_SOURCE\020\014B\244\001\n\037a" +
-      "i.chalk.protos.chalk.server.v1B\017Deployme" +
-      "ntProtoP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Ch" +
-      "alk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\" +
-      "Server\\V1\\GPBMetadata\352\002\021Chalk::Server::V" +
-      "1b\006proto3"
+      "oyment_tags\030\004 \003(\tR\016deploymentTags\022$\n\016clo" +
+      "ud_build_id\030\005 \001(\tR\014cloudBuildId\022!\n\014trigg" +
+      "ered_by\030\006 \001(\tR\013triggeredBy\0228\n\025requiremen" +
+      "ts_filepath\030\007 \001(\tH\000R\024requirementsFilepat" +
+      "h\210\001\001\0224\n\023dockerfile_filepath\030\010 \001(\tH\001R\022doc" +
+      "kerfileFilepath\210\001\001\022\035\n\007runtime\030\t \001(\tH\002R\007r" +
+      "untime\210\001\001\022\'\n\017chalkpy_version\030\n \001(\tR\016chal" +
+      "kpyVersion\022.\n\023raw_dependency_hash\030\013 \001(\tR" +
+      "\021rawDependencyHash\0227\n\025final_dependency_h" +
+      "ash\030\014 \001(\tH\003R\023finalDependencyHash\210\001\001\0227\n\025i" +
+      "s_preview_deployment\030\r \001(\010H\004R\023isPreviewD" +
+      "eployment\210\001\001\0229\n\ncreated_at\030\016 \001(\0132\032.googl" +
+      "e.protobuf.TimestampR\tcreatedAt\0229\n\nupdat" +
+      "ed_at\030\017 \001(\0132\032.google.protobuf.TimestampR" +
+      "\tupdatedAt\022\035\n\ngit_commit\030\020 \001(\tR\tgitCommi" +
+      "t\022\025\n\006git_pr\030\021 \001(\tR\005gitPr\022\035\n\ngit_branch\030\022" +
+      " \001(\tR\tgitBranch\022(\n\020git_author_email\030\023 \001(" +
+      "\tR\016gitAuthorEmail\022\026\n\006branch\030\024 \001(\tR\006branc" +
+      "h\022)\n\020project_settings\030\025 \001(\tR\017projectSett" +
+      "ings\0222\n\022requirements_files\030\026 \001(\tH\005R\021requ" +
+      "irementsFiles\210\001\001\022\027\n\007git_tag\030\027 \001(\tR\006gitTa" +
+      "g\022$\n\016base_image_sha\030\030 \001(\tR\014baseImageSha\022" +
+      "F\n\021status_changed_at\030\031 \001(\0132\032.google.prot" +
+      "obuf.TimestampR\017statusChangedAt\022;\n\027pinne" +
+      "d_platform_version\030\032 \001(\tH\006R\025pinnedPlatfo" +
+      "rmVersion\210\001\001B\030\n\026_requirements_filepathB\026" +
+      "\n\024_dockerfile_filepathB\n\n\010_runtimeB\030\n\026_f" +
+      "inal_dependency_hashB\030\n\026_is_preview_depl" +
+      "oymentB\025\n\023_requirements_filesB\032\n\030_pinned" +
+      "_platform_version*\275\003\n\020DeploymentStatus\022!" +
+      "\n\035DEPLOYMENT_STATUS_UNSPECIFIED\020\000\022\035\n\031DEP" +
+      "LOYMENT_STATUS_UNKNOWN\020\001\022\035\n\031DEPLOYMENT_S" +
+      "TATUS_PENDING\020\002\022\034\n\030DEPLOYMENT_STATUS_QUE" +
+      "UED\020\003\022\035\n\031DEPLOYMENT_STATUS_WORKING\020\004\022\035\n\031" +
+      "DEPLOYMENT_STATUS_SUCCESS\020\005\022\035\n\031DEPLOYMEN" +
+      "T_STATUS_FAILURE\020\006\022$\n DEPLOYMENT_STATUS_" +
+      "INTERNAL_ERROR\020\007\022\035\n\031DEPLOYMENT_STATUS_TI" +
+      "MEOUT\020\010\022\037\n\033DEPLOYMENT_STATUS_CANCELLED\020\t" +
+      "\022\035\n\031DEPLOYMENT_STATUS_EXPIRED\020\n\022!\n\035DEPLO" +
+      "YMENT_STATUS_BOOT_ERRORS\020\013\022%\n!DEPLOYMENT" +
+      "_STATUS_AWAITING_SOURCE\020\014B\244\001\n\037ai.chalk.p" +
+      "rotos.chalk.server.v1B\017DeploymentProtoP\001" +
+      "Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Serve" +
+      "r.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1" +
+      "\\GPBMetadata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -93,7 +105,7 @@ public final class DeploymentProto {
     internal_static_chalk_server_v1_Deployment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_Deployment_descriptor,
-        new java.lang.String[] { "Id", "EnvironmentId", "Status", "DeploymentTags", "RequirementsFilepath", "DockerfileFilepath", "Runtime", "FinalDependencyHash", "IsPreviewDeployment", "CreatedAt", "UpdatedAt", "GitCommit", "RequirementsFiles", "BaseImageSha", });
+        new java.lang.String[] { "Id", "EnvironmentId", "Status", "DeploymentTags", "CloudBuildId", "TriggeredBy", "RequirementsFilepath", "DockerfileFilepath", "Runtime", "ChalkpyVersion", "RawDependencyHash", "FinalDependencyHash", "IsPreviewDeployment", "CreatedAt", "UpdatedAt", "GitCommit", "GitPr", "GitBranch", "GitAuthorEmail", "Branch", "ProjectSettings", "RequirementsFiles", "GitTag", "BaseImageSha", "StatusChangedAt", "PinnedPlatformVersion", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

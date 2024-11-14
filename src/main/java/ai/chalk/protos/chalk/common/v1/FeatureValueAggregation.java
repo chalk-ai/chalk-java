@@ -7,7 +7,7 @@ package ai.chalk.protos.chalk.common.v1;
 /**
  * Protobuf enum {@code chalk.common.v1.FeatureValueAggregation}
  */
-public enum FeatureValueAggregation
+@java.lang.Deprecated public enum FeatureValueAggregation
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
    * <code>FEATURE_VALUE_AGGREGATION_UNSPECIFIED = 0;</code>

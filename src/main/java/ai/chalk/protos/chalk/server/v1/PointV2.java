@@ -7,7 +7,7 @@ package ai.chalk.protos.chalk.server.v1;
 /**
  * Protobuf type {@code chalk.server.v1.PointV2}
  */
-public final class PointV2 extends
+@java.lang.Deprecated public final class PointV2 extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:chalk.server.v1.PointV2)
     PointV2OrBuilder {
@@ -43,10 +43,6 @@ private static final long serialVersionUID = 0L;
   public static final int VALUE_FIELD_NUMBER = 1;
   private double value_ = 0D;
   /**
-   * <pre>
-   * wrapped in a Point to allow for optional (empty space in time series)
-   * </pre>
-   *
    * <code>optional double value = 1 [json_name = "value"];</code>
    * @return Whether the value field is set.
    */
@@ -55,10 +51,6 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <pre>
-   * wrapped in a Point to allow for optional (empty space in time series)
-   * </pre>
-   *
    * <code>optional double value = 1 [json_name = "value"];</code>
    * @return The value.
    */
@@ -404,10 +396,6 @@ private static final long serialVersionUID = 0L;
 
     private double value_ ;
     /**
-     * <pre>
-     * wrapped in a Point to allow for optional (empty space in time series)
-     * </pre>
-     *
      * <code>optional double value = 1 [json_name = "value"];</code>
      * @return Whether the value field is set.
      */
@@ -416,10 +404,6 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <pre>
-     * wrapped in a Point to allow for optional (empty space in time series)
-     * </pre>
-     *
      * <code>optional double value = 1 [json_name = "value"];</code>
      * @return The value.
      */
@@ -428,10 +412,6 @@ private static final long serialVersionUID = 0L;
       return value_;
     }
     /**
-     * <pre>
-     * wrapped in a Point to allow for optional (empty space in time series)
-     * </pre>
-     *
      * <code>optional double value = 1 [json_name = "value"];</code>
      * @param value The value to set.
      * @return This builder for chaining.
@@ -444,10 +424,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     * wrapped in a Point to allow for optional (empty space in time series)
-     * </pre>
-     *
      * <code>optional double value = 1 [json_name = "value"];</code>
      * @return This builder for chaining.
      */

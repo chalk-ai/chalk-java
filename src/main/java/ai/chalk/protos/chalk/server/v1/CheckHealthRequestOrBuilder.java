@@ -7,4 +7,19 @@ package ai.chalk.protos.chalk.server.v1;
 public interface CheckHealthRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.server.v1.CheckHealthRequest)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   * @return Whether the filters field is set.
+   */
+  boolean hasFilters();
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   * @return The filters.
+   */
+  ai.chalk.protos.chalk.server.v1.HealthCheckFilters getFilters();
+  /**
+   * <code>optional .chalk.server.v1.HealthCheckFilters filters = 1 [json_name = "filters"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.HealthCheckFiltersOrBuilder getFiltersOrBuilder();
 }

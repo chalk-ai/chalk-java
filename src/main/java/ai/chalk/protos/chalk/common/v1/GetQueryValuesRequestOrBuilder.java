@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.common.v1;
 
-public interface GetQueryValuesRequestOrBuilder extends
+@java.lang.Deprecated public interface GetQueryValuesRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.GetQueryValuesRequest)
     com.google.protobuf.MessageOrBuilder {
 

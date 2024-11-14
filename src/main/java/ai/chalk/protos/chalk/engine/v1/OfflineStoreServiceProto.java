@@ -34,7 +34,7 @@ public final class OfflineStoreServiceProto {
       "rmissions.proto\032$chalk/common/v1/feature" +
       "_values.proto\032\037chalk/common/v1/query_log" +
       ".proto\032\"chalk/common/v1/query_values.pro" +
-      "to\"\032\n\030OfflineStoreServiceDummy2\262\005\n\023Offli" +
+      "to\"\032\n\030OfflineStoreServiceDummy2\272\005\n\023Offli" +
       "neStoreService\022r\n\022GetQueryLogEntries\022*.c" +
       "halk.common.v1.GetQueryLogEntriesRequest" +
       "\032+.chalk.common.v1.GetQueryLogEntriesRes" +
@@ -48,15 +48,15 @@ public final class OfflineStoreServiceProto {
       ".chalk.common.v1.GetFeatureValuesTimeSer" +
       "iesChartRequest\0328.chalk.common.v1.GetFea" +
       "tureValuesTimeSeriesChartResponse\"\006\210\002\001\200}" +
-      "\004\022\237\001\n!GetFeatureValuesTimeSeriesChartV2\022" +
+      "\004\022\242\001\n!GetFeatureValuesTimeSeriesChartV2\022" +
       "9.chalk.common.v1.GetFeatureValuesTimeSe" +
       "riesChartV2Request\032:.chalk.common.v1.Get" +
-      "FeatureValuesTimeSeriesChartV2Response\"\003" +
-      "\200}\004B\231\001\n\037ai.chalk.protos.chalk.engine.v1B" +
-      "\030OfflineStoreServiceProtoP\001\242\002\003CEX\252\002\017Chal" +
-      "k.Engine.V1\312\002\017Chalk\\Engine\\V1\342\002\033Chalk\\En" +
-      "gine\\V1\\GPBMetadata\352\002\021Chalk::Engine::V1b" +
-      "\006proto3"
+      "FeatureValuesTimeSeriesChartV2Response\"\006" +
+      "\210\002\001\200}\004\032\003\210\002\001B\231\001\n\037ai.chalk.protos.chalk.en" +
+      "gine.v1B\030OfflineStoreServiceProtoP\001\242\002\003CE" +
+      "X\252\002\017Chalk.Engine.V1\312\002\017Chalk\\Engine\\V1\342\002\033" +
+      "Chalk\\Engine\\V1\\GPBMetadata\352\002\021Chalk::Eng" +
+      "ine::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

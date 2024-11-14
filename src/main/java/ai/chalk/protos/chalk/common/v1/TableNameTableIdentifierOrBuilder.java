@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.common.v1;
 
-public interface TableNameTableIdentifierOrBuilder extends
+@java.lang.Deprecated public interface TableNameTableIdentifierOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.TableNameTableIdentifier)
     com.google.protobuf.MessageOrBuilder {
 

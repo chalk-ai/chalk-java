@@ -4,24 +4,16 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.server.v1;
 
-public interface PointV2OrBuilder extends
+@java.lang.Deprecated public interface PointV2OrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.server.v1.PointV2)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   * wrapped in a Point to allow for optional (empty space in time series)
-   * </pre>
-   *
    * <code>optional double value = 1 [json_name = "value"];</code>
    * @return Whether the value field is set.
    */
   boolean hasValue();
   /**
-   * <pre>
-   * wrapped in a Point to allow for optional (empty space in time series)
-   * </pre>
-   *
    * <code>optional double value = 1 [json_name = "value"];</code>
    * @return The value.
    */

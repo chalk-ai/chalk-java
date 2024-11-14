@@ -42,20 +42,21 @@ public final class TimeserieschartProto {
       "\n%chalk/server/v1/timeserieschart.proto\022" +
       "\017chalk.server.v1\032\036google/protobuf/durati" +
       "on.proto\032\037google/protobuf/timestamp.prot" +
-      "o\".\n\007PointV2\022\031\n\005value\030\001 \001(\001H\000R\005value\210\001\001B" +
-      "\010\n\006_value\"l\n\014TimeSeriesV2\0220\n\006points\030\001 \003(" +
-      "\0132\030.chalk.server.v1.PointV2R\006points\022\024\n\005l" +
-      "abel\030\002 \001(\tR\005label\022\024\n\005units\030\003 \001(\tR\005units\"" +
-      "\327\001\n\021TimeSeriesChartV2\022\024\n\005title\030\001 \001(\tR\005ti" +
-      "tle\0225\n\006series\030\002 \003(\0132\035.chalk.server.v1.Ti" +
-      "meSeriesV2R\006series\0225\n\010x_series\030\003 \003(\0132\032.g" +
-      "oogle.protobuf.TimestampR\007xSeries\022>\n\rwin" +
-      "dow_period\030\004 \001(\0132\031.google.protobuf.Durat" +
-      "ionR\014windowPeriodB\251\001\n\037ai.chalk.protos.ch" +
-      "alk.server.v1B\024TimeserieschartProtoP\001Z\022s" +
-      "erver/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V" +
-      "1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GP" +
-      "BMetadata\352\002\021Chalk::Server::V1b\006proto3"
+      "o\"2\n\007PointV2\022\031\n\005value\030\001 \001(\001H\000R\005value\210\001\001:" +
+      "\002\030\001B\010\n\006_value\"p\n\014TimeSeriesV2\0220\n\006points\030" +
+      "\001 \003(\0132\030.chalk.server.v1.PointV2R\006points\022" +
+      "\024\n\005label\030\002 \001(\tR\005label\022\024\n\005units\030\003 \001(\tR\005un" +
+      "its:\002\030\001\"\333\001\n\021TimeSeriesChartV2\022\024\n\005title\030\001" +
+      " \001(\tR\005title\0225\n\006series\030\002 \003(\0132\035.chalk.serv" +
+      "er.v1.TimeSeriesV2R\006series\0225\n\010x_series\030\003" +
+      " \003(\0132\032.google.protobuf.TimestampR\007xSerie" +
+      "s\022>\n\rwindow_period\030\004 \001(\0132\031.google.protob" +
+      "uf.DurationR\014windowPeriod:\002\030\001B\251\001\n\037ai.cha" +
+      "lk.protos.chalk.server.v1B\024Timeseriescha" +
+      "rtProtoP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Ch" +
+      "alk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\" +
+      "Server\\V1\\GPBMetadata\352\002\021Chalk::Server::V" +
+      "1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

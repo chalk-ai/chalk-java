@@ -11,6 +11,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
     value = "by gRPC proto compiler (version 1.64.0)",
     comments = "Source: chalk/engine/v1/offline_store_service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
+@java.lang.Deprecated
 public final class OfflineStoreServiceGrpc {
 
   private OfflineStoreServiceGrpc() {}
@@ -222,6 +223,7 @@ public final class OfflineStoreServiceGrpc {
    * This service exposes endpoints for dealing with the offline store. It should never depend on the python graph.
    * </pre>
    */
+  @java.lang.Deprecated
   public interface AsyncService {
 
     /**
@@ -256,6 +258,7 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     default void getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetFeatureValuesTimeSeriesChartV2Method(), responseObserver);
@@ -268,6 +271,7 @@ public final class OfflineStoreServiceGrpc {
    * This service exposes endpoints for dealing with the offline store. It should never depend on the python graph.
    * </pre>
    */
+  @java.lang.Deprecated
   public static abstract class OfflineStoreServiceImplBase
       implements io.grpc.BindableService, AsyncService {
 
@@ -282,6 +286,7 @@ public final class OfflineStoreServiceGrpc {
    * This service exposes endpoints for dealing with the offline store. It should never depend on the python graph.
    * </pre>
    */
+  @java.lang.Deprecated
   public static final class OfflineStoreServiceStub
       extends io.grpc.stub.AbstractAsyncStub<OfflineStoreServiceStub> {
     private OfflineStoreServiceStub(
@@ -331,6 +336,7 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public void getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -344,6 +350,7 @@ public final class OfflineStoreServiceGrpc {
    * This service exposes endpoints for dealing with the offline store. It should never depend on the python graph.
    * </pre>
    */
+  @java.lang.Deprecated
   public static final class OfflineStoreServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<OfflineStoreServiceBlockingStub> {
     private OfflineStoreServiceBlockingStub(
@@ -389,6 +396,7 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response getFeatureValuesTimeSeriesChartV2(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetFeatureValuesTimeSeriesChartV2Method(), getCallOptions(), request);
@@ -401,6 +409,7 @@ public final class OfflineStoreServiceGrpc {
    * This service exposes endpoints for dealing with the offline store. It should never depend on the python graph.
    * </pre>
    */
+  @java.lang.Deprecated
   public static final class OfflineStoreServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<OfflineStoreServiceFutureStub> {
     private OfflineStoreServiceFutureStub(
@@ -450,6 +459,7 @@ public final class OfflineStoreServiceGrpc {
 
     /**
      */
+    @java.lang.Deprecated
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Response> getFeatureValuesTimeSeriesChartV2(
         ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartV2Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(

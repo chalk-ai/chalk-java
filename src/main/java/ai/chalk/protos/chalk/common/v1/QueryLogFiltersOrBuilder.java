@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.common.v1;
 
-public interface QueryLogFiltersOrBuilder extends
+@java.lang.Deprecated public interface QueryLogFiltersOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.QueryLogFilters)
     com.google.protobuf.MessageOrBuilder {
 

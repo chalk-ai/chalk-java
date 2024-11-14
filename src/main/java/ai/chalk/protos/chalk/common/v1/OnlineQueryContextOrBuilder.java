@@ -261,4 +261,48 @@ com.google.protobuf.Value defaultValue);
    */
   com.google.protobuf.Value getOptionsOrThrow(
       java.lang.String key);
+
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr> 
+      getValueMetricsTagByFeaturesList();
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.OutputExpr getValueMetricsTagByFeatures(int index);
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  int getValueMetricsTagByFeaturesCount();
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder> 
+      getValueMetricsTagByFeaturesOrBuilderList();
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder getValueMetricsTagByFeaturesOrBuilder(
+      int index);
 }

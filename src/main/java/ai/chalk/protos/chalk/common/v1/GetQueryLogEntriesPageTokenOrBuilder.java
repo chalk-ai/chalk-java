@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.common.v1;
 
-public interface GetQueryLogEntriesPageTokenOrBuilder extends
+@java.lang.Deprecated public interface GetQueryLogEntriesPageTokenOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.GetQueryLogEntriesPageToken)
     com.google.protobuf.MessageOrBuilder {
 

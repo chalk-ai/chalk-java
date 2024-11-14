@@ -31,6 +31,7 @@ private static final long serialVersionUID = 0L;
     correlationId_ = "";
     queryName_ = "";
     queryNameVersion_ = "";
+    valueMetricsTagByFeatures_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -561,6 +562,67 @@ com.google.protobuf.Value defaultValue) {
     return map.get(key);
   }
 
+  public static final int VALUE_METRICS_TAG_BY_FEATURES_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr> valueMetricsTagByFeatures_;
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr> getValueMetricsTagByFeaturesList() {
+    return valueMetricsTagByFeatures_;
+  }
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder> 
+      getValueMetricsTagByFeaturesOrBuilderList() {
+    return valueMetricsTagByFeatures_;
+  }
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  @java.lang.Override
+  public int getValueMetricsTagByFeaturesCount() {
+    return valueMetricsTagByFeatures_.size();
+  }
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.OutputExpr getValueMetricsTagByFeatures(int index) {
+    return valueMetricsTagByFeatures_.get(index);
+  }
+  /**
+   * <pre>
+   * Value metrics will be tagged by the output of the given features
+   * </pre>
+   *
+   * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder getValueMetricsTagByFeaturesOrBuilder(
+      int index) {
+    return valueMetricsTagByFeatures_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -605,6 +667,9 @@ com.google.protobuf.Value defaultValue) {
         internalGetOptions(),
         OptionsDefaultEntryHolder.defaultEntry,
         9);
+    for (int i = 0; i < valueMetricsTagByFeatures_.size(); i++) {
+      output.writeMessage(10, valueMetricsTagByFeatures_.get(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -658,6 +723,10 @@ com.google.protobuf.Value defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, options__);
     }
+    for (int i = 0; i < valueMetricsTagByFeatures_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, valueMetricsTagByFeatures_.get(i));
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -706,6 +775,8 @@ com.google.protobuf.Value defaultValue) {
     }
     if (!internalGetOptions().equals(
         other.internalGetOptions())) return false;
+    if (!getValueMetricsTagByFeaturesList()
+        .equals(other.getValueMetricsTagByFeaturesList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -750,6 +821,10 @@ com.google.protobuf.Value defaultValue) {
     if (!internalGetOptions().getMap().isEmpty()) {
       hash = (37 * hash) + OPTIONS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetOptions().hashCode();
+    }
+    if (getValueMetricsTagByFeaturesCount() > 0) {
+      hash = (37 * hash) + VALUE_METRICS_TAG_BY_FEATURES_FIELD_NUMBER;
+      hash = (53 * hash) + getValueMetricsTagByFeaturesList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -919,6 +994,13 @@ com.google.protobuf.Value defaultValue) {
       queryName_ = "";
       queryNameVersion_ = "";
       internalGetMutableOptions().clear();
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        valueMetricsTagByFeatures_ = java.util.Collections.emptyList();
+      } else {
+        valueMetricsTagByFeatures_ = null;
+        valueMetricsTagByFeaturesBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000200);
       return this;
     }
 
@@ -945,9 +1027,22 @@ com.google.protobuf.Value defaultValue) {
     @java.lang.Override
     public ai.chalk.protos.chalk.common.v1.OnlineQueryContext buildPartial() {
       ai.chalk.protos.chalk.common.v1.OnlineQueryContext result = new ai.chalk.protos.chalk.common.v1.OnlineQueryContext(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(ai.chalk.protos.chalk.common.v1.OnlineQueryContext result) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0)) {
+          valueMetricsTagByFeatures_ = java.util.Collections.unmodifiableList(valueMetricsTagByFeatures_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.valueMetricsTagByFeatures_ = valueMetricsTagByFeatures_;
+      } else {
+        result.valueMetricsTagByFeatures_ = valueMetricsTagByFeaturesBuilder_.build();
+      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.common.v1.OnlineQueryContext result) {
@@ -1087,6 +1182,32 @@ com.google.protobuf.Value defaultValue) {
       internalGetMutableOptions().mergeFrom(
           other.internalGetOptions());
       bitField0_ |= 0x00000100;
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        if (!other.valueMetricsTagByFeatures_.isEmpty()) {
+          if (valueMetricsTagByFeatures_.isEmpty()) {
+            valueMetricsTagByFeatures_ = other.valueMetricsTagByFeatures_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+          } else {
+            ensureValueMetricsTagByFeaturesIsMutable();
+            valueMetricsTagByFeatures_.addAll(other.valueMetricsTagByFeatures_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.valueMetricsTagByFeatures_.isEmpty()) {
+          if (valueMetricsTagByFeaturesBuilder_.isEmpty()) {
+            valueMetricsTagByFeaturesBuilder_.dispose();
+            valueMetricsTagByFeaturesBuilder_ = null;
+            valueMetricsTagByFeatures_ = other.valueMetricsTagByFeatures_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+            valueMetricsTagByFeaturesBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getValueMetricsTagByFeaturesFieldBuilder() : null;
+          } else {
+            valueMetricsTagByFeaturesBuilder_.addAllMessages(other.valueMetricsTagByFeatures_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1164,6 +1285,19 @@ com.google.protobuf.Value defaultValue) {
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              ai.chalk.protos.chalk.common.v1.OutputExpr m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.common.v1.OutputExpr.parser(),
+                      extensionRegistry);
+              if (valueMetricsTagByFeaturesBuilder_ == null) {
+                ensureValueMetricsTagByFeaturesIsMutable();
+                valueMetricsTagByFeatures_.add(m);
+              } else {
+                valueMetricsTagByFeaturesBuilder_.addMessage(m);
+              }
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2165,6 +2299,318 @@ com.google.protobuf.Value defaultValue) {
         builderMap.put(key, entry);
       }
       return (com.google.protobuf.Value.Builder) entry;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr> valueMetricsTagByFeatures_ =
+      java.util.Collections.emptyList();
+    private void ensureValueMetricsTagByFeaturesIsMutable() {
+      if (!((bitField0_ & 0x00000200) != 0)) {
+        valueMetricsTagByFeatures_ = new java.util.ArrayList<ai.chalk.protos.chalk.common.v1.OutputExpr>(valueMetricsTagByFeatures_);
+        bitField0_ |= 0x00000200;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.OutputExpr, ai.chalk.protos.chalk.common.v1.OutputExpr.Builder, ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder> valueMetricsTagByFeaturesBuilder_;
+
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr> getValueMetricsTagByFeaturesList() {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(valueMetricsTagByFeatures_);
+      } else {
+        return valueMetricsTagByFeaturesBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public int getValueMetricsTagByFeaturesCount() {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        return valueMetricsTagByFeatures_.size();
+      } else {
+        return valueMetricsTagByFeaturesBuilder_.getCount();
+      }
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OutputExpr getValueMetricsTagByFeatures(int index) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        return valueMetricsTagByFeatures_.get(index);
+      } else {
+        return valueMetricsTagByFeaturesBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder setValueMetricsTagByFeatures(
+        int index, ai.chalk.protos.chalk.common.v1.OutputExpr value) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.set(index, value);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder setValueMetricsTagByFeatures(
+        int index, ai.chalk.protos.chalk.common.v1.OutputExpr.Builder builderForValue) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder addValueMetricsTagByFeatures(ai.chalk.protos.chalk.common.v1.OutputExpr value) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.add(value);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder addValueMetricsTagByFeatures(
+        int index, ai.chalk.protos.chalk.common.v1.OutputExpr value) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.add(index, value);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder addValueMetricsTagByFeatures(
+        ai.chalk.protos.chalk.common.v1.OutputExpr.Builder builderForValue) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.add(builderForValue.build());
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder addValueMetricsTagByFeatures(
+        int index, ai.chalk.protos.chalk.common.v1.OutputExpr.Builder builderForValue) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder addAllValueMetricsTagByFeatures(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.common.v1.OutputExpr> values) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        ensureValueMetricsTagByFeaturesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, valueMetricsTagByFeatures_);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder clearValueMetricsTagByFeatures() {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        valueMetricsTagByFeatures_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public Builder removeValueMetricsTagByFeatures(int index) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        ensureValueMetricsTagByFeaturesIsMutable();
+        valueMetricsTagByFeatures_.remove(index);
+        onChanged();
+      } else {
+        valueMetricsTagByFeaturesBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OutputExpr.Builder getValueMetricsTagByFeaturesBuilder(
+        int index) {
+      return getValueMetricsTagByFeaturesFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder getValueMetricsTagByFeaturesOrBuilder(
+        int index) {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        return valueMetricsTagByFeatures_.get(index);  } else {
+        return valueMetricsTagByFeaturesBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder> 
+         getValueMetricsTagByFeaturesOrBuilderList() {
+      if (valueMetricsTagByFeaturesBuilder_ != null) {
+        return valueMetricsTagByFeaturesBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(valueMetricsTagByFeatures_);
+      }
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OutputExpr.Builder addValueMetricsTagByFeaturesBuilder() {
+      return getValueMetricsTagByFeaturesFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.common.v1.OutputExpr.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.OutputExpr.Builder addValueMetricsTagByFeaturesBuilder(
+        int index) {
+      return getValueMetricsTagByFeaturesFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.common.v1.OutputExpr.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Value metrics will be tagged by the output of the given features
+     * </pre>
+     *
+     * <code>repeated .chalk.common.v1.OutputExpr value_metrics_tag_by_features = 10 [json_name = "valueMetricsTagByFeatures"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.OutputExpr.Builder> 
+         getValueMetricsTagByFeaturesBuilderList() {
+      return getValueMetricsTagByFeaturesFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.OutputExpr, ai.chalk.protos.chalk.common.v1.OutputExpr.Builder, ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder> 
+        getValueMetricsTagByFeaturesFieldBuilder() {
+      if (valueMetricsTagByFeaturesBuilder_ == null) {
+        valueMetricsTagByFeaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.OutputExpr, ai.chalk.protos.chalk.common.v1.OutputExpr.Builder, ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder>(
+                valueMetricsTagByFeatures_,
+                ((bitField0_ & 0x00000200) != 0),
+                getParentForChildren(),
+                isClean());
+        valueMetricsTagByFeatures_ = null;
+      }
+      return valueMetricsTagByFeaturesBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

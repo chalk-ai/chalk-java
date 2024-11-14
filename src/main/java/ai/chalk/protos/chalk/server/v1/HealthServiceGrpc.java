@@ -47,6 +47,38 @@ public final class HealthServiceGrpc {
     return getCheckHealthMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetHealthRequest,
+      ai.chalk.protos.chalk.server.v1.GetHealthResponse> getGetHealthMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetHealth",
+      requestType = ai.chalk.protos.chalk.server.v1.GetHealthRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetHealthResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetHealthRequest,
+      ai.chalk.protos.chalk.server.v1.GetHealthResponse> getGetHealthMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetHealthRequest, ai.chalk.protos.chalk.server.v1.GetHealthResponse> getGetHealthMethod;
+    if ((getGetHealthMethod = HealthServiceGrpc.getGetHealthMethod) == null) {
+      synchronized (HealthServiceGrpc.class) {
+        if ((getGetHealthMethod = HealthServiceGrpc.getGetHealthMethod) == null) {
+          HealthServiceGrpc.getGetHealthMethod = getGetHealthMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetHealthRequest, ai.chalk.protos.chalk.server.v1.GetHealthResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetHealth"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetHealthRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetHealthResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new HealthServiceMethodDescriptorSupplier("GetHealth"))
+              .build();
+        }
+      }
+    }
+    return getGetHealthMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -96,10 +128,23 @@ public final class HealthServiceGrpc {
   public interface AsyncService {
 
     /**
+     * <pre>
+     * If any checks fail, this request fails.
+     * </pre>
      */
     default void checkHealth(ai.chalk.protos.chalk.server.v1.CheckHealthRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CheckHealthResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckHealthMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Return the actual health check values.
+     * </pre>
+     */
+    default void getHealth(ai.chalk.protos.chalk.server.v1.GetHealthRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetHealthResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetHealthMethod(), responseObserver);
     }
   }
 
@@ -131,11 +176,25 @@ public final class HealthServiceGrpc {
     }
 
     /**
+     * <pre>
+     * If any checks fail, this request fails.
+     * </pre>
      */
     public void checkHealth(ai.chalk.protos.chalk.server.v1.CheckHealthRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CheckHealthResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCheckHealthMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Return the actual health check values.
+     * </pre>
+     */
+    public void getHealth(ai.chalk.protos.chalk.server.v1.GetHealthRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetHealthResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetHealthMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -156,10 +215,23 @@ public final class HealthServiceGrpc {
     }
 
     /**
+     * <pre>
+     * If any checks fail, this request fails.
+     * </pre>
      */
     public ai.chalk.protos.chalk.server.v1.CheckHealthResponse checkHealth(ai.chalk.protos.chalk.server.v1.CheckHealthRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCheckHealthMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Return the actual health check values.
+     * </pre>
+     */
+    public ai.chalk.protos.chalk.server.v1.GetHealthResponse getHealth(ai.chalk.protos.chalk.server.v1.GetHealthRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetHealthMethod(), getCallOptions(), request);
     }
   }
 
@@ -180,15 +252,30 @@ public final class HealthServiceGrpc {
     }
 
     /**
+     * <pre>
+     * If any checks fail, this request fails.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.CheckHealthResponse> checkHealth(
         ai.chalk.protos.chalk.server.v1.CheckHealthRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCheckHealthMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Return the actual health check values.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetHealthResponse> getHealth(
+        ai.chalk.protos.chalk.server.v1.GetHealthRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetHealthMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CHECK_HEALTH = 0;
+  private static final int METHODID_GET_HEALTH = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -210,6 +297,10 @@ public final class HealthServiceGrpc {
         case METHODID_CHECK_HEALTH:
           serviceImpl.checkHealth((ai.chalk.protos.chalk.server.v1.CheckHealthRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CheckHealthResponse>) responseObserver);
+          break;
+        case METHODID_GET_HEALTH:
+          serviceImpl.getHealth((ai.chalk.protos.chalk.server.v1.GetHealthRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetHealthResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -236,6 +327,13 @@ public final class HealthServiceGrpc {
               ai.chalk.protos.chalk.server.v1.CheckHealthRequest,
               ai.chalk.protos.chalk.server.v1.CheckHealthResponse>(
                 service, METHODID_CHECK_HEALTH)))
+        .addMethod(
+          getGetHealthMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetHealthRequest,
+              ai.chalk.protos.chalk.server.v1.GetHealthResponse>(
+                service, METHODID_GET_HEALTH)))
         .build();
   }
 
@@ -285,6 +383,7 @@ public final class HealthServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new HealthServiceFileDescriptorSupplier())
               .addMethod(getCheckHealthMethod())
+              .addMethod(getGetHealthMethod())
               .build();
         }
       }

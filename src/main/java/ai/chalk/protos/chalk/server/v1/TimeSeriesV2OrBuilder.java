@@ -4,7 +4,7 @@
 // Protobuf Java Version: 3.25.1
 package ai.chalk.protos.chalk.server.v1;
 
-public interface TimeSeriesV2OrBuilder extends
+@java.lang.Deprecated public interface TimeSeriesV2OrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.server.v1.TimeSeriesV2)
     com.google.protobuf.MessageOrBuilder {
 
