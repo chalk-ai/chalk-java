@@ -118,6 +118,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .body(body)
                 .method("POST")
                 .environmentOverride(params.getEnvironmentId())
+                .isEngineRequest(true)
                 .build();
 
         HttpResponse<byte[]> response = this.handler.sendRequest(request);
