@@ -69,9 +69,9 @@ public interface ChalkClient extends AutoCloseable {
      * <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-     *         .withInput("user.id", Arrays.asList(1, 2, 3))
-     *         .withOutputs("user.email", "user.transactions")
-     *         .build();
+     *             .withInput("user.id", Arrays.asList(1, 2, 3))
+     *             .withOutputs("user.email", "user.transactions")
+     *             .build();
      *
      *         try (OnlineQueryResult result = client.onlineQuery(params)) {
      *             // do something with the result
@@ -88,6 +88,26 @@ public interface ChalkClient extends AutoCloseable {
     /**
      * UploadFeatures synchronously persists feature values to the online store and
      * offline store.
+     * <p> See {@link UploadFeaturesParams} for more details on the parameters.
+     *
+     * <p>
+     * Example usage:
+     *     <pre>
+     *         {@code
+     *         var userIds = Arrays.asList("777", "888", "999");
+     *         var scoreList = Arrays.asList(600, 700, 800);
+     *         UploadFeaturesParams params = UploadFeaturesParams.builder()
+     *             .withInputs(Map.of("user.id", userIds,"user.credit_score", scoreList))
+     *             .withInput(Features.user.email, List.of("user1@email.com", "user2@email.com", "user3@email.com"))
+     *             .build();
+     *         UploadFeaturesResult res = client.uploadFeatures(params);
+     *         if (client.uploadFeatures(params).getErrors().size() > 0) {
+     *             throw new Exception("upload failed");
+     *         }
+     *
+     *     </pre>
+     * </p>
+     *
      */
     UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException;
 

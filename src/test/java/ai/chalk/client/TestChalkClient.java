@@ -110,10 +110,10 @@ public class TestChalkClient {
         var userIds = Arrays.asList("777", "888", "999");
         var scoreList = Arrays.asList(Math.random(), Math.random(), Math.random());
 
-        var inputs = new HashMap<String, List<?>>();
-        inputs.put("user.id", userIds);
-        inputs.put("user.socure_score", scoreList);
-        UploadFeaturesResult res = client.uploadFeatures(UploadFeaturesParams.builder().withInputs(inputs).build());
+        UploadFeaturesParams uploadParams = UploadFeaturesParams.builder()
+            .withInputs(Map.of("user.id", userIds,"user.socure_score", scoreList))
+            .build();
+        UploadFeaturesResult res = client.uploadFeatures(uploadParams);
         assert res.getErrors().size() == 0;
         assert !res.getOperationId().equals("");
 
