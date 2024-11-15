@@ -28,6 +28,7 @@ import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -168,7 +169,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
     }
 
-    private RequestHeaderInterceptor getRequestHeaderInterceptor(String environmentId) {
+    private RequestHeaderInterceptor getRequestHeaderInterceptor(
+        @Nullable String environmentId
+    ) {
         return new RequestHeaderInterceptor(environmentId, this.resolvedEnvironmentId);
     }
 
@@ -318,10 +321,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
-        if (params.getEnvironmentId() != null) {
-            throw new UnsupportedOperationException("Environment ID override via param is not yet supported");
-        }
-
         byte[] tableBytes;
         try {
             tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
@@ -329,7 +328,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.queryStub.uploadFeatures(
+        UploadFeaturesResponse response = this.queryStub.withInterceptors(
+            this.getRequestHeaderInterceptor(params.getEnvironmentId())
+        ).uploadFeatures(
             UploadFeaturesRequest.newBuilder()
                 .setInputsTable(ByteString.copyFrom(tableBytes))
                 .build()
