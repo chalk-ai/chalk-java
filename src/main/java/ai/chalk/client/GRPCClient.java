@@ -8,14 +8,9 @@ import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
-import ai.chalk.protos.chalk.common.v1.ExplainOptions;
-import ai.chalk.protos.chalk.common.v1.FeatherBodyType;
-import ai.chalk.protos.chalk.common.v1.FeatureEncodingOptions;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkResponse;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryContext;
-import ai.chalk.protos.chalk.common.v1.OnlineQueryResponseOptions;
-import ai.chalk.protos.chalk.common.v1.OutputExpr;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
+import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -33,6 +28,7 @@ import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -53,6 +49,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     private final String resolvedEnvironmentId;
+    private final String branchId;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -113,6 +110,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             environmentId = environmentIds.get(0);
         }
         resolvedEnvironmentId = environmentId;
+        branchId = builder.getBranch();
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 100)
@@ -173,8 +171,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
     }
 
-    private RequestHeaderInterceptor getRequestHeaderInterceptor(String environmentId) {
-        return new RequestHeaderInterceptor(environmentId, this.resolvedEnvironmentId);
+    private RequestHeaderInterceptor getRequestHeaderInterceptor(
+        @Nullable String environmentIdOverride
+    ) {
+        return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -209,8 +209,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         var context = OnlineQueryContext.newBuilder();
-        if (params.getBranch() != null) {
+        if (params.getBranch() != null && !params.getBranch().isEmpty()) {
             context.setBranchId(params.getBranch());
+        } else if (this.branchId != null && !this.branchId.isEmpty()) {
+            context.setBranchId(this.branchId);
         }
         if (params.getCorrelationId() != null) {
             context.setCorrelationId(params.getCorrelationId());
@@ -320,6 +322,30 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 meta,
                 responseAlloc
         );
+    }
+
+    public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        byte[] tableBytes;
+        try {
+            tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to convert inputs to Arrow bytes", e);
+        }
+
+        UploadFeaturesResponse response = this.queryStub.withInterceptors(
+            this.getRequestHeaderInterceptor(params.getEnvironmentId())
+        ).uploadFeatures(
+            UploadFeaturesRequest.newBuilder()
+                .setInputsTable(ByteString.copyFrom(tableBytes))
+                .build()
+        );
+
+        List<ServerError> errors = new ArrayList<>();
+        for (int i = 0; i < response.getErrorsCount(); i++) {
+            errors.add(GrpcSerializer.toServerError(response.getErrors(i)));
+        }
+
+        return new UploadFeaturesResult(response.getOperationId(), errors);
     }
 
     @Override

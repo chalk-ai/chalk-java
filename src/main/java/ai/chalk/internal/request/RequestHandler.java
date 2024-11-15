@@ -217,7 +217,7 @@ public class RequestHandler {
         return response;
     }
 
-    private <T> T deserializeResponseBody(byte[] body, Class<T> responseClass) throws ChalkException {
+    public <T> T deserializeResponseBody(byte[] body, Class<T> responseClass) throws ChalkException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

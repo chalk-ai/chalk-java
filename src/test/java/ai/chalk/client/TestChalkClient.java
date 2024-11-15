@@ -2,14 +2,16 @@ package ai.chalk.client;
 
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
-import ai.chalk.models.OnlineQueryParams;
-import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class TestChalkClient {
@@ -99,10 +101,11 @@ public class TestChalkClient {
                 var users = result.unmarshal(User.class);
                 assert users.length == userIds.length;
                 assert users[0].socure_score.getValue().equals(123.0);
-            }
-            ;
+            };
         }
     }
+
+
 
     @Disabled("Branch server issue")
     public void testBranchFromClientArg() throws Exception {

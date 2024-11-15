@@ -3,21 +3,24 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
+import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
 import org.apache.arrow.memory.RootAllocator;
 
 import java.net.http.HttpResponse;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig apiServer;
@@ -69,7 +72,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder<OnlineQueryBulkResponse>()
+        SendRequestParams request = new SendRequestParams.Builder()
                 .path("/v1/query/feather")
                 .body(bodyBytes)
                 .method("POST")
@@ -89,6 +92,38 @@ public class ChalkClientImpl implements ChalkClient {
         // ignore the warning here, because we don't want to free the memory yet
         var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
         return bulkResponse.toResult();
+    }
+
+    public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
+        byte[] tableBytes;
+        try {
+            tableBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), this.allocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to convert inputs to Arrow bytes", e);
+        }
+
+        var attrs = new HashMap<String, Object>();
+        attrs.put("features", params.getInputs().keySet().stream().toList());
+        attrs.put("table_compression", "uncompressed");
+        attrs.put("table_bytes", tableBytes);
+
+        byte[] body;
+        try {
+            body = BytesProducer.chalkMarshal(attrs);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize UploadFeaturesParams", e);
+        }
+
+        SendRequestParams request = new SendRequestParams.Builder()
+                .path("/v1/upload_features/multi")
+                .body(body)
+                .method("POST")
+                .environmentOverride(params.getEnvironmentId())
+                .isEngineRequest(true)
+                .build();
+
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), UploadFeaturesResult.class);
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
