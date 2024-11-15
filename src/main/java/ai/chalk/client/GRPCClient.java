@@ -126,8 +126,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
         String engineHost;
-        if (builder.getQueryServer() != null && !builder.getQueryServer().isEmpty()) {
-            engineHost = builder.getQueryServer();
+        if (builder.getQueryServerOverride() != null && !builder.getQueryServerOverride().isEmpty()) {
+            engineHost = builder.getQueryServerOverride();
         } else {
             try {
                 engineHost = token.getEnginesOrThrow(environmentId);

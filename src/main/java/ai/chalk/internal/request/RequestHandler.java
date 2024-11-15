@@ -28,7 +28,7 @@ public class RequestHandler {
     private final HttpClient httpClient;
     private final URI apiServer;
     @Nullable
-    private final URI queryServer;
+    private final URI queryServerOverride;
     private SourcedConfig environmentId;
     private Map<String, URI> engines;
     private final SourcedConfig initialEnvironment;
@@ -41,7 +41,7 @@ public class RequestHandler {
     public RequestHandler(
             HttpClient httpClient,
             SourcedConfig apiServer,
-            String queryServer,
+            String queryServerOverride,
             SourcedConfig initialEnvironment,
             SourcedConfig environmentId,
             SourcedConfig clientId,
@@ -57,10 +57,10 @@ public class RequestHandler {
         }
 
         this.apiServer = URI.create(apiServer.value());
-        if (queryServer == null || queryServer.isEmpty()) {
-            this.queryServer = null;
+        if (queryServerOverride == null || queryServerOverride.isEmpty()) {
+            this.queryServerOverride = null;
         } else {
-            this.queryServer = URI.create(queryServer);
+            this.queryServerOverride = URI.create(queryServerOverride);
         }
         this.environmentId = environmentId;
         this.initialEnvironment = initialEnvironment;
@@ -234,8 +234,8 @@ public class RequestHandler {
 
     private URI getUri(SendRequestParams args) {
         if (args.getIsEngineRequest()) {
-            if (this.queryServer != null) {
-                return this.queryServer.resolve(args.getPath());
+            if (this.queryServerOverride != null) {
+                return this.queryServerOverride.resolve(args.getPath());
             }
             String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
             if (resolved != null &&

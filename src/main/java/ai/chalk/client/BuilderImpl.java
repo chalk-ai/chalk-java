@@ -16,7 +16,7 @@ public class BuilderImpl implements ChalkClient.Builder {
     @Nullable
     private String apiServer;
     @Nullable
-    private String queryServer;
+    private String queryServerOverride;
     @Nullable
     private String environmentId;
     @Nullable
@@ -33,7 +33,7 @@ public class BuilderImpl implements ChalkClient.Builder {
         this.clientId = null;
         this.clientSecret = null;
         this.apiServer = null;
-        this.queryServer = null;
+        this.queryServerOverride = null;
         this.environmentId = null;
         this.branch = null;
         this.deploymentTag = null;
@@ -60,8 +60,8 @@ public class BuilderImpl implements ChalkClient.Builder {
     }
 
     @Override
-    public BuilderImpl withQueryServer(String queryServer) {
-        this.queryServer = queryServer;
+    public BuilderImpl withQueryServerOverride(String queryServer) {
+        this.queryServerOverride = queryServer;
         return this;
     }
 

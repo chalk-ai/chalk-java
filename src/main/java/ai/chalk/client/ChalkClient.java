@@ -117,7 +117,7 @@ public interface ChalkClient extends AutoCloseable {
          * different query server than the one automatically resolved
          * by Chalk.
          */
-        public Builder withQueryServer(String queryServer);
+        public Builder withQueryServerOverride(String queryServer);
 
         /**
          * Sets the environment ID. This is the identifier
