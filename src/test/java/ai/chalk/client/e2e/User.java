@@ -8,4 +8,5 @@ public class User extends FeaturesClass {
     public Feature<Double> socure_score;
     public Feature<byte[]> binary_data;
     public Feature<Double> crashingFeature;
+    public Feature<String> environmentId;
 }
