@@ -60,7 +60,7 @@ public class BuilderImpl implements ChalkClient.Builder {
     }
 
     @Override
-    public BuilderImpl withQueryServerOverride(String queryServer) {
+    public BuilderImpl withQueryServer(String queryServer) {
         this.queryServerOverride = queryServer;
         return this;
     }
