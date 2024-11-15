@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -26,6 +27,8 @@ public class RequestHandler {
     private JWT jwt;
     private final HttpClient httpClient;
     private final URI apiServer;
+    @Nullable
+    private final URI queryServerOverride;
     private SourcedConfig environmentId;
     private Map<String, URI> engines;
     private final SourcedConfig initialEnvironment;
@@ -38,6 +41,7 @@ public class RequestHandler {
     public RequestHandler(
             HttpClient httpClient,
             SourcedConfig apiServer,
+            String queryServerOverride,
             SourcedConfig initialEnvironment,
             SourcedConfig environmentId,
             SourcedConfig clientId,
@@ -53,6 +57,11 @@ public class RequestHandler {
         }
 
         this.apiServer = URI.create(apiServer.value());
+        if (queryServerOverride == null || queryServerOverride.isEmpty()) {
+            this.queryServerOverride = null;
+        } else {
+            this.queryServerOverride = URI.create(queryServerOverride);
+        }
         this.environmentId = environmentId;
         this.initialEnvironment = initialEnvironment;
         this.clientId = clientId;
@@ -225,6 +234,9 @@ public class RequestHandler {
 
     private URI getUri(SendRequestParams args) {
         if (args.getIsEngineRequest()) {
+            if (this.queryServerOverride != null) {
+                return this.queryServerOverride.resolve(args.getPath());
+            }
             String resolved = this.getResolvedEnvironment(args.getEnvironmentOverride());
             if (resolved != null &&
                     !resolved.isEmpty() &&

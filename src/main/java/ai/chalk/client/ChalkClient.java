@@ -138,6 +138,15 @@ public interface ChalkClient extends AutoCloseable {
         public Builder withApiServer(String apiServer);
 
         /**
+         * Chalk routes performance sensitive requests like online query
+         * directly to the query server that runs the engine. Populate
+         * this field if you would like to route these requests to a
+         * different query server than the one automatically resolved
+         * by Chalk.
+         */
+        public Builder withQueryServer(String queryServer);
+
+        /**
          * Sets the environment ID. This is the identifier
          * that distinguishes between different environments
          * in your Chalk project.

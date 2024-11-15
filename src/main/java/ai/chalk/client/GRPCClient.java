@@ -47,6 +47,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
+    private final String resolvedEnvironmentId;
+
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
     }
@@ -105,6 +107,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
             environmentId = environmentIds.get(0);
         }
+        resolvedEnvironmentId = environmentId;
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 100)
@@ -113,7 +116,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 ServerType.SERVER,
                                 Map.of(),
                                 tokenRefresher,
-                                environmentId,
                                 null
                         )
                 )
@@ -121,13 +123,16 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
         String engineHost;
-        try {
-            engineHost = token
-                    .getEnginesOrThrow(environmentId)
-                    .replaceFirst("^https?://", "");
-        } catch (Exception e) {
-            throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
+        if (builder.getQueryServerOverride() != null && !builder.getQueryServerOverride().isEmpty()) {
+            engineHost = builder.getQueryServerOverride();
+        } else {
+            try {
+                engineHost = token.getEnginesOrThrow(environmentId);
+            } catch (Exception e) {
+                throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
+            }
         }
+        engineHost = engineHost.replaceFirst("^https?://", "");
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
@@ -135,7 +140,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 ServerType.ENGINE,
                                 Map.of(),
                                 tokenRefresher,
-                                environmentId,
                                 builder.getDeploymentTag()
                         )
                 )
@@ -159,16 +163,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
     }
 
-    private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
-        AtomicReference<Metadata> headersRef = new AtomicReference<>();
-        return this.queryStub.withInterceptors(
-                MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef)
-        );
-    }
-
     @Override
     public void printConfig() {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
+    }
+
+    private RequestHeaderInterceptor getRequestHeaderInterceptor(String environmentId) {
+        return new RequestHeaderInterceptor(environmentId, this.resolvedEnvironmentId);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -252,7 +253,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
+        OnlineQueryBulkResponse response = this.queryStub.withInterceptors(
+                MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
+                this.getRequestHeaderInterceptor(params.getEnvironmentId())
+        ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
                 response.getResponseMeta(),

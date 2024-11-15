@@ -48,6 +48,7 @@ public class ChalkClientImpl implements ChalkClient {
         this.handler = new RequestHandler(
                 config.getHttpClient(),
                 this.apiServer,
+                config.getQueryServerOverride(),
                 this.environmentId,
                 initialEnvironment,
                 this.clientId,
