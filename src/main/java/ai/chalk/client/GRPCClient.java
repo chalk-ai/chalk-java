@@ -209,9 +209,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         var context = OnlineQueryContext.newBuilder();
-        if (params.getBranch() != null) {
+        if (params.getBranch() != null && !params.getBranch().isEmpty()) {
             context.setBranchId(params.getBranch());
-        } else {
+        } else if (this.branchId != null && !this.branchId.isEmpty()) {
             context.setBranchId(this.branchId);
         }
         if (params.getCorrelationId() != null) {
