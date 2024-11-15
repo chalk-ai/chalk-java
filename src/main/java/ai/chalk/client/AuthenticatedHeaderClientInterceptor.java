@@ -20,8 +20,7 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
     ) {
         this.tokenRefresher = tokenRefresher;
         this.allHeaders = new HashMap<>(Map.of(
-                GrpcHeaders.SERVER_TYPE_KEY, serverType.headerName(),
-//                GrpcHeaders.ENVIRONMENT_ID_KEY, environmentId
+                GrpcHeaders.SERVER_TYPE_KEY, serverType.headerName()
         ));
         for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
             this.allHeaders.put(Metadata.Key.of(entry.getKey(), Metadata.ASCII_STRING_MARSHALLER), entry.getValue());
