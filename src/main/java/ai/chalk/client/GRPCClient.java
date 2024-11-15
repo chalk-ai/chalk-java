@@ -52,6 +52,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
+    private final String resolvedEnvironmentId;
+
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
     }
@@ -110,6 +112,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
             environmentId = environmentIds.get(0);
         }
+        resolvedEnvironmentId = environmentId;
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 100)
@@ -118,7 +121,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 ServerType.SERVER,
                                 Map.of(),
                                 tokenRefresher,
-                                environmentId,
                                 null
                         )
                 )
@@ -143,7 +145,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 ServerType.ENGINE,
                                 Map.of(),
                                 tokenRefresher,
-                                environmentId,
                                 builder.getDeploymentTag()
                         )
                 )
@@ -165,13 +166,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
             return channelBuilder.build();
         }
-    }
-
-    private QueryServiceGrpc.QueryServiceBlockingStub queryStubWithTrailers(AtomicReference<Metadata> trailersRef) {
-        AtomicReference<Metadata> headersRef = new AtomicReference<>();
-        return this.queryStub.withInterceptors(
-                MetadataUtils.newCaptureMetadataInterceptor(headersRef, trailersRef)
-        );
     }
 
     @Override
@@ -260,7 +254,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStubWithTrailers(trailersRef).onlineQueryBulk(request);
+        OnlineQueryBulkResponse response = this.queryStub.withInterceptors(
+                MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
+                new RequestHeaderInterceptor(params.getEnvironmentId(), this.resolvedEnvironmentId)
+        ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
                 response.getResponseMeta(),
