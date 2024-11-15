@@ -173,6 +173,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         logger.log(System.Logger.Level.ERROR, "Config printing for GRPC client not yet implemented");
     }
 
+    private RequestHeaderInterceptor getRequestHeaderInterceptor(String environmentId) {
+        return new RequestHeaderInterceptor(environmentId, this.resolvedEnvironmentId);
+    }
+
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
         try (
@@ -256,7 +260,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
         OnlineQueryBulkResponse response = this.queryStub.withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                new RequestHeaderInterceptor(params.getEnvironmentId(), this.resolvedEnvironmentId)
+                this.getRequestHeaderInterceptor(params.getEnvironmentId())
         ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
