@@ -126,13 +126,16 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
         String engineHost;
-        try {
-            engineHost = token
-                    .getEnginesOrThrow(environmentId)
-                    .replaceFirst("^https?://", "");
-        } catch (Exception e) {
-            throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
+        if (builder.getQueryServerOverride() != null && !builder.getQueryServerOverride().isEmpty()) {
+            engineHost = builder.getQueryServerOverride();
+        } else {
+            try {
+                engineHost = token.getEnginesOrThrow(environmentId);
+            } catch (Exception e) {
+                throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
+            }
         }
+        engineHost = engineHost.replaceFirst("^https?://", "");
         Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
