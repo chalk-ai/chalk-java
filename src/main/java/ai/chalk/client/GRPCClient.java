@@ -49,6 +49,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     private final String resolvedEnvironmentId;
+    private final String branchId;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -109,6 +110,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             environmentId = environmentIds.get(0);
         }
         resolvedEnvironmentId = environmentId;
+        branchId = builder.getBranch();
 
         Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 100)
@@ -176,10 +178,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
-        if (params.getBranch() != null) {
-            throw new ClientException("Querying a branch is not supported via gRPC");
-        }
-
         byte[] bodyBytes;
         try (
                 var childAllocator = allocator.newChildAllocator(
@@ -213,6 +211,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         var context = OnlineQueryContext.newBuilder();
         if (params.getBranch() != null) {
             context.setBranchId(params.getBranch());
+        } else {
+            context.setBranchId(this.branchId);
         }
         if (params.getCorrelationId() != null) {
             context.setCorrelationId(params.getCorrelationId());
