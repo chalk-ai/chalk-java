@@ -1,7 +1,6 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
-import ai.chalk.exceptions.ClientException;
 import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 

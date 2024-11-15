@@ -172,9 +172,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     private RequestHeaderInterceptor getRequestHeaderInterceptor(
-        @Nullable String environmentId
+        @Nullable String environmentIdOverride
     ) {
-        return new RequestHeaderInterceptor(environmentId, this.resolvedEnvironmentId);
+        return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
