@@ -176,6 +176,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
+        if (params.getBranch() != null) {
+            throw new ClientException("Querying a branch is not supported via gRPC");
+        }
+
         byte[] bodyBytes;
         try (
                 var childAllocator = allocator.newChildAllocator(

@@ -1,6 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
 import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -108,6 +109,9 @@ public class BuilderImpl implements ChalkClient.Builder {
     @Override
     public ChalkClient build() throws ChalkException {
         if (useGrpc) {
+            if (branch != null) {
+                throw new ClientException("Querying a branch is not supported via gRPC");
+            }
             return new GRPCClient(this);
         }
         return new ChalkClientImpl(this);
