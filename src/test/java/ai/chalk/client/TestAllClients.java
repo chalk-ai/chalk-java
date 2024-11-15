@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 class TestAllClients {
     private static ChalkClient restClient;
@@ -40,11 +42,11 @@ class TestAllClients {
 
         String qaEnvId = System.getenv().get("STAGING_QA_ENV_ID");
         if (qaEnvId == null) {
-            throw new Exception("STAGING_QA_ENV_ID env var not set");
+            fail("STAGING_QA_ENV_ID env var not set");
         }
         String devEnvId = System.getenv().get("STAGING_DEV_ENV_ID");
         if (devEnvId == null) {
-            throw new Exception("STAGING_DEV_ENV_ID env var not set");
+            fail("STAGING_DEV_ENV_ID env var not set");
         }
 
         for (String envId : Arrays.asList(qaEnvId, devEnvId)) {
