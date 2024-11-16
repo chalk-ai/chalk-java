@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'ai.chalk'
-version '0.13.0'
+version '0.14.0'
 
 repositories {
     mavenCentral()
@@ -30,7 +30,7 @@ dependencies {
     api "io.grpc:grpc-stub:${versions.grpcVersion}"
     api "io.grpc:grpc-netty-shaded:${versions.grpcVersion}"
     api "org.apache.arrow:arrow-compression:${versions.arrowVersion}"
-    api "org.apache.arrow:arrow-memory-unsafe:${versions.arrowVersion}"
+    api "org.apache.arrow:arrow-memory-netty:${versions.arrowVersion}"
     api "org.apache.arrow:arrow-vector:${versions.arrowVersion}"
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
