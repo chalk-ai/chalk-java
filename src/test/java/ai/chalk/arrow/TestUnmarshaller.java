@@ -6,6 +6,7 @@ import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
+import ai.chalk.models.OnlineQueryParams;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -1226,6 +1227,32 @@ public class TestUnmarshaller {
         assert namedClasses[0].abc_7d7_efg.getValue().equals("a");
         assert namedClasses[1].abc_7d7_efg.getValue().equals("b");
         assert namedClasses[2].abc_7d7_efg.getValue().equals("c");
+    }
+
+    @Test
+    public void TestBenchmarkBulkUnmarshal() throws Exception {
+        var userIds = new ArrayList<String>();
+        for (var i = 0; i < 3000; i++) {
+            userIds.add(String.valueOf(i));
+        }
+
+        var socureScores = new ArrayList<Double>();
+        for (var i = 0; i < 3000; i++) {
+            socureScores.add(123.0);
+        }
+
+        var inputs = new HashMap<String, List<?>>();
+        inputs.put("arrow_user.id", userIds);
+        inputs.put("arrow_user.favorite_float8", socureScores);
+
+        var table = FeatherProcessor.inputsToTable(inputs, allocator);
+
+
+        var start = System.currentTimeMillis();
+        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
+        var end = System.currentTimeMillis();
+
+        System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
     }
 
 }
