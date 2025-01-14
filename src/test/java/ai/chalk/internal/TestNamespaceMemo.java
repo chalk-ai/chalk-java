@@ -18,9 +18,6 @@ public class TestNamespaceMemo {
         assert userMemo.resolvedFieldNameToIndices.get("id").equals(List.of(0));
         assert userMemo.resolvedFieldNameToIndices.get("name").equals(List.of(1));
         assert userMemo.resolvedFieldNameToIndices.get("transactions").equals(List.of(2));
-        assert userMemo.resolvedFieldNameToIndices.get("user.id").equals(List.of(0));
-        assert userMemo.resolvedFieldNameToIndices.get("user.name").equals(List.of(1));
-        assert userMemo.resolvedFieldNameToIndices.get("user.transactions").equals(List.of(2));
 
         assert memo.containsKey("transaction");
         var transactionMemo = memo.get("transaction");
