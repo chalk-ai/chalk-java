@@ -4,6 +4,7 @@ import ai.chalk.features.*;
 import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 
+import javax.annotation.Nullable;
 import javax.xml.stream.events.Namespace;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -24,9 +25,9 @@ public class Initializer {
             } catch (Exception e) {
                 return e;
             }
-            var rootFeatureFqn = Utils.chalkpySnakeCase(field.getType().getSimpleName());
+            var namespace = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, rootFeatureFqn, null, new HashSet<>(), memo);
+                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, namespace);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -72,15 +73,9 @@ public class Initializer {
             String resolvedName = entry.getKey();
             List<Integer> indices = entry.getValue();
             for (int i : indices) {
-                Field field;
-                try {
-                    field = fields[i];
-                } catch (Exception e) {
-                    throw new Exception("Field not found for resolved name: " + resolvedName);
-                }
-
+                Field field = fields[i];
                 String childFqn = namespace + "." + resolvedName;
-                var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>(), memo);
+                var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>(), memo, null);
                 field.set(fc, feature);
             }
         }
@@ -92,7 +87,8 @@ public class Initializer {
         String fqn,
         Map<String, List<Feature<?>>> featureMap,
         Set<Class<?>> seenClassesInChain,
-        Map<String, NamespaceMemoItem> memo
+        Map<String, NamespaceMemoItem> memo,
+        @Nullable String namespace
     ) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(f.getType())) {
             // RECURSIVE CASE
@@ -105,7 +101,9 @@ public class Initializer {
             }
             seenClassesInChain.add(f.getType());
 
-            var namespace = Utils.chalkpySnakeCase(f.getType().getSimpleName());
+            if (namespace == null) {
+                namespace = Utils.chalkpySnakeCase(castCls.getSimpleName());
+            }
             NamespaceMemoItem memoItem = memo.get(namespace);
             if (memoItem == null) {
                 throw new Exception("memo not found for namespace: " + namespace);
@@ -133,7 +131,7 @@ public class Initializer {
                     } else {
                         childFqn = fqn + "." + resolvedName;
                     }
-                    childField.set(fc, init(childField, childFqn, featureMap, seenClassesInChain, memo));
+                    childField.set(fc, init(childField, childFqn, featureMap, seenClassesInChain, memo, null));
                 }
             }
 
