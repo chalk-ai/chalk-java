@@ -67,7 +67,13 @@ public class Initializer {
 
         NamespaceMemoItem nsMemo = memo.get(fc.getClass());
         if (nsMemo == null) {
-            throw new Exception("memo not found for namespace: " + namespace);
+            throw new Exception(
+                String.format(
+                    "memo not found for namespace %s, found keys: %s",
+                    fc.getClass().getSimpleName(),
+                    memo.keySet()
+                )
+            );
         }
 
         for (Map.Entry<String, List<Integer>> entry : nsMemo.resolvedFieldNameToIndices.entrySet()) {
@@ -114,7 +120,13 @@ public class Initializer {
 
             NamespaceMemoItem memoItem = memo.get(castCls);
             if (memoItem == null) {
-                throw new Exception("memo not found for namespace: " + castCls.getSimpleName());
+                throw new Exception(
+                    String.format(
+                        "memo not found for features class %s, found keys: %s",
+                        castCls.getSimpleName(),
+                        memo.keySet()
+                    )
+                );
             }
 
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
