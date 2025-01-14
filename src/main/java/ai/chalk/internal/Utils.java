@@ -1,30 +1,70 @@
 package ai.chalk.internal;
 
 import ai.chalk.features.Name;
+import ai.chalk.features.Versioned;
+import ai.chalk.features.WindowedFeaturesClass;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
+import java.util.regex.Pattern;
 
 public class Utils {
+    private static final Pattern snakeCase1 = Pattern.compile("(.)([A-Z][a-z]+)");
+    private static final Pattern snakeCase2 = Pattern.compile("__([A-Z])");
+    private static final Pattern snakeCase3 = Pattern.compile("([a-z0-9])([A-Z])");
+
+
     public static String getResolvedName(Field field) {
+        String fieldName;
+
         // If has the Name annotation, use that as the name
         // Otherwise, use the field name snake cased
         if (field.isAnnotationPresent(Name.class)) {
-            return field.getAnnotation(Name.class).value();
+            fieldName = field.getAnnotation(Name.class).value();
+        } else {
+            fieldName = chalkpySnakeCase(field.getName());
         }
-        return chalkpySnakeCase(field.getName());
+
+        if (field.isAnnotationPresent(Versioned.class)) {
+            Versioned versionInfo = field.getAnnotation(Versioned.class);
+            if (versionInfo.defaultVersion() == 0) {
+                // Is not base version feature, so we need to strip the `_vN` suffix by splitting on '_'
+                String[] parts = fieldName.split("_");
+                // Parse the digits from the last part of the FQN, which looks something like `v1`
+                String versionStr = parts[parts.length - 1].substring(1);
+                String base = String.join("_", Arrays.copyOf(parts, parts.length - 1));
+                if (versionStr.equals("1")) {
+                    // If the version is 1, we don't need to append it to the FQN
+                    fieldName = base;
+                } else {
+                    fieldName = base + "@" + versionStr;
+                }
+            } else if (versionInfo.defaultVersion() > 1) {
+                // Is base version feature, so we need to append the default version to the FQN
+                fieldName += "@" + versionInfo.defaultVersion();
+            }
+            return fieldName;
+        } else if (WindowedFeaturesClass.class.isAssignableFrom(field.getDeclaringClass())) {
+            // Convert bucket_1h to __3600s__
+            String durationWithUnitStr = fieldName.substring("bucket_".length());
+            String convertedDurationStr = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
+            fieldName = String.format("__%s__", convertedDurationStr);
+        }
+
+        return fieldName;
 
     }
     public static String chalkpySnakeCase(String s) {
         // Aims to be in parity with chalkpy's impl
-        s = s.replaceAll("(.)([A-Z][a-z]+)", "$1_$2");
-        s = s.replaceAll("__([A-Z])", "_$1");
-        s = s.replaceAll("([a-z0-9])([A-Z])", "$1_$2");
+        s = snakeCase1.matcher(s).replaceAll("$1_$2");
+        s = snakeCase2.matcher(s).replaceAll("_$1");
+        s = snakeCase3.matcher(s).replaceAll("$1_$2");
         return s.toLowerCase();
     }
 
@@ -50,8 +90,7 @@ public class Utils {
                 "' does not exist in class " + clazz.getName());
     }
 
-    public static Class<?> getListFeatureInnerType(Field field) throws Exception {
-        Type genericType = field.getGenericType();
+    public static Class<?> getInnerTypeFromListType(Type genericType) throws Exception {
         if (genericType instanceof ParameterizedType) {
             ParameterizedType paramType = (ParameterizedType) genericType;
             Type[] typeArgs = paramType.getActualTypeArguments();
@@ -67,7 +106,19 @@ public class Utils {
                 }
             }
         }
-        throw new Exception("Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName());
+        throw new Exception("not a parameterized type");
+    }
+
+    public static Class<?> getInnerTypeFromListField(Field field) throws Exception {
+        Type genericType = field.getGenericType();
+        try {
+            return getInnerTypeFromListType(genericType);
+        } catch (Exception e) {
+            throw new Exception(
+                "Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName(),
+                e
+            );
+        }
     }
 
     public static boolean isInteger(String s) {

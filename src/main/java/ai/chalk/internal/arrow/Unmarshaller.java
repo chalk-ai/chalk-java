@@ -6,6 +6,7 @@ import ai.chalk.features.FeaturesClass;
 import ai.chalk.features.HasMany;
 import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.internal.Constants;
+import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
 import ai.chalk.models.OnlineQueryResult;
@@ -48,7 +49,7 @@ public class Unmarshaller {
             String fqn = entry.getKey();
             Table table = entry.getValue();
             Field hasManyField = getFieldFromFqn(targets[0].getClass(), fqn);
-            Class<?> hasManyClass = getListFeatureInnerType(hasManyField);
+            Class<?> hasManyClass = getInnerTypeFromListField(hasManyField);
             if (!hasManyField.isAnnotationPresent(HasMany.class)) {
                 throw new Exception("Field " + fqn + " is not annotated as a has-many field");
             }
@@ -90,16 +91,22 @@ public class Unmarshaller {
         }
     }
 
+
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
 
         // Exists to work around `row.getLargeList` not being available.
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
+
+        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
+        Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
+
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
             Map<String, List<Feature<?>>> featureMap;
             try {
-                featureMap = Initializer.initResult(obj);
+                featureMap = Initializer.initResult(obj, memo, namespace);
             } catch (Exception e) {
                 throw new Exception("Failed to initialize result object", e);
             }
@@ -337,13 +344,14 @@ public class Unmarshaller {
                                     Class<?> dataclass;
                                     try {
                                         Field field = Utils.getFieldFromFqn(target, fqn);
-                                        dataclass = Utils.getListFeatureInnerType(field);
+                                        dataclass = Utils.getInnerTypeFromListField(field);
                                     } catch (Exception e) {
                                         throw new Exception("Could not get the inner type of list feature: " + fqn, e);
                                     }
 
                                     var dataclassInstance = (StructFeaturesClass) dataclass.getDeclaredConstructor().newInstance();
-                                    var dataclassFeatureMap = Initializer.initResult(dataclassInstance);
+                                    var dataclassNamespace = Utils.chalkpySnakeCase(dataclass.getSimpleName());
+                                    var dataclassFeatureMap = Initializer.initResult(dataclassInstance, memo, dataclassNamespace);
 
                                     for (Map.Entry<String, Object> entry : ((Map<String, Object>) rawObj).entrySet()) {
                                         var dataclassRootFqn = Utils.chalkpySnakeCase(dataclass.getSimpleName());
