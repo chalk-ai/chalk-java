@@ -99,7 +99,7 @@ public class Unmarshaller {
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
 
         String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
-        Map<String, NamespaceMemoItem> memo = new HashMap<>();
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
         for (Row row : table) {

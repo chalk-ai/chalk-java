@@ -19,7 +19,7 @@ public class Initializer {
             if (!FeaturesBase.class.isAssignableFrom(field.getType())) {
                 continue;
             }
-            Map<String, NamespaceMemoItem> memo = new HashMap<>();
+            Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
             try {
                 Initializer.buildNamespaceMemo(field.getType(), memo, new HashSet<>());
             } catch (Exception e) {
@@ -27,7 +27,7 @@ public class Initializer {
             }
             var namespace = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, namespace, true);
+                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, true);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -61,11 +61,11 @@ public class Initializer {
         }
     }
 
-    public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc, Map<String, NamespaceMemoItem> memo, String namespace) throws Exception {
+    public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc, Map<Class<?>, NamespaceMemoItem> memo, String namespace) throws Exception {
         List<Field> fields = getFeaturesClassFields(fc.getClass());
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
 
-        NamespaceMemoItem nsMemo = memo.get(namespace);
+        NamespaceMemoItem nsMemo = memo.get(fc.getClass());
         if (nsMemo == null) {
             throw new Exception("memo not found for namespace: " + namespace);
         }
@@ -82,7 +82,6 @@ public class Initializer {
                     featureMap,
                     new HashSet<>(),
                     memo,
-                    null,
                     nsMemo.isFieldFeaturesBaseSubclass.get(i)
                 );
                 field.set(fc, feature);
@@ -96,8 +95,7 @@ public class Initializer {
         String fqn,
         Map<String, List<Feature<?>>> featureMap,
         Set<Class<?>> seenClassesInChain,
-        Map<String, NamespaceMemoItem> memo,
-        @Nullable String namespace,
+        Map<Class<?>, NamespaceMemoItem> memo,
         @Nullable Boolean isFieldFeaturesBaseSubclass
     ) throws Exception {
         if (isFieldFeaturesBaseSubclass == null) {
@@ -114,12 +112,9 @@ public class Initializer {
             }
             seenClassesInChain.add(f.getType());
 
-            if (namespace == null) {
-                namespace = Utils.chalkpySnakeCase(castCls.getSimpleName());
-            }
-            NamespaceMemoItem memoItem = memo.get(namespace);
+            NamespaceMemoItem memoItem = memo.get(castCls);
             if (memoItem == null) {
-                throw new Exception("memo not found for namespace: " + namespace);
+                throw new Exception("memo not found for namespace: " + castCls.getSimpleName());
             }
 
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
@@ -152,7 +147,6 @@ public class Initializer {
                             featureMap,
                             seenClassesInChain,
                             memo,
-                            null,
                             memoItem.isFieldFeaturesBaseSubclass.get(i)
                         )
                     );
@@ -210,7 +204,7 @@ public class Initializer {
 
     public static void buildNamespaceMemo(
         Class<?> cls,
-        Map<String, NamespaceMemoItem> memo,
+        Map<Class<?>, NamespaceMemoItem> memo,
         Set<String> visitedNamespaces
     ) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(cls)) {
@@ -234,7 +228,7 @@ public class Initializer {
                 Class<?> underlyingCls = getUnderlyingClass(fields.get(i).getGenericType());
                 buildNamespaceMemo(underlyingCls, memo, visitedNamespaces);
             }
-            memo.put(namespace, memoItem);
+            memo.put(cls, memoItem);
         }
     };
 }
