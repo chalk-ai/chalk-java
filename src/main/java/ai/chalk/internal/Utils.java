@@ -1,24 +1,56 @@
 package ai.chalk.internal;
 
 import ai.chalk.features.Name;
+import ai.chalk.features.Versioned;
+import ai.chalk.features.WindowedFeaturesClass;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 
 public class Utils {
 
     public static String getResolvedName(Field field) {
+        var fieldName = chalkpySnakeCase(field.getName());
+
         // If has the Name annotation, use that as the name
         // Otherwise, use the field name snake cased
         if (field.isAnnotationPresent(Name.class)) {
-            return field.getAnnotation(Name.class).value();
+            fieldName = field.getAnnotation(Name.class).value();
         }
-        return chalkpySnakeCase(field.getName());
+
+        if (field.isAnnotationPresent(Versioned.class)) {
+            Versioned versionInfo = field.getAnnotation(Versioned.class);
+            if (versionInfo.defaultVersion() == 0) {
+                // Is not base version feature, so we need to strip the `_vN` suffix by splitting on '_'
+                String[] parts = fieldName.split("_");
+                // Parse the digits from the last part of the FQN, which looks something like `v1`
+                String versionStr = parts[parts.length - 1].substring(1);
+                String base = String.join("_", Arrays.copyOf(parts, parts.length - 1));
+                if (versionStr.equals("1")) {
+                    // If the version is 1, we don't need to append it to the FQN
+                    fieldName = base;
+                } else {
+                    fieldName = base + "@" + versionStr;
+                }
+            } else if (versionInfo.defaultVersion() > 1) {
+                // Is base version feature, so we need to append the default version to the FQN
+                fieldName += "@" + versionInfo.defaultVersion();
+            }
+            return fieldName;
+        } else if (WindowedFeaturesClass.class.isAssignableFrom(field.getDeclaringClass())) {
+            // Convert average_transactions.bucket_1h to average_transactions__3600s__
+            String durationWithUnitStr = fieldName.substring("bucket_".length());
+            String convertedDurationStr = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
+            fieldName = String.format("__%s__", convertedDurationStr);
+        }
+
+        return fieldName;
 
     }
     public static String chalkpySnakeCase(String s) {

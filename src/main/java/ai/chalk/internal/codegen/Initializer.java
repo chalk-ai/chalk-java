@@ -150,16 +150,31 @@ public class Initializer {
         Map<String, NamespaceMemoItem> memo,
         Set<String> visitedNamespaces
     ) throws Exception {
-        if (FeaturesClass.class.isAssignableFrom(cls)) {
-            @SuppressWarnings("unchecked")
-            var castCls = (Class<? extends FeaturesClass>) cls;
+        if (FeaturesBase.class.isAssignableFrom(cls)) {
+            Field[] fields;
+
+            if (FeaturesClass.class.isAssignableFrom(cls)) {
+                @SuppressWarnings("unchecked")
+                var castCls = (Class<? extends FeaturesClass>) cls;
+                fields = getFeaturesClassFields(castCls);
+            } else if (StructFeaturesClass.class.isAssignableFrom(cls)) {
+                @SuppressWarnings("unchecked")
+                var castCls = (Class<? extends StructFeaturesClass>) cls;
+                fields = castCls.getDeclaredFields();
+            } else if (WindowedFeaturesClass.class.isAssignableFrom(cls)) {
+                @SuppressWarnings("unchecked")
+                var castCls = (Class<? extends WindowedFeaturesClass>) cls;
+                fields = castCls.getDeclaredFields();
+            } else {
+                throw new Exception("Unknown FeaturesBase subclass found during call: " + cls.getSimpleName());
+            }
+
             String namespace = Utils.chalkpySnakeCase(cls.getSimpleName());
             if (visitedNamespaces.contains(namespace)) {
                 return;
             }
             visitedNamespaces.add(namespace);
             var memoItem = new NamespaceMemoItem();
-            Field[] fields = getFeaturesClassFields(castCls);
             for (int i = 0; i < fields.length; i++) {
                 var resolvedName = Utils.getResolvedName(fields[i]);
                 if (!memoItem.resolvedFieldNameToIndices.containsKey(resolvedName)) {
@@ -167,11 +182,13 @@ public class Initializer {
                 }
                 memoItem.resolvedFieldNameToIndices.get(resolvedName).add(i);
 
-                var fqn = namespace + "." + resolvedName;
-                if (!memoItem.resolvedFieldNameToIndices.containsKey(fqn)) {
-                    memoItem.resolvedFieldNameToIndices.put(fqn, new ArrayList<>());
+                if (!(WindowedFeaturesClass.class.isAssignableFrom(cls))) {
+                    var fqn = namespace + "." + resolvedName;
+                    if (!memoItem.resolvedFieldNameToIndices.containsKey(fqn)) {
+                        memoItem.resolvedFieldNameToIndices.put(fqn, new ArrayList<>());
+                    }
+                    memoItem.resolvedFieldNameToIndices.get(fqn).add(i);
                 }
-                memoItem.resolvedFieldNameToIndices.get(fqn).add(i);
 
                 buildNamespaceMemo(getUnderlyingClass(fields[i].getGenericType()), memo, visitedNamespaces);
             }

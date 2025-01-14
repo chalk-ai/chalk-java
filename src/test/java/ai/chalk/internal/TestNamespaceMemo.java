@@ -26,10 +26,13 @@ public class TestNamespaceMemo {
         var transactionMemo = memo.get("transaction");
         assert transactionMemo.resolvedFieldNameToIndices.get("id").equals(List.of(0));
         assert transactionMemo.resolvedFieldNameToIndices.get("amount").equals(List.of(1));
-        assert transactionMemo.resolvedFieldNameToIndices.get("avgAmount__86400__").equals(List.of(2));
-        assert transactionMemo.resolvedFieldNameToIndices.get("avgAmount__2592000__").equals(List.of(2));
         assert transactionMemo.resolvedFieldNameToIndices.get("name@2").equals(List.of(3, 4));
         assert transactionMemo.resolvedFieldNameToIndices.get("name@3").equals(List.of(5));
+
+        assert memo.containsKey("_windowed_features_1d_30d");
+        var windowedMemo = memo.get("_windowed_features_1d_30d");
+        assert windowedMemo.resolvedFieldNameToIndices.get("__86400__").equals(List.of(0));
+        assert windowedMemo.resolvedFieldNameToIndices.get("__2592000__").equals(List.of(1));
     }
 }
 
