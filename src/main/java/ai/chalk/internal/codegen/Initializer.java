@@ -36,13 +36,14 @@ public class Initializer {
         return null;
     }
 
-    public static <T extends FeaturesBase> Field[] getFeaturesClassFieldsInner(Class<T> cls) {
-        Field[] myFields = cls.getDeclaredFields();
-        Field[] parentFields = cls.getSuperclass().getDeclaredFields();
-        return Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
+    public static <T extends FeaturesBase> List<Field> getFeaturesClassFieldsInner(Class<T> cls) {
+        List<Field> res = new ArrayList<>();
+        res.addAll(Arrays.asList(cls.getDeclaredFields()));
+        res.addAll(Arrays.asList(cls.getSuperclass().getDeclaredFields()));
+        return res;
     }
 
-    public static <T extends FeaturesBase> Field[] getFeaturesClassFields(Class<T> cls) throws Exception {
+    public static <T extends FeaturesBase> List<Field> getFeaturesClassFields(Class<T> cls) throws Exception {
         if (FeaturesClass.class.isAssignableFrom(cls)) {
             @SuppressWarnings("unchecked")
             var castCls = (Class<? extends FeaturesClass>) cls;
@@ -61,7 +62,7 @@ public class Initializer {
     }
 
     public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc, Map<String, NamespaceMemoItem> memo, String namespace) throws Exception {
-        Field[] fields = getFeaturesClassFields(fc.getClass());
+        List<Field> fields = getFeaturesClassFields(fc.getClass());
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
 
         NamespaceMemoItem nsMemo = memo.get(namespace);
@@ -73,7 +74,7 @@ public class Initializer {
             String resolvedName = entry.getKey();
             List<Integer> indices = entry.getValue();
             for (int i : indices) {
-                Field field = fields[i];
+                Field field = fields.get(i);
                 String childFqn = namespace + "." + resolvedName;
                 var feature = Initializer.init(
                     field,
@@ -124,12 +125,12 @@ public class Initializer {
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
 
-            Field[] fields = getFeaturesClassFields(castCls);
+            List<Field> fields = getFeaturesClassFields(castCls);
             for (Map.Entry<String, List<Integer>> entry : memoItem.resolvedFieldNameToIndices.entrySet()) {
                 String resolvedName = entry.getKey();
                 List<Integer> indices = entry.getValue();
                 for (int i : indices) {
-                    Field childField = fields[i];
+                    Field childField = fields.get(i);
                     String childFqn;
                     if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
                         // For input features, struct field FQNs end at the last actual feature in the chain.
@@ -254,7 +255,7 @@ public class Initializer {
     ) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(cls)) {
             @SuppressWarnings("unchecked")
-            Field[] fields = getFeaturesClassFields((Class<FeaturesBase>) cls);
+            List<Field> fields = getFeaturesClassFields((Class<FeaturesBase>) cls);
 
             String namespace = Utils.chalkpySnakeCase(cls.getSimpleName());
             if (visitedNamespaces.contains(namespace)) {
@@ -262,8 +263,8 @@ public class Initializer {
             }
             visitedNamespaces.add(namespace);
             var memoItem = new NamespaceMemoItem();
-            for (int i = 0; i < fields.length; i++) {
-                var resolvedName = Utils.getResolvedName(fields[i]);
+            for (int i = 0; i < fields.size(); i++) {
+                var resolvedName = Utils.getResolvedName(fields.get(i));
                 if (!memoItem.resolvedFieldNameToIndices.containsKey(resolvedName)) {
                     memoItem.resolvedFieldNameToIndices.put(resolvedName, new ArrayList<>());
                 }
@@ -277,8 +278,8 @@ public class Initializer {
 //                    memoItem.resolvedFieldNameToIndices.get(fqn).add(i);
 //                }
 
-                memoItem.isFieldFeaturesBaseSubclass.add(FeaturesBase.class.isAssignableFrom(fields[i].getType()));
-                Class<?> underlyingCls = getUnderlyingClass(fields[i].getGenericType());
+                memoItem.isFieldFeaturesBaseSubclass.add(FeaturesBase.class.isAssignableFrom(fields.get(i).getType()));
+                Class<?> underlyingCls = getUnderlyingClass(fields.get(i).getGenericType());
                 buildNamespaceMemo(underlyingCls, memo, visitedNamespaces);
             }
             memo.put(namespace, memoItem);
