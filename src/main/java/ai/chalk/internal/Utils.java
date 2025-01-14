@@ -21,12 +21,14 @@ public class Utils {
 
 
     public static String getResolvedName(Field field) {
-        var fieldName = chalkpySnakeCase(field.getName());
+        String fieldName;
 
         // If has the Name annotation, use that as the name
         // Otherwise, use the field name snake cased
         if (field.isAnnotationPresent(Name.class)) {
             fieldName = field.getAnnotation(Name.class).value();
+        } else {
+            fieldName = chalkpySnakeCase(field.getName());
         }
 
         if (field.isAnnotationPresent(Versioned.class)) {
