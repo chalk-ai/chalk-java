@@ -48,7 +48,7 @@ public class Unmarshaller {
             String fqn = entry.getKey();
             Table table = entry.getValue();
             Field hasManyField = getFieldFromFqn(targets[0].getClass(), fqn);
-            Class<?> hasManyClass = getListFeatureInnerType(hasManyField);
+            Class<?> hasManyClass = getInnerTypeFromListField(hasManyField);
             if (!hasManyField.isAnnotationPresent(HasMany.class)) {
                 throw new Exception("Field " + fqn + " is not annotated as a has-many field");
             }
@@ -90,11 +90,15 @@ public class Unmarshaller {
         }
     }
 
+
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
 
         // Exists to work around `row.getLargeList` not being available.
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
+
+        Field[] fields = Initializer.getFeaturesClassFields(target);
+
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
             Map<String, List<Feature<?>>> featureMap;
@@ -337,7 +341,7 @@ public class Unmarshaller {
                                     Class<?> dataclass;
                                     try {
                                         Field field = Utils.getFieldFromFqn(target, fqn);
-                                        dataclass = Utils.getListFeatureInnerType(field);
+                                        dataclass = Utils.getInnerTypeFromListField(field);
                                     } catch (Exception e) {
                                         throw new Exception("Could not get the inner type of list feature: " + fqn, e);
                                     }

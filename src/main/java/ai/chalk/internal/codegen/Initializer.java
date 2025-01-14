@@ -1,9 +1,12 @@
 package ai.chalk.internal.codegen;
 
 import ai.chalk.features.*;
+import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -25,11 +28,14 @@ public class Initializer {
         return null;
     }
 
-    public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc) throws Exception {
-        Field[] myFields = fc.getClass().getDeclaredFields();
-        Field[] parentFields = fc.getClass().getSuperclass().getDeclaredFields();
-        Field[] fields = Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
+    public static <T extends FeaturesBase> Field[] getFeaturesClassFields(Class<T> cls) {
+        Field[] myFields = cls.getDeclaredFields();
+        Field[] parentFields = cls.getSuperclass().getDeclaredFields();
+        return Stream.concat(Arrays.stream(myFields), Arrays.stream(parentFields)).toArray(Field[]::new);
+    }
 
+    public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc) throws Exception {
+        Field[] fields = getFeaturesClassFields((Class<FeaturesBase>) fc.getClass());
         Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
         var rootFeatureFqn = Utils.chalkpySnakeCase(fc.getClass().getSimpleName());
         for (Field field : fields) {
@@ -110,4 +116,66 @@ public class Initializer {
             throw new Exception("Unknown type found during call - expected `FeaturesClass` or `Feature`, found: " + f.getType());
         }
     }
+
+    public static Class<?> getUnderlyingClass(Type typ) {
+        if (typ instanceof ParameterizedType) {
+            var parametrizedTyp = (ParameterizedType) typ;
+            Type rawTyp = parametrizedTyp.getRawType();
+
+            if (!(rawTyp instanceof Class)) {
+                return typ.getClass();
+            }
+            var cls = (Class<?>) rawTyp;
+            if (Feature.class.isAssignableFrom(cls)) {
+                var args = parametrizedTyp.getActualTypeArguments();
+                return getUnderlyingClass(args[0]);
+            } else if (List.class.isAssignableFrom(cls)) {
+                var args = parametrizedTyp.getActualTypeArguments();
+                return getUnderlyingClass(args[0]);
+            } else {
+                return typ.getClass();
+            }
+        } else {
+            if (typ instanceof Class) {
+                return (Class<?>) typ;
+            } else {
+                return typ.getClass();
+            }
+
+        }
+    }
+
+    public static void buildNamespaceMemo(
+        Class<?> cls,
+        Map<String, NamespaceMemoItem> memo,
+        Set<String> visitedNamespaces
+    ) throws Exception {
+        if (FeaturesClass.class.isAssignableFrom(cls)) {
+            @SuppressWarnings("unchecked")
+            var castCls = (Class<? extends FeaturesClass>) cls;
+            String namespace = Utils.chalkpySnakeCase(cls.getSimpleName());
+            if (visitedNamespaces.contains(namespace)) {
+                return;
+            }
+            visitedNamespaces.add(namespace);
+            var memoItem = new NamespaceMemoItem();
+            Field[] fields = getFeaturesClassFields(castCls);
+            for (int i = 0; i < fields.length; i++) {
+                var resolvedName = Utils.getResolvedName(fields[i]);
+                if (!memoItem.resolvedFieldNameToIndices.containsKey(resolvedName)) {
+                    memoItem.resolvedFieldNameToIndices.put(resolvedName, new ArrayList<>());
+                }
+                memoItem.resolvedFieldNameToIndices.get(resolvedName).add(i);
+
+                var fqn = namespace + "." + resolvedName;
+                if (!memoItem.resolvedFieldNameToIndices.containsKey(fqn)) {
+                    memoItem.resolvedFieldNameToIndices.put(fqn, new ArrayList<>());
+                }
+                memoItem.resolvedFieldNameToIndices.get(fqn).add(i);
+
+                buildNamespaceMemo(getUnderlyingClass(fields[i].getGenericType()), memo, visitedNamespaces);
+            }
+            memo.put(namespace, memoItem);
+        }
+    };
 }

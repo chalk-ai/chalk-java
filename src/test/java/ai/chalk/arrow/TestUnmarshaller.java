@@ -1249,7 +1249,7 @@ public class TestUnmarshaller {
 
 
         var start = System.currentTimeMillis();
-        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
+        Unmarshaller.unmarshalTable(table, ArrowUser.class);
         var end = System.currentTimeMillis();
 
         System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);

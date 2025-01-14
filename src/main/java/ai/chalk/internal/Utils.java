@@ -11,6 +11,7 @@ import java.util.List;
 import java.time.temporal.ChronoUnit;
 
 public class Utils {
+
     public static String getResolvedName(Field field) {
         // If has the Name annotation, use that as the name
         // Otherwise, use the field name snake cased
@@ -50,8 +51,7 @@ public class Utils {
                 "' does not exist in class " + clazz.getName());
     }
 
-    public static Class<?> getListFeatureInnerType(Field field) throws Exception {
-        Type genericType = field.getGenericType();
+    public static Class<?> getInnerTypeFromListType(Type genericType) throws Exception {
         if (genericType instanceof ParameterizedType) {
             ParameterizedType paramType = (ParameterizedType) genericType;
             Type[] typeArgs = paramType.getActualTypeArguments();
@@ -67,7 +67,19 @@ public class Utils {
                 }
             }
         }
-        throw new Exception("Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName());
+        throw new Exception("not a parameterized type");
+    }
+
+    public static Class<?> getInnerTypeFromListField(Field field) throws Exception {
+        Type genericType = field.getGenericType();
+        try {
+            return getInnerTypeFromListType(genericType);
+        } catch (Exception e) {
+            throw new Exception(
+                "Could not get inner type of field " + field.getName() + " in class " + field.getDeclaringClass().getName(),
+                e
+            );
+        }
     }
 
     public static boolean isInteger(String s) {
