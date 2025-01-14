@@ -27,7 +27,7 @@ public class Initializer {
             }
             var namespace = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, namespace);
+                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, namespace, true);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -75,7 +75,15 @@ public class Initializer {
             for (int i : indices) {
                 Field field = fields[i];
                 String childFqn = namespace + "." + resolvedName;
-                var feature = Initializer.init(field, childFqn, featureMap, new HashSet<>(), memo, null);
+                var feature = Initializer.init(
+                    field,
+                    childFqn,
+                    featureMap,
+                    new HashSet<>(),
+                    memo,
+                    null,
+                    nsMemo.isFieldFeaturesBaseSubclass.get(i)
+                );
                 field.set(fc, feature);
             }
         }
@@ -88,9 +96,13 @@ public class Initializer {
         Map<String, List<Feature<?>>> featureMap,
         Set<Class<?>> seenClassesInChain,
         Map<String, NamespaceMemoItem> memo,
-        @Nullable String namespace
+        @Nullable String namespace,
+        @Nullable Boolean isFieldFeaturesBaseSubclass
     ) throws Exception {
-        if (FeaturesBase.class.isAssignableFrom(f.getType())) {
+        if (isFieldFeaturesBaseSubclass == null) {
+            isFieldFeaturesBaseSubclass = FeaturesBase.class.isAssignableFrom(f.getType());
+        }
+        if (isFieldFeaturesBaseSubclass) {
             // RECURSIVE CASE
             @SuppressWarnings("unchecked")
             var castCls = (Class<? extends FeaturesBase>) f.getType();
@@ -131,7 +143,18 @@ public class Initializer {
                     } else {
                         childFqn = fqn + "." + resolvedName;
                     }
-                    childField.set(fc, init(childField, childFqn, featureMap, seenClassesInChain, memo, null));
+                    childField.set(
+                        fc,
+                        init(
+                            childField,
+                            childFqn,
+                            featureMap,
+                            seenClassesInChain,
+                            memo,
+                            null,
+                            memoItem.isFieldFeaturesBaseSubclass.get(i)
+                        )
+                    );
                 }
             }
 
@@ -254,7 +277,9 @@ public class Initializer {
 //                    memoItem.resolvedFieldNameToIndices.get(fqn).add(i);
 //                }
 
-                buildNamespaceMemo(getUnderlyingClass(fields[i].getGenericType()), memo, visitedNamespaces);
+                memoItem.isFieldFeaturesBaseSubclass.add(FeaturesBase.class.isAssignableFrom(fields[i].getType()));
+                Class<?> underlyingCls = getUnderlyingClass(fields[i].getGenericType());
+                buildNamespaceMemo(underlyingCls, memo, visitedNamespaces);
             }
             memo.put(namespace, memoItem);
         }
