@@ -422,7 +422,6 @@ public class FeatherProcessor {
     }
 
     public static Table inputsToTable(Map<String, List<?>> inputs, BufferAllocator allocator) throws Exception {
-        byte[] bytes = inputsToArrowBytes(inputs, allocator);
-        return convertBytesToTable(bytes, allocator);
+        return convertBytesToTable(inputsToArrowBytes(inputs, allocator), allocator);
     }
 }

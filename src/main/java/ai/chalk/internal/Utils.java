@@ -51,7 +51,7 @@ public class Utils {
             }
             return fieldName;
         } else if (WindowedFeaturesClass.class.isAssignableFrom(field.getDeclaringClass())) {
-            // Convert average_transactions.bucket_1h to average_transactions__3600s__
+            // Convert bucket_1h to __3600s__
             String durationWithUnitStr = fieldName.substring("bucket_".length());
             String convertedDurationStr = Utils.convertBucketDurationToSeconds(durationWithUnitStr);
             fieldName = String.format("__%s__", convertedDurationStr);
