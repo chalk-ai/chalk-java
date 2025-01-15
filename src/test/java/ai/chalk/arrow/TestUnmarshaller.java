@@ -2,6 +2,7 @@ package ai.chalk.arrow;
 
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
+import ai.chalk.arrow.test_features.UnmarshalArrowUser;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
@@ -1244,21 +1245,23 @@ public class TestUnmarshaller {
         }
 
         var inputs = new HashMap<String, List<?>>();
-        inputs.put("arrow_user.id", userIds);
-        inputs.put("arrow_user.favorite_float8", socureScores);
+        inputs.put("unmarshal_arrow_user.id", userIds);
+        inputs.put("unmarshal_arrow_user.favorite_float8", socureScores);
 
         var table = FeatherProcessor.inputsToTable(inputs, allocator);
 
-
-        var start = System.currentTimeMillis();
-        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
-        var end = System.currentTimeMillis();
-
-        System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
-        assert users.length == userIds.size();
-        for (var i = 0; i < userIds.size(); i++) {
-            assert users[i].id.getValue().equals(userIds.get(i));
-            assert users[i].favoriteFloat8.getValue().equals(socureScores.get(i));
+        // For some reason first few runs are slower, possibly due to JIT plus
+        // CPU contention from test setup?
+        for (int run = 0; run < 10; run++) {
+            var start = System.currentTimeMillis();
+            var users = Unmarshaller.unmarshalTable(table, UnmarshalArrowUser.class);
+            var end = System.currentTimeMillis();
+            System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
+            assert users.length == userIds.size();
+            for (var i = 0; i < userIds.size(); i++) {
+                assert users[i].id.getValue().equals(userIds.get(i));
+                assert users[i].favoriteFloat8.getValue().equals(socureScores.get(i));
+            }
         }
     }
 }
