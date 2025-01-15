@@ -1241,8 +1241,8 @@ public class TestUnmarshaller {
         }
 
         var inputs = new HashMap<String, List<?>>();
-        inputs.put("unmarshal_arrow_user.id", userIds);
-        inputs.put("unmarshal_arrow_user.favorite_float8", socureScores);
+        inputs.put("arrow_user.id", userIds);
+        inputs.put("arrow_user.favorite_float8", socureScores);
 
         var table = FeatherProcessor.inputsToTable(inputs, allocator);
 
