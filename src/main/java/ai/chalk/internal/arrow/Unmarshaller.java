@@ -23,7 +23,7 @@ import javax.xml.stream.events.Namespace;
 import java.lang.reflect.Field;
 import java.time.*;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import static ai.chalk.internal.Utils.*;
@@ -31,6 +31,13 @@ import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList
 
 public class Unmarshaller {
     private final static Integer unmarshalNumChunks = Runtime.getRuntime().availableProcessors();
+    private final static ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            unmarshalNumChunks,
+            unmarshalNumChunks,
+            30, TimeUnit.SECONDS,  // ineffectual, because corePoolSize == maximumPoolSize
+            new SynchronousQueue<>(),
+            new ThreadPoolExecutor.CallerRunsPolicy()
+    );
     public static List<String> fqnsToSkip = List.of(Constants.tsFeatureFqn, Constants.indexFqn);
     public static List<String> prefixToSkip = List.of(Constants.chalkDunderPrefix);
 
@@ -99,8 +106,6 @@ public class Unmarshaller {
     public static <T extends FeaturesClass> List<T> unmarshalTableChunk(
         Table table,
         Class<T> target,
-        Integer startIdx,
-        Integer endIdx,
         Map<Class<?>, NamespaceMemoItem> memo,
         List<Boolean> shouldSkipField
     ) throws Exception {
@@ -117,7 +122,7 @@ public class Unmarshaller {
 
         // Exists to work around `row.getLargeList` not being available.
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
-        for (Row row : table.slice(startIdx, endIdx - startIdx)) {
+        for (Row row : table) {
             for (var i = 0; i < table.getSchema().getFields().size(); i++) {
                 if (shouldSkipField.get(i)) {
                     continue;
@@ -786,19 +791,17 @@ public class Unmarshaller {
             throw new IllegalArgumentException("Row count " + table.getRowCount() + " is out of range for int");
         }
         var intRowCount = (int) table.getRowCount();
-        Integer chunkSize = intRowCount / Runtime.getRuntime().availableProcessors();
+        int chunkSize = intRowCount / Runtime.getRuntime().availableProcessors();
         List<CompletableFuture<List<T>>> futures = new ArrayList<>();
-        for (Integer startIdx = 0; startIdx < intRowCount; startIdx += chunkSize) {
+        for (int startIdx = 0; startIdx < intRowCount; startIdx += chunkSize) {
             var endIdx = Math.min(startIdx + chunkSize, intRowCount);
-            final Integer finalStartIdx = startIdx;
+            var finalStartIdx = startIdx;
             futures.add(CompletableFuture.supplyAsync(() -> {
                 List<T> chunkResult;
-                try {
+                try (Table chunk = table.slice(finalStartIdx, endIdx - finalStartIdx)) {
                     chunkResult = unmarshalTableChunk(
-                        table,
+                        chunk,
                         target,
-                        finalStartIdx,
-                        endIdx,
                         memo,
                         shouldSkipField
                     );
@@ -806,7 +809,7 @@ public class Unmarshaller {
                     throw new RuntimeException(e);
                 }
                 return chunkResult;
-            }));
+            }, executor));
         }
 
         List<List<T>> allChunkResults = futures.stream()
