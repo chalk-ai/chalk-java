@@ -19,12 +19,10 @@ import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.util.Text;
 
-import javax.xml.stream.events.Namespace;
 import java.lang.reflect.Field;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 import static ai.chalk.internal.Utils.*;
 import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList;
