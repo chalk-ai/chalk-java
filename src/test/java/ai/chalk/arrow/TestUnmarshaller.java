@@ -18,6 +18,8 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import java.time.*;
 import java.util.*;
@@ -1238,7 +1240,7 @@ public class TestUnmarshaller {
 
         var socureScores = new ArrayList<Double>();
         for (var i = 0; i < 3000; i++) {
-            socureScores.add(123.0);
+            socureScores.add((double) i * 2);
         }
 
         var inputs = new HashMap<String, List<?>>();
@@ -1249,10 +1251,14 @@ public class TestUnmarshaller {
 
 
         var start = System.currentTimeMillis();
-        Unmarshaller.unmarshalTable(table, ArrowUser.class);
+        var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         var end = System.currentTimeMillis();
 
         System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
+        assert users.length == userIds.size();
+        for (var i = 0; i < userIds.size(); i++) {
+            assert users[i].id.getValue().equals(userIds.get(i));
+            assert users[i].favoriteFloat8.getValue().equals(socureScores.get(i));
+        }
     }
-
 }

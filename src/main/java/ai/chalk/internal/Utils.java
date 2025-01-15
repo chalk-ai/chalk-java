@@ -19,6 +19,13 @@ public class Utils {
     private static final Pattern snakeCase2 = Pattern.compile("__([A-Z])");
     private static final Pattern snakeCase3 = Pattern.compile("([a-z0-9])([A-Z])");
 
+    public static int parseEnvVarInt(String envVar, int defaultValue) {
+        String envVarStr = System.getenv(envVar);
+        if (envVarStr == null) {
+            return defaultValue;
+        }
+        return Integer.parseInt(envVarStr);
+    }
 
     public static String getResolvedName(Field field) {
         String fieldName;
