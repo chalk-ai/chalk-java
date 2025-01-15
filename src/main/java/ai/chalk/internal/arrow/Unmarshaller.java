@@ -155,17 +155,16 @@ public class Unmarshaller {
         Map<String, LargeListVector> fqnToLargeListColumnCopy
     ) throws Exception {
         List<T> result = new ArrayList<>();
-        T obj = target.getDeclaredConstructor().newInstance();
-        result.add(obj);
         String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
-        Map<String, List<Feature<?>>> featureMap;
-        try {
-            featureMap = Initializer.initResult(obj, memo, namespace);
-        } catch (Exception e) {
-            throw new Exception("Failed to initialize result object", e);
-        }
-
         for (Row row : table) {
+            T obj = target.getDeclaredConstructor().newInstance();
+            result.add(obj);
+            Map<String, List<Feature<?>>> featureMap;
+            try {
+                featureMap = Initializer.initResult(obj, memo, namespace);
+            } catch (Exception e) {
+                throw new Exception("Failed to initialize result object", e);
+            }
             for (var i = 0; i < table.getSchema().getFields().size(); i++) {
                 if (shouldSkipField.get(i)) {
                     continue;
@@ -513,7 +512,7 @@ public class Unmarshaller {
         }
         List<CompletableFuture<List<T>>> futures = new ArrayList<>();
         for (int startIdx = 0; startIdx < intRowCount; startIdx += effectiveChunkSize) {
-            var endIdx = Math.min(startIdx + chunkSize, intRowCount);
+            var endIdx = Math.min(startIdx + effectiveChunkSize, intRowCount);
             var finalStartIdx = startIdx;
             futures.add(CompletableFuture.supplyAsync(() -> {
                 List<T> chunkResult;
