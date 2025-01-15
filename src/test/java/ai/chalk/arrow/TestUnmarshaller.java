@@ -2,12 +2,10 @@ package ai.chalk.arrow;
 
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
-import ai.chalk.arrow.test_features.UnmarshalArrowUser;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
-import ai.chalk.models.OnlineQueryParams;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -19,8 +17,6 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import java.time.*;
 import java.util.*;
@@ -1254,7 +1250,7 @@ public class TestUnmarshaller {
         // CPU contention from test setup?
         for (int run = 0; run < 10; run++) {
             var start = System.currentTimeMillis();
-            var users = Unmarshaller.unmarshalTable(table, UnmarshalArrowUser.class);
+            var users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
             var end = System.currentTimeMillis();
             System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
             assert users.length == userIds.size();
