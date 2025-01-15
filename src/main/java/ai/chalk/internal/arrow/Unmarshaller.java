@@ -1,5 +1,6 @@
 package ai.chalk.internal.arrow;
 
+import ai.chalk.client.ChalkClientImpl;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesClass;
@@ -28,11 +29,33 @@ import static ai.chalk.internal.Utils.*;
 import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList;
 
 public class Unmarshaller {
-    private final static Integer unmarshalNumChunks = Runtime.getRuntime().availableProcessors();
+    public enum ChunkingMode {
+        NUM_CHUNKS,
+        CHUNK_SIZE,
+    }
+    private final static int executorNumThreads = Runtime.getRuntime().availableProcessors();
+    private final static int chunkSize = parseEnvVarInt("CHALK_UNMARSHALLER_CHUNK_SIZE", 1_000);
+    private final static int numChunks = parseEnvVarInt("CHALK_UNMARSHALLER_NUM_CHUNKS", executorNumThreads);
+    private final static ChunkingMode chunkingMode = ChunkingMode.valueOf(
+        System.getenv().getOrDefault("CHALK_UNMARSHALLER_CHUNKING_MODE", ChunkingMode.NUM_CHUNKS.name())
+    );
+
+    private static final System.Logger logger = System.getLogger(Unmarshaller.class.getName());
+
+    static {
+        if (chunkingMode == ChunkingMode.CHUNK_SIZE) {
+            logger.log(System.Logger.Level.INFO, "Chalk Unmarshaller using CHUNK_SIZE: " + chunkSize);
+        } else if (chunkingMode == ChunkingMode.NUM_CHUNKS) {
+            logger.log(System.Logger.Level.INFO, "Chalk Unmarshaller using NUM_CHUNKS: " + numChunks);
+        } else {
+            throw new RuntimeException("Invalid Chalk Unmarshaller chunking mode: " + chunkingMode);
+        }
+    }
+
     private final static ThreadPoolExecutor executor = new ThreadPoolExecutor(
-            unmarshalNumChunks,
-            unmarshalNumChunks,
-            30, TimeUnit.SECONDS,  // ineffectual, because corePoolSize == maximumPoolSize
+            executorNumThreads,
+            executorNumThreads,
+            5, TimeUnit.MINUTES,  // ineffectual, because corePoolSize == maximumPoolSize
             new SynchronousQueue<>(),
             new ThreadPoolExecutor.CallerRunsPolicy()
     );
@@ -480,9 +503,16 @@ public class Unmarshaller {
             throw new IllegalArgumentException("Row count " + table.getRowCount() + " is out of range for int");
         }
         var intRowCount = (int) table.getRowCount();
-        int chunkSize = Math.max(intRowCount / Runtime.getRuntime().availableProcessors(), 1);
+        int effectiveChunkSize;
+        if (chunkingMode == ChunkingMode.CHUNK_SIZE) {
+            effectiveChunkSize = Math.min(intRowCount, Unmarshaller.chunkSize);
+        } else if (chunkingMode == ChunkingMode.NUM_CHUNKS) {
+            effectiveChunkSize = Math.max(intRowCount / numChunks, 1);
+        } else {
+            throw new Exception("Invalid unmarshaller chunking mode: " + chunkingMode);
+        }
         List<CompletableFuture<List<T>>> futures = new ArrayList<>();
-        for (int startIdx = 0; startIdx < intRowCount; startIdx += chunkSize) {
+        for (int startIdx = 0; startIdx < intRowCount; startIdx += effectiveChunkSize) {
             var endIdx = Math.min(startIdx + chunkSize, intRowCount);
             var finalStartIdx = startIdx;
             futures.add(CompletableFuture.supplyAsync(() -> {
