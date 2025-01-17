@@ -456,21 +456,14 @@ public class Unmarshaller {
         List<T> result = new ArrayList<T>();
 
         // Exists to work around `row.getLargeList` not being available.
-        var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
 
-        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
-        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
+//        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMa  p<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
         try (var root = table.toVectorSchemaRoot()) {
             for (var rowIdx = 0; rowIdx < root.getRowCount(); rowIdx++) {
                 T obj = target.getDeclaredConstructor().newInstance();
-                Map<String, List<Feature<?>>> featureMap;
-                try {
-                    featureMap = Initializer.initResult(obj, memo, namespace);
-                } catch (Exception e) {
-                    throw new Exception("Failed to initialize result object", e);
-                }
                 result.add(obj);
 
                 outerLoop:
@@ -486,7 +479,6 @@ public class Unmarshaller {
                     }
 
                     var settersList = Initializer.initScoped(obj, fqn, memo);
-                    var featureList = featureMap.get(fqn);
 
                     for (var setter : settersList) {
                         Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
@@ -526,9 +518,6 @@ public class Unmarshaller {
             }
         }
 
-        for (var entry : fqnToLargeListColumnCopy.entrySet()) {
-            entry.getValue().close();
-        }
         return listToArray(result, target);
     }
 

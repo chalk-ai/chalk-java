@@ -11,5 +11,6 @@ public class StructSetter implements Setter {
 
     public void set(Object value) {
         // TODO
+//        System.out.println("tyrina set struct value: " + value);
     }
 }

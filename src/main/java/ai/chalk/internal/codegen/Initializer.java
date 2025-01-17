@@ -253,7 +253,7 @@ public class Initializer {
                 WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
                 return List.of(setter);
             } else {
-                FeatureSetter setter = new FeatureSetter((Feature<?>) fieldObj);
+                FeatureSetter setter = new FeatureSetter(new Feature<>());
                 return List.of(setter);
             }
         }
