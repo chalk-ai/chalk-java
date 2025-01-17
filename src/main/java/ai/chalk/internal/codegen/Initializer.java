@@ -6,12 +6,10 @@ import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 
 import javax.annotation.Nullable;
-import javax.xml.stream.events.Namespace;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.stream.Stream;
 
 import static ai.chalk.internal.Utils.getResolvedName;
 
@@ -414,6 +412,16 @@ public class Initializer {
                         memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
                     }
                     // Prepend base windowed feature name to windowed child fields
+                    // i.e.
+                    // {
+                    //   "__3600__": [0],
+                    //   "__2592000__": [1]
+                    // }
+                    // ->
+                    // {
+                    //   "average_txns__3600__": [0],
+                    //   "average_txns__2592000__": [1]
+                    // }
                     var prependedMap = new HashMap<String, List<Integer>>();
                     for (Map.Entry<String, List<Integer>> entry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
                         prependedMap.put(resolvedName + entry.getKey(), entry.getValue());

@@ -104,7 +104,7 @@ public class Unmarshaller {
             for (org.apache.arrow.vector.types.pojo.Field field : root.getSchema().getFields()) {
                 FieldVector vector = root.getVector(field.getName());
                 ArrowType arrowType = field.getFieldType().getType();
-                var obj = getValueFromArrowArray(vector, arrowType, i);
+                var obj = getValueFromArrowArray(vector, i);
                 System.out.printf("%s[%d]: %s \n", field.getName(), i, obj);
             }
         }
@@ -495,7 +495,7 @@ public class Unmarshaller {
                     }
                     var settersList = Initializer.initScoped(obj, fieldIdxToFqnParts.get(i), memo);
                     for (var setter : settersList) {
-                        Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
+                        Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), rowIdx);
                         setter.set(value);
                     }
                 }
@@ -505,16 +505,17 @@ public class Unmarshaller {
         return listToArray(result, target);
     }
 
-    public static List<Object> getInnerList(FieldVector vector, int startIdx, int endIdx, ArrowType arrowType) throws Exception {
+    public static List<Object> getInnerList(FieldVector vector, int startIdx, int endIdx) throws Exception {
         List<Object> result = new ArrayList<>();
         for (int i = startIdx; i < endIdx; i++) {
-            result.add(getValueFromArrowArray(vector, arrowType, i));
+            result.add(getValueFromArrowArray(vector, i));
         }
         return result;
     }
 
 
-    public static Object getValueFromArrowArray(FieldVector vector, ArrowType arrowType, int idx) throws Exception {
+    public static Object getValueFromArrowArray(FieldVector vector, int idx) throws Exception {
+        ArrowType arrowType = vector.getField().getType();
         switch (arrowType.getTypeID()) {
             case Int -> {
                 var intType = (ArrowType.Int) arrowType;
@@ -683,8 +684,7 @@ public class Unmarshaller {
                 return getInnerList(
                     dataVector,
                     startIdx,
-                    endIdx,
-                    dataVector.getField().getType()
+                    endIdx
                 );
             }
             case LargeList -> {
@@ -698,8 +698,7 @@ public class Unmarshaller {
                 return getInnerList(
                     largeListVector.getDataVector(),
                     Math.toIntExact(startIdx),
-                    Math.toIntExact(endIdx),
-                    largeListVector.getField().getType()
+                    Math.toIntExact(endIdx)
                 );
             }
             case Duration -> {
@@ -753,7 +752,7 @@ public class Unmarshaller {
                     var childVector = structVector.getChild(childField.getName());
                     result.put(
                         childField.getName(),
-                        getValueFromArrowArray(childVector, childField.getField().getType(), idx)
+                        getValueFromArrowArray(childVector, idx)
                     );
                 }
                 return result;
