@@ -1,6 +1,7 @@
 package ai.chalk.internal.codegen;
 
 import ai.chalk.features.*;
+import ai.chalk.internal.FieldMeta;
 import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 
@@ -88,7 +89,7 @@ public class Initializer {
                     featureMap,
                     new HashSet<>(),
                     memo,
-                    nsMemo.isFieldFeaturesBaseSubclass.get(i)
+                    nsMemo.fieldMetas.get(i).isFeaturesBase()
                 );
                 field.set(fc, feature);
             }
@@ -159,7 +160,7 @@ public class Initializer {
                             featureMap,
                             seenClassesInChain,
                             memo,
-                            memoItem.isFieldFeaturesBaseSubclass.get(i)
+                            memoItem.fieldMetas.get(i).isFeaturesBase()
                         )
                     );
                 }
@@ -198,22 +199,22 @@ public class Initializer {
         List<String> fqnParts = List.of(fqn.split("\\."));
         if (fqnParts.size() < 2) {
             throw new Exception(
-                    String.format(
-                            "FQN '%s' must have at least 2 parts, found %d",
-                            fqn,
-                            fqnParts.size()
-                    )
+                String.format(
+                    "FQN '%s' must have at least 2 parts, found %d",
+                    fqn,
+                    fqnParts.size()
+                )
             );
         }
 
         NamespaceMemoItem nsMemo = memo.get(cls.getClass());
         if (nsMemo == null) {
             throw new Exception(
-                    String.format(
-                            "memo not found for namespace '%s', found keys: %s",
-                            cls.getClass().getSimpleName(),
-                            memo.keySet()
-                    )
+                String.format(
+                    "memo not found for namespace '%s', found keys: %s",
+                    cls.getClass().getSimpleName(),
+                    memo.keySet()
+                )
             );
         }
 
@@ -222,7 +223,13 @@ public class Initializer {
         List<Setter> targetFields = new ArrayList<>();
         for (int i : indices) {
             Field field = fields.get(i);
-            List<Setter> res = initScopedInner(cls, field, fqnParts.subList(2, fqnParts.size()), memo);
+            List<Setter> res = initScopedInner(
+                cls,
+                field,
+                nsMemo.fieldMetas.get(i),
+                fqnParts.subList(2, fqnParts.size()),
+                memo
+            );
             targetFields.addAll(res);
         }
 
@@ -232,19 +239,22 @@ public class Initializer {
     public static List<Setter> initScopedInner(
         Object parent,
         Field field,
+        FieldMeta meta,
         List<String> fqnParts,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        // If is a feature, then return feature setter
-        // if is a struct, then return struct setter
-        // if is a windowed, then return windowed setter
-
-        // determine which type by checking memo
-        // memo should be the memo for the current
-
         var fieldObj = field.get(parent);
+
         if (fqnParts.size() == 0) {
             FeatureSetter setter = new FeatureSetter((Feature<?>) fieldObj);
+            return List.of(setter);
+        }
+        if (meta.isStruct()) {
+            StructSetter setter = new StructSetter((StructFeaturesClass) fieldObj);
+            return List.of(setter);
+        }
+        if (meta.isWindowed()) {
+            WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
             return List.of(setter);
         }
 
@@ -265,7 +275,13 @@ public class Initializer {
         List<Setter> targetFields = new ArrayList<>();
         for (int i : indices) {
             Field childField = fields.get(i);
-            List<Setter> res = initScopedInner(fc, childField, fqnParts.subList(1, fqnParts.size()), memo);
+            List<Setter> res = initScopedInner(
+                fc,
+                childField,
+                nextMemo.fieldMetas.get(i),
+                fqnParts.subList(1, fqnParts.size()),
+                memo
+            );
             targetFields.addAll(res);
         }
 
@@ -301,9 +317,9 @@ public class Initializer {
     }
 
     public static void buildNamespaceMemo(
-        Class<?> cls,
-        Map<Class<?>, NamespaceMemoItem> memo,
-        Set<String> visitedNamespaces
+            Class<?> cls,
+            Map<Class<?>, NamespaceMemoItem> classMemo,
+            Set<String> visitedNamespaces
     ) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(cls)) {
             @SuppressWarnings("unchecked")
@@ -314,6 +330,7 @@ public class Initializer {
                 return;
             }
             visitedNamespaces.add(namespace);
+
             var memoItem = new NamespaceMemoItem();
             for (int i = 0; i < fields.size(); i++) {
                 var resolvedName = Utils.getResolvedName(fields.get(i));
@@ -322,11 +339,21 @@ public class Initializer {
                 }
                 memoItem.resolvedFieldNameToIndices.get(resolvedName).add(i);
 
-                memoItem.isFieldFeaturesBaseSubclass.add(FeaturesBase.class.isAssignableFrom(fields.get(i).getType()));
-                Class<?> underlyingCls = getUnderlyingClass(fields.get(i).getGenericType());
-                buildNamespaceMemo(underlyingCls, memo, visitedNamespaces);
+                var fieldType = fields.get(i).getType();
+                boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
+                memoItem.fieldMetas.add(new FieldMeta(
+                    isFeaturesBase,
+                    isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType),
+                    isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType)
+                ));
+
+                buildNamespaceMemo(
+                        getUnderlyingClass(fields.get(i).getGenericType()),
+                        classMemo,
+                        visitedNamespaces
+                );
             }
-            memo.put(cls, memoItem);
+            classMemo.put(cls, memoItem);
         }
     };
 }

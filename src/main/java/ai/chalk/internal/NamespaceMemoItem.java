@@ -8,10 +8,9 @@ import java.util.Map;
 
 public class NamespaceMemoItem {
     public Map<String, List<Integer>> resolvedFieldNameToIndices;
-    public List<Boolean> isFieldFeaturesBaseSubclass;
-
+    public List<FieldMeta> fieldMetas;
     public NamespaceMemoItem() {
         resolvedFieldNameToIndices = new HashMap<>();
-        isFieldFeaturesBaseSubclass = new ArrayList<>();
+        fieldMetas = new ArrayList<>();
     }
 }

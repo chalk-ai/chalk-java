@@ -485,6 +485,7 @@ public class Unmarshaller {
                         }
                     }
 
+                    var settersList = Initializer.initScoped(obj, fqn, memo);
                     var featureList = featureMap.get(fqn);
                     if (featureList == null) {
 //                        // We are faking the attributes of a struct as features,
