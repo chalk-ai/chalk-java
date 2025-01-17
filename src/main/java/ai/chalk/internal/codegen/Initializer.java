@@ -186,6 +186,92 @@ public class Initializer {
         }
     }
 
+    /*
+     * Unlike init that branches out and initializes all fields, initScoped only initializes
+     * the fields relevant to the specified FQN.
+     */
+    public static List<Setter> initScoped(
+        FeaturesClass cls,
+        String fqn,
+        Map<Class<?>, NamespaceMemoItem> memo
+    ) throws Exception {
+        List<String> fqnParts = List.of(fqn.split("\\."));
+        if (fqnParts.size() < 2) {
+            throw new Exception(
+                    String.format(
+                            "FQN '%s' must have at least 2 parts, found %d",
+                            fqn,
+                            fqnParts.size()
+                    )
+            );
+        }
+
+        NamespaceMemoItem nsMemo = memo.get(cls.getClass());
+        if (nsMemo == null) {
+            throw new Exception(
+                    String.format(
+                            "memo not found for namespace '%s', found keys: %s",
+                            cls.getClass().getSimpleName(),
+                            memo.keySet()
+                    )
+            );
+        }
+
+        List<Integer> indices = nsMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
+        List<Field> fields = getFeaturesClassFields(cls.getClass());
+        List<Setter> targetFields = new ArrayList<>();
+        for (int i : indices) {
+            Field field = fields.get(i);
+            List<Setter> res = initScopedInner(cls, field, fqnParts.subList(2, fqnParts.size()), memo);
+            targetFields.addAll(res);
+        }
+
+        return targetFields;
+    }
+
+    public static List<Setter> initScopedInner(
+        Object parent,
+        Field field,
+        List<String> fqnParts,
+        Map<Class<?>, NamespaceMemoItem> memo
+    ) throws Exception {
+        // If is a feature, then return feature setter
+        // if is a struct, then return struct setter
+        // if is a windowed, then return windowed setter
+
+        // determine which type by checking memo
+        // memo should be the memo for the current
+
+        var fieldObj = field.get(parent);
+        if (fqnParts.size() == 0) {
+            FeatureSetter setter = new FeatureSetter((Feature<?>) fieldObj);
+            return List.of(setter);
+        }
+
+        FeaturesBase fc = (FeaturesBase) field.get(parent);
+        var nextMemo = memo.get(fc.getClass());
+        if (nextMemo == null) {
+            throw new Exception(
+                    String.format(
+                            "memo not found for features class %s, found keys: %s",
+                            fc.getClass().getSimpleName(),
+                            memo.keySet()
+                    )
+            );
+        }
+
+        List<Field> fields = getFeaturesClassFields(fc.getClass());
+        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
+        List<Setter> targetFields = new ArrayList<>();
+        for (int i : indices) {
+            Field childField = fields.get(i);
+            List<Setter> res = initScopedInner(fc, childField, fqnParts.subList(1, fqnParts.size()), memo);
+            targetFields.addAll(res);
+        }
+
+        return targetFields;
+    }
+
     public static Class<?> getUnderlyingClass(Type typ) {
         if (typ instanceof ParameterizedType) {
             var parametrizedTyp = (ParameterizedType) typ;
