@@ -349,35 +349,35 @@ public class TestUnmarshaller {
         }
         durationNanoVector.setValueCount(durationNanoValues.length);
         fieldVectors.add(durationNanoVector);
-//
-//        /*
-//        Create struct vector for the following dataclass
-//
-//            public class VanillaDataclass extends FeaturesClass {
-//                public Feature<Long> niceNumber;
-//                public Feature<java.time.LocalDateTime> niceDatetime;
-//            }
-//         */
-//        var structVector = StructVector.empty("arrow_user.favorite_struct", allocator);
-//
-//        var numRows = 3;
-//        structVector.setValueCount(numRows);
-//        structVector.allocateNew();
-//
-//        var structWriter = structVector.getWriter();
-//
-//        long[] niceNumberValues = {1L, 2L, 3L};
-//        var longWriter = structWriter.bigInt("nice_number");
-//
-//        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
-//        var datetimeWriter = structWriter.timeStampSec("nice_datetime");
-//        for (var i = 0; i < numRows; i++) {
-//            structWriter.start();
-//            longWriter.writeBigInt(niceNumberValues[i]);
-//            datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
-//            structWriter.end();
-//        }
-//        fieldVectors.add(structVector);
+
+        /*
+        Create struct vector for the following dataclass
+
+            public class VanillaDataclass extends FeaturesClass {
+                public Feature<Long> niceNumber;
+                public Feature<java.time.LocalDateTime> niceDatetime;
+            }
+         */
+        var structVector = StructVector.empty("arrow_user.favorite_struct", allocator);
+
+        var numRows = 3;
+        structVector.setValueCount(numRows);
+        structVector.allocateNew();
+
+        var structWriter = structVector.getWriter();
+
+        long[] niceNumberValues = {1L, 2L, 3L};
+        var longWriter = structWriter.bigInt("nice_number");
+
+        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
+        var datetimeWriter = structWriter.timeStampSec("nice_datetime");
+        for (var i = 0; i < numRows; i++) {
+            structWriter.start();
+            longWriter.writeBigInt(niceNumberValues[i]);
+            datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
+            structWriter.end();
+        }
+        fieldVectors.add(structVector);
 //
 //        var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
 //        var listWriter = listVector.getWriter();
@@ -853,7 +853,7 @@ public class TestUnmarshaller {
         var totalTime = 0L;
         for (int i = 0; i < 1000; i++) {
             var start = System.currentTimeMillis();
-            users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
+            users = Unmarshaller.unmarshalTableNewNew(table.copy(), ArrowUser.class);
             totalTime += System.currentTimeMillis() - start;
         }
         System.out.println("Unmarshal time: " + totalTime + "ms");
@@ -948,12 +948,12 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime2.plusNanos(1));
         assert users[2].favoriteTimestampNanoTz.getValue().equals(expectedZonedDatetime3.plusNanos(1));
 
-//        assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
-//        assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
-//        assert users[2].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime3);
-//        assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
-//        assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
-//        assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
+        assert users[0].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStruct.niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
 //
 //        assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
 //        assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));

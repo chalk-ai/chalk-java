@@ -12,6 +12,7 @@ import ai.chalk.internal.codegen.Initializer;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.LargeListVector;
+import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;
 import org.apache.arrow.vector.table.Table;
@@ -687,7 +688,6 @@ public class Unmarshaller {
                     }
                 }
             }
-            // Skip large lists for now
             case List, LargeList -> {
                 return null;
             }
@@ -733,6 +733,19 @@ public class Unmarshaller {
                         throw new Exception("Unsupported time unit found while converting from Arrow to Java: " + timeType.getUnit());
                     }
                 }
+            }
+            case Struct -> {
+                Map<String, Object> result = new HashMap<>();
+                StructVector structVector = (StructVector) vector;
+                var childFields = structVector.getChildrenFromFields();
+                for (var childField : childFields) {
+                    var childVector = structVector.getChild(childField.getName());
+                    result.put(
+                        childField.getName(),
+                        getValueFromArrowArray(childVector, childField.getField().getType(), idx)
+                    );
+                }
+                return result;
             }
             default -> {
                 throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowType.getTypeID());
