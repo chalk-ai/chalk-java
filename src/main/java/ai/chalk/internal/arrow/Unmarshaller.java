@@ -487,35 +487,41 @@ public class Unmarshaller {
 
                     var settersList = Initializer.initScoped(obj, fqn, memo);
                     var featureList = featureMap.get(fqn);
-                    if (featureList == null) {
-//                        // We are faking the attributes of a struct as features,
-//                        // instead of having the struct itself be a feature.
-//                        if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
-//                            var structObj = row.getStruct(fqn);
-//                            if (structObj == null) {
-//                                if (!arrowField.isNullable()) {
-//                                    throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
-//                                }
-//                                continue;
-//                            }
-//                            unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
-//                        } else {
-//                            throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
-//                        }
-                        throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+
+                    for (var setter : settersList) {
+                        Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
+                        setter.set(value);
                     }
 
-                    for (Feature<?> feature : featureList) {
-                        switch (arrowField.getType().getTypeID()) {
-                            default -> {
-                                Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
-                                feature.setValue(value);
-                            }
-                        }
-                        if (feature.getValue() == null && !arrowField.isNullable()) {
-                            throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
-                        }
-                    }
+//                    if (featureList == null) {
+////                        // We are faking the attributes of a struct as features,
+////                        // instead of having the struct itself be a feature.
+////                        if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
+////                            var structObj = row.getStruct(fqn);
+////                            if (structObj == null) {
+////                                if (!arrowField.isNullable()) {
+////                                    throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
+////                                }
+////                                continue;
+////                            }
+////                            unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
+////                        } else {
+////                            throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+////                        }
+//                        throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+//                    }
+//
+//                    for (Feature<?> feature : featureList) {
+//                        switch (arrowField.getType().getTypeID()) {
+//                            default -> {
+//                                Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
+//                                feature.setValue(value);
+//                            }
+//                        }
+//                        if (feature.getValue() == null && !arrowField.isNullable()) {
+//                            throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
+//                        }
+//                    }
                 }
             }
         }

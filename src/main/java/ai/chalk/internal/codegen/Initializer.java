@@ -246,16 +246,16 @@ public class Initializer {
         var fieldObj = field.get(parent);
 
         if (fqnParts.size() == 0) {
-            FeatureSetter setter = new FeatureSetter((Feature<?>) fieldObj);
-            return List.of(setter);
-        }
-        if (meta.isStruct()) {
-            StructSetter setter = new StructSetter((StructFeaturesClass) fieldObj);
-            return List.of(setter);
-        }
-        if (meta.isWindowed()) {
-            WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
-            return List.of(setter);
+            if (meta.isStruct()) {
+                StructSetter setter = new StructSetter((StructFeaturesClass) fieldObj);
+                return List.of(setter);
+            } else if (meta.isWindowed()) {
+                WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
+                return List.of(setter);
+            } else {
+                FeatureSetter setter = new FeatureSetter((Feature<?>) fieldObj);
+                return List.of(setter);
+            }
         }
 
         FeaturesBase fc = (FeaturesBase) field.get(parent);
