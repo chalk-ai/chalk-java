@@ -371,19 +371,17 @@ public class Initializer {
                 memoItem.fieldMetas.add(meta);
 
                 buildNamespaceMemo(
-                        getUnderlyingClass(fields.get(i).getType()),
-                        classMemo,
-                        visitedNamespaces
+                    getUnderlyingClass(fields.get(i).getType()),
+                    classMemo,
+                    visitedNamespaces
                 );
 
                 if (meta.isWindowed()) {
-                    for (Field childField : meta.field().getType().getDeclaredFields()) {
-                        // Map windowed child fields to the base windowed field
-                        var childFieldName = getResolvedName(childField);
+                    var windowedMemo = classMemo.get(meta.field().getType());
+                    for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
                         memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
                     }
                 }
-
             }
             classMemo.put(cls, memoItem);
         }
