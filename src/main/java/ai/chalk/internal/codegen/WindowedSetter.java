@@ -9,7 +9,7 @@ public class WindowedSetter implements Setter {
         this.windowedFeature = windowedFeature;
     }
 
-    public void set(Object value) {
+    public void set(Object value) throws Exception {
         // TODO
     }
 }

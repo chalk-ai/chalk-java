@@ -65,7 +65,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<java.time.Duration> favoriteDurationMicroNullable;
     public Feature<java.time.Duration> favoriteDurationNano;
     public Feature<java.time.Duration> favoriteDurationNanoNullable;
-//    public VanillaDataclass favoriteStruct;
+    public VanillaDataclass favoriteStruct;
 //    public VanillaDataclass favoriteStructNullable;
 //    public Feature<List<String>> favoriteStringList;
 //    public Feature<List<String>> favoriteStringListNullable;
