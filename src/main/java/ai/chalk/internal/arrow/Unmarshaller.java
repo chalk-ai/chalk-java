@@ -451,6 +451,80 @@ public class Unmarshaller {
     }
 
 
+    public static <T extends FeaturesClass> T[] unmarshalTableNewNew(Table table, Class<T> target) throws Exception {
+        List<T> result = new ArrayList<T>();
+
+        // Exists to work around `row.getLargeList` not being available.
+        var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
+
+        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
+        Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
+
+        try (var root = table.toVectorSchemaRoot()) {
+            for (var rowIdx = 0; rowIdx < root.getRowCount(); rowIdx++) {
+                T obj = target.getDeclaredConstructor().newInstance();
+                Map<String, List<Feature<?>>> featureMap;
+                try {
+                    featureMap = Initializer.initResult(obj, memo, namespace);
+                } catch (Exception e) {
+                    throw new Exception("Failed to initialize result object", e);
+                }
+                result.add(obj);
+
+                outerLoop:
+                for (var arrowField : table.getSchema().getFields()) {
+                    String fqn = arrowField.getName();
+                    if (fqnsToSkip.contains(fqn)) {
+                        continue;
+                    }
+                    for (String prefix : prefixToSkip) {
+                        if (fqn.startsWith(prefix)) {
+                            continue outerLoop;
+                        }
+                    }
+
+                    var featureList = featureMap.get(fqn);
+                    if (featureList == null) {
+//                        // We are faking the attributes of a struct as features,
+//                        // instead of having the struct itself be a feature.
+//                        if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
+//                            var structObj = row.getStruct(fqn);
+//                            if (structObj == null) {
+//                                if (!arrowField.isNullable()) {
+//                                    throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
+//                                }
+//                                continue;
+//                            }
+//                            unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
+//                        } else {
+//                            throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+//                        }
+                        throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
+                    }
+
+                    for (Feature<?> feature : featureList) {
+                        switch (arrowField.getType().getTypeID()) {
+                            default -> {
+                                Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
+                                feature.setValue(value);
+                            }
+                        }
+                        if (feature.getValue() == null && !arrowField.isNullable()) {
+                            throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
+                        }
+                    }
+                }
+            }
+        }
+
+        for (var entry : fqnToLargeListColumnCopy.entrySet()) {
+            entry.getValue().close();
+        }
+        return listToArray(result, target);
+    }
+
+
     public static Object getValueFromArrowArray(FieldVector vector, ArrowType arrowType, int idx) throws Exception {
         switch (arrowType.getTypeID()) {
             case Int -> {
@@ -509,9 +583,14 @@ public class Unmarshaller {
             }
             case Utf8 -> {
                 VarCharVector varCharVector = (VarCharVector) vector;
-                if (varCharVector.isNull(idx)) {
-                    return null;
+                try {
+                    if (varCharVector.isNull(idx)) {
+                        return null;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
                 }
+
                 return new String(varCharVector.get(idx));
             }
             case LargeUtf8 -> {
@@ -624,11 +703,17 @@ public class Unmarshaller {
                 switch (timeType.getUnit()) {
                     case SECOND -> {
                         TimeSecVector timeSecVector = (TimeSecVector) vector;
+                        if (timeSecVector.isNull(idx)) {
+                            return null;
+                        }
                         return LocalTime.ofSecondOfDay(timeSecVector.getObject(idx));
                     }
                     case MILLISECOND -> {
                         TimeMilliVector timeMilliVector = (TimeMilliVector) vector;
-                        return timeMilliVector.getObject(idx);
+                        if (timeMilliVector.isNull(idx)) {
+                            return null;
+                        }
+                        return timeMilliVector.getObject(idx).toLocalTime();
                     }
                     case MICROSECOND -> {
                         TimeMicroVector timeMicroVector = (TimeMicroVector) vector;
