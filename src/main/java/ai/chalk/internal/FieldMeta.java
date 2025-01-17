@@ -1,5 +1,7 @@
 package ai.chalk.internal;
 
 
-public record FieldMeta(boolean isFeaturesBase, boolean isStruct, boolean isWindowed) {
+import java.lang.reflect.Field;
+
+public record FieldMeta(Field field, boolean isFeaturesBase, boolean isStruct, boolean isWindowed) {
 }

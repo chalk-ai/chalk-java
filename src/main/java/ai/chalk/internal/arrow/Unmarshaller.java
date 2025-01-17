@@ -452,6 +452,19 @@ public class Unmarshaller {
     }
 
 
+    private static boolean shouldSkipField(String fqn) {
+        if (fqnsToSkip.contains(fqn)) {
+            return true;
+        }
+        for (String prefix : prefixToSkip) {
+            if (fqn.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public static <T extends FeaturesClass> T[] unmarshalTableNewNew(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
 
@@ -461,59 +474,29 @@ public class Unmarshaller {
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
+
+        List<List<String>> fieldIdxToFqnParts = new ArrayList<>();
+        for (int i = 0; i < table.getSchema().getFields().size(); i++) {
+            var arrowField = table.getSchema().getFields().get(i);
+            String fqn = arrowField.getName();
+            fieldIdxToFqnParts.add(Arrays.asList(fqn.split("\\.")));
+        }
+
         try (var root = table.toVectorSchemaRoot()) {
             for (var rowIdx = 0; rowIdx < root.getRowCount(); rowIdx++) {
                 T obj = target.getDeclaredConstructor().newInstance();
                 result.add(obj);
-
-                outerLoop:
-                for (var arrowField : table.getSchema().getFields()) {
+                for (var i = 0; i < root.getSchema().getFields().size(); i++) {
+                    var arrowField = root.getSchema().getFields().get(i);
                     String fqn = arrowField.getName();
-                    if (fqnsToSkip.contains(fqn)) {
+                    if (shouldSkipField(fqn)) {
                         continue;
                     }
-                    for (String prefix : prefixToSkip) {
-                        if (fqn.startsWith(prefix)) {
-                            continue outerLoop;
-                        }
-                    }
-
-                    var settersList = Initializer.initScoped(obj, fqn, memo);
-
+                    var settersList = Initializer.initScoped(obj, fieldIdxToFqnParts.get(i), memo);
                     for (var setter : settersList) {
                         Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
                         setter.set(value);
                     }
-
-//                    if (featureList == null) {
-////                        // We are faking the attributes of a struct as features,
-////                        // instead of having the struct itself be a feature.
-////                        if (arrowField.getType().getTypeID() == ArrowType.ArrowTypeID.Struct) {
-////                            var structObj = row.getStruct(fqn);
-////                            if (structObj == null) {
-////                                if (!arrowField.isNullable()) {
-////                                    throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
-////                                }
-////                                continue;
-////                            }
-////                            unmarshalNested((HashMap<String, Object>) structObj, featureMap, fqn);
-////                        } else {
-////                            throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
-////                        }
-//                        throw new Exception(String.format("Target field not found for unmarshalling feature with FQN: '%s'", fqn));
-//                    }
-//
-//                    for (Feature<?> feature : featureList) {
-//                        switch (arrowField.getType().getTypeID()) {
-//                            default -> {
-//                                Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), arrowField.getType(), rowIdx);
-//                                feature.setValue(value);
-//                            }
-//                        }
-//                        if (feature.getValue() == null && !arrowField.isNullable()) {
-//                            throw new Exception(String.format("Non-nullable field '%s' is null", fqn));
-//                        }
-//                    }
                 }
             }
         }

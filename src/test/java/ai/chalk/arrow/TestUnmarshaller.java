@@ -350,34 +350,34 @@ public class TestUnmarshaller {
         durationNanoVector.setValueCount(durationNanoValues.length);
         fieldVectors.add(durationNanoVector);
 
-        /*
-        Create struct vector for the following dataclass
-
-            public class VanillaDataclass extends FeaturesClass {
-                public Feature<Long> niceNumber;
-                public Feature<java.time.LocalDateTime> niceDatetime;
-            }
-         */
-        var structVector = StructVector.empty("arrow_user.favorite_struct", allocator);
-
-        var numRows = 3;
-        structVector.setValueCount(numRows);
-        structVector.allocateNew();
-
-        var structWriter = structVector.getWriter();
-
-        long[] niceNumberValues = {1L, 2L, 3L};
-        var longWriter = structWriter.bigInt("nice_number");
-
-        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
-        var datetimeWriter = structWriter.timeStampSec("nice_datetime");
-        for (var i = 0; i < numRows; i++) {
-            structWriter.start();
-            longWriter.writeBigInt(niceNumberValues[i]);
-            datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
-            structWriter.end();
-        }
-        fieldVectors.add(structVector);
+//        /*
+//        Create struct vector for the following dataclass
+//
+//            public class VanillaDataclass extends FeaturesClass {
+//                public Feature<Long> niceNumber;
+//                public Feature<java.time.LocalDateTime> niceDatetime;
+//            }
+//         */
+//        var structVector = StructVector.empty("arrow_user.favorite_struct", allocator);
+//
+//        var numRows = 3;
+//        structVector.setValueCount(numRows);
+//        structVector.allocateNew();
+//
+//        var structWriter = structVector.getWriter();
+//
+//        long[] niceNumberValues = {1L, 2L, 3L};
+//        var longWriter = structWriter.bigInt("nice_number");
+//
+//        int[] niceDatetimeValues = new int[]{1627689600, 1627776000, 1627862400};  // 10:14:00, 10:14:01, 10:14:02
+//        var datetimeWriter = structWriter.timeStampSec("nice_datetime");
+//        for (var i = 0; i < numRows; i++) {
+//            structWriter.start();
+//            longWriter.writeBigInt(niceNumberValues[i]);
+//            datetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
+//            structWriter.end();
+//        }
+//        fieldVectors.add(structVector);
 //
 //        var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
 //        var listWriter = listVector.getWriter();
@@ -858,6 +858,14 @@ public class TestUnmarshaller {
             totalTime += System.currentTimeMillis() - start;
         }
         System.out.println("Unmarshal time: " + totalTime + "ms");
+
+        totalTime = 0L;
+        for (int i = 0; i < 1000; i++) {
+            var start = System.currentTimeMillis();
+            users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
+            totalTime += System.currentTimeMillis() - start;
+        }
+        System.out.println("Unmarshal time OLD: " + totalTime + "ms");
         assert users.length == 3;
 
         assert users[0].favoriteBigInt.getValue() == 1L;
