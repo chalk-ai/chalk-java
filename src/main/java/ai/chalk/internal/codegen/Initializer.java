@@ -221,9 +221,10 @@ public class Initializer {
         if (indices == null) {
             throw new Exception(
                 String.format(
-                    "FQN '%s' not found in namespace '%s'",
-                    String.join(".", fqnParts),
-                    cls.getClass().getSimpleName()
+                    "FQN '%s' not found in namespace memo for '%s', got '%s' instead",
+                    fqnParts.get(1),
+                    cls.getClass().getSimpleName(),
+                    nsMemo.resolvedFieldNameToIndices.keySet()
                 )
             );
         }

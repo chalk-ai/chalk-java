@@ -74,7 +74,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<List<Double>> favoriteDoubleList;
     public Feature<List<java.time.LocalDateTime>> favoriteTimestampSecList;
     public Feature<List<VanillaDataclass>> favoriteStructList;
-//    public DataclassWithComplexFeatures favoriteStructComplex;
+    public DataclassWithComplexFeatures favoriteStructComplex;
     public Feature<String> favoriteHasOneId;
     public MyTail favoriteHasOne;
 //    public Feature<String> leastFavoriteHasOneId;
@@ -83,7 +83,7 @@ public class ArrowUser extends FeaturesClass {
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> smallTransactions;
 
-//    public _WindowedFeatures favoriteWindowed;
+    public _WindowedFeatures favoriteWindowed;
 
 
     // TODO: Add support for these data types

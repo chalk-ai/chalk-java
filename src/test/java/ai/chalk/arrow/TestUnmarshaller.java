@@ -456,8 +456,8 @@ public class TestUnmarshaller {
         }
         timestampSecListVector.setValueCount(3);
         fieldVectors.add(timestampSecListVector);
-//
-//        // Create a list of structs
+
+//         Create a list of structs
 //        var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
 //        var structListWriter = structListVector.getWriter();
 //        var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
@@ -476,7 +476,7 @@ public class TestUnmarshaller {
 //        }
 //        structListVector.setValueCount(3);
 //        fieldVectors.add(structListVector);
-//
+
         var hasOneDoubleVector = new Float8Vector("arrow_user.favorite_has_one.length", allocator);
         hasOneDoubleVector.allocateNew();
         double[] hasOneDoubleValues = {1.0, 2.0, 3.0};
@@ -486,23 +486,23 @@ public class TestUnmarshaller {
         hasOneDoubleVector.setValueCount(hasOneDoubleValues.length);
         fieldVectors.add(hasOneDoubleVector);
 
-//        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed__86400__", allocator);
-//        windowedDoubleVector__1d__.allocateNew();
-//        double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
-//        for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
-//            windowedDoubleVector__1d__.set(i, windowedDoubleValues__1d__[i]);
-//        }
-//        windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
-//        fieldVectors.add(windowedDoubleVector__1d__);
-//
-//        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed__601__", allocator);
-//        windowedDoubleVector__601s__.allocateNew();
-//        double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
-//        for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
-//            windowedDoubleVector__601s__.set(i, windowedDoubleValues__601s__[i]);
-//        }
-//        windowedDoubleVector__601s__.setValueCount(windowedDoubleValues__601s__.length);
-//        fieldVectors.add(windowedDoubleVector__601s__);
+        var windowedDoubleVector__1d__ = new Float8Vector("arrow_user.favorite_windowed__86400__", allocator);
+        windowedDoubleVector__1d__.allocateNew();
+        double[] windowedDoubleValues__1d__ = {1.0, 2.0, 3.0};
+        for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
+            windowedDoubleVector__1d__.set(i, windowedDoubleValues__1d__[i]);
+        }
+        windowedDoubleVector__1d__.setValueCount(windowedDoubleValues__1d__.length);
+        fieldVectors.add(windowedDoubleVector__1d__);
+
+        var windowedDoubleVector__601s__ = new Float8Vector("arrow_user.favorite_windowed__601__", allocator);
+        windowedDoubleVector__601s__.allocateNew();
+        double[] windowedDoubleValues__601s__ = {4.0, 5.0, 6.0};
+        for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
+            windowedDoubleVector__601s__.set(i, windowedDoubleValues__601s__[i]);
+        }
+        windowedDoubleVector__601s__.setValueCount(windowedDoubleValues__601s__.length);
+        fieldVectors.add(windowedDoubleVector__601s__);
 
         // Add nullable versions of the above vectors
 
@@ -817,24 +817,24 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVectorNullable);
 
-//        var listVectorNullable = ListVector.empty("arrow_user.favorite_string_list_nullable", allocator);
-//        listVectorNullable.setValueCount(numNullableRows);
-//        listVectorNullable.allocateNew();
-//
-//        var listWriterNullable = listVectorNullable.getWriter();
-//        for (var i = 0; i < numNullableRows - 1; i++) {
-//            listWriterNullable.startList();
-//            for (var j = 0; j < 3; j++) {
-//                var idx = i * 3 + j;
-//                var character = varCharValues[idx];
-//                var bytes = character.getBytes();
-//                ArrowBuf tempBuf = allocator.buffer(bytes.length);
-//                tempBuf.setBytes(0, bytes);
-//                listWriterNullable.writeVarChar(0, bytes.length, tempBuf);
-//            }
-//            listWriterNullable.endList();
-//        }
-//        fieldVectors.add(listVectorNullable);
+        var listVectorNullable = ListVector.empty("arrow_user.favorite_string_list_nullable", allocator);
+        listVectorNullable.setValueCount(numNullableRows);
+        listVectorNullable.allocateNew();
+
+        var listWriterNullable = listVectorNullable.getWriter();
+        for (var i = 0; i < numNullableRows - 1; i++) {
+            listWriterNullable.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var character = varCharValues[idx];
+                var bytes = character.getBytes();
+                ArrowBuf tempBuf = allocator.buffer(bytes.length);
+                tempBuf.setBytes(0, bytes);
+                listWriterNullable.writeVarChar(0, bytes.length, tempBuf);
+            }
+            listWriterNullable.endList();
+        }
+        fieldVectors.add(listVectorNullable);
 
         // TODO: Support binary
         // TODO: Support Decimal
@@ -984,7 +984,7 @@ public class TestUnmarshaller {
         assert users[0].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime1, expectedDatetime2, expectedDatetime3));
         assert users[1].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime3, expectedDatetime1, expectedDatetime2));
         assert users[2].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime2, expectedDatetime3, expectedDatetime1));
-//
+
 //        assert users[0].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(1L);
 //        assert users[0].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(2L);
 //        assert users[0].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(3L);
@@ -1040,14 +1040,14 @@ public class TestUnmarshaller {
         assert users[0].favoriteHasOne.length.getValue().equals(1.0);
         assert users[1].favoriteHasOne.length.getValue().equals(2.0);
         assert users[2].favoriteHasOne.length.getValue().equals(3.0);
-//
-//        assert users[0].favoriteWindowed.bucket1d.getValue().equals(1.0);
-//        assert users[1].favoriteWindowed.bucket1d.getValue().equals(2.0);
-//        assert users[2].favoriteWindowed.bucket1d.getValue().equals(3.0);
-//
-//        assert users[0].favoriteWindowed.bucket601s.getValue().equals(4.0);
-//        assert users[1].favoriteWindowed.bucket601s.getValue().equals(5.0);
-//        assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
+
+        assert users[0].favoriteWindowed.bucket1d.getValue().equals(1.0);
+        assert users[1].favoriteWindowed.bucket1d.getValue().equals(2.0);
+        assert users[2].favoriteWindowed.bucket1d.getValue().equals(3.0);
+
+        assert users[0].favoriteWindowed.bucket601s.getValue().equals(4.0);
+        assert users[1].favoriteWindowed.bucket601s.getValue().equals(5.0);
+        assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
 
         // TODO: Support complex structs and lists
         // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
@@ -1131,16 +1131,16 @@ public class TestUnmarshaller {
         assert users[2].favoriteLargeUtf8Nullable.getValue().equals("");
 
         // TODO: Maybe should not propogate nulls, i.e. make favoriteStructNullable null instead of its fields
-//        assert users[0].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime1);
-//        assert users[1].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime2);
-//        assert users[2].favoriteStructNullable.niceDatetime.getValue() == null;
-//        assert users[0].favoriteStructNullable.niceNumber.getValue().equals(1L);
-//        assert users[1].favoriteStructNullable.niceNumber.getValue().equals(2L);
-//        assert users[2].favoriteStructNullable.niceNumber.getValue() == null;
+        assert users[0].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructNullable.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructNullable.niceDatetime.getValue() == null;
+        assert users[0].favoriteStructNullable.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStructNullable.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStructNullable.niceNumber.getValue() == null;
 
-//        assert users[0].favoriteStringListNullable.getValue().equals(Arrays.asList("a", "b", "c"));
-//        assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
-//        assert users[2].favoriteStringListNullable.getValue() == null;
+        assert users[0].favoriteStringListNullable.getValue().equals(Arrays.asList("a", "b", "c"));
+        assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
+        assert users[2].favoriteStringListNullable.getValue() == null;
         // Nullable features end
     }
 

@@ -3,7 +3,6 @@ package ai.chalk.internal.codegen;
 import ai.chalk.features.Feature;
 import ai.chalk.features.StructFeaturesClass;
 import ai.chalk.internal.NamespaceMemoItem;
-import io.netty.util.internal.SuppressJava6Requirement;
 
 import java.util.Map;
 
