@@ -458,7 +458,7 @@ public class Unmarshaller {
         // Exists to work around `row.getLargeList` not being available.
 
 //        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
-        Map<Class<?>, NamespaceMemoItem> memo = new HashMa  p<>();
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
         try (var root = table.toVectorSchemaRoot()) {
