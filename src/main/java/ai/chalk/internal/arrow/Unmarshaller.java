@@ -95,23 +95,6 @@ public class Unmarshaller {
     }
 
 
-    public static <T extends FeaturesClass> T[] unmarshalTableNew(Table table, Class<T> target) throws Exception {
-        VectorSchemaRoot root = table.toVectorSchemaRoot();
-        List<T> result = new ArrayList<T>();
-
-
-        for (int i = 0; i < root.getRowCount(); i++) {
-            for (org.apache.arrow.vector.types.pojo.Field field : root.getSchema().getFields()) {
-                FieldVector vector = root.getVector(field.getName());
-                ArrowType arrowType = field.getFieldType().getType();
-                var obj = getValueFromArrowArray(vector, i);
-                System.out.printf("%s[%d]: %s \n", field.getName(), i, obj);
-            }
-        }
-
-        return listToArray(result, target);
-    }
-
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
 
@@ -467,36 +450,36 @@ public class Unmarshaller {
 
 
     public static <T extends FeaturesClass> T[] unmarshalTableNewNew(Table table, Class<T> target) throws Exception {
-        List<T> result = new ArrayList<T>();
-
-        // Exists to work around `row.getLargeList` not being available.
-
-//        String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
+        List<T> result = new ArrayList<>();
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
+        var constructor = target.getDeclaredConstructor();
 
-
+        // Cache repeated work
         List<List<String>> fieldIdxToFqnParts = new ArrayList<>();
-        for (int i = 0; i < table.getSchema().getFields().size(); i++) {
-            var arrowField = table.getSchema().getFields().get(i);
+        for (int j = 0; j < table.getSchema().getFields().size(); j++) {
+            var arrowField = table.getSchema().getFields().get(j);
             String fqn = arrowField.getName();
             fieldIdxToFqnParts.add(Arrays.asList(fqn.split("\\.")));
         }
+        List<Boolean> fieldIdxToSkip = new ArrayList<>();
+        for (int j = 0; j < table.getSchema().getFields().size(); j++) {
+            var arrowField = table.getSchema().getFields().get(j);
+            fieldIdxToSkip.add(shouldSkipField(arrowField.getName()));
+        }
 
         try (var root = table.toVectorSchemaRoot()) {
-            for (var rowIdx = 0; rowIdx < root.getRowCount(); rowIdx++) {
-                T obj = target.getDeclaredConstructor().newInstance();
+            for (var row = 0; row < root.getRowCount(); row++) {
+                T obj = constructor.newInstance();
                 result.add(obj);
-                for (var i = 0; i < root.getSchema().getFields().size(); i++) {
-                    var arrowField = root.getSchema().getFields().get(i);
-                    String fqn = arrowField.getName();
-                    if (shouldSkipField(fqn)) {
+                for (var col = 0; col < root.getSchema().getFields().size(); col++) {
+                    if (fieldIdxToSkip.get(col)) {
                         continue;
                     }
-                    var settersList = Initializer.initScoped(obj, fieldIdxToFqnParts.get(i), memo);
-                    for (var setter : settersList) {
-                        Object value = getValueFromArrowArray(root.getVector(arrowField.getName()), rowIdx);
-                        setter.set(value);
+                    var setters = Initializer.initScoped(obj, fieldIdxToFqnParts.get(col), memo);
+                    for (var s : setters) {
+                        Object value = getValueFromFieldVector(root.getVector(col), row);
+                        s.set(value);
                     }
                 }
             }
@@ -508,13 +491,13 @@ public class Unmarshaller {
     public static List<Object> getInnerList(FieldVector vector, int startIdx, int endIdx) throws Exception {
         List<Object> result = new ArrayList<>();
         for (int i = startIdx; i < endIdx; i++) {
-            result.add(getValueFromArrowArray(vector, i));
+            result.add(getValueFromFieldVector(vector, i));
         }
         return result;
     }
 
 
-    public static Object getValueFromArrowArray(FieldVector vector, int idx) throws Exception {
+    public static Object getValueFromFieldVector(FieldVector vector, int idx) throws Exception {
         ArrowType arrowType = vector.getField().getType();
         switch (arrowType.getTypeID()) {
             case Int -> {
@@ -752,7 +735,7 @@ public class Unmarshaller {
                     var childVector = structVector.getChild(childField.getName());
                     result.put(
                         childField.getName(),
-                        getValueFromArrowArray(childVector, idx)
+                        getValueFromFieldVector(childVector, idx)
                     );
                 }
                 return result;
