@@ -10,6 +10,7 @@ import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
 import ai.chalk.models.OnlineQueryResult;
+import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;
@@ -91,6 +92,23 @@ public class Unmarshaller {
         }
     }
 
+
+    public static <T extends FeaturesClass> T[] unmarshalTableNew(Table table, Class<T> target) throws Exception {
+        VectorSchemaRoot root = table.toVectorSchemaRoot();
+        List<T> result = new ArrayList<T>();
+
+
+        for (int i = 0; i < root.getRowCount(); i++) {
+            for (org.apache.arrow.vector.types.pojo.Field field : root.getSchema().getFields()) {
+                FieldVector vector = root.getVector(field.getName());
+                ArrowType arrowType = field.getFieldType().getType();
+                var obj = getValueFromArrowArray(vector, arrowType, i);
+                System.out.printf("%s[%d]: %s \n", field.getName(), i, obj);
+            }
+        }
+
+        return listToArray(result, target);
+    }
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
         List<T> result = new ArrayList<T>();
@@ -430,6 +448,211 @@ public class Unmarshaller {
             entry.getValue().close();
         }
         return listToArray(result, target);
+    }
+
+
+    public static Object getValueFromArrowArray(FieldVector vector, ArrowType arrowType, int idx) throws Exception {
+        switch (arrowType.getTypeID()) {
+            case Int -> {
+                var intType = (ArrowType.Int) arrowType;
+                var bitWidth = intType.getBitWidth();
+                if (bitWidth == 8) {
+                    TinyIntVector tinyIntVector = (TinyIntVector) vector;
+                    if (tinyIntVector.isNull(idx)) {
+                        return null;
+                    }
+                    return tinyIntVector.getObject(idx);
+                } else if (bitWidth == 16) {
+                    SmallIntVector smallIntVector = (SmallIntVector) vector;
+                    if (smallIntVector.isNull(idx)) {
+                        return null;
+                    }
+                    return smallIntVector.getObject(idx);
+                } else if (bitWidth == 32) {
+                    IntVector intVector = (IntVector) vector;
+                    if (intVector.isNull(idx)) {
+                        return null;
+                    }
+                    return intVector.getObject(idx);
+                } else if (bitWidth == 64) {
+                    BigIntVector bigIntVector = (BigIntVector) vector;
+                    if (bigIntVector.isNull(idx)) {
+                        return null;
+                    }
+                    return bigIntVector.getObject(idx);
+                } else {
+                    throw new Exception("Unsupported bitwidth found while converting from Arrow to Java: " + bitWidth);
+                }
+            }
+            case FloatingPoint -> {
+                var floatingPointType = (ArrowType.FloatingPoint) arrowType;
+                var precision = floatingPointType.getPrecision();
+                if (precision == FloatingPointPrecision.SINGLE) {
+                    Float4Vector float4Vector = (Float4Vector) vector;
+                    if (float4Vector.isNull(idx)) {
+                        return null;
+                    }
+                    return float4Vector.getObject(idx);
+                } else if (precision == FloatingPointPrecision.DOUBLE) {
+                    Float8Vector float8Vector = (Float8Vector) vector;
+                    if (float8Vector.isNull(idx)) {
+                        return null;
+                    }
+                    return float8Vector.getObject(idx);
+                } else {
+                    throw new Exception("Unsupported precision found while converting from Arrow to Java: " + precision);
+                }
+            }
+            case Bool -> {
+                BitVector bitVector = (BitVector) vector;
+                return bitVector.getObject(idx);
+            }
+            case Utf8 -> {
+                VarCharVector varCharVector = (VarCharVector) vector;
+                if (varCharVector.isNull(idx)) {
+                    return null;
+                }
+                return new String(varCharVector.get(idx));
+            }
+            case LargeUtf8 -> {
+                LargeVarCharVector largeVarCharVector = (LargeVarCharVector) vector;
+                if (largeVarCharVector.isNull(idx)) {
+                    return null;
+                }
+                return new String(largeVarCharVector.get(idx));
+            }
+            case Date -> {
+                var dateType = (ArrowType.Date) arrowType;
+                if (dateType.getUnit() == DateUnit.DAY) {
+                    DateDayVector dateDayVector = (DateDayVector) vector;
+                    if (dateDayVector.isNull(idx)) {
+                        return null;
+                    }
+                    return LocalDate.ofEpochDay(dateDayVector.getObject(idx));
+                } else if (dateType.getUnit() == DateUnit.MILLISECOND) {
+                    DateMilliVector dateMilliVector = (DateMilliVector) vector;
+                    if (dateMilliVector.isNull(idx)) {
+                        return null;
+                    }
+                    return dateMilliVector.getObject(idx).toLocalDate();
+                } else {
+                    throw new Exception("Unsupported date unit found while converting from Arrow to Java: " + dateType.getUnit());
+                }
+            }
+            case Timestamp -> {
+                var timestampType = (ArrowType.Timestamp) arrowType;
+                var timezone = timestampType.getTimezone();
+                ZoneId zoneId = null;
+                if (timezone != null) {
+                    zoneId = ZoneId.of(timezone);
+                }
+                boolean hasTimezone = zoneId != null;
+                switch (timestampType.getUnit()) {
+                    case SECOND -> {
+                        if (hasTimezone) {
+                            TimeStampSecTZVector timeStampSecTZVector = (TimeStampSecTZVector) vector;
+                            if (timeStampSecTZVector.isNull(idx)) {
+                                return null;
+                            }
+                            return Instant.ofEpochSecond(timeStampSecTZVector.get(idx)).atZone(zoneId);
+                        } else {
+                            TimeStampSecVector timeStampSecVector = (TimeStampSecVector) vector;
+                            if (timeStampSecVector.isNull(idx)) {
+                                return null;
+                            }
+                            return Instant.ofEpochSecond(timeStampSecVector.get(idx)).atZone(ZoneOffset.UTC).toLocalDateTime();
+                        }
+                    }
+                    case MILLISECOND -> {
+                        if (hasTimezone) {
+                            TimeStampMilliTZVector timeStampMilliTZVector = (TimeStampMilliTZVector) vector;
+                            if (timeStampMilliTZVector.isNull(idx)) {
+                                return null;
+                            }
+                            return Instant.ofEpochMilli(timeStampMilliTZVector.getObject(idx)).atZone(zoneId);
+                        } else {
+                            TimeStampMilliVector timeStampMilliVector = (TimeStampMilliVector) vector;
+                            return timeStampMilliVector.getObject(idx);
+                        }
+                    }
+                    case MICROSECOND -> {
+                        if (hasTimezone) {
+                            TimeStampMicroTZVector timeStampMicroTZVector = (TimeStampMicroTZVector) vector;
+                            if (timeStampMicroTZVector.isNull(idx)) {
+                                return null;
+                            }
+                            long epochSecondsTruncated = timeStampMicroTZVector.getObject(idx) / 1_000_000;
+                            long epochNanoRemainder = (timeStampMicroTZVector.getObject(idx) % 1_000_000) * 1_000;
+                            return Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId);
+                        } else {
+                            TimeStampMicroVector timeStampMicroVector = (TimeStampMicroVector) vector;
+                            return timeStampMicroVector.getObject(idx);
+                        }
+                    }
+                    case NANOSECOND -> {
+                        if (hasTimezone) {
+                            TimeStampNanoTZVector timeStampNanoTZVector = (TimeStampNanoTZVector) vector;
+                            if (timeStampNanoTZVector.isNull(idx)) {
+                                return null;
+                            }
+                            long epochSecondsTruncated = timeStampNanoTZVector.getObject(idx) / 1_000_000_000;
+                            long epochNanoRemainder = timeStampNanoTZVector.getObject(idx) % 1_000_000_000;
+                            return Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId);
+                        } else {
+                            TimeStampNanoVector timeStampNanoVector = (TimeStampNanoVector) vector;
+                            return timeStampNanoVector.getObject(idx);
+                        }
+                    }
+                    default -> {
+                        throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowType);
+                    }
+                }
+            }
+            // Skip large lists for now
+            case List, LargeList -> {
+                return null;
+            }
+            case Duration -> {
+                DurationVector durationVector = (DurationVector) vector;
+                if (durationVector.isNull(idx)) {
+                    return null;
+                }
+                return Duration.ofSeconds(durationVector.getObject(idx).getSeconds(), durationVector.getObject(idx).getNano());
+            }
+            case Time -> {
+                var timeType = (ArrowType.Time) arrowType;
+                switch (timeType.getUnit()) {
+                    case SECOND -> {
+                        TimeSecVector timeSecVector = (TimeSecVector) vector;
+                        return LocalTime.ofSecondOfDay(timeSecVector.getObject(idx));
+                    }
+                    case MILLISECOND -> {
+                        TimeMilliVector timeMilliVector = (TimeMilliVector) vector;
+                        return timeMilliVector.getObject(idx);
+                    }
+                    case MICROSECOND -> {
+                        TimeMicroVector timeMicroVector = (TimeMicroVector) vector;
+                        if (timeMicroVector.isNull(idx)) {
+                            return null;
+                        }
+                        return LocalTime.ofNanoOfDay(timeMicroVector.getObject(idx) * 1_000L);
+                    }
+                    case NANOSECOND -> {
+                        TimeNanoVector timeNanoVector = (TimeNanoVector) vector;
+                        if (timeNanoVector.isNull(idx)) {
+                            return null;
+                        }
+                        return LocalTime.ofNanoOfDay(timeNanoVector.getObject(idx));
+                    }
+                    default -> {
+                        throw new Exception("Unsupported time unit found while converting from Arrow to Java: " + timeType.getUnit());
+                    }
+                }
+            }
+            default -> {
+                throw new Exception("Unsupported type found while unmarshalling Arrow Table: " + arrowType.getTypeID());
+            }
+        }
     }
 
     private static void unmarshalNested(Map<String, Object> struct, Map<String, List<Feature<?>>> featureMap, String fqn) {
