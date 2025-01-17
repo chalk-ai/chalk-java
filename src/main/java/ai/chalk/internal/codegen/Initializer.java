@@ -247,14 +247,17 @@ public class Initializer {
 
         if (fqnParts.size() == 0) {
             if (meta.isStruct()) {
+                // FIXME: create new StructFeaturesClass
                 StructSetter setter = new StructSetter((StructFeaturesClass) fieldObj);
                 return List.of(setter);
             } else if (meta.isWindowed()) {
+                // FIXME: create new WindowedFeaturesClass
                 WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
                 return List.of(setter);
             } else {
-                FeatureSetter setter = new FeatureSetter(new Feature<>());
-                return List.of(setter);
+                Feature<?> feature = new Feature<>();
+                field.set(parent, feature);
+                return List.of(new FeatureSetter(feature));
             }
         }
 
@@ -348,7 +351,7 @@ public class Initializer {
                 ));
 
                 buildNamespaceMemo(
-                        getUnderlyingClass(fields.get(i).getGenericType()),
+                        getUnderlyingClass(fields.get(i).getType()),
                         classMemo,
                         visitedNamespaces
                 );

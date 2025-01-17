@@ -852,12 +852,12 @@ public class TestUnmarshaller {
 
         var totalTime = 0L;
         for (int i = 0; i < 1000; i++) {
+            var tableCopy = table.copy();
             var start = System.currentTimeMillis();
-            users = Unmarshaller.unmarshalTableNewNew(table.copy(), ArrowUser.class);
+            users = Unmarshaller.unmarshalTableNewNew(tableCopy, ArrowUser.class);
             totalTime += System.currentTimeMillis() - start;
         }
         System.out.println("Unmarshal time: " + totalTime + "ms");
-        Unmarshaller.unmarshalTableNew(table, ArrowUser.class);
         assert users.length == 3;
 
         assert users[0].favoriteBigInt.getValue() == 1L;
