@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static ai.chalk.internal.Utils.getResolvedName;
+
 public class Initializer {
     public static Exception initFeatures(Class<?> cls) {
         Field[] fields = cls.getDeclaredFields();
@@ -352,7 +354,7 @@ public class Initializer {
 
             var memoItem = new NamespaceMemoItem();
             for (int i = 0; i < fields.size(); i++) {
-                var resolvedName = Utils.getResolvedName(fields.get(i));
+                var resolvedName = getResolvedName(fields.get(i));
                 if (!memoItem.resolvedFieldNameToIndices.containsKey(resolvedName)) {
                     memoItem.resolvedFieldNameToIndices.put(resolvedName, new ArrayList<>());
                 }
@@ -360,18 +362,28 @@ public class Initializer {
 
                 var fieldType = fields.get(i).getType();
                 boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
-                memoItem.fieldMetas.add(new FieldMeta(
-                    fields.get(i),
-                    isFeaturesBase,
-                    isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType),
-                    isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType)
-                ));
+                FieldMeta meta = new FieldMeta(
+                        fields.get(i),
+                        isFeaturesBase,
+                        isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType),
+                        isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType)
+                );
+                memoItem.fieldMetas.add(meta);
 
                 buildNamespaceMemo(
                         getUnderlyingClass(fields.get(i).getType()),
                         classMemo,
                         visitedNamespaces
                 );
+
+                if (meta.isWindowed()) {
+                    for (Field childField : meta.field().getType().getDeclaredFields()) {
+                        // Map windowed child fields to the base windowed field
+                        var childFieldName = getResolvedName(childField);
+                        memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
+                    }
+                }
+
             }
             classMemo.put(cls, memoItem);
         }
