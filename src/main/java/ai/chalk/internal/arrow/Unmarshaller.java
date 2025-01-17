@@ -12,6 +12,7 @@ import ai.chalk.internal.codegen.Initializer;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.LargeListVector;
+import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.holders.*;
 import org.apache.arrow.vector.table.Row;
@@ -504,6 +505,14 @@ public class Unmarshaller {
         return listToArray(result, target);
     }
 
+    public static List<Object> getInnerList(FieldVector vector, int startIdx, int endIdx, ArrowType arrowType) throws Exception {
+        List<Object> result = new ArrayList<>();
+        for (int i = startIdx; i < endIdx; i++) {
+            result.add(getValueFromArrowArray(vector, arrowType, i));
+        }
+        return result;
+    }
+
 
     public static Object getValueFromArrowArray(FieldVector vector, ArrowType arrowType, int idx) throws Exception {
         switch (arrowType.getTypeID()) {
@@ -563,14 +572,9 @@ public class Unmarshaller {
             }
             case Utf8 -> {
                 VarCharVector varCharVector = (VarCharVector) vector;
-                try {
-                    if (varCharVector.isNull(idx)) {
-                        return null;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                if (varCharVector.isNull(idx)) {
+                    return null;
                 }
-
                 return new String(varCharVector.get(idx));
             }
             case LargeUtf8 -> {
@@ -667,8 +671,36 @@ public class Unmarshaller {
                     }
                 }
             }
-            case List, LargeList -> {
-                return null;
+            case List -> {
+                ListVector listVector = (ListVector) vector;
+                if (listVector.isNull(idx)) {
+                    return null;
+                }
+                int offsetSize = 4;  // 4 bytes
+                int startIdx = listVector.getOffsetBuffer().getInt((long) idx * offsetSize);
+                int endIdx = listVector.getOffsetBuffer().getInt((long) (idx + 1) * offsetSize);
+                var dataVector = listVector.getDataVector();
+                return getInnerList(
+                    dataVector,
+                    startIdx,
+                    endIdx,
+                    dataVector.getField().getType()
+                );
+            }
+            case LargeList -> {
+                LargeListVector largeListVector = (LargeListVector) vector;
+                if (largeListVector.isNull(idx)) {
+                    return null;
+                }
+                int offsetSize = 8;  // 8 bytes
+                long startIdx = largeListVector.getOffsetBuffer().getLong((long) idx * offsetSize);
+                long endIdx = largeListVector.getOffsetBuffer().getLong((long) (idx + 1) * offsetSize);
+                return getInnerList(
+                    largeListVector.getDataVector(),
+                    Math.toIntExact(startIdx),
+                    Math.toIntExact(endIdx),
+                    largeListVector.getField().getType()
+                );
             }
             case Duration -> {
                 DurationVector durationVector = (DurationVector) vector;
