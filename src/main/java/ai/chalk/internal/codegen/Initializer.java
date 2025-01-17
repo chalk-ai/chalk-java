@@ -230,12 +230,13 @@ public class Initializer {
                 )
             );
         }
+
         List<Setter> targetFields = new ArrayList<>();
         for (int i : indices) {
             List<Setter> res = initScopedInner(
                 cls,
                 nsMemo.fieldMetas.get(i),
-                fqnParts.subList(2, fqnParts.size()),
+                fqnParts.subList(1, fqnParts.size()),
                 memo
             );
             targetFields.addAll(res);
@@ -250,12 +251,10 @@ public class Initializer {
         List<String> fqnParts,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        var fieldObj = meta.field().get(parent);
-        if (fqnParts.size() == 0) {
+        if (fqnParts.size() == 1) {
             if (meta.isStruct()) {
                 StructFeaturesClass structObj = (StructFeaturesClass) meta.field().getType().getConstructor().newInstance();
                 meta.field().set(parent, structObj);
-                memo.get(structObj.getClass());
                 var structMemo = memo.get(structObj.getClass());
                 if (structMemo == null) {
                     throw new Exception(
@@ -268,9 +267,40 @@ public class Initializer {
                 }
                 return List.of(new StructSetter(structObj, structMemo));
             } else if (meta.isWindowed()) {
-                // FIXME: create new WindowedFeaturesClass
-                WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
-                return List.of(setter);
+                WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
+                if (windowedObj == null) {
+                    windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
+                    meta.field().set(parent, windowedObj);
+                }
+                var windowedMemo = memo.get(windowedObj.getClass());
+                if (windowedMemo == null) {
+                    throw new Exception(
+                        String.format(
+                            "memo not found for windowed features class %s, found keys: %s",
+                            windowedObj.getClass().getSimpleName(),
+                            memo.keySet()
+                        )
+                    );
+                }
+                List<Integer> fieldIdxs = windowedMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
+                if (fieldIdxs == null) {
+                    throw new Exception(
+                        String.format(
+                            "FQN '%s' not found in windowed features memo for '%s', got '%s' instead",
+                            fqnParts.get(0),
+                            windowedObj.getClass().getSimpleName(),
+                            windowedMemo.resolvedFieldNameToIndices.keySet()
+                        )
+                    );
+                }
+                List<Setter> setters = new ArrayList<>();
+                for (int idx : fieldIdxs) {
+                    Feature<?> feature = new Feature<>();
+                    var windowedChildField = windowedMemo.fieldMetas.get(idx);
+                    windowedChildField.field().set(windowedObj, feature);
+                    setters.add(new FeatureSetter(feature));
+                }
+                return setters;
             } else {
                 Feature<?> feature = new Feature<>();
                 meta.field().set(parent, feature);
@@ -294,7 +324,7 @@ public class Initializer {
             );
         }
 
-        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
+        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
         List<Setter> targetFields = new ArrayList<>();
         for (int i : indices) {
             List<Setter> res = initScopedInner(
@@ -379,8 +409,16 @@ public class Initializer {
                 if (meta.isWindowed()) {
                     var windowedMemo = classMemo.get(meta.field().getType());
                     for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
+                        // Map windowed child fields to the base windowed field
+                        // i.e. "average_txns__3600__" -> "average_txns"
                         memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
                     }
+                    // Prepend base windowed feature name to windowed child fields
+                    var prependedMap = new HashMap<String, List<Integer>>();
+                    for (Map.Entry<String, List<Integer>> entry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
+                        prependedMap.put(resolvedName + entry.getKey(), entry.getValue());
+                    }
+                    windowedMemo.resolvedFieldNameToIndices = prependedMap;
                 }
             }
             classMemo.put(cls, memoItem);
