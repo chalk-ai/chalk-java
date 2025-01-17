@@ -248,25 +248,22 @@ public class Initializer {
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
         var fieldObj = meta.field().get(parent);
-
         if (fqnParts.size() == 0) {
             if (meta.isStruct()) {
-                // FIXME: create new StructFeaturesClass
                 StructFeaturesClass structObj = (StructFeaturesClass) meta.field().getType().getConstructor().newInstance();
                 meta.field().set(parent, structObj);
                 memo.get(structObj.getClass());
                 var structMemo = memo.get(structObj.getClass());
                 if (structMemo == null) {
-                throw new Exception(
-                    String.format(
-                            "memo not found for struct features class %s, found keys: %s",
-                            structObj.getClass().getSimpleName(),
-                            memo.keySet()
-                    )
-                );
+                    throw new Exception(
+                            String.format(
+                                    "memo not found for struct features class %s, found keys: %s",
+                                    structObj.getClass().getSimpleName(),
+                                    memo.keySet()
+                            )
+                    );
                 }
-                StructSetter setter = new StructSetter(structObj, structMemo);
-                return List.of(setter);
+                return List.of(new StructSetter(structObj, structMemo));
             } else if (meta.isWindowed()) {
                 // FIXME: create new WindowedFeaturesClass
                 WindowedSetter setter = new WindowedSetter((WindowedFeaturesClass) fieldObj);
@@ -279,6 +276,10 @@ public class Initializer {
         }
 
         FeaturesBase fc = (FeaturesBase) meta.field().get(parent);
+        if (fc == null) {
+            fc = (FeaturesBase) meta.field().getType().getConstructor().newInstance();
+            meta.field().set(parent, fc);
+        }
         var nextMemo = memo.get(fc.getClass());
         if (nextMemo == null) {
             throw new Exception(
