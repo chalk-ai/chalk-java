@@ -451,6 +451,7 @@ public class Unmarshaller {
         List<T> result = new ArrayList<>();
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
+        Initializer.alterMemoForUnmarshaller(memo);
         var constructor = target.getDeclaredConstructor();
 
         // Cache repeated work

@@ -522,6 +522,47 @@ public class Initializer {
         }
     }
 
+    public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) {
+        for (Map.Entry<Class<?>, NamespaceMemoItem> entry : memo.entrySet()) {
+            NamespaceMemoItem memoItem = entry.getValue();
+            for (String resolvedName : memoItem.resolvedFieldNameToIndices.keySet().stream().toList()) {
+                var indices = memoItem.resolvedFieldNameToIndices.get(resolvedName);
+                for (int i : indices) {
+                    FieldMeta meta = memoItem.fieldMetas.get(i);
+                    if (meta.isWindowed()) {
+                        var windowedMemo = memo.get(meta.field().getType());
+                        for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
+                            // Map windowed child fields to the base windowed field
+                            // i.e. "average_txns__3600__" -> "average_txns"
+                            var newKey = resolvedName + childFieldName;
+                            if (!memoItem.resolvedFieldNameToIndices.containsKey(newKey)) {
+                                memoItem.resolvedFieldNameToIndices.put(newKey, new ArrayList<>());
+                            }
+                            memoItem.resolvedFieldNameToIndices.get(newKey).add(i);
+                        }
+
+                        // Prepend base windowed feature name to windowed child fields
+                        // i.e.
+                        // {
+                        //   "__3600__": [0],
+                        //   "__2592000__": [1]
+                        // }
+                        // ->
+                        // {
+                        //   "average_txns__3600__": [0],
+                        //   "average_txns__2592000__": [1]
+                        // }
+                        var prependedMap = new HashMap<String, List<Integer>>();
+                        for (Map.Entry<String, List<Integer>> innerEntry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
+                            prependedMap.put(resolvedName + innerEntry.getKey(), innerEntry.getValue());
+                        }
+                        windowedMemo.resolvedFieldNameToIndices = prependedMap;
+                    }
+                }
+            }
+        }
+    }
+
     public static void buildNamespaceMemo(
             Class<?> cls,
             Map<Class<?>, NamespaceMemoItem> classMemo,
@@ -574,30 +615,30 @@ public class Initializer {
                     visitedNamespaces
                 );
 
-                if (meta.isWindowed()) {
-                    var windowedMemo = classMemo.get(meta.field().getType());
-                    for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
-                        // Map windowed child fields to the base windowed field
-                        // i.e. "average_txns__3600__" -> "average_txns"
-                        memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
-                    }
-                    // Prepend base windowed feature name to windowed child fields
-                    // i.e.
-                    // {
-                    //   "__3600__": [0],
-                    //   "__2592000__": [1]
-                    // }
-                    // ->
-                    // {
-                    //   "average_txns__3600__": [0],
-                    //   "average_txns__2592000__": [1]
-                    // }
-                    var prependedMap = new HashMap<String, List<Integer>>();
-                    for (Map.Entry<String, List<Integer>> entry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
-                        prependedMap.put(resolvedName + entry.getKey(), entry.getValue());
-                    }
-                    windowedMemo.resolvedFieldNameToIndices = prependedMap;
-                }
+//                if (meta.isWindowed()) {
+//                    var windowedMemo = classMemo.get(meta.field().getType());
+//                    for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
+//                        // Map windowed child fields to the base windowed field
+//                        // i.e. "average_txns__3600__" -> "average_txns"
+//                        memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
+//                    }
+//                    // Prepend base windowed feature name to windowed child fields
+//                    // i.e.
+//                    // {
+//                    //   "__3600__": [0],
+//                    //   "__2592000__": [1]
+//                    // }
+//                    // ->
+//                    // {
+//                    //   "average_txns__3600__": [0],
+//                    //   "average_txns__2592000__": [1]
+//                    // }
+//                    var prependedMap = new HashMap<String, List<Integer>>();
+//                    for (Map.Entry<String, List<Integer>> entry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
+//                        prependedMap.put(resolvedName + entry.getKey(), entry.getValue());
+//                    }
+//                    windowedMemo.resolvedFieldNameToIndices = prependedMap;
+//                }
             }
             classMemo.put(cls, memoItem);
         }
