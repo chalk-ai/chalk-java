@@ -476,14 +476,12 @@ public class Initializer {
     }
 
     public static Class<?> getUnderlyingClass(Type typ) {
-        if (typ instanceof ParameterizedType) {
-            var parametrizedTyp = (ParameterizedType) typ;
+        if (typ instanceof ParameterizedType parametrizedTyp) {
             Type rawTyp = parametrizedTyp.getRawType();
 
-            if (!(rawTyp instanceof Class)) {
+            if (!(rawTyp instanceof Class<?> cls)) {
                 return typ.getClass();
             }
-            var cls = (Class<?>) rawTyp;
             if (Feature.class.isAssignableFrom(cls)) {
                 var args = parametrizedTyp.getActualTypeArguments();
                 return getUnderlyingClass(args[0]);
@@ -503,14 +501,12 @@ public class Initializer {
     }
 
     public static Class<?> unwrapFeatureType(Type typ) {
-        if (typ instanceof ParameterizedType) {
-            var parametrizedTyp = (ParameterizedType) typ;
+        if (typ instanceof ParameterizedType parametrizedTyp) {
             Type rawTyp = parametrizedTyp.getRawType();
 
-            if (!(rawTyp instanceof Class)) {
+            if (!(rawTyp instanceof Class<?> cls)) {
                 return typ.getClass();
             }
-            var cls = (Class<?>) rawTyp;
             if (Feature.class.isAssignableFrom(cls)) {
                 var args = parametrizedTyp.getActualTypeArguments();
                 return unwrapFeatureType(args[0]);
