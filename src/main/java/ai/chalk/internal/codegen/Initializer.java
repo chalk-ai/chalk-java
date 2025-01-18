@@ -464,31 +464,6 @@ public class Initializer {
                     classMemo,
                     visitedNamespaces
                 );
-
-//                if (meta.isWindowed()) {
-//                    var windowedMemo = classMemo.get(meta.field().getType());
-//                    for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
-//                        // Map windowed child fields to the base windowed field
-//                        // i.e. "average_txns__3600__" -> "average_txns"
-//                        memoItem.resolvedFieldNameToIndices.put(resolvedName + childFieldName, List.of(i));
-//                    }
-//                    // Prepend base windowed feature name to windowed child fields
-//                    // i.e.
-//                    // {
-//                    //   "__3600__": [0],
-//                    //   "__2592000__": [1]
-//                    // }
-//                    // ->
-//                    // {
-//                    //   "average_txns__3600__": [0],
-//                    //   "average_txns__2592000__": [1]
-//                    // }
-//                    var prependedMap = new HashMap<String, List<Integer>>();
-//                    for (Map.Entry<String, List<Integer>> entry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
-//                        prependedMap.put(resolvedName + entry.getKey(), entry.getValue());
-//                    }
-//                    windowedMemo.resolvedFieldNameToIndices = prependedMap;
-//                }
             }
             classMemo.put(cls, memoItem);
         }
