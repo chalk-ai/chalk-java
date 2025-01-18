@@ -1,11 +1,9 @@
 package ai.chalk.internal.arrow;
 
 import ai.chalk.exceptions.ClientException;
-import ai.chalk.features.Feature;
-import ai.chalk.features.FeaturesClass;
-import ai.chalk.features.HasMany;
-import ai.chalk.features.StructFeaturesClass;
+import ai.chalk.features.*;
 import ai.chalk.internal.Constants;
+import ai.chalk.internal.FieldMeta;
 import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.codegen.Initializer;
@@ -745,6 +743,72 @@ public class Unmarshaller {
             }
         }
     }
+//
+//    private static Object primitiveToRich(
+//        Object primitiveVal,
+//        FieldMeta meta,
+//        Map<Class<?>, NamespaceMemoItem> allMemo
+//    ) throws Exception {
+//        if (primitiveVal == null) {
+//            return null;
+//        }
+//        if (meta.isFeature()) {
+//            Feature<?> feature = new Feature<>();
+//            feature.setValue(primitiveVal);
+//            return feature;
+//        } else if (meta.isStruct() || meta.isFeaturesClass()) {
+//            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
+//            if (currMemo == null) {
+//                throw new Exception(
+//                    String.format(
+//                        "Memo not found for class '%s', found: %s",
+//                        meta.featuresBase().getSimpleName(),
+//                        allMemo.keySet()
+//                    )
+//                );
+//            }
+//            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
+//        } else if (meta.isList()) {
+//            List<?> list = (List<?>) primitiveVal;
+//            List<Object> result = new ArrayList<>();
+//
+//            for (Object item : list) {
+//
+//            }
+//            return result;
+//        } else {
+//            throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
+//        }
+//        return primitiveVal;
+//
+//    }
+
+//    private static <T extends FeaturesBase> T primitiveToRichClass(
+//        Object primitiveVal,
+//        Class<? extends FeaturesBase> target,
+//        NamespaceMemoItem currMemo,
+//        Map<Class<?>, NamespaceMemoItem> allMemo
+//    ) throws Exception {
+//        @SuppressWarnings("unchecked")
+//        var map = (Map<String, Object>) primitiveVal;
+//
+//        @SuppressWarnings("unchecked")
+//        T result = (T) target.getDeclaredConstructor().newInstance();
+//        for (Map.Entry<String, Object> entry : map.entrySet()) {
+//            String key = entry.getKey();
+//            Object value = entry.getValue();
+//            List<Integer> indices = currMemo.resolvedFieldNameToIndices.get(key);
+//            if (indices == null) {
+//                throw new Exception("Field not found in memo: " + key);
+//            }
+//            for (int idx : indices) {
+//                FieldMeta meta = currMemo.fieldMetas.get(idx);
+//                meta.field().set(result, primitiveToRich(value, meta, allMemo));
+//            }
+//        }
+//        return result;
+//
+//    }
 
     private static void unmarshalNested(Map<String, Object> struct, Map<String, List<Feature<?>>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {

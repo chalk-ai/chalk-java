@@ -191,6 +191,138 @@ public class Initializer {
      * Unlike init that branches out and initializes all fields, initScoped only initializes
      * the fields relevant to the specified FQN.
      */
+    public static List<FieldMeta> initScopedNew(
+        FeaturesClass cls,
+        List<String> fqnParts,
+        Map<Class<?>, NamespaceMemoItem> memo
+    ) throws Exception {
+        if (fqnParts.size() < 2) {
+            throw new Exception(
+                    String.format(
+                            "FQN '%s' must have at least 2 parts, found %d",
+                            String.join(".", fqnParts),
+                            fqnParts.size()
+                    )
+            );
+        }
+
+        NamespaceMemoItem nsMemo = memo.get(cls.getClass());
+        if (nsMemo == null) {
+            throw new Exception(
+                    String.format(
+                            "memo not found for namespace '%s', found keys: %s",
+                            cls.getClass().getSimpleName(),
+                            memo.keySet()
+                    )
+            );
+        }
+
+        List<Integer> indices = nsMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
+        if (indices == null) {
+            throw new Exception(
+                    String.format(
+                            "FQN '%s' not found in namespace memo for '%s', got '%s' instead",
+                            fqnParts.get(1),
+                            cls.getClass().getSimpleName(),
+                            nsMemo.resolvedFieldNameToIndices.keySet()
+                    )
+            );
+        }
+
+        List<FieldMeta> targetFields = new ArrayList<>();
+        for (int i : indices) {
+            List<FieldMeta> res = initScopedInnerNew(
+                    cls,
+                    nsMemo.fieldMetas.get(i),
+                    fqnParts.subList(1, fqnParts.size()),
+                    memo
+            );
+            targetFields.addAll(res);
+        }
+
+        return targetFields;
+    }
+
+    public static List<FieldMeta> initScopedInnerNew(
+        Object parent,
+        FieldMeta meta,
+        List<String> fqnParts,
+        Map<Class<?>, NamespaceMemoItem> memo
+    ) throws Exception {
+        if (fqnParts.size() == 1) {
+            if (meta.isWindowed()) {
+                WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
+                if (windowedObj == null) {
+                    windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
+                    meta.field().set(parent, windowedObj);
+                }
+                var windowedMemo = memo.get(windowedObj.getClass());
+                if (windowedMemo == null) {
+                    throw new Exception(
+                            String.format(
+                                    "memo not found for windowed features class %s, found keys: %s",
+                                    windowedObj.getClass().getSimpleName(),
+                                    memo.keySet()
+                            )
+                    );
+                }
+                List<Integer> fieldIdxs = windowedMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
+                if (fieldIdxs == null) {
+                    throw new Exception(
+                            String.format(
+                                    "FQN '%s' not found in windowed features memo for '%s', got '%s' instead",
+                                    fqnParts.get(0),
+                                    windowedObj.getClass().getSimpleName(),
+                                    windowedMemo.resolvedFieldNameToIndices.keySet()
+                            )
+                    );
+                }
+                List<FieldMeta> metas = new ArrayList<>();
+                for (int idx : fieldIdxs) {
+                    var windowedChildField = windowedMemo.fieldMetas.get(idx);
+                    metas.add(windowedChildField);
+                }
+                return metas;
+            } else {
+                return List.of(meta);
+            }
+        }
+
+        FeaturesBase fc = (FeaturesBase) meta.field().get(parent);
+        if (fc == null) {
+            fc = (FeaturesBase) meta.field().getType().getConstructor().newInstance();
+            meta.field().set(parent, fc);
+        }
+        var nextMemo = memo.get(fc.getClass());
+        if (nextMemo == null) {
+            throw new Exception(
+                    String.format(
+                            "memo not found for features class %s, found keys: %s",
+                            fc.getClass().getSimpleName(),
+                            memo.keySet()
+                    )
+            );
+        }
+
+        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
+        List<FieldMeta> targetFields = new ArrayList<>();
+        for (int i : indices) {
+            List<FieldMeta> res = initScopedInnerNew(
+                    fc,
+                    nextMemo.fieldMetas.get(i),
+                    fqnParts.subList(1, fqnParts.size()),
+                    memo
+            );
+            targetFields.addAll(res);
+        }
+
+        return targetFields;
+    }
+
+    /*
+     * Unlike init that branches out and initializes all fields, initScoped only initializes
+     * the fields relevant to the specified FQN.
+     */
     public static List<Setter> initScoped(
         FeaturesClass cls,
         List<String> fqnParts,
@@ -390,16 +522,25 @@ public class Initializer {
 
                 var fieldType = fields.get(i).getType();
                 boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
+                boolean isFeaturesClass = isFeaturesBase && FeaturesClass.class.isAssignableFrom(fieldType);
+                boolean isStructFeaturesClass = isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType);
+                boolean isWindowedFeaturesClass = isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType);
+                Class<?> underlyingClass = getUnderlyingClass(fields.get(i).getType());
+
+                @SuppressWarnings("unchecked")
                 FieldMeta meta = new FieldMeta(
-                        fields.get(i),
-                        isFeaturesBase,
-                        isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType),
-                        isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType)
+                    fields.get(i),
+                    isFeaturesBase ? (Class<? extends FeaturesBase>) fieldType : null,
+                    isFeaturesClass ? (Class<? extends FeaturesClass>) fieldType : null,
+                    isStructFeaturesClass ? (Class<? extends StructFeaturesClass>) fieldType : null,
+                    isWindowedFeaturesClass ? (Class<? extends WindowedFeaturesClass>) fieldType : null,
+                    List.class.isAssignableFrom(fieldType) ? underlyingClass : null,
+                    Feature.class.isAssignableFrom(fieldType)
                 );
                 memoItem.fieldMetas.add(meta);
 
                 buildNamespaceMemo(
-                    getUnderlyingClass(fields.get(i).getType()),
+                    underlyingClass,
                     classMemo,
                     visitedNamespaces
                 );
