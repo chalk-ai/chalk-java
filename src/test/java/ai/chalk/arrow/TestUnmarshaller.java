@@ -458,24 +458,24 @@ public class TestUnmarshaller {
         fieldVectors.add(timestampSecListVector);
 
 //         Create a list of structs
-//        var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
-//        var structListWriter = structListVector.getWriter();
-//        var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
-//        var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
-//        for (var i = 0; i < 3; i++) {
-//            structListWriter.startList();
-//            var nestedStructWriter = structListWriter.struct();
-//            for (var j = 0; j < 3; j++) {
-//                var idx = i * 3 + j;
-//                nestedStructWriter.start();
-//                nestedStructWriter.bigInt("nice_number").writeBigInt(nestedNiceNumberValues[idx]);
-//                nestedStructWriter.timeStampSec("nice_datetime").writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
-//                nestedStructWriter.end();
-//            }
-//            structListWriter.endList();
-//        }
-//        structListVector.setValueCount(3);
-//        fieldVectors.add(structListVector);
+        var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
+        var structListWriter = structListVector.getWriter();
+        var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
+        var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
+        for (var i = 0; i < 3; i++) {
+            structListWriter.startList();
+            var nestedStructWriter = structListWriter.struct();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                nestedStructWriter.start();
+                nestedStructWriter.bigInt("nice_number").writeBigInt(nestedNiceNumberValues[idx]);
+                nestedStructWriter.timeStampSec("nice_datetime").writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
+                nestedStructWriter.end();
+            }
+            structListWriter.endList();
+        }
+        structListVector.setValueCount(3);
+        fieldVectors.add(structListVector);
 
         var hasOneDoubleVector = new Float8Vector("arrow_user.favorite_has_one.length", allocator);
         hasOneDoubleVector.allocateNew();
@@ -627,7 +627,7 @@ public class TestUnmarshaller {
         }
         dateMilliVectorNullable.setValueCount(optionalDateMilliValues.length);
         fieldVectors.add(dateMilliVectorNullable);
-        
+
         var timeSecVectorNullable = new TimeSecVector("arrow_user.favorite_time_sec_nullable", allocator);
         timeSecVectorNullable.allocateNew();
         Integer[] optionalTimeSecValues = {36840, null, 36842};
@@ -638,7 +638,7 @@ public class TestUnmarshaller {
         }
         timeSecVectorNullable.setValueCount(optionalTimeSecValues.length);
         fieldVectors.add(timeSecVectorNullable);
-        
+
         var timeMilliVectorNullable = new TimeMilliVector("arrow_user.favorite_time_milli_nullable", allocator);
         timeMilliVectorNullable.allocateNew();
         Integer[] optionalTimeMilliValues = {36840001, null, 36842001};
@@ -649,7 +649,7 @@ public class TestUnmarshaller {
         }
         timeMilliVectorNullable.setValueCount(optionalTimeMilliValues.length);
         fieldVectors.add(timeMilliVectorNullable);
-        
+
         var timeMicroVectorNullable = new TimeMicroVector("arrow_user.favorite_time_micro_nullable", allocator);
         timeMicroVectorNullable.allocateNew();
         Long[] optionalTimeMicroValues = {36840000001L, null, 36842000001L};
@@ -660,7 +660,7 @@ public class TestUnmarshaller {
         }
         timeMicroVectorNullable.setValueCount(optionalTimeMicroValues.length);
         fieldVectors.add(timeMicroVectorNullable);
-        
+
         var timeNanoVectorNullable = new TimeNanoVector("arrow_user.favorite_time_nano_nullable", allocator);
         timeNanoVectorNullable.allocateNew();
         Long[] optionalTimeNanoValues = {36840000000001L, null, 36842000000001L};
@@ -682,7 +682,7 @@ public class TestUnmarshaller {
         }
         timestampSecVectorNullable.setValueCount(optionalTimestampSecValues.length);
         fieldVectors.add(timestampSecVectorNullable);
-        
+
         var timestampMilliVectorNullable = new TimeStampMilliVector("arrow_user.favorite_timestamp_milli_nullable", allocator);
         timestampMilliVectorNullable.allocateNew();
         Long[] optionalTimestampMilliValues = {1627689600001L, null, 1627862400001L};
@@ -693,7 +693,7 @@ public class TestUnmarshaller {
         }
         timestampMilliVectorNullable.setValueCount(optionalTimestampMilliValues.length);
         fieldVectors.add(timestampMilliVectorNullable);
-        
+
         var timestampMicroVectorNullable = new TimeStampMicroVector("arrow_user.favorite_timestamp_micro_nullable", allocator);
         timestampMicroVectorNullable.allocateNew();
         Long[] optionalTimestampMicroValues = {1627689600000001L, null, 1627862400000001L};
@@ -704,7 +704,7 @@ public class TestUnmarshaller {
         }
         timestampMicroVectorNullable.setValueCount(optionalTimestampMicroValues.length);
         fieldVectors.add(timestampMicroVectorNullable);
-        
+
         var timestampNanoVectorNullable = new TimeStampNanoVector("arrow_user.favorite_timestamp_nano_nullable", allocator);
         timestampNanoVectorNullable.allocateNew();
         Long[] optionalTimestampNanoValues = {1627689600000000001L, null, 1627862400000000001L};
@@ -985,25 +985,25 @@ public class TestUnmarshaller {
         assert users[1].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime3, expectedDatetime1, expectedDatetime2));
         assert users[2].favoriteTimestampSecList.getValue().equals(Arrays.asList(expectedDatetime2, expectedDatetime3, expectedDatetime1));
 
-//        assert users[0].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(1L);
-//        assert users[0].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(2L);
-//        assert users[0].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(3L);
-//        assert users[1].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(4L);
-//        assert users[1].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(5L);
-//        assert users[1].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(6L);
-//        assert users[2].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(7L);
-//        assert users[2].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(8L);
-//        assert users[2].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(9L);
-//
-//        assert users[0].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
-//        assert users[0].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime2);
-//        assert users[0].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime3);
-//        assert users[1].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime3);
-//        assert users[1].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime1);
-//        assert users[1].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime2);
-//        assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
-//        assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
-//        assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(1L);
+        assert users[0].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(2L);
+        assert users[0].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(3L);
+        assert users[1].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(4L);
+        assert users[1].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(5L);
+        assert users[1].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(6L);
+        assert users[2].favoriteStructList.getValue().get(0).niceNumber.getValue().equals(7L);
+        assert users[2].favoriteStructList.getValue().get(1).niceNumber.getValue().equals(8L);
+        assert users[2].favoriteStructList.getValue().get(2).niceNumber.getValue().equals(9L);
+
+        assert users[0].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[0].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
 
         assert users[0].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36900));
         assert users[1].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36901));

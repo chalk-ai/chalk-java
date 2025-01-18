@@ -499,7 +499,30 @@ public class Initializer {
             } else {
                 return typ.getClass();
             }
+        }
+    }
 
+    public static Class<?> unwrapFeatureType(Type typ) {
+        if (typ instanceof ParameterizedType) {
+            var parametrizedTyp = (ParameterizedType) typ;
+            Type rawTyp = parametrizedTyp.getRawType();
+
+            if (!(rawTyp instanceof Class)) {
+                return typ.getClass();
+            }
+            var cls = (Class<?>) rawTyp;
+            if (Feature.class.isAssignableFrom(cls)) {
+                var args = parametrizedTyp.getActualTypeArguments();
+                return unwrapFeatureType(args[0]);
+            } else {
+                return (Class<?>) ((ParameterizedType) typ).getRawType();
+            }
+        } else {
+            if (typ instanceof Class) {
+                return (Class<?>) typ;
+            } else {
+                return typ.getClass();
+            }
         }
     }
 
@@ -531,7 +554,11 @@ public class Initializer {
                 boolean isFeaturesClass = isFeaturesBase && FeaturesClass.class.isAssignableFrom(fieldType);
                 boolean isStructFeaturesClass = isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType);
                 boolean isWindowedFeaturesClass = isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType);
-                Class<?> underlyingClass = getUnderlyingClass(fields.get(i).getType());
+                boolean isFeature = Feature.class.isAssignableFrom(fieldType);
+
+                // Must use `getGenericType` here to get a type that contains the underlying class
+                var genericType = fields.get(i).getGenericType();
+                Class<?> underlyingClass = getUnderlyingClass(genericType);
 
                 @SuppressWarnings("unchecked")
                 FieldMeta meta = new FieldMeta(
@@ -540,8 +567,8 @@ public class Initializer {
                     isFeaturesClass ? (Class<? extends FeaturesClass>) fieldType : null,
                     isStructFeaturesClass ? (Class<? extends StructFeaturesClass>) fieldType : null,
                     isWindowedFeaturesClass ? (Class<? extends WindowedFeaturesClass>) fieldType : null,
-                    List.class.isAssignableFrom(fieldType) ? underlyingClass : null,
-                    Feature.class.isAssignableFrom(fieldType)
+                    isFeature && List.class.isAssignableFrom(unwrapFeatureType(genericType)) ? underlyingClass : null,
+                    isFeature
                 );
                 memoItem.fieldMetas.add(meta);
 

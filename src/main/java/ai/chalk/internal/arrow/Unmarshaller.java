@@ -474,9 +474,7 @@ public class Unmarshaller {
                     if (fieldIdxToSkip.get(col)) {
                         continue;
                     }
-
                     Object value = getValueFromFieldVector(root.getVector(col), row);
-
                     var fieldSetters = Initializer.initScopedNew(obj, fieldIdxToFqnParts.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
@@ -484,11 +482,6 @@ public class Unmarshaller {
                             fieldMeta.field().set(setter.parent(), richVal);
                         }
                     }
-
-//                    var setters = Initializer.initScoped(obj, fieldIdxToFqnParts.get(col), memo);
-//                    for (var s : setters) {
-//                        s.set(value);
-//                    }
                 }
             }
         }
@@ -759,23 +752,7 @@ public class Unmarshaller {
         FieldMeta meta,
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
-        if (meta.isFeature()) {
-            Feature<?> feature = new Feature<>();
-            feature.setValue(primitiveVal);
-            return feature;
-        } else if (meta.isStruct() || meta.isFeaturesClass()) {
-            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
-            if (currMemo == null) {
-                throw new Exception(
-                    String.format(
-                        "Memo not found for class '%s', found: %s",
-                        meta.featuresBase().getSimpleName(),
-                        allMemo.keySet()
-                    )
-                );
-            }
-            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
-        } else if (meta.isList()) {
+        if (meta.isList()) {
             List<?> list = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
             Feature<?> newFeature = new Feature<>();
@@ -794,6 +771,22 @@ public class Unmarshaller {
             }
             newFeature.setValue(result);
             return newFeature;
+        } else if (meta.isFeature()) {
+            Feature<?> feature = new Feature<>();
+            feature.setValue(primitiveVal);
+            return feature;
+        } else if (meta.isStruct() || meta.isFeaturesClass()) {
+            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
+            if (currMemo == null) {
+                throw new Exception(
+                        String.format(
+                                "Memo not found for class '%s', found: %s",
+                                meta.featuresBase().getSimpleName(),
+                                allMemo.keySet()
+                        )
+                );
+            }
+            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
         } else {
             throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
         }
