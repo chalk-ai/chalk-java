@@ -191,7 +191,7 @@ public class Initializer {
      * Unlike init that branches out and initializes all fields, initScoped only initializes
      * the fields relevant to the specified FQN.
      */
-    public static List<FieldSetter> initScopedNew(
+    public static List<FieldSetter> initScoped(
         FeaturesClass cls,
         List<String> fqnParts,
         Map<Class<?>, NamespaceMemoItem> memo
@@ -231,7 +231,7 @@ public class Initializer {
 
         List<FieldSetter> targetFields = new ArrayList<>();
         for (int i : indices) {
-            List<FieldSetter> res = initScopedInnerNew(
+            List<FieldSetter> res = initScopedInner(
                     cls,
                     nsMemo.fieldMetas.get(i),
                     fqnParts.subList(1, fqnParts.size()),
@@ -243,7 +243,7 @@ public class Initializer {
         return targetFields;
     }
 
-    public static List<FieldSetter> initScopedInnerNew(
+    public static List<FieldSetter> initScopedInner(
         Object parent,
         FieldMeta meta,
         List<String> fqnParts,
@@ -313,157 +313,7 @@ public class Initializer {
         List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
         List<FieldSetter> targetFields = new ArrayList<>();
         for (int i : indices) {
-            List<FieldSetter> res = initScopedInnerNew(
-                fc,
-                nextMemo.fieldMetas.get(i),
-                fqnParts.subList(1, fqnParts.size()),
-                memo
-            );
-            targetFields.addAll(res);
-        }
-
-        return targetFields;
-    }
-
-    /*
-     * Unlike init that branches out and initializes all fields, initScoped only initializes
-     * the fields relevant to the specified FQN.
-     */
-    public static List<Setter> initScoped(
-        FeaturesClass cls,
-        List<String> fqnParts,
-        Map<Class<?>, NamespaceMemoItem> memo
-    ) throws Exception {
-        if (fqnParts.size() < 2) {
-            throw new Exception(
-                String.format(
-                    "FQN '%s' must have at least 2 parts, found %d",
-                    String.join(".", fqnParts),
-                    fqnParts.size()
-                )
-            );
-        }
-
-        NamespaceMemoItem nsMemo = memo.get(cls.getClass());
-        if (nsMemo == null) {
-            throw new Exception(
-                String.format(
-                    "memo not found for namespace '%s', found keys: %s",
-                    cls.getClass().getSimpleName(),
-                    memo.keySet()
-                )
-            );
-        }
-
-        List<Integer> indices = nsMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
-        if (indices == null) {
-            throw new Exception(
-                String.format(
-                    "FQN '%s' not found in namespace memo for '%s', got '%s' instead",
-                    fqnParts.get(1),
-                    cls.getClass().getSimpleName(),
-                    nsMemo.resolvedFieldNameToIndices.keySet()
-                )
-            );
-        }
-
-        List<Setter> targetFields = new ArrayList<>();
-        for (int i : indices) {
-            List<Setter> res = initScopedInner(
-                cls,
-                nsMemo.fieldMetas.get(i),
-                fqnParts.subList(1, fqnParts.size()),
-                memo
-            );
-            targetFields.addAll(res);
-        }
-
-        return targetFields;
-    }
-
-    public static List<Setter> initScopedInner(
-        Object parent,
-        FieldMeta meta,
-        List<String> fqnParts,
-        Map<Class<?>, NamespaceMemoItem> memo
-    ) throws Exception {
-        if (fqnParts.size() == 1) {
-            if (meta.isStruct()) {
-                StructFeaturesClass structObj = (StructFeaturesClass) meta.field().getType().getConstructor().newInstance();
-                meta.field().set(parent, structObj);
-                var structMemo = memo.get(structObj.getClass());
-                if (structMemo == null) {
-                    throw new Exception(
-                            String.format(
-                                    "memo not found for struct features class %s, found keys: %s",
-                                    structObj.getClass().getSimpleName(),
-                                    memo.keySet()
-                            )
-                    );
-                }
-                return List.of(new StructSetter(structObj, structMemo));
-            } else if (meta.isWindowed()) {
-                WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
-                if (windowedObj == null) {
-                    windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
-                    meta.field().set(parent, windowedObj);
-                }
-                var windowedMemo = memo.get(windowedObj.getClass());
-                if (windowedMemo == null) {
-                    throw new Exception(
-                        String.format(
-                            "memo not found for windowed features class %s, found keys: %s",
-                            windowedObj.getClass().getSimpleName(),
-                            memo.keySet()
-                        )
-                    );
-                }
-                List<Integer> fieldIdxs = windowedMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
-                if (fieldIdxs == null) {
-                    throw new Exception(
-                        String.format(
-                            "FQN '%s' not found in windowed features memo for '%s', got '%s' instead",
-                            fqnParts.get(0),
-                            windowedObj.getClass().getSimpleName(),
-                            windowedMemo.resolvedFieldNameToIndices.keySet()
-                        )
-                    );
-                }
-                List<Setter> setters = new ArrayList<>();
-                for (int idx : fieldIdxs) {
-                    Feature<?> feature = new Feature<>();
-                    var windowedChildField = windowedMemo.fieldMetas.get(idx);
-                    windowedChildField.field().set(windowedObj, feature);
-                    setters.add(new FeatureSetter(feature));
-                }
-                return setters;
-            } else {
-                Feature<?> feature = new Feature<>();
-                meta.field().set(parent, feature);
-                return List.of(new FeatureSetter(feature));
-            }
-        }
-
-        FeaturesBase fc = (FeaturesBase) meta.field().get(parent);
-        if (fc == null) {
-            fc = (FeaturesBase) meta.field().getType().getConstructor().newInstance();
-            meta.field().set(parent, fc);
-        }
-        var nextMemo = memo.get(fc.getClass());
-        if (nextMemo == null) {
-            throw new Exception(
-                    String.format(
-                            "memo not found for features class %s, found keys: %s",
-                            fc.getClass().getSimpleName(),
-                            memo.keySet()
-                    )
-            );
-        }
-
-        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
-        List<Setter> targetFields = new ArrayList<>();
-        for (int i : indices) {
-            List<Setter> res = initScopedInner(
+            List<FieldSetter> res = initScopedInner(
                 fc,
                 nextMemo.fieldMetas.get(i),
                 fqnParts.subList(1, fqnParts.size()),

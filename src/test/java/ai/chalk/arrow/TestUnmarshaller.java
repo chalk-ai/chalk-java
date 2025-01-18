@@ -6,7 +6,6 @@ import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
-import ai.chalk.models.OnlineQueryParams;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -854,7 +853,7 @@ public class TestUnmarshaller {
         for (int i = 0; i < 1000; i++) {
             var tableCopy = table.copy();
             var start = System.currentTimeMillis();
-            users = Unmarshaller.unmarshalTableNewNew(tableCopy, ArrowUser.class);
+            users = Unmarshaller.unmarshalTable(tableCopy, ArrowUser.class);
             totalTime += System.currentTimeMillis() - start;
         }
         System.out.println("Unmarshal time: " + totalTime + "ms");
@@ -1268,7 +1267,7 @@ public class TestUnmarshaller {
 
 
         var start = System.currentTimeMillis();
-        Unmarshaller.unmarshalTableNewNew(table, ArrowUser.class);
+        Unmarshaller.unmarshalTable(table, ArrowUser.class);
         var end = System.currentTimeMillis();
 
         System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
