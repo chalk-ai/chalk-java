@@ -474,11 +474,21 @@ public class Unmarshaller {
                     if (fieldIdxToSkip.get(col)) {
                         continue;
                     }
-                    var setters = Initializer.initScoped(obj, fieldIdxToFqnParts.get(col), memo);
-                    for (var s : setters) {
-                        Object value = getValueFromFieldVector(root.getVector(col), row);
-                        s.set(value);
+
+                    Object value = getValueFromFieldVector(root.getVector(col), row);
+
+                    var fieldSetters = Initializer.initScopedNew(obj, fieldIdxToFqnParts.get(col), memo);
+                    for (var setter : fieldSetters) {
+                        for (var fieldMeta : setter.fieldMetas()) {
+                            var richVal = primitiveToRich(value, fieldMeta, memo);
+                            fieldMeta.field().set(setter.parent(), richVal);
+                        }
                     }
+
+//                    var setters = Initializer.initScoped(obj, fieldIdxToFqnParts.get(col), memo);
+//                    for (var s : setters) {
+//                        s.set(value);
+//                    }
                 }
             }
         }
@@ -743,72 +753,78 @@ public class Unmarshaller {
             }
         }
     }
-//
-//    private static Object primitiveToRich(
-//        Object primitiveVal,
-//        FieldMeta meta,
-//        Map<Class<?>, NamespaceMemoItem> allMemo
-//    ) throws Exception {
-//        if (primitiveVal == null) {
-//            return null;
-//        }
-//        if (meta.isFeature()) {
-//            Feature<?> feature = new Feature<>();
-//            feature.setValue(primitiveVal);
-//            return feature;
-//        } else if (meta.isStruct() || meta.isFeaturesClass()) {
-//            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
-//            if (currMemo == null) {
-//                throw new Exception(
-//                    String.format(
-//                        "Memo not found for class '%s', found: %s",
-//                        meta.featuresBase().getSimpleName(),
-//                        allMemo.keySet()
-//                    )
-//                );
-//            }
-//            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
-//        } else if (meta.isList()) {
-//            List<?> list = (List<?>) primitiveVal;
-//            List<Object> result = new ArrayList<>();
-//
-//            for (Object item : list) {
-//
-//            }
-//            return result;
-//        } else {
-//            throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
-//        }
-//        return primitiveVal;
-//
-//    }
 
-//    private static <T extends FeaturesBase> T primitiveToRichClass(
-//        Object primitiveVal,
-//        Class<? extends FeaturesBase> target,
-//        NamespaceMemoItem currMemo,
-//        Map<Class<?>, NamespaceMemoItem> allMemo
-//    ) throws Exception {
-//        @SuppressWarnings("unchecked")
-//        var map = (Map<String, Object>) primitiveVal;
-//
-//        @SuppressWarnings("unchecked")
-//        T result = (T) target.getDeclaredConstructor().newInstance();
-//        for (Map.Entry<String, Object> entry : map.entrySet()) {
-//            String key = entry.getKey();
-//            Object value = entry.getValue();
-//            List<Integer> indices = currMemo.resolvedFieldNameToIndices.get(key);
-//            if (indices == null) {
-//                throw new Exception("Field not found in memo: " + key);
-//            }
-//            for (int idx : indices) {
-//                FieldMeta meta = currMemo.fieldMetas.get(idx);
-//                meta.field().set(result, primitiveToRich(value, meta, allMemo));
-//            }
-//        }
-//        return result;
-//
-//    }
+    private static Object primitiveToRich(
+        Object primitiveVal,
+        FieldMeta meta,
+        Map<Class<?>, NamespaceMemoItem> allMemo
+    ) throws Exception {
+        if (meta.isFeature()) {
+            Feature<?> feature = new Feature<>();
+            feature.setValue(primitiveVal);
+            return feature;
+        } else if (meta.isStruct() || meta.isFeaturesClass()) {
+            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
+            if (currMemo == null) {
+                throw new Exception(
+                    String.format(
+                        "Memo not found for class '%s', found: %s",
+                        meta.featuresBase().getSimpleName(),
+                        allMemo.keySet()
+                    )
+                );
+            }
+            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
+        } else if (meta.isList()) {
+            List<?> list = (List<?>) primitiveVal;
+            NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
+            Feature<?> newFeature = new Feature<>();
+
+            if (currMemo == null) {
+                // Not a struct or features class, since it's not in the memo
+                newFeature.setValue(list);
+                return newFeature;
+            }
+
+            List<Object> result = new ArrayList<>();
+            for (Object item : list) {
+                @SuppressWarnings("unchecked")
+                var cls = (Class<? extends FeaturesBase>) meta.listUnderlyingClass();
+                result.add(primitiveToRichClass(item, cls, currMemo, allMemo));
+            }
+            newFeature.setValue(result);
+            return newFeature;
+        } else {
+            throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
+        }
+    }
+
+    private static <T extends FeaturesBase> T primitiveToRichClass(
+        Object primitiveVal,
+        Class<? extends FeaturesBase> target,
+        NamespaceMemoItem currMemo,
+        Map<Class<?>, NamespaceMemoItem> allMemo
+    ) throws Exception {
+        @SuppressWarnings("unchecked")
+        var map = (Map<String, Object>) primitiveVal;
+
+        @SuppressWarnings("unchecked")
+        T result = (T) target.getDeclaredConstructor().newInstance();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            List<Integer> indices = currMemo.resolvedFieldNameToIndices.get(key);
+            if (indices == null) {
+                throw new Exception("Field not found in memo: " + key);
+            }
+            for (int idx : indices) {
+                FieldMeta meta = currMemo.fieldMetas.get(idx);
+                meta.field().set(result, primitiveToRich(value, meta, allMemo));
+            }
+        }
+        return result;
+
+    }
 
     private static void unmarshalNested(Map<String, Object> struct, Map<String, List<Feature<?>>> featureMap, String fqn) {
         for (Map.Entry<String, Object> entry : struct.entrySet()) {

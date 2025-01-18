@@ -191,7 +191,7 @@ public class Initializer {
      * Unlike init that branches out and initializes all fields, initScoped only initializes
      * the fields relevant to the specified FQN.
      */
-    public static List<FieldMeta> initScopedNew(
+    public static List<FieldSetter> initScopedNew(
         FeaturesClass cls,
         List<String> fqnParts,
         Map<Class<?>, NamespaceMemoItem> memo
@@ -229,9 +229,9 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> targetFields = new ArrayList<>();
+        List<FieldSetter> targetFields = new ArrayList<>();
         for (int i : indices) {
-            List<FieldMeta> res = initScopedInnerNew(
+            List<FieldSetter> res = initScopedInnerNew(
                     cls,
                     nsMemo.fieldMetas.get(i),
                     fqnParts.subList(1, fqnParts.size()),
@@ -243,7 +243,7 @@ public class Initializer {
         return targetFields;
     }
 
-    public static List<FieldMeta> initScopedInnerNew(
+    public static List<FieldSetter> initScopedInnerNew(
         Object parent,
         FieldMeta meta,
         List<String> fqnParts,
@@ -282,9 +282,15 @@ public class Initializer {
                     var windowedChildField = windowedMemo.fieldMetas.get(idx);
                     metas.add(windowedChildField);
                 }
-                return metas;
+                return List.of(new FieldSetter(
+                    windowedObj,
+                    metas
+                ));
             } else {
-                return List.of(meta);
+                return List.of(new FieldSetter(
+                    parent,
+                    List.of(meta)
+                ));
             }
         }
 
@@ -305,13 +311,13 @@ public class Initializer {
         }
 
         List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
-        List<FieldMeta> targetFields = new ArrayList<>();
+        List<FieldSetter> targetFields = new ArrayList<>();
         for (int i : indices) {
-            List<FieldMeta> res = initScopedInnerNew(
-                    fc,
-                    nextMemo.fieldMetas.get(i),
-                    fqnParts.subList(1, fqnParts.size()),
-                    memo
+            List<FieldSetter> res = initScopedInnerNew(
+                fc,
+                nextMemo.fieldMetas.get(i),
+                fqnParts.subList(1, fqnParts.size()),
+                memo
             );
             targetFields.addAll(res);
         }

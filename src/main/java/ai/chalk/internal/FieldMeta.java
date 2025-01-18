@@ -14,7 +14,8 @@ public record FieldMeta(
         Class<? extends FeaturesClass> featuresClass,
         Class<? extends StructFeaturesClass> structClass,
         Class<? extends WindowedFeaturesClass> windowedClass,
-        Class<?> listUnderlyingClass, boolean isFeature
+        Class<?> listUnderlyingClass,
+        boolean isFeature
 ) {
     public boolean isFeaturesBase() {
         return featuresBase != null;
