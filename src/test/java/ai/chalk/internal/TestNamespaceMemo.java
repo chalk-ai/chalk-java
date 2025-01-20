@@ -8,7 +8,6 @@ import ai.chalk.internal.codegen.Initializer;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public class TestNamespaceMemo {
     private void assertIsScalarFeature(FieldMeta meta) {
@@ -29,6 +28,15 @@ public class TestNamespaceMemo {
         assert !meta.isFeaturesClass();
     }
 
+    private void assertIsWindowedFeature(FieldMeta meta) {
+        assert !meta.isFeature();
+        assert !meta.isList();
+        assert !meta.isStruct();
+        assert meta.isWindowed();
+        assert meta.isFeaturesBase();
+        assert !meta.isFeaturesClass();
+    }
+
     private void assertIsStructFeature(FieldMeta meta) {
         assert !meta.isFeature();
         assert !meta.isList();
@@ -38,13 +46,13 @@ public class TestNamespaceMemo {
         assert !meta.isFeaturesClass();
     }
 
-    private void assertIsWindowedFeature(FieldMeta meta) {
+    private void assertIsFeaturesClassFeature(FieldMeta meta) {
         assert !meta.isFeature();
         assert !meta.isList();
         assert !meta.isStruct();
-        assert meta.isWindowed();
+        assert !meta.isWindowed();
         assert meta.isFeaturesBase();
-        assert !meta.isFeaturesClass();
+        assert meta.isFeaturesClass();
     }
 
 
@@ -68,6 +76,14 @@ public class TestNamespaceMemo {
         assert transactionsMeta.field().equals(User.class.getField("transactions"));
         assertIsListFeature(transactionsMeta);
         assert transactionsMeta.listUnderlyingClass().equals(Transaction.class);
+
+        FieldMeta accountMeta = userMemo.resolvedNameToFieldMeta.get("account").get(0);
+        assert accountMeta.field().equals(User.class.getField("account"));
+        assertIsFeaturesClassFeature(accountMeta);
+
+        FieldMeta addressMeta = userMemo.resolvedNameToFieldMeta.get("address").get(0);
+        assert addressMeta.field().equals(User.class.getField("address"));
+        assertIsStructFeature(addressMeta);
 
         // Transaction
         assert memo.containsKey(Transaction.class);
