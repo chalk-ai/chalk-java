@@ -398,10 +398,7 @@ public class TestUnmarshaller {
         var goodDataclassNiceNumberWriter = goodDataclassWriter.bigInt("nice_number");
         var goodDataclassNiceDatetimeWriter = goodDataclassWriter.timeStampSec("nice_datetime");
 
-        structComplexWriter.list("good_dataclasses");
-        var childVector = (ListVector) structComplexVector.getChild("good_dataclasses");
-        var goodDataclassesWriter = childVector.getWriter();
-        goodDataclassesWriter.allocate();
+        var goodDataclassesWriter = structComplexWriter.list("good_dataclasses");
 
         for (var i = 0; i < numRows; i++) {
             structComplexWriter.start();
@@ -410,15 +407,14 @@ public class TestUnmarshaller {
             goodDataclassNiceNumberWriter.writeBigInt(goodNumberValues[i]);
             goodDataclassNiceDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
             goodDataclassWriter.end();
+
             goodDataclassesWriter.startList();
+            var nestedComplexStructWriter = goodDataclassesWriter.struct();
+            var nestedBigIntWriter = nestedComplexStructWriter.bigInt("nice_number");
+            var nestedTimestampWriter = nestedComplexStructWriter.timeStampSec("nice_datetime");
             for (var j = 0; j < 3; j++) {
                 var idx = i * 3 + j;
-                var nestedComplexStructWriter = goodDataclassesWriter.struct();
-                var nestedBigIntWriter = nestedComplexStructWriter.bigInt("nice_number");
-                var nestedTimestampWriter = nestedComplexStructWriter.timeStampSec("nice_datetime");
                 nestedComplexStructWriter.start();
-                // TODO: Writing here does not seem to work. The resulting arrow table has this inner struct as empty.
-                //       On the assertion side, we skip asserting correctness on this inner list of structs.
                 nestedBigIntWriter.writeBigInt(nestedNiceNumberValues[idx]);
                 nestedTimestampWriter.writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
                 nestedComplexStructWriter.end();
@@ -426,7 +422,6 @@ public class TestUnmarshaller {
             goodDataclassesWriter.endList();
             structComplexWriter.end();
         }
-        childVector.setValueCount(3);
         fieldVectors.add(structComplexVector);
 
         var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
