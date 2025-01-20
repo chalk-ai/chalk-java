@@ -3,6 +3,8 @@ package ai.chalk.arrow;
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
+import ai.chalk.arrow.test_features._Dataclass6036;
+import ai.chalk.features.Feature;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
@@ -378,6 +380,38 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVector);
 
+        /*
+            public class DataclassWithComplexFeatures extends StructFeaturesClass {
+                public Feature<Long> goodNumber;
+                public _Dataclass6036 goodDataclass;
+                public Feature<List<_Dataclass6036>> goodDataclasses;
+            }
+         */
+        var structComplexVector = StructVector.empty("arrow_user.favorite_struct_complex", allocator);
+        structComplexVector.setValueCount(numRows);
+        structComplexVector.allocateNew();
+        var structComplexWriter = structComplexVector.getWriter();
+
+        long[] goodNumberValues = {1L, 2L, 3L};
+        var goodNumberWriter = structComplexWriter.bigInt("good_number");
+
+        var goodDataclassWriter = structComplexWriter.struct("good_dataclass");
+        var goodDataclassNiceNumberWriter = goodDataclassWriter.bigInt("nice_number");
+        var goodDataclassNiceDatetimeWriter = goodDataclassWriter.timeStampSec("nice_datetime");
+
+        var goodDataclassesWriter = structComplexWriter.list();
+
+        for (var i = 0; i < numRows; i++) {
+            structComplexWriter.start();
+            goodNumberWriter.writeBigInt(goodNumberValues[i]);
+            goodDataclassWriter.start();
+            goodDataclassNiceNumberWriter.writeBigInt(goodNumberValues[i]);
+            goodDataclassNiceDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
+            goodDataclassWriter.end();
+            structComplexWriter.end();
+        }
+        fieldVectors.add(structComplexVector);
+
         var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
         var listWriter = listVector.getWriter();
         var varCharValues = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i"};
@@ -456,7 +490,7 @@ public class TestUnmarshaller {
         timestampSecListVector.setValueCount(3);
         fieldVectors.add(timestampSecListVector);
 
-//         Create a list of structs
+        // Create a list of structs
         var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
         var structListWriter = structListVector.getWriter();
         var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
@@ -1049,8 +1083,16 @@ public class TestUnmarshaller {
         assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
 
         // TODO: Support complex structs and lists
-        // assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
-        // assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime3);
+
+        assert users[0].favoriteStructComplex.goodDataclass.niceNumber.getValue().equals(1L);
+        assert users[1].favoriteStructComplex.goodDataclass.niceNumber.getValue().equals(2L);
+        assert users[2].favoriteStructComplex.goodDataclass.niceNumber.getValue().equals(3L);
+
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+
 
         // Nullable features start
         assert users[0].favoriteBigIntNullable.getValue() == 1L;

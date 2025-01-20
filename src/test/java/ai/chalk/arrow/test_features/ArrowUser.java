@@ -77,8 +77,6 @@ public class ArrowUser extends FeaturesClass {
     public DataclassWithComplexFeatures favoriteStructComplex;
     public Feature<String> favoriteHasOneId;
     public MyTail favoriteHasOne;
-//    public Feature<String> leastFavoriteHasOneId;
-//    public MyTail leastFavoriteHasOne;
 
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> smallTransactions;
