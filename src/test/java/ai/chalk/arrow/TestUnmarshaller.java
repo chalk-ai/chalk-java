@@ -3,21 +3,16 @@ package ai.chalk.arrow;
 import ai.chalk.arrow.test_features.ArrowUser;
 import ai.chalk.arrow.test_features.NamedFeaturesClass;
 import ai.chalk.arrow.test_features.VersionedFeaturesClass;
-import ai.chalk.arrow.test_features._Dataclass6036;
-import ai.chalk.features.Feature;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
-import com.chalk.arrow.v1.Struct;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
-import org.apache.arrow.vector.complex.impl.UnionListWriter;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
-import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -389,38 +384,39 @@ public class TestUnmarshaller {
         var structComplexVector = StructVector.empty("arrow_user.favorite_struct_complex", allocator);
         structComplexVector.setValueCount(numRows);
         structComplexVector.allocateNew();
-        var structComplexWriter = structComplexVector.getWriter();
+        var outerStructWriter = structComplexVector.getWriter();
 
         long[] goodNumberValues = {1L, 2L, 3L};
-        var goodNumberWriter = structComplexWriter.bigInt("good_number");
+        var innerIntWriter = outerStructWriter.bigInt("good_number");
 
-        var goodDataclassWriter = structComplexWriter.struct("good_dataclass");
-        var goodDataclassNiceNumberWriter = goodDataclassWriter.bigInt("nice_number");
-        var goodDataclassNiceDatetimeWriter = goodDataclassWriter.timeStampSec("nice_datetime");
+        var innerStructWriter = outerStructWriter.struct("good_dataclass");
+        var innerStructIntWriter = innerStructWriter.bigInt("nice_number");
+        var innerStructDatetimeWriter = innerStructWriter.timeStampSec("nice_datetime");
 
-        var goodDataclassesWriter = structComplexWriter.list("good_dataclasses");
+        var innerStructStructListWriter = outerStructWriter.list("good_dataclasses");
 
         for (var i = 0; i < numRows; i++) {
-            structComplexWriter.start();
-            goodNumberWriter.writeBigInt(goodNumberValues[i]);
-            goodDataclassWriter.start();
-            goodDataclassNiceNumberWriter.writeBigInt(goodNumberValues[i]);
-            goodDataclassNiceDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
-            goodDataclassWriter.end();
+            outerStructWriter.start();
+            innerIntWriter.writeBigInt(goodNumberValues[i]);
+            innerStructWriter.start();
+            innerStructIntWriter.writeBigInt(goodNumberValues[i]);
+            innerStructDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
+            innerStructWriter.end();
 
-            goodDataclassesWriter.startList();
-            var nestedComplexStructWriter = goodDataclassesWriter.struct();
-            var nestedBigIntWriter = nestedComplexStructWriter.bigInt("nice_number");
-            var nestedTimestampWriter = nestedComplexStructWriter.timeStampSec("nice_datetime");
+            var innerInnerStructWriter = innerStructStructListWriter.struct();
+            var nestedBigIntWriter = innerInnerStructWriter.bigInt("nice_number");
+            var nestedTimestampWriter = innerInnerStructWriter.timeStampSec("nice_datetime");
+
+            innerStructStructListWriter.startList();
             for (var j = 0; j < 3; j++) {
                 var idx = i * 3 + j;
-                nestedComplexStructWriter.start();
+                innerInnerStructWriter.start();
                 nestedBigIntWriter.writeBigInt(nestedNiceNumberValues[idx]);
                 nestedTimestampWriter.writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
-                nestedComplexStructWriter.end();
+                innerInnerStructWriter.end();
             }
-            goodDataclassesWriter.endList();
-            structComplexWriter.end();
+            innerStructStructListWriter.endList();
+            outerStructWriter.end();
         }
         fieldVectors.add(structComplexVector);
 
@@ -890,27 +886,7 @@ public class TestUnmarshaller {
     @Test
     public void testUnmarshalScalar() throws Exception {
         Table table = getTestTableWithAllArrowTypes();
-
-        ArrowUser[] users = new ArrowUser[0];
-
-        var totalTime = 0L;
-        for (int i = 0; i < 1000; i++) {
-            var tableCopy = table.copy();
-            var start = System.currentTimeMillis();
-            users = Unmarshaller.unmarshalTable(tableCopy, ArrowUser.class);
-            totalTime += System.currentTimeMillis() - start;
-        }
-        System.out.println("Unmarshal time: " + totalTime + "ms");
-
-//        totalTime = 0L;
-//        for (int i = 0; i < 1000; i++) {
-//            var start = System.currentTimeMillis();
-//            users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
-//            totalTime += System.currentTimeMillis() - start;
-//        }
-//        System.out.println("Unmarshal time OLD: " + totalTime + "ms");
-
-
+        ArrowUser[] users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
         assert users.length == 3;
 
         assert users[0].favoriteBigInt.getValue() == 1L;
