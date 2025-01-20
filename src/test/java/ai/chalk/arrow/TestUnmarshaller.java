@@ -1256,7 +1256,7 @@ public class TestUnmarshaller {
 
         var socureScores = new ArrayList<Double>();
         for (var i = 0; i < 3000; i++) {
-            socureScores.add(123.0);
+            socureScores.add((double) i * 2);
         }
 
         var inputs = new HashMap<String, List<?>>();
@@ -1265,12 +1265,19 @@ public class TestUnmarshaller {
 
         var table = FeatherProcessor.inputsToTable(inputs, allocator);
 
-
-        var start = System.currentTimeMillis();
-        Unmarshaller.unmarshalTable(table, ArrowUser.class);
-        var end = System.currentTimeMillis();
-
-        System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
+        // For some reason first few runs are slower, possibly due to JIT plus
+        // CPU contention from test setup
+        for (int run = 0; run < 10; run++) {
+            Table tableCopy = table.copy();
+            var start = System.currentTimeMillis();
+            var users = Unmarshaller.unmarshalTable(tableCopy, ArrowUser.class);
+            var end = System.currentTimeMillis();
+            System.out.printf("Bulk unmarshal for %d rows took %d ms\n", userIds.size(), end - start);
+            assert users.length == userIds.size();
+            for (var i = 0; i < userIds.size(); i++) {
+                assert users[i].id.getValue().equals(userIds.get(i));
+                assert users[i].favoriteFloat8.getValue().equals(socureScores.get(i));
+            }
+        }
     }
-
 }
