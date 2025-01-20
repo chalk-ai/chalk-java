@@ -6,6 +6,7 @@ import ai.chalk.internal.Constants;
 import ai.chalk.internal.FieldMeta;
 import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
+import ai.chalk.internal.codegen.FieldSetter;
 import ai.chalk.internal.codegen.Initializer;
 import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.*;
@@ -30,6 +31,9 @@ public class Unmarshaller {
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
         try {
             var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
+            // This only unmarshals if has-many features gets returned in `result.groupsTables`
+            // When using gRPC, has-many results get returned directly as lists of structs in
+            // `result.scalarsTable`.
             unmarshalHasMany(result.getGroupsTables(), rootFeatureClasses);
             return rootFeatureClasses;
         } catch (Exception e) {
@@ -41,8 +45,10 @@ public class Unmarshaller {
         if (targets.length == 0) {
             return;
         }
+        Class<?> localClass = targets[0].getClass();
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
+        Initializer.buildNamespaceMemo(localClass, memo, new HashSet<>());
         for (var entry : tables.entrySet()) {
-            Class<?> localClass = targets[0].getClass();
             String fqn = entry.getKey();
             Table table = entry.getValue();
             Field hasManyField = getFieldFromFqn(targets[0].getClass(), fqn);
@@ -69,20 +75,28 @@ public class Unmarshaller {
                 grouped.get(v).add(obj);
             }
 
+            List<String> fqnParts = Arrays.asList(fqn.split("\\."));
             for (FeaturesClass target : targets) {
                 Field localField = getFieldFromFqn(localClass, localFqn);
                 Feature<?> localKeyFeature = (Feature<?>) localField.get(target);
                 if (localKeyFeature == null) {
                     throw new Exception("Error while grouping has-many result: local join key is null");
                 }
-                Field hmField = getFieldFromFqn(target.getClass(), fqn);
-                Feature<?> hmFieldFeature = (Feature<?>) hmField.get(target);
-                String v = localKeyFeature.getValue().toString();
-                if (grouped.containsKey(v)) {
-                    List<FeaturesClass> group = grouped.get(v);
-                    hmFieldFeature.setValue(group);
-                } else {
-                    hmFieldFeature.setValue(new ArrayList<>());
+
+                List<FieldSetter> setters = Initializer.initScoped(target, fqnParts, memo);
+                for (FieldSetter s : setters) {
+                    if (s.fieldMetas().size() != 1) {
+                        throw new Exception("Expected exactly one field for has-many field: " + fqn);
+                    }
+                    FieldMeta meta = s.fieldMetas().get(0);
+                    Feature<?> hmFeature = new Feature<>();
+                    meta.field().set(target, hmFeature);
+                    String joinKey = localKeyFeature.getValue().toString();
+                    if (grouped.containsKey(joinKey)) {
+                        hmFeature.setValue(grouped.get(joinKey));
+                    } else {
+                        hmFeature.setValue(new ArrayList<>());
+                    }
                 }
             }
         }
