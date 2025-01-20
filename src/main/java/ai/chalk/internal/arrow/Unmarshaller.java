@@ -402,9 +402,11 @@ public class Unmarshaller {
                 var childFields = structVector.getChildrenFromFields();
                 for (var childField : childFields) {
                     var childVector = structVector.getChild(childField.getName());
+                    // FIXME: Remove debug
+                    var childRes = getValueFromFieldVector(childVector, idx);
                     result.put(
                         childField.getName(),
-                        getValueFromFieldVector(childVector, idx)
+                        childRes
                     );
                 }
                 return result;

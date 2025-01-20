@@ -8,13 +8,16 @@ import ai.chalk.features.Feature;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
+import com.chalk.arrow.v1.Struct;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
 import org.apache.arrow.vector.complex.StructVector;
+import org.apache.arrow.vector.complex.impl.UnionListWriter;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -380,13 +383,9 @@ public class TestUnmarshaller {
         }
         fieldVectors.add(structVector);
 
-        /*
-            public class DataclassWithComplexFeatures extends StructFeaturesClass {
-                public Feature<Long> goodNumber;
-                public _Dataclass6036 goodDataclass;
-                public Feature<List<_Dataclass6036>> goodDataclasses;
-            }
-         */
+        var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
+        var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
+
         var structComplexVector = StructVector.empty("arrow_user.favorite_struct_complex", allocator);
         structComplexVector.setValueCount(numRows);
         structComplexVector.allocateNew();
@@ -399,7 +398,10 @@ public class TestUnmarshaller {
         var goodDataclassNiceNumberWriter = goodDataclassWriter.bigInt("nice_number");
         var goodDataclassNiceDatetimeWriter = goodDataclassWriter.timeStampSec("nice_datetime");
 
-        var goodDataclassesWriter = structComplexWriter.list();
+        structComplexWriter.list("good_dataclasses");
+        var childVector = (ListVector) structComplexVector.getChild("good_dataclasses");
+        var goodDataclassesWriter = childVector.getWriter();
+        goodDataclassesWriter.allocate();
 
         for (var i = 0; i < numRows; i++) {
             structComplexWriter.start();
@@ -408,8 +410,23 @@ public class TestUnmarshaller {
             goodDataclassNiceNumberWriter.writeBigInt(goodNumberValues[i]);
             goodDataclassNiceDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
             goodDataclassWriter.end();
+            goodDataclassesWriter.startList();
+            for (var j = 0; j < 3; j++) {
+                var idx = i * 3 + j;
+                var nestedComplexStructWriter = goodDataclassesWriter.struct();
+                var nestedBigIntWriter = nestedComplexStructWriter.bigInt("nice_number");
+                var nestedTimestampWriter = nestedComplexStructWriter.timeStampSec("nice_datetime");
+                nestedComplexStructWriter.start();
+                // TODO: Writing here does not seem to work. The resulting arrow table has this inner struct as empty.
+                //       On the assertion side, we skip asserting correctness on this inner list of structs.
+                nestedBigIntWriter.writeBigInt(nestedNiceNumberValues[idx]);
+                nestedTimestampWriter.writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
+                nestedComplexStructWriter.end();
+            }
+            goodDataclassesWriter.endList();
             structComplexWriter.end();
         }
+        childVector.setValueCount(3);
         fieldVectors.add(structComplexVector);
 
         var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
@@ -493,8 +510,6 @@ public class TestUnmarshaller {
         // Create a list of structs
         var structListVector = ListVector.empty("arrow_user.favorite_struct_list", allocator);
         var structListWriter = structListVector.getWriter();
-        var nestedNiceNumberValues = new long[]{1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L};
-        var nestedNiceTimestampSecValues = new int[]{1627689600, 1627776000, 1627862400, 1627862400, 1627689600, 1627776000, 1627776000, 1627862400, 1627689600};
         for (var i = 0; i < 3; i++) {
             structListWriter.startList();
             var nestedStructWriter = structListWriter.struct();
@@ -1082,7 +1097,6 @@ public class TestUnmarshaller {
         assert users[1].favoriteWindowed.bucket601s.getValue().equals(5.0);
         assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
 
-        // TODO: Support complex structs and lists
         assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         assert users[1].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime2);
         assert users[2].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime3);
@@ -1092,7 +1106,24 @@ public class TestUnmarshaller {
         assert users[2].favoriteStructComplex.goodDataclass.niceNumber.getValue().equals(3L);
 
         assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime1);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
 
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceNumber.getValue().equals(1L);
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(1).niceNumber.getValue().equals(2L);
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(2).niceNumber.getValue().equals(3L);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(0).niceNumber.getValue().equals(4L);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(1).niceNumber.getValue().equals(5L);
+        assert users[1].favoriteStructComplex.goodDataclasses.getValue().get(2).niceNumber.getValue().equals(6L);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(0).niceNumber.getValue().equals(7L);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(1).niceNumber.getValue().equals(8L);
+        assert users[2].favoriteStructComplex.goodDataclasses.getValue().get(2).niceNumber.getValue().equals(9L);
 
         // Nullable features start
         assert users[0].favoriteBigIntNullable.getValue() == 1L;
