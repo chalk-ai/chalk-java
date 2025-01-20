@@ -403,17 +403,17 @@ public class TestUnmarshaller {
             innerStructDatetimeWriter.writeTimeStampSec(niceDatetimeValues[i]);
             innerStructWriter.end();
 
-            var innerInnerStructWriter = innerStructStructListWriter.struct();
-            var nestedBigIntWriter = innerInnerStructWriter.bigInt("nice_number");
-            var nestedTimestampWriter = innerInnerStructWriter.timeStampSec("nice_datetime");
+            var nestedComplexStructWriter = innerStructStructListWriter.struct();
+            var nestedBigIntWriter = nestedComplexStructWriter.bigInt("nice_number");
+            var nestedTimestampWriter = nestedComplexStructWriter.timeStampSec("nice_datetime");
 
             innerStructStructListWriter.startList();
             for (var j = 0; j < 3; j++) {
                 var idx = i * 3 + j;
-                innerInnerStructWriter.start();
+                nestedComplexStructWriter.start();
                 nestedBigIntWriter.writeBigInt(nestedNiceNumberValues[idx]);
                 nestedTimestampWriter.writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
-                innerInnerStructWriter.end();
+                nestedComplexStructWriter.end();
             }
             innerStructStructListWriter.endList();
             outerStructWriter.end();

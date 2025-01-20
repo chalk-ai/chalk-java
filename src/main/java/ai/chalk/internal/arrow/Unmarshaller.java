@@ -486,12 +486,16 @@ public class Unmarshaller {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            List<Integer> indices = currMemo.resolvedFieldNameToIndices.get(key);
-            if (indices == null) {
-                throw new Exception("Field not found in memo: " + key);
+            List<FieldMeta> fieldMetas = currMemo.resolvedNameToFieldMeta.get(key);
+            if (fieldMetas == null) {
+                throw new Exception(String.format(
+                    "Field '%s' not found in memo for class '%s', found keys: %s",
+                    key,
+                    target.getSimpleName(),
+                    currMemo.resolvedNameToFieldMeta.keySet()
+                ));
             }
-            for (int idx : indices) {
-                FieldMeta meta = currMemo.fieldMetas.get(idx);
+            for (FieldMeta meta : fieldMetas) {
                 meta.field().set(result, primitiveToRich(value, meta, allMemo));
             }
         }

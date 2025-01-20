@@ -77,21 +77,19 @@ public class Initializer {
             );
         }
 
-        for (Map.Entry<String, List<Integer>> entry : nsMemo.resolvedFieldNameToIndices.entrySet()) {
+        for (Map.Entry<String, List<FieldMeta>> entry : nsMemo.resolvedNameToFieldMeta.entrySet()) {
             String resolvedName = entry.getKey();
-            List<Integer> indices = entry.getValue();
-            for (int i : indices) {
-                Field field = fields.get(i);
+            for (FieldMeta meta : entry.getValue()) {
                 String childFqn = namespace + "." + resolvedName;
                 var feature = Initializer.init(
-                    field,
+                    meta.field(),
                     childFqn,
                     featureMap,
                     new HashSet<>(),
                     memo,
-                    nsMemo.fieldMetas.get(i).isFeaturesBase()
+                    meta.isFeaturesBase()
                 );
-                field.set(fc, feature);
+                meta.field().set(fc, feature);
             }
         }
         return featureMap;
@@ -133,12 +131,10 @@ public class Initializer {
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
 
-            List<Field> fields = getFeaturesClassFields(castCls);
-            for (Map.Entry<String, List<Integer>> entry : memoItem.resolvedFieldNameToIndices.entrySet()) {
+            for (Map.Entry<String, List<FieldMeta>> entry : memoItem.resolvedNameToFieldMeta.entrySet()) {
                 String resolvedName = entry.getKey();
-                List<Integer> indices = entry.getValue();
-                for (int i : indices) {
-                    Field childField = fields.get(i);
+                for (FieldMeta meta : entry.getValue()) {
+                    Field childField = meta.field();
                     String childFqn;
                     if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
                         // For input features, struct field FQNs end at the last actual feature in the chain.
@@ -160,7 +156,7 @@ public class Initializer {
                             featureMap,
                             seenClassesInChain,
                             memo,
-                            memoItem.fieldMetas.get(i).isFeaturesBase()
+                            meta.isFeaturesBase()
                         )
                     );
                 }
@@ -217,23 +213,23 @@ public class Initializer {
             );
         }
 
-        List<Integer> indices = nsMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
-        if (indices == null) {
+        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMeta.get(fqnParts.get(1));
+        if (fieldMetas == null) {
             throw new Exception(
                     String.format(
                             "FQN '%s' not found in namespace memo for '%s', got '%s' instead",
                             fqnParts.get(1),
                             cls.getClass().getSimpleName(),
-                            nsMemo.resolvedFieldNameToIndices.keySet()
+                            nsMemo.resolvedNameToFieldMeta.keySet()
                     )
             );
         }
 
         List<FieldSetter> targetFields = new ArrayList<>();
-        for (int i : indices) {
+        for (FieldMeta meta: fieldMetas) {
             List<FieldSetter> res = initScopedInner(
                     cls,
-                    nsMemo.fieldMetas.get(i),
+                    meta,
                     fqnParts.subList(1, fqnParts.size()),
                     memo
             );
@@ -266,25 +262,20 @@ public class Initializer {
                             )
                     );
                 }
-                List<Integer> fieldIdxs = windowedMemo.resolvedFieldNameToIndices.get(fqnParts.get(0));
-                if (fieldIdxs == null) {
+                List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMeta.get(fqnParts.get(0));
+                if (fieldMetas == null) {
                     throw new Exception(
                             String.format(
                                     "FQN '%s' not found in windowed features memo for '%s', got '%s' instead",
                                     fqnParts.get(0),
                                     windowedObj.getClass().getSimpleName(),
-                                    windowedMemo.resolvedFieldNameToIndices.keySet()
+                                    windowedMemo.resolvedNameToFieldMeta.keySet()
                             )
                     );
                 }
-                List<FieldMeta> metas = new ArrayList<>();
-                for (int idx : fieldIdxs) {
-                    var windowedChildField = windowedMemo.fieldMetas.get(idx);
-                    metas.add(windowedChildField);
-                }
                 return List.of(new FieldSetter(
                     windowedObj,
-                    metas
+                    fieldMetas
                 ));
             } else {
                 return List.of(new FieldSetter(
@@ -310,12 +301,22 @@ public class Initializer {
             );
         }
 
-        List<Integer> indices = nextMemo.resolvedFieldNameToIndices.get(fqnParts.get(1));
+        List<FieldMeta> metas = nextMemo.resolvedNameToFieldMeta.get(fqnParts.get(1));
+        if (metas == null) {
+            throw new Exception(
+                    String.format(
+                            "FQN '%s' not found in features memo for '%s', got keys '%s' instead",
+                            fqnParts.get(1),
+                            fc.getClass().getSimpleName(),
+                            nextMemo.resolvedNameToFieldMeta.keySet()
+                    )
+            );
+        }
         List<FieldSetter> targetFields = new ArrayList<>();
-        for (int i : indices) {
+        for (FieldMeta nextMeta : metas) {
             List<FieldSetter> res = initScopedInner(
                 fc,
-                nextMemo.fieldMetas.get(i),
+                nextMeta,
                 fqnParts.subList(1, fqnParts.size()),
                 memo
             );
@@ -375,20 +376,19 @@ public class Initializer {
     public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) {
         for (Map.Entry<Class<?>, NamespaceMemoItem> entry : memo.entrySet()) {
             NamespaceMemoItem memoItem = entry.getValue();
-            for (String resolvedName : memoItem.resolvedFieldNameToIndices.keySet().stream().toList()) {
-                var indices = memoItem.resolvedFieldNameToIndices.get(resolvedName);
-                for (int i : indices) {
-                    FieldMeta meta = memoItem.fieldMetas.get(i);
+            for (String resolvedName : memoItem.resolvedNameToFieldMeta.keySet().stream().toList()) {
+                List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMeta.get(resolvedName);
+                for (FieldMeta meta : fieldMetas) {
                     if (meta.isWindowed()) {
                         var windowedMemo = memo.get(meta.field().getType());
-                        for (String childFieldName : windowedMemo.resolvedFieldNameToIndices.keySet()) {
+                        for (String childFieldName : windowedMemo.resolvedNameToFieldMeta.keySet()) {
                             // Map windowed child fields to the base windowed field
                             // i.e. "average_txns__3600__" -> "average_txns"
                             var newKey = resolvedName + childFieldName;
-                            if (!memoItem.resolvedFieldNameToIndices.containsKey(newKey)) {
-                                memoItem.resolvedFieldNameToIndices.put(newKey, new ArrayList<>());
+                            if (!memoItem.resolvedNameToFieldMeta.containsKey(newKey)) {
+                                memoItem.resolvedNameToFieldMeta.put(newKey, new ArrayList<>());
                             }
-                            memoItem.resolvedFieldNameToIndices.get(newKey).add(i);
+                            memoItem.resolvedNameToFieldMeta.get(newKey).add(meta);
                         }
 
                         // Prepend base windowed feature name to windowed child fields
@@ -402,11 +402,11 @@ public class Initializer {
                         //   "average_txns__3600__": [0],
                         //   "average_txns__2592000__": [1]
                         // }
-                        var prependedMap = new HashMap<String, List<Integer>>();
-                        for (Map.Entry<String, List<Integer>> innerEntry : windowedMemo.resolvedFieldNameToIndices.entrySet()) {
+                        var prependedMap = new HashMap<String, List<FieldMeta>>();
+                        for (Map.Entry<String, List<FieldMeta>> innerEntry : windowedMemo.resolvedNameToFieldMeta.entrySet()) {
                             prependedMap.put(resolvedName + innerEntry.getKey(), innerEntry.getValue());
                         }
-                        windowedMemo.resolvedFieldNameToIndices = prependedMap;
+                        windowedMemo.resolvedNameToFieldMeta = prependedMap;
                     }
                 }
             }
@@ -430,12 +430,6 @@ public class Initializer {
 
             var memoItem = new NamespaceMemoItem();
             for (int i = 0; i < fields.size(); i++) {
-                var resolvedName = getResolvedName(fields.get(i));
-                if (!memoItem.resolvedFieldNameToIndices.containsKey(resolvedName)) {
-                    memoItem.resolvedFieldNameToIndices.put(resolvedName, new ArrayList<>());
-                }
-                memoItem.resolvedFieldNameToIndices.get(resolvedName).add(i);
-
                 var fieldType = fields.get(i).getType();
                 boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
                 boolean isFeaturesClass = isFeaturesBase && FeaturesClass.class.isAssignableFrom(fieldType);
@@ -457,7 +451,12 @@ public class Initializer {
                     isFeature && List.class.isAssignableFrom(unwrapFeatureType(genericType)) ? underlyingClass : null,
                     isFeature
                 );
-                memoItem.fieldMetas.add(meta);
+
+                var resolvedName = getResolvedName(fields.get(i));
+                if (!memoItem.resolvedNameToFieldMeta.containsKey(resolvedName)) {
+                    memoItem.resolvedNameToFieldMeta.put(resolvedName, new ArrayList<>());
+                }
+                memoItem.resolvedNameToFieldMeta.get(resolvedName).add(meta);
 
                 buildNamespaceMemo(
                     underlyingClass,
