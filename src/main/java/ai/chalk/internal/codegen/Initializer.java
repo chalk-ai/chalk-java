@@ -28,7 +28,7 @@ public class Initializer {
             }
             var namespace = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, namespace, null, new HashSet<>(), memo, true);
+                var featureClass = Initializer.init(field, namespace, new HashSet<>(), memo);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -62,51 +62,13 @@ public class Initializer {
         }
     }
 
-    public static Map<String, List<Feature<?>>> initResult(FeaturesBase fc, Map<Class<?>, NamespaceMemoItem> memo, String namespace) throws Exception {
-        List<Field> fields = getFeaturesClassFields(fc.getClass());
-        Map<String, List<Feature<?>>> featureMap = new java.util.HashMap<>();
-
-        NamespaceMemoItem nsMemo = memo.get(fc.getClass());
-        if (nsMemo == null) {
-            throw new Exception(
-                String.format(
-                    "memo not found for namespace %s, found keys: %s",
-                    fc.getClass().getSimpleName(),
-                    memo.keySet()
-                )
-            );
-        }
-
-        for (Map.Entry<String, List<FieldMeta>> entry : nsMemo.resolvedNameToFieldMeta.entrySet()) {
-            String resolvedName = entry.getKey();
-            for (FieldMeta meta : entry.getValue()) {
-                String childFqn = namespace + "." + resolvedName;
-                var feature = Initializer.init(
-                    meta.field(),
-                    childFqn,
-                    featureMap,
-                    new HashSet<>(),
-                    memo,
-                    meta.isFeaturesBase()
-                );
-                meta.field().set(fc, feature);
-            }
-        }
-        return featureMap;
-    }
-
     public static Object init(
         Field f,
         String fqn,
-        Map<String, List<Feature<?>>> featureMap,
         Set<Class<?>> seenClassesInChain,
-        Map<Class<?>, NamespaceMemoItem> memo,
-        @Nullable Boolean isFieldFeaturesBaseSubclass
+        Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        if (isFieldFeaturesBaseSubclass == null) {
-            isFieldFeaturesBaseSubclass = FeaturesBase.class.isAssignableFrom(f.getType());
-        }
-        if (isFieldFeaturesBaseSubclass) {
+        if (FeaturesBase.class.isAssignableFrom(f.getType())) {
             // RECURSIVE CASE
             @SuppressWarnings("unchecked")
             var castCls = (Class<? extends FeaturesBase>) f.getType();
@@ -136,11 +98,10 @@ public class Initializer {
                 for (FieldMeta meta : entry.getValue()) {
                     Field childField = meta.field();
                     String childFqn;
-                    if (StructFeaturesClass.class.isAssignableFrom(f.getType()) && featureMap == null) {
-                        // For input features, struct field FQNs end at the last actual feature in the chain.
-                        // Only override the fqn for StructFeaturesClass children for initing features that are
-                        // used to specify query inputs. For features that are used to store query outputs, we
-                        // want a fake FQN (fake being struct fields should not have an FQN).
+                    if (StructFeaturesClass.class.isAssignableFrom(f.getType())) {
+                        // Fields of StructFeaturesClass are not real features.
+                        // The StructFeaturesClass itself is a real feature.
+                        // So we set the FQN of the child to the parent FQN.
                         childFqn = fqn;
                     } else if (WindowedFeaturesClass.class.isAssignableFrom(f.getType())) {
                         // "user.average_transactions" + "__3600__"
@@ -153,10 +114,8 @@ public class Initializer {
                         init(
                             childField,
                             childFqn,
-                            featureMap,
                             seenClassesInChain,
-                            memo,
-                            meta.isFeaturesBase()
+                            memo
                         )
                     );
                 }
@@ -167,16 +126,6 @@ public class Initializer {
             // BASE CASE
             Feature<?> feature = (Feature<?>) f.getType().getConstructor().newInstance();
             feature.setFqn(fqn);
-            if (featureMap != null) {
-                if (featureMap.containsKey(fqn)) {
-                    // Only versioned features should have multiple features with the same FQN
-                    // i.e. `Features.user.versioned_feature` and `Features.user.versioned_feature_v2`
-                    //       have the same FQN `user.versioned_feature@2` if the default version is 2.
-                    featureMap.get(fqn).add(feature);
-                } else {
-                    featureMap.put(fqn, new ArrayList<>(List.of(feature)));
-                }
-            }
             return feature;
         } else {
             throw new Exception("Unknown type found during call - expected `FeaturesClass` or `Feature`, found: " + f.getType());
