@@ -516,6 +516,29 @@ public class TestUnmarshaller {
         structListVector.setValueCount(3);
         fieldVectors.add(structListVector);
 
+        // create a list of list of structs
+        var structListListVector = ListVector.empty("arrow_user.favorite_struct_list_list", allocator);
+        var level1Writer = structListListVector.getWriter();
+        for (var i = 0; i < 3; i++) {
+            level1Writer.startList();
+            var level2Writer = level1Writer.list();
+            for (var j = 0; j < 3; j++) {
+                level2Writer.startList();
+                var level3Writer = level2Writer.struct();
+                for (var k = 0; k < 3; k++) {
+                    var idx = i * 3 + j;
+                    level3Writer.start();
+                    level3Writer.bigInt("nice_number").writeBigInt(nestedNiceNumberValues[idx]);
+                    level3Writer.timeStampSec("nice_datetime").writeTimeStampSec(nestedNiceTimestampSecValues[idx]);
+                    level3Writer.end();
+                }
+                level2Writer.endList();
+            }
+            level1Writer.endList();
+        }
+        structListListVector.setValueCount(3);
+        fieldVectors.add(structListListVector);
+
         var hasOneDoubleVector = new Float8Vector("arrow_user.favorite_has_one.length", allocator);
         hasOneDoubleVector.allocateNew();
         double[] hasOneDoubleValues = {1.0, 2.0, 3.0};
@@ -1032,6 +1055,10 @@ public class TestUnmarshaller {
         assert users[2].favoriteStructList.getValue().get(0).niceDatetime.getValue().equals(expectedDatetime2);
         assert users[2].favoriteStructList.getValue().get(1).niceDatetime.getValue().equals(expectedDatetime3);
         assert users[2].favoriteStructList.getValue().get(2).niceDatetime.getValue().equals(expectedDatetime1);
+
+        assert users[0].favoriteStructListList.getValue().get(0).get(0).niceNumber.getValue().equals(1L);
+        assert users[0].favoriteStructListList.getValue().get(0).get(1).niceNumber.getValue().equals(1L);
+        assert users[0].favoriteStructListList.getValue().get(0).get(2).niceNumber.getValue().equals(1L);
 
         assert users[0].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36900));
         assert users[1].favoriteDurationSec.getValue().equals(Duration.ofSeconds(36901));

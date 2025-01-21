@@ -460,10 +460,22 @@ public class Unmarshaller {
                     var map = (Map<String, Object>) item;
                     result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
                 }
-
             }
-            newFeature.setValue(result);
-            return newFeature;
+            if (explicitIsList) {
+                // Inner lists need to not be wrapped in a `Feature` object,
+                // i.e.
+                //      If we have
+                //
+                //          `Feature<List<List<MyDataclass>>>`
+                //
+                //      we want to avoid
+                //
+                //          building `Feature<List<Feature<List<MyDataclass>>>>`
+                return result;
+            } else {
+                newFeature.setValue(result);
+                return newFeature;
+            }
         } else if (meta.isFeature()) {
             Feature<?> feature = new Feature<>();
             feature.setValue(primitiveVal);
