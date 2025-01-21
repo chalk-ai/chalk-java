@@ -17,9 +17,6 @@ public record FieldMeta(
         Class<?> listUnderlyingClass,
         boolean isFeature
 ) {
-    public boolean isFeaturesBase() {
-        return featuresBase != null;
-    }
 
     public boolean isFeaturesClass() {
         return featuresClass != null;

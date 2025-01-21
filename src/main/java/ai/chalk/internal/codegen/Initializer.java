@@ -5,7 +5,6 @@ import ai.chalk.internal.FieldMeta;
 import ai.chalk.internal.NamespaceMemoItem;
 import ai.chalk.internal.Utils;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -28,7 +27,7 @@ public class Initializer {
             }
             var namespace = Utils.chalkpySnakeCase(field.getType().getSimpleName());
             try {
-                var featureClass = Initializer.init(field, namespace, new HashSet<>(), memo);
+                var featureClass = Initializer.initAll(field, namespace, new HashSet<>(), memo);
                 field.set(cls, featureClass);
             } catch (Exception e) {
                 return e;
@@ -62,7 +61,13 @@ public class Initializer {
         }
     }
 
-    public static Object init(
+
+    /*
+     * `initAll` initializes all `Feature` fields of a `FeaturesClass`
+     * so that they are ready to be used when specifying inputs to
+     * a query.
+     */
+    public static Object initAll(
         Field f,
         String fqn,
         Set<Class<?>> seenClassesInChain,
@@ -111,7 +116,7 @@ public class Initializer {
                     }
                     childField.set(
                         fc,
-                        init(
+                        initAll(
                             childField,
                             childFqn,
                             seenClassesInChain,
@@ -133,7 +138,7 @@ public class Initializer {
     }
 
     /*
-     * Unlike init that branches out and initializes all fields, initScoped only initializes
+     * Unlike `initAll` that branches out and initializes all fields, `initScoped` only initializes
      * the fields relevant to the specified FQN.
      */
     public static List<FieldSetter> initScoped(

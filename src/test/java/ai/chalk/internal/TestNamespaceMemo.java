@@ -15,7 +15,6 @@ public class TestNamespaceMemo {
         assert !meta.isList();
         assert !meta.isStruct();
         assert !meta.isWindowed();
-        assert !meta.isFeaturesBase();
         assert !meta.isFeaturesClass();
     }
 
@@ -24,7 +23,6 @@ public class TestNamespaceMemo {
         assert meta.isList();
         assert !meta.isStruct();
         assert !meta.isWindowed();
-        assert !meta.isFeaturesBase();
         assert !meta.isFeaturesClass();
     }
 
@@ -33,7 +31,6 @@ public class TestNamespaceMemo {
         assert !meta.isList();
         assert !meta.isStruct();
         assert meta.isWindowed();
-        assert meta.isFeaturesBase();
         assert !meta.isFeaturesClass();
     }
 
@@ -42,7 +39,6 @@ public class TestNamespaceMemo {
         assert !meta.isList();
         assert meta.isStruct();
         assert !meta.isWindowed();
-        assert meta.isFeaturesBase();
         assert !meta.isFeaturesClass();
     }
 
@@ -51,7 +47,6 @@ public class TestNamespaceMemo {
         assert !meta.isList();
         assert !meta.isStruct();
         assert !meta.isWindowed();
-        assert meta.isFeaturesBase();
         assert meta.isFeaturesClass();
     }
 
