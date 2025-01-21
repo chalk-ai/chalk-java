@@ -84,6 +84,9 @@ public class ArrowUser extends FeaturesClass {
 
     public _WindowedFeatures favoriteWindowed;
 
+    // Tests multiple windowed features with the same duration buckets
+    public _WindowedFeatures favoriteWindowedSameBuckets;
+
 
     // TODO: Add support for these data types
     //    public Feature<BigDecimal> favoriteDecimal;

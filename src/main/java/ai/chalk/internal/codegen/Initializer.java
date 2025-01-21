@@ -338,15 +338,17 @@ public class Initializer {
         }
     }
 
+
     /*
      * When unmarshalling, we want the memo to readily contain the most helpful information
      * for unmarshalling. Since `WindowedFeaturesClass` child fields are not hiearchically
      * structured the same way as actual windowed child features returned from Chalk,
      * we alter memo to mimic that original structure for straightforward unmarshalling.
      */
-    public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) {
+    public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) throws Exception {
         for (Map.Entry<Class<?>, NamespaceMemoItem> entry : memo.entrySet()) {
             NamespaceMemoItem memoItem = entry.getValue();
+            // Copying the keyset because we are editing the map in-place.
             var keySet = memoItem.resolvedNameToFieldMetas.keySet().toArray(new String[0]);
             for (String resolvedName : keySet) {
                 List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMetas.get(resolvedName);
@@ -371,19 +373,36 @@ public class Initializer {
                         // }
                         // ->
                         // {
+                        //   // Multiple distinct feature classes can use the same WindowedFeaturesClass
                         //   "average_txns__3600__": [field-meta-0],
-                        //   "average_txns__2592000__": [field-meta-1]
+                        //   "average_txns__2592000__": [field-meta-1],
+                        //   "some_other_feature_from_another_class__3600__": [field-meta-0],
+                        //   "some_other_feature_from_another_class__2592000__": [field-meta-1]
                         // }
-                        var prependedMap = new HashMap<String, List<FieldMeta>>();
-                        for (Map.Entry<String, List<FieldMeta>> innerEntry : windowedMemo.resolvedNameToFieldMetas.entrySet()) {
-                            prependedMap.put(resolvedName + innerEntry.getKey(), innerEntry.getValue());
+                        var oldMap = windowedMemo.resolvedNameToFieldMetas;
+                        var newMap = new HashMap<>(windowedMemo.resolvedNameToFieldMetas);
+                        for (Map.Entry<String, List<FieldMeta>> innerEntry : oldMap.entrySet()) {
+                            var prependedName = resolvedName + innerEntry.getKey();
+                            if (newMap.containsKey(prependedName)) {
+                                throw new Exception(
+                                    String.format(
+                                        "Prepended name '%s' already exists in memo, this means multiple distinct " +
+                                        "feature classes have the same name for a windowed feature with the same " +
+                                        "WindowedFeaturesClass type. This has yet to be supported in the unmarshaller.",
+                                        prependedName
+                                    )
+                                );
+                            }
+                            newMap.put(prependedName, innerEntry.getValue());
                         }
-                        windowedMemo.resolvedNameToFieldMetas = prependedMap;
+                        windowedMemo.resolvedNameToFieldMetas = newMap;
                     }
                 }
             }
         }
     }
+
+
 
     public static void buildNamespaceMemo(
             Class<?> cls,

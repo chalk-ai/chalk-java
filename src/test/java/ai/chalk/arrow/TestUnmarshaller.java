@@ -566,6 +566,22 @@ public class TestUnmarshaller {
         windowedDoubleVector__601s__.setValueCount(windowedDoubleValues__601s__.length);
         fieldVectors.add(windowedDoubleVector__601s__);
 
+        var windowedDoubleVector__1d__SameBuckets = new Float8Vector("arrow_user.favorite_windowed_same_buckets__86400__", allocator);
+        windowedDoubleVector__1d__SameBuckets.allocateNew();
+        for (int i = 0; i < windowedDoubleValues__1d__.length; i++) {
+            windowedDoubleVector__1d__SameBuckets.set(i, windowedDoubleValues__1d__[i]);
+        }
+        windowedDoubleVector__1d__SameBuckets.setValueCount(windowedDoubleValues__1d__.length);
+        fieldVectors.add(windowedDoubleVector__1d__SameBuckets);
+
+        var windowedDoubleVector__601s__SameBuckets = new Float8Vector("arrow_user.favorite_windowed_same_buckets__601__", allocator);
+        windowedDoubleVector__601s__SameBuckets.allocateNew();
+        for (int i = 0; i < windowedDoubleValues__601s__.length; i++) {
+            windowedDoubleVector__601s__SameBuckets.set(i, windowedDoubleValues__601s__[i]);
+        }
+        windowedDoubleVector__601s__SameBuckets.setValueCount(windowedDoubleValues__601s__.length);
+        fieldVectors.add(windowedDoubleVector__601s__SameBuckets);
+
         // Add nullable versions of the above vectors
 
         var bigIntVectorNullable = new BigIntVector("arrow_user.favorite_big_int_nullable", allocator);
@@ -1156,6 +1172,14 @@ public class TestUnmarshaller {
         assert users[0].favoriteWindowed.bucket601s.getValue().equals(4.0);
         assert users[1].favoriteWindowed.bucket601s.getValue().equals(5.0);
         assert users[2].favoriteWindowed.bucket601s.getValue().equals(6.0);
+
+        assert users[0].favoriteWindowedSameBuckets.bucket1d.getValue().equals(1.0);
+        assert users[1].favoriteWindowedSameBuckets.bucket1d.getValue().equals(2.0);
+        assert users[2].favoriteWindowedSameBuckets.bucket1d.getValue().equals(3.0);
+
+        assert users[0].favoriteWindowedSameBuckets.bucket601s.getValue().equals(4.0);
+        assert users[1].favoriteWindowedSameBuckets.bucket601s.getValue().equals(5.0);
+        assert users[2].favoriteWindowedSameBuckets.bucket601s.getValue().equals(6.0);
 
         assert users[0].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime1);
         assert users[1].favoriteStructComplex.goodDataclass.niceDatetime.getValue().equals(expectedDatetime2);
