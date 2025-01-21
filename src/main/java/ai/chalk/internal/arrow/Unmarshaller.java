@@ -153,7 +153,7 @@ public class Unmarshaller {
         boolean[] shouldSkipField,
         Map<String, LargeListVector> fqnToLargeListColumnCopy
     ) throws Exception {
-        List<T> result = new ArrayList<>();
+        List<T> result = new ArrayList<>(Math.toIntExact(table.getRowCount()));
         String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
@@ -164,11 +164,12 @@ public class Unmarshaller {
             } catch (Exception e) {
                 throw new Exception("Failed to initialize result object", e);
             }
-            for (var i = 0; i < table.getSchema().getFields().size(); i++) {
+            var fields = table.getSchema().getFields();
+            for (var i = 0; i < fields.size(); i++) {
                 if (shouldSkipField[i]) {
                     continue;
                 }
-                var arrowField = table.getSchema().getFields().get(i);
+                var arrowField = fields.get(i);
                 String fqn = arrowField.getName();
                 var featureList = featureMap.get(fqn);
                 if (featureList == null) {
