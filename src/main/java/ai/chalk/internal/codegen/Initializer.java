@@ -444,7 +444,7 @@ public class Initializer {
                 memoItem.resolvedNameToFieldMetas.get(resolvedName).add(meta);
 
                 buildNamespaceMemo(
-                        fieldType,
+                        meta.isList() ? meta.listUnderlyingClass() : fieldType,
                         classMemo,
                         visitedNamespaces
                 );

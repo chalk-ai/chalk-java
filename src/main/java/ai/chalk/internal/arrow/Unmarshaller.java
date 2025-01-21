@@ -146,7 +146,7 @@ public class Unmarshaller {
                     var fieldSetters = Initializer.initScoped(obj, fqnPartsList.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
-                            var richVal = primitiveToRich(value, fieldMeta, memo);
+                            var richVal = primitiveToRich(value, fieldMeta, memo, false);
                             fieldMeta.field().set(setter.parent(), richVal);
                         }
                     }
@@ -426,13 +426,15 @@ public class Unmarshaller {
      *      to
      *    MyFeaturesClass(feature1=Feature(null, 1), feature2=Feature(null, 2))
      *
+     * This function tries to avoid `X.class.isAssignableFrom` checks because that is expensive.
      */
     private static Object primitiveToRich(
         Object primitiveVal,
         FieldMeta meta,
-        Map<Class<?>, NamespaceMemoItem> allMemo
+        Map<Class<?>, NamespaceMemoItem> allMemo,
+        boolean explicitIsList
     ) throws Exception {
-        if (meta.isList()) {
+        if (meta.isList() || explicitIsList) {
             List<?> list = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
             Feature<?> newFeature = new Feature<>();
@@ -445,11 +447,18 @@ public class Unmarshaller {
 
             List<Object> result = new ArrayList<>();
             for (Object item : list) {
-                @SuppressWarnings("unchecked")
-                var cls = (Class<? extends FeaturesBase>) meta.listUnderlyingClass();
-                @SuppressWarnings("unchecked")
-                var map = (Map<String, Object>) item;
-                result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
+                if (item instanceof List) {
+                    // Unwrap nested lists
+                    result.add(primitiveToRich(item, meta, allMemo, true));
+                } else {
+                    // No more lists to unwrap, element is a struct or features class
+                    @SuppressWarnings("unchecked")
+                    var cls = (Class<? extends FeaturesBase>) meta.listUnderlyingClass();
+                    @SuppressWarnings("unchecked")
+                    var map = (Map<String, Object>) item;
+                    result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
+                }
+
             }
             newFeature.setValue(result);
             return newFeature;
@@ -496,7 +505,7 @@ public class Unmarshaller {
                 ));
             }
             for (FieldMeta meta : fieldMetas) {
-                meta.field().set(result, primitiveToRich(entry.getValue(), meta, allMemo));
+                meta.field().set(result, primitiveToRich(entry.getValue(), meta, allMemo, false));
             }
         }
         return result;
