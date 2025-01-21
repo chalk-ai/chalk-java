@@ -167,6 +167,9 @@ public class Unmarshaller {
 
 
     public static Object getValueFromFieldVector(FieldVector vector, int idx) throws Exception {
+        if (vector.isNull(idx)) {
+            return null;
+        }
         ArrowType arrowType = vector.getField().getType();
         switch (arrowType.getTypeID()) {
             case Int -> {
@@ -174,27 +177,15 @@ public class Unmarshaller {
                 var bitWidth = intType.getBitWidth();
                 if (bitWidth == 8) {
                     TinyIntVector tinyIntVector = (TinyIntVector) vector;
-                    if (tinyIntVector.isNull(idx)) {
-                        return null;
-                    }
                     return tinyIntVector.getObject(idx);
                 } else if (bitWidth == 16) {
                     SmallIntVector smallIntVector = (SmallIntVector) vector;
-                    if (smallIntVector.isNull(idx)) {
-                        return null;
-                    }
                     return smallIntVector.getObject(idx);
                 } else if (bitWidth == 32) {
                     IntVector intVector = (IntVector) vector;
-                    if (intVector.isNull(idx)) {
-                        return null;
-                    }
                     return intVector.getObject(idx);
                 } else if (bitWidth == 64) {
                     BigIntVector bigIntVector = (BigIntVector) vector;
-                    if (bigIntVector.isNull(idx)) {
-                        return null;
-                    }
                     return bigIntVector.getObject(idx);
                 } else {
                     throw new Exception("Unsupported bitwidth found while converting from Arrow to Java: " + bitWidth);
@@ -205,15 +196,9 @@ public class Unmarshaller {
                 var precision = floatingPointType.getPrecision();
                 if (precision == FloatingPointPrecision.SINGLE) {
                     Float4Vector float4Vector = (Float4Vector) vector;
-                    if (float4Vector.isNull(idx)) {
-                        return null;
-                    }
                     return float4Vector.getObject(idx);
                 } else if (precision == FloatingPointPrecision.DOUBLE) {
                     Float8Vector float8Vector = (Float8Vector) vector;
-                    if (float8Vector.isNull(idx)) {
-                        return null;
-                    }
                     return float8Vector.getObject(idx);
                 } else {
                     throw new Exception("Unsupported precision found while converting from Arrow to Java: " + precision);
@@ -225,31 +210,19 @@ public class Unmarshaller {
             }
             case Utf8 -> {
                 VarCharVector varCharVector = (VarCharVector) vector;
-                if (varCharVector.isNull(idx)) {
-                    return null;
-                }
                 return new String(varCharVector.get(idx));
             }
             case LargeUtf8 -> {
                 LargeVarCharVector largeVarCharVector = (LargeVarCharVector) vector;
-                if (largeVarCharVector.isNull(idx)) {
-                    return null;
-                }
                 return new String(largeVarCharVector.get(idx));
             }
             case Date -> {
                 var dateType = (ArrowType.Date) arrowType;
                 if (dateType.getUnit() == DateUnit.DAY) {
                     DateDayVector dateDayVector = (DateDayVector) vector;
-                    if (dateDayVector.isNull(idx)) {
-                        return null;
-                    }
                     return LocalDate.ofEpochDay(dateDayVector.getObject(idx));
                 } else if (dateType.getUnit() == DateUnit.MILLISECOND) {
                     DateMilliVector dateMilliVector = (DateMilliVector) vector;
-                    if (dateMilliVector.isNull(idx)) {
-                        return null;
-                    }
                     return dateMilliVector.getObject(idx).toLocalDate();
                 } else {
                     throw new Exception("Unsupported date unit found while converting from Arrow to Java: " + dateType.getUnit());
@@ -267,24 +240,15 @@ public class Unmarshaller {
                     case SECOND -> {
                         if (hasTimezone) {
                             TimeStampSecTZVector timeStampSecTZVector = (TimeStampSecTZVector) vector;
-                            if (timeStampSecTZVector.isNull(idx)) {
-                                return null;
-                            }
                             return Instant.ofEpochSecond(timeStampSecTZVector.get(idx)).atZone(zoneId);
                         } else {
                             TimeStampSecVector timeStampSecVector = (TimeStampSecVector) vector;
-                            if (timeStampSecVector.isNull(idx)) {
-                                return null;
-                            }
                             return Instant.ofEpochSecond(timeStampSecVector.get(idx)).atZone(ZoneOffset.UTC).toLocalDateTime();
                         }
                     }
                     case MILLISECOND -> {
                         if (hasTimezone) {
                             TimeStampMilliTZVector timeStampMilliTZVector = (TimeStampMilliTZVector) vector;
-                            if (timeStampMilliTZVector.isNull(idx)) {
-                                return null;
-                            }
                             return Instant.ofEpochMilli(timeStampMilliTZVector.getObject(idx)).atZone(zoneId);
                         } else {
                             TimeStampMilliVector timeStampMilliVector = (TimeStampMilliVector) vector;
@@ -294,9 +258,6 @@ public class Unmarshaller {
                     case MICROSECOND -> {
                         if (hasTimezone) {
                             TimeStampMicroTZVector timeStampMicroTZVector = (TimeStampMicroTZVector) vector;
-                            if (timeStampMicroTZVector.isNull(idx)) {
-                                return null;
-                            }
                             long epochSecondsTruncated = timeStampMicroTZVector.getObject(idx) / 1_000_000;
                             long epochNanoRemainder = (timeStampMicroTZVector.getObject(idx) % 1_000_000) * 1_000;
                             return Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId);
@@ -308,9 +269,6 @@ public class Unmarshaller {
                     case NANOSECOND -> {
                         if (hasTimezone) {
                             TimeStampNanoTZVector timeStampNanoTZVector = (TimeStampNanoTZVector) vector;
-                            if (timeStampNanoTZVector.isNull(idx)) {
-                                return null;
-                            }
                             long epochSecondsTruncated = timeStampNanoTZVector.getObject(idx) / 1_000_000_000;
                             long epochNanoRemainder = timeStampNanoTZVector.getObject(idx) % 1_000_000_000;
                             return Instant.ofEpochSecond(epochSecondsTruncated, epochNanoRemainder).atZone(zoneId);
@@ -326,9 +284,6 @@ public class Unmarshaller {
             }
             case List -> {
                 ListVector listVector = (ListVector) vector;
-                if (listVector.isNull(idx)) {
-                    return null;
-                }
                 int offsetSize = 4;  // 4 bytes
                 int startIdx = listVector.getOffsetBuffer().getInt((long) idx * offsetSize);
                 int endIdx = listVector.getOffsetBuffer().getInt((long) (idx + 1) * offsetSize);
@@ -340,9 +295,6 @@ public class Unmarshaller {
             }
             case LargeList -> {
                 LargeListVector largeListVector = (LargeListVector) vector;
-                if (largeListVector.isNull(idx)) {
-                    return null;
-                }
                 int offsetSize = 8;  // 8 bytes
                 long startIdx = largeListVector.getOffsetBuffer().getLong((long) idx * offsetSize);
                 long endIdx = largeListVector.getOffsetBuffer().getLong((long) (idx + 1) * offsetSize);
@@ -354,9 +306,6 @@ public class Unmarshaller {
             }
             case Duration -> {
                 DurationVector durationVector = (DurationVector) vector;
-                if (durationVector.isNull(idx)) {
-                    return null;
-                }
                 return Duration.ofSeconds(durationVector.getObject(idx).getSeconds(), durationVector.getObject(idx).getNano());
             }
             case Time -> {
@@ -364,30 +313,18 @@ public class Unmarshaller {
                 switch (timeType.getUnit()) {
                     case SECOND -> {
                         TimeSecVector timeSecVector = (TimeSecVector) vector;
-                        if (timeSecVector.isNull(idx)) {
-                            return null;
-                        }
                         return LocalTime.ofSecondOfDay(timeSecVector.getObject(idx));
                     }
                     case MILLISECOND -> {
                         TimeMilliVector timeMilliVector = (TimeMilliVector) vector;
-                        if (timeMilliVector.isNull(idx)) {
-                            return null;
-                        }
                         return timeMilliVector.getObject(idx).toLocalTime();
                     }
                     case MICROSECOND -> {
                         TimeMicroVector timeMicroVector = (TimeMicroVector) vector;
-                        if (timeMicroVector.isNull(idx)) {
-                            return null;
-                        }
                         return LocalTime.ofNanoOfDay(timeMicroVector.getObject(idx) * 1_000L);
                     }
                     case NANOSECOND -> {
                         TimeNanoVector timeNanoVector = (TimeNanoVector) vector;
-                        if (timeNanoVector.isNull(idx)) {
-                            return null;
-                        }
                         return LocalTime.ofNanoOfDay(timeNanoVector.getObject(idx));
                     }
                     default -> {
