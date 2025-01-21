@@ -886,7 +886,16 @@ public class TestUnmarshaller {
     @Test
     public void testUnmarshalScalar() throws Exception {
         Table table = getTestTableWithAllArrowTypes();
-        ArrowUser[] users = Unmarshaller.unmarshalTable(table, ArrowUser.class);
+        ArrowUser[] users = new ArrowUser[0];
+        var total = 0L;
+        for (int i = 0; i < 1000; i++){
+            var tableCopy = table.copy();
+            var start = System.currentTimeMillis();
+            users = Unmarshaller.unmarshalTable(tableCopy, ArrowUser.class);
+            var end = System.currentTimeMillis();
+            total += end - start;
+        }
+        System.out.println("Total time: " + total + " ms");
         assert users.length == 3;
 
         assert users[0].favoriteBigInt.getValue() == 1L;

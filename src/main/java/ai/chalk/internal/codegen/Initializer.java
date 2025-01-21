@@ -98,7 +98,7 @@ public class Initializer {
             FeaturesBase fc = (FeaturesBase) f.getType().getConstructor().newInstance();
             fc.setFqn(fqn);
 
-            for (Map.Entry<String, List<FieldMeta>> entry : memoItem.resolvedNameToFieldMeta.entrySet()) {
+            for (Map.Entry<String, List<FieldMeta>> entry : memoItem.resolvedNameToFieldMetas.entrySet()) {
                 String resolvedName = entry.getKey();
                 for (FieldMeta meta : entry.getValue()) {
                     Field childField = meta.field();
@@ -167,14 +167,14 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMeta.get(fqnParts.get(1));
+        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMetas.get(fqnParts.get(1));
         if (fieldMetas == null) {
             throw new Exception(
                     String.format(
-                            "FQN '%s' not found in namespace memo for '%s', got '%s' instead",
+                            "Field '%s' not found in namespace memo for '%s', got '%s' instead",
                             fqnParts.get(1),
                             cls.getClass().getSimpleName(),
-                            nsMemo.resolvedNameToFieldMeta.keySet()
+                            nsMemo.resolvedNameToFieldMetas.keySet()
                     )
             );
         }
@@ -216,14 +216,14 @@ public class Initializer {
                             )
                     );
                 }
-                List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMeta.get(fqnParts.get(0));
+                List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMetas.get(fqnParts.get(0));
                 if (fieldMetas == null) {
                     throw new Exception(
                             String.format(
-                                    "FQN '%s' not found in windowed features memo for '%s', got '%s' instead",
+                                    "Field '%s' not found in windowed features memo for '%s', got '%s' instead",
                                     fqnParts.get(0),
                                     windowedObj.getClass().getSimpleName(),
-                                    windowedMemo.resolvedNameToFieldMeta.keySet()
+                                    windowedMemo.resolvedNameToFieldMetas.keySet()
                             )
                     );
                 }
@@ -239,9 +239,9 @@ public class Initializer {
             }
         }
 
-        FeaturesBase fc = (FeaturesBase) meta.field().get(parent);
+        var fc = meta.field().get(parent);
         if (fc == null) {
-            fc = (FeaturesBase) meta.field().getType().getConstructor().newInstance();
+            fc = meta.field().getType().getConstructor().newInstance();
             meta.field().set(parent, fc);
         }
         var nextMemo = memo.get(fc.getClass());
@@ -255,14 +255,14 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> metas = nextMemo.resolvedNameToFieldMeta.get(fqnParts.get(1));
+        List<FieldMeta> metas = nextMemo.resolvedNameToFieldMetas.get(fqnParts.get(1));
         if (metas == null) {
             throw new Exception(
                     String.format(
                             "FQN '%s' not found in features memo for '%s', got keys '%s' instead",
                             fqnParts.get(1),
                             fc.getClass().getSimpleName(),
-                            nextMemo.resolvedNameToFieldMeta.keySet()
+                            nextMemo.resolvedNameToFieldMetas.keySet()
                     )
             );
         }
@@ -280,6 +280,13 @@ public class Initializer {
         return targetFields;
     }
 
+
+    /*
+     * Unwraps
+     *     - `Feature<List<T>>` to `T`
+     *     - `Feature<T>` to `T`
+     *     - `List<T>` to `T`
+     */
     public static Class<?> getUnderlyingClass(Type typ) {
         if (typ instanceof ParameterizedType parametrizedTyp) {
             Type rawTyp = parametrizedTyp.getRawType();
@@ -305,6 +312,10 @@ public class Initializer {
         }
     }
 
+
+    /*
+     * Unwraps `Feature<List<T>>` to `List<T>`.
+     */
     public static Class<?> unwrapFeatureType(Type typ) {
         if (typ instanceof ParameterizedType parametrizedTyp) {
             Type rawTyp = parametrizedTyp.getRawType();
@@ -327,40 +338,46 @@ public class Initializer {
         }
     }
 
+    /*
+     * When unmarshalling, we want the memo to readily contain the most helpful information
+     * for unmarshalling. Since `WindowedFeaturesClass` child fields are not hiearchically
+     * structured the same way as actual windowed child features returned from Chalk,
+     * we alter memo to mimic that original structure for straightforward unmarshalling.
+     */
     public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) {
         for (Map.Entry<Class<?>, NamespaceMemoItem> entry : memo.entrySet()) {
             NamespaceMemoItem memoItem = entry.getValue();
-            for (String resolvedName : memoItem.resolvedNameToFieldMeta.keySet().stream().toList()) {
-                List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMeta.get(resolvedName);
+            for (String resolvedName : memoItem.resolvedNameToFieldMetas.keySet().stream().toList()) {
+                List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMetas.get(resolvedName);
                 for (FieldMeta meta : fieldMetas) {
                     if (meta.isWindowed()) {
                         var windowedMemo = memo.get(meta.field().getType());
-                        for (String childFieldName : windowedMemo.resolvedNameToFieldMeta.keySet()) {
+                        for (String childFieldName : windowedMemo.resolvedNameToFieldMetas.keySet()) {
                             // Map windowed child fields to the base windowed field
                             // i.e. "average_txns__3600__" -> "average_txns"
                             var newKey = resolvedName + childFieldName;
-                            if (!memoItem.resolvedNameToFieldMeta.containsKey(newKey)) {
-                                memoItem.resolvedNameToFieldMeta.put(newKey, new ArrayList<>());
+                            if (!memoItem.resolvedNameToFieldMetas.containsKey(newKey)) {
+                                memoItem.resolvedNameToFieldMetas.put(newKey, new ArrayList<>());
                             }
-                            memoItem.resolvedNameToFieldMeta.get(newKey).add(meta);
+                            memoItem.resolvedNameToFieldMetas.get(newKey).add(meta);
                         }
 
                         // Prepend base windowed feature name to windowed child fields
                         // i.e.
                         // {
-                        //   "__3600__": [0],
-                        //   "__2592000__": [1]
+                        //   "__3600__": [field-meta-0],
+                        //   "__2592000__": [field-meta-1]
                         // }
                         // ->
                         // {
-                        //   "average_txns__3600__": [0],
-                        //   "average_txns__2592000__": [1]
+                        //   "average_txns__3600__": [field-meta-0],
+                        //   "average_txns__2592000__": [field-meta-1]
                         // }
                         var prependedMap = new HashMap<String, List<FieldMeta>>();
-                        for (Map.Entry<String, List<FieldMeta>> innerEntry : windowedMemo.resolvedNameToFieldMeta.entrySet()) {
+                        for (Map.Entry<String, List<FieldMeta>> innerEntry : windowedMemo.resolvedNameToFieldMetas.entrySet()) {
                             prependedMap.put(resolvedName + innerEntry.getKey(), innerEntry.getValue());
                         }
-                        windowedMemo.resolvedNameToFieldMeta = prependedMap;
+                        windowedMemo.resolvedNameToFieldMetas = prependedMap;
                     }
                 }
             }
@@ -383,13 +400,17 @@ public class Initializer {
             visitedNamespaces.add(namespace);
 
             var memoItem = new NamespaceMemoItem();
-            for (int i = 0; i < fields.size(); i++) {
-                var fieldType = fields.get(i).getType();
+            for (Field field : fields) {
+                var fieldType = field.getType();
+                // Must use `getGenericType` here to get a type that contains the underlying class
+                var genericType = field.getGenericType();
+
                 boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
                 boolean isFeaturesClass = false;
                 boolean isStructFeaturesClass = false;
                 boolean isWindowedFeaturesClass = false;
                 boolean isFeature = false;
+                boolean isList = false;
                 if (isFeaturesBase) {
                     if (FeaturesClass.class.isAssignableFrom(fieldType)) {
                         isFeaturesClass = true;
@@ -400,33 +421,32 @@ public class Initializer {
                     }
                 } else {
                     isFeature = Feature.class.isAssignableFrom(fieldType);
+                    if (isFeature) {
+                        isList = List.class.isAssignableFrom(unwrapFeatureType(genericType));
+                    }
                 }
-
-                // Must use `getGenericType` here to get a type that contains the underlying class
-                var genericType = fields.get(i).getGenericType();
-                Class<?> underlyingClass = getUnderlyingClass(genericType);
 
                 @SuppressWarnings("unchecked")
                 FieldMeta meta = new FieldMeta(
-                    fields.get(i),
-                    isFeaturesBase ? (Class<? extends FeaturesBase>) fieldType : null,
-                    isFeaturesClass ? (Class<? extends FeaturesClass>) fieldType : null,
-                    isStructFeaturesClass ? (Class<? extends StructFeaturesClass>) fieldType : null,
-                    isWindowedFeaturesClass ? (Class<? extends WindowedFeaturesClass>) fieldType : null,
-                    isFeature && List.class.isAssignableFrom(unwrapFeatureType(genericType)) ? underlyingClass : null,
-                    isFeature
+                        field,
+                        isFeaturesBase ? (Class<? extends FeaturesBase>) fieldType : null,
+                        isFeaturesClass ? (Class<? extends FeaturesClass>) fieldType : null,
+                        isStructFeaturesClass ? (Class<? extends StructFeaturesClass>) fieldType : null,
+                        isWindowedFeaturesClass ? (Class<? extends WindowedFeaturesClass>) fieldType : null,
+                        isList ? getUnderlyingClass(genericType) : null,
+                        isFeature
                 );
 
-                var resolvedName = getResolvedName(fields.get(i));
-                if (!memoItem.resolvedNameToFieldMeta.containsKey(resolvedName)) {
-                    memoItem.resolvedNameToFieldMeta.put(resolvedName, new ArrayList<>());
+                var resolvedName = getResolvedName(field);
+                if (!memoItem.resolvedNameToFieldMetas.containsKey(resolvedName)) {
+                    memoItem.resolvedNameToFieldMetas.put(resolvedName, new ArrayList<>());
                 }
-                memoItem.resolvedNameToFieldMeta.get(resolvedName).add(meta);
+                memoItem.resolvedNameToFieldMetas.get(resolvedName).add(meta);
 
                 buildNamespaceMemo(
-                    underlyingClass,
-                    classMemo,
-                    visitedNamespaces
+                        fieldType,
+                        classMemo,
+                        visitedNamespaces
                 );
             }
             classMemo.put(cls, memoItem);

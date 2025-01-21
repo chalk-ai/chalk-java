@@ -122,16 +122,16 @@ public class Unmarshaller {
         var constructor = target.getDeclaredConstructor();
 
         // Cache repeated work
-        List<List<String>> fieldIdxToFqnParts = new ArrayList<>();
+        List<List<String>> fqnPartsList = new ArrayList<>();
         for (int j = 0; j < table.getSchema().getFields().size(); j++) {
             var arrowField = table.getSchema().getFields().get(j);
             String fqn = arrowField.getName();
-            fieldIdxToFqnParts.add(Arrays.asList(fqn.split("\\.")));
+            fqnPartsList.add(Arrays.asList(fqn.split("\\.")));
         }
-        List<Boolean> fieldIdxToSkip = new ArrayList<>();
+        List<Boolean> shouldSkip = new ArrayList<>();
         for (int j = 0; j < table.getSchema().getFields().size(); j++) {
             var arrowField = table.getSchema().getFields().get(j);
-            fieldIdxToSkip.add(shouldSkipField(arrowField.getName()));
+            shouldSkip.add(shouldSkipField(arrowField.getName()));
         }
 
         try (var root = table.toVectorSchemaRoot()) {
@@ -139,11 +139,11 @@ public class Unmarshaller {
                 T obj = constructor.newInstance();
                 result.add(obj);
                 for (var col = 0; col < root.getSchema().getFields().size(); col++) {
-                    if (fieldIdxToSkip.get(col)) {
+                    if (shouldSkip.get(col)) {
                         continue;
                     }
                     Object value = getValueFromFieldVector(root.getVector(col), row);
-                    var fieldSetters = Initializer.initScoped(obj, fieldIdxToFqnParts.get(col), memo);
+                    var fieldSetters = Initializer.initScoped(obj, fqnPartsList.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
                             var richVal = primitiveToRich(value, fieldMeta, memo);
@@ -332,9 +332,8 @@ public class Unmarshaller {
                 int offsetSize = 4;  // 4 bytes
                 int startIdx = listVector.getOffsetBuffer().getInt((long) idx * offsetSize);
                 int endIdx = listVector.getOffsetBuffer().getInt((long) (idx + 1) * offsetSize);
-                var dataVector = listVector.getDataVector();
                 return getInnerList(
-                    dataVector,
+                    listVector.getDataVector(),
                     startIdx,
                     endIdx
                 );
@@ -401,12 +400,12 @@ public class Unmarshaller {
                 StructVector structVector = (StructVector) vector;
                 var childFields = structVector.getChildrenFromFields();
                 for (var childField : childFields) {
-                    var childVector = structVector.getChild(childField.getName());
-                    // FIXME: Remove debug
-                    var childRes = getValueFromFieldVector(childVector, idx);
                     result.put(
                         childField.getName(),
-                        childRes
+                        getValueFromFieldVector(
+                            structVector.getChild(childField.getName()),
+                            idx
+                        )
                     );
                 }
                 return result;
@@ -418,14 +417,15 @@ public class Unmarshaller {
     }
 
     /**
-     * Recursively converts hash maps to codegen'd structs.
-     *  e.g.
+     * Recursively converts hash maps to codegen'd classes, and scalar features to `Feature` objects.
+     *  i.e.
      *    {
      *      "feature1": 1,
      *      "feature2": 2,
      *    }
-     *    to
-     *    MyFeaturesClass(feature1=1, feature2=2)
+     *      to
+     *    MyFeaturesClass(feature1=Feature(null, 1), feature2=Feature(null, 2))
+     *
      */
     private static Object primitiveToRich(
         Object primitiveVal,
@@ -447,7 +447,9 @@ public class Unmarshaller {
             for (Object item : list) {
                 @SuppressWarnings("unchecked")
                 var cls = (Class<? extends FeaturesBase>) meta.listUnderlyingClass();
-                result.add(primitiveToRichClass(item, cls, currMemo, allMemo));
+                @SuppressWarnings("unchecked")
+                var map = (Map<String, Object>) item;
+                result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
             }
             newFeature.setValue(result);
             return newFeature;
@@ -466,37 +468,35 @@ public class Unmarshaller {
                         )
                 );
             }
-            return primitiveToRichClass(primitiveVal, meta.featuresBase(), currMemo, allMemo);
+            @SuppressWarnings("unchecked")
+            var map = (Map<String, Object>) primitiveVal;
+            return convertMapToFeaturesClass(map, meta.featuresBase(), currMemo, allMemo);
         } else {
             throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
         }
     }
 
-    private static <T extends FeaturesBase> T primitiveToRichClass(
-        Object primitiveVal,
+    private static <T extends FeaturesBase> T convertMapToFeaturesClass(
+        Map<String, Object> map,
         Class<? extends FeaturesBase> target,
         NamespaceMemoItem currMemo,
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
         @SuppressWarnings("unchecked")
-        var map = (Map<String, Object>) primitiveVal;
-
-        @SuppressWarnings("unchecked")
         T result = (T) target.getDeclaredConstructor().newInstance();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
-            Object value = entry.getValue();
-            List<FieldMeta> fieldMetas = currMemo.resolvedNameToFieldMeta.get(key);
+            List<FieldMeta> fieldMetas = currMemo.resolvedNameToFieldMetas.get(key);
             if (fieldMetas == null) {
                 throw new Exception(String.format(
                     "Field '%s' not found in memo for class '%s', found keys: %s",
                     key,
                     target.getSimpleName(),
-                    currMemo.resolvedNameToFieldMeta.keySet()
+                    currMemo.resolvedNameToFieldMetas.keySet()
                 ));
             }
             for (FieldMeta meta : fieldMetas) {
-                meta.field().set(result, primitiveToRich(value, meta, allMemo));
+                meta.field().set(result, primitiveToRich(entry.getValue(), meta, allMemo));
             }
         }
         return result;
