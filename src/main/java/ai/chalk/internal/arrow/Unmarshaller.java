@@ -126,7 +126,7 @@ public class Unmarshaller {
             Table table,
             Class<T> target,
             Map<Class<?>, NamespaceMemoItem> memo,
-            List<Boolean> shouldSkipField
+            boolean[] shouldSkipField
     ) throws Exception {
         // Exists to work around `row.getLargeList` not being available.
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
@@ -150,7 +150,7 @@ public class Unmarshaller {
         Table table,
         Class<T> target,
         Map<Class<?>, NamespaceMemoItem> memo,
-        List<Boolean> shouldSkipField,
+        boolean[] shouldSkipField,
         Map<String, LargeListVector> fqnToLargeListColumnCopy
     ) throws Exception {
         List<T> result = new ArrayList<>();
@@ -165,7 +165,7 @@ public class Unmarshaller {
                 throw new Exception("Failed to initialize result object", e);
             }
             for (var i = 0; i < table.getSchema().getFields().size(); i++) {
-                if (shouldSkipField.get(i)) {
+                if (shouldSkipField[i]) {
                     continue;
                 }
                 var arrowField = table.getSchema().getFields().get(i);
@@ -495,11 +495,10 @@ public class Unmarshaller {
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
-        var shouldSkipField = new ArrayList<Boolean>();
         var fields = table.getSchema().getFields();
-        for (org.apache.arrow.vector.types.pojo.Field field : fields) {
-            String fqn = field.getName();
-            shouldSkipField.add(shouldSkipField(fqn));
+        var shouldSkip = new boolean[fields.size()];
+        for (var i = 0; i < fields.size(); i++) {
+            shouldSkip[i] = shouldSkipField(fields.get(i).getName());
         }
 
         int effectiveChunkSize;
@@ -521,7 +520,7 @@ public class Unmarshaller {
                         chunk,
                         target,
                         memo,
-                        shouldSkipField
+                        shouldSkip
                     );
                 } catch (Exception e) {
                     throw new RuntimeException(e);
