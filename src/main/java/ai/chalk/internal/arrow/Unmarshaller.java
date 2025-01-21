@@ -22,11 +22,42 @@ import org.apache.arrow.vector.util.Text;
 import java.lang.reflect.Field;
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 import static ai.chalk.internal.Utils.*;
 import static org.apache.arrow.vector.types.pojo.ArrowType.ArrowTypeID.LargeList;
 
 public class Unmarshaller {
+    public enum ChunkingMode {
+        NUM_CHUNKS,
+        CHUNK_SIZE,
+    }
+    private final static int executorNumThreads = Runtime.getRuntime().availableProcessors();
+    private final static int chunkSize = parseEnvVarInt("CHALK_UNMARSHALLER_CHUNK_SIZE", 1_000);
+    private final static int numChunks = parseEnvVarInt("CHALK_UNMARSHALLER_NUM_CHUNKS", executorNumThreads);
+    private final static ChunkingMode chunkingMode = ChunkingMode.valueOf(
+        System.getenv().getOrDefault("CHALK_UNMARSHALLER_CHUNKING_MODE", ChunkingMode.NUM_CHUNKS.name())
+    );
+
+    private static final System.Logger logger = System.getLogger(Unmarshaller.class.getName());
+
+    static {
+        if (chunkingMode == ChunkingMode.CHUNK_SIZE) {
+            logger.log(System.Logger.Level.INFO, "Chalk Unmarshaller using CHUNK_SIZE: " + chunkSize);
+        } else if (chunkingMode == ChunkingMode.NUM_CHUNKS) {
+            logger.log(System.Logger.Level.INFO, "Chalk Unmarshaller using NUM_CHUNKS: " + numChunks);
+        } else {
+            throw new RuntimeException("Invalid Chalk Unmarshaller chunking mode: " + chunkingMode);
+        }
+    }
+
+    private final static ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            executorNumThreads,
+            executorNumThreads,
+            5, TimeUnit.MINUTES,  // ineffectual, because corePoolSize == maximumPoolSize
+            new SynchronousQueue<>(),
+            new ThreadPoolExecutor.CallerRunsPolicy()
+    );
     public static List<String> fqnsToSkip = List.of(Constants.tsFeatureFqn, Constants.indexFqn);
     public static List<String> prefixToSkip = List.of(Constants.chalkDunderPrefix);
 
@@ -91,39 +122,55 @@ public class Unmarshaller {
         }
     }
 
-
-    public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
-        List<T> result = new ArrayList<T>();
-
+    public static <T extends FeaturesClass> List<T> unmarshalTableChunk(
+            Table table,
+            Class<T> target,
+            Map<Class<?>, NamespaceMemoItem> memo,
+            boolean[] shouldSkipField
+    ) throws Exception {
         // Exists to work around `row.getLargeList` not being available.
         var fqnToLargeListColumnCopy = new HashMap<String, LargeListVector>();
+        try {
+            return unmarshalTableChunkInner(
+                table,
+                target,
+                memo,
+                shouldSkipField,
+                fqnToLargeListColumnCopy
+            );
+        } finally {
+            for (var entry : fqnToLargeListColumnCopy.entrySet()) {
+                entry.getValue().close();
+            }
+        }
+    }
 
+
+    public static <T extends FeaturesClass> List<T> unmarshalTableChunkInner(
+        Table table,
+        Class<T> target,
+        Map<Class<?>, NamespaceMemoItem> memo,
+        boolean[] shouldSkipField,
+        Map<String, LargeListVector> fqnToLargeListColumnCopy
+    ) throws Exception {
+        List<T> result = new ArrayList<>(Math.toIntExact(table.getRowCount()));
         String namespace = Utils.chalkpySnakeCase(target.getSimpleName());
-        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
-        Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
-
         for (Row row : table) {
             T obj = target.getDeclaredConstructor().newInstance();
+            result.add(obj);
             Map<String, List<Feature<?>>> featureMap;
             try {
                 featureMap = Initializer.initResult(obj, memo, namespace);
             } catch (Exception e) {
                 throw new Exception("Failed to initialize result object", e);
             }
-            result.add(obj);
-
-            outerLoop:
-            for (var arrowField : table.getSchema().getFields()) {
-                String fqn = arrowField.getName();
-                if (fqnsToSkip.contains(fqn)) {
+            var fields = table.getSchema().getFields();
+            for (var i = 0; i < fields.size(); i++) {
+                if (shouldSkipField[i]) {
                     continue;
                 }
-                for (String prefix : prefixToSkip) {
-                    if (fqn.startsWith(prefix)) {
-                        continue outerLoop;
-                    }
-                }
-
+                var arrowField = fields.get(i);
+                String fqn = arrowField.getName();
                 var featureList = featureMap.get(fqn);
                 if (featureList == null) {
                     // We are faking the attributes of a struct as features,
@@ -426,9 +473,71 @@ public class Unmarshaller {
                 }
             }
         }
-        for (var entry : fqnToLargeListColumnCopy.entrySet()) {
-            entry.getValue().close();
+
+        return result;
+    }
+
+    private static Boolean shouldSkipField(String name) {
+        if (fqnsToSkip.contains(name)) {
+            return true;
         }
+        for (String prefix : prefixToSkip) {
+            if (name.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
+        int rowCount = Math.toIntExact(table.getRowCount());
+        List<T> result = new ArrayList<>(rowCount);
+
+        Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
+        Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
+
+        var fields = table.getSchema().getFields();
+        var shouldSkip = new boolean[fields.size()];
+        for (var i = 0; i < fields.size(); i++) {
+            shouldSkip[i] = shouldSkipField(fields.get(i).getName());
+        }
+
+        int effectiveChunkSize;
+        if (chunkingMode == ChunkingMode.CHUNK_SIZE) {
+            effectiveChunkSize = Math.min(rowCount, Unmarshaller.chunkSize);
+        } else if (chunkingMode == ChunkingMode.NUM_CHUNKS) {
+            effectiveChunkSize = Math.max(rowCount / numChunks, 1);
+        } else {
+            throw new Exception("Invalid unmarshaller chunking mode: " + chunkingMode);
+        }
+        List<CompletableFuture<List<T>>> futures = new ArrayList<>();
+        for (int startIdx = 0; startIdx < rowCount; startIdx += effectiveChunkSize) {
+            var endIdx = Math.min(startIdx + effectiveChunkSize, rowCount);
+            var finalStartIdx = startIdx;
+            futures.add(CompletableFuture.supplyAsync(() -> {
+                List<T> chunkResult;
+                try (Table chunk = table.slice(finalStartIdx, endIdx - finalStartIdx)) {
+                    chunkResult = unmarshalTableChunk(
+                        chunk,
+                        target,
+                        memo,
+                        shouldSkip
+                    );
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return chunkResult;
+            }, executor));
+        }
+
+        List<List<T>> allChunkResults = futures.stream()
+            .map(CompletableFuture::join)
+            .toList();
+
+        for (List<T> chunkResult : allChunkResults) {
+            result.addAll(chunkResult);
+        }
+
         return listToArray(result, target);
     }
 

@@ -36,8 +36,8 @@ class TestAllClients {
 
 
     /*
-        * Test the request header interceptor by setting an environment ID override
-        * in online query params.
+     * Test the request header interceptor by setting an environment ID override
+     * in online query params.
      */
     @ParameterizedTest
     @ValueSource(strings = {grpcClientKey, restClientKey})
@@ -72,7 +72,13 @@ class TestAllClients {
     @ValueSource(strings = {grpcClientKey, restClientKey})
     public void testUploadFeatures(String clientVersion) throws Exception {
         ChalkClient c = getClient(clientVersion);
-        var userIds = Arrays.asList("777", "888", "999");
+        List<String> userIds;
+        // Different user ids for gRPC and REST clients, otherwise race condition
+        if (clientVersion.equals("gRPC")) {
+            userIds = Arrays.asList("777", "888", "999");
+        } else {
+            userIds = Arrays.asList("345", "678", "789");
+        }
         var scoreList = Arrays.asList(Math.random(), Math.random(), Math.random());
 
         UploadFeaturesParams uploadParams = UploadFeaturesParams.builder()
@@ -83,7 +89,7 @@ class TestAllClients {
         assert !res.getOperationId().equals("");
 
         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-                .withInput(FraudTemplateFeatures.user.id, Arrays.asList("777", "888", "999"))
+                .withInput(FraudTemplateFeatures.user.id, userIds)
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 .build();
 
