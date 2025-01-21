@@ -446,8 +446,10 @@ public class Unmarshaller {
             }
 
             List<Object> result = new ArrayList<>();
+            var isInnerList = false;
             for (Object item : list) {
-                if (item instanceof List) {
+                if (isInnerList || item instanceof List) {
+                    isInnerList = true;
                     // Unwrap nested lists
                     result.add(primitiveToRich(item, meta, allMemo, true));
                 } else {
