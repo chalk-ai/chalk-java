@@ -432,6 +432,9 @@ public class Unmarshaller {
         NamespaceMemoItem currMemo,
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
+        if (map == null) {
+            return null;
+        }
         @SuppressWarnings("unchecked")
         T result = (T) target.getDeclaredConstructor().newInstance();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
