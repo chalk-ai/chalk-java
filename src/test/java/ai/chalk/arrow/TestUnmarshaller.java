@@ -1273,6 +1273,14 @@ public class TestUnmarshaller {
         assert users[1].favoriteStringListNullable.getValue().equals(Arrays.asList("d", "e", "f"));
         assert users[2].favoriteStringListNullable.getValue() == null;
         // Nullable features end
+
+
+        // Test fqns
+        assert users[0].favoriteInt.getFqn().equals("arrow_user.favorite_int");  // Scalar on root class
+        assert users[0].favoriteStruct.niceNumber.getFqn() == null;  // Scalar on dataclass, not a real feature, no FQN
+        assert users[0].favoriteHasOne.length.getFqn().equals("arrow_user.favorite_has_one.length");  // Scalar on has_one
+        assert users[0].favoriteWindowed.bucket1d.getFqn().equals("arrow_user.favorite_windowed__86400__");  // Scalar on windowed
+        assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceNumber.getFqn() == null;  // Scalar on nested dataclass list
     }
 
     @Test
@@ -1291,6 +1299,9 @@ public class TestUnmarshaller {
         assert users[1].smallTransactions.getValue().get(0).amount.getValue().equals(3.0);
 
         assert users[2].smallTransactions.getValue().size() == 0;
+
+        // Test fqns
+        assert users[0].smallTransactions.getValue().get(0).amount.getFqn().equals("transaction.amount");  // Scalar on has_many
     }
 
     @Test

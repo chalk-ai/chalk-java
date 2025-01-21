@@ -90,6 +90,7 @@ public class Unmarshaller {
                     }
                     FieldMeta meta = s.fieldMetas().get(0);
                     Feature<?> hmFeature = new Feature<>();
+                    hmFeature.setFqn(fqn);
                     meta.field().set(target, hmFeature);
                     String joinKey = localKeyFeature.getValue().toString();
                     if (grouped.containsKey(joinKey)) {
@@ -147,6 +148,9 @@ public class Unmarshaller {
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
                             var richVal = primitiveToRich(value, fieldMeta, memo);
+                            if (richVal instanceof Feature) {
+                                ((Feature<?>) richVal).setFqn(fields.get(col).getName());
+                            }
                             fieldMeta.field().set(setter.parent(), richVal);
                         }
                     }
