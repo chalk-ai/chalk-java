@@ -8,28 +8,7 @@ import ai.chalk.features.WindowedFeaturesClass;
 
 import java.lang.reflect.Field;
 
-public record FieldMeta(
-        Field field,
-        Class<? extends FeaturesBase> featuresBase,
-        Class<? extends FeaturesClass> featuresClass,
-        Class<? extends StructFeaturesClass> structClass,
-        Class<? extends WindowedFeaturesClass> windowedClass,
-        Class<?> listUnderlyingClass,
-        boolean isFeature
-) {
-
-    public boolean isFeaturesClass() {
-        return featuresClass != null;
-    }
-
-    public boolean isStruct() {
-        return structClass != null;
-    }
-
-    public boolean isWindowed() {
-        return windowedClass != null;
-    }
-
+public record FieldMeta(Field field, Class<?> listUnderlyingClass) {
     public boolean isList() {
         return listUnderlyingClass != null;
     }

@@ -362,14 +362,13 @@ public class Unmarshaller {
      *    }
      *      to
      *    MyFeaturesClass(feature1=Feature(null, 1), feature2=Feature(null, 2))
-     *
-     * This function tries to avoid `X.class.isAssignableFrom` checks because that is expensive.
      */
     private static Object primitiveToRich(
         Object primitiveVal,
         FieldMeta meta,
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
+        var fieldType = meta.field().getType();
         if (meta.isList()) {
             List<?> primitiveList = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
@@ -403,24 +402,26 @@ public class Unmarshaller {
             }
             newFeature.setValue(richList);
             return newFeature;
-        } else if (meta.isFeature()) {
+        } else if (Feature.class.isAssignableFrom(fieldType)) {
             Feature<?> feature = new Feature<>();
             feature.setValue(primitiveVal);
             return feature;
-        } else if (meta.isStruct() || meta.isFeaturesClass()) {
-            NamespaceMemoItem currMemo = allMemo.get(meta.featuresBase());
+        } else if (StructFeaturesClass.class.isAssignableFrom(fieldType) || FeaturesClass.class.isAssignableFrom(fieldType)) {
+            NamespaceMemoItem currMemo = allMemo.get(fieldType);
             if (currMemo == null) {
                 throw new Exception(
                         String.format(
                                 "Memo not found for class '%s', found: %s",
-                                meta.featuresBase().getSimpleName(),
+                                fieldType.getSimpleName(),
                                 allMemo.keySet()
                         )
                 );
             }
             @SuppressWarnings("unchecked")
             var map = (Map<String, Object>) primitiveVal;
-            return convertMapToFeaturesClass(map, meta.featuresBase(), currMemo, allMemo);
+            @SuppressWarnings("unchecked")
+            var castClass = (Class<? extends FeaturesBase>) meta.field().getType();
+            return convertMapToFeaturesClass(map, castClass, currMemo, allMemo);
         } else {
             throw new Exception("Unsupported type found while converting from primitive to rich: " + meta);
         }
@@ -428,15 +429,14 @@ public class Unmarshaller {
 
     private static <T extends FeaturesBase> T convertMapToFeaturesClass(
         Map<String, Object> map,
-        Class<? extends FeaturesBase> target,
+        Class<? extends T> target,
         NamespaceMemoItem currMemo,
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
         if (map == null) {
             return null;
         }
-        @SuppressWarnings("unchecked")
-        T result = (T) target.getDeclaredConstructor().newInstance();
+        T result = target.getDeclaredConstructor().newInstance();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             List<FieldMeta> fieldMetas = currMemo.resolvedNameToFieldMetas.get(key);

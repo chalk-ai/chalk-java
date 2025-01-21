@@ -200,7 +200,7 @@ public class Initializer {
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
         if (fqnParts.size() == 1) {
-            if (meta.isWindowed()) {
+            if (WindowedFeaturesClass.class.isAssignableFrom(meta.field().getType())) {
                 WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
                 if (windowedObj == null) {
                     windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
@@ -350,7 +350,7 @@ public class Initializer {
             for (String resolvedName : memoItem.resolvedNameToFieldMetas.keySet().stream().toList()) {
                 List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMetas.get(resolvedName);
                 for (FieldMeta meta : fieldMetas) {
-                    if (meta.isWindowed()) {
+                    if (WindowedFeaturesClass.class.isAssignableFrom(meta.field().getType())) {
                         var windowedMemo = memo.get(meta.field().getType());
                         for (String childFieldName : windowedMemo.resolvedNameToFieldMetas.keySet()) {
                             // Map windowed child fields to the base windowed field
@@ -404,38 +404,11 @@ public class Initializer {
                 var fieldType = field.getType();
                 // Must use `getGenericType` here to get a type that contains the underlying class
                 var genericType = field.getGenericType();
-
-                boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
-                boolean isFeaturesClass = false;
-                boolean isStructFeaturesClass = false;
-                boolean isWindowedFeaturesClass = false;
-                boolean isFeature = false;
-                boolean isList = false;
-                if (isFeaturesBase) {
-                    if (FeaturesClass.class.isAssignableFrom(fieldType)) {
-                        isFeaturesClass = true;
-                    } else if (StructFeaturesClass.class.isAssignableFrom(fieldType)) {
-                        isStructFeaturesClass = true;
-                    } else if (WindowedFeaturesClass.class.isAssignableFrom(fieldType)) {
-                        isWindowedFeaturesClass = true;
-                    }
-                } else {
-                    isFeature = Feature.class.isAssignableFrom(fieldType);
-                    if (isFeature) {
-                        isList = List.class.isAssignableFrom(unwrapFeatureType(genericType));
-                    }
-                }
-
-                @SuppressWarnings("unchecked")
-                FieldMeta meta = new FieldMeta(
-                        field,
-                        isFeaturesBase ? (Class<? extends FeaturesBase>) fieldType : null,
-                        isFeaturesClass ? (Class<? extends FeaturesClass>) fieldType : null,
-                        isStructFeaturesClass ? (Class<? extends StructFeaturesClass>) fieldType : null,
-                        isWindowedFeaturesClass ? (Class<? extends WindowedFeaturesClass>) fieldType : null,
-                        isList ? getUnderlyingClass(genericType) : null,
-                        isFeature
+                boolean isList = (
+                        Feature.class.isAssignableFrom(fieldType) &&
+                        List.class.isAssignableFrom(unwrapFeatureType(genericType))
                 );
+                FieldMeta meta = new FieldMeta(field, isList ? getUnderlyingClass(genericType) : null);
 
                 var resolvedName = getResolvedName(field);
                 if (!memoItem.resolvedNameToFieldMetas.containsKey(resolvedName)) {
