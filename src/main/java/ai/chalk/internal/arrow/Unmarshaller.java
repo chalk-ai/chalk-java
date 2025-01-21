@@ -146,7 +146,7 @@ public class Unmarshaller {
                     var fieldSetters = Initializer.initScoped(obj, fqnPartsList.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
-                            var richVal = primitiveToRich(value, fieldMeta, memo, false);
+                            var richVal = primitiveToRich(value, fieldMeta, memo);
                             fieldMeta.field().set(setter.parent(), richVal);
                         }
                     }
@@ -431,14 +431,9 @@ public class Unmarshaller {
     private static Object primitiveToRich(
         Object primitiveVal,
         FieldMeta meta,
-        Map<Class<?>, NamespaceMemoItem> allMemo,
-        boolean isNestedList
+        Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
-        if (meta.isList() || isNestedList) {
-            // We arrive here via `meta.isList()` if the top level field is a list
-            //      i.e. `Feature<List<MyDataclass>>`
-            // We arrive here via `isNestedList` if we recurse into a nested list
-            //      i.e. `Feature<List<List<MyDataclass>>>`
+        if (meta.isList()) {
             List<?> list = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
             Feature<?> newFeature = new Feature<>();
@@ -450,12 +445,16 @@ public class Unmarshaller {
             }
 
             List<Object> result = new ArrayList<>();
-            var nextIsNestedList = false;
+            var isNestedList = false;
             for (Object item : list) {
-                if (nextIsNestedList || item instanceof List) {
-                    nextIsNestedList = true;
-                    // Unwrap nested lists
-                    result.add(primitiveToRich(item, meta, allMemo, true));
+                if (isNestedList || item instanceof List) {
+                    isNestedList = true;
+                    // Nested lists are returned as `Feature<List<Dataclass>>`
+                    // or `Feature<List<List<Dataclass>>>` etc. Unwrap.
+                    var nestedList = primitiveToRich(item, meta, allMemo);
+                    @SuppressWarnings("unchecked")
+                    var nestedListFeature = (Feature<?>) nestedList;
+                    result.add(nestedListFeature.getValue());
                 } else {
                     // No more lists to unwrap, element is a struct or features class
                     @SuppressWarnings("unchecked")
@@ -465,21 +464,8 @@ public class Unmarshaller {
                     result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
                 }
             }
-            if (isNestedList) {
-                // Inner lists need to not be wrapped in a `Feature` object,
-                // i.e.
-                //      If we have
-                //
-                //          `Feature<List<List<MyDataclass>>>`
-                //
-                //      we want to avoid
-                //
-                //          building `Feature<List<Feature<List<MyDataclass>>>>`
-                return result;
-            } else {
-                newFeature.setValue(result);
-                return newFeature;
-            }
+            newFeature.setValue(result);
+            return newFeature;
         } else if (meta.isFeature()) {
             Feature<?> feature = new Feature<>();
             feature.setValue(primitiveVal);
@@ -523,7 +509,7 @@ public class Unmarshaller {
                 ));
             }
             for (FieldMeta meta : fieldMetas) {
-                meta.field().set(result, primitiveToRich(entry.getValue(), meta, allMemo, false));
+                meta.field().set(result, primitiveToRich(entry.getValue(), meta, allMemo));
             }
         }
         return result;
