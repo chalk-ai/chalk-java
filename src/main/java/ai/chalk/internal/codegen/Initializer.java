@@ -386,10 +386,21 @@ public class Initializer {
             for (int i = 0; i < fields.size(); i++) {
                 var fieldType = fields.get(i).getType();
                 boolean isFeaturesBase = FeaturesBase.class.isAssignableFrom(fieldType);
-                boolean isFeaturesClass = isFeaturesBase && FeaturesClass.class.isAssignableFrom(fieldType);
-                boolean isStructFeaturesClass = isFeaturesBase && StructFeaturesClass.class.isAssignableFrom(fieldType);
-                boolean isWindowedFeaturesClass = isFeaturesBase && WindowedFeaturesClass.class.isAssignableFrom(fieldType);
-                boolean isFeature = Feature.class.isAssignableFrom(fieldType);
+                boolean isFeaturesClass = false;
+                boolean isStructFeaturesClass = false;
+                boolean isWindowedFeaturesClass = false;
+                boolean isFeature = false;
+                if (isFeaturesBase) {
+                    if (FeaturesClass.class.isAssignableFrom(fieldType)) {
+                        isFeaturesClass = true;
+                    } else if (StructFeaturesClass.class.isAssignableFrom(fieldType)) {
+                        isStructFeaturesClass = true;
+                    } else if (WindowedFeaturesClass.class.isAssignableFrom(fieldType)) {
+                        isWindowedFeaturesClass = true;
+                    }
+                } else {
+                    isFeature = Feature.class.isAssignableFrom(fieldType);
+                }
 
                 // Must use `getGenericType` here to get a type that contains the underlying class
                 var genericType = fields.get(i).getGenericType();
