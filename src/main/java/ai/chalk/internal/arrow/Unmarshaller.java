@@ -115,23 +115,23 @@ public class Unmarshaller {
     }
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
-        List<T> result = new ArrayList<>();
+        List<T> result = new ArrayList<>(Math.toIntExact(table.getRowCount()));
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
         Initializer.alterMemoForUnmarshaller(memo);
         var constructor = target.getDeclaredConstructor();
 
         // Cache repeated work
-        List<List<String>> fqnPartsList = new ArrayList<>();
-        for (int j = 0; j < table.getSchema().getFields().size(); j++) {
-            var arrowField = table.getSchema().getFields().get(j);
+        List<org.apache.arrow.vector.types.pojo.Field> fields = table.getSchema().getFields();
+        List<List<String>> fqnPartsList = new ArrayList<>(fields.size());
+        for (org.apache.arrow.vector.types.pojo.Field arrowField : fields) {
             String fqn = arrowField.getName();
             fqnPartsList.add(Arrays.asList(fqn.split("\\.")));
         }
-        List<Boolean> shouldSkip = new ArrayList<>();
-        for (int j = 0; j < table.getSchema().getFields().size(); j++) {
-            var arrowField = table.getSchema().getFields().get(j);
-            shouldSkip.add(shouldSkipField(arrowField.getName()));
+        var shouldSkip = new boolean[fields.size()];
+        for (int j = 0; j < fields.size(); j++) {
+            var arrowField = fields.get(j);
+            shouldSkip[j] = shouldSkipField(arrowField.getName());
         }
 
         try (var root = table.toVectorSchemaRoot()) {
@@ -139,7 +139,7 @@ public class Unmarshaller {
                 T obj = constructor.newInstance();
                 result.add(obj);
                 for (var col = 0; col < root.getSchema().getFields().size(); col++) {
-                    if (shouldSkip.get(col)) {
+                    if (shouldSkip[col]) {
                         continue;
                     }
                     Object value = getValueFromFieldVector(root.getVector(col), row);
@@ -158,7 +158,7 @@ public class Unmarshaller {
     }
 
     public static List<Object> getInnerList(FieldVector vector, int startIdx, int endIdx) throws Exception {
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList<>(endIdx - startIdx);
         for (int i = startIdx; i < endIdx; i++) {
             result.add(getValueFromFieldVector(vector, i));
         }
@@ -371,19 +371,19 @@ public class Unmarshaller {
         Map<Class<?>, NamespaceMemoItem> allMemo
     ) throws Exception {
         if (meta.isList()) {
-            List<?> list = (List<?>) primitiveVal;
+            List<?> primitiveList = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
             Feature<?> newFeature = new Feature<>();
 
             if (currMemo == null) {
                 // Not a struct or features class, since it's not in the memo
-                newFeature.setValue(list);
+                newFeature.setValue(primitiveList);
                 return newFeature;
             }
 
-            List<Object> result = new ArrayList<>();
+            List<Object> richList = new ArrayList<>(primitiveList.size());
             var isNestedList = false;
-            for (Object item : list) {
+            for (Object item : primitiveList) {
                 if (isNestedList || item instanceof List) {
                     isNestedList = true;
                     // Nested lists are returned as `Feature<List<Dataclass>>`
@@ -391,17 +391,17 @@ public class Unmarshaller {
                     var nestedList = primitiveToRich(item, meta, allMemo);
                     @SuppressWarnings("unchecked")
                     var nestedListFeature = (Feature<?>) nestedList;
-                    result.add(nestedListFeature.getValue());
+                    richList.add(nestedListFeature.getValue());
                 } else {
                     // No more lists to unwrap, element is a struct or features class
                     @SuppressWarnings("unchecked")
                     var cls = (Class<? extends FeaturesBase>) meta.listUnderlyingClass();
                     @SuppressWarnings("unchecked")
                     var map = (Map<String, Object>) item;
-                    result.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
+                    richList.add(convertMapToFeaturesClass(map, cls, currMemo, allMemo));
                 }
             }
-            newFeature.setValue(result);
+            newFeature.setValue(richList);
             return newFeature;
         } else if (meta.isFeature()) {
             Feature<?> feature = new Feature<>();
