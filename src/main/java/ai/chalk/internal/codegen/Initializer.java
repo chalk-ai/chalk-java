@@ -347,7 +347,8 @@ public class Initializer {
     public static void alterMemoForUnmarshaller(Map<Class<?>, NamespaceMemoItem> memo) {
         for (Map.Entry<Class<?>, NamespaceMemoItem> entry : memo.entrySet()) {
             NamespaceMemoItem memoItem = entry.getValue();
-            for (String resolvedName : memoItem.resolvedNameToFieldMetas.keySet().stream().toList()) {
+            var keySet = memoItem.resolvedNameToFieldMetas.keySet().toArray(new String[0]);
+            for (String resolvedName : keySet) {
                 List<FieldMeta> fieldMetas = memoItem.resolvedNameToFieldMetas.get(resolvedName);
                 for (FieldMeta meta : fieldMetas) {
                     if (WindowedFeaturesClass.class.isAssignableFrom(meta.field().getType())) {
