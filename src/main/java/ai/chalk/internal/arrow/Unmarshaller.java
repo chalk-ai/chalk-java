@@ -1,6 +1,5 @@
 package ai.chalk.internal.arrow;
 
-import ai.chalk.client.ChalkClientImpl;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesClass;
@@ -477,9 +476,12 @@ public class Unmarshaller {
         return result;
     }
 
-    private static Boolean hasSkippedPrefix(String s) {
+    private static Boolean shouldSkipField(String name) {
+        if (fqnsToSkip.contains(name)) {
+            return true;
+        }
         for (String prefix : prefixToSkip) {
-            if (s.startsWith(prefix)) {
+            if (name.startsWith(prefix)) {
                 return true;
             }
         }
@@ -487,32 +489,30 @@ public class Unmarshaller {
     }
 
     public static <T extends FeaturesClass> T[] unmarshalTable(Table table, Class<T> target) throws Exception {
-        List<T> result = new ArrayList<T>();
+        int rowCount = Math.toIntExact(table.getRowCount());
+        List<T> result = new ArrayList<>(rowCount);
 
         Map<Class<?>, NamespaceMemoItem> memo = new HashMap<>();
         Initializer.buildNamespaceMemo(target, memo, new HashSet<>());
 
         var shouldSkipField = new ArrayList<Boolean>();
-        for (var i = 0; i < table.getSchema().getFields().size(); i++) {
-            String fqn = table.getSchema().getFields().get(i).getName();
-            shouldSkipField.add(fqnsToSkip.contains(fqn) || hasSkippedPrefix(fqn));
+        var fields = table.getSchema().getFields();
+        for (org.apache.arrow.vector.types.pojo.Field field : fields) {
+            String fqn = field.getName();
+            shouldSkipField.add(shouldSkipField(fqn));
         }
 
-        if (table.getRowCount() > Integer.MAX_VALUE || table.getRowCount() < Integer.MIN_VALUE) {
-            throw new IllegalArgumentException("Row count " + table.getRowCount() + " is out of range for int");
-        }
-        var intRowCount = (int) table.getRowCount();
         int effectiveChunkSize;
         if (chunkingMode == ChunkingMode.CHUNK_SIZE) {
-            effectiveChunkSize = Math.min(intRowCount, Unmarshaller.chunkSize);
+            effectiveChunkSize = Math.min(rowCount, Unmarshaller.chunkSize);
         } else if (chunkingMode == ChunkingMode.NUM_CHUNKS) {
-            effectiveChunkSize = Math.max(intRowCount / numChunks, 1);
+            effectiveChunkSize = Math.max(rowCount / numChunks, 1);
         } else {
             throw new Exception("Invalid unmarshaller chunking mode: " + chunkingMode);
         }
         List<CompletableFuture<List<T>>> futures = new ArrayList<>();
-        for (int startIdx = 0; startIdx < intRowCount; startIdx += effectiveChunkSize) {
-            var endIdx = Math.min(startIdx + effectiveChunkSize, intRowCount);
+        for (int startIdx = 0; startIdx < rowCount; startIdx += effectiveChunkSize) {
+            var endIdx = Math.min(startIdx + effectiveChunkSize, rowCount);
             var finalStartIdx = startIdx;
             futures.add(CompletableFuture.supplyAsync(() -> {
                 List<T> chunkResult;
