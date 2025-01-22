@@ -143,16 +143,12 @@ public class Initializer {
      */
     public static List<FieldSetter> initScoped(
         FeaturesClass cls,
-        List<String> fqnParts,
+        List<String> fieldNames,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        if (fqnParts.size() < 2) {
+        if (fieldNames.size() < 1) {
             throw new Exception(
-                    String.format(
-                            "FQN '%s' must have at least 2 parts, found %d",
-                            String.join(".", fqnParts),
-                            fqnParts.size()
-                    )
+                "there should be at least 1 field name in the chain of field names"
             );
         }
 
@@ -167,12 +163,12 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMetas.get(fqnParts.get(1));
+        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMetas.get(fieldNames.get(0));
         if (fieldMetas == null) {
             throw new Exception(
                     String.format(
                             "Field '%s' not found in namespace memo for '%s', got '%s' instead",
-                            fqnParts.get(1),
+                            fieldNames.get(1),
                             cls.getClass().getSimpleName(),
                             nsMemo.resolvedNameToFieldMetas.keySet()
                     )
@@ -184,7 +180,7 @@ public class Initializer {
             List<FieldSetter> res = initScopedInner(
                     cls,
                     meta,
-                    fqnParts.subList(1, fqnParts.size()),
+                    fieldNames,
                     memo
             );
             targetFields.addAll(res);

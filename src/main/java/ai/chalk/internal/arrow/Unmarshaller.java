@@ -83,7 +83,8 @@ public class Unmarshaller {
                     throw new Exception("Error while grouping has-many result: local join key is null");
                 }
 
-                List<FieldSetter> setters = Initializer.initScoped(target, fqnParts, memo);
+                var fieldNames = fqnParts.subList(1, fqnParts.size());
+                List<FieldSetter> setters = Initializer.initScoped(target, fieldNames, memo);
                 for (FieldSetter s : setters) {
                     if (s.fieldMetas().size() != 1) {
                         throw new Exception("Expected exactly one field for has-many field: " + fqn);
@@ -124,10 +125,14 @@ public class Unmarshaller {
 
         // Cache repeated work
         List<org.apache.arrow.vector.types.pojo.Field> fields = table.getSchema().getFields();
-        List<List<String>> fqnPartsList = new ArrayList<>(fields.size());
+        List<List<String>> fieldNames = new ArrayList<>(fields.size());
         for (org.apache.arrow.vector.types.pojo.Field arrowField : fields) {
             String fqn = arrowField.getName();
-            fqnPartsList.add(Arrays.asList(fqn.split("\\.")));
+            var fqnParts = Arrays.asList(fqn.split("\\."));
+            if (fqnParts.size() < 2) {
+                throw new Exception("FQN of feature must have at least two parts i.e. {namespace}.{name}, found " + fqn);
+            }
+            fieldNames.add(fqnParts.subList(1, fqnParts.size()));
         }
         var shouldSkip = new boolean[fields.size()];
         for (int j = 0; j < fields.size(); j++) {
@@ -144,7 +149,7 @@ public class Unmarshaller {
                         continue;
                     }
                     Object value = getValueFromFieldVector(root.getVector(col), row);
-                    var fieldSetters = Initializer.initScoped(obj, fqnPartsList.get(col), memo);
+                    var fieldSetters = Initializer.initScoped(obj, fieldNames.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
                             var richVal = primitiveToRich(value, fieldMeta, memo);
