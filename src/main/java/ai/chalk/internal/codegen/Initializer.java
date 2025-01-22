@@ -148,7 +148,7 @@ public class Initializer {
     ) throws Exception {
         if (fieldNames.size() < 1) {
             throw new Exception(
-                "there should be at least 1 field name in the chain of field names"
+                "internal error - there should be at least 1 field name in the chain of field names"
             );
         }
 
@@ -156,7 +156,8 @@ public class Initializer {
         if (nsMemo == null) {
             throw new Exception(
                     String.format(
-                            "memo not found for namespace '%s', found keys: %s",
+                            "internal error- memo not found for namespace '%s', found keys: %s instead. This could " +
+                            "also happen if the codegen'd classes are edited.",
                             cls.getClass().getSimpleName(),
                             memo.keySet()
                     )
@@ -167,7 +168,8 @@ public class Initializer {
         if (fieldMetas == null) {
             throw new Exception(
                     String.format(
-                            "Field '%s' not found in namespace memo for '%s', got '%s' instead",
+                            "internal error - Field '%s' not found in namespace memo for '%s', got '%s' instead. " +
+                            "This could also happen if the codegen'd classes are edited.",
                             fieldNames.get(1),
                             cls.getClass().getSimpleName(),
                             nsMemo.resolvedNameToFieldMetas.keySet()
@@ -206,7 +208,8 @@ public class Initializer {
                 if (windowedMemo == null) {
                     throw new Exception(
                             String.format(
-                                    "memo not found for windowed features class %s, found keys: %s",
+                                    "internal error - memo not found for windowed features class %s, found keys: %s." +
+                                    " This could also happen if the codegen'd classes are edited",
                                     windowedObj.getClass().getSimpleName(),
                                     memo.keySet()
                             )
@@ -216,7 +219,8 @@ public class Initializer {
                 if (fieldMetas == null) {
                     throw new Exception(
                             String.format(
-                                    "Field '%s' not found in windowed features memo for '%s', got '%s' instead",
+                                    "internal error - field '%s' not found in windowed features memo for '%s', got '%s' " +
+                                    "instead. This could also happen if the codegen'd classes are edited.",
                                     fqnParts.get(0),
                                     windowedObj.getClass().getSimpleName(),
                                     windowedMemo.resolvedNameToFieldMetas.keySet()
@@ -244,7 +248,8 @@ public class Initializer {
         if (nextMemo == null) {
             throw new Exception(
                     String.format(
-                            "memo not found for features class %s, found keys: %s",
+                            "internal error - memo not found for features class %s, found keys: %s. This could also " +
+                            "happen if the codegen'd classes are edited",
                             fc.getClass().getSimpleName(),
                             memo.keySet()
                     )
@@ -255,7 +260,8 @@ public class Initializer {
         if (metas == null) {
             throw new Exception(
                     String.format(
-                            "FQN '%s' not found in features memo for '%s', got keys '%s' instead",
+                            "internal error- Field '%s' not found in memo for '%s', got keys '%s' instead. This could" +
+                            " also happen if the codegen'd classes are edited.",
                             fqnParts.get(1),
                             fc.getClass().getSimpleName(),
                             nextMemo.resolvedNameToFieldMetas.keySet()
