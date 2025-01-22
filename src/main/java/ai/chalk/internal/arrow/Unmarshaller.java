@@ -126,18 +126,16 @@ public class Unmarshaller {
         // Cache repeated work
         List<org.apache.arrow.vector.types.pojo.Field> fields = table.getSchema().getFields();
         List<List<String>> fieldNames = new ArrayList<>(fields.size());
-        for (org.apache.arrow.vector.types.pojo.Field arrowField : fields) {
-            String fqn = arrowField.getName();
-            var fqnParts = Arrays.asList(fqn.split("\\."));
-            if (fqnParts.size() < 2) {
-                throw new Exception("FQN of feature must have at least two parts i.e. {namespace}.{name}, found " + fqn);
-            }
-            fieldNames.add(fqnParts.subList(1, fqnParts.size()));
-        }
         var shouldSkip = new boolean[fields.size()];
         for (int j = 0; j < fields.size(); j++) {
             var arrowField = fields.get(j);
             shouldSkip[j] = shouldSkipField(arrowField.getName());
+            String fqn = arrowField.getName();
+            var fqnParts = Arrays.asList(fqn.split("\\."));
+            if (fqnParts.size() < 2 && !shouldSkip[j]) {
+                throw new Exception("FQN of feature must have at least two parts i.e. {namespace}.{name}, found " + fqn);
+            }
+            fieldNames.add(fqnParts.subList(1, fqnParts.size()));
         }
 
         try (var root = table.toVectorSchemaRoot()) {
