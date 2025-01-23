@@ -74,7 +74,7 @@ public class OnlineQueryResult implements AutoCloseable {
     }
 
     /*
-     * unmarshal unmarshals the underlying Arrow `Table` into an array of the target feature class.
+     * unmarshal deserializes the underlying Arrow `Table` into an array of the target feature class.
      * This operation consumes the Arrow Table, so the `Table` objects should not be used after
      * calling this method. If needed, please make a copy of the `Table` beforehand.
      */
