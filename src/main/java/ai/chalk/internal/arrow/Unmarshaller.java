@@ -462,19 +462,4 @@ public class Unmarshaller {
         return result;
 
     }
-
-    private static void unmarshalNested(Map<String, Object> struct, Map<String, List<Feature<?>>> featureMap, String fqn) {
-        for (Map.Entry<String, Object> entry : struct.entrySet()) {
-            var childFqn = fqn + "." + entry.getKey();
-            var value = entry.getValue();
-            if (value instanceof Map) {
-                unmarshalNested((Map<String, Object>) value, featureMap, childFqn);
-            } else {
-                var childFeatures = featureMap.get(childFqn);
-                for (Feature<?> childFeature : childFeatures) {
-                    childFeature.setValue(value);
-                }
-            }
-        }
-    }
 }

@@ -164,13 +164,14 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMetas.get(fieldNames.get(0));
+        var nextFieldName = fieldNames.get(0);
+        List<FieldMeta> fieldMetas = nsMemo.resolvedNameToFieldMetas.get(nextFieldName);
         if (fieldMetas == null) {
             throw new Exception(
                     String.format(
                             "internal error - Field '%s' not found in namespace memo for '%s', got '%s' instead. " +
                             "This could also happen if the codegen'd classes are edited.",
-                            fieldNames.get(1),
+                            nextFieldName,
                             cls.getClass().getSimpleName(),
                             nsMemo.resolvedNameToFieldMetas.keySet()
                     )
@@ -194,10 +195,31 @@ public class Initializer {
     public static List<FieldSetter> initScopedInner(
         Object parent,
         FieldMeta meta,
-        List<String> fqnParts,
+        List<String> fieldNames,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        if (fqnParts.size() == 1) {
+        if (fieldNames.size() == 1) {
+            // When there is one field name left, we are already at the last field in the chain
+            // of fields,
+            // i.e.
+            //      Given the targeted FQN: "user.account.address.street_number":
+            //            `parent`: `Address` instance
+            //            `meta`: `FieldMeta` instance for `street_number`, where `meta.field()` corresponds
+            //                    to the `street_number` field on `Address`
+            //            `fieldNames`: ["street_number"]
+            //
+            // One might ask: "Why would `fieldNames` still have elements if we already have access to the field via
+            //                 `meta.field()` ?"
+            //
+            // This is because the last field could correspond to:
+            //      `parent`: `User` instance
+            //      `meta`: `FieldMeta` instance for the `User.avg_txn` field which is a subclass
+            //              `WindowedFeaturesClass`.
+            //      `fieldNames`: ["average_txn__3600__"]
+            //
+            //
+            // In this case, we need "average_txn__3600__" so that we know which field in the `WindowedFeaturesClass`
+            // to return.
             if (WindowedFeaturesClass.class.isAssignableFrom(meta.field().getType())) {
                 WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
                 if (windowedObj == null) {
@@ -215,13 +237,17 @@ public class Initializer {
                             )
                     );
                 }
-                List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMetas.get(fqnParts.get(0));
+
+                // This would be one of the buckets in the windowed feature
+                // e.g. windowChildFieldName here would be "average_txn__3600__"
+                var windowChildFieldName = fieldNames.get(0);
+                List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMetas.get(windowChildFieldName);
                 if (fieldMetas == null) {
                     throw new Exception(
                             String.format(
                                     "internal error - field '%s' not found in windowed features memo for '%s', got '%s' " +
                                     "instead. This could also happen if the codegen'd classes are edited.",
-                                    fqnParts.get(0),
+                                    fieldNames.get(0),
                                     windowedObj.getClass().getSimpleName(),
                                     windowedMemo.resolvedNameToFieldMetas.keySet()
                             )
@@ -256,13 +282,14 @@ public class Initializer {
             );
         }
 
-        List<FieldMeta> metas = nextMemo.resolvedNameToFieldMetas.get(fqnParts.get(1));
+        var nextFieldName = fieldNames.get(1);
+        List<FieldMeta> metas = nextMemo.resolvedNameToFieldMetas.get(nextFieldName);
         if (metas == null) {
             throw new Exception(
                     String.format(
-                            "internal error- Field '%s' not found in memo for '%s', got keys '%s' instead. This could" +
+                            "internal error - Field '%s' not found in memo for '%s', got keys '%s' instead. This could"+
                             " also happen if the codegen'd classes are edited.",
-                            fqnParts.get(1),
+                            nextFieldName,
                             fc.getClass().getSimpleName(),
                             nextMemo.resolvedNameToFieldMetas.keySet()
                     )
@@ -273,7 +300,7 @@ public class Initializer {
             List<FieldSetter> res = initScopedInner(
                 fc,
                 nextMeta,
-                fqnParts.subList(1, fqnParts.size()),
+                fieldNames.subList(1, fieldNames.size()),
                 memo
             );
             targetFields.addAll(res);
