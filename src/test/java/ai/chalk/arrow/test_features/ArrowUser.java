@@ -74,16 +74,18 @@ public class ArrowUser extends FeaturesClass {
     public Feature<List<Double>> favoriteDoubleList;
     public Feature<List<java.time.LocalDateTime>> favoriteTimestampSecList;
     public Feature<List<VanillaDataclass>> favoriteStructList;
+    public Feature<List<List<VanillaDataclass>>> favoriteStructListList;
     public DataclassWithComplexFeatures favoriteStructComplex;
     public Feature<String> favoriteHasOneId;
     public MyTail favoriteHasOne;
-    public Feature<String> leastFavoriteHasOneId;
-    public MyTail leastFavoriteHasOne;
 
     @HasMany(localKey = "id", foreignKey = "user_id")
     public Feature<List<Transaction>> smallTransactions;
 
     public _WindowedFeatures favoriteWindowed;
+
+    // Tests multiple windowed features with the same duration buckets
+    public _WindowedFeatures favoriteWindowedSameBuckets;
 
 
     // TODO: Add support for these data types
