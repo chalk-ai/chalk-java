@@ -1305,6 +1305,9 @@ public class TestUnmarshaller {
         assert users[0].favoriteHasOne.length.getFqn().equals("arrow_user.favorite_has_one.length");  // Scalar on has_one
         assert users[0].favoriteWindowed.bucket1d.getFqn().equals("arrow_user.favorite_windowed__86400__");  // Scalar on windowed
         assert users[0].favoriteStructComplex.goodDataclasses.getValue().get(0).niceNumber.getFqn() == null;  // Scalar on nested dataclass list
+        assert users[0].favoriteHasOne.getFqn().equals("arrow_user.favorite_has_one");  // HasOne on root class
+        assert users[0].favoriteWindowed.getFqn().equals("arrow_user.favorite_windowed");  // Windowed on root class
+        assert users[0].favoriteStruct.getFqn().equals("arrow_user.favorite_struct");  // Dataclass on root class
     }
 
     @Test

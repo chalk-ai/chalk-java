@@ -143,6 +143,7 @@ public class Initializer {
      */
     public static List<FieldSetter> initScoped(
         FeaturesClass cls,
+        String rootNamespace,
         List<String> fieldNames,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
@@ -183,7 +184,9 @@ public class Initializer {
             List<FieldSetter> res = initScopedInner(
                     cls,
                     meta,
+                    rootNamespace,
                     fieldNames,
+                    0,
                     memo
             );
             targetFields.addAll(res);
@@ -195,59 +198,65 @@ public class Initializer {
     public static List<FieldSetter> initScopedInner(
         Object parent,
         FieldMeta meta,
+        String rootNamespace,
         List<String> fieldNames,
+        int fieldNamesIdx,
         Map<Class<?>, NamespaceMemoItem> memo
     ) throws Exception {
-        if (fieldNames.size() == 1) {
-            // When there is one field name left, we are already at the last field in the chain
-            // of fields,
-            // i.e.
-            //      Given the targeted FQN: "user.account.address.street_number":
-            //            `parent`: `Address` instance
-            //            `meta`: `FieldMeta` instance for `street_number`, where `meta.field()` corresponds
-            //                    to the `street_number` field on `Address`
-            //            `fieldNames`: ["street_number"]
+        var fieldType = meta.field().getType();
+        if (fieldNamesIdx == fieldNames.size() - 1) {
+            // When the last field is a scalar feature with FQN "user.account.address.street_number":
+            //       `parent`: `Address` instance
+            //       `meta`: `FieldMeta` instance for `street_number`, where `meta.field()` corresponds
+            //               to the `street_number` field on `Address`
+            //       `fieldNames`: ["account", "address", "street_number"]
+            //       `fieldNamesIdx`: 2
             //
-            // One might ask: "Why would `fieldNames` still have elements if we already have access to the field via
-            //                 `meta.field()` ?"
-            //
-            // This is because the last field could correspond to:
+            // When last field is a windowed child pseudofeature with FQN "user.avg_txn__3600__":
             //      `parent`: `User` instance
             //      `meta`: `FieldMeta` instance for the `User.avg_txn` field which is a subclass
             //              `WindowedFeaturesClass`.
             //      `fieldNames`: ["average_txn__3600__"]
+            //      `fieldNamesIdx`: 0
             //
-            //
-            // In this case, we need "average_txn__3600__" so that we know which field in the `WindowedFeaturesClass`
-            // to return.
-            if (WindowedFeaturesClass.class.isAssignableFrom(meta.field().getType())) {
-                WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
-                if (windowedObj == null) {
-                    windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
-                    meta.field().set(parent, windowedObj);
-                }
-                var windowedMemo = memo.get(windowedObj.getClass());
+            if (WindowedFeaturesClass.class.isAssignableFrom(fieldType)) {
+                var windowedMemo = memo.get(fieldType);
                 if (windowedMemo == null) {
                     throw new Exception(
                             String.format(
                                     "internal error - memo not found for windowed features class %s, found keys: %s." +
-                                    " This could also happen if the codegen'd classes are edited",
-                                    windowedObj.getClass().getSimpleName(),
+                                            " This could also happen if the codegen'd classes are edited",
+                                    fieldType.getSimpleName(),
                                     memo.keySet()
                             )
                     );
                 }
 
+                WindowedFeaturesClass windowedObj = (WindowedFeaturesClass) meta.field().get(parent);
+                if (windowedObj == null) {
+                    windowedObj = (WindowedFeaturesClass) meta.field().getType().getConstructor().newInstance();
+                    meta.field().set(parent, windowedObj);
+                    String baseWindowedFeatureFqn = rootNamespace + ".";
+                    if (fieldNames.size() > 1) {
+                        // Remote windowed feature
+                        baseWindowedFeatureFqn += String.join(
+                                ".", fieldNames.subList(0, fieldNames.size())
+                        );
+                    }
+                    baseWindowedFeatureFqn += meta.resolvedName();
+                    windowedObj.setFqn(baseWindowedFeatureFqn);
+                }
+
                 // This would be one of the buckets in the windowed feature
                 // e.g. windowChildFieldName here would be "average_txn__3600__"
-                var windowChildFieldName = fieldNames.get(0);
+                var windowChildFieldName = fieldNames.get(fieldNamesIdx);
                 List<FieldMeta> fieldMetas = windowedMemo.resolvedNameToFieldMetas.get(windowChildFieldName);
                 if (fieldMetas == null) {
                     throw new Exception(
                             String.format(
                                     "internal error - field '%s' not found in windowed features memo for '%s', got '%s' " +
                                     "instead. This could also happen if the codegen'd classes are edited.",
-                                    fieldNames.get(0),
+                                    fieldNames.get(fieldNamesIdx),
                                     windowedObj.getClass().getSimpleName(),
                                     windowedMemo.resolvedNameToFieldMetas.keySet()
                             )
@@ -265,24 +274,31 @@ public class Initializer {
             }
         }
 
-        var fc = meta.field().get(parent);
-        if (fc == null) {
-            fc = meta.field().getType().getConstructor().newInstance();
-            meta.field().set(parent, fc);
-        }
-        var nextMemo = memo.get(fc.getClass());
+        var nextMemo = memo.get(fieldType);
         if (nextMemo == null) {
             throw new Exception(
                     String.format(
                             "internal error - memo not found for features class %s, found keys: %s. This could also " +
-                            "happen if the codegen'd classes are edited",
-                            fc.getClass().getSimpleName(),
+                                    "happen if the codegen'd classes are edited",
+                            fieldType.getSimpleName(),
                             memo.keySet()
                     )
             );
         }
 
-        var nextFieldName = fieldNames.get(1);
+        var fc = meta.field().get(parent);
+        if (fc == null) {
+            fc = meta.field().getType().getConstructor().newInstance();
+            meta.field().set(parent, fc);
+            // unchecked cast because we know that `fc` is a `FeaturesBase` instance,
+            // since it exists in the memo
+            ((FeaturesBase) fc).setFqn(
+                    rootNamespace + "." + String.join(".", fieldNames.subList(0, fieldNamesIdx + 1))
+            );
+        }
+
+        var nextFieldIdx = fieldNamesIdx + 1;
+        var nextFieldName = fieldNames.get(nextFieldIdx);
         List<FieldMeta> metas = nextMemo.resolvedNameToFieldMetas.get(nextFieldName);
         if (metas == null) {
             throw new Exception(
@@ -300,7 +316,9 @@ public class Initializer {
             List<FieldSetter> res = initScopedInner(
                 fc,
                 nextMeta,
-                fieldNames.subList(1, fieldNames.size()),
+                rootNamespace,
+                fieldNames,
+                nextFieldIdx,
                 memo
             );
             targetFields.addAll(res);
@@ -434,9 +452,9 @@ public class Initializer {
 
 
     public static void buildNamespaceMemo(
-            Class<?> cls,
-            Map<Class<?>, NamespaceMemoItem> classMemo,
-            Set<String> visitedNamespaces
+        Class<?> cls,
+        Map<Class<?>, NamespaceMemoItem> classMemo,
+        Set<String> visitedNamespaces
     ) throws Exception {
         if (FeaturesBase.class.isAssignableFrom(cls)) {
             @SuppressWarnings("unchecked")
@@ -457,9 +475,9 @@ public class Initializer {
                         Feature.class.isAssignableFrom(fieldType) &&
                         List.class.isAssignableFrom(unwrapFeatureType(genericType))
                 );
-                FieldMeta meta = new FieldMeta(field, isList ? getUnderlyingClass(genericType) : null);
-
                 var resolvedName = getResolvedName(field);
+                FieldMeta meta = new FieldMeta(field, isList ? getUnderlyingClass(genericType) : null, resolvedName);
+
                 if (!memoItem.resolvedNameToFieldMetas.containsKey(resolvedName)) {
                     memoItem.resolvedNameToFieldMetas.put(resolvedName, new ArrayList<>());
                 }

@@ -76,6 +76,8 @@ public class Unmarshaller {
             }
 
             List<String> fqnParts = Arrays.asList(fqn.split("\\."));
+            String namespace = fqnParts.get(0);
+            var fieldNames = fqnParts.subList(1, fqnParts.size());
             for (FeaturesClass target : targets) {
                 Field localField = getFieldFromFqn(localClass, localFqn);
                 Feature<?> localKeyFeature = (Feature<?>) localField.get(target);
@@ -83,8 +85,7 @@ public class Unmarshaller {
                     throw new Exception("Error while grouping has-many result: local join key is null");
                 }
 
-                var fieldNames = fqnParts.subList(1, fqnParts.size());
-                List<FieldSetter> setters = Initializer.initScoped(target, fieldNames, memo);
+                List<FieldSetter> setters = Initializer.initScoped(target, namespace, fieldNames, memo);
                 for (FieldSetter s : setters) {
                     if (s.fieldMetas().size() != 1) {
                         throw new Exception("Expected exactly one field for has-many field: " + fqn);
@@ -125,6 +126,7 @@ public class Unmarshaller {
 
         // Cache repeated work
         List<org.apache.arrow.vector.types.pojo.Field> fields = table.getSchema().getFields();
+        List<String> namespaces = new ArrayList<>(fields.size());
         List<List<String>> fieldNames = new ArrayList<>(fields.size());
         var shouldSkip = new boolean[fields.size()];
         for (int j = 0; j < fields.size(); j++) {
@@ -135,6 +137,7 @@ public class Unmarshaller {
             if (fqnParts.size() < 2 && !shouldSkip[j]) {
                 throw new Exception("FQN of feature must have at least two parts i.e. {namespace}.{name}, found " + fqn);
             }
+            namespaces.add(fqnParts.get(0));
             fieldNames.add(fqnParts.subList(1, fqnParts.size()));
         }
 
@@ -147,12 +150,14 @@ public class Unmarshaller {
                         continue;
                     }
                     Object value = getValueFromFieldVector(root.getVector(col), row);
-                    var fieldSetters = Initializer.initScoped(obj, fieldNames.get(col), memo);
+                    var fieldSetters = Initializer.initScoped(obj, namespaces.get(col), fieldNames.get(col), memo);
                     for (var setter : fieldSetters) {
                         for (var fieldMeta : setter.fieldMetas()) {
                             var richVal = primitiveToRich(value, fieldMeta, memo);
                             if (richVal instanceof Feature) {
                                 ((Feature<?>) richVal).setFqn(fields.get(col).getName());
+                            } else if (richVal instanceof StructFeaturesClass) {
+                                ((StructFeaturesClass) richVal).setFqn(fields.get(col).getName());
                             }
                             fieldMeta.field().set(setter.parent(), richVal);
                         }
