@@ -70,10 +70,4 @@ public class TestUtils {
         assertEquals("ml_foo", Utils.chalkpySnakeCase("MLFoo"));
         assertEquals("fish_paste", Utils.chalkpySnakeCase("Fish_Paste"));
     }
-
-    @Test
-    public void testToProto() {
-
-    }
-
 }

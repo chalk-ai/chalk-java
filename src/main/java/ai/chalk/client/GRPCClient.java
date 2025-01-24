@@ -243,9 +243,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 plannerOptions.put(entry.getKey(), Utils.toProto(entry.getValue()));
             }
         }
-        if (params.getPlannerOptions() != null) {
-            context.putAllOptions(plannerOptions);
-        }
+        context.putAllOptions(plannerOptions);
 
         var options = OnlineQueryResponseOptions.newBuilder()
                 .setIncludeMeta(params.isIncludeMeta() || params.isExplain())
