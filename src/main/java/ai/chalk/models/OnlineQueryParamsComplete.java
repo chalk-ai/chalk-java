@@ -47,7 +47,8 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             String correlationId,
             String branch,
             List<ZonedDateTime> now,
-            List<String> requiredResolverTags
+            List<String> requiredResolverTags,
+            Map<String, Object> plannerOptions
     ) {
         super(
             inputs,
@@ -65,7 +66,8 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             correlationId,
             branch,
             now,
-            requiredResolverTags
+            requiredResolverTags,
+            plannerOptions
         );
     }
 }
