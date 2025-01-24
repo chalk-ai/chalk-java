@@ -65,6 +65,9 @@ public class BytesProducer {
         if (params.getTags() != null) {
             jsonHeader.put("tags", params.getTags());
         }
+        if (params.getPlannerOptions() != null) {
+            jsonHeader.put("planner_options", params.getPlannerOptions());
+        }
 
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         DataOutputStream ioWriter = new DataOutputStream(result);

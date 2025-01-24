@@ -128,6 +128,12 @@ public class OnlineQueryParams {
      */
     private List<String> requiredResolverTags;
 
+    /**
+     * Map of additional options to pass to the Chalk query engine. Values may be provided
+     * as part of conversations with Chalk Support to enable or disable specific functionality.
+     */
+    private Map<String, Object> plannerOptions;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -148,6 +154,7 @@ public class OnlineQueryParams {
         protected String branch;
         protected List<ZonedDateTime> now;
         protected List<String> requiredResolverTags;
+        protected Map<String, Object> plannerOptions;
 
         protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
@@ -258,6 +265,22 @@ public class OnlineQueryParams {
             return this.withRequiredResolverTags(Arrays.asList(requiredResolverTag));
         }
 
+        public T withPlannerOptions(Map<String, Object> plannerOptions) {
+            if (this.plannerOptions == null) {
+                this.plannerOptions = new HashMap<>();
+            }
+            this.plannerOptions.putAll(plannerOptions);
+            return (T) this;
+        }
+
+        public T withPlannerOption(String key, Object value) {
+            if (this.plannerOptions == null) {
+                this.plannerOptions = new HashMap<>();
+            }
+            this.plannerOptions.put(key, value);
+            return (T) this;
+        }
+
         // withNow takes a list of ZonedDateTimes and adds them to the now list
         public T withNow(List<ZonedDateTime> now) {
             if (this.now == null) {
@@ -338,7 +361,8 @@ public class OnlineQueryParams {
                     correlationId,
                     branch,
                     now,
-                    requiredResolverTags
+                    requiredResolverTags,
+                    plannerOptions
             );
         }
     }
@@ -360,7 +384,8 @@ public class OnlineQueryParams {
             String correlationId,
             String branch,
             List<ZonedDateTime> now,
-            List<String> requiredResolverTags
+            List<String> requiredResolverTags,
+            Map<String, Object> plannerOptions
         ) {
             super(
                 inputs,
@@ -378,7 +403,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
 
@@ -432,7 +458,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
     }
@@ -454,7 +481,8 @@ public class OnlineQueryParams {
             String correlationId,
             String branch,
             List<ZonedDateTime> now,
-            List<String> requiredResolverTags
+            List<String> requiredResolverTags,
+            Map<String, Object> plannerOptions
         ) {
             super(
                 inputs,
@@ -472,7 +500,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
 
@@ -493,7 +522,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
                 );
         }
 
@@ -548,7 +578,8 @@ public class OnlineQueryParams {
                 String correlationId,
                 String branch,
                 List<ZonedDateTime> now,
-                List<String> requiredResolverTags
+                List<String> requiredResolverTags,
+                Map<String, Object> plannerOptions
         ) {
             super(
                 inputs,
@@ -566,7 +597,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
 
@@ -588,7 +620,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
 
@@ -645,7 +678,8 @@ public class OnlineQueryParams {
                 String correlationId,
                 String branch,
                 List<ZonedDateTime> now,
-                List<String> requiredResolverTags
+                List<String> requiredResolverTags,
+                Map<String, Object> plannerOptions
         ) {
             super(
                 inputs,
@@ -663,7 +697,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
             );
         }
 
@@ -684,7 +719,8 @@ public class OnlineQueryParams {
                     correlationId,
                     branch,
                     now,
-                    requiredResolverTags
+                    requiredResolverTags,
+                    plannerOptions
                 );
         }
 
@@ -705,7 +741,8 @@ public class OnlineQueryParams {
                 correlationId,
                 branch,
                 now,
-                requiredResolverTags
+                requiredResolverTags,
+                plannerOptions
          );
         }
 

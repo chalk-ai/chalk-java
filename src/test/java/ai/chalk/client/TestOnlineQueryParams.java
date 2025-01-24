@@ -260,6 +260,9 @@ public class TestOnlineQueryParams extends AllocatorTest {
         var now = Arrays.asList(ZonedDateTime.now(), ZonedDateTime.now().minusDays(1));
         var requiredResolverTags = List.of("prod1", "prod2");
         var queryNameVersion = "queryNameVersionAbc";
+        var plannerOptions = new HashMap<String, Object>() {{
+            put("planner_version", "2");
+        }};
 
         // Test BuilderSeed with optional params
         OnlineQueryParams.BuilderSeed builderSeed = OnlineQueryParams.builder()
@@ -281,7 +284,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withBranch("abc")
                 .withNow(now)
                 .withRequiredResolverTags(requiredResolverTags)
-                .withQueryNameVersion(queryNameVersion);
+                .withQueryNameVersion(queryNameVersion)
+                .withPlannerOptions(plannerOptions);
         OnlineQueryParams paramsSeed = builderSeed.build();
         assert paramsSeed.getStaleness().get("user.id").equals(Duration.ofSeconds(1000));
         assert paramsSeed.getMeta().get("user.id").equals("abc");
@@ -299,6 +303,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsSeed.getNow().equals(now);
         assert paramsSeed.getRequiredResolverTags().equals(requiredResolverTags);
         assert paramsSeed.getQueryNameVersion().equals(queryNameVersion);
+        assert paramsSeed.getPlannerOptions().equals(plannerOptions);
 
 
         // Test BuilderWithInputs with optional params
@@ -323,7 +328,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withBranch("abc")
                 .withNow(now)
                 .withRequiredResolverTags(requiredResolverTags)
-                .withQueryNameVersion(queryNameVersion);
+                .withQueryNameVersion(queryNameVersion)
+                .withPlannerOptions(plannerOptions);
 
         OnlineQueryParams paramsWithInputs = builderWithInputs.build();
         assert paramsWithInputs.getInputs().get("user.id").equals(userIds);
@@ -346,6 +352,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsWithInputs.getNow().equals(now);
         assert paramsWithInputs.getRequiredResolverTags().equals(requiredResolverTags);
         assert paramsWithInputs.getQueryNameVersion().equals(queryNameVersion);
+        assert paramsWithInputs.getPlannerOptions().equals(plannerOptions);
 
         // Test BuilderWithOutputs with optional params
         OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
@@ -366,7 +373,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withPreviewDeploymentId("abc")
                 .withQueryName("abc")
                 .withCorrelationId("abc")
-                .withBranch("abc");
+                .withBranch("abc")
+                .withPlannerOptions(plannerOptions);
 
         OnlineQueryParams paramsWithOutputs = builderWithOutputs.build();
         assert paramsWithOutputs.getOutputs().get(0).equals("user.today");
@@ -384,6 +392,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsWithOutputs.getPreviewDeploymentId().equals("abc");
         assert paramsWithOutputs.getQueryName().equals("abc");
         assert paramsWithOutputs.getCorrelationId().equals("abc");
+        assert paramsWithOutputs.getPlannerOptions().equals(plannerOptions);
+
 
         // Test BuilderComplete with optional params
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
@@ -408,7 +418,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withBranch("abc")
                 .withNow(now)
                 .withRequiredResolverTags(requiredResolverTags)
-                .withQueryNameVersion(queryNameVersion);
+                .withQueryNameVersion(queryNameVersion)
+                .withPlannerOptions(plannerOptions);
 
         OnlineQueryParamsComplete paramsComplete = builderComplete.build();
         assert paramsComplete.getInputs().get("user.id").equals(userIds);
@@ -433,6 +444,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsComplete.getNow().equals(now);
         assert paramsComplete.getRequiredResolverTags().equals(requiredResolverTags);
         assert paramsComplete.getQueryNameVersion().equals(queryNameVersion);
+        assert paramsComplete.getPlannerOptions().equals(plannerOptions);
 
         // Test serialization
         BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);

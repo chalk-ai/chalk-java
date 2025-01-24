@@ -3,6 +3,10 @@ package ai.chalk.internal;
 import ai.chalk.features.Name;
 import ai.chalk.features.Versioned;
 import ai.chalk.features.WindowedFeaturesClass;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.NullValue;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -12,6 +16,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -232,5 +237,37 @@ public class Utils {
             return "0s";
         }
         return res;
+    }
+
+    public static Value toProto(Object obj) {
+        Value.Builder valueBuilder = Value.newBuilder();
+        if (obj == null) {
+            valueBuilder.setNullValue(NullValue.NULL_VALUE);
+        } else if (obj instanceof String) {
+            valueBuilder.setStringValue((String) obj);
+        } else if (obj instanceof Number) {
+            valueBuilder.setNumberValue(((Number) obj).doubleValue());
+        } else if (obj instanceof Boolean) {
+            valueBuilder.setBoolValue((Boolean) obj);
+        } else if (obj instanceof Map) {
+            Struct.Builder structBuilder = Struct.newBuilder();
+            Map<?, ?> map = (Map<?, ?>) obj;
+            for (Map.Entry<?, ?> entry : map.entrySet()) {
+                String key = entry.getKey().toString();
+                Value value = toProto(entry.getValue());
+                structBuilder.putFields(key, value);
+            }
+            valueBuilder.setStructValue(structBuilder.build());
+        } else if (obj instanceof List) {
+            ListValue.Builder listBuilder = ListValue.newBuilder();
+            List<?> list = (List<?>) obj;
+            for (Object item : list) {
+                listBuilder.addValues(toProto(item));
+            }
+            valueBuilder.setListValue(listBuilder.build());
+        } else {
+            throw new IllegalArgumentException("Unsupported object type: " + obj.getClass().getName());
+        }
+        return valueBuilder.build();
     }
 }
