@@ -15,14 +15,14 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
     private final double retryBackoffMultiplier;
 
     public RefreshingRetryInterceptor(
-            Supplier<ManagedChannel> channelSupplier,
-
-            int retryAttempts,
-            long retryIntervalMillis,
-            double retryBackoffMultiplier
+        Supplier<ManagedChannel> channelSupplier,
+        AtomicReference<ManagedChannel> currentChannel,
+        int retryAttempts,
+        long retryIntervalMillis,
+        double retryBackoffMultiplier
     ) {
         this.channelSupplier = channelSupplier;
-        this.channel = new AtomicReference<>(channelSupplier.get());
+        this.channel = currentChannel;
         this.retryAttempts = retryAttempts;
         this.retryIntervalMillis = retryIntervalMillis;
         this.retryBackoffMultiplier = retryBackoffMultiplier;

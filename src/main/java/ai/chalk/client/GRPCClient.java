@@ -37,7 +37,9 @@ import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 public class GRPCClient implements ChalkClient, AutoCloseable {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
-    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+
+    // Creating query stubs are cheap (channels are expensive)
+    private final Supplier<QueryServiceGrpc.QueryServiceBlockingStub> queryStubSupplier;
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
@@ -47,6 +49,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private final String branchId;
 
     private final Supplier<ManagedChannel> authenticatedServerChannelSupplier;
+
+    private final AtomicReference<ManagedChannel> currentEngineChannel;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -143,13 +147,12 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 Map.of(),
                                 tokenRefresher,
                                 builder.getDeploymentTag()
-                        ),
+                        )
                 )
-                .intercept()
                 .build();
 
-        Channel authenticatedEngineChannel = authenticatedServerChannelSupplier.get();
-        this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+        currentEngineChannel = new AtomicReference<>(authenticatedServerChannelSupplier.get());
+        this.queryStubSupplier = () -> QueryServiceGrpc.newBlockingStub(this.currentEngineChannel.get());
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -181,7 +184,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private RefreshingRetryInterceptor getRefreshingRetryInterceptor() {
         // Current behavior exhibited by python grpc client is to retry once, instantly
-        return new RefreshingRetryInterceptor(this.authenticatedServerChannelSupplier, 1, 0, 2.0);
+        return new RefreshingRetryInterceptor(
+                this.authenticatedServerChannelSupplier,
+                this.currentEngineChannel,
+                1,
+                0,
+                2.0
+        );
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -267,9 +276,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStub.withInterceptors(
+        OnlineQueryBulkResponse response = this.queryStubSupplier.get().withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                this.getRequestHeaderInterceptor(params.getEnvironmentId())
+                this.getRequestHeaderInterceptor(params.getEnvironmentId()),
+                this.getRefreshingRetryInterceptor()
         ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
@@ -339,7 +349,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.queryStub.withInterceptors(
+        UploadFeaturesResponse response = this.queryStubSupplier.get().withInterceptors(
             this.getRequestHeaderInterceptor(params.getEnvironmentId()),
             this.getRefreshingRetryInterceptor()
         ).uploadFeatures(
