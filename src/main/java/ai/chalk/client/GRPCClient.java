@@ -17,13 +17,7 @@ import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
-import io.grpc.Channel;
-import io.grpc.ChannelCredentials;
-import io.grpc.Grpc;
-import io.grpc.InsecureChannelCredentials;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.Metadata;
-import io.grpc.TlsChannelCredentials;
+import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
@@ -36,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
@@ -50,6 +45,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private final String resolvedEnvironmentId;
     private final String branchId;
+
+    private final Supplier<ManagedChannel> authenticatedServerChannelSupplier;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -136,7 +133,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
         }
         engineHost = engineHost.replaceFirst("^https?://", "");
-        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
+
+        String finalEngineHost = engineHost;
+        authenticatedServerChannelSupplier = () -> Grpc.newChannelBuilder(finalEngineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -144,9 +143,12 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 Map.of(),
                                 tokenRefresher,
                                 builder.getDeploymentTag()
-                        )
+                        ),
                 )
+                .intercept()
                 .build();
+
+        Channel authenticatedEngineChannel = authenticatedServerChannelSupplier.get();
         this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
     }
 
@@ -175,6 +177,11 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         @Nullable String environmentIdOverride
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
+    }
+
+    private RefreshingRetryInterceptor getRefreshingRetryInterceptor() {
+        // Current behavior exhibited by python grpc client is to retry once, instantly
+        return new RefreshingRetryInterceptor(this.authenticatedServerChannelSupplier, 1, 0, 2.0);
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -333,7 +340,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         UploadFeaturesResponse response = this.queryStub.withInterceptors(
-            this.getRequestHeaderInterceptor(params.getEnvironmentId())
+            this.getRequestHeaderInterceptor(params.getEnvironmentId()),
+            this.getRefreshingRetryInterceptor()
         ).uploadFeatures(
             UploadFeaturesRequest.newBuilder()
                 .setInputsTable(ByteString.copyFrom(tableBytes))

@@ -16,6 +16,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
 
     public RefreshingRetryInterceptor(
             Supplier<ManagedChannel> channelSupplier,
+
             int retryAttempts,
             long retryIntervalMillis,
             double retryBackoffMultiplier
@@ -87,6 +88,6 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
     }
 
     public ManagedChannel getChannel() {
-        return channel;
+        return channel.get();
     }
 }
