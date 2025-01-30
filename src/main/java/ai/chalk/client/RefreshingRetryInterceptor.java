@@ -3,11 +3,12 @@ package ai.chalk.client;
 import io.grpc.*;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
 
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 public class RefreshingRetryInterceptor implements ClientInterceptor {
     private final Supplier<ManagedChannel> channelSupplier;
-    private volatile ManagedChannel channel;
+    private final AtomicReference<ManagedChannel> channel;
 
     private final int retryAttempts;
     private final long retryIntervalMillis;
@@ -20,7 +21,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
             double retryBackoffMultiplier
     ) {
         this.channelSupplier = channelSupplier;
-        this.channel = channelSupplier.get();
+        this.channel = new AtomicReference<>(channelSupplier.get());
         this.retryAttempts = retryAttempts;
         this.retryIntervalMillis = retryIntervalMillis;
         this.retryBackoffMultiplier = retryBackoffMultiplier;
@@ -70,10 +71,12 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                         }
-                        ManagedChannel oldChannel = channel;
-                        channel = channelSupplier.get(); // Recreate channel
-                        oldChannel.shutdownNow();
-                        ClientCall<ReqT, RespT> retryCall = channel.newCall(method, callOptions);
+                        ManagedChannel oldChannel = channel.get();
+                        ManagedChannel newChannel = channelSupplier.get();
+                        if (channel.compareAndSet(oldChannel, newChannel)) {
+                            oldChannel.shutdownNow();
+                        }
+                        ClientCall<ReqT, RespT> retryCall = newChannel.newCall(method, callOptions);
                         retryCall.start(this, headers);
                     } else {
                         responseListener.onClose(status, trailers);
