@@ -31,60 +31,52 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
             MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
-        return new RetryingClientCall<>(method, callOptions, next, retryAttempts, retryIntervalMillis, retryBackoffMultiplier);
-    }
+        return new SimpleForwardingClientCall<>(next.newCall(method, callOptions)) {
 
-    private class RetryingClientCall<ReqT, RespT> extends SimpleForwardingClientCall<ReqT, RespT> {
-        private final MethodDescriptor<ReqT, RespT> method;
-        private final CallOptions callOptions;
-        private final int retryAttempts;
-        private final long retryIntervalMillis;
-        private final double retryBackoffMultiplier;
+            @Override
+            public void start(Listener<RespT> responseListener, Metadata headers) {
+                super.start(new Listener<RespT>() {
+                    private int attempt = 0;
 
-        protected RetryingClientCall(
-                MethodDescriptor<ReqT, RespT> method,
-                CallOptions callOptions,
-                Channel next,
-                int retryAttempts,
-                long retryIntervalMillis,
-                double retryBackoffMultiplier
-        ) {
-            super(next.newCall(method, callOptions));
-            this.method = method;
-            this.callOptions = callOptions;
-            this.retryAttempts = retryAttempts;
-            this.retryIntervalMillis = retryIntervalMillis;
-            this.retryBackoffMultiplier = retryBackoffMultiplier;
-        }
-
-        @Override
-        public void start(Listener<RespT> responseListener, Metadata headers) {
-            super.start(new Listener<>() {
-                private int attempt = 0;
-
-                @Override
-                public void onClose(Status status, Metadata trailers) {
-                    if (status.getCode() == Status.Code.UNAVAILABLE && attempt < retryAttempts) {
-                        long backOffMillis = (long) (retryIntervalMillis * Math.pow(retryBackoffMultiplier, attempt));
-                        attempt++;
-                        try {
-                            Thread.sleep(backOffMillis);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        }
-                        ManagedChannel oldChannel = channel.get();
-                        ManagedChannel newChannel = channelSupplier.get();
-                        if (channel.compareAndSet(oldChannel, newChannel)) {
-                            oldChannel.shutdownNow();
-                        }
-                        ClientCall<ReqT, RespT> retryCall = newChannel.newCall(method, callOptions);
-                        retryCall.start(this, headers);
-                    } else {
-                        responseListener.onClose(status, trailers);
+                    @Override
+                    public void onMessage(RespT message) {
+                        responseListener.onMessage(message); // Forward response properly
                     }
-                }
-            }, headers);
-        }
+
+                    @Override
+                    public void onReady() {
+                        responseListener.onReady();
+                    }
+
+                    @Override
+                    public void onHeaders(Metadata headers) {
+                        responseListener.onHeaders(headers);
+                    }
+
+                    @Override
+                    public void onClose(Status status, Metadata trailers) {
+                        if (status.getCode() == Status.Code.UNAVAILABLE && attempt < retryAttempts) {
+                            long backOffMillis = (long) (retryIntervalMillis * Math.pow(retryBackoffMultiplier, attempt));
+                            attempt++;
+                            try {
+                                Thread.sleep(backOffMillis);
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                            }
+                            ManagedChannel oldChannel = channel.get();
+                            ManagedChannel newChannel = channelSupplier.get();
+                            if (channel.compareAndSet(oldChannel, newChannel)) {
+                                oldChannel.shutdownNow();
+                            }
+                            ClientCall<ReqT, RespT> retryCall = newChannel.newCall(method, callOptions);
+                            retryCall.start(this, headers);
+                        } else {
+                            responseListener.onClose(status, trailers);
+                        }
+                    }
+                }, headers);
+            }
+        };
     }
 
     public ManagedChannel getChannel() {
