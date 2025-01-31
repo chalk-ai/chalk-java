@@ -155,7 +155,6 @@ public class TestChalkClient {
             assert users.length == userIds.length;
             assert users[0].socure_score.getValue().equals(123.0);
         }
-        ;
     }
 }
 
