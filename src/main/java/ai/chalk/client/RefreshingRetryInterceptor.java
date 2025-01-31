@@ -35,7 +35,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
 
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
-                super.start(new Listener<RespT>() {
+                super.start(new Listener<>() {
                     private int attempt = 0;
 
                     @Override
