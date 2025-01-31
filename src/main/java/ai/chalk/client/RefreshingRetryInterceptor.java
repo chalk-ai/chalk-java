@@ -69,7 +69,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                         if (status.getCode() == Status.Code.UNAVAILABLE && attempt.get() < retryAttempts) {
                             long backOffMillis = (long) (retryIntervalMillis * Math.pow(retryBackoffMultiplier, attempt.get()));
                             attempt.set(attempt.get() + 1);
-                            logger.log(System.Logger.Level.INFO, "Performing manual channel refresh in " + backOffMillis + "ms...");
+                            logger.log(System.Logger.Level.INFO, "Server was UNAVAILABLE, performing manual channel refresh in " + backOffMillis + "ms...");
                             try {
                                 Thread.sleep(backOffMillis);
                             } catch (InterruptedException e) {

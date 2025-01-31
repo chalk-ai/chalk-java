@@ -25,10 +25,7 @@ import org.apache.arrow.vector.table.Table;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
@@ -138,6 +135,24 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
         engineHost = engineHost.replaceFirst("^https?://", "");
 
+        /**
+         * Create static retry policy (TODO: make it configurable)
+         */
+        Map<String, Object> defaultServiceConfig = new HashMap<>();
+        Map<String, Object> methodConfig = new HashMap<>();
+        Map<String, Object> retryPolicy = new HashMap<>();
+
+        retryPolicy.put("maxAttempts", 3.0);
+        retryPolicy.put("initialBackoff", "0.01s");
+        retryPolicy.put("maxBackoff", "0.1s");
+        retryPolicy.put("backoffMultiplier", 5.0);
+        retryPolicy.put("retryableStatusCodes", Collections.singletonList("UNAVAILABLE"));
+
+        methodConfig.put("name", Collections.singletonList(Map.of("service", "chalk.engine.v1.QueryService")));
+        methodConfig.put("retryPolicy", retryPolicy);
+
+        defaultServiceConfig.put("methodConfig", Collections.singletonList(methodConfig));
+
         String finalEngineHost = engineHost;
         authenticatedServerChannelSupplier = () -> Grpc.newChannelBuilder(finalEngineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
@@ -149,6 +164,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 builder.getDeploymentTag()
                         )
                 )
+                .defaultServiceConfig(defaultServiceConfig)
                 .build();
 
         currentEngineChannel = new AtomicReference<>(authenticatedServerChannelSupplier.get());
