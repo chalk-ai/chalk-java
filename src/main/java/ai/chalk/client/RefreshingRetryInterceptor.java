@@ -67,16 +67,14 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                             }
 
                             ManagedChannel oldChannel = channel.get();
-
-                            if (oldChannel.isShutdown() || oldChannel.isTerminated()) {
-                                synchronized (channelLock) {
-                                    if (channel.get() == oldChannel) {
-                                        ManagedChannel newChannel = channelSupplier.get();
-                                        if (channel.compareAndSet(oldChannel, newChannel)) {
-                                            oldChannel.shutdownNow();
-                                        } else {
-                                            newChannel.shutdownNow();
-                                        }
+                            synchronized (channelLock) {
+                                if (channel.get() == oldChannel) {
+                                    ManagedChannel newChannel = channelSupplier.get();
+                                    if (channel.compareAndSet(oldChannel, newChannel)) {
+                                        oldChannel.shutdownNow();
+                                    } else {
+                                        // not sure if we can ever get here, better safe than sorry
+                                        newChannel.shutdownNow();
                                     }
                                 }
                             }
