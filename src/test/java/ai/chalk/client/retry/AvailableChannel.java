@@ -18,6 +18,7 @@ public class AvailableChannel extends ManagedChannel  {
         return new ClientCall<>() {
             @Override
             public void start(Listener<ResponseT> responseListener, Metadata headers) {
+                // TODO: It would be good to make this an actual mock server
                 underlying.newCall(methodDescriptor, callOptions).start(responseListener, headers);
                 responseListener.onClose(Status.OK.withDescription("Mocked Available"), new Metadata());
             }

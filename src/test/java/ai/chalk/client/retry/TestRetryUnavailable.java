@@ -62,6 +62,7 @@ public class TestRetryUnavailable {
         try {
             PingResponse resp = queryStubSupplier.get().withInterceptors(retryInterceptor).ping(PingRequest.newBuilder().build());
         } catch (StatusRuntimeException e) {
+            // TODO: Make this not fail: create an actual mock server
             assert e.getStatus().getCode() == Status.Code.INTERNAL;
         }
         long endTime = System.currentTimeMillis();

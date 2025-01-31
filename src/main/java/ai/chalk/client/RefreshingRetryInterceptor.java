@@ -14,6 +14,8 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
     private final long retryIntervalMillis;
     private final double retryBackoffMultiplier;
 
+    private final Object channelLock = new Object();
+
     public RefreshingRetryInterceptor(
         Supplier<ManagedChannel> channelSupplier,
         AtomicReference<ManagedChannel> currentChannel,
@@ -63,12 +65,22 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }
+
                             ManagedChannel oldChannel = channel.get();
-                            ManagedChannel newChannel = channelSupplier.get();
-                            if (channel.compareAndSet(oldChannel, newChannel)) {
-                                oldChannel.shutdownNow();
+
+                            if (oldChannel.isShutdown() || oldChannel.isTerminated()) {
+                                synchronized (channelLock) {
+                                    if (channel.get() == oldChannel) {
+                                        ManagedChannel newChannel = channelSupplier.get();
+                                        if (channel.compareAndSet(oldChannel, newChannel)) {
+                                            oldChannel.shutdownNow();
+                                        } else {
+                                            newChannel.shutdownNow();
+                                        }
+                                    }
+                                }
                             }
-                            ClientCall<ReqT, RespT> retryCall = newChannel.newCall(method, callOptions);
+                            ClientCall<ReqT, RespT> retryCall = channel.get().newCall(method, callOptions);
                             retryCall.start(this, headers);
                         } else {
                             responseListener.onClose(status, trailers);
