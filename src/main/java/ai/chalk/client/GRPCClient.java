@@ -17,13 +17,7 @@ import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
-import io.grpc.Channel;
-import io.grpc.ChannelCredentials;
-import io.grpc.Grpc;
-import io.grpc.InsecureChannelCredentials;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.Metadata;
-import io.grpc.TlsChannelCredentials;
+import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
@@ -31,18 +25,18 @@ import org.apache.arrow.vector.table.Table;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
 public class GRPCClient implements ChalkClient, AutoCloseable {
     private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
     private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
-    private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+
+    // Creating query stubs are cheap (channels are expensive)
+    private final Supplier<QueryServiceGrpc.QueryServiceBlockingStub> queryStubSupplier;
 
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
@@ -50,6 +44,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private final String resolvedEnvironmentId;
     private final String branchId;
+
+    private final Supplier<ManagedChannel> authenticatedServerChannelSupplier;
+
+    private final AtomicReference<ManagedChannel> currentEngineChannel;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -136,7 +134,27 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
         }
         engineHost = engineHost.replaceFirst("^https?://", "");
-        Channel authenticatedEngineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
+
+        /**
+         * Create static retry policy (TODO: make it configurable)
+         */
+        Map<String, Object> defaultServiceConfig = new HashMap<>();
+        Map<String, Object> methodConfig = new HashMap<>();
+        Map<String, Object> retryPolicy = new HashMap<>();
+
+        retryPolicy.put("maxAttempts", 3.0);
+        retryPolicy.put("initialBackoff", "0.01s");
+        retryPolicy.put("maxBackoff", "0.1s");
+        retryPolicy.put("backoffMultiplier", 5.0);
+        retryPolicy.put("retryableStatusCodes", Collections.singletonList("UNAVAILABLE"));
+
+        methodConfig.put("name", Collections.singletonList(Map.of("service", "chalk.engine.v1.QueryService")));
+        methodConfig.put("retryPolicy", retryPolicy);
+
+        defaultServiceConfig.put("methodConfig", Collections.singletonList(methodConfig));
+
+        String finalEngineHost = engineHost;
+        authenticatedServerChannelSupplier = () -> Grpc.newChannelBuilder(finalEngineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -146,8 +164,11 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                                 builder.getDeploymentTag()
                         )
                 )
+                .defaultServiceConfig(defaultServiceConfig)
                 .build();
-        this.queryStub = QueryServiceGrpc.newBlockingStub(authenticatedEngineChannel);
+
+        currentEngineChannel = new AtomicReference<>(authenticatedServerChannelSupplier.get());
+        this.queryStubSupplier = () -> QueryServiceGrpc.newBlockingStub(this.currentEngineChannel.get());
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -175,6 +196,17 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         @Nullable String environmentIdOverride
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
+    }
+
+    private RefreshingRetryInterceptor getEngineSingleRefreshingRetryInterceptor() {
+        // Create interceptor for engine calls that retries once, instantly, which is the behavior exhibited by the python client.
+        return new RefreshingRetryInterceptor(
+                this.authenticatedServerChannelSupplier,
+                this.currentEngineChannel,
+                3,
+                10,
+                5.0
+        );
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
@@ -260,9 +292,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStub.withInterceptors(
+        OnlineQueryBulkResponse response = this.queryStubSupplier.get().withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                this.getRequestHeaderInterceptor(params.getEnvironmentId())
+                this.getRequestHeaderInterceptor(params.getEnvironmentId()),
+                this.getEngineSingleRefreshingRetryInterceptor()
         ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
@@ -332,8 +365,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.queryStub.withInterceptors(
-            this.getRequestHeaderInterceptor(params.getEnvironmentId())
+        UploadFeaturesResponse response = this.queryStubSupplier.get().withInterceptors(
+            this.getRequestHeaderInterceptor(params.getEnvironmentId()),
+            this.getEngineSingleRefreshingRetryInterceptor()
         ).uploadFeatures(
             UploadFeaturesRequest.newBuilder()
                 .setInputsTable(ByteString.copyFrom(tableBytes))
