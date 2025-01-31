@@ -182,8 +182,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
     }
 
-    private RefreshingRetryInterceptor getRefreshingRetryInterceptor() {
-        // Current behavior exhibited by python grpc client is to retry once, instantly
+    private RefreshingRetryInterceptor getEngineSingleRefreshingRetryInterceptor() {
+        // Create interceptor for engine calls that retries once, instantly, which is the behavior exhibited by the python client.
         return new RefreshingRetryInterceptor(
                 this.authenticatedServerChannelSupplier,
                 this.currentEngineChannel,
@@ -279,7 +279,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         OnlineQueryBulkResponse response = this.queryStubSupplier.get().withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
                 this.getRequestHeaderInterceptor(params.getEnvironmentId()),
-                this.getRefreshingRetryInterceptor()
+                this.getEngineSingleRefreshingRetryInterceptor()
         ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
@@ -351,7 +351,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         UploadFeaturesResponse response = this.queryStubSupplier.get().withInterceptors(
             this.getRequestHeaderInterceptor(params.getEnvironmentId()),
-            this.getRefreshingRetryInterceptor()
+            this.getEngineSingleRefreshingRetryInterceptor()
         ).uploadFeatures(
             UploadFeaturesRequest.newBuilder()
                 .setInputsTable(ByteString.copyFrom(tableBytes))
