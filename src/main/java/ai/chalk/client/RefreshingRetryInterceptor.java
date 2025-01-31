@@ -40,7 +40,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
 
                     @Override
                     public void onMessage(RespT message) {
-                        responseListener.onMessage(message); // Forward response properly
+                        responseListener.onMessage(message);
                     }
 
                     @Override
