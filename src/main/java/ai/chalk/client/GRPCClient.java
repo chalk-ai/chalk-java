@@ -187,9 +187,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         return new RefreshingRetryInterceptor(
                 this.authenticatedServerChannelSupplier,
                 this.currentEngineChannel,
-                1,
-                0,
-                2.0
+                3,
+                10,
+                5.0
         );
     }
 
