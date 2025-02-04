@@ -24,13 +24,16 @@ jobs:
       - name: Extract Version from GitHub Tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
-      - name: Update README.md with new version
+      - name: Update README.md and gradle.properties with release version
         run: |
           # Replace Gradle version line
           sed -i "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:${VERSION}'|" README.md
 
           # Replace Maven version line
           sed -i "s|<version>[0-9.]*</version>|<version>${VERSION}</version>|" README.md
+          
+          # Replace Gradle properties version
+          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
         env:
           VERSION: ${{ env.VERSION }}
 
@@ -44,15 +47,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Auto-update README with version from gradle.properties"
+          git add README.md gradle.properties
+          git commit -m "Auto-update version before publishing"
           git push
-
-      - name: Run Gradle Release (Version Bumping & Tagging)
-        run: ./gradlew release -Prelease.releaseVersion=$VERSION
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ env.VERSION }}
 
       - name: Publish to Sonatype
         run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
