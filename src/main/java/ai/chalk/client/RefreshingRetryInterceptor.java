@@ -82,10 +82,10 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                                     ManagedChannel newChannel = channelSupplier.get();
                                     logger.log(System.Logger.Level.INFO, "Channel refreshed. Attempting retry...");
                                     if (channel.compareAndSet(oldChannel, newChannel)) {
-                                        oldChannel.shutdownNow();
+                                        oldChannel.shutdown();
                                     } else {
                                         // not sure if we can ever get here, better safe than sorry
-                                        newChannel.shutdownNow();
+                                        newChannel.shutdown();
                                     }
                                 } else {
                                     logger.log(System.Logger.Level.INFO, "Channel was not refreshed, as it was refreshed by a different call. Attempting retry...");
