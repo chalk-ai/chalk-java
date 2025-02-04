@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: "Publish to Maven Central"
+    name: "Release and Publish"
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,36 @@ jobs:
           distribution: 'oracle'
 
       - uses: actions/checkout@v4
+
+      - name: Extract Version from GitHub Tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Update README.md and gradle.properties with release version
+        run: |
+          # Replace Gradle version line
+          sed -i "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:${VERSION}'|" README.md
+
+          # Replace Maven version line
+          sed -i "s|<version>[0-9.]*</version>|<version>${VERSION}</version>|" README.md
+          
+          # Replace Gradle properties version
+          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
+        env:
+          VERSION: ${{ env.VERSION }}
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet || echo "changes=true" >> $GITHUB_ENV
+
+      - name: Commit and push if changed
+        if: env.changes == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md gradle.properties
+          git commit -m "Auto-update version before publishing"
+          git push
 
       - name: Publish to Sonatype
         run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
