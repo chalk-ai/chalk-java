@@ -24,8 +24,8 @@ jobs:
           distribution: 'oracle'
           cache: gradle
 
-      - name: Extract Version from GitHub Tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Extract Latest Version from Git Tags
+        run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Update README.md and gradle.properties with release version
         run: |
