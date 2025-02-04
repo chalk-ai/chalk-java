@@ -22,8 +22,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'oracle'
           cache: gradle
+          distribution: 'oracle'
 
       - name: Extract Latest Version from Git Tags
         run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
