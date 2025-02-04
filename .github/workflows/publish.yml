@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: "Publish to Maven Central"
+    name: "Release and Publish"
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,15 @@ jobs:
           distribution: 'oracle'
 
       - uses: actions/checkout@v4
+
+      - name: Extract Version from GitHub Tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Run Gradle Release (Version Bumping & Tagging)
+        run: ./gradlew release -Prelease.releaseVersion=$VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ env.VERSION }}
 
       - name: Publish to Sonatype
         run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
