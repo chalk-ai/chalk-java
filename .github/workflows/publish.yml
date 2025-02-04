@@ -20,6 +20,8 @@ jobs:
           distribution: 'oracle'
 
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Extract Version from GitHub Tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
