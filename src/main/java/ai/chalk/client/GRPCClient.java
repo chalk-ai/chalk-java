@@ -165,6 +165,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                         )
                 )
                 .defaultServiceConfig(defaultServiceConfig)
+                .enableRetry()
                 .build();
 
         currentEngineChannel = new AtomicReference<>(authenticatedServerChannelSupplier.get());
