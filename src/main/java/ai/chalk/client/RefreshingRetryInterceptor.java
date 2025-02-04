@@ -69,7 +69,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                         if (status.getCode() == Status.Code.UNAVAILABLE && attempt.get() < retryAttempts) {
                             long backOffMillis = (long) (retryIntervalMillis * Math.pow(retryBackoffMultiplier, attempt.get()));
                             attempt.set(attempt.get() + 1);
-                            logger.log(System.Logger.Level.INFO, "Server was UNAVAILABLE, performing manual channel refresh in " + backOffMillis + "ms...");
+                            logger.log(System.Logger.Level.ERROR, "Server was UNAVAILABLE, performing manual channel refresh in " + backOffMillis + "ms...");
                             try {
                                 Thread.sleep(backOffMillis);
                             } catch (InterruptedException e) {
@@ -80,7 +80,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                             synchronized (channelLock) {
                                 if (channel.get() == oldChannel) {
                                     ManagedChannel newChannel = channelSupplier.get();
-                                    logger.log(System.Logger.Level.INFO, "Channel refreshed. Attempting retry...");
+                                    logger.log(System.Logger.Level.ERROR, "Channel refreshed. Attempting retry...");
                                     if (channel.compareAndSet(oldChannel, newChannel)) {
                                         oldChannel.shutdown();
                                     } else {
@@ -88,7 +88,7 @@ public class RefreshingRetryInterceptor implements ClientInterceptor {
                                         newChannel.shutdown();
                                     }
                                 } else {
-                                    logger.log(System.Logger.Level.INFO, "Channel was not refreshed, as it was refreshed by a different call. Attempting retry...");
+                                    logger.log(System.Logger.Level.ERROR, "Channel was not refreshed, as it was refreshed by a different call. Attempting retry...");
                                 }
                             }
                             ManagedChannel newChannel = channel.get();
