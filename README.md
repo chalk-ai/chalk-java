@@ -10,19 +10,19 @@ The official [Chalk](https://chalk.ai) client library for Java.
 ### Installation
 The Java client is hosted on Maven Central.
 #### Gradle
-Add the following dependency block to your `build.gradle`, replacing `VERSION` with the latest version, e.g. `1.0.2`.
+Add the following dependency block to your `build.gradle`.
 ```java
-implementation 'ai.chalk:chalk-java:VERSION'
+implementation 'ai.chalk:chalk-java:1.0.2'
 ```
-    
+
 #### Maven
-Add the following dependency block to your `pom.xml`, replacing `VERSION` with the latest version, e.g. `1.0.2`.
+Add the following dependency block to your `pom.xml`.
 ```xml
 <dependencies>
     <dependency>
         <groupId>ai.chalk</groupId>
         <artifactId>chalk-java</artifactId>
-        <version>VERSION</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencies>
 ```
