@@ -17,9 +17,9 @@ BRANCH_NAME="release/$VERSION"
 git checkout -b "$BRANCH_NAME"
 
 # Update README.md and gradle.properties
-sed -i "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:$VERSION'|" README.md
-sed -i "s|<version>[0-9.]*</version>|<version>$VERSION</version>|" README.md
-sed -i "s/^version=.*/version=$VERSION/" gradle.properties
+sed -i '' "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:$VERSION'|" README.md
+sed -i '' "s|<version>[0-9.]*</version>|<version>$VERSION</version>|" README.md
+sed -i '' "s/^version=.*/version=$VERSION/" gradle.properties
 
 # Commit and push changes
 git add README.md gradle.properties

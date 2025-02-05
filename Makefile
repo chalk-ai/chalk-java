@@ -7,11 +7,10 @@ release:
 		exit 1; \
 	fi
 
-	@echo "Creating GitHub Release for version $(VERSION)..."
-# Ensure the version has a "v" prefix
-	$(eval TAG := $(shell echo $(VERSION) | sed 's/^v*/v/'))
-	@echo "Using tag: $(TAG)"
-	gh release create $(TAG) --generate-notes
+# Run the version update script
+	@echo "Creating Release PR for version $(VERSION)..."
+	@./create-release-pr.sh $(VERSION)
+
 
 # Prevents Make from treating the version as a target
 %:
