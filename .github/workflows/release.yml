@@ -27,6 +27,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "v$VERSION" \
-            --title "Release v$VERSION" \
+            --title "v$VERSION" \
             --generate-notes \
             --target main

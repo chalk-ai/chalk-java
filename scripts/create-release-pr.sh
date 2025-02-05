@@ -2,6 +2,13 @@
 
 set -e  # Exit immediately on error
 
+# Ensure the script is run from the main branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" != "main" ]; then
+  echo "Error: Release script must be run from the main branch."
+  exit 1
+fi
+
 # Ensure a version argument is provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <version>"
