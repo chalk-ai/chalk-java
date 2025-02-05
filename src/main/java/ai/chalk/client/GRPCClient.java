@@ -3,6 +3,7 @@ package ai.chalk.client;
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
+import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
@@ -17,6 +18,7 @@ import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.Value;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
 import org.apache.arrow.memory.RootAllocator;
@@ -256,6 +258,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         if (params.getRequiredResolverTags() != null) {
             context.addAllRequiredResolverTags(params.getRequiredResolverTags());
         }
+        var plannerOptions = new HashMap<String, Value>();
+        if (params.getPlannerOptions() != null) {
+            for (var entry : params.getPlannerOptions().entrySet()) {
+                plannerOptions.put(entry.getKey(), Utils.toProto(entry.getValue()));
+            }
+        }
+        context.putAllOptions(plannerOptions);
 
         var options = OnlineQueryResponseOptions.newBuilder()
                 .setIncludeMeta(params.isIncludeMeta() || params.isExplain())

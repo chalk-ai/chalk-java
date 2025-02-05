@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,36 @@ class TestAllClients {
 
     public ChalkClient getClient(String clientVersion) {
         return clientVersion.equals("gRPC") ? grpcClient : restClient;
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testPlannerOptions(String clientVersion) {
+        ChalkClient c = getClient(clientVersion);
+
+        var validPlannerVersion = "2";
+        var invalidPlannerVersion = "abc";
+        var plannerVersions = List.of(validPlannerVersion, invalidPlannerVersion);
+
+        for (var plannerVersion : plannerVersions) {
+            var plannerOptions = new HashMap<String, Object>();
+            plannerOptions.put("planner_version", plannerVersion);
+            try {
+                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                        .withOutputs(FraudTemplateFeatures.user.socure_score)
+                        .withPlannerOptions(plannerOptions)
+                        .build();
+                c.onlineQuery(params);
+                if (plannerVersion.equals(invalidPlannerVersion)) {
+                    fail("Expected exception for invalid planner version");
+                }
+            } catch (Exception e) {
+                if (plannerVersion.equals(validPlannerVersion)) {
+                    fail("Expected no exception for valid planner version");
+                }
+            }
+        }
     }
 
 
