@@ -9,6 +9,9 @@ if [ "$CURRENT_BRANCH" != "main" ]; then
   exit 1
 fi
 
+# Latest main
+git pull
+
 # Ensure a version argument is provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <version>"
