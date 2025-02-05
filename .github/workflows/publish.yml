@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: "Publish to Maven Central"
-    if: github.event_name == 'release' || github.event.label.name == 'release'
+    if: github.event.label.name == 'release'
     runs-on: ubuntu-latest
 
     steps:
