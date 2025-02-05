@@ -296,7 +296,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         OnlineQueryBulkResponse response = this.queryStubSupplier.get().withInterceptors(
                 MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
                 this.getRequestHeaderInterceptor(params.getEnvironmentId())
-//                this.getEngineSingleRefreshingRetryInterceptor()
         ).onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
@@ -367,8 +366,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
 
         UploadFeaturesResponse response = this.queryStubSupplier.get().withInterceptors(
-            this.getRequestHeaderInterceptor(params.getEnvironmentId())\
-//            this.getEngineSingleRefreshingRetryInterceptor()
+            this.getRequestHeaderInterceptor(params.getEnvironmentId())
         ).uploadFeatures(
             UploadFeaturesRequest.newBuilder()
                 .setInputsTable(ByteString.copyFrom(tableBytes))
