@@ -1,8 +1,10 @@
 name: Publish to Maven Central
 
 on:
-  workflow_dispatch:
-
+  release:
+    types:
+      - "published"
+      
   pull_request:
     types:
       - "labeled"
@@ -10,7 +12,7 @@ on:
 jobs:
   build:
     name: "Publish to Maven Central"
-    if: github.event.label.name == 'release'
+    if: github.event_name == 'release' || github.event.label.name == 'release'
     runs-on: ubuntu-latest
 
     steps:
