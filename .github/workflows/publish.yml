@@ -1,10 +1,6 @@
 name: Publish to Maven Central
 
 on:
-  release:
-    types:
-      - "published"
-      
   pull_request:
     types:
       - "labeled"
