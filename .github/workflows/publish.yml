@@ -25,35 +25,35 @@ jobs:
           cache: gradle
           distribution: 'oracle'
 
-      - name: Extract Latest Version from Git Tags
-        run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Update README.md and gradle.properties with release version
-        run: |
-          # Replace Gradle version line
-          sed -i "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:${VERSION}'|" README.md
-
-          # Replace Maven version line
-          sed -i "s|<version>[0-9.]*</version>|<version>${VERSION}</version>|" README.md
-          
-          # Replace Gradle properties version
-          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
-        env:
-          VERSION: ${{ env.VERSION }}
-
-      - name: Check for changes
-        id: check_changes
-        run: |
-          git diff --quiet || echo "changes=true" >> $GITHUB_ENV
-
-      - name: Commit and push if changed
-        if: env.changes == 'true'
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md gradle.properties
-          git commit -m "Auto-update version before publishing"
-          git push https://x-access-token:${{ secrets.CHALK_JAVA_VERSION_UPDATE_PAT }}@github.com/${{ github.repository }}.git main
+#      - name: Extract Latest Version from Git Tags
+#        run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+#
+#      - name: Update README.md and gradle.properties with release version
+#        run: |
+#          # Replace Gradle version line
+#          sed -i "s|implementation 'ai.chalk:chalk-java:[0-9.]*'|implementation 'ai.chalk:chalk-java:${VERSION}'|" README.md
+#
+#          # Replace Maven version line
+#          sed -i "s|<version>[0-9.]*</version>|<version>${VERSION}</version>|" README.md
+#
+#          # Replace Gradle properties version
+#          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
+#        env:
+#          VERSION: ${{ env.VERSION }}
+#
+#      - name: Check for changes
+#        id: check_changes
+#        run: |
+#          git diff --quiet || echo "changes=true" >> $GITHUB_ENV
+#
+#      - name: Commit and push if changed
+#        if: env.changes == 'true'
+#        run: |
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+#          git add README.md gradle.properties
+#          git commit -m "Auto-update version before publishing"
+#          git push https://x-access-token:${{ secrets.CHALK_JAVA_VERSION_UPDATE_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Publish to Sonatype
         run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
