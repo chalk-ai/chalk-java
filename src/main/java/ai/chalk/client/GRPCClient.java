@@ -45,9 +45,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     private final String resolvedEnvironmentId;
     private final String branchId;
 
-    private final Supplier<ManagedChannel> authenticatedServerChannelSupplier;
+    private final ManagedChannel authenticatedServerChannel;
 
-    private final AtomicReference<ManagedChannel> currentEngineChannel;
+    private final ManagedChannel currentEngineChannel;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -110,7 +110,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         resolvedEnvironmentId = environmentId;
         branchId = builder.getBranch();
 
-        Channel authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
+        authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 100)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -154,7 +154,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         defaultServiceConfig.put("methodConfig", Collections.singletonList(methodConfig));
 
         String finalEngineHost = engineHost;
-        authenticatedServerChannelSupplier = () -> Grpc.newChannelBuilder(finalEngineHost, channelCreds)
+        currentEngineChannel = Grpc.newChannelBuilder(finalEngineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -168,8 +168,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .enableRetry()
                 .build();
 
-        currentEngineChannel = new AtomicReference<>(authenticatedServerChannelSupplier.get());
-        this.queryStubSupplier = () -> QueryServiceGrpc.newBlockingStub(this.currentEngineChannel.get());
+        this.queryStubSupplier = () -> QueryServiceGrpc.newBlockingStub(this.currentEngineChannel);
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -197,17 +196,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         @Nullable String environmentIdOverride
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
-    }
-
-    private RefreshingRetryInterceptor getEngineSingleRefreshingRetryInterceptor() {
-        // Create interceptor for engine calls that retries once, instantly, which is the behavior exhibited by the python client.
-        return new RefreshingRetryInterceptor(
-                this.authenticatedServerChannelSupplier,
-                this.currentEngineChannel,
-                3,
-                10,
-                5.0
-        );
     }
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
