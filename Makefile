@@ -9,7 +9,7 @@ release:
 
 # Run the version update script
 	@echo "Creating Release PR for version $(VERSION)..."
-	@./create-release-pr.sh $(VERSION)
+	@./scripts/create-release-pr.sh $(VERSION)
 
 
 # Prevents Make from treating the version as a target
