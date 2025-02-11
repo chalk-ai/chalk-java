@@ -283,21 +283,16 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        SendRequestParams params = new SendRequestParams(
-                new GetTokenRequest(
+        SendRequestParams params = new SendRequestParams.Builder()
+                .body(new GetTokenRequest(
                         this.clientId.value(),
                         this.clientSecret.value(),
                         "client_credentials"
-                ),
-                "POST",
-                "/v1/oauth/token",
-                true,
-                null,
-                null,
-                null,
-                null,
-                false
-        );
+                ))
+                .method("POST")
+                .path("/v1/oauth/token")
+                .dontRefresh(true)
+                .build();
         GetTokenResponse response;
         try {
             HttpResponse<byte[]> responseRaw = this.sendRequest(params);

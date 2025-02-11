@@ -353,7 +353,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             .withInterceptors(
                 this.getRequestHeaderInterceptor(params.getEnvironmentId())
             )
-            .withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS)
             .uploadFeatures(
                 UploadFeaturesRequest.newBuilder()
                     .setInputsTable(ByteString.copyFrom(tableBytes))
@@ -379,7 +378,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
      * Wrapper class around stubs so that we can provide them along with universal
      * configurations like timeouts.
      */
-    public class StubsProvider {
+    public static class StubsProvider {
         private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
 
         public StubsProvider(

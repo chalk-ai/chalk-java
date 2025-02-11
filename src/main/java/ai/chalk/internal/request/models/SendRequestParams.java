@@ -2,6 +2,9 @@ package ai.chalk.internal.request.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.Duration;
 
 
 // Not using Lombok's @Builder annotation because the generated
@@ -18,7 +21,9 @@ public class SendRequestParams {
     private String branch;
     private String queryName;
     private Boolean isEngineRequest;
+    private Duration timeout;
 
+    @NoArgsConstructor
     public static class Builder {
         private Object body;
         private String method;
@@ -29,6 +34,11 @@ public class SendRequestParams {
         private String branch;
         private String queryName;
         private Boolean isEngineRequest;
+        private Duration timeout;
+
+        public Builder(Duration timeout) {
+            this.timeout = timeout;
+        }
 
         public Builder body(Object body) {
             this.body = body;
@@ -76,11 +86,16 @@ public class SendRequestParams {
             return this;
         }
 
+        public Builder timeout(Duration timeout) {
+            this.timeout = timeout;
+            return this;
+        }
+
         public SendRequestParams build() {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
-                    isEngineRequest
+                    isEngineRequest, timeout
             );
         }
     }
