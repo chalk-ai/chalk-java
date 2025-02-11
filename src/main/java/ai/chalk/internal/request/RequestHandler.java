@@ -292,6 +292,7 @@ public class RequestHandler {
                 .method("POST")
                 .path("/v1/oauth/token")
                 .dontRefresh(true)
+                .isEngineRequest(false)
                 .build();
         GetTokenResponse response;
         try {
