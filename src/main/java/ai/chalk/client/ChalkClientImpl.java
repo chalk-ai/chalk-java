@@ -53,7 +53,7 @@ public class ChalkClientImpl implements ChalkClient {
                 this.clientSecret,
                 branch,
                 deploymentTag,
-                config.getTimeout()
+                Optional.ofNullable(config.getTimeout())
         );
     }
 

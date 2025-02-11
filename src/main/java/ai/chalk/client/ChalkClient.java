@@ -6,6 +6,7 @@ import ai.chalk.models.*;
 import java.net.http.HttpClient;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Optional;
 
 public interface ChalkClient extends AutoCloseable {
 

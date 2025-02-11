@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class RequestHandler {
@@ -37,7 +38,7 @@ public class RequestHandler {
     private final SourcedConfig clientSecret;
     private final String branch;
     private final String deploymentTag;
-    private final Duration clientLevelTimeout;
+    private final Optional<Duration> clientLevelTimeout;
 
 
     public RequestHandler(
@@ -50,7 +51,7 @@ public class RequestHandler {
             SourcedConfig clientSecret,
             String branch,
             String deploymentTag,
-            Duration clientLevelTimeout
+            Optional<Duration> clientLevelTimeout
     ) {
         if (httpClient == null) {
             System.setProperty("jdk.httpclient.keepalive.timeout", "300");
@@ -167,8 +168,8 @@ public class RequestHandler {
         HttpRequest.Builder builder = HttpRequest.newBuilder();
         if (args.getRequestLevelTimeout() != null) {
             builder.timeout(args.getRequestLevelTimeout());
-        } else if (this.clientLevelTimeout != null) {
-            builder.timeout(this.clientLevelTimeout);
+        } else if (this.clientLevelTimeout.isPresent()) {
+            builder.timeout(this.clientLevelTimeout.get());
         }
         builder = builder
             .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))

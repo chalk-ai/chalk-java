@@ -7,6 +7,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.time.Duration;
+import java.util.Optional;
 
 
 public class TokenRefresher {
@@ -22,13 +23,13 @@ public class TokenRefresher {
     private GetTokenResponse lastToken;
 
     @Nullable
-    private final Duration timeout;
+    private final Optional<Duration> timeout;
 
     public TokenRefresher(
             @NonNull String clientId,
             @NonNull String clientSecret,
             AuthServiceGrpc.AuthServiceBlockingStub blockingStub,
-            java.time.Duration timeout
+            Optional<Duration> timeout
     ) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
@@ -43,8 +44,8 @@ public class TokenRefresher {
                         this.lastToken.getExpiresAt().getSeconds() < System.currentTimeMillis() / 1000 + 60
         ) {
             var stub = this.blockingStub;
-            if (this.timeout != null) {
-                stub = stub.withDeadlineAfter(this.timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+            if (this.timeout.isPresent()) {
+                stub = stub.withDeadlineAfter(this.timeout.get().toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
             }
             this.lastToken = stub
                     .getToken(

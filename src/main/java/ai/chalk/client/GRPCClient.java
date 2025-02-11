@@ -15,7 +15,6 @@ import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
-import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.Value;
@@ -41,7 +40,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private final String resolvedEnvironmentId;
     private final String branchId;
-    private final Duration timeout;
+    private final Optional<Duration> timeout;
 
     private final StubsProvider stubsProvider;
 
@@ -69,7 +68,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         String grpcHost = resolvedConfig.grpcHost();
         final ChannelCredentials channelCreds = getChannelCredentials(grpcHost, resolvedConfig);
 
-        timeout = builder.getTimeout();
+        timeout = Optional.ofNullable(builder.getTimeout());
         unauthServerChannel = Grpc.newChannelBuilder(
             grpcHost,
             channelCreds
@@ -279,7 +278,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(params.getTimeout())
+        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
                 .withInterceptors(
                     MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
                     this.getRequestHeaderInterceptor(params.getEnvironmentId())
@@ -353,7 +352,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.stubsProvider.getQueryStub(params.getTimeout())
+        UploadFeaturesResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
             .withInterceptors(
                 this.getRequestHeaderInterceptor(params.getEnvironmentId())
             )
@@ -386,22 +385,22 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
      */
     public static class StubsProvider {
         private final @NonNull QueryServiceGrpc.QueryServiceBlockingStub queryStub;
-        private final @Nullable Duration clientLevelTimeout;
+        private final Optional<Duration> clientLevelTimeout;
 
         public StubsProvider(
             QueryServiceGrpc.QueryServiceBlockingStub queryStub,
-            Duration clientLevelTimeout
+            Optional<Duration> clientLevelTimeout
         ) {
             this.queryStub = queryStub;
             this.clientLevelTimeout = clientLevelTimeout;
         }
 
-        public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Duration requestLevelTimeout) {
+        public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Optional<Duration> requestLevelTimeout) {
             Duration timeout = null;
-            if (requestLevelTimeout != null) {
-                timeout = requestLevelTimeout;
-            } else if (this.clientLevelTimeout != null) {
-                timeout = this.clientLevelTimeout;
+            if (requestLevelTimeout.isPresent()) {
+                timeout = requestLevelTimeout.get();
+            } else if (this.clientLevelTimeout.isPresent()) {
+                timeout = this.clientLevelTimeout.get();
             }
             if (timeout != null) {
                 return queryStub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
