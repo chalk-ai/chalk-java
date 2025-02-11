@@ -153,7 +153,7 @@ class TestAllClients {
                 assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
                 if (!shouldFail.get(i)) {
-                    fail("Expected no exception for timeout", e);
+                    fail("Expected no timeout but query failed", e);
                 }
             }
         }
@@ -184,7 +184,7 @@ class TestAllClients {
                 assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
                 if (!shouldFail.get(i)) {
-                    fail("Expected no exception for timeout", e);
+                    fail("Expected no timeout but query failed", e);
                 }
             }
         }

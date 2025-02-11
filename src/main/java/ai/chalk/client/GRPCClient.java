@@ -21,6 +21,7 @@ import com.google.protobuf.Timestamp;
 import com.google.protobuf.Value;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
+import lombok.NonNull;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
@@ -158,7 +159,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         var queryStub = QueryServiceGrpc.newBlockingStub(engineChannel);
 
-        this.stubsProvider = new StubsProvider(queryStub);
+        this.stubsProvider = new StubsProvider(queryStub, this.timeout);
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -383,17 +384,26 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
      * configurations like timeouts.
      */
     public static class StubsProvider {
-        private final QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+        private final @NonNull QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+        private final @Nullable Duration clientLevelTimeout;
 
         public StubsProvider(
-            QueryServiceGrpc.QueryServiceBlockingStub queryStub
+            QueryServiceGrpc.QueryServiceBlockingStub queryStub,
+            Duration clientLevelTimeout
         ) {
             this.queryStub = queryStub;
+            this.clientLevelTimeout = clientLevelTimeout;
         }
 
         public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Duration requestLevelTimeout) {
+            Duration timeout = null;
             if (requestLevelTimeout != null) {
-                return queryStub.withDeadlineAfter(requestLevelTimeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+                timeout = requestLevelTimeout;
+            } else if (this.clientLevelTimeout != null) {
+                timeout = this.clientLevelTimeout;
+            }
+            if (timeout != null) {
+                return queryStub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
             }
             return queryStub;
         }
