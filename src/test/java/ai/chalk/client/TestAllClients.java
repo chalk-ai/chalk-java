@@ -189,4 +189,36 @@ class TestAllClients {
             }
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testTimeoutOnlineQueryClientAndRequestLevels (String clientType) throws Exception {
+        List<Duration> clientLevelTimeout = new ArrayList<>(Arrays.asList(Duration.ofSeconds(5), Duration.ofSeconds(5)));
+        List<Duration> requestLevelTimeout = new ArrayList<>(Arrays.asList(Duration.ofSeconds(5), Duration.ofNanos(1)));
+        var shouldFail = List.of(false, true);
+
+        for (int i = 0; i < clientLevelTimeout.size(); i++) {
+            try {
+                var builder = ChalkClient.builder().withTimeout(clientLevelTimeout.get(i));
+                var client = clientType.equals(grpcClientKey) ? builder.withGrpc().build() : builder.build();
+                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                        .withOutputs(FraudTemplateFeatures.user.socure_score)
+                        .withTimeout(requestLevelTimeout.get(i))
+                        .build();
+                var res = client.onlineQuery(params);
+                if (shouldFail.get(i)) {
+                    fail("Expected exception for extremely small timeout value");
+                }
+                var users = res.unmarshal(User.class);
+                assert users[0].socure_score.getValue() == 123.0;
+            } catch (Exception e) {
+                if (!shouldFail.get(i)) {
+                    fail("Expected no timeout but query failed", e);
+                }
+            }
+        }
+    }
+
+
 }
