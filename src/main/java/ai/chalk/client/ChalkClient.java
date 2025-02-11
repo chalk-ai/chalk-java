@@ -5,6 +5,7 @@ import ai.chalk.models.*;
 
 import java.net.http.HttpClient;
 import java.nio.file.Path;
+import java.time.Duration;
 
 public interface ChalkClient extends AutoCloseable {
 
@@ -177,6 +178,13 @@ public interface ChalkClient extends AutoCloseable {
         public Builder withGrpc();
 
         /**
+         * Sets the timeout for all requests.
+         * Defaults to no timeout.
+         * @param timeout The timeout duration
+         */
+        public Builder withTimeout(Duration timeout);
+
+        /**
          * Sets the root CA certificate file.
          * @param rootCa The path to the root CA
          */
@@ -197,6 +205,8 @@ public interface ChalkClient extends AutoCloseable {
         public Path getRootCa();
 
         public HttpClient getHttpClient();
+
+        public Duration getTimeout();
 
         ChalkClient build() throws ChalkException;
     }
