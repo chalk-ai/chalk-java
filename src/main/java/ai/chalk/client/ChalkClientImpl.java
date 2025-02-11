@@ -70,7 +70,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder()
+        SendRequestParams request = new SendRequestParams.Builder(params.getTimeout())
                 .path("/v1/query/feather")
                 .body(bodyBytes)
                 .method("POST")
@@ -112,7 +112,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize UploadFeaturesParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder()
+        SendRequestParams request = new SendRequestParams.Builder(null)
                 .path("/v1/upload_features/multi")
                 .body(body)
                 .method("POST")

@@ -2,7 +2,6 @@ package ai.chalk.internal.request.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.Duration;
 
@@ -23,7 +22,6 @@ public class SendRequestParams {
     private Boolean isEngineRequest;
     private Duration timeout;
 
-    @NoArgsConstructor
     public static class Builder {
         private Object body;
         private String method;
@@ -34,10 +32,10 @@ public class SendRequestParams {
         private String branch;
         private String queryName;
         private Boolean isEngineRequest;
-        private Duration timeout;
+        private Duration requestLevelTimeout;
 
-        public Builder(Duration timeout) {
-            this.timeout = timeout;
+        public Builder(Duration requestLevelTimeout) {
+            this.requestLevelTimeout = requestLevelTimeout;
         }
 
         public Builder body(Object body) {
@@ -87,7 +85,7 @@ public class SendRequestParams {
         }
 
         public Builder timeout(Duration timeout) {
-            this.timeout = timeout;
+            this.requestLevelTimeout = timeout;
             return this;
         }
 
@@ -95,7 +93,7 @@ public class SendRequestParams {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
-                    isEngineRequest, timeout
+                    isEngineRequest, requestLevelTimeout
             );
         }
     }

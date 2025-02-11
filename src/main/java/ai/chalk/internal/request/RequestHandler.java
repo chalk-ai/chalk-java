@@ -160,7 +160,11 @@ public class RequestHandler {
                 args.getQueryName()
         );
 
-        HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
+        var builder = HttpRequest.newBuilder();
+        if (args.getTimeout() != null) {
+            builder.timeout(args.getTimeout());
+        }
+        HttpRequest.Builder requestBuilder = builder
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
                 .uri(getUri(args))
                 .version(HttpClient.Version.HTTP_1_1)
@@ -283,7 +287,7 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        SendRequestParams params = new SendRequestParams.Builder()
+        SendRequestParams params = new SendRequestParams.Builder(null)
                 .body(new GetTokenRequest(
                         this.clientId.value(),
                         this.clientSecret.value(),
