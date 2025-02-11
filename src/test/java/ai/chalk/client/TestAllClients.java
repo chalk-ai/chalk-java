@@ -192,7 +192,7 @@ class TestAllClients {
 
     @ParameterizedTest
     @ValueSource(strings = {grpcClientKey, restClientKey})
-    public void testTimeoutOnlineQueryClientAndRequestLevels (String clientType) throws Exception {
+    public void testTimeoutOnlineQueryRequestConfigOverridesClientConfig(String clientType) throws Exception {
         List<Duration> clientLevelTimeout = new ArrayList<>(Arrays.asList(Duration.ofSeconds(5), Duration.ofSeconds(5)));
         List<Duration> requestLevelTimeout = new ArrayList<>(Arrays.asList(Duration.ofSeconds(5), Duration.ofNanos(1)));
         var shouldFail = List.of(false, true);
