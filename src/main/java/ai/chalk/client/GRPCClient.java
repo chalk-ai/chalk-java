@@ -372,10 +372,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     @Override
-    public void close() {
+    public void close() throws InterruptedException {
         this.allocator.close();
-        this.unauthServerChannel.shutdown();
-        this.engineChannel.shutdown();
+        this.unauthServerChannel.shutdown().awaitTermination(600, java.util.concurrent.TimeUnit.SECONDS);
+        this.engineChannel.shutdown().awaitTermination(600, java.util.concurrent.TimeUnit.SECONDS);
     }
 
 
