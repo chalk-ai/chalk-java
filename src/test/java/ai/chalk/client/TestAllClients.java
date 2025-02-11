@@ -134,6 +134,32 @@ class TestAllClients {
 
     @ParameterizedTest
     @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testTimeoutUploadFeatures(String clientType) throws Exception {
+        List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(60), null));
+        var shouldFail = List.of(true, false, false);
+        var client = getClient(clientType);
+        for (int i = 0; i < timeout.size(); i++) {
+            try {
+                UploadFeaturesParams params = UploadFeaturesParams.builder()
+                        .withInput(FraudTemplateFeatures.user.id, List.of("8868"))
+                        .withInput(FraudTemplateFeatures.user.socure_score, List.of(5526.0))
+                        .withTimeout(timeout.get(i))
+                        .build();
+                var res = client.uploadFeatures(params);
+                if (shouldFail.get(i)) {
+                    fail("Expected exception for timeout value: " + timeout.get(i));
+                }
+                assert res.getErrors().size() == 0;
+            } catch (Exception e) {
+                if (!shouldFail.get(i)) {
+                    fail("Expected no timeout but query failed", e);
+                }
+            }
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
     public void testTimeoutOnlineQueryRequestLevel(String clientType) throws Exception {
         List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(5), null));
         var shouldFail = List.of(true, false, false);

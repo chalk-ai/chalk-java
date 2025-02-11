@@ -113,7 +113,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize UploadFeaturesParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder(null)
+        SendRequestParams request = new SendRequestParams.Builder(params.getTimeout())
                 .path("/v1/upload_features/multi")
                 .body(body)
                 .method("POST")

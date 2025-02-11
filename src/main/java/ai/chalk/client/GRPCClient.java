@@ -354,7 +354,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.stubsProvider.getQueryStub(null)
+        UploadFeaturesResponse response = this.stubsProvider.getQueryStub(params.getTimeout())
             .withInterceptors(
                 this.getRequestHeaderInterceptor(params.getEnvironmentId())
             )
