@@ -137,7 +137,7 @@ class TestAllClients {
     public void testTimeoutOnlineQueryRequestLevel(String clientType) throws Exception {
         List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(5), null));
         var shouldFail = List.of(true, false, false);
-        var client = clientType.equals(grpcClientKey) ? ChalkClient.createGrpc() : ChalkClient.create();
+        var client = getClient(clientType);
         for (int i = 0; i < timeout.size(); i++) {
             try {
                 OnlineQueryParamsComplete params = OnlineQueryParams.builder()
@@ -157,11 +157,33 @@ class TestAllClients {
                 }
             }
         }
-
-
-
-
-
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testTimeoutOnlineQueryClientLevel (String clientType) throws Exception {
+        List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(5), null));
+        var shouldFail = List.of(true, false, false);
+
+        for (int i = 0; i < timeout.size(); i++) {
+            try {
+                var builder = ChalkClient.builder().withTimeout(timeout.get(i));
+                var client = clientType.equals(grpcClientKey) ? builder.withGrpc().build() : builder.build();
+                if (shouldFail.get(i)) {
+                    fail("Expected exception for timeout value: " + timeout.get(i));
+                }
+                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                        .withOutputs(FraudTemplateFeatures.user.socure_score)
+                        .build();
+                var res = client.onlineQuery(params);
+                var users = res.unmarshal(User.class);
+                assert users[0].socure_score.getValue() == 123.0;
+            } catch (Exception e) {
+                if (!shouldFail.get(i)) {
+                    fail("Expected no exception for timeout", e);
+                }
+            }
+        }
+    }
 }

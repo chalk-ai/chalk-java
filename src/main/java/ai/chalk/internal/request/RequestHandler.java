@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class RequestHandler {
     private final SourcedConfig clientSecret;
     private final String branch;
     private final String deploymentTag;
+    private final Duration clientLevelTimeout;
 
 
     public RequestHandler(
@@ -47,7 +49,8 @@ public class RequestHandler {
             SourcedConfig clientId,
             SourcedConfig clientSecret,
             String branch,
-            String deploymentTag
+            String deploymentTag,
+            Duration clientLevelTimeout
     ) {
         if (httpClient == null) {
             System.setProperty("jdk.httpclient.keepalive.timeout", "300");
@@ -69,6 +72,7 @@ public class RequestHandler {
         this.branch = branch;
         this.deploymentTag = deploymentTag;
         this.engines = new HashMap<>();
+        this.clientLevelTimeout = clientLevelTimeout;
     }
 
     private String getResolvedEnvironment(String environmentOverride) {
