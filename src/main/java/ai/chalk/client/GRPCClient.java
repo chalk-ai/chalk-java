@@ -45,7 +45,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private final StubsProvider stubsProvider;
 
-    // Must retain channels even though unused to avoid premature GC.
     private final ManagedChannel unauthServerChannel;
     private final ManagedChannel engineChannel;
 
@@ -375,6 +374,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     @Override
     public void close() {
         this.allocator.close();
+        this.unauthServerChannel.shutdown();
+        this.engineChannel.shutdown();
     }
 
 
