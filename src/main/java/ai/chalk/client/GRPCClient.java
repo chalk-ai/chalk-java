@@ -30,7 +30,6 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
@@ -276,7 +275,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(this.timeout)
+        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(params.getTimeout())
                 .withInterceptors(
                     MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
                     this.getRequestHeaderInterceptor(params.getEnvironmentId())
@@ -389,9 +388,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             this.queryStub = queryStub;
         }
 
-        public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Duration timeout) {
-            if (timeout != null) {
-                return queryStub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+        public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Duration requestLevelTimeout) {
+            if (requestLevelTimeout != null) {
+                return queryStub.withDeadlineAfter(requestLevelTimeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
             }
             return queryStub;
         }

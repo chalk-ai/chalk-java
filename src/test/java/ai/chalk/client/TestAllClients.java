@@ -137,7 +137,7 @@ class TestAllClients {
     public void testTimeoutOnlineQueryRequestLevel(String clientType) throws Exception {
         List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(5), null));
         var shouldFail = List.of(true, false, false);
-        var client = clientType == grpcClientKey ? ChalkClient.createGrpc() : ChalkClient.create();
+        var client = clientType.equals(grpcClientKey) ? ChalkClient.createGrpc() : ChalkClient.create();
         for (int i = 0; i < timeout.size(); i++) {
             try {
                 OnlineQueryParamsComplete params = OnlineQueryParams.builder()
