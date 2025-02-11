@@ -3,6 +3,7 @@ package ai.chalk.internal.request.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.annotation.Nullable;
 import java.time.Duration;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class SendRequestParams {
         private String branch;
         private String queryName;
         private Boolean isEngineRequest;
-        private Duration requestLevelTimeout;
+        private @Nullable Duration requestLevelTimeout;
 
         public Builder(Duration requestLevelTimeout) {
             this.requestLevelTimeout = requestLevelTimeout;

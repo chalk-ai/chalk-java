@@ -22,14 +22,14 @@ public class TokenRefresher {
     @Nullable
     private GetTokenResponse lastToken;
 
-    @Nullable
+    @NonNull
     private final Optional<Duration> timeout;
 
     public TokenRefresher(
             @NonNull String clientId,
             @NonNull String clientSecret,
             AuthServiceGrpc.AuthServiceBlockingStub blockingStub,
-            Optional<Duration> timeout
+            @NonNull Optional<Duration> timeout
     ) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
