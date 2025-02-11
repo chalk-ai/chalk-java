@@ -20,7 +20,7 @@ public class SendRequestParams {
     private String branch;
     private String queryName;
     private Boolean isEngineRequest;
-    private Duration timeout;
+    private Duration requestLevelTimeout;
 
     public static class Builder {
         private Object body;

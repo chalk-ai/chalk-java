@@ -165,8 +165,10 @@ public class RequestHandler {
         );
 
         var builder = HttpRequest.newBuilder();
-        if (args.getTimeout() != null) {
-            builder.timeout(args.getTimeout());
+        if (args.getRequestLevelTimeout() != null) {
+            builder.timeout(args.getRequestLevelTimeout());
+        } else if (this.clientLevelTimeout != null) {
+            builder.timeout(this.clientLevelTimeout);
         }
         HttpRequest.Builder requestBuilder = builder
                 .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))

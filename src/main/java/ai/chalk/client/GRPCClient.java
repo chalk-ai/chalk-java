@@ -44,6 +44,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
     private final StubsProvider stubsProvider;
 
+    // Must retain channels even though unused to avoid premature GC.
+    private final ManagedChannel unauthServerChannel;
+    private final ManagedChannel engineChannel;
+
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
     }
@@ -66,19 +70,18 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         final ChannelCredentials channelCreds = getChannelCredentials(grpcHost, resolvedConfig);
 
         timeout = builder.getTimeout();
+        unauthServerChannel = Grpc.newChannelBuilder(
+            grpcHost,
+            channelCreds
+        )
+        .maxInboundMessageSize(1024 * 1024 * 100)
+        .intercept(
+                new UnauthenticatedHeaderClientInterceptor(Map.of())
+        ).build();
         TokenRefresher tokenRefresher = new TokenRefresher(
                 resolvedConfig.clientId().value(),
                 resolvedConfig.clientSecret().value(),
-                AuthServiceGrpc.newBlockingStub(
-                        Grpc.newChannelBuilder(
-                            grpcHost,
-                            channelCreds
-                        )
-                        .maxInboundMessageSize(1024 * 1024 * 100)
-                        .intercept(
-                            new UnauthenticatedHeaderClientInterceptor(Map.of())
-                        ).build()
-                ),
+                AuthServiceGrpc.newBlockingStub(unauthServerChannel),
                 this.timeout
         );
 
@@ -139,8 +142,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         defaultServiceConfig.put("methodConfig", Collections.singletonList(methodConfig));
 
-        var queryStub = QueryServiceGrpc.newBlockingStub(
-            Grpc.newChannelBuilder(engineHost, channelCreds)
+        engineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -152,8 +154,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 )
                 .defaultServiceConfig(defaultServiceConfig)
                 .enableRetry()
-                .build()
-        );
+                .build();
+
+        var queryStub = QueryServiceGrpc.newBlockingStub(engineChannel);
+
         this.stubsProvider = new StubsProvider(queryStub);
     }
 

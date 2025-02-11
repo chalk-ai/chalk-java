@@ -169,7 +169,7 @@ class TestAllClients {
             try {
                 var builder = ChalkClient.builder().withTimeout(timeout.get(i));
                 var client = clientType.equals(grpcClientKey) ? builder.withGrpc().build() : builder.build();
-                if (shouldFail.get(i)) {
+                if (shouldFail.get(i) && clientType.equals(grpcClientKey)) {
                     fail("Expected exception for timeout value: " + timeout.get(i));
                 }
                 OnlineQueryParamsComplete params = OnlineQueryParams.builder()
@@ -177,6 +177,9 @@ class TestAllClients {
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .build();
                 var res = client.onlineQuery(params);
+                if (shouldFail.get(i)) {
+                    fail("Expected exception for timeout value: " + timeout.get(i));
+                }
                 var users = res.unmarshal(User.class);
                 assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
