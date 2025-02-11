@@ -7,10 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -133,4 +131,37 @@ class TestAllClients {
             assert users[2].socure_score.getValue().equals(scoreList.get(2));
         };
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testTimeoutOnlineQueryRequestLevel(String clientType) throws Exception {
+        List<Duration> timeout = new ArrayList<>(Arrays.asList(Duration.ofNanos(1), Duration.ofSeconds(5), null));
+        var shouldFail = List.of(true, false, false);
+        var client = clientType == grpcClientKey ? ChalkClient.createGrpc() : ChalkClient.create();
+        for (int i = 0; i < timeout.size(); i++) {
+            try {
+                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                        .withOutputs(FraudTemplateFeatures.user.socure_score)
+                        .withTimeout(timeout.get(i))
+                        .build();
+                var res = client.onlineQuery(params);
+                if (shouldFail.get(i)) {
+                    fail("Expected exception for timeout value: " + timeout.get(i));
+                }
+                var users = res.unmarshal(User.class);
+                assert users[0].socure_score.getValue() == 123.0;
+            } catch (Exception e) {
+                if (!shouldFail.get(i)) {
+                    fail("Expected no exception for timeout", e);
+                }
+            }
+        }
+
+
+
+
+
+    }
+
 }

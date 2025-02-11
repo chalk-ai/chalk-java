@@ -48,7 +48,8 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             String branch,
             List<ZonedDateTime> now,
             List<String> requiredResolverTags,
-            Map<String, Object> plannerOptions
+            Map<String, Object> plannerOptions,
+            Duration timeout
     ) {
         super(
             inputs,
@@ -67,7 +68,8 @@ public class OnlineQueryParamsComplete extends OnlineQueryParams {
             branch,
             now,
             requiredResolverTags,
-            plannerOptions
+            plannerOptions,
+            timeout
         );
     }
 }
