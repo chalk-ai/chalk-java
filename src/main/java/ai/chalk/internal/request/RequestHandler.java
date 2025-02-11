@@ -164,19 +164,19 @@ public class RequestHandler {
                 args.getQueryName()
         );
 
-        var builder = HttpRequest.newBuilder();
+        HttpRequest.Builder builder = HttpRequest.newBuilder();
         if (args.getRequestLevelTimeout() != null) {
             builder.timeout(args.getRequestLevelTimeout());
         } else if (this.clientLevelTimeout != null) {
             builder.timeout(this.clientLevelTimeout);
         }
-        HttpRequest.Builder requestBuilder = builder
-                .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
-                .uri(getUri(args))
-                .version(HttpClient.Version.HTTP_1_1)
-                .headers(headers.entrySet().stream()
-                        .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
-                        .toArray(String[]::new));
+        builder = builder
+            .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
+            .uri(getUri(args))
+            .version(HttpClient.Version.HTTP_1_1)
+            .headers(headers.entrySet().stream()
+                    .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
+                    .toArray(String[]::new));
 
         if (!args.isDontRefresh()) {
             try {
@@ -187,10 +187,10 @@ public class RequestHandler {
         }
 
         if (this.jwt != null && this.jwt.getValue() != null && !this.jwt.getValue().isEmpty()) {
-            requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
+            builder.header("Authorization", "Bearer " + this.jwt.getValue());
         }
 
-        var request = requestBuilder.build();
+        var request = builder.build();
         HttpResponse<byte[]> response;
 
         var retries = 1;

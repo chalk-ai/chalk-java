@@ -84,11 +84,6 @@ public class SendRequestParams {
             return this;
         }
 
-        public Builder timeout(Duration timeout) {
-            this.requestLevelTimeout = timeout;
-            return this;
-        }
-
         public SendRequestParams build() {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
