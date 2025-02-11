@@ -179,7 +179,8 @@ public interface ChalkClient extends AutoCloseable {
 
         /**
          * Sets the timeout for all requests.
-         * Defaults to no timeout.
+         * Defaults to no timeout. Timeout of
+         * 0 means the query times out immediately.
          * @param timeout The timeout duration
          */
         public Builder withTimeout(Duration timeout);

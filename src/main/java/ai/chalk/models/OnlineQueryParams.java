@@ -135,7 +135,7 @@ public class OnlineQueryParams {
     private Map<String, Object> plannerOptions;
 
     /**
-     * Timeout for the query. Defaults to no timeout.
+     * Timeout for the query. Defaults to no timeout. Timeout of 0 means the request times out immediately.
      */
     private Duration timeout;
 
