@@ -17,10 +17,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class RequestHandler {
@@ -36,6 +38,7 @@ public class RequestHandler {
     private final SourcedConfig clientSecret;
     private final String branch;
     private final String deploymentTag;
+    private final Optional<Duration> clientLevelTimeout;
 
 
     public RequestHandler(
@@ -47,7 +50,8 @@ public class RequestHandler {
             SourcedConfig clientId,
             SourcedConfig clientSecret,
             String branch,
-            String deploymentTag
+            String deploymentTag,
+            Optional<Duration> clientLevelTimeout
     ) {
         if (httpClient == null) {
             System.setProperty("jdk.httpclient.keepalive.timeout", "300");
@@ -69,6 +73,7 @@ public class RequestHandler {
         this.branch = branch;
         this.deploymentTag = deploymentTag;
         this.engines = new HashMap<>();
+        this.clientLevelTimeout = clientLevelTimeout;
     }
 
     private String getResolvedEnvironment(String environmentOverride) {
@@ -160,13 +165,19 @@ public class RequestHandler {
                 args.getQueryName()
         );
 
-        HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
-                .uri(getUri(args))
-                .version(HttpClient.Version.HTTP_1_1)
-                .headers(headers.entrySet().stream()
-                        .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
-                        .toArray(String[]::new));
+        HttpRequest.Builder builder = HttpRequest.newBuilder();
+        if (args.getRequestLevelTimeout() != null) {
+            builder.timeout(args.getRequestLevelTimeout());
+        } else if (this.clientLevelTimeout.isPresent()) {
+            builder.timeout(this.clientLevelTimeout.get());
+        }
+        builder = builder
+            .method(args.getMethod(), HttpRequest.BodyPublishers.ofByteArray(bodyBytes))
+            .uri(getUri(args))
+            .version(HttpClient.Version.HTTP_1_1)
+            .headers(headers.entrySet().stream()
+                    .flatMap(e -> Stream.of(e.getKey(), e.getValue()))
+                    .toArray(String[]::new));
 
         if (!args.isDontRefresh()) {
             try {
@@ -177,10 +188,10 @@ public class RequestHandler {
         }
 
         if (this.jwt != null && this.jwt.getValue() != null && !this.jwt.getValue().isEmpty()) {
-            requestBuilder.header("Authorization", "Bearer " + this.jwt.getValue());
+            builder.header("Authorization", "Bearer " + this.jwt.getValue());
         }
 
-        var request = requestBuilder.build();
+        var request = builder.build();
         HttpResponse<byte[]> response;
 
         var retries = 1;
@@ -283,21 +294,17 @@ public class RequestHandler {
 
 
     private JWT getJwt() throws ChalkException {
-        SendRequestParams params = new SendRequestParams(
-                new GetTokenRequest(
+        SendRequestParams params = new SendRequestParams.Builder(null)
+                .body(new GetTokenRequest(
                         this.clientId.value(),
                         this.clientSecret.value(),
                         "client_credentials"
-                ),
-                "POST",
-                "/v1/oauth/token",
-                true,
-                null,
-                null,
-                null,
-                null,
-                false
-        );
+                ))
+                .method("POST")
+                .path("/v1/oauth/token")
+                .dontRefresh(true)
+                .isEngineRequest(false)
+                .build();
         GetTokenResponse response;
         try {
             HttpResponse<byte[]> responseRaw = this.sendRequest(params);

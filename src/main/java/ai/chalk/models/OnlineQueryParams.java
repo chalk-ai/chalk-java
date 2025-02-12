@@ -134,6 +134,11 @@ public class OnlineQueryParams {
      */
     private Map<String, Object> plannerOptions;
 
+    /**
+     * Timeout for the query. Defaults to no timeout. Timeout of 0 means the request times out immediately.
+     */
+    private Duration timeout;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -155,6 +160,7 @@ public class OnlineQueryParams {
         protected List<ZonedDateTime> now;
         protected List<String> requiredResolverTags;
         protected Map<String, Object> plannerOptions;
+        protected Duration timeout;
 
         protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
@@ -281,6 +287,11 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        public T withTimeout(Duration timeout) {
+            this.timeout = timeout;
+            return (T) this;
+        }
+
         // withNow takes a list of ZonedDateTimes and adds them to the now list
         public T withNow(List<ZonedDateTime> now) {
             if (this.now == null) {
@@ -362,7 +373,8 @@ public class OnlineQueryParams {
                     branch,
                     now,
                     requiredResolverTags,
-                    plannerOptions
+                    plannerOptions,
+                    timeout
             );
         }
     }
@@ -385,7 +397,8 @@ public class OnlineQueryParams {
             String branch,
             List<ZonedDateTime> now,
             List<String> requiredResolverTags,
-            Map<String, Object> plannerOptions
+            Map<String, Object> plannerOptions,
+            Duration timeout
         ) {
             super(
                 inputs,
@@ -404,7 +417,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
 
@@ -459,7 +473,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
     }
@@ -482,7 +497,8 @@ public class OnlineQueryParams {
             String branch,
             List<ZonedDateTime> now,
             List<String> requiredResolverTags,
-            Map<String, Object> plannerOptions
+            Map<String, Object> plannerOptions,
+            Duration timeout
         ) {
             super(
                 inputs,
@@ -501,7 +517,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
 
@@ -523,7 +540,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
                 );
         }
 
@@ -579,7 +597,8 @@ public class OnlineQueryParams {
                 String branch,
                 List<ZonedDateTime> now,
                 List<String> requiredResolverTags,
-                Map<String, Object> plannerOptions
+                Map<String, Object> plannerOptions,
+                Duration timeout
         ) {
             super(
                 inputs,
@@ -598,7 +617,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
 
@@ -621,7 +641,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
 
@@ -679,7 +700,8 @@ public class OnlineQueryParams {
                 String branch,
                 List<ZonedDateTime> now,
                 List<String> requiredResolverTags,
-                Map<String, Object> plannerOptions
+                Map<String, Object> plannerOptions,
+                Duration timeout
         ) {
             super(
                 inputs,
@@ -698,7 +720,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
             );
         }
 
@@ -720,7 +743,8 @@ public class OnlineQueryParams {
                     branch,
                     now,
                     requiredResolverTags,
-                    plannerOptions
+                    plannerOptions,
+                    timeout
                 );
         }
 
@@ -742,7 +766,8 @@ public class OnlineQueryParams {
                 branch,
                 now,
                 requiredResolverTags,
-                plannerOptions
+                plannerOptions,
+                timeout
          );
         }
 

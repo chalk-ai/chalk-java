@@ -3,6 +3,10 @@ package ai.chalk.internal.request.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.annotation.Nullable;
+import java.time.Duration;
+import java.util.Optional;
+
 
 // Not using Lombok's @Builder annotation because the generated
 // `responseClass` method takes in `Class<Object>` instead of `Class<T>`
@@ -18,6 +22,7 @@ public class SendRequestParams {
     private String branch;
     private String queryName;
     private Boolean isEngineRequest;
+    private Duration requestLevelTimeout;
 
     public static class Builder {
         private Object body;
@@ -29,6 +34,11 @@ public class SendRequestParams {
         private String branch;
         private String queryName;
         private Boolean isEngineRequest;
+        private @Nullable Duration requestLevelTimeout;
+
+        public Builder(Duration requestLevelTimeout) {
+            this.requestLevelTimeout = requestLevelTimeout;
+        }
 
         public Builder body(Object body) {
             this.body = body;
@@ -80,7 +90,7 @@ public class SendRequestParams {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
-                    isEngineRequest
+                    isEngineRequest, requestLevelTimeout
             );
         }
     }

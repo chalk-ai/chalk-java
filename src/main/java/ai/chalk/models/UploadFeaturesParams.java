@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.annotation.Nullable;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,15 +17,18 @@ public class UploadFeaturesParams {
     private final Map<String, List<?>> inputs;
     @Nullable
     private final String environmentId;
+    @Nullable
+    private final Duration timeout;
 
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Builder {
         protected Map<String, List<?>> inputs;
         protected String environmentId;
+        protected Duration timeout;
 
         public UploadFeaturesParams build() {
-            return new UploadFeaturesParams(this.inputs, this.environmentId);
+            return new UploadFeaturesParams(this.inputs, this.environmentId, this.timeout);
         }
 
         private void initInputs() {
@@ -57,6 +61,11 @@ public class UploadFeaturesParams {
 
         public Builder withInput(String feature, List<?> value) {
             return this._withInput(feature, value);
+        }
+
+        public Builder withTimeout(Duration timeout) {
+            this.timeout = timeout;
+            return this;
         }
     }
 

@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.net.http.HttpClient;
 import java.nio.file.Path;
+import java.time.Duration;
 
 @Getter
 public class BuilderImpl implements ChalkClient.Builder {
@@ -28,6 +29,8 @@ public class BuilderImpl implements ChalkClient.Builder {
     private String deploymentTag;
     @Nullable
     private Path rootCa;
+    @Nullable
+    private Duration timeout;
 
     public BuilderImpl() {
         this.clientId = null;
@@ -39,6 +42,7 @@ public class BuilderImpl implements ChalkClient.Builder {
         this.deploymentTag = null;
         this.httpClient = null;
         this.rootCa = null;
+        this.timeout = null;
     }
 
     @Override
@@ -92,6 +96,12 @@ public class BuilderImpl implements ChalkClient.Builder {
     @Override
     public BuilderImpl withGrpc() {
         this.useGrpc = true;
+        return this;
+    }
+
+    @Override
+    public ChalkClient.Builder withTimeout(Duration timeout) {
+        this.timeout = timeout;
         return this;
     }
 

@@ -15,41 +15,37 @@ import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
-import ai.chalk.protos.chalk.server.v1.TeamServiceGrpc;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.Value;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
+import lombok.NonNull;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
 public class GRPCClient implements ChalkClient, AutoCloseable {
-    private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
-    private final TeamServiceGrpc.TeamServiceBlockingStub teamStub;
-
-    // Creating query stubs are cheap (channels are expensive)
-    private final Supplier<QueryServiceGrpc.QueryServiceBlockingStub> queryStubSupplier;
-
     private static final Metadata.Key<String> CHALK_TRACE_ID_KEY = Metadata.Key.of("x-chalk-trace-id", Metadata.ASCII_STRING_MARSHALLER);
     private static final System.Logger logger = System.getLogger(GRPCClient.class.getName());
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
 
     private final String resolvedEnvironmentId;
     private final String branchId;
+    private final Optional<Duration> timeout;
 
-    private final ManagedChannel authenticatedServerChannel;
+    private final StubsProvider stubsProvider;
 
-    private final ManagedChannel currentEngineChannel;
+    private final ManagedChannel unauthServerChannel;
+    private final ManagedChannel engineChannel;
 
     public GRPCClient() throws ChalkException {
         this(new BuilderImpl());
@@ -71,18 +67,21 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         String grpcHost = resolvedConfig.grpcHost();
         final ChannelCredentials channelCreds = getChannelCredentials(grpcHost, resolvedConfig);
-        ManagedChannelBuilder<?> unauthenticatedChannelBuilder = Grpc.newChannelBuilder(
-                grpcHost,
-                channelCreds
-        ).maxInboundMessageSize(1024 * 1024 * 100);
-        this.authStub = AuthServiceGrpc.newBlockingStub(
-                unauthenticatedChannelBuilder.intercept(new UnauthenticatedHeaderClientInterceptor(Map.of())).build()
-        );
 
+        timeout = Optional.ofNullable(builder.getTimeout());
+        unauthServerChannel = Grpc.newChannelBuilder(
+            grpcHost,
+            channelCreds
+        )
+        .maxInboundMessageSize(1024 * 1024 * 100)
+        .intercept(
+                new UnauthenticatedHeaderClientInterceptor(Map.of())
+        ).build();
         TokenRefresher tokenRefresher = new TokenRefresher(
                 resolvedConfig.clientId().value(),
                 resolvedConfig.clientSecret().value(),
-                this.authStub
+                AuthServiceGrpc.newBlockingStub(unauthServerChannel),
+                this.timeout
         );
 
         GetTokenResponse token = tokenRefresher.getToken();
@@ -111,19 +110,6 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         }
         resolvedEnvironmentId = environmentId;
         branchId = builder.getBranch();
-
-        authenticatedServerChannel = Grpc.newChannelBuilder(grpcHost, channelCreds)
-                .maxInboundMessageSize(1024 * 1024 * 100)
-                .intercept(
-                        new AuthenticatedHeaderClientInterceptor(
-                                ServerType.SERVER,
-                                Map.of(),
-                                tokenRefresher,
-                                null
-                        )
-                )
-                .build();
-        this.teamStub = TeamServiceGrpc.newBlockingStub(authenticatedServerChannel);
 
         String engineHost;
         if (builder.getQueryServerOverride() != null && !builder.getQueryServerOverride().isEmpty()) {
@@ -155,8 +141,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         defaultServiceConfig.put("methodConfig", Collections.singletonList(methodConfig));
 
-        String finalEngineHost = engineHost;
-        currentEngineChannel = Grpc.newChannelBuilder(finalEngineHost, channelCreds)
+        engineChannel = Grpc.newChannelBuilder(engineHost, channelCreds)
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
@@ -170,7 +155,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .enableRetry()
                 .build();
 
-        this.queryStubSupplier = () -> QueryServiceGrpc.newBlockingStub(this.currentEngineChannel);
+        var queryStub = QueryServiceGrpc.newBlockingStub(engineChannel);
+
+        this.stubsProvider = new StubsProvider(queryStub, this.timeout);
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -199,6 +186,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
     }
+
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
         byte[] bodyBytes;
@@ -290,10 +278,12 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .build();
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.queryStubSupplier.get().withInterceptors(
-                MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                this.getRequestHeaderInterceptor(params.getEnvironmentId())
-        ).onlineQueryBulk(request);
+        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
+                .withInterceptors(
+                    MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
+                    this.getRequestHeaderInterceptor(params.getEnvironmentId())
+                )
+                .onlineQueryBulk(request);
 
         var meta = GrpcSerializer.toQueryMeta(
                 response.getResponseMeta(),
@@ -362,13 +352,15 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesResponse response = this.queryStubSupplier.get().withInterceptors(
-            this.getRequestHeaderInterceptor(params.getEnvironmentId())
-        ).uploadFeatures(
-            UploadFeaturesRequest.newBuilder()
-                .setInputsTable(ByteString.copyFrom(tableBytes))
-                .build()
-        );
+        UploadFeaturesResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
+            .withInterceptors(
+                this.getRequestHeaderInterceptor(params.getEnvironmentId())
+            )
+            .uploadFeatures(
+                UploadFeaturesRequest.newBuilder()
+                    .setInputsTable(ByteString.copyFrom(tableBytes))
+                    .build()
+            );
 
         List<ServerError> errors = new ArrayList<>();
         for (int i = 0; i < response.getErrorsCount(); i++) {
@@ -379,7 +371,41 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     @Override
-    public void close() {
+    public void close() throws InterruptedException {
         this.allocator.close();
+        this.unauthServerChannel.shutdown().awaitTermination(600, java.util.concurrent.TimeUnit.SECONDS);
+        this.engineChannel.shutdown().awaitTermination(600, java.util.concurrent.TimeUnit.SECONDS);
+    }
+
+
+
+    /*
+     * Wrapper class around stubs so that we can provide them along with universal
+     * configurations like timeouts.
+     */
+    public static class StubsProvider {
+        private final @NonNull QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+        private final Optional<Duration> clientLevelTimeout;
+
+        public StubsProvider(
+            QueryServiceGrpc.QueryServiceBlockingStub queryStub,
+            Optional<Duration> clientLevelTimeout
+        ) {
+            this.queryStub = queryStub;
+            this.clientLevelTimeout = clientLevelTimeout;
+        }
+
+        public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Optional<Duration> requestLevelTimeout) {
+            Duration timeout = null;
+            if (requestLevelTimeout.isPresent()) {
+                timeout = requestLevelTimeout.get();
+            } else if (this.clientLevelTimeout.isPresent()) {
+                timeout = this.clientLevelTimeout.get();
+            }
+            if (timeout != null) {
+                return queryStub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+            }
+            return queryStub;
+        }
     }
 }

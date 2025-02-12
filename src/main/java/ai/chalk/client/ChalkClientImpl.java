@@ -3,14 +3,12 @@ package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
 import ai.chalk.exceptions.ClientException;
-import ai.chalk.exceptions.ServerError;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
-import ai.chalk.internal.request.models.GetTokenResponse;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
@@ -54,7 +52,8 @@ public class ChalkClientImpl implements ChalkClient {
                 this.clientId,
                 this.clientSecret,
                 branch,
-                deploymentTag
+                deploymentTag,
+                Optional.ofNullable(config.getTimeout())
         );
     }
 
@@ -72,7 +71,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder()
+        SendRequestParams request = new SendRequestParams.Builder(params.getTimeout())
                 .path("/v1/query/feather")
                 .body(bodyBytes)
                 .method("POST")
@@ -114,7 +113,7 @@ public class ChalkClientImpl implements ChalkClient {
             throw new ClientException("Failed to serialize UploadFeaturesParams", e);
         }
 
-        SendRequestParams request = new SendRequestParams.Builder()
+        SendRequestParams request = new SendRequestParams.Builder(params.getTimeout())
                 .path("/v1/upload_features/multi")
                 .body(body)
                 .method("POST")
