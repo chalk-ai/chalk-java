@@ -12,6 +12,7 @@ import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.complex.ListVector;
+import org.apache.arrow.vector.complex.MapVector;
 import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
@@ -356,6 +357,23 @@ public class Unmarshaller {
                             idx
                         )
                     );
+                }
+                return result;
+            }
+            case Map -> {
+                Map<Object, Object> result = new HashMap<>();
+                MapVector mapVector = (MapVector) vector;
+                var keyVector = mapVector.getDataVector().getChildrenFromFields().get(0);
+                var valueVector = mapVector.getDataVector().getChildrenFromFields().get(1);
+
+                var offsetSize = 4;  // 4 bytes
+                int startIdx = vector.getOffsetBuffer().getInt((long) idx * offsetSize);
+                int endIdx = vector.getOffsetBuffer().getInt((long) (idx + 1) * offsetSize);
+
+                for (int i = startIdx; i < endIdx; i++) {
+                    Object key = getValueFromFieldVector(keyVector, i);
+                    Object value = getValueFromFieldVector(valueVector, i);
+                    result.put(key, value);
                 }
                 return result;
             }
