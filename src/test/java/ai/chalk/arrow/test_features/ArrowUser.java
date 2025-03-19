@@ -3,10 +3,8 @@ package ai.chalk.arrow.test_features;
 import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesClass;
 import ai.chalk.features.HasMany;
-import org.junit.jupiter.api.Nested;
 
 import java.util.List;
-import java.util.Map;
 
 public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
