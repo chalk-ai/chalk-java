@@ -7,5 +7,5 @@ import java.util.Map;
 
 
 public class NestedMapDataclass extends StructFeaturesClass {
-    public Feature<Map<String, Map<String, Integer>>> nestedMap;
+    public Feature<Map<String, Map<String, Long>>> nestedMap;
 }

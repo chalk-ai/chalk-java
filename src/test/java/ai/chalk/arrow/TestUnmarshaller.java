@@ -425,27 +425,24 @@ public class TestUnmarshaller {
         nestedMapStructVector.setValueCount(numRows);
         nestedMapStructVector.allocateNew();
         var nestedMapStructWriter = nestedMapStructVector.getWriter();
-        var outerMapWriter = nestedMapStructWriter.map("nested_map");
-
-        for (var i = 0; i < numRows; i++) {
+        for (var i = 0; i < 3; i++) {
             nestedMapStructWriter.start();
+            var outerMapWriter = nestedMapStructWriter.map("nested_map", false);
             outerMapWriter.startMap();
-
             for (var j = 0; j < 3; j++) {
                 outerMapWriter.startEntry();
-                outerMapWriter.key().bigInt().writeBigInt(j);
+                outerMapWriter.key().largeVarChar().writeLargeVarChar(String.format("%d", j));
                 var innerMapWriter = outerMapWriter.value().map(false);
                 innerMapWriter.startMap();
                 for (var k = 0; k < 3; k++) {
                     innerMapWriter.startEntry();
                     innerMapWriter.key().largeVarChar().writeLargeVarChar(String.format("%d", j * 3 + k));
-                    innerMapWriter.value().bigInt().writeBigInt(j * 3 + k);
+                    innerMapWriter.value().bigInt().writeBigInt((j * 3) + k + i);
                     innerMapWriter.endEntry();
                 }
                 innerMapWriter.endMap();
                 outerMapWriter.endEntry();
             }
-
             outerMapWriter.endMap();
             nestedMapStructWriter.end();
         }
@@ -1064,6 +1061,18 @@ public class TestUnmarshaller {
         assert users[0].favoriteStruct.niceNumber.getValue().equals(1L);
         assert users[1].favoriteStruct.niceNumber.getValue().equals(2L);
         assert users[2].favoriteStruct.niceNumber.getValue().equals(3L);
+
+        for (var i = 0; i < 3; i++) {
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("0").get("0").equals(0L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("0").get("1").equals(1L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("0").get("2").equals(2L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("1").get("3").equals(3L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("1").get("4").equals(4L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("1").get("5").equals(5L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("2").get("6").equals(6L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("2").get("7").equals(7L + i);
+            assert users[i].nestedMapDataclass.nestedMap.getValue().get("2").get("8").equals(8L + i);
+        }
 
         assert users[0].favoriteStringList.getValue().equals(Arrays.asList("a", "b", "c"));
         assert users[1].favoriteStringList.getValue().equals(Arrays.asList("d", "e", "f"));
