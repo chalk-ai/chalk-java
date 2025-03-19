@@ -3,8 +3,10 @@ package ai.chalk.arrow.test_features;
 import ai.chalk.features.Feature;
 import ai.chalk.features.FeaturesClass;
 import ai.chalk.features.HasMany;
+import org.junit.jupiter.api.Nested;
 
 import java.util.List;
+import java.util.Map;
 
 public class ArrowUser extends FeaturesClass {
     public Feature<String> id;
@@ -67,6 +69,7 @@ public class ArrowUser extends FeaturesClass {
     public Feature<java.time.Duration> favoriteDurationNanoNullable;
     public VanillaDataclass favoriteStruct;
     public VanillaDataclass favoriteStructNullable;
+    public NestedMapDataclass nestedMapDataclass;
     public Feature<List<String>> favoriteStringList;
     public Feature<List<String>> favoriteStringListNullable;
     public Feature<List<Boolean>> favoriteBooleanList;

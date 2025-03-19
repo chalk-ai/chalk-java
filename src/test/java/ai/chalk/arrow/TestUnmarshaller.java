@@ -10,6 +10,7 @@ import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.complex.ListVector;
+import org.apache.arrow.vector.complex.MapVector;
 import org.apache.arrow.vector.complex.StructVector;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.TimeUnit;
@@ -419,6 +420,38 @@ public class TestUnmarshaller {
             outerStructWriter.end();
         }
         fieldVectors.add(structComplexVector);
+
+        var nestedMapStructVector = StructVector.empty("arrow_user.nested_map_dataclass", allocator);
+        nestedMapStructVector.setValueCount(numRows);
+        nestedMapStructVector.allocateNew();
+        var nestedMapStructWriter = nestedMapStructVector.getWriter();
+        var outerMapWriter = nestedMapStructWriter.map("nested_map");
+
+        for (var i = 0; i < numRows; i++) {
+            nestedMapStructWriter.start();
+            outerMapWriter.startMap();
+
+            for (var j = 0; j < 3; j++) {
+                outerMapWriter.startEntry();
+                outerMapWriter.key().bigInt().writeBigInt(j);
+                var innerMapWriter = outerMapWriter.value().map(false);
+                innerMapWriter.startMap();
+                for (var k = 0; k < 3; k++) {
+                    innerMapWriter.startEntry();
+                    innerMapWriter.key().largeVarChar().writeLargeVarChar(String.format("%d", j * 3 + k));
+                    innerMapWriter.value().bigInt().writeBigInt(j * 3 + k);
+                    innerMapWriter.endEntry();
+                }
+                innerMapWriter.endMap();
+                outerMapWriter.endEntry();
+            }
+
+            outerMapWriter.endMap();
+            nestedMapStructWriter.end();
+        }
+
+        fieldVectors.add(nestedMapStructVector);
+
 
         var listVector = ListVector.empty("arrow_user.favorite_string_list", allocator);
         var listWriter = listVector.getWriter();
