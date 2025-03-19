@@ -363,7 +363,7 @@ public class Unmarshaller {
             case Map -> {
                 Map<Object, Object> result = new HashMap<>();
                 MapVector mapVector = (MapVector) vector;
-                var keyVector = mapVector.getDataVector().getField()
+                var keyVector = mapVector.getDataVector().getChildrenFromFields().get(0);
                 var valueVector = mapVector.getDataVector().getChildrenFromFields().get(1);
 
                 var offsetSize = 4;  // 4 bytes
