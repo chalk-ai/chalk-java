@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     projects_ = java.util.Collections.emptyList();
     environments_ = java.util.Collections.emptyList();
     teamInvites_ = java.util.Collections.emptyList();
+    globalPinnedBaseImage_ = "";
   }
 
   @java.lang.Override
@@ -234,6 +235,53 @@ private static final long serialVersionUID = 0L;
     return extraSettings_ == null ? ai.chalk.protos.chalk.server.v1.BootstrapExtraSettings.getDefaultInstance() : extraSettings_;
   }
 
+  public static final int GLOBAL_PINNED_BASE_IMAGE_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object globalPinnedBaseImage_ = "";
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return Whether the globalPinnedBaseImage field is set.
+   */
+  @java.lang.Override
+  public boolean hasGlobalPinnedBaseImage() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return The globalPinnedBaseImage.
+   */
+  @java.lang.Override
+  public java.lang.String getGlobalPinnedBaseImage() {
+    java.lang.Object ref = globalPinnedBaseImage_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      globalPinnedBaseImage_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return The bytes for globalPinnedBaseImage.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGlobalPinnedBaseImageBytes() {
+    java.lang.Object ref = globalPinnedBaseImage_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      globalPinnedBaseImage_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -262,6 +310,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(5, getExtraSettings());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, globalPinnedBaseImage_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -292,6 +343,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, getExtraSettings());
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, globalPinnedBaseImage_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -319,6 +373,11 @@ private static final long serialVersionUID = 0L;
     if (hasExtraSettings()) {
       if (!getExtraSettings()
           .equals(other.getExtraSettings())) return false;
+    }
+    if (hasGlobalPinnedBaseImage() != other.hasGlobalPinnedBaseImage()) return false;
+    if (hasGlobalPinnedBaseImage()) {
+      if (!getGlobalPinnedBaseImage()
+          .equals(other.getGlobalPinnedBaseImage())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -350,6 +409,10 @@ private static final long serialVersionUID = 0L;
     if (hasExtraSettings()) {
       hash = (37 * hash) + EXTRA_SETTINGS_FIELD_NUMBER;
       hash = (53 * hash) + getExtraSettings().hashCode();
+    }
+    if (hasGlobalPinnedBaseImage()) {
+      hash = (37 * hash) + GLOBAL_PINNED_BASE_IMAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getGlobalPinnedBaseImage().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -525,6 +588,7 @@ private static final long serialVersionUID = 0L;
         extraSettingsBuilder_.dispose();
         extraSettingsBuilder_ = null;
       }
+      globalPinnedBaseImage_ = "";
       return this;
     }
 
@@ -604,6 +668,10 @@ private static final long serialVersionUID = 0L;
             ? extraSettings_
             : extraSettingsBuilder_.build();
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.globalPinnedBaseImage_ = globalPinnedBaseImage_;
+        to_bitField0_ |= 0x00000002;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -759,6 +827,11 @@ private static final long serialVersionUID = 0L;
       if (other.hasExtraSettings()) {
         mergeExtraSettings(other.getExtraSettings());
       }
+      if (other.hasGlobalPinnedBaseImage()) {
+        globalPinnedBaseImage_ = other.globalPinnedBaseImage_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -844,6 +917,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              globalPinnedBaseImage_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1940,6 +2018,85 @@ private static final long serialVersionUID = 0L;
         extraSettings_ = null;
       }
       return extraSettingsBuilder_;
+    }
+
+    private java.lang.Object globalPinnedBaseImage_ = "";
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @return Whether the globalPinnedBaseImage field is set.
+     */
+    public boolean hasGlobalPinnedBaseImage() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @return The globalPinnedBaseImage.
+     */
+    public java.lang.String getGlobalPinnedBaseImage() {
+      java.lang.Object ref = globalPinnedBaseImage_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        globalPinnedBaseImage_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @return The bytes for globalPinnedBaseImage.
+     */
+    public com.google.protobuf.ByteString
+        getGlobalPinnedBaseImageBytes() {
+      java.lang.Object ref = globalPinnedBaseImage_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        globalPinnedBaseImage_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @param value The globalPinnedBaseImage to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGlobalPinnedBaseImage(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      globalPinnedBaseImage_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGlobalPinnedBaseImage() {
+      globalPinnedBaseImage_ = getDefaultInstance().getGlobalPinnedBaseImage();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+     * @param value The bytes for globalPinnedBaseImage to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGlobalPinnedBaseImageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      globalPinnedBaseImage_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

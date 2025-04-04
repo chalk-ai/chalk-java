@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     module_ = "";
     fileName_ = "";
     functionDefinition_ = "";
+    capturedGlobals_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -219,6 +220,47 @@ private static final long serialVersionUID = 0L;
     return sourceLine_;
   }
 
+  public static final int CAPTURED_GLOBALS_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> capturedGlobals_;
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> getCapturedGlobalsList() {
+    return capturedGlobals_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder> 
+      getCapturedGlobalsOrBuilderList() {
+    return capturedGlobals_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  @java.lang.Override
+  public int getCapturedGlobalsCount() {
+    return capturedGlobals_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal getCapturedGlobals(int index) {
+    return capturedGlobals_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder getCapturedGlobalsOrBuilder(
+      int index) {
+    return capturedGlobals_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -248,6 +290,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeInt32(5, sourceLine_);
     }
+    for (int i = 0; i < capturedGlobals_.size(); i++) {
+      output.writeMessage(6, capturedGlobals_.get(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -272,6 +317,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(5, sourceLine_);
+    }
+    for (int i = 0; i < capturedGlobals_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, capturedGlobals_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -301,6 +350,8 @@ private static final long serialVersionUID = 0L;
       if (getSourceLine()
           != other.getSourceLine()) return false;
     }
+    if (!getCapturedGlobalsList()
+        .equals(other.getCapturedGlobalsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -323,6 +374,10 @@ private static final long serialVersionUID = 0L;
     if (hasSourceLine()) {
       hash = (37 * hash) + SOURCE_LINE_FIELD_NUMBER;
       hash = (53 * hash) + getSourceLine();
+    }
+    if (getCapturedGlobalsCount() > 0) {
+      hash = (37 * hash) + CAPTURED_GLOBALS_FIELD_NUMBER;
+      hash = (53 * hash) + getCapturedGlobalsList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -460,6 +515,13 @@ private static final long serialVersionUID = 0L;
       fileName_ = "";
       functionDefinition_ = "";
       sourceLine_ = 0;
+      if (capturedGlobalsBuilder_ == null) {
+        capturedGlobals_ = java.util.Collections.emptyList();
+      } else {
+        capturedGlobals_ = null;
+        capturedGlobalsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000020);
       return this;
     }
 
@@ -486,9 +548,22 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.graph.v1.FunctionReference buildPartial() {
       ai.chalk.protos.chalk.graph.v1.FunctionReference result = new ai.chalk.protos.chalk.graph.v1.FunctionReference(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(ai.chalk.protos.chalk.graph.v1.FunctionReference result) {
+      if (capturedGlobalsBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0)) {
+          capturedGlobals_ = java.util.Collections.unmodifiableList(capturedGlobals_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.capturedGlobals_ = capturedGlobals_;
+      } else {
+        result.capturedGlobals_ = capturedGlobalsBuilder_.build();
+      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.graph.v1.FunctionReference result) {
@@ -580,6 +655,32 @@ private static final long serialVersionUID = 0L;
       if (other.hasSourceLine()) {
         setSourceLine(other.getSourceLine());
       }
+      if (capturedGlobalsBuilder_ == null) {
+        if (!other.capturedGlobals_.isEmpty()) {
+          if (capturedGlobals_.isEmpty()) {
+            capturedGlobals_ = other.capturedGlobals_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureCapturedGlobalsIsMutable();
+            capturedGlobals_.addAll(other.capturedGlobals_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.capturedGlobals_.isEmpty()) {
+          if (capturedGlobalsBuilder_.isEmpty()) {
+            capturedGlobalsBuilder_.dispose();
+            capturedGlobalsBuilder_ = null;
+            capturedGlobals_ = other.capturedGlobals_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+            capturedGlobalsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getCapturedGlobalsFieldBuilder() : null;
+          } else {
+            capturedGlobalsBuilder_.addAllMessages(other.capturedGlobals_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -631,6 +732,19 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 40
+            case 50: {
+              ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.parser(),
+                      extensionRegistry);
+              if (capturedGlobalsBuilder_ == null) {
+                ensureCapturedGlobalsIsMutable();
+                capturedGlobals_.add(m);
+              } else {
+                capturedGlobalsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -974,6 +1088,246 @@ private static final long serialVersionUID = 0L;
       sourceLine_ = 0;
       onChanged();
       return this;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> capturedGlobals_ =
+      java.util.Collections.emptyList();
+    private void ensureCapturedGlobalsIsMutable() {
+      if (!((bitField0_ & 0x00000020) != 0)) {
+        capturedGlobals_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal>(capturedGlobals_);
+        bitField0_ |= 0x00000020;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder> capturedGlobalsBuilder_;
+
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> getCapturedGlobalsList() {
+      if (capturedGlobalsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(capturedGlobals_);
+      } else {
+        return capturedGlobalsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public int getCapturedGlobalsCount() {
+      if (capturedGlobalsBuilder_ == null) {
+        return capturedGlobals_.size();
+      } else {
+        return capturedGlobalsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal getCapturedGlobals(int index) {
+      if (capturedGlobalsBuilder_ == null) {
+        return capturedGlobals_.get(index);
+      } else {
+        return capturedGlobalsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder setCapturedGlobals(
+        int index, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal value) {
+      if (capturedGlobalsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.set(index, value);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder setCapturedGlobals(
+        int index, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder builderForValue) {
+      if (capturedGlobalsBuilder_ == null) {
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder addCapturedGlobals(ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal value) {
+      if (capturedGlobalsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.add(value);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder addCapturedGlobals(
+        int index, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal value) {
+      if (capturedGlobalsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.add(index, value);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder addCapturedGlobals(
+        ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder builderForValue) {
+      if (capturedGlobalsBuilder_ == null) {
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.add(builderForValue.build());
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder addCapturedGlobals(
+        int index, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder builderForValue) {
+      if (capturedGlobalsBuilder_ == null) {
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder addAllCapturedGlobals(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> values) {
+      if (capturedGlobalsBuilder_ == null) {
+        ensureCapturedGlobalsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, capturedGlobals_);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder clearCapturedGlobals() {
+      if (capturedGlobalsBuilder_ == null) {
+        capturedGlobals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public Builder removeCapturedGlobals(int index) {
+      if (capturedGlobalsBuilder_ == null) {
+        ensureCapturedGlobalsIsMutable();
+        capturedGlobals_.remove(index);
+        onChanged();
+      } else {
+        capturedGlobalsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder getCapturedGlobalsBuilder(
+        int index) {
+      return getCapturedGlobalsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder getCapturedGlobalsOrBuilder(
+        int index) {
+      if (capturedGlobalsBuilder_ == null) {
+        return capturedGlobals_.get(index);  } else {
+        return capturedGlobalsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder> 
+         getCapturedGlobalsOrBuilderList() {
+      if (capturedGlobalsBuilder_ != null) {
+        return capturedGlobalsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(capturedGlobals_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder addCapturedGlobalsBuilder() {
+      return getCapturedGlobalsFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder addCapturedGlobalsBuilder(
+        int index) {
+      return getCapturedGlobalsFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder> 
+         getCapturedGlobalsBuilderList() {
+      return getCapturedGlobalsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder> 
+        getCapturedGlobalsFieldBuilder() {
+      if (capturedGlobalsBuilder_ == null) {
+        capturedGlobalsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal.Builder, ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder>(
+                capturedGlobals_,
+                ((bitField0_ & 0x00000020) != 0),
+                getParentForChildren(),
+                isClean());
+        capturedGlobals_ = null;
+      }
+      return capturedGlobalsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

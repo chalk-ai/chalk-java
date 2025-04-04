@@ -31,6 +31,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * node.Name
+   * ex. ip-10-33-13-186.us-west-2.compute.internal
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -40,6 +41,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * node.Name
+   * ex. ip-10-33-13-186.us-west-2.compute.internal
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -50,7 +52,11 @@ public interface NodeStatusPubSubOrBuilder extends
 
   /**
    * <pre>
-   * node.UID
+   * A Kubernetes systems-generated string to uniquely identify objects.
+   * Every object created over the whole lifetime of a Kubernetes cluster
+   * has a distinct UID. It is intended to distinguish between historical
+   * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+   * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
    * </pre>
    *
    * <code>string uid = 3 [json_name = "uid"];</code>
@@ -59,7 +65,11 @@ public interface NodeStatusPubSubOrBuilder extends
   java.lang.String getUid();
   /**
    * <pre>
-   * node.UID
+   * A Kubernetes systems-generated string to uniquely identify objects.
+   * Every object created over the whole lifetime of a Kubernetes cluster
+   * has a distinct UID. It is intended to distinguish between historical
+   * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+   * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
    * </pre>
    *
    * <code>string uid = 3 [json_name = "uid"];</code>
@@ -71,6 +81,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * node.kubernetes.io/instance-type
+   * ex. t3.medium
    * </pre>
    *
    * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -80,6 +91,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * node.kubernetes.io/instance-type
+   * ex. t3.medium
    * </pre>
    *
    * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -91,6 +103,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * topology.kubernetes.io/region
+   * ex. us-west-2
    * </pre>
    *
    * <code>string region = 5 [json_name = "region"];</code>
@@ -100,6 +113,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * topology.kubernetes.io/region
+   * ex. us-west-2
    * </pre>
    *
    * <code>string region = 5 [json_name = "region"];</code>
@@ -111,6 +125,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * topology.kubernetes.io/zone
+   * ex. us-west-2a
    * </pre>
    *
    * <code>string zone = 6 [json_name = "zone"];</code>
@@ -120,6 +135,7 @@ public interface NodeStatusPubSubOrBuilder extends
   /**
    * <pre>
    * topology.kubernetes.io/zone
+   * ex. us-west-2a
    * </pre>
    *
    * <code>string zone = 6 [json_name = "zone"];</code>
@@ -269,11 +285,25 @@ java.lang.String defaultValue);
       java.lang.String key);
 
   /**
+   * <pre>
+   * MachineID reported by the node. For unique machine identification
+   * in the cluster this field is preferred. Learn more from man(5)
+   * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+   * ex. ec2d1437f00e85506a67dc38744731fe
+   * </pre>
+   *
    * <code>string machine_id = 13 [json_name = "machineId"];</code>
    * @return The machineId.
    */
   java.lang.String getMachineId();
   /**
+   * <pre>
+   * MachineID reported by the node. For unique machine identification
+   * in the cluster this field is preferred. Learn more from man(5)
+   * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+   * ex. ec2d1437f00e85506a67dc38744731fe
+   * </pre>
+   *
    * <code>string machine_id = 13 [json_name = "machineId"];</code>
    * @return The bytes for machineId.
    */
@@ -281,11 +311,25 @@ java.lang.String defaultValue);
       getMachineIdBytes();
 
   /**
+   * <pre>
+   * SystemUUID reported by the node. For unique machine identification
+   * MachineID is preferred. This field is specific to Red Hat hosts
+   * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+   * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+   * </pre>
+   *
    * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
    * @return The systemUuid.
    */
   java.lang.String getSystemUuid();
   /**
+   * <pre>
+   * SystemUUID reported by the node. For unique machine identification
+   * MachineID is preferred. This field is specific to Red Hat hosts
+   * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+   * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+   * </pre>
+   *
    * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
    * @return The bytes for systemUuid.
    */
@@ -293,11 +337,21 @@ java.lang.String defaultValue);
       getSystemUuidBytes();
 
   /**
+   * <pre>
+   * Boot ID reported by the node.
+   * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+   * </pre>
+   *
    * <code>string boot_id = 15 [json_name = "bootId"];</code>
    * @return The bootId.
    */
   java.lang.String getBootId();
   /**
+   * <pre>
+   * Boot ID reported by the node.
+   * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+   * </pre>
+   *
    * <code>string boot_id = 15 [json_name = "bootId"];</code>
    * @return The bytes for bootId.
    */
@@ -324,6 +378,7 @@ java.lang.String defaultValue);
 
   /**
    * <pre>
+   * Often null.
    * container.googleapis.com/instance_id
    * </pre>
    *
@@ -333,6 +388,7 @@ java.lang.String defaultValue);
   java.lang.String getInstanceId();
   /**
    * <pre>
+   * Often null.
    * container.googleapis.com/instance_id
    * </pre>
    *
@@ -343,11 +399,21 @@ java.lang.String defaultValue);
       getInstanceIdBytes();
 
   /**
+   * <pre>
+   * The name of the cluster that the node is in.
+   * ex. mycompany-prod-eks
+   * </pre>
+   *
    * <code>string cluster = 19 [json_name = "cluster"];</code>
    * @return The cluster.
    */
   java.lang.String getCluster();
   /**
+   * <pre>
+   * The name of the cluster that the node is in.
+   * ex. mycompany-prod-eks
+   * </pre>
+   *
    * <code>string cluster = 19 [json_name = "cluster"];</code>
    * @return The bytes for cluster.
    */
@@ -401,4 +467,10 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getAllocatableMemoryBytes();
+
+  /**
+   * <code>bool chalk_managed = 24 [json_name = "chalkManaged"];</code>
+   * @return The chalkManaged.
+   */
+  boolean getChalkManaged();
 }

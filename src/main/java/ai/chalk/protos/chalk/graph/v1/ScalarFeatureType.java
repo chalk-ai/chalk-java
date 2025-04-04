@@ -702,6 +702,60 @@ private static final long serialVersionUID = 0L;
     return result == null ? ai.chalk.protos.chalk.graph.v1.CacheStrategy.UNRECOGNIZED : result;
   }
 
+  public static final int STORE_ONLINE_FIELD_NUMBER = 26;
+  private boolean storeOnline_ = false;
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+   * @return Whether the storeOnline field is set.
+   */
+  @java.lang.Override
+  public boolean hasStoreOnline() {
+    return ((bitField0_ & 0x00001000) != 0);
+  }
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+   * @return The storeOnline.
+   */
+  @java.lang.Override
+  public boolean getStoreOnline() {
+    return storeOnline_;
+  }
+
+  public static final int STORE_OFFLINE_FIELD_NUMBER = 27;
+  private boolean storeOffline_ = false;
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+   * @return Whether the storeOffline field is set.
+   */
+  @java.lang.Override
+  public boolean hasStoreOffline() {
+    return ((bitField0_ & 0x00002000) != 0);
+  }
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+   * @return The storeOffline.
+   */
+  @java.lang.Override
+  public boolean getStoreOffline() {
+    return storeOffline_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -787,6 +841,12 @@ private static final long serialVersionUID = 0L;
     }
     if (cacheStrategy_ != ai.chalk.protos.chalk.graph.v1.CacheStrategy.CACHE_STRATEGY_UNSPECIFIED.getNumber()) {
       output.writeEnum(25, cacheStrategy_);
+    }
+    if (((bitField0_ & 0x00001000) != 0)) {
+      output.writeBool(26, storeOnline_);
+    }
+    if (((bitField0_ & 0x00002000) != 0)) {
+      output.writeBool(27, storeOffline_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -892,6 +952,14 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(25, cacheStrategy_);
     }
+    if (((bitField0_ & 0x00001000) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(26, storeOnline_);
+    }
+    if (((bitField0_ & 0x00002000) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(27, storeOffline_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -990,6 +1058,16 @@ private static final long serialVersionUID = 0L;
     if (getIsDeprecated()
         != other.getIsDeprecated()) return false;
     if (cacheStrategy_ != other.cacheStrategy_) return false;
+    if (hasStoreOnline() != other.hasStoreOnline()) return false;
+    if (hasStoreOnline()) {
+      if (getStoreOnline()
+          != other.getStoreOnline()) return false;
+    }
+    if (hasStoreOffline() != other.hasStoreOffline()) return false;
+    if (hasStoreOffline()) {
+      if (getStoreOffline()
+          != other.getStoreOffline()) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1085,6 +1163,16 @@ private static final long serialVersionUID = 0L;
         getIsDeprecated());
     hash = (37 * hash) + CACHE_STRATEGY_FIELD_NUMBER;
     hash = (53 * hash) + cacheStrategy_;
+    if (hasStoreOnline()) {
+      hash = (37 * hash) + STORE_ONLINE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getStoreOnline());
+    }
+    if (hasStoreOffline()) {
+      hash = (37 * hash) + STORE_OFFLINE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getStoreOffline());
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1293,6 +1381,8 @@ private static final long serialVersionUID = 0L;
       attributeName_ = "";
       isDeprecated_ = false;
       cacheStrategy_ = 0;
+      storeOnline_ = false;
+      storeOffline_ = false;
       return this;
     }
 
@@ -1437,6 +1527,14 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00800000) != 0)) {
         result.cacheStrategy_ = cacheStrategy_;
+      }
+      if (((from_bitField0_ & 0x01000000) != 0)) {
+        result.storeOnline_ = storeOnline_;
+        to_bitField0_ |= 0x00001000;
+      }
+      if (((from_bitField0_ & 0x02000000) != 0)) {
+        result.storeOffline_ = storeOffline_;
+        to_bitField0_ |= 0x00002000;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1596,6 +1694,12 @@ private static final long serialVersionUID = 0L;
       }
       if (other.cacheStrategy_ != 0) {
         setCacheStrategyValue(other.getCacheStrategyValue());
+      }
+      if (other.hasStoreOnline()) {
+        setStoreOnline(other.getStoreOnline());
+      }
+      if (other.hasStoreOffline()) {
+        setStoreOffline(other.getStoreOffline());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1768,6 +1872,16 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00800000;
               break;
             } // case 200
+            case 208: {
+              storeOnline_ = input.readBool();
+              bitField0_ |= 0x01000000;
+              break;
+            } // case 208
+            case 216: {
+              storeOffline_ = input.readBool();
+              bitField0_ |= 0x02000000;
+              break;
+            } // case 216
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3889,6 +4003,118 @@ private static final long serialVersionUID = 0L;
     public Builder clearCacheStrategy() {
       bitField0_ = (bitField0_ & ~0x00800000);
       cacheStrategy_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean storeOnline_ ;
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+     * @return Whether the storeOnline field is set.
+     */
+    @java.lang.Override
+    public boolean hasStoreOnline() {
+      return ((bitField0_ & 0x01000000) != 0);
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+     * @return The storeOnline.
+     */
+    @java.lang.Override
+    public boolean getStoreOnline() {
+      return storeOnline_;
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+     * @param value The storeOnline to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStoreOnline(boolean value) {
+
+      storeOnline_ = value;
+      bitField0_ |= 0x01000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStoreOnline() {
+      bitField0_ = (bitField0_ & ~0x01000000);
+      storeOnline_ = false;
+      onChanged();
+      return this;
+    }
+
+    private boolean storeOffline_ ;
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+     * @return Whether the storeOffline field is set.
+     */
+    @java.lang.Override
+    public boolean hasStoreOffline() {
+      return ((bitField0_ & 0x02000000) != 0);
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+     * @return The storeOffline.
+     */
+    @java.lang.Override
+    public boolean getStoreOffline() {
+      return storeOffline_;
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+     * @param value The storeOffline to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStoreOffline(boolean value) {
+
+      storeOffline_ = value;
+      bitField0_ |= 0x02000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * optional because proto default is false, but chalk defaults to true
+     * </pre>
+     *
+     * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStoreOffline() {
+      bitField0_ = (bitField0_ & ~0x02000000);
+      storeOffline_ = false;
       onChanged();
       return this;
     }

@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private LogicalExprNode() {
+    exprId_ = "";
   }
 
   @java.lang.Override
@@ -348,6 +349,53 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.expression.v1.ExprLiteral.getDefaultInstance();
   }
 
+  public static final int EXPR_ID_FIELD_NUMBER = 40;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object exprId_ = "";
+  /**
+   * <pre>
+   * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+   * </pre>
+   *
+   * <code>string expr_id = 40 [json_name = "exprId"];</code>
+   * @return The exprId.
+   */
+  @java.lang.Override
+  public java.lang.String getExprId() {
+    java.lang.Object ref = exprId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      exprId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+   * </pre>
+   *
+   * <code>string expr_id = 40 [json_name = "exprId"];</code>
+   * @return The bytes for exprId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getExprIdBytes() {
+    java.lang.Object ref = exprId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      exprId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int COLUMN_FIELD_NUMBER = 1;
   /**
    * <pre>
@@ -356,7 +404,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=64
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return Whether the column field is set.
    */
   @java.lang.Override
@@ -370,7 +418,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=64
+   *     See chalk/expression/v1/expression.proto;l=72
    * @return The column.
    */
   @java.lang.Override
@@ -403,7 +451,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=67
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return Whether the alias field is set.
    */
   @java.lang.Override
@@ -417,7 +465,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=67
+   *     See chalk/expression/v1/expression.proto;l=75
    * @return The alias.
    */
   @java.lang.Override
@@ -446,7 +494,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=69
+   *     See chalk/expression/v1/expression.proto;l=77
    * @return Whether the literal field is set.
    */
   @java.lang.Override
@@ -456,7 +504,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=69
+   *     See chalk/expression/v1/expression.proto;l=77
    * @return The literal.
    */
   @java.lang.Override
@@ -485,7 +533,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=72
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return Whether the binaryExpr field is set.
    */
   @java.lang.Override
@@ -499,7 +547,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=72
+   *     See chalk/expression/v1/expression.proto;l=80
    * @return The binaryExpr.
    */
   @java.lang.Override
@@ -532,7 +580,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=75
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return Whether the aggregateExpr field is set.
    */
   @java.lang.Override
@@ -546,7 +594,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=75
+   *     See chalk/expression/v1/expression.proto;l=83
    * @return The aggregateExpr.
    */
   @java.lang.Override
@@ -579,7 +627,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=78
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return Whether the isNullExpr field is set.
    */
   @java.lang.Override
@@ -593,7 +641,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=78
+   *     See chalk/expression/v1/expression.proto;l=86
    * @return The isNullExpr.
    */
   @java.lang.Override
@@ -622,7 +670,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=79
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return Whether the isNotNullExpr field is set.
    */
   @java.lang.Override
@@ -632,7 +680,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=79
+   *     See chalk/expression/v1/expression.proto;l=87
    * @return The isNotNullExpr.
    */
   @java.lang.Override
@@ -657,7 +705,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=80
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return Whether the notExpr field is set.
    */
   @java.lang.Override
@@ -667,7 +715,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=80
+   *     See chalk/expression/v1/expression.proto;l=88
    * @return The notExpr.
    */
   @java.lang.Override
@@ -692,7 +740,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=82
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return Whether the between field is set.
    */
   @java.lang.Override
@@ -702,7 +750,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=82
+   *     See chalk/expression/v1/expression.proto;l=90
    * @return The between.
    */
   @java.lang.Override
@@ -727,7 +775,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=83
+   *     See chalk/expression/v1/expression.proto;l=91
    * @return Whether the case field is set.
    */
   @java.lang.Override
@@ -737,7 +785,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=83
+   *     See chalk/expression/v1/expression.proto;l=91
    * @return The case.
    */
   @java.lang.Override
@@ -762,7 +810,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=84
+   *     See chalk/expression/v1/expression.proto;l=92
    * @return Whether the cast field is set.
    */
   @java.lang.Override
@@ -772,7 +820,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=84
+   *     See chalk/expression/v1/expression.proto;l=92
    * @return The cast.
    */
   @java.lang.Override
@@ -797,7 +845,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=85
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return Whether the sort field is set.
    */
   @java.lang.Override
@@ -807,7 +855,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=85
+   *     See chalk/expression/v1/expression.proto;l=93
    * @return The sort.
    */
   @java.lang.Override
@@ -832,7 +880,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=86
+   *     See chalk/expression/v1/expression.proto;l=94
    * @return Whether the negative field is set.
    */
   @java.lang.Override
@@ -842,7 +890,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=86
+   *     See chalk/expression/v1/expression.proto;l=94
    * @return The negative.
    */
   @java.lang.Override
@@ -867,7 +915,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=87
+   *     See chalk/expression/v1/expression.proto;l=95
    * @return Whether the inList field is set.
    */
   @java.lang.Override
@@ -877,7 +925,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=87
+   *     See chalk/expression/v1/expression.proto;l=95
    * @return The inList.
    */
   @java.lang.Override
@@ -902,7 +950,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=88
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return Whether the wildcard field is set.
    */
   @java.lang.Override
@@ -912,7 +960,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=88
+   *     See chalk/expression/v1/expression.proto;l=96
    * @return The wildcard.
    */
   @java.lang.Override
@@ -937,7 +985,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=89
+   *     See chalk/expression/v1/expression.proto;l=97
    * @return Whether the scalarFunction field is set.
    */
   @java.lang.Override
@@ -947,7 +995,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=89
+   *     See chalk/expression/v1/expression.proto;l=97
    * @return The scalarFunction.
    */
   @java.lang.Override
@@ -972,7 +1020,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=90
+   *     See chalk/expression/v1/expression.proto;l=98
    * @return Whether the tryCast field is set.
    */
   @java.lang.Override
@@ -982,7 +1030,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=90
+   *     See chalk/expression/v1/expression.proto;l=98
    * @return The tryCast.
    */
   @java.lang.Override
@@ -1011,7 +1059,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=93
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return Whether the windowExpr field is set.
    */
   @java.lang.Override
@@ -1025,7 +1073,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=93
+   *     See chalk/expression/v1/expression.proto;l=101
    * @return The windowExpr.
    */
   @java.lang.Override
@@ -1058,7 +1106,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=96
+   *     See chalk/expression/v1/expression.proto;l=104
    * @return Whether the aggregateUdfExpr field is set.
    */
   @java.lang.Override
@@ -1072,7 +1120,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=96
+   *     See chalk/expression/v1/expression.proto;l=104
    * @return The aggregateUdfExpr.
    */
   @java.lang.Override
@@ -1105,7 +1153,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=99
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return Whether the scalarUdfExpr field is set.
    */
   @java.lang.Override
@@ -1119,7 +1167,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=99
+   *     See chalk/expression/v1/expression.proto;l=107
    * @return The scalarUdfExpr.
    */
   @java.lang.Override
@@ -1148,7 +1196,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=101
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return Whether the getIndexedField field is set.
    */
   @java.lang.Override
@@ -1158,7 +1206,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=101
+   *     See chalk/expression/v1/expression.proto;l=109
    * @return The getIndexedField.
    */
   @java.lang.Override
@@ -1183,7 +1231,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=103
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return Whether the groupingSet field is set.
    */
   @java.lang.Override
@@ -1193,7 +1241,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=103
+   *     See chalk/expression/v1/expression.proto;l=111
    * @return The groupingSet.
    */
   @java.lang.Override
@@ -1218,7 +1266,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=105
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return Whether the cube field is set.
    */
   @java.lang.Override
@@ -1228,7 +1276,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=105
+   *     See chalk/expression/v1/expression.proto;l=113
    * @return The cube.
    */
   @java.lang.Override
@@ -1253,7 +1301,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=107
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return Whether the rollup field is set.
    */
   @java.lang.Override
@@ -1263,7 +1311,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=107
+   *     See chalk/expression/v1/expression.proto;l=115
    * @return The rollup.
    */
   @java.lang.Override
@@ -1288,7 +1336,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=109
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return Whether the isTrue field is set.
    */
   @java.lang.Override
@@ -1298,7 +1346,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=109
+   *     See chalk/expression/v1/expression.proto;l=117
    * @return The isTrue.
    */
   @java.lang.Override
@@ -1323,7 +1371,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=110
+   *     See chalk/expression/v1/expression.proto;l=118
    * @return Whether the isFalse field is set.
    */
   @java.lang.Override
@@ -1333,7 +1381,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=110
+   *     See chalk/expression/v1/expression.proto;l=118
    * @return The isFalse.
    */
   @java.lang.Override
@@ -1358,7 +1406,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=111
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return Whether the isUnknown field is set.
    */
   @java.lang.Override
@@ -1368,7 +1416,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=111
+   *     See chalk/expression/v1/expression.proto;l=119
    * @return The isUnknown.
    */
   @java.lang.Override
@@ -1393,7 +1441,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=112
+   *     See chalk/expression/v1/expression.proto;l=120
    * @return Whether the isNotTrue field is set.
    */
   @java.lang.Override
@@ -1403,7 +1451,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=112
+   *     See chalk/expression/v1/expression.proto;l=120
    * @return The isNotTrue.
    */
   @java.lang.Override
@@ -1428,7 +1476,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=113
+   *     See chalk/expression/v1/expression.proto;l=121
    * @return Whether the isNotFalse field is set.
    */
   @java.lang.Override
@@ -1438,7 +1486,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=113
+   *     See chalk/expression/v1/expression.proto;l=121
    * @return The isNotFalse.
    */
   @java.lang.Override
@@ -1463,7 +1511,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=114
+   *     See chalk/expression/v1/expression.proto;l=122
    * @return Whether the isNotUnknown field is set.
    */
   @java.lang.Override
@@ -1473,7 +1521,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=114
+   *     See chalk/expression/v1/expression.proto;l=122
    * @return The isNotUnknown.
    */
   @java.lang.Override
@@ -1498,7 +1546,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=115
+   *     See chalk/expression/v1/expression.proto;l=123
    * @return Whether the like field is set.
    */
   @java.lang.Override
@@ -1508,7 +1556,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=115
+   *     See chalk/expression/v1/expression.proto;l=123
    * @return The like.
    */
   @java.lang.Override
@@ -1533,7 +1581,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=116
+   *     See chalk/expression/v1/expression.proto;l=124
    * @return Whether the ilike field is set.
    */
   @java.lang.Override
@@ -1543,7 +1591,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=116
+   *     See chalk/expression/v1/expression.proto;l=124
    * @return The ilike.
    */
   @java.lang.Override
@@ -1568,7 +1616,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=117
+   *     See chalk/expression/v1/expression.proto;l=125
    * @return Whether the similarTo field is set.
    */
   @java.lang.Override
@@ -1578,7 +1626,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=117
+   *     See chalk/expression/v1/expression.proto;l=125
    * @return The similarTo.
    */
   @java.lang.Override
@@ -1603,7 +1651,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=119
+   *     See chalk/expression/v1/expression.proto;l=127
    * @return Whether the placeholder field is set.
    */
   @java.lang.Override
@@ -1613,7 +1661,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
    * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
-   *     See chalk/expression/v1/expression.proto;l=119
+   *     See chalk/expression/v1/expression.proto;l=127
    * @return The placeholder.
    */
   @java.lang.Override
@@ -1764,6 +1812,9 @@ private static final long serialVersionUID = 0L;
     }
     if (exprFormCase_ == 39) {
       output.writeMessage(39, (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(exprId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 40, exprId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1930,6 +1981,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(39, (ai.chalk.protos.chalk.expression.v1.ExprLiteral) exprForm_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(exprId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(40, exprId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1945,6 +1999,8 @@ private static final long serialVersionUID = 0L;
     }
     ai.chalk.protos.chalk.expression.v1.LogicalExprNode other = (ai.chalk.protos.chalk.expression.v1.LogicalExprNode) obj;
 
+    if (!getExprId()
+        .equals(other.getExprId())) return false;
     if (!getExprFormCase().equals(other.getExprFormCase())) return false;
     switch (exprFormCase_) {
       case 35:
@@ -2122,6 +2178,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + EXPR_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getExprId().hashCode();
     switch (exprFormCase_) {
       case 35:
         hash = (37 * hash) + IDENTIFIER_FIELD_NUMBER;
@@ -2433,6 +2491,7 @@ private static final long serialVersionUID = 0L;
       if (literalValueBuilder_ != null) {
         literalValueBuilder_.clear();
       }
+      exprId_ = "";
       if (columnBuilder_ != null) {
         columnBuilder_.clear();
       }
@@ -2574,6 +2633,9 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(ai.chalk.protos.chalk.expression.v1.LogicalExprNode result) {
       int from_bitField0_ = bitField0_;
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.exprId_ = exprId_;
+      }
     }
 
     private void buildPartial1(ai.chalk.protos.chalk.expression.v1.LogicalExprNode result) {
@@ -2787,6 +2849,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ai.chalk.protos.chalk.expression.v1.LogicalExprNode other) {
       if (other == ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance()) return this;
+      if (!other.getExprId().isEmpty()) {
+        exprId_ = other.exprId_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
       switch (other.getExprFormCase()) {
         case IDENTIFIER: {
           mergeIdentifier(other.getIdentifier());
@@ -3252,6 +3319,11 @@ private static final long serialVersionUID = 0L;
               exprFormCase_ = 39;
               break;
             } // case 314
+            case 322: {
+              exprId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 322
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -4010,6 +4082,98 @@ private static final long serialVersionUID = 0L;
       return literalValueBuilder_;
     }
 
+    private java.lang.Object exprId_ = "";
+    /**
+     * <pre>
+     * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+     * </pre>
+     *
+     * <code>string expr_id = 40 [json_name = "exprId"];</code>
+     * @return The exprId.
+     */
+    public java.lang.String getExprId() {
+      java.lang.Object ref = exprId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        exprId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+     * </pre>
+     *
+     * <code>string expr_id = 40 [json_name = "exprId"];</code>
+     * @return The bytes for exprId.
+     */
+    public com.google.protobuf.ByteString
+        getExprIdBytes() {
+      java.lang.Object ref = exprId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        exprId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+     * </pre>
+     *
+     * <code>string expr_id = 40 [json_name = "exprId"];</code>
+     * @param value The exprId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExprId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      exprId_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+     * </pre>
+     *
+     * <code>string expr_id = 40 [json_name = "exprId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearExprId() {
+      exprId_ = getDefaultInstance().getExprId();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The memory ID of this node. Nodes with equal id share are *identical*, sharing any nondeterminism and mutations.
+     * </pre>
+     *
+     * <code>string expr_id = 40 [json_name = "exprId"];</code>
+     * @param value The bytes for exprId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExprIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      exprId_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.expression.v1.Column, ai.chalk.protos.chalk.expression.v1.Column.Builder, ai.chalk.protos.chalk.expression.v1.ColumnOrBuilder> columnBuilder_;
     /**
@@ -4019,7 +4183,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=64
+     *     See chalk/expression/v1/expression.proto;l=72
      * @return Whether the column field is set.
      */
     @java.lang.Override
@@ -4033,7 +4197,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.Column column = 1 [json_name = "column", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.column is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=64
+     *     See chalk/expression/v1/expression.proto;l=72
      * @return The column.
      */
     @java.lang.Override
@@ -4201,7 +4365,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=67
+     *     See chalk/expression/v1/expression.proto;l=75
      * @return Whether the alias field is set.
      */
     @java.lang.Override
@@ -4215,7 +4379,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AliasNode alias = 2 [json_name = "alias", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.alias is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=67
+     *     See chalk/expression/v1/expression.proto;l=75
      * @return The alias.
      */
     @java.lang.Override
@@ -4379,7 +4543,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=69
+     *     See chalk/expression/v1/expression.proto;l=77
      * @return Whether the literal field is set.
      */
     @java.lang.Override
@@ -4389,7 +4553,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.arrow.v1.ScalarValue literal = 3 [json_name = "literal", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.literal is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=69
+     *     See chalk/expression/v1/expression.proto;l=77
      * @return The literal.
      */
     @java.lang.Override
@@ -4529,7 +4693,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=72
+     *     See chalk/expression/v1/expression.proto;l=80
      * @return Whether the binaryExpr field is set.
      */
     @java.lang.Override
@@ -4543,7 +4707,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.BinaryExprNode binary_expr = 4 [json_name = "binaryExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.binary_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=72
+     *     See chalk/expression/v1/expression.proto;l=80
      * @return The binaryExpr.
      */
     @java.lang.Override
@@ -4711,7 +4875,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=75
+     *     See chalk/expression/v1/expression.proto;l=83
      * @return Whether the aggregateExpr field is set.
      */
     @java.lang.Override
@@ -4725,7 +4889,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AggregateExprNode aggregate_expr = 5 [json_name = "aggregateExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=75
+     *     See chalk/expression/v1/expression.proto;l=83
      * @return The aggregateExpr.
      */
     @java.lang.Override
@@ -4893,7 +5057,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=78
+     *     See chalk/expression/v1/expression.proto;l=86
      * @return Whether the isNullExpr field is set.
      */
     @java.lang.Override
@@ -4907,7 +5071,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.IsNull is_null_expr = 6 [json_name = "isNullExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_null_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=78
+     *     See chalk/expression/v1/expression.proto;l=86
      * @return The isNullExpr.
      */
     @java.lang.Override
@@ -5071,7 +5235,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=79
+     *     See chalk/expression/v1/expression.proto;l=87
      * @return Whether the isNotNullExpr field is set.
      */
     @java.lang.Override
@@ -5081,7 +5245,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotNull is_not_null_expr = 7 [json_name = "isNotNullExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_null_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=79
+     *     See chalk/expression/v1/expression.proto;l=87
      * @return The isNotNullExpr.
      */
     @java.lang.Override
@@ -5217,7 +5381,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=80
+     *     See chalk/expression/v1/expression.proto;l=88
      * @return Whether the notExpr field is set.
      */
     @java.lang.Override
@@ -5227,7 +5391,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.Not not_expr = 8 [json_name = "notExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.not_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=80
+     *     See chalk/expression/v1/expression.proto;l=88
      * @return The notExpr.
      */
     @java.lang.Override
@@ -5363,7 +5527,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=82
+     *     See chalk/expression/v1/expression.proto;l=90
      * @return Whether the between field is set.
      */
     @java.lang.Override
@@ -5373,7 +5537,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.BetweenNode between = 9 [json_name = "between", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.between is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=82
+     *     See chalk/expression/v1/expression.proto;l=90
      * @return The between.
      */
     @java.lang.Override
@@ -5509,7 +5673,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=83
+     *     See chalk/expression/v1/expression.proto;l=91
      * @return Whether the case field is set.
      */
     @java.lang.Override
@@ -5519,7 +5683,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CaseNode case = 10 [json_name = "case", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.case is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=83
+     *     See chalk/expression/v1/expression.proto;l=91
      * @return The case.
      */
     @java.lang.Override
@@ -5655,7 +5819,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=84
+     *     See chalk/expression/v1/expression.proto;l=92
      * @return Whether the cast field is set.
      */
     @java.lang.Override
@@ -5665,7 +5829,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CastNode cast = 11 [json_name = "cast", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.cast is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=84
+     *     See chalk/expression/v1/expression.proto;l=92
      * @return The cast.
      */
     @java.lang.Override
@@ -5801,7 +5965,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=85
+     *     See chalk/expression/v1/expression.proto;l=93
      * @return Whether the sort field is set.
      */
     @java.lang.Override
@@ -5811,7 +5975,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.SortExprNode sort = 12 [json_name = "sort", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.sort is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=85
+     *     See chalk/expression/v1/expression.proto;l=93
      * @return The sort.
      */
     @java.lang.Override
@@ -5947,7 +6111,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=86
+     *     See chalk/expression/v1/expression.proto;l=94
      * @return Whether the negative field is set.
      */
     @java.lang.Override
@@ -5957,7 +6121,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.NegativeNode negative = 13 [json_name = "negative", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.negative is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=86
+     *     See chalk/expression/v1/expression.proto;l=94
      * @return The negative.
      */
     @java.lang.Override
@@ -6093,7 +6257,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=87
+     *     See chalk/expression/v1/expression.proto;l=95
      * @return Whether the inList field is set.
      */
     @java.lang.Override
@@ -6103,7 +6267,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.InListNode in_list = 14 [json_name = "inList", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.in_list is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=87
+     *     See chalk/expression/v1/expression.proto;l=95
      * @return The inList.
      */
     @java.lang.Override
@@ -6239,7 +6403,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=88
+     *     See chalk/expression/v1/expression.proto;l=96
      * @return Whether the wildcard field is set.
      */
     @java.lang.Override
@@ -6249,7 +6413,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.Wildcard wildcard = 15 [json_name = "wildcard", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.wildcard is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=88
+     *     See chalk/expression/v1/expression.proto;l=96
      * @return The wildcard.
      */
     @java.lang.Override
@@ -6385,7 +6549,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=89
+     *     See chalk/expression/v1/expression.proto;l=97
      * @return Whether the scalarFunction field is set.
      */
     @java.lang.Override
@@ -6395,7 +6559,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.ScalarFunctionNode scalar_function = 16 [json_name = "scalarFunction", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.scalar_function is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=89
+     *     See chalk/expression/v1/expression.proto;l=97
      * @return The scalarFunction.
      */
     @java.lang.Override
@@ -6531,7 +6695,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=90
+     *     See chalk/expression/v1/expression.proto;l=98
      * @return Whether the tryCast field is set.
      */
     @java.lang.Override
@@ -6541,7 +6705,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.TryCastNode try_cast = 17 [json_name = "tryCast", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.try_cast is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=90
+     *     See chalk/expression/v1/expression.proto;l=98
      * @return The tryCast.
      */
     @java.lang.Override
@@ -6681,7 +6845,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=93
+     *     See chalk/expression/v1/expression.proto;l=101
      * @return Whether the windowExpr field is set.
      */
     @java.lang.Override
@@ -6695,7 +6859,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.WindowExprNode window_expr = 18 [json_name = "windowExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.window_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=93
+     *     See chalk/expression/v1/expression.proto;l=101
      * @return The windowExpr.
      */
     @java.lang.Override
@@ -6863,7 +7027,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=96
+     *     See chalk/expression/v1/expression.proto;l=104
      * @return Whether the aggregateUdfExpr field is set.
      */
     @java.lang.Override
@@ -6877,7 +7041,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.AggregateUDFExprNode aggregate_udf_expr = 19 [json_name = "aggregateUdfExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.aggregate_udf_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=96
+     *     See chalk/expression/v1/expression.proto;l=104
      * @return The aggregateUdfExpr.
      */
     @java.lang.Override
@@ -7045,7 +7209,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=99
+     *     See chalk/expression/v1/expression.proto;l=107
      * @return Whether the scalarUdfExpr field is set.
      */
     @java.lang.Override
@@ -7059,7 +7223,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>.chalk.expression.v1.ScalarUDFExprNode scalar_udf_expr = 20 [json_name = "scalarUdfExpr", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.scalar_udf_expr is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=99
+     *     See chalk/expression/v1/expression.proto;l=107
      * @return The scalarUdfExpr.
      */
     @java.lang.Override
@@ -7223,7 +7387,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=101
+     *     See chalk/expression/v1/expression.proto;l=109
      * @return Whether the getIndexedField field is set.
      */
     @java.lang.Override
@@ -7233,7 +7397,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.GetIndexedField get_indexed_field = 21 [json_name = "getIndexedField", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.get_indexed_field is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=101
+     *     See chalk/expression/v1/expression.proto;l=109
      * @return The getIndexedField.
      */
     @java.lang.Override
@@ -7369,7 +7533,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=103
+     *     See chalk/expression/v1/expression.proto;l=111
      * @return Whether the groupingSet field is set.
      */
     @java.lang.Override
@@ -7379,7 +7543,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.GroupingSetNode grouping_set = 22 [json_name = "groupingSet", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.grouping_set is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=103
+     *     See chalk/expression/v1/expression.proto;l=111
      * @return The groupingSet.
      */
     @java.lang.Override
@@ -7515,7 +7679,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=105
+     *     See chalk/expression/v1/expression.proto;l=113
      * @return Whether the cube field is set.
      */
     @java.lang.Override
@@ -7525,7 +7689,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.CubeNode cube = 23 [json_name = "cube", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.cube is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=105
+     *     See chalk/expression/v1/expression.proto;l=113
      * @return The cube.
      */
     @java.lang.Override
@@ -7661,7 +7825,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=107
+     *     See chalk/expression/v1/expression.proto;l=115
      * @return Whether the rollup field is set.
      */
     @java.lang.Override
@@ -7671,7 +7835,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.RollupNode rollup = 24 [json_name = "rollup", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.rollup is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=107
+     *     See chalk/expression/v1/expression.proto;l=115
      * @return The rollup.
      */
     @java.lang.Override
@@ -7807,7 +7971,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=109
+     *     See chalk/expression/v1/expression.proto;l=117
      * @return Whether the isTrue field is set.
      */
     @java.lang.Override
@@ -7817,7 +7981,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsTrue is_true = 25 [json_name = "isTrue", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_true is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=109
+     *     See chalk/expression/v1/expression.proto;l=117
      * @return The isTrue.
      */
     @java.lang.Override
@@ -7953,7 +8117,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=110
+     *     See chalk/expression/v1/expression.proto;l=118
      * @return Whether the isFalse field is set.
      */
     @java.lang.Override
@@ -7963,7 +8127,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsFalse is_false = 26 [json_name = "isFalse", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_false is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=110
+     *     See chalk/expression/v1/expression.proto;l=118
      * @return The isFalse.
      */
     @java.lang.Override
@@ -8099,7 +8263,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=111
+     *     See chalk/expression/v1/expression.proto;l=119
      * @return Whether the isUnknown field is set.
      */
     @java.lang.Override
@@ -8109,7 +8273,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsUnknown is_unknown = 27 [json_name = "isUnknown", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_unknown is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=111
+     *     See chalk/expression/v1/expression.proto;l=119
      * @return The isUnknown.
      */
     @java.lang.Override
@@ -8245,7 +8409,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=112
+     *     See chalk/expression/v1/expression.proto;l=120
      * @return Whether the isNotTrue field is set.
      */
     @java.lang.Override
@@ -8255,7 +8419,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotTrue is_not_true = 28 [json_name = "isNotTrue", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_true is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=112
+     *     See chalk/expression/v1/expression.proto;l=120
      * @return The isNotTrue.
      */
     @java.lang.Override
@@ -8391,7 +8555,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=113
+     *     See chalk/expression/v1/expression.proto;l=121
      * @return Whether the isNotFalse field is set.
      */
     @java.lang.Override
@@ -8401,7 +8565,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotFalse is_not_false = 29 [json_name = "isNotFalse", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_false is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=113
+     *     See chalk/expression/v1/expression.proto;l=121
      * @return The isNotFalse.
      */
     @java.lang.Override
@@ -8537,7 +8701,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=114
+     *     See chalk/expression/v1/expression.proto;l=122
      * @return Whether the isNotUnknown field is set.
      */
     @java.lang.Override
@@ -8547,7 +8711,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.IsNotUnknown is_not_unknown = 30 [json_name = "isNotUnknown", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.is_not_unknown is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=114
+     *     See chalk/expression/v1/expression.proto;l=122
      * @return The isNotUnknown.
      */
     @java.lang.Override
@@ -8683,7 +8847,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=115
+     *     See chalk/expression/v1/expression.proto;l=123
      * @return Whether the like field is set.
      */
     @java.lang.Override
@@ -8693,7 +8857,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.LikeNode like = 31 [json_name = "like", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.like is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=115
+     *     See chalk/expression/v1/expression.proto;l=123
      * @return The like.
      */
     @java.lang.Override
@@ -8829,7 +8993,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=116
+     *     See chalk/expression/v1/expression.proto;l=124
      * @return Whether the ilike field is set.
      */
     @java.lang.Override
@@ -8839,7 +9003,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.ILikeNode ilike = 32 [json_name = "ilike", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.ilike is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=116
+     *     See chalk/expression/v1/expression.proto;l=124
      * @return The ilike.
      */
     @java.lang.Override
@@ -8975,7 +9139,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=117
+     *     See chalk/expression/v1/expression.proto;l=125
      * @return Whether the similarTo field is set.
      */
     @java.lang.Override
@@ -8985,7 +9149,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.SimilarToNode similar_to = 33 [json_name = "similarTo", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.similar_to is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=117
+     *     See chalk/expression/v1/expression.proto;l=125
      * @return The similarTo.
      */
     @java.lang.Override
@@ -9121,7 +9285,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=119
+     *     See chalk/expression/v1/expression.proto;l=127
      * @return Whether the placeholder field is set.
      */
     @java.lang.Override
@@ -9131,7 +9295,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.chalk.expression.v1.PlaceholderNode placeholder = 34 [json_name = "placeholder", deprecated = true];</code>
      * @deprecated chalk.expression.v1.LogicalExprNode.placeholder is deprecated.
-     *     See chalk/expression/v1/expression.proto;l=119
+     *     See chalk/expression/v1/expression.proto;l=127
      * @return The placeholder.
      */
     @java.lang.Override

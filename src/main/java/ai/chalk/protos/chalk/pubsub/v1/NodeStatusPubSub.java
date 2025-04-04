@@ -126,6 +126,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * node.Name
+   * ex. ip-10-33-13-186.us-west-2.compute.internal
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -147,6 +148,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * node.Name
+   * ex. ip-10-33-13-186.us-west-2.compute.internal
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -172,7 +174,11 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object uid_ = "";
   /**
    * <pre>
-   * node.UID
+   * A Kubernetes systems-generated string to uniquely identify objects.
+   * Every object created over the whole lifetime of a Kubernetes cluster
+   * has a distinct UID. It is intended to distinguish between historical
+   * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+   * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
    * </pre>
    *
    * <code>string uid = 3 [json_name = "uid"];</code>
@@ -193,7 +199,11 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * node.UID
+   * A Kubernetes systems-generated string to uniquely identify objects.
+   * Every object created over the whole lifetime of a Kubernetes cluster
+   * has a distinct UID. It is intended to distinguish between historical
+   * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+   * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
    * </pre>
    *
    * <code>string uid = 3 [json_name = "uid"];</code>
@@ -220,6 +230,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * node.kubernetes.io/instance-type
+   * ex. t3.medium
    * </pre>
    *
    * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -241,6 +252,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * node.kubernetes.io/instance-type
+   * ex. t3.medium
    * </pre>
    *
    * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -267,6 +279,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * topology.kubernetes.io/region
+   * ex. us-west-2
    * </pre>
    *
    * <code>string region = 5 [json_name = "region"];</code>
@@ -288,6 +301,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * topology.kubernetes.io/region
+   * ex. us-west-2
    * </pre>
    *
    * <code>string region = 5 [json_name = "region"];</code>
@@ -314,6 +328,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * topology.kubernetes.io/zone
+   * ex. us-west-2a
    * </pre>
    *
    * <code>string zone = 6 [json_name = "zone"];</code>
@@ -335,6 +350,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * topology.kubernetes.io/zone
+   * ex. us-west-2a
    * </pre>
    *
    * <code>string zone = 6 [json_name = "zone"];</code>
@@ -596,6 +612,13 @@ java.lang.String defaultValue) {
   @SuppressWarnings("serial")
   private volatile java.lang.Object machineId_ = "";
   /**
+   * <pre>
+   * MachineID reported by the node. For unique machine identification
+   * in the cluster this field is preferred. Learn more from man(5)
+   * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+   * ex. ec2d1437f00e85506a67dc38744731fe
+   * </pre>
+   *
    * <code>string machine_id = 13 [json_name = "machineId"];</code>
    * @return The machineId.
    */
@@ -613,6 +636,13 @@ java.lang.String defaultValue) {
     }
   }
   /**
+   * <pre>
+   * MachineID reported by the node. For unique machine identification
+   * in the cluster this field is preferred. Learn more from man(5)
+   * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+   * ex. ec2d1437f00e85506a67dc38744731fe
+   * </pre>
+   *
    * <code>string machine_id = 13 [json_name = "machineId"];</code>
    * @return The bytes for machineId.
    */
@@ -635,6 +665,13 @@ java.lang.String defaultValue) {
   @SuppressWarnings("serial")
   private volatile java.lang.Object systemUuid_ = "";
   /**
+   * <pre>
+   * SystemUUID reported by the node. For unique machine identification
+   * MachineID is preferred. This field is specific to Red Hat hosts
+   * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+   * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+   * </pre>
+   *
    * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
    * @return The systemUuid.
    */
@@ -652,6 +689,13 @@ java.lang.String defaultValue) {
     }
   }
   /**
+   * <pre>
+   * SystemUUID reported by the node. For unique machine identification
+   * MachineID is preferred. This field is specific to Red Hat hosts
+   * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+   * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+   * </pre>
+   *
    * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
    * @return The bytes for systemUuid.
    */
@@ -674,6 +718,11 @@ java.lang.String defaultValue) {
   @SuppressWarnings("serial")
   private volatile java.lang.Object bootId_ = "";
   /**
+   * <pre>
+   * Boot ID reported by the node.
+   * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+   * </pre>
+   *
    * <code>string boot_id = 15 [json_name = "bootId"];</code>
    * @return The bootId.
    */
@@ -691,6 +740,11 @@ java.lang.String defaultValue) {
     }
   }
   /**
+   * <pre>
+   * Boot ID reported by the node.
+   * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+   * </pre>
+   *
    * <code>string boot_id = 15 [json_name = "bootId"];</code>
    * @return The bytes for bootId.
    */
@@ -764,6 +818,7 @@ java.lang.String defaultValue) {
   private volatile java.lang.Object instanceId_ = "";
   /**
    * <pre>
+   * Often null.
    * container.googleapis.com/instance_id
    * </pre>
    *
@@ -785,6 +840,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
+   * Often null.
    * container.googleapis.com/instance_id
    * </pre>
    *
@@ -810,6 +866,11 @@ java.lang.String defaultValue) {
   @SuppressWarnings("serial")
   private volatile java.lang.Object cluster_ = "";
   /**
+   * <pre>
+   * The name of the cluster that the node is in.
+   * ex. mycompany-prod-eks
+   * </pre>
+   *
    * <code>string cluster = 19 [json_name = "cluster"];</code>
    * @return The cluster.
    */
@@ -827,6 +888,11 @@ java.lang.String defaultValue) {
     }
   }
   /**
+   * <pre>
+   * The name of the cluster that the node is in.
+   * ex. mycompany-prod-eks
+   * </pre>
+   *
    * <code>string cluster = 19 [json_name = "cluster"];</code>
    * @return The bytes for cluster.
    */
@@ -1001,6 +1067,17 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int CHALK_MANAGED_FIELD_NUMBER = 24;
+  private boolean chalkManaged_ = false;
+  /**
+   * <code>bool chalk_managed = 24 [json_name = "chalkManaged"];</code>
+   * @return The chalkManaged.
+   */
+  @java.lang.Override
+  public boolean getChalkManaged() {
+    return chalkManaged_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1086,6 +1163,9 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 23, allocatableMemory_);
+    }
+    if (chalkManaged_ != false) {
+      output.writeBool(24, chalkManaged_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1180,6 +1260,10 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, allocatableMemory_);
     }
+    if (chalkManaged_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(24, chalkManaged_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1239,6 +1323,8 @@ java.lang.String defaultValue) {
         .equals(other.getAllocatableCpu())) return false;
     if (!getAllocatableMemory()
         .equals(other.getAllocatableMemory())) return false;
+    if (getChalkManaged()
+        != other.getChalkManaged()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1302,6 +1388,9 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getAllocatableCpu().hashCode();
     hash = (37 * hash) + ALLOCATABLE_MEMORY_FIELD_NUMBER;
     hash = (53 * hash) + getAllocatableMemory().hashCode();
+    hash = (37 * hash) + CHALK_MANAGED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getChalkManaged());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1485,6 +1574,7 @@ java.lang.String defaultValue) {
       totalMemory_ = "";
       allocatableCpu_ = "";
       allocatableMemory_ = "";
+      chalkManaged_ = false;
       return this;
     }
 
@@ -1585,6 +1675,9 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00200000) != 0)) {
         result.allocatableMemory_ = allocatableMemory_;
+      }
+      if (((from_bitField0_ & 0x00400000) != 0)) {
+        result.chalkManaged_ = chalkManaged_;
       }
     }
 
@@ -1730,6 +1823,9 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00200000;
         onChanged();
       }
+      if (other.getChalkManaged() != false) {
+        setChalkManaged(other.getChalkManaged());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1874,6 +1970,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00200000;
               break;
             } // case 186
+            case 192: {
+              chalkManaged_ = input.readBool();
+              bitField0_ |= 0x00400000;
+              break;
+            } // case 192
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1987,6 +2088,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.Name
+     * ex. ip-10-33-13-186.us-west-2.compute.internal
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -2007,6 +2109,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.Name
+     * ex. ip-10-33-13-186.us-west-2.compute.internal
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -2028,6 +2131,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.Name
+     * ex. ip-10-33-13-186.us-west-2.compute.internal
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -2045,6 +2149,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.Name
+     * ex. ip-10-33-13-186.us-west-2.compute.internal
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -2059,6 +2164,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.Name
+     * ex. ip-10-33-13-186.us-west-2.compute.internal
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -2078,7 +2184,11 @@ java.lang.String defaultValue) {
     private java.lang.Object uid_ = "";
     /**
      * <pre>
-     * node.UID
+     * A Kubernetes systems-generated string to uniquely identify objects.
+     * Every object created over the whole lifetime of a Kubernetes cluster
+     * has a distinct UID. It is intended to distinguish between historical
+     * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+     * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
      * </pre>
      *
      * <code>string uid = 3 [json_name = "uid"];</code>
@@ -2098,7 +2208,11 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * node.UID
+     * A Kubernetes systems-generated string to uniquely identify objects.
+     * Every object created over the whole lifetime of a Kubernetes cluster
+     * has a distinct UID. It is intended to distinguish between historical
+     * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+     * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
      * </pre>
      *
      * <code>string uid = 3 [json_name = "uid"];</code>
@@ -2119,7 +2233,11 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * node.UID
+     * A Kubernetes systems-generated string to uniquely identify objects.
+     * Every object created over the whole lifetime of a Kubernetes cluster
+     * has a distinct UID. It is intended to distinguish between historical
+     * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+     * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
      * </pre>
      *
      * <code>string uid = 3 [json_name = "uid"];</code>
@@ -2136,7 +2254,11 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * node.UID
+     * A Kubernetes systems-generated string to uniquely identify objects.
+     * Every object created over the whole lifetime of a Kubernetes cluster
+     * has a distinct UID. It is intended to distinguish between historical
+     * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+     * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
      * </pre>
      *
      * <code>string uid = 3 [json_name = "uid"];</code>
@@ -2150,7 +2272,11 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * node.UID
+     * A Kubernetes systems-generated string to uniquely identify objects.
+     * Every object created over the whole lifetime of a Kubernetes cluster
+     * has a distinct UID. It is intended to distinguish between historical
+     * occurrences of similar entities. Kubernetes UIDs are UUIDs.
+     * ex. f65e1fce-e511-495f-a5af-e5d4ebe79614
      * </pre>
      *
      * <code>string uid = 3 [json_name = "uid"];</code>
@@ -2171,6 +2297,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.kubernetes.io/instance-type
+     * ex. t3.medium
      * </pre>
      *
      * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -2191,6 +2318,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.kubernetes.io/instance-type
+     * ex. t3.medium
      * </pre>
      *
      * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -2212,6 +2340,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.kubernetes.io/instance-type
+     * ex. t3.medium
      * </pre>
      *
      * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -2229,6 +2358,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.kubernetes.io/instance-type
+     * ex. t3.medium
      * </pre>
      *
      * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -2243,6 +2373,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * node.kubernetes.io/instance-type
+     * ex. t3.medium
      * </pre>
      *
      * <code>string instance_type = 4 [json_name = "instanceType"];</code>
@@ -2263,6 +2394,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/region
+     * ex. us-west-2
      * </pre>
      *
      * <code>string region = 5 [json_name = "region"];</code>
@@ -2283,6 +2415,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/region
+     * ex. us-west-2
      * </pre>
      *
      * <code>string region = 5 [json_name = "region"];</code>
@@ -2304,6 +2437,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/region
+     * ex. us-west-2
      * </pre>
      *
      * <code>string region = 5 [json_name = "region"];</code>
@@ -2321,6 +2455,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/region
+     * ex. us-west-2
      * </pre>
      *
      * <code>string region = 5 [json_name = "region"];</code>
@@ -2335,6 +2470,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/region
+     * ex. us-west-2
      * </pre>
      *
      * <code>string region = 5 [json_name = "region"];</code>
@@ -2355,6 +2491,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/zone
+     * ex. us-west-2a
      * </pre>
      *
      * <code>string zone = 6 [json_name = "zone"];</code>
@@ -2375,6 +2512,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/zone
+     * ex. us-west-2a
      * </pre>
      *
      * <code>string zone = 6 [json_name = "zone"];</code>
@@ -2396,6 +2534,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/zone
+     * ex. us-west-2a
      * </pre>
      *
      * <code>string zone = 6 [json_name = "zone"];</code>
@@ -2413,6 +2552,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/zone
+     * ex. us-west-2a
      * </pre>
      *
      * <code>string zone = 6 [json_name = "zone"];</code>
@@ -2427,6 +2567,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * topology.kubernetes.io/zone
+     * ex. us-west-2a
      * </pre>
      *
      * <code>string zone = 6 [json_name = "zone"];</code>
@@ -2893,6 +3034,13 @@ java.lang.String defaultValue) {
 
     private java.lang.Object machineId_ = "";
     /**
+     * <pre>
+     * MachineID reported by the node. For unique machine identification
+     * in the cluster this field is preferred. Learn more from man(5)
+     * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+     * ex. ec2d1437f00e85506a67dc38744731fe
+     * </pre>
+     *
      * <code>string machine_id = 13 [json_name = "machineId"];</code>
      * @return The machineId.
      */
@@ -2909,6 +3057,13 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * MachineID reported by the node. For unique machine identification
+     * in the cluster this field is preferred. Learn more from man(5)
+     * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+     * ex. ec2d1437f00e85506a67dc38744731fe
+     * </pre>
+     *
      * <code>string machine_id = 13 [json_name = "machineId"];</code>
      * @return The bytes for machineId.
      */
@@ -2926,6 +3081,13 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * MachineID reported by the node. For unique machine identification
+     * in the cluster this field is preferred. Learn more from man(5)
+     * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+     * ex. ec2d1437f00e85506a67dc38744731fe
+     * </pre>
+     *
      * <code>string machine_id = 13 [json_name = "machineId"];</code>
      * @param value The machineId to set.
      * @return This builder for chaining.
@@ -2939,6 +3101,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * MachineID reported by the node. For unique machine identification
+     * in the cluster this field is preferred. Learn more from man(5)
+     * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+     * ex. ec2d1437f00e85506a67dc38744731fe
+     * </pre>
+     *
      * <code>string machine_id = 13 [json_name = "machineId"];</code>
      * @return This builder for chaining.
      */
@@ -2949,6 +3118,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * MachineID reported by the node. For unique machine identification
+     * in the cluster this field is preferred. Learn more from man(5)
+     * machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+     * ex. ec2d1437f00e85506a67dc38744731fe
+     * </pre>
+     *
      * <code>string machine_id = 13 [json_name = "machineId"];</code>
      * @param value The bytes for machineId to set.
      * @return This builder for chaining.
@@ -2965,6 +3141,13 @@ java.lang.String defaultValue) {
 
     private java.lang.Object systemUuid_ = "";
     /**
+     * <pre>
+     * SystemUUID reported by the node. For unique machine identification
+     * MachineID is preferred. This field is specific to Red Hat hosts
+     * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+     * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+     * </pre>
+     *
      * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
      * @return The systemUuid.
      */
@@ -2981,6 +3164,13 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * SystemUUID reported by the node. For unique machine identification
+     * MachineID is preferred. This field is specific to Red Hat hosts
+     * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+     * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+     * </pre>
+     *
      * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
      * @return The bytes for systemUuid.
      */
@@ -2998,6 +3188,13 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * SystemUUID reported by the node. For unique machine identification
+     * MachineID is preferred. This field is specific to Red Hat hosts
+     * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+     * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+     * </pre>
+     *
      * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
      * @param value The systemUuid to set.
      * @return This builder for chaining.
@@ -3011,6 +3208,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * SystemUUID reported by the node. For unique machine identification
+     * MachineID is preferred. This field is specific to Red Hat hosts
+     * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+     * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+     * </pre>
+     *
      * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
      * @return This builder for chaining.
      */
@@ -3021,6 +3225,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * SystemUUID reported by the node. For unique machine identification
+     * MachineID is preferred. This field is specific to Red Hat hosts
+     * https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+     * ex. ec2d1437-f00e-8550-6a67-dc38744731fe
+     * </pre>
+     *
      * <code>string system_uuid = 14 [json_name = "systemUuid"];</code>
      * @param value The bytes for systemUuid to set.
      * @return This builder for chaining.
@@ -3037,6 +3248,11 @@ java.lang.String defaultValue) {
 
     private java.lang.Object bootId_ = "";
     /**
+     * <pre>
+     * Boot ID reported by the node.
+     * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+     * </pre>
+     *
      * <code>string boot_id = 15 [json_name = "bootId"];</code>
      * @return The bootId.
      */
@@ -3053,6 +3269,11 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * Boot ID reported by the node.
+     * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+     * </pre>
+     *
      * <code>string boot_id = 15 [json_name = "bootId"];</code>
      * @return The bytes for bootId.
      */
@@ -3070,6 +3291,11 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * Boot ID reported by the node.
+     * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+     * </pre>
+     *
      * <code>string boot_id = 15 [json_name = "bootId"];</code>
      * @param value The bootId to set.
      * @return This builder for chaining.
@@ -3083,6 +3309,11 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * Boot ID reported by the node.
+     * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+     * </pre>
+     *
      * <code>string boot_id = 15 [json_name = "bootId"];</code>
      * @return This builder for chaining.
      */
@@ -3093,6 +3324,11 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * Boot ID reported by the node.
+     * ex. 2c094fc9-b776-4223-9316-c66e70f9f6b9
+     * </pre>
+     *
      * <code>string boot_id = 15 [json_name = "bootId"];</code>
      * @param value The bytes for bootId to set.
      * @return This builder for chaining.
@@ -3214,6 +3450,7 @@ java.lang.String defaultValue) {
     private java.lang.Object instanceId_ = "";
     /**
      * <pre>
+     * Often null.
      * container.googleapis.com/instance_id
      * </pre>
      *
@@ -3234,6 +3471,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
+     * Often null.
      * container.googleapis.com/instance_id
      * </pre>
      *
@@ -3255,6 +3493,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
+     * Often null.
      * container.googleapis.com/instance_id
      * </pre>
      *
@@ -3272,6 +3511,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
+     * Often null.
      * container.googleapis.com/instance_id
      * </pre>
      *
@@ -3286,6 +3526,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
+     * Often null.
      * container.googleapis.com/instance_id
      * </pre>
      *
@@ -3305,6 +3546,11 @@ java.lang.String defaultValue) {
 
     private java.lang.Object cluster_ = "";
     /**
+     * <pre>
+     * The name of the cluster that the node is in.
+     * ex. mycompany-prod-eks
+     * </pre>
+     *
      * <code>string cluster = 19 [json_name = "cluster"];</code>
      * @return The cluster.
      */
@@ -3321,6 +3567,11 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * The name of the cluster that the node is in.
+     * ex. mycompany-prod-eks
+     * </pre>
+     *
      * <code>string cluster = 19 [json_name = "cluster"];</code>
      * @return The bytes for cluster.
      */
@@ -3338,6 +3589,11 @@ java.lang.String defaultValue) {
       }
     }
     /**
+     * <pre>
+     * The name of the cluster that the node is in.
+     * ex. mycompany-prod-eks
+     * </pre>
+     *
      * <code>string cluster = 19 [json_name = "cluster"];</code>
      * @param value The cluster to set.
      * @return This builder for chaining.
@@ -3351,6 +3607,11 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * The name of the cluster that the node is in.
+     * ex. mycompany-prod-eks
+     * </pre>
+     *
      * <code>string cluster = 19 [json_name = "cluster"];</code>
      * @return This builder for chaining.
      */
@@ -3361,6 +3622,11 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
+     * <pre>
+     * The name of the cluster that the node is in.
+     * ex. mycompany-prod-eks
+     * </pre>
+     *
      * <code>string cluster = 19 [json_name = "cluster"];</code>
      * @param value The bytes for cluster to set.
      * @return This builder for chaining.
@@ -3659,6 +3925,38 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       allocatableMemory_ = value;
       bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+
+    private boolean chalkManaged_ ;
+    /**
+     * <code>bool chalk_managed = 24 [json_name = "chalkManaged"];</code>
+     * @return The chalkManaged.
+     */
+    @java.lang.Override
+    public boolean getChalkManaged() {
+      return chalkManaged_;
+    }
+    /**
+     * <code>bool chalk_managed = 24 [json_name = "chalkManaged"];</code>
+     * @param value The chalkManaged to set.
+     * @return This builder for chaining.
+     */
+    public Builder setChalkManaged(boolean value) {
+
+      chalkManaged_ = value;
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool chalk_managed = 24 [json_name = "chalkManaged"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearChalkManaged() {
+      bitField0_ = (bitField0_ & ~0x00400000);
+      chalkManaged_ = false;
       onChanged();
       return this;
     }

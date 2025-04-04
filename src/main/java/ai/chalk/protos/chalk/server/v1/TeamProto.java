@@ -101,6 +101,26 @@ public final class TeamProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_CreateEnvironmentResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentOperation_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_AdditionalEnvVarsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentOperation_AdditionalEnvVarsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_GetTeamRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -291,216 +311,236 @@ public final class TeamProto {
       "ission.proto\032\037chalk/auth/v1/permissions." +
       "proto\032!chalk/server/v1/environment.proto" +
       "\032\036chalk/utils/v1/sensitive.proto\032 google" +
-      "/protobuf/descriptor.proto\032\034google/proto" +
-      "buf/struct.proto\032\037google/protobuf/timest" +
-      "amp.proto\"\017\n\rGetEnvRequest\"P\n\016GetEnvResp" +
-      "onse\022>\n\013environment\030\001 \001(\0132\034.chalk.server" +
-      ".v1.EnvironmentR\013environment\"2\n\026GetEnvir" +
-      "onmentsRequest\022\030\n\007project\030\001 \001(\tR\007project" +
-      "\"[\n\027GetEnvironmentsResponse\022@\n\014environme" +
-      "nts\030\002 \003(\0132\034.chalk.server.v1.EnvironmentR" +
-      "\014environments\"\021\n\017GetAgentRequest\">\n\020GetA" +
-      "gentResponse\022*\n\005agent\030\001 \001(\0132\024.chalk.auth" +
-      ".v1.AgentR\005agent\"\030\n\026GetDisplayAgentReque" +
-      "st\"L\n\027GetDisplayAgentResponse\0221\n\005agent\030\001" +
-      " \001(\0132\033.chalk.auth.v1.DisplayAgentR\005agent" +
-      "\"\202\003\n\004Team\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 \001(\tR" +
-      "\004name\022\022\n\004slug\030\003 \001(\tR\004slug\022\027\n\004logo\030\004 \001(\tH" +
-      "\000R\004logo\210\001\001\0224\n\010projects\030\005 \003(\0132\030.chalk.ser" +
-      "ver.v1.ProjectR\010projects\022(\n\rscim_provide" +
-      "r\030\006 \001(\tH\001R\014scimProvider\210\001\001\022S\n\020spec_confi" +
-      "g_json\030\007 \003(\0132).chalk.server.v1.Team.Spec" +
-      "ConfigJsonEntryR\016specConfigJson\032Y\n\023SpecC" +
-      "onfigJsonEntry\022\020\n\003key\030\001 \001(\tR\003key\022,\n\005valu" +
-      "e\030\002 \001(\0132\026.google.protobuf.ValueR\005value:\002" +
-      "8\001B\007\n\005_logoB\020\n\016_scim_provider\"\265\001\n\007Projec" +
-      "t\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007team_id\030\002 \001(\tR\006team" +
-      "Id\022\022\n\004name\030\003 \001(\tR\004name\022@\n\014environments\030\004" +
-      " \003(\0132\034.chalk.server.v1.EnvironmentR\014envi" +
-      "ronments\022\036\n\010git_repo\030\005 \001(\tH\000R\007gitRepo\210\001\001" +
-      "B\013\n\t_git_repo\"]\n\021CreateTeamRequest\022\022\n\004na" +
-      "me\030\001 \001(\tR\004name\022\022\n\004slug\030\002 \001(\tR\004slug\022\027\n\004lo" +
-      "go\030\003 \001(\tH\000R\004logo\210\001\001B\007\n\005_logo\"?\n\022CreateTe" +
-      "amResponse\022)\n\004team\030\001 \001(\0132\025.chalk.server." +
-      "v1.TeamR\004team\"*\n\024CreateProjectRequest\022\022\n" +
-      "\004name\030\001 \001(\tR\004name\"K\n\025CreateProjectRespon" +
-      "se\0222\n\007project\030\001 \001(\0132\030.chalk.server.v1.Pr" +
-      "ojectR\007project\"l\n\030CreateEnvironmentReque" +
-      "st\022\035\n\nproject_id\030\001 \001(\tR\tprojectId\022\022\n\004nam" +
-      "e\030\002 \001(\tR\004name\022\035\n\nis_default\030\003 \001(\010R\tisDef" +
-      "ault\"[\n\031CreateEnvironmentResponse\022>\n\013env" +
-      "ironment\030\001 \001(\0132\034.chalk.server.v1.Environ" +
-      "mentR\013environment\"\020\n\016GetTeamRequest\"<\n\017G" +
-      "etTeamResponse\022)\n\004team\030\001 \001(\0132\025.chalk.ser" +
-      "ver.v1.TeamR\004team\"\313\003\n\031CreateServiceToken" +
-      "Request\022\022\n\004name\030\001 \001(\tR\004name\022;\n\013permissio" +
-      "ns\030\002 \003(\0162\031.chalk.auth.v1.PermissionR\013per" +
-      "missions\022\'\n\rcustom_claims\030\003 \003(\tB\002\030\001R\014cus" +
-      "tomClaims\022C\n\017customer_claims\030\004 \003(\0132\032.cha" +
-      "lk.auth.v1.CustomClaimR\016customerClaims\022\201" +
-      "\001\n\031feature_tag_to_permission\030\005 \003(\0132F.cha" +
-      "lk.server.v1.CreateServiceTokenRequest.F" +
-      "eatureTagToPermissionEntryR\026featureTagTo" +
-      "Permission\032k\n\033FeatureTagToPermissionEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005value\030\002 \001(\0162 .cha" +
-      "lk.auth.v1.FeaturePermissionR\005value:\0028\001\"" +
-      "\177\n\032CreateServiceTokenResponse\0226\n\005agent\030\001" +
-      " \001(\0132 .chalk.auth.v1.ServiceTokenAgentR\005" +
-      "agent\022)\n\rclient_secret\030\002 \001(\tB\004\330\241\'\001R\014clie" +
-      "ntSecret\"+\n\031DeleteServiceTokenRequest\022\016\n" +
-      "\002id\030\001 \001(\tR\002id\"\034\n\032DeleteServiceTokenRespo" +
-      "nse\"\327\001\n\025PermissionDescription\022)\n\002id\030\001 \001(" +
-      "\0162\031.chalk.auth.v1.PermissionR\002id\022\022\n\004slug" +
-      "\030\002 \001(\tR\004slug\022\034\n\tnamespace\030\003 \001(\tR\tnamespa" +
-      "ce\022\022\n\004name\030\004 \001(\tR\004name\022 \n\013description\030\005 " +
-      "\001(\tR\013description\022+\n\021group_description\030\006 " +
-      "\001(\tR\020groupDescription\"\207\002\n\017RoleDescriptio" +
-      "n\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 \001(\tR\004name\022 \n" +
-      "\013description\030\003 \001(\tR\013description\022;\n\013permi" +
-      "ssions\030\004 \003(\0162\031.chalk.auth.v1.PermissionR" +
-      "\013permissions\022R\n\023feature_permissions\030\005 \001(" +
-      "\0132!.chalk.auth.v1.FeaturePermissionsR\022fe" +
-      "aturePermissions\022\035\n\nis_default\030\006 \001(\010R\tis" +
-      "Default\" \n\036GetAvailablePermissionsReques" +
-      "t\"\215\002\n\037GetAvailablePermissionsResponse\022H\n" +
-      "\013permissions\030\001 \003(\0132&.chalk.server.v1.Per" +
-      "missionDescriptionR\013permissions\0226\n\005roles" +
-      "\030\002 \003(\0132 .chalk.server.v1.RoleDescription" +
-      "R\005roles\022h\n#available_service_token_permi" +
-      "ssions\030\003 \003(\0162\031.chalk.auth.v1.PermissionR" +
-      " availableServiceTokenPermissions\"z\n\037Ups" +
-      "ertFeaturePermissionsRequest\022\022\n\004role\030\001 \001" +
-      "(\tR\004role\022C\n\013permissions\030\002 \001(\0132!.chalk.au" +
-      "th.v1.FeaturePermissionsR\013permissions\"{\n" +
-      " UpsertFeaturePermissionsResponse\022\022\n\004rol" +
-      "e\030\001 \001(\tR\004role\022C\n\013permissions\030\002 \001(\0132!.cha" +
-      "lk.auth.v1.FeaturePermissionsR\013permissio" +
-      "ns\"\032\n\030ListServiceTokensRequest\"\\\n\031ListSe" +
-      "rviceTokensResponse\022?\n\006agents\030\001 \003(\0132\'.ch" +
-      "alk.auth.v1.DisplayServiceTokenAgentR\006ag" +
-      "ents\"\277\003\n\031UpdateServiceTokenRequest\022\033\n\tcl" +
-      "ient_id\030\001 \001(\tR\010clientId\022\022\n\004name\030\002 \001(\tR\004n" +
-      "ame\022;\n\013permissions\030\003 \003(\0162\031.chalk.auth.v1" +
-      ".PermissionR\013permissions\022C\n\017customer_cla" +
-      "ims\030\004 \003(\0132\032.chalk.auth.v1.CustomClaimR\016c" +
-      "ustomerClaims\022\201\001\n\031feature_tag_to_permiss" +
-      "ion\030\005 \003(\0132F.chalk.server.v1.UpdateServic" +
-      "eTokenRequest.FeatureTagToPermissionEntr" +
-      "yR\026featureTagToPermission\032k\n\033FeatureTagT" +
-      "oPermissionEntry\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005va" +
-      "lue\030\002 \001(\0162 .chalk.auth.v1.FeaturePermiss" +
-      "ionR\005value:\0028\001\"[\n\032UpdateServiceTokenResp" +
-      "onse\022=\n\005agent\030\001 \001(\0132\'.chalk.auth.v1.Disp" +
-      "layServiceTokenAgentR\005agent\"U\n\036UpdateSci" +
-      "mGroupSettingsRequest\022\035\n\nquery_tags\030\001 \003(" +
-      "\tR\tqueryTags\022\024\n\005group\030\002 \001(\tR\005group\"@\n\037Up" +
-      "dateScimGroupSettingsResponse\022\035\n\nquery_t" +
-      "ags\030\001 \003(\tR\tqueryTags\"Y\n\027InviteTeamMember" +
-      "Request\022\024\n\005email\030\001 \001(\tR\005email\022\034\n\007role_id" +
-      "\030\002 \001(\tH\000R\006roleId\210\001\001B\n\n\010_role_id\"\032\n\030Invit" +
-      "eTeamMemberResponse\")\n\027ExpireTeamInviteR" +
-      "equest\022\016\n\002id\030\001 \001(\tR\002id\"\032\n\030ExpireTeamInvi" +
-      "teResponse\"\243\001\n\nTeamInvite\022\016\n\002id\030\001 \001(\tR\002i" +
-      "d\022\024\n\005email\030\002 \001(\tR\005email\022\022\n\004team\030\003 \001(\tR\004t" +
-      "eam\022\027\n\004role\030\004 \001(\tH\000R\004role\210\001\001\0229\n\ncreated_" +
-      "at\030\010 \001(\0132\032.google.protobuf.TimestampR\tcr" +
-      "eatedAtB\007\n\005_role\"\030\n\026ListTeamInvitesReque" +
-      "st\"P\n\027ListTeamInvitesResponse\0225\n\007invites" +
-      "\030\001 \003(\0132\033.chalk.server.v1.TeamInviteR\007inv" +
-      "ites\"h\n\tScimGroup\022\016\n\002id\030\001 \001(\tR\002id\022\030\n\007dis" +
-      "play\030\002 \001(\tR\007display\022\027\n\007team_id\030\003 \001(\tR\006te" +
-      "amId\022\030\n\007members\030\004 \003(\tR\007members\"\223\001\n\027ScimG" +
-      "roupRoleAssignment\022\031\n\010group_id\030\001 \001(\tR\007gr" +
-      "oupId\022%\n\016environment_id\030\003 \001(\tR\renvironme" +
-      "ntId\022\027\n\007role_id\030\004 \001(\tR\006roleId\022\035\n\nquery_t" +
-      "ags\030\005 \003(\tR\tqueryTags\"A\n\022UserRoleAssignme" +
-      "nt\022\027\n\007role_id\030\001 \001(\tR\006roleId\022\022\n\004type\030\002 \001(" +
-      "\tR\004type\"\333\001\n\017UserPermissions\022\027\n\007user_id\030\001" +
-      " \001(\tR\006userId\022%\n\016environment_id\030\002 \001(\tR\ren" +
-      "vironmentId\022B\n\nuser_roles\030\003 \003(\0132#.chalk." +
-      "server.v1.UserRoleAssignmentR\tuserRoles\022" +
-      "D\n\020user_permissions\030\004 \003(\0162\031.chalk.auth.v" +
-      "1.PermissionR\017userPermissions\"\207\002\n\004User\022\016" +
-      "\n\002id\030\001 \001(\tR\002id\022\027\n\004name\030\002 \001(\tH\000R\004name\210\001\001\022" +
-      "\031\n\005email\030\003 \001(\tH\001R\005email\210\001\001\022\031\n\005image\030\004 \001(" +
-      "\tH\002R\005image\210\001\001\022\034\n\007team_id\030\005 \001(\tH\003R\006teamId" +
-      "\210\001\001\022F\n\016deactivated_at\030\006 \001(\0132\032.google.pro" +
-      "tobuf.TimestampH\004R\rdeactivatedAt\210\001\001B\007\n\005_" +
-      "nameB\010\n\006_emailB\010\n\006_imageB\n\n\010_team_idB\021\n\017" +
-      "_deactivated_at\"\325\001\n\026EnvironmentPermissio" +
-      "ns\022%\n\016environment_id\030\001 \001(\tR\renvironmentI" +
-      "d\022G\n\nscim_roles\030\002 \003(\0132(.chalk.server.v1." +
-      "ScimGroupRoleAssignmentR\tscimRoles\022K\n\020us" +
-      "er_permissions\030\003 \003(\0132 .chalk.server.v1.U" +
-      "serPermissionsR\017userPermissions\"\033\n\031GetTe" +
-      "amPermissionsRequest\"\255\002\n\032GetTeamPermissi" +
-      "onsResponse\0226\n\005roles\030\001 \003(\0132 .chalk.serve" +
-      "r.v1.RoleDescriptionR\005roles\022;\n\013scim_grou" +
-      "ps\030\002 \003(\0132\032.chalk.server.v1.ScimGroupR\nsc" +
-      "imGroups\022`\n\027environment_permissions\030\003 \003(" +
-      "\0132\'.chalk.server.v1.EnvironmentPermissio" +
-      "nsR\026environmentPermissions\0228\n\014team_membe" +
-      "rs\030\004 \003(\0132\025.chalk.server.v1.UserR\013teamMem" +
-      "bers2\213\021\n\013TeamService\022Q\n\006GetEnv\022\036.chalk.s" +
-      "erver.v1.GetEnvRequest\032\037.chalk.server.v1" +
-      ".GetEnvResponse\"\006\220\002\001\200}\013\022l\n\017GetEnvironmen" +
-      "ts\022\'.chalk.server.v1.GetEnvironmentsRequ" +
-      "est\032(.chalk.server.v1.GetEnvironmentsRes" +
-      "ponse\"\006\220\002\001\200}\002\022W\n\010GetAgent\022 .chalk.server" +
-      ".v1.GetAgentRequest\032!.chalk.server.v1.Ge" +
-      "tAgentResponse\"\006\220\002\001\200}\002\022l\n\017GetDisplayAgen" +
-      "t\022\'.chalk.server.v1.GetDisplayAgentReque" +
-      "st\032(.chalk.server.v1.GetDisplayAgentResp" +
-      "onse\"\006\220\002\001\200}\002\022T\n\007GetTeam\022\037.chalk.server.v" +
-      "1.GetTeamRequest\032 .chalk.server.v1.GetTe" +
-      "amResponse\"\006\220\002\001\200}\002\022`\n\nCreateTeam\022\".chalk" +
-      ".server.v1.CreateTeamRequest\032#.chalk.ser" +
-      "ver.v1.CreateTeamResponse\"\t\200}\033\212\323\016\002\010\002\022i\n\r" +
-      "CreateProject\022%.chalk.server.v1.CreatePr" +
-      "ojectRequest\032&.chalk.server.v1.CreatePro" +
-      "jectResponse\"\t\200}\032\212\323\016\002\010\002\022u\n\021CreateEnviron" +
-      "ment\022).chalk.server.v1.CreateEnvironment" +
-      "Request\032*.chalk.server.v1.CreateEnvironm" +
-      "entResponse\"\t\200}\032\212\323\016\002\010\002\022\204\001\n\027GetAvailableP" +
-      "ermissions\022/.chalk.server.v1.GetAvailabl" +
-      "ePermissionsRequest\0320.chalk.server.v1.Ge" +
-      "tAvailablePermissionsResponse\"\006\220\002\001\200}\002\022\217\001" +
-      "\n\022CreateServiceToken\022*.chalk.server.v1.C" +
-      "reateServiceTokenRequest\032+.chalk.server." +
-      "v1.CreateServiceTokenResponse\" \200}\025\212\323\016\031\010\002" +
-      "\022\025Created service token\022x\n\022DeleteService" +
-      "Token\022*.chalk.server.v1.DeleteServiceTok" +
-      "enRequest\032+.chalk.server.v1.DeleteServic" +
-      "eTokenResponse\"\t\200}\025\212\323\016\002\010\002\022o\n\021ListService" +
-      "Tokens\022).chalk.server.v1.ListServiceToke" +
-      "nsRequest\032*.chalk.server.v1.ListServiceT" +
-      "okensResponse\"\003\200}\026\022x\n\022UpdateServiceToken" +
-      "\022*.chalk.server.v1.UpdateServiceTokenReq" +
-      "uest\032+.chalk.server.v1.UpdateServiceToke" +
-      "nResponse\"\t\200}\025\212\323\016\002\010\002\022r\n\020InviteTeamMember" +
-      "\022(.chalk.server.v1.InviteTeamMemberReque" +
-      "st\032).chalk.server.v1.InviteTeamMemberRes" +
-      "ponse\"\t\200}\007\212\323\016\002\010\002\022r\n\020ExpireTeamInvite\022(.c" +
-      "halk.server.v1.ExpireTeamInviteRequest\032)" +
-      ".chalk.server.v1.ExpireTeamInviteRespons" +
-      "e\"\t\200}\010\212\323\016\002\010\002\022i\n\017ListTeamInvites\022\'.chalk." +
-      "server.v1.ListTeamInvitesRequest\032(.chalk" +
-      ".server.v1.ListTeamInvitesResponse\"\003\200}\t\022" +
-      "\212\001\n\030UpsertFeaturePermissions\0220.chalk.ser" +
-      "ver.v1.UpsertFeaturePermissionsRequest\0321" +
-      ".chalk.server.v1.UpsertFeaturePermission" +
-      "sResponse\"\t\200}\025\212\323\016\002\010\002\022\207\001\n\027UpdateScimGroup" +
-      "Settings\022/.chalk.server.v1.UpdateScimGro" +
-      "upSettingsRequest\0320.chalk.server.v1.Upda" +
-      "teScimGroupSettingsResponse\"\t\200}\n\212\323\016\002\010\002\022r" +
-      "\n\022GetTeamPermissions\022*.chalk.server.v1.G" +
-      "etTeamPermissionsRequest\032+.chalk.server." +
-      "v1.GetTeamPermissionsResponse\"\003\200}\002B\236\001\n\037a" +
-      "i.chalk.protos.chalk.server.v1B\tTeamProt" +
-      "oP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Se" +
-      "rver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server" +
-      "\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pro" +
-      "to3"
+      "/protobuf/descriptor.proto\032 google/proto" +
+      "buf/field_mask.proto\032\034google/protobuf/st" +
+      "ruct.proto\032\037google/protobuf/timestamp.pr" +
+      "oto\"\017\n\rGetEnvRequest\"P\n\016GetEnvResponse\022>" +
+      "\n\013environment\030\001 \001(\0132\034.chalk.server.v1.En" +
+      "vironmentR\013environment\"2\n\026GetEnvironment" +
+      "sRequest\022\030\n\007project\030\001 \001(\tR\007project\"[\n\027Ge" +
+      "tEnvironmentsResponse\022@\n\014environments\030\002 " +
+      "\003(\0132\034.chalk.server.v1.EnvironmentR\014envir" +
+      "onments\"\021\n\017GetAgentRequest\">\n\020GetAgentRe" +
+      "sponse\022*\n\005agent\030\001 \001(\0132\024.chalk.auth.v1.Ag" +
+      "entR\005agent\"\030\n\026GetDisplayAgentRequest\"L\n\027" +
+      "GetDisplayAgentResponse\0221\n\005agent\030\001 \001(\0132\033" +
+      ".chalk.auth.v1.DisplayAgentR\005agent\"\202\003\n\004T" +
+      "eam\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 \001(\tR\004name\022" +
+      "\022\n\004slug\030\003 \001(\tR\004slug\022\027\n\004logo\030\004 \001(\tH\000R\004log" +
+      "o\210\001\001\0224\n\010projects\030\005 \003(\0132\030.chalk.server.v1" +
+      ".ProjectR\010projects\022(\n\rscim_provider\030\006 \001(" +
+      "\tH\001R\014scimProvider\210\001\001\022S\n\020spec_config_json" +
+      "\030\007 \003(\0132).chalk.server.v1.Team.SpecConfig" +
+      "JsonEntryR\016specConfigJson\032Y\n\023SpecConfigJ" +
+      "sonEntry\022\020\n\003key\030\001 \001(\tR\003key\022,\n\005value\030\002 \001(" +
+      "\0132\026.google.protobuf.ValueR\005value:\0028\001B\007\n\005" +
+      "_logoB\020\n\016_scim_provider\"\265\001\n\007Project\022\016\n\002i" +
+      "d\030\001 \001(\tR\002id\022\027\n\007team_id\030\002 \001(\tR\006teamId\022\022\n\004" +
+      "name\030\003 \001(\tR\004name\022@\n\014environments\030\004 \003(\0132\034" +
+      ".chalk.server.v1.EnvironmentR\014environmen" +
+      "ts\022\036\n\010git_repo\030\005 \001(\tH\000R\007gitRepo\210\001\001B\013\n\t_g" +
+      "it_repo\"]\n\021CreateTeamRequest\022\022\n\004name\030\001 \001" +
+      "(\tR\004name\022\022\n\004slug\030\002 \001(\tR\004slug\022\027\n\004logo\030\003 \001" +
+      "(\tH\000R\004logo\210\001\001B\007\n\005_logo\"?\n\022CreateTeamResp" +
+      "onse\022)\n\004team\030\001 \001(\0132\025.chalk.server.v1.Tea" +
+      "mR\004team\"*\n\024CreateProjectRequest\022\022\n\004name\030" +
+      "\001 \001(\tR\004name\"K\n\025CreateProjectResponse\0222\n\007" +
+      "project\030\001 \001(\0132\030.chalk.server.v1.ProjectR" +
+      "\007project\"l\n\030CreateEnvironmentRequest\022\035\n\n" +
+      "project_id\030\001 \001(\tR\tprojectId\022\022\n\004name\030\002 \001(" +
+      "\tR\004name\022\035\n\nis_default\030\003 \001(\010R\tisDefault\"[" +
+      "\n\031CreateEnvironmentResponse\022>\n\013environme" +
+      "nt\030\001 \001(\0132\034.chalk.server.v1.EnvironmentR\013" +
+      "environment\"\371\002\n\032UpdateEnvironmentOperati" +
+      "on\022/\n\021specs_config_json\030\001 \001(\tH\000R\017specsCo" +
+      "nfigJson\210\001\001\022r\n\023additional_env_vars\030\002 \003(\013" +
+      "2B.chalk.server.v1.UpdateEnvironmentOper" +
+      "ation.AdditionalEnvVarsEntryR\021additional" +
+      "EnvVars\022=\n\030private_pip_repositories\030\003 \001(" +
+      "\tH\001R\026privatePipRepositories\210\001\001\032D\n\026Additi" +
+      "onalEnvVarsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005va" +
+      "lue\030\002 \001(\tR\005value:\0028\001B\024\n\022_specs_config_js" +
+      "onB\033\n\031_private_pip_repositories\"\254\001\n\030Upda" +
+      "teEnvironmentRequest\022\016\n\002id\030\001 \001(\tR\002id\022C\n\006" +
+      "update\030\002 \001(\0132+.chalk.server.v1.UpdateEnv" +
+      "ironmentOperationR\006update\022;\n\013update_mask" +
+      "\030\003 \001(\0132\032.google.protobuf.FieldMaskR\nupda" +
+      "teMask\"[\n\031UpdateEnvironmentResponse\022>\n\013e" +
+      "nvironment\030\001 \001(\0132\034.chalk.server.v1.Envir" +
+      "onmentR\013environment\"\020\n\016GetTeamRequest\"<\n" +
+      "\017GetTeamResponse\022)\n\004team\030\001 \001(\0132\025.chalk.s" +
+      "erver.v1.TeamR\004team\"\313\003\n\031CreateServiceTok" +
+      "enRequest\022\022\n\004name\030\001 \001(\tR\004name\022;\n\013permiss" +
+      "ions\030\002 \003(\0162\031.chalk.auth.v1.PermissionR\013p" +
+      "ermissions\022\'\n\rcustom_claims\030\003 \003(\tB\002\030\001R\014c" +
+      "ustomClaims\022C\n\017customer_claims\030\004 \003(\0132\032.c" +
+      "halk.auth.v1.CustomClaimR\016customerClaims" +
+      "\022\201\001\n\031feature_tag_to_permission\030\005 \003(\0132F.c" +
+      "halk.server.v1.CreateServiceTokenRequest" +
+      ".FeatureTagToPermissionEntryR\026featureTag" +
+      "ToPermission\032k\n\033FeatureTagToPermissionEn" +
+      "try\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005value\030\002 \001(\0162 .c" +
+      "halk.auth.v1.FeaturePermissionR\005value:\0028" +
+      "\001\"\177\n\032CreateServiceTokenResponse\0226\n\005agent" +
+      "\030\001 \001(\0132 .chalk.auth.v1.ServiceTokenAgent" +
+      "R\005agent\022)\n\rclient_secret\030\002 \001(\tB\004\330\241\'\001R\014cl" +
+      "ientSecret\"+\n\031DeleteServiceTokenRequest\022" +
+      "\016\n\002id\030\001 \001(\tR\002id\"\034\n\032DeleteServiceTokenRes" +
+      "ponse\"\327\001\n\025PermissionDescription\022)\n\002id\030\001 " +
+      "\001(\0162\031.chalk.auth.v1.PermissionR\002id\022\022\n\004sl" +
+      "ug\030\002 \001(\tR\004slug\022\034\n\tnamespace\030\003 \001(\tR\tnames" +
+      "pace\022\022\n\004name\030\004 \001(\tR\004name\022 \n\013description\030" +
+      "\005 \001(\tR\013description\022+\n\021group_description\030" +
+      "\006 \001(\tR\020groupDescription\"\207\002\n\017RoleDescript" +
+      "ion\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004name\030\002 \001(\tR\004name\022" +
+      " \n\013description\030\003 \001(\tR\013description\022;\n\013per" +
+      "missions\030\004 \003(\0162\031.chalk.auth.v1.Permissio" +
+      "nR\013permissions\022R\n\023feature_permissions\030\005 " +
+      "\001(\0132!.chalk.auth.v1.FeaturePermissionsR\022" +
+      "featurePermissions\022\035\n\nis_default\030\006 \001(\010R\t" +
+      "isDefault\" \n\036GetAvailablePermissionsRequ" +
+      "est\"\215\002\n\037GetAvailablePermissionsResponse\022" +
+      "H\n\013permissions\030\001 \003(\0132&.chalk.server.v1.P" +
+      "ermissionDescriptionR\013permissions\0226\n\005rol" +
+      "es\030\002 \003(\0132 .chalk.server.v1.RoleDescripti" +
+      "onR\005roles\022h\n#available_service_token_per" +
+      "missions\030\003 \003(\0162\031.chalk.auth.v1.Permissio" +
+      "nR availableServiceTokenPermissions\"z\n\037U" +
+      "psertFeaturePermissionsRequest\022\022\n\004role\030\001" +
+      " \001(\tR\004role\022C\n\013permissions\030\002 \001(\0132!.chalk." +
+      "auth.v1.FeaturePermissionsR\013permissions\"" +
+      "{\n UpsertFeaturePermissionsResponse\022\022\n\004r" +
+      "ole\030\001 \001(\tR\004role\022C\n\013permissions\030\002 \001(\0132!.c" +
+      "halk.auth.v1.FeaturePermissionsR\013permiss" +
+      "ions\"\032\n\030ListServiceTokensRequest\"\\\n\031List" +
+      "ServiceTokensResponse\022?\n\006agents\030\001 \003(\0132\'." +
+      "chalk.auth.v1.DisplayServiceTokenAgentR\006" +
+      "agents\"\277\003\n\031UpdateServiceTokenRequest\022\033\n\t" +
+      "client_id\030\001 \001(\tR\010clientId\022\022\n\004name\030\002 \001(\tR" +
+      "\004name\022;\n\013permissions\030\003 \003(\0162\031.chalk.auth." +
+      "v1.PermissionR\013permissions\022C\n\017customer_c" +
+      "laims\030\004 \003(\0132\032.chalk.auth.v1.CustomClaimR" +
+      "\016customerClaims\022\201\001\n\031feature_tag_to_permi" +
+      "ssion\030\005 \003(\0132F.chalk.server.v1.UpdateServ" +
+      "iceTokenRequest.FeatureTagToPermissionEn" +
+      "tryR\026featureTagToPermission\032k\n\033FeatureTa" +
+      "gToPermissionEntry\022\020\n\003key\030\001 \001(\tR\003key\0226\n\005" +
+      "value\030\002 \001(\0162 .chalk.auth.v1.FeaturePermi" +
+      "ssionR\005value:\0028\001\"[\n\032UpdateServiceTokenRe" +
+      "sponse\022=\n\005agent\030\001 \001(\0132\'.chalk.auth.v1.Di" +
+      "splayServiceTokenAgentR\005agent\"U\n\036UpdateS" +
+      "cimGroupSettingsRequest\022\035\n\nquery_tags\030\001 " +
+      "\003(\tR\tqueryTags\022\024\n\005group\030\002 \001(\tR\005group\"@\n\037" +
+      "UpdateScimGroupSettingsResponse\022\035\n\nquery" +
+      "_tags\030\001 \003(\tR\tqueryTags\"Y\n\027InviteTeamMemb" +
+      "erRequest\022\024\n\005email\030\001 \001(\tR\005email\022\034\n\007role_" +
+      "id\030\002 \001(\tH\000R\006roleId\210\001\001B\n\n\010_role_id\"\032\n\030Inv" +
+      "iteTeamMemberResponse\")\n\027ExpireTeamInvit" +
+      "eRequest\022\016\n\002id\030\001 \001(\tR\002id\"\032\n\030ExpireTeamIn" +
+      "viteResponse\"\243\001\n\nTeamInvite\022\016\n\002id\030\001 \001(\tR" +
+      "\002id\022\024\n\005email\030\002 \001(\tR\005email\022\022\n\004team\030\003 \001(\tR" +
+      "\004team\022\027\n\004role\030\004 \001(\tH\000R\004role\210\001\001\0229\n\ncreate" +
+      "d_at\030\010 \001(\0132\032.google.protobuf.TimestampR\t" +
+      "createdAtB\007\n\005_role\"\030\n\026ListTeamInvitesReq" +
+      "uest\"P\n\027ListTeamInvitesResponse\0225\n\007invit" +
+      "es\030\001 \003(\0132\033.chalk.server.v1.TeamInviteR\007i" +
+      "nvites\"h\n\tScimGroup\022\016\n\002id\030\001 \001(\tR\002id\022\030\n\007d" +
+      "isplay\030\002 \001(\tR\007display\022\027\n\007team_id\030\003 \001(\tR\006" +
+      "teamId\022\030\n\007members\030\004 \003(\tR\007members\"\223\001\n\027Sci" +
+      "mGroupRoleAssignment\022\031\n\010group_id\030\001 \001(\tR\007" +
+      "groupId\022%\n\016environment_id\030\003 \001(\tR\renviron" +
+      "mentId\022\027\n\007role_id\030\004 \001(\tR\006roleId\022\035\n\nquery" +
+      "_tags\030\005 \003(\tR\tqueryTags\"A\n\022UserRoleAssign" +
+      "ment\022\027\n\007role_id\030\001 \001(\tR\006roleId\022\022\n\004type\030\002 " +
+      "\001(\tR\004type\"\333\001\n\017UserPermissions\022\027\n\007user_id" +
+      "\030\001 \001(\tR\006userId\022%\n\016environment_id\030\002 \001(\tR\r" +
+      "environmentId\022B\n\nuser_roles\030\003 \003(\0132#.chal" +
+      "k.server.v1.UserRoleAssignmentR\tuserRole" +
+      "s\022D\n\020user_permissions\030\004 \003(\0162\031.chalk.auth" +
+      ".v1.PermissionR\017userPermissions\"\207\002\n\004User" +
+      "\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\004name\030\002 \001(\tH\000R\004name\210\001" +
+      "\001\022\031\n\005email\030\003 \001(\tH\001R\005email\210\001\001\022\031\n\005image\030\004 " +
+      "\001(\tH\002R\005image\210\001\001\022\034\n\007team_id\030\005 \001(\tH\003R\006team" +
+      "Id\210\001\001\022F\n\016deactivated_at\030\006 \001(\0132\032.google.p" +
+      "rotobuf.TimestampH\004R\rdeactivatedAt\210\001\001B\007\n" +
+      "\005_nameB\010\n\006_emailB\010\n\006_imageB\n\n\010_team_idB\021" +
+      "\n\017_deactivated_at\"\325\001\n\026EnvironmentPermiss" +
+      "ions\022%\n\016environment_id\030\001 \001(\tR\renvironmen" +
+      "tId\022G\n\nscim_roles\030\002 \003(\0132(.chalk.server.v" +
+      "1.ScimGroupRoleAssignmentR\tscimRoles\022K\n\020" +
+      "user_permissions\030\003 \003(\0132 .chalk.server.v1" +
+      ".UserPermissionsR\017userPermissions\"\033\n\031Get" +
+      "TeamPermissionsRequest\"\255\002\n\032GetTeamPermis" +
+      "sionsResponse\0226\n\005roles\030\001 \003(\0132 .chalk.ser" +
+      "ver.v1.RoleDescriptionR\005roles\022;\n\013scim_gr" +
+      "oups\030\002 \003(\0132\032.chalk.server.v1.ScimGroupR\n" +
+      "scimGroups\022`\n\027environment_permissions\030\003 " +
+      "\003(\0132\'.chalk.server.v1.EnvironmentPermiss" +
+      "ionsR\026environmentPermissions\0228\n\014team_mem" +
+      "bers\030\004 \003(\0132\025.chalk.server.v1.UserR\013teamM" +
+      "embers2\202\022\n\013TeamService\022Q\n\006GetEnv\022\036.chalk" +
+      ".server.v1.GetEnvRequest\032\037.chalk.server." +
+      "v1.GetEnvResponse\"\006\220\002\001\200}\013\022l\n\017GetEnvironm" +
+      "ents\022\'.chalk.server.v1.GetEnvironmentsRe" +
+      "quest\032(.chalk.server.v1.GetEnvironmentsR" +
+      "esponse\"\006\220\002\001\200}\002\022W\n\010GetAgent\022 .chalk.serv" +
+      "er.v1.GetAgentRequest\032!.chalk.server.v1." +
+      "GetAgentResponse\"\006\220\002\001\200}\002\022l\n\017GetDisplayAg" +
+      "ent\022\'.chalk.server.v1.GetDisplayAgentReq" +
+      "uest\032(.chalk.server.v1.GetDisplayAgentRe" +
+      "sponse\"\006\220\002\001\200}\002\022T\n\007GetTeam\022\037.chalk.server" +
+      ".v1.GetTeamRequest\032 .chalk.server.v1.Get" +
+      "TeamResponse\"\006\220\002\001\200}\002\022`\n\nCreateTeam\022\".cha" +
+      "lk.server.v1.CreateTeamRequest\032#.chalk.s" +
+      "erver.v1.CreateTeamResponse\"\t\200}\033\212\323\016\002\010\002\022i" +
+      "\n\rCreateProject\022%.chalk.server.v1.Create" +
+      "ProjectRequest\032&.chalk.server.v1.CreateP" +
+      "rojectResponse\"\t\200}\032\212\323\016\002\010\002\022u\n\021CreateEnvir" +
+      "onment\022).chalk.server.v1.CreateEnvironme" +
+      "ntRequest\032*.chalk.server.v1.CreateEnviro" +
+      "nmentResponse\"\t\200}\032\212\323\016\002\010\002\022u\n\021UpdateEnviro" +
+      "nment\022).chalk.server.v1.UpdateEnvironmen" +
+      "tRequest\032*.chalk.server.v1.UpdateEnviron" +
+      "mentResponse\"\t\200}\014\212\323\016\002\010\002\022\204\001\n\027GetAvailable" +
+      "Permissions\022/.chalk.server.v1.GetAvailab" +
+      "lePermissionsRequest\0320.chalk.server.v1.G" +
+      "etAvailablePermissionsResponse\"\006\220\002\001\200}\002\022\217" +
+      "\001\n\022CreateServiceToken\022*.chalk.server.v1." +
+      "CreateServiceTokenRequest\032+.chalk.server" +
+      ".v1.CreateServiceTokenResponse\" \200}\025\212\323\016\031\010" +
+      "\002\022\025Created service token\022x\n\022DeleteServic" +
+      "eToken\022*.chalk.server.v1.DeleteServiceTo" +
+      "kenRequest\032+.chalk.server.v1.DeleteServi" +
+      "ceTokenResponse\"\t\200}\025\212\323\016\002\010\002\022o\n\021ListServic" +
+      "eTokens\022).chalk.server.v1.ListServiceTok" +
+      "ensRequest\032*.chalk.server.v1.ListService" +
+      "TokensResponse\"\003\200}\026\022x\n\022UpdateServiceToke" +
+      "n\022*.chalk.server.v1.UpdateServiceTokenRe" +
+      "quest\032+.chalk.server.v1.UpdateServiceTok" +
+      "enResponse\"\t\200}\025\212\323\016\002\010\002\022r\n\020InviteTeamMembe" +
+      "r\022(.chalk.server.v1.InviteTeamMemberRequ" +
+      "est\032).chalk.server.v1.InviteTeamMemberRe" +
+      "sponse\"\t\200}\007\212\323\016\002\010\002\022r\n\020ExpireTeamInvite\022(." +
+      "chalk.server.v1.ExpireTeamInviteRequest\032" +
+      ").chalk.server.v1.ExpireTeamInviteRespon" +
+      "se\"\t\200}\010\212\323\016\002\010\002\022i\n\017ListTeamInvites\022\'.chalk" +
+      ".server.v1.ListTeamInvitesRequest\032(.chal" +
+      "k.server.v1.ListTeamInvitesResponse\"\003\200}\t" +
+      "\022\212\001\n\030UpsertFeaturePermissions\0220.chalk.se" +
+      "rver.v1.UpsertFeaturePermissionsRequest\032" +
+      "1.chalk.server.v1.UpsertFeaturePermissio" +
+      "nsResponse\"\t\200}\025\212\323\016\002\010\002\022\207\001\n\027UpdateScimGrou" +
+      "pSettings\022/.chalk.server.v1.UpdateScimGr" +
+      "oupSettingsRequest\0320.chalk.server.v1.Upd" +
+      "ateScimGroupSettingsResponse\"\t\200}\n\212\323\016\002\010\002\022" +
+      "r\n\022GetTeamPermissions\022*.chalk.server.v1." +
+      "GetTeamPermissionsRequest\032+.chalk.server" +
+      ".v1.GetTeamPermissionsResponse\"\003\200}\002B\236\001\n\037" +
+      "ai.chalk.protos.chalk.server.v1B\tTeamPro" +
+      "toP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.S" +
+      "erver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Serve" +
+      "r\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -513,6 +553,7 @@ public final class TeamProto {
           ai.chalk.protos.chalk.server.v1.EnvironmentProto.getDescriptor(),
           ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor(),
           com.google.protobuf.DescriptorProtos.getDescriptor(),
+          com.google.protobuf.FieldMaskProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
@@ -618,20 +659,44 @@ public final class TeamProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateEnvironmentResponse_descriptor,
         new java.lang.String[] { "Environment", });
-    internal_static_chalk_server_v1_GetTeamRequest_descriptor =
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_descriptor =
       getDescriptor().getMessageTypes().get(16);
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentOperation_descriptor,
+        new java.lang.String[] { "SpecsConfigJson", "AdditionalEnvVars", "PrivatePipRepositories", });
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_AdditionalEnvVarsEntry_descriptor =
+      internal_static_chalk_server_v1_UpdateEnvironmentOperation_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_server_v1_UpdateEnvironmentOperation_AdditionalEnvVarsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentOperation_AdditionalEnvVarsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_server_v1_UpdateEnvironmentRequest_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_chalk_server_v1_UpdateEnvironmentRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentRequest_descriptor,
+        new java.lang.String[] { "Id", "Update", "UpdateMask", });
+    internal_static_chalk_server_v1_UpdateEnvironmentResponse_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_chalk_server_v1_UpdateEnvironmentResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentResponse_descriptor,
+        new java.lang.String[] { "Environment", });
+    internal_static_chalk_server_v1_GetTeamRequest_descriptor =
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_server_v1_GetTeamRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetTeamRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetTeamResponse_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_server_v1_GetTeamResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetTeamResponse_descriptor,
         new java.lang.String[] { "Team", });
     internal_static_chalk_server_v1_CreateServiceTokenRequest_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_chalk_server_v1_CreateServiceTokenRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateServiceTokenRequest_descriptor,
@@ -643,73 +708,73 @@ public final class TeamProto {
         internal_static_chalk_server_v1_CreateServiceTokenRequest_FeatureTagToPermissionEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_server_v1_CreateServiceTokenResponse_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_chalk_server_v1_CreateServiceTokenResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateServiceTokenResponse_descriptor,
         new java.lang.String[] { "Agent", "ClientSecret", });
     internal_static_chalk_server_v1_DeleteServiceTokenRequest_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_chalk_server_v1_DeleteServiceTokenRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeleteServiceTokenRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_chalk_server_v1_DeleteServiceTokenResponse_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_chalk_server_v1_DeleteServiceTokenResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeleteServiceTokenResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_PermissionDescription_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_chalk_server_v1_PermissionDescription_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_PermissionDescription_descriptor,
         new java.lang.String[] { "Id", "Slug", "Namespace", "Name", "Description", "GroupDescription", });
     internal_static_chalk_server_v1_RoleDescription_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_chalk_server_v1_RoleDescription_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_RoleDescription_descriptor,
         new java.lang.String[] { "Id", "Name", "Description", "Permissions", "FeaturePermissions", "IsDefault", });
     internal_static_chalk_server_v1_GetAvailablePermissionsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_chalk_server_v1_GetAvailablePermissionsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetAvailablePermissionsRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetAvailablePermissionsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_chalk_server_v1_GetAvailablePermissionsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetAvailablePermissionsResponse_descriptor,
         new java.lang.String[] { "Permissions", "Roles", "AvailableServiceTokenPermissions", });
     internal_static_chalk_server_v1_UpsertFeaturePermissionsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_chalk_server_v1_UpsertFeaturePermissionsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpsertFeaturePermissionsRequest_descriptor,
         new java.lang.String[] { "Role", "Permissions", });
     internal_static_chalk_server_v1_UpsertFeaturePermissionsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_chalk_server_v1_UpsertFeaturePermissionsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpsertFeaturePermissionsResponse_descriptor,
         new java.lang.String[] { "Role", "Permissions", });
     internal_static_chalk_server_v1_ListServiceTokensRequest_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_chalk_server_v1_ListServiceTokensRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ListServiceTokensRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_ListServiceTokensResponse_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_chalk_server_v1_ListServiceTokensResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ListServiceTokensResponse_descriptor,
         new java.lang.String[] { "Agents", });
     internal_static_chalk_server_v1_UpdateServiceTokenRequest_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_chalk_server_v1_UpdateServiceTokenRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpdateServiceTokenRequest_descriptor,
@@ -721,109 +786,109 @@ public final class TeamProto {
         internal_static_chalk_server_v1_UpdateServiceTokenRequest_FeatureTagToPermissionEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_server_v1_UpdateServiceTokenResponse_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_chalk_server_v1_UpdateServiceTokenResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpdateServiceTokenResponse_descriptor,
         new java.lang.String[] { "Agent", });
     internal_static_chalk_server_v1_UpdateScimGroupSettingsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(35);
     internal_static_chalk_server_v1_UpdateScimGroupSettingsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpdateScimGroupSettingsRequest_descriptor,
         new java.lang.String[] { "QueryTags", "Group", });
     internal_static_chalk_server_v1_UpdateScimGroupSettingsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(36);
     internal_static_chalk_server_v1_UpdateScimGroupSettingsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpdateScimGroupSettingsResponse_descriptor,
         new java.lang.String[] { "QueryTags", });
     internal_static_chalk_server_v1_InviteTeamMemberRequest_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(37);
     internal_static_chalk_server_v1_InviteTeamMemberRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_InviteTeamMemberRequest_descriptor,
         new java.lang.String[] { "Email", "RoleId", });
     internal_static_chalk_server_v1_InviteTeamMemberResponse_descriptor =
-      getDescriptor().getMessageTypes().get(35);
+      getDescriptor().getMessageTypes().get(38);
     internal_static_chalk_server_v1_InviteTeamMemberResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_InviteTeamMemberResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_ExpireTeamInviteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(36);
+      getDescriptor().getMessageTypes().get(39);
     internal_static_chalk_server_v1_ExpireTeamInviteRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ExpireTeamInviteRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_chalk_server_v1_ExpireTeamInviteResponse_descriptor =
-      getDescriptor().getMessageTypes().get(37);
+      getDescriptor().getMessageTypes().get(40);
     internal_static_chalk_server_v1_ExpireTeamInviteResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ExpireTeamInviteResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_TeamInvite_descriptor =
-      getDescriptor().getMessageTypes().get(38);
+      getDescriptor().getMessageTypes().get(41);
     internal_static_chalk_server_v1_TeamInvite_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_TeamInvite_descriptor,
         new java.lang.String[] { "Id", "Email", "Team", "Role", "CreatedAt", });
     internal_static_chalk_server_v1_ListTeamInvitesRequest_descriptor =
-      getDescriptor().getMessageTypes().get(39);
+      getDescriptor().getMessageTypes().get(42);
     internal_static_chalk_server_v1_ListTeamInvitesRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ListTeamInvitesRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_ListTeamInvitesResponse_descriptor =
-      getDescriptor().getMessageTypes().get(40);
+      getDescriptor().getMessageTypes().get(43);
     internal_static_chalk_server_v1_ListTeamInvitesResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ListTeamInvitesResponse_descriptor,
         new java.lang.String[] { "Invites", });
     internal_static_chalk_server_v1_ScimGroup_descriptor =
-      getDescriptor().getMessageTypes().get(41);
+      getDescriptor().getMessageTypes().get(44);
     internal_static_chalk_server_v1_ScimGroup_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ScimGroup_descriptor,
         new java.lang.String[] { "Id", "Display", "TeamId", "Members", });
     internal_static_chalk_server_v1_ScimGroupRoleAssignment_descriptor =
-      getDescriptor().getMessageTypes().get(42);
+      getDescriptor().getMessageTypes().get(45);
     internal_static_chalk_server_v1_ScimGroupRoleAssignment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ScimGroupRoleAssignment_descriptor,
         new java.lang.String[] { "GroupId", "EnvironmentId", "RoleId", "QueryTags", });
     internal_static_chalk_server_v1_UserRoleAssignment_descriptor =
-      getDescriptor().getMessageTypes().get(43);
+      getDescriptor().getMessageTypes().get(46);
     internal_static_chalk_server_v1_UserRoleAssignment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UserRoleAssignment_descriptor,
         new java.lang.String[] { "RoleId", "Type", });
     internal_static_chalk_server_v1_UserPermissions_descriptor =
-      getDescriptor().getMessageTypes().get(44);
+      getDescriptor().getMessageTypes().get(47);
     internal_static_chalk_server_v1_UserPermissions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UserPermissions_descriptor,
         new java.lang.String[] { "UserId", "EnvironmentId", "UserRoles", "UserPermissions", });
     internal_static_chalk_server_v1_User_descriptor =
-      getDescriptor().getMessageTypes().get(45);
+      getDescriptor().getMessageTypes().get(48);
     internal_static_chalk_server_v1_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_User_descriptor,
         new java.lang.String[] { "Id", "Name", "Email", "Image", "TeamId", "DeactivatedAt", });
     internal_static_chalk_server_v1_EnvironmentPermissions_descriptor =
-      getDescriptor().getMessageTypes().get(46);
+      getDescriptor().getMessageTypes().get(49);
     internal_static_chalk_server_v1_EnvironmentPermissions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_EnvironmentPermissions_descriptor,
         new java.lang.String[] { "EnvironmentId", "ScimRoles", "UserPermissions", });
     internal_static_chalk_server_v1_GetTeamPermissionsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(47);
+      getDescriptor().getMessageTypes().get(50);
     internal_static_chalk_server_v1_GetTeamPermissionsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetTeamPermissionsRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetTeamPermissionsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(48);
+      getDescriptor().getMessageTypes().get(51);
     internal_static_chalk_server_v1_GetTeamPermissionsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetTeamPermissionsResponse_descriptor,
@@ -843,6 +908,7 @@ public final class TeamProto {
     ai.chalk.protos.chalk.server.v1.EnvironmentProto.getDescriptor();
     ai.chalk.protos.chalk.utils.v1.SensitiveProto.getDescriptor();
     com.google.protobuf.DescriptorProtos.getDescriptor();
+    com.google.protobuf.FieldMaskProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }

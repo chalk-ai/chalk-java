@@ -19,4 +19,28 @@ public interface ActivateDeploymentRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getExistingDeploymentIdBytes();
+
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> 
+      getTargetsList();
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget getTargets(int index);
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  int getTargetsCount();
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder> 
+      getTargetsOrBuilderList();
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder getTargetsOrBuilder(
+      int index);
 }

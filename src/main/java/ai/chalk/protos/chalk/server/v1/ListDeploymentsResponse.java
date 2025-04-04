@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private ListDeploymentsResponse() {
     deployments_ = java.util.Collections.emptyList();
+    cursor_ = "";
   }
 
   @java.lang.Override
@@ -40,6 +41,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse.class, ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int DEPLOYMENTS_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private java.util.List<ai.chalk.protos.chalk.server.v1.Deployment> deployments_;
@@ -81,6 +83,53 @@ private static final long serialVersionUID = 0L;
     return deployments_.get(index);
   }
 
+  public static final int CURSOR_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object cursor_ = "";
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return Whether the cursor field is set.
+   */
+  @java.lang.Override
+  public boolean hasCursor() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return The cursor.
+   */
+  @java.lang.Override
+  public java.lang.String getCursor() {
+    java.lang.Object ref = cursor_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      cursor_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return The bytes for cursor.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCursorBytes() {
+    java.lang.Object ref = cursor_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      cursor_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -98,6 +147,9 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < deployments_.size(); i++) {
       output.writeMessage(1, deployments_.get(i));
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, cursor_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -110,6 +162,9 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < deployments_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, deployments_.get(i));
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, cursor_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -128,6 +183,11 @@ private static final long serialVersionUID = 0L;
 
     if (!getDeploymentsList()
         .equals(other.getDeploymentsList())) return false;
+    if (hasCursor() != other.hasCursor()) return false;
+    if (hasCursor()) {
+      if (!getCursor()
+          .equals(other.getCursor())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -142,6 +202,10 @@ private static final long serialVersionUID = 0L;
     if (getDeploymentsCount() > 0) {
       hash = (37 * hash) + DEPLOYMENTS_FIELD_NUMBER;
       hash = (53 * hash) + getDeploymentsList().hashCode();
+    }
+    if (hasCursor()) {
+      hash = (37 * hash) + CURSOR_FIELD_NUMBER;
+      hash = (53 * hash) + getCursor().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -281,6 +345,7 @@ private static final long serialVersionUID = 0L;
         deploymentsBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
+      cursor_ = "";
       return this;
     }
 
@@ -327,6 +392,12 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(ai.chalk.protos.chalk.server.v1.ListDeploymentsResponse result) {
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.cursor_ = cursor_;
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -399,6 +470,11 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (other.hasCursor()) {
+        cursor_ = other.cursor_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -438,6 +514,11 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 10
+            case 18: {
+              cursor_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -693,6 +774,85 @@ private static final long serialVersionUID = 0L;
         deployments_ = null;
       }
       return deploymentsBuilder_;
+    }
+
+    private java.lang.Object cursor_ = "";
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @return Whether the cursor field is set.
+     */
+    public boolean hasCursor() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @return The cursor.
+     */
+    public java.lang.String getCursor() {
+      java.lang.Object ref = cursor_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cursor_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @return The bytes for cursor.
+     */
+    public com.google.protobuf.ByteString
+        getCursorBytes() {
+      java.lang.Object ref = cursor_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cursor_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @param value The cursor to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCursor(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      cursor_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCursor() {
+      cursor_ = getDefaultInstance().getCursor();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+     * @param value The bytes for cursor to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCursorBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      cursor_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

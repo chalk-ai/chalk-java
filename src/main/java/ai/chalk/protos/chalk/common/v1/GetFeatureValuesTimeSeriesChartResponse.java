@@ -39,33 +39,6 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.class, ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.Builder.class);
   }
 
-  private int bitField0_;
-  public static final int CHART_FIELD_NUMBER = 1;
-  private ai.chalk.protos.chalk.server.v1.TimeSeriesChart chart_;
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   * @return Whether the chart field is set.
-   */
-  @java.lang.Override
-  public boolean hasChart() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   * @return The chart.
-   */
-  @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.TimeSeriesChart getChart() {
-    return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChart.getDefaultInstance() : chart_;
-  }
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   */
-  @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder getChartOrBuilder() {
-    return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChart.getDefaultInstance() : chart_;
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -80,9 +53,6 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(1, getChart());
-    }
     getUnknownFields().writeTo(output);
   }
 
@@ -92,10 +62,6 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getChart());
-    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -111,11 +77,6 @@ private static final long serialVersionUID = 0L;
     }
     ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse other = (ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse) obj;
 
-    if (hasChart() != other.hasChart()) return false;
-    if (hasChart()) {
-      if (!getChart()
-          .equals(other.getChart())) return false;
-    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -127,10 +88,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasChart()) {
-      hash = (37 * hash) + CHART_FIELD_NUMBER;
-      hash = (53 * hash) + getChart().hashCode();
-    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -250,29 +207,17 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getChartFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
-      chart_ = null;
-      if (chartBuilder_ != null) {
-        chartBuilder_.dispose();
-        chartBuilder_ = null;
-      }
       return this;
     }
 
@@ -299,21 +244,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse buildPartial() {
       ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse result = new ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
-    }
-
-    private void buildPartial0(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.chart_ = chartBuilder_ == null
-            ? chart_
-            : chartBuilder_.build();
-        to_bitField0_ |= 0x00000001;
-      }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -360,9 +292,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse other) {
       if (other == ai.chalk.protos.chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse.getDefaultInstance()) return this;
-      if (other.hasChart()) {
-        mergeChart(other.getChart());
-      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -389,13 +318,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 10: {
-              input.readMessage(
-                  getChartFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              bitField0_ |= 0x00000001;
-              break;
-            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -410,128 +332,6 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } // finally
       return this;
-    }
-    private int bitField0_;
-
-    private ai.chalk.protos.chalk.server.v1.TimeSeriesChart chart_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChart, ai.chalk.protos.chalk.server.v1.TimeSeriesChart.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder> chartBuilder_;
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     * @return Whether the chart field is set.
-     */
-    public boolean hasChart() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     * @return The chart.
-     */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChart getChart() {
-      if (chartBuilder_ == null) {
-        return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChart.getDefaultInstance() : chart_;
-      } else {
-        return chartBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public Builder setChart(ai.chalk.protos.chalk.server.v1.TimeSeriesChart value) {
-      if (chartBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        chart_ = value;
-      } else {
-        chartBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public Builder setChart(
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChart.Builder builderForValue) {
-      if (chartBuilder_ == null) {
-        chart_ = builderForValue.build();
-      } else {
-        chartBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public Builder mergeChart(ai.chalk.protos.chalk.server.v1.TimeSeriesChart value) {
-      if (chartBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0) &&
-          chart_ != null &&
-          chart_ != ai.chalk.protos.chalk.server.v1.TimeSeriesChart.getDefaultInstance()) {
-          getChartBuilder().mergeFrom(value);
-        } else {
-          chart_ = value;
-        }
-      } else {
-        chartBuilder_.mergeFrom(value);
-      }
-      if (chart_ != null) {
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public Builder clearChart() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      chart_ = null;
-      if (chartBuilder_ != null) {
-        chartBuilder_.dispose();
-        chartBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChart.Builder getChartBuilder() {
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return getChartFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder getChartOrBuilder() {
-      if (chartBuilder_ != null) {
-        return chartBuilder_.getMessageOrBuilder();
-      } else {
-        return chart_ == null ?
-            ai.chalk.protos.chalk.server.v1.TimeSeriesChart.getDefaultInstance() : chart_;
-      }
-    }
-    /**
-     * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChart, ai.chalk.protos.chalk.server.v1.TimeSeriesChart.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder> 
-        getChartFieldBuilder() {
-      if (chartBuilder_ == null) {
-        chartBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            ai.chalk.protos.chalk.server.v1.TimeSeriesChart, ai.chalk.protos.chalk.server.v1.TimeSeriesChart.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder>(
-                getChart(),
-                getParentForChildren(),
-                isClean());
-        chart_ = null;
-      }
-      return chartBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

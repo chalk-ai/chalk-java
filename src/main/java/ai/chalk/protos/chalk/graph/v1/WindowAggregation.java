@@ -609,6 +609,44 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int BUCKET_START_FIELD_NUMBER = 14;
+  private com.google.protobuf.Timestamp bucketStart_;
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   * @return Whether the bucketStart field is set.
+   */
+  @java.lang.Override
+  public boolean hasBucketStart() {
+    return ((bitField0_ & 0x00000200) != 0);
+  }
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   * @return The bucketStart.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getBucketStart() {
+    return bucketStart_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : bucketStart_;
+  }
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getBucketStartOrBuilder() {
+    return bucketStart_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : bucketStart_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -661,6 +699,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000100) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 13, backfillSchedule_);
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      output.writeMessage(14, getBucketStart());
     }
     getUnknownFields().writeTo(output);
   }
@@ -717,6 +758,10 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000100) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, backfillSchedule_);
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(14, getBucketStart());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -786,6 +831,11 @@ private static final long serialVersionUID = 0L;
       if (!getBackfillSchedule()
           .equals(other.getBackfillSchedule())) return false;
     }
+    if (hasBucketStart() != other.hasBucketStart()) return false;
+    if (hasBucketStart()) {
+      if (!getBucketStart()
+          .equals(other.getBucketStart())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -844,6 +894,10 @@ private static final long serialVersionUID = 0L;
     if (hasBackfillSchedule()) {
       hash = (37 * hash) + BACKFILL_SCHEDULE_FIELD_NUMBER;
       hash = (53 * hash) + getBackfillSchedule().hashCode();
+    }
+    if (hasBucketStart()) {
+      hash = (37 * hash) + BUCKET_START_FIELD_NUMBER;
+      hash = (53 * hash) + getBucketStart().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -983,6 +1037,7 @@ private static final long serialVersionUID = 0L;
         getBackfillLookbackDurationFieldBuilder();
         getBackfillStartTimeFieldBuilder();
         getContinuousBufferDurationFieldBuilder();
+        getBucketStartFieldBuilder();
       }
     }
     @java.lang.Override
@@ -1038,6 +1093,11 @@ private static final long serialVersionUID = 0L;
         continuousBufferDurationBuilder_ = null;
       }
       backfillSchedule_ = "";
+      bucketStart_ = null;
+      if (bucketStartBuilder_ != null) {
+        bucketStartBuilder_.dispose();
+        bucketStartBuilder_ = null;
+      }
       return this;
     }
 
@@ -1147,6 +1207,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00001000) != 0)) {
         result.backfillSchedule_ = backfillSchedule_;
         to_bitField0_ |= 0x00000100;
+      }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
+        result.bucketStart_ = bucketStartBuilder_ == null
+            ? bucketStart_
+            : bucketStartBuilder_.build();
+        to_bitField0_ |= 0x00000200;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1290,6 +1356,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00001000;
         onChanged();
       }
+      if (other.hasBucketStart()) {
+        mergeBucketStart(other.getBucketStart());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1409,6 +1478,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00001000;
               break;
             } // case 106
+            case 114: {
+              input.readMessage(
+                  getBucketStartFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00002000;
+              break;
+            } // case 114
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3275,6 +3351,163 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00001000;
       onChanged();
       return this;
+    }
+
+    private com.google.protobuf.Timestamp bucketStart_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> bucketStartBuilder_;
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     * @return Whether the bucketStart field is set.
+     */
+    public boolean hasBucketStart() {
+      return ((bitField0_ & 0x00002000) != 0);
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     * @return The bucketStart.
+     */
+    public com.google.protobuf.Timestamp getBucketStart() {
+      if (bucketStartBuilder_ == null) {
+        return bucketStart_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : bucketStart_;
+      } else {
+        return bucketStartBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public Builder setBucketStart(com.google.protobuf.Timestamp value) {
+      if (bucketStartBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bucketStart_ = value;
+      } else {
+        bucketStartBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public Builder setBucketStart(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (bucketStartBuilder_ == null) {
+        bucketStart_ = builderForValue.build();
+      } else {
+        bucketStartBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public Builder mergeBucketStart(com.google.protobuf.Timestamp value) {
+      if (bucketStartBuilder_ == null) {
+        if (((bitField0_ & 0x00002000) != 0) &&
+          bucketStart_ != null &&
+          bucketStart_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getBucketStartBuilder().mergeFrom(value);
+        } else {
+          bucketStart_ = value;
+        }
+      } else {
+        bucketStartBuilder_.mergeFrom(value);
+      }
+      if (bucketStart_ != null) {
+        bitField0_ |= 0x00002000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public Builder clearBucketStart() {
+      bitField0_ = (bitField0_ & ~0x00002000);
+      bucketStart_ = null;
+      if (bucketStartBuilder_ != null) {
+        bucketStartBuilder_.dispose();
+        bucketStartBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getBucketStartBuilder() {
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return getBucketStartFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getBucketStartOrBuilder() {
+      if (bucketStartBuilder_ != null) {
+        return bucketStartBuilder_.getMessageOrBuilder();
+      } else {
+        return bucketStart_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : bucketStart_;
+      }
+    }
+    /**
+     * <pre>
+     * The lower bound of the first bucket. All buckets are aligned to this time.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getBucketStartFieldBuilder() {
+      if (bucketStartBuilder_ == null) {
+        bucketStartBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getBucketStart(),
+                getParentForChildren(),
+                isClean());
+        bucketStart_ = null;
+      }
+      return bucketStartBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

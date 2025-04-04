@@ -34,14 +34,41 @@ public interface CreateClusterBackgroundPersistenceRequestOrBuilder extends
       getEnvironmentIdsBytes(int index);
 
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <pre>
+   * use specs instead
+   * </pre>
+   *
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=267
    * @return The specsString.
    */
-  java.lang.String getSpecsString();
+  @java.lang.Deprecated java.lang.String getSpecsString();
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <pre>
+   * use specs instead
+   * </pre>
+   *
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=267
    * @return The bytes for specsString.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getSpecsStringBytes();
+
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   * @return Whether the specs field is set.
+   */
+  boolean hasSpecs();
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   * @return The specs.
+   */
+  ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs getSpecs();
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder getSpecsOrBuilder();
 }

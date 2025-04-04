@@ -51,6 +51,11 @@ public final class OnlineQueryProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_common_v1_OnlineQueryMultiRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_FeatureExpression_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_FeatureExpression_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_common_v1_OutputExpr_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -65,6 +70,11 @@ public final class OnlineQueryProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_common_v1_OnlineQueryContext_OptionsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_common_v1_OnlineQueryResponseOptions_descriptor;
   static final 
@@ -166,45 +176,52 @@ public final class OnlineQueryProto {
     java.lang.String[] descriptorData = {
       "\n\"chalk/common/v1/online_query.proto\022\017ch" +
       "alk.common.v1\032!chalk/common/v1/chalk_err" +
-      "or.proto\032\036google/protobuf/duration.proto" +
-      "\032\034google/protobuf/struct.proto\032\037google/p" +
-      "rotobuf/timestamp.proto\"\311\004\n\022OnlineQueryR" +
-      "equest\022G\n\006inputs\030\001 \003(\0132/.chalk.common.v1" +
-      ".OnlineQueryRequest.InputsEntryR\006inputs\022" +
-      "5\n\007outputs\030\002 \003(\0132\033.chalk.common.v1.Outpu" +
-      "tExprR\007outputs\0221\n\003now\030\003 \001(\0132\032.google.pro" +
-      "tobuf.TimestampH\000R\003now\210\001\001\022P\n\tstaleness\030\004" +
-      " \003(\01322.chalk.common.v1.OnlineQueryReques" +
-      "t.StalenessEntryR\tstaleness\022=\n\007context\030\005" +
-      " \001(\0132#.chalk.common.v1.OnlineQueryContex" +
-      "tR\007context\022V\n\020response_options\030\006 \001(\0132+.c" +
-      "halk.common.v1.OnlineQueryResponseOption" +
-      "sR\017responseOptions\032Q\n\013InputsEntry\022\020\n\003key" +
-      "\030\001 \001(\tR\003key\022,\n\005value\030\002 \001(\0132\026.google.prot" +
-      "obuf.ValueR\005value:\0028\001\032<\n\016StalenessEntry\022" +
-      "\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:" +
-      "\0028\001B\006\n\004_now\"\216\004\n\026OnlineQueryBulkRequest\022%" +
-      "\n\016inputs_feather\030\001 \001(\014R\rinputsFeather\0225\n" +
+      "or.proto\032$chalk/expression/v1/expression" +
+      ".proto\032\036google/protobuf/duration.proto\032\034" +
+      "google/protobuf/struct.proto\032\037google/pro" +
+      "tobuf/timestamp.proto\"\311\004\n\022OnlineQueryReq" +
+      "uest\022G\n\006inputs\030\001 \003(\0132/.chalk.common.v1.O" +
+      "nlineQueryRequest.InputsEntryR\006inputs\0225\n" +
       "\007outputs\030\002 \003(\0132\033.chalk.common.v1.OutputE" +
-      "xprR\007outputs\022,\n\003now\030\003 \003(\0132\032.google.proto" +
-      "buf.TimestampR\003now\022T\n\tstaleness\030\004 \003(\01326." +
-      "chalk.common.v1.OnlineQueryBulkRequest.S" +
-      "talenessEntryR\tstaleness\022=\n\007context\030\005 \001(" +
-      "\0132#.chalk.common.v1.OnlineQueryContextR\007" +
-      "context\022V\n\020response_options\030\006 \001(\0132+.chal" +
-      "k.common.v1.OnlineQueryResponseOptionsR\017" +
-      "responseOptions\022=\n\tbody_type\030\007 \001(\0162 .cha" +
-      "lk.common.v1.FeatherBodyTypeR\010bodyType\032<" +
-      "\n\016StalenessEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005va" +
-      "lue\030\002 \001(\tR\005value:\0028\001\"\271\001\n\022GenericSingleQu" +
-      "ery\022L\n\016single_request\030\001 \001(\0132#.chalk.comm" +
-      "on.v1.OnlineQueryRequestH\000R\rsingleReques" +
-      "t\022L\n\014bulk_request\030\002 \001(\0132\'.chalk.common.v" +
-      "1.OnlineQueryBulkRequestH\000R\013bulkRequestB" +
-      "\007\n\005query\"X\n\027OnlineQueryMultiRequest\022=\n\007q" +
-      "ueries\030\001 \003(\0132#.chalk.common.v1.GenericSi" +
-      "ngleQueryR\007queries\"7\n\nOutputExpr\022!\n\013feat" +
-      "ure_fqn\030\001 \001(\tH\000R\nfeatureFqnB\006\n\004expr\"\263\005\n\022" +
+      "xprR\007outputs\0221\n\003now\030\003 \001(\0132\032.google.proto" +
+      "buf.TimestampH\000R\003now\210\001\001\022P\n\tstaleness\030\004 \003" +
+      "(\01322.chalk.common.v1.OnlineQueryRequest." +
+      "StalenessEntryR\tstaleness\022=\n\007context\030\005 \001" +
+      "(\0132#.chalk.common.v1.OnlineQueryContextR" +
+      "\007context\022V\n\020response_options\030\006 \001(\0132+.cha" +
+      "lk.common.v1.OnlineQueryResponseOptionsR" +
+      "\017responseOptions\032Q\n\013InputsEntry\022\020\n\003key\030\001" +
+      " \001(\tR\003key\022,\n\005value\030\002 \001(\0132\026.google.protob" +
+      "uf.ValueR\005value:\0028\001\032<\n\016StalenessEntry\022\020\n" +
+      "\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028" +
+      "\001B\006\n\004_now\"\216\004\n\026OnlineQueryBulkRequest\022%\n\016" +
+      "inputs_feather\030\001 \001(\014R\rinputsFeather\0225\n\007o" +
+      "utputs\030\002 \003(\0132\033.chalk.common.v1.OutputExp" +
+      "rR\007outputs\022,\n\003now\030\003 \003(\0132\032.google.protobu" +
+      "f.TimestampR\003now\022T\n\tstaleness\030\004 \003(\01326.ch" +
+      "alk.common.v1.OnlineQueryBulkRequest.Sta" +
+      "lenessEntryR\tstaleness\022=\n\007context\030\005 \001(\0132" +
+      "#.chalk.common.v1.OnlineQueryContextR\007co" +
+      "ntext\022V\n\020response_options\030\006 \001(\0132+.chalk." +
+      "common.v1.OnlineQueryResponseOptionsR\017re" +
+      "sponseOptions\022=\n\tbody_type\030\007 \001(\0162 .chalk" +
+      ".common.v1.FeatherBodyTypeR\010bodyType\032<\n\016" +
+      "StalenessEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
+      "e\030\002 \001(\tR\005value:\0028\001\"\271\001\n\022GenericSingleQuer" +
+      "y\022L\n\016single_request\030\001 \001(\0132#.chalk.common" +
+      ".v1.OnlineQueryRequestH\000R\rsingleRequest\022" +
+      "L\n\014bulk_request\030\002 \001(\0132\'.chalk.common.v1." +
+      "OnlineQueryBulkRequestH\000R\013bulkRequestB\007\n" +
+      "\005query\"X\n\027OnlineQueryMultiRequest\022=\n\007que" +
+      "ries\030\001 \003(\0132#.chalk.common.v1.GenericSing" +
+      "leQueryR\007queries\"\231\001\n\021FeatureExpression\022," +
+      "\n\022output_column_name\030\001 \001(\tR\020outputColumn" +
+      "Name\022\034\n\tnamespace\030\003 \001(\tR\tnamespace\0228\n\004ex" +
+      "pr\030\002 \001(\0132$.chalk.expression.v1.LogicalEx" +
+      "prNodeR\004expr\"\214\001\n\nOutputExpr\022!\n\013feature_f" +
+      "qn\030\001 \001(\tH\000R\nfeatureFqn\022S\n\022feature_expres" +
+      "sion\030\002 \001(\0132\".chalk.common.v1.FeatureExpr" +
+      "essionH\000R\021featureExpressionB\006\n\004expr\"\350\006\n\022" +
       "OnlineQueryContext\022$\n\013environment\030\001 \001(\tB" +
       "\002\030\001R\013environment\022\022\n\004tags\030\002 \003(\tR\004tags\0224\n\026" +
       "required_resolver_tags\030\003 \003(\tR\024requiredRe" +
@@ -217,98 +234,103 @@ public final class OnlineQueryProto {
       "(\01320.chalk.common.v1.OnlineQueryContext." +
       "OptionsEntryR\007options\022]\n\035value_metrics_t" +
       "ag_by_features\030\n \003(\0132\033.chalk.common.v1.O" +
-      "utputExprR\031valueMetricsTagByFeatures\032R\n\014" +
-      "OptionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022,\n\005value\030" +
-      "\002 \001(\0132\026.google.protobuf.ValueR\005value:\0028\001" +
-      "B\020\n\016_deployment_idB\014\n\n_branch_idB\021\n\017_cor" +
-      "relation_idB\r\n\013_query_nameB\025\n\023_query_nam" +
-      "e_version\"\342\002\n\032OnlineQueryResponseOptions" +
-      "\022!\n\014include_meta\030\001 \001(\010R\013includeMeta\0229\n\007e" +
-      "xplain\030\002 \001(\0132\037.chalk.common.v1.ExplainOp" +
-      "tionsR\007explain\022R\n\020encoding_options\030\003 \001(\013" +
-      "2\'.chalk.common.v1.FeatureEncodingOption" +
-      "sR\017encodingOptions\022U\n\010metadata\030\004 \003(\01329.c" +
-      "halk.common.v1.OnlineQueryResponseOption" +
-      "s.MetadataEntryR\010metadata\032;\n\rMetadataEnt" +
-      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
-      "ue:\0028\001\"\020\n\016ExplainOptions\"S\n\026FeatureEncod" +
-      "ingOptions\0229\n\031encode_structs_as_objects\030" +
-      "\001 \001(\010R\026encodeStructsAsObjects\"\315\001\n\023Online" +
-      "QueryResponse\0226\n\004data\030\001 \001(\0132\".chalk.comm" +
-      "on.v1.OnlineQueryResultR\004data\0223\n\006errors\030" +
-      "\002 \003(\0132\033.chalk.common.v1.ChalkErrorR\006erro" +
-      "rs\022I\n\rresponse_meta\030\003 \001(\0132$.chalk.common" +
-      ".v1.OnlineQueryMetadataR\014responseMeta\"\326\002" +
-      "\n\027OnlineQueryBulkResponse\022!\n\014scalars_dat" +
-      "a\030\001 \001(\014R\013scalarsData\022Y\n\013groups_data\030\002 \003(" +
-      "\01328.chalk.common.v1.OnlineQueryBulkRespo" +
-      "nse.GroupsDataEntryR\ngroupsData\0223\n\006error" +
-      "s\030\003 \003(\0132\033.chalk.common.v1.ChalkErrorR\006er" +
-      "rors\022I\n\rresponse_meta\030\004 \001(\0132$.chalk.comm" +
-      "on.v1.OnlineQueryMetadataR\014responseMeta\032" +
-      "=\n\017GroupsDataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005" +
-      "value\030\002 \001(\014R\005value:\0028\001\"\302\001\n\025GenericSingle" +
-      "Response\022O\n\017single_response\030\001 \001(\0132$.chal" +
-      "k.common.v1.OnlineQueryResponseH\000R\016singl" +
-      "eResponse\022O\n\rbulk_response\030\002 \001(\0132(.chalk" +
-      ".common.v1.OnlineQueryBulkResponseH\000R\014bu" +
-      "lkResponseB\007\n\005query\"\225\001\n\030OnlineQueryMulti" +
-      "Response\022D\n\tresponses\030\001 \003(\0132&.chalk.comm" +
-      "on.v1.GenericSingleResponseR\tresponses\0223" +
-      "\n\006errors\030\002 \003(\0132\033.chalk.common.v1.ChalkEr" +
-      "rorR\006errors\"M\n\021OnlineQueryResult\0228\n\007resu" +
-      "lts\030\001 \003(\0132\036.chalk.common.v1.FeatureResul" +
-      "tR\007results\"\271\002\n\rFeatureResult\022\024\n\005field\030\001 " +
-      "\001(\tR\005field\022*\n\004pkey\030\006 \001(\0132\026.google.protob" +
-      "uf.ValueR\004pkey\022,\n\005value\030\002 \001(\0132\026.google.p" +
-      "rotobuf.ValueR\005value\0226\n\005error\030\003 \001(\0132\033.ch" +
-      "alk.common.v1.ChalkErrorH\000R\005error\210\001\001\022/\n\002" +
-      "ts\030\004 \001(\0132\032.google.protobuf.TimestampH\001R\002" +
-      "ts\210\001\001\0225\n\004meta\030\005 \001(\0132\034.chalk.common.v1.Fe" +
-      "atureMetaH\002R\004meta\210\001\001B\010\n\006_errorB\005\n\003_tsB\007\n" +
-      "\005_meta\"\233\001\n\013FeatureMeta\022.\n\023chosen_resolve" +
-      "r_fqn\030\001 \001(\tR\021chosenResolverFqn\022\033\n\tcache_" +
-      "hit\030\002 \001(\010R\010cacheHit\022%\n\016primitive_type\030\003 " +
-      "\001(\tR\rprimitiveType\022\030\n\007version\030\004 \001(\003R\007ver" +
-      "sion\"\372\005\n\023OnlineQueryMetadata\022H\n\022executio" +
-      "n_duration\030\001 \001(\0132\031.google.protobuf.Durat" +
-      "ionR\021executionDuration\022#\n\rdeployment_id\030" +
-      "\002 \001(\tR\014deploymentId\022%\n\016environment_id\030\003 " +
-      "\001(\tR\renvironmentId\022)\n\020environment_name\030\004" +
-      " \001(\tR\017environmentName\022\031\n\010query_id\030\005 \001(\tR" +
-      "\007queryId\022C\n\017query_timestamp\030\006 \001(\0132\032.goog" +
-      "le.protobuf.TimestampR\016queryTimestamp\022\035\n" +
-      "\nquery_hash\030\007 \001(\tR\tqueryHash\022H\n\016explain_" +
-      "output\030\010 \001(\0132!.chalk.common.v1.QueryExpl" +
-      "ainInfoR\rexplainOutput\022N\n\010metadata\030\t \003(\013" +
-      "22.chalk.common.v1.OnlineQueryMetadata.M" +
-      "etadataEntryR\010metadata\022m\n\023additional_met" +
-      "adata\030\n \003(\0132<.chalk.common.v1.OnlineQuer" +
-      "yMetadata.AdditionalMetadataEntryR\022addit" +
-      "ionalMetadata\032;\n\rMetadataEntry\022\020\n\003key\030\001 " +
-      "\001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032]\n\027Ad" +
-      "ditionalMetadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
-      ",\n\005value\030\002 \001(\0132\026.google.protobuf.ValueR\005" +
-      "value:\0028\001\"H\n\020QueryExplainInfo\022$\n\013plan_st" +
-      "ring\030\001 \001(\tH\000R\nplanString\210\001\001B\016\n\014_plan_str" +
-      "ing\"\201\001\n\031UploadFeaturesBulkRequest\022%\n\016inp" +
-      "uts_feather\030\001 \001(\014R\rinputsFeather\022=\n\tbody" +
-      "_type\030\007 \001(\0162 .chalk.common.v1.FeatherBod" +
-      "yTypeR\010bodyType\"Q\n\032UploadFeaturesBulkRes" +
-      "ponse\0223\n\006errors\030\001 \003(\0132\033.chalk.common.v1." +
-      "ChalkErrorR\006errors*w\n\017FeatherBodyType\022!\n" +
-      "\035FEATHER_BODY_TYPE_UNSPECIFIED\020\000\022\033\n\027FEAT" +
-      "HER_BODY_TYPE_TABLE\020\001\022$\n FEATHER_BODY_TY" +
-      "PE_RECORD_BATCHES\020\002B\221\001\n\037ai.chalk.protos." +
-      "chalk.common.v1B\020OnlineQueryProtoP\001\242\002\003CC" +
-      "X\252\002\017Chalk.Common.V1\312\002\017Chalk\\Common\\V1\342\002\033" +
-      "Chalk\\Common\\V1\\GPBMetadata\352\002\021Chalk::Com" +
-      "mon::V1b\006proto3"
+      "utputExprR\031valueMetricsTagByFeatures\022Z\n\r" +
+      "query_context\030\013 \003(\01325.chalk.common.v1.On" +
+      "lineQueryContext.QueryContextEntryR\014quer" +
+      "yContext\032R\n\014OptionsEntry\022\020\n\003key\030\001 \001(\tR\003k" +
+      "ey\022,\n\005value\030\002 \001(\0132\026.google.protobuf.Valu" +
+      "eR\005value:\0028\001\032W\n\021QueryContextEntry\022\020\n\003key" +
+      "\030\001 \001(\tR\003key\022,\n\005value\030\002 \001(\0132\026.google.prot" +
+      "obuf.ValueR\005value:\0028\001B\020\n\016_deployment_idB" +
+      "\014\n\n_branch_idB\021\n\017_correlation_idB\r\n\013_que" +
+      "ry_nameB\025\n\023_query_name_version\"\342\002\n\032Onlin" +
+      "eQueryResponseOptions\022!\n\014include_meta\030\001 " +
+      "\001(\010R\013includeMeta\0229\n\007explain\030\002 \001(\0132\037.chal" +
+      "k.common.v1.ExplainOptionsR\007explain\022R\n\020e" +
+      "ncoding_options\030\003 \001(\0132\'.chalk.common.v1." +
+      "FeatureEncodingOptionsR\017encodingOptions\022" +
+      "U\n\010metadata\030\004 \003(\01329.chalk.common.v1.Onli" +
+      "neQueryResponseOptions.MetadataEntryR\010me" +
+      "tadata\032;\n\rMetadataEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
+      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\020\n\016ExplainOp" +
+      "tions\"S\n\026FeatureEncodingOptions\0229\n\031encod" +
+      "e_structs_as_objects\030\001 \001(\010R\026encodeStruct" +
+      "sAsObjects\"\315\001\n\023OnlineQueryResponse\0226\n\004da" +
+      "ta\030\001 \001(\0132\".chalk.common.v1.OnlineQueryRe" +
+      "sultR\004data\0223\n\006errors\030\002 \003(\0132\033.chalk.commo" +
+      "n.v1.ChalkErrorR\006errors\022I\n\rresponse_meta" +
+      "\030\003 \001(\0132$.chalk.common.v1.OnlineQueryMeta" +
+      "dataR\014responseMeta\"\326\002\n\027OnlineQueryBulkRe" +
+      "sponse\022!\n\014scalars_data\030\001 \001(\014R\013scalarsDat" +
+      "a\022Y\n\013groups_data\030\002 \003(\01328.chalk.common.v1" +
+      ".OnlineQueryBulkResponse.GroupsDataEntry" +
+      "R\ngroupsData\0223\n\006errors\030\003 \003(\0132\033.chalk.com" +
+      "mon.v1.ChalkErrorR\006errors\022I\n\rresponse_me" +
+      "ta\030\004 \001(\0132$.chalk.common.v1.OnlineQueryMe" +
+      "tadataR\014responseMeta\032=\n\017GroupsDataEntry\022" +
+      "\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\014R\005value:" +
+      "\0028\001\"\302\001\n\025GenericSingleResponse\022O\n\017single_" +
+      "response\030\001 \001(\0132$.chalk.common.v1.OnlineQ" +
+      "ueryResponseH\000R\016singleResponse\022O\n\rbulk_r" +
+      "esponse\030\002 \001(\0132(.chalk.common.v1.OnlineQu" +
+      "eryBulkResponseH\000R\014bulkResponseB\007\n\005query" +
+      "\"\225\001\n\030OnlineQueryMultiResponse\022D\n\trespons" +
+      "es\030\001 \003(\0132&.chalk.common.v1.GenericSingle" +
+      "ResponseR\tresponses\0223\n\006errors\030\002 \003(\0132\033.ch" +
+      "alk.common.v1.ChalkErrorR\006errors\"M\n\021Onli" +
+      "neQueryResult\0228\n\007results\030\001 \003(\0132\036.chalk.c" +
+      "ommon.v1.FeatureResultR\007results\"\271\002\n\rFeat" +
+      "ureResult\022\024\n\005field\030\001 \001(\tR\005field\022*\n\004pkey\030" +
+      "\006 \001(\0132\026.google.protobuf.ValueR\004pkey\022,\n\005v" +
+      "alue\030\002 \001(\0132\026.google.protobuf.ValueR\005valu" +
+      "e\0226\n\005error\030\003 \001(\0132\033.chalk.common.v1.Chalk" +
+      "ErrorH\000R\005error\210\001\001\022/\n\002ts\030\004 \001(\0132\032.google.p" +
+      "rotobuf.TimestampH\001R\002ts\210\001\001\0225\n\004meta\030\005 \001(\013" +
+      "2\034.chalk.common.v1.FeatureMetaH\002R\004meta\210\001" +
+      "\001B\010\n\006_errorB\005\n\003_tsB\007\n\005_meta\"\233\001\n\013FeatureM" +
+      "eta\022.\n\023chosen_resolver_fqn\030\001 \001(\tR\021chosen" +
+      "ResolverFqn\022\033\n\tcache_hit\030\002 \001(\010R\010cacheHit" +
+      "\022%\n\016primitive_type\030\003 \001(\tR\rprimitiveType\022" +
+      "\030\n\007version\030\004 \001(\003R\007version\"\372\005\n\023OnlineQuer" +
+      "yMetadata\022H\n\022execution_duration\030\001 \001(\0132\031." +
+      "google.protobuf.DurationR\021executionDurat" +
+      "ion\022#\n\rdeployment_id\030\002 \001(\tR\014deploymentId" +
+      "\022%\n\016environment_id\030\003 \001(\tR\renvironmentId\022" +
+      ")\n\020environment_name\030\004 \001(\tR\017environmentNa" +
+      "me\022\031\n\010query_id\030\005 \001(\tR\007queryId\022C\n\017query_t" +
+      "imestamp\030\006 \001(\0132\032.google.protobuf.Timesta" +
+      "mpR\016queryTimestamp\022\035\n\nquery_hash\030\007 \001(\tR\t" +
+      "queryHash\022H\n\016explain_output\030\010 \001(\0132!.chal" +
+      "k.common.v1.QueryExplainInfoR\rexplainOut" +
+      "put\022N\n\010metadata\030\t \003(\01322.chalk.common.v1." +
+      "OnlineQueryMetadata.MetadataEntryR\010metad" +
+      "ata\022m\n\023additional_metadata\030\n \003(\0132<.chalk" +
+      ".common.v1.OnlineQueryMetadata.Additiona" +
+      "lMetadataEntryR\022additionalMetadata\032;\n\rMe" +
+      "tadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002" +
+      " \001(\tR\005value:\0028\001\032]\n\027AdditionalMetadataEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\022,\n\005value\030\002 \001(\0132\026.go" +
+      "ogle.protobuf.ValueR\005value:\0028\001\"H\n\020QueryE" +
+      "xplainInfo\022$\n\013plan_string\030\001 \001(\tH\000R\nplanS" +
+      "tring\210\001\001B\016\n\014_plan_string\"\201\001\n\031UploadFeatu" +
+      "resBulkRequest\022%\n\016inputs_feather\030\001 \001(\014R\r" +
+      "inputsFeather\022=\n\tbody_type\030\007 \001(\0162 .chalk" +
+      ".common.v1.FeatherBodyTypeR\010bodyType\"Q\n\032" +
+      "UploadFeaturesBulkResponse\0223\n\006errors\030\001 \003" +
+      "(\0132\033.chalk.common.v1.ChalkErrorR\006errors*" +
+      "w\n\017FeatherBodyType\022!\n\035FEATHER_BODY_TYPE_" +
+      "UNSPECIFIED\020\000\022\033\n\027FEATHER_BODY_TYPE_TABLE" +
+      "\020\001\022$\n FEATHER_BODY_TYPE_RECORD_BATCHES\020\002" +
+      "B\221\001\n\037ai.chalk.protos.chalk.common.v1B\020On" +
+      "lineQueryProtoP\001\242\002\003CCX\252\002\017Chalk.Common.V1" +
+      "\312\002\017Chalk\\Common\\V1\342\002\033Chalk\\Common\\V1\\GPB" +
+      "Metadata\352\002\021Chalk::Common::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor(),
+          ai.chalk.protos.chalk.expression.v1.ExpressionProto.getDescriptor(),
           com.google.protobuf.DurationProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
@@ -355,26 +377,38 @@ public final class OnlineQueryProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryMultiRequest_descriptor,
         new java.lang.String[] { "Queries", });
-    internal_static_chalk_common_v1_OutputExpr_descriptor =
+    internal_static_chalk_common_v1_FeatureExpression_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_common_v1_FeatureExpression_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_FeatureExpression_descriptor,
+        new java.lang.String[] { "OutputColumnName", "Namespace", "Expr", });
+    internal_static_chalk_common_v1_OutputExpr_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_common_v1_OutputExpr_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OutputExpr_descriptor,
-        new java.lang.String[] { "FeatureFqn", "Expr", });
+        new java.lang.String[] { "FeatureFqn", "FeatureExpression", "Expr", });
     internal_static_chalk_common_v1_OnlineQueryContext_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_chalk_common_v1_OnlineQueryContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryContext_descriptor,
-        new java.lang.String[] { "Environment", "Tags", "RequiredResolverTags", "DeploymentId", "BranchId", "CorrelationId", "QueryName", "QueryNameVersion", "Options", "ValueMetricsTagByFeatures", });
+        new java.lang.String[] { "Environment", "Tags", "RequiredResolverTags", "DeploymentId", "BranchId", "CorrelationId", "QueryName", "QueryNameVersion", "Options", "ValueMetricsTagByFeatures", "QueryContext", });
     internal_static_chalk_common_v1_OnlineQueryContext_OptionsEntry_descriptor =
       internal_static_chalk_common_v1_OnlineQueryContext_descriptor.getNestedTypes().get(0);
     internal_static_chalk_common_v1_OnlineQueryContext_OptionsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryContext_OptionsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_descriptor =
+      internal_static_chalk_common_v1_OnlineQueryContext_descriptor.getNestedTypes().get(1);
+    internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_common_v1_OnlineQueryResponseOptions_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_common_v1_OnlineQueryResponseOptions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryResponseOptions_descriptor,
@@ -386,25 +420,25 @@ public final class OnlineQueryProto {
         internal_static_chalk_common_v1_OnlineQueryResponseOptions_MetadataEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_common_v1_ExplainOptions_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_chalk_common_v1_ExplainOptions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_ExplainOptions_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_common_v1_FeatureEncodingOptions_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_chalk_common_v1_FeatureEncodingOptions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_FeatureEncodingOptions_descriptor,
         new java.lang.String[] { "EncodeStructsAsObjects", });
     internal_static_chalk_common_v1_OnlineQueryResponse_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_chalk_common_v1_OnlineQueryResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryResponse_descriptor,
         new java.lang.String[] { "Data", "Errors", "ResponseMeta", });
     internal_static_chalk_common_v1_OnlineQueryBulkResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_chalk_common_v1_OnlineQueryBulkResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryBulkResponse_descriptor,
@@ -416,37 +450,37 @@ public final class OnlineQueryProto {
         internal_static_chalk_common_v1_OnlineQueryBulkResponse_GroupsDataEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_common_v1_GenericSingleResponse_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_chalk_common_v1_GenericSingleResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_GenericSingleResponse_descriptor,
         new java.lang.String[] { "SingleResponse", "BulkResponse", "Query", });
     internal_static_chalk_common_v1_OnlineQueryMultiResponse_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_chalk_common_v1_OnlineQueryMultiResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryMultiResponse_descriptor,
         new java.lang.String[] { "Responses", "Errors", });
     internal_static_chalk_common_v1_OnlineQueryResult_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_chalk_common_v1_OnlineQueryResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryResult_descriptor,
         new java.lang.String[] { "Results", });
     internal_static_chalk_common_v1_FeatureResult_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_chalk_common_v1_FeatureResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_FeatureResult_descriptor,
         new java.lang.String[] { "Field", "Pkey", "Value", "Error", "Ts", "Meta", });
     internal_static_chalk_common_v1_FeatureMeta_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_chalk_common_v1_FeatureMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_FeatureMeta_descriptor,
         new java.lang.String[] { "ChosenResolverFqn", "CacheHit", "PrimitiveType", "Version", });
     internal_static_chalk_common_v1_OnlineQueryMetadata_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_chalk_common_v1_OnlineQueryMetadata_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_OnlineQueryMetadata_descriptor,
@@ -464,24 +498,25 @@ public final class OnlineQueryProto {
         internal_static_chalk_common_v1_OnlineQueryMetadata_AdditionalMetadataEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_common_v1_QueryExplainInfo_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_chalk_common_v1_QueryExplainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_QueryExplainInfo_descriptor,
         new java.lang.String[] { "PlanString", });
     internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_common_v1_UploadFeaturesBulkRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesBulkRequest_descriptor,
         new java.lang.String[] { "InputsFeather", "BodyType", });
     internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_common_v1_UploadFeaturesBulkResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesBulkResponse_descriptor,
         new java.lang.String[] { "Errors", });
     ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor();
+    ai.chalk.protos.chalk.expression.v1.ExpressionProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();

@@ -21,19 +21,35 @@ public interface UpdateGraphRequestOrBuilder extends
       getDeploymentIdBytes();
 
   /**
-   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.UpdateGraphRequest.graph is deprecated.
+   *     See chalk/server/v1/graph.proto;l=62
    * @return Whether the graph field is set.
    */
-  boolean hasGraph();
+  @java.lang.Deprecated boolean hasGraph();
   /**
-   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.UpdateGraphRequest.graph is deprecated.
+   *     See chalk/server/v1/graph.proto;l=62
    * @return The graph.
    */
-  ai.chalk.protos.chalk.graph.v1.Graph getGraph();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.Graph getGraph();
   /**
-   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder();
 
   /**
    * <code>string chalkpy_version = 3 [json_name = "chalkpyVersion"];</code>
@@ -63,4 +79,19 @@ public interface UpdateGraphRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTagBytes();
+
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 5 [json_name = "export"];</code>
+   * @return Whether the export field is set.
+   */
+  boolean hasExport();
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 5 [json_name = "export"];</code>
+   * @return The export.
+   */
+  ai.chalk.protos.chalk.artifacts.v1.Export getExport();
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 5 [json_name = "export"];</code>
+   */
+  ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder();
 }

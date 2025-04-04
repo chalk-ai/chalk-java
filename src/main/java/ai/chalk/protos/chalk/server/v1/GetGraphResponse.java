@@ -45,26 +45,42 @@ private static final long serialVersionUID = 0L;
   public static final int GRAPH_FIELD_NUMBER = 1;
   private ai.chalk.protos.chalk.graph.v1.Graph graph_;
   /**
-   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.GetGraphResponse.graph is deprecated.
+   *     See chalk/server/v1/graph.proto;l=76
    * @return Whether the graph field is set.
    */
   @java.lang.Override
-  public boolean hasGraph() {
+  @java.lang.Deprecated public boolean hasGraph() {
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.GetGraphResponse.graph is deprecated.
+   *     See chalk/server/v1/graph.proto;l=76
    * @return The graph.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
     return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
   }
   /**
-   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+   * <pre>
+   * Use Export instead, which includes a graph + additional metadata
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
     return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
   }
 
@@ -154,6 +170,32 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int EXPORT_FIELD_NUMBER = 4;
+  private ai.chalk.protos.chalk.artifacts.v1.Export export_;
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return Whether the export field is set.
+   */
+  @java.lang.Override
+  public boolean hasExport() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return The export.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.artifacts.v1.Export getExport() {
+    return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+  }
+  /**
+   * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder() {
+    return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -177,6 +219,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000002) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, tag_);
     }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(4, getExport());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -195,6 +240,10 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, tag_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getExport());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -223,6 +272,11 @@ private static final long serialVersionUID = 0L;
       if (!getTag()
           .equals(other.getTag())) return false;
     }
+    if (hasExport() != other.hasExport()) return false;
+    if (hasExport()) {
+      if (!getExport()
+          .equals(other.getExport())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -243,6 +297,10 @@ private static final long serialVersionUID = 0L;
     if (hasTag()) {
       hash = (37 * hash) + TAG_FIELD_NUMBER;
       hash = (53 * hash) + getTag().hashCode();
+    }
+    if (hasExport()) {
+      hash = (37 * hash) + EXPORT_FIELD_NUMBER;
+      hash = (53 * hash) + getExport().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -375,6 +433,7 @@ private static final long serialVersionUID = 0L;
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getGraphFieldBuilder();
+        getExportFieldBuilder();
       }
     }
     @java.lang.Override
@@ -388,6 +447,11 @@ private static final long serialVersionUID = 0L;
       }
       chalkpyVersion_ = "";
       tag_ = "";
+      export_ = null;
+      if (exportBuilder_ != null) {
+        exportBuilder_.dispose();
+        exportBuilder_ = null;
+      }
       return this;
     }
 
@@ -434,6 +498,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.tag_ = tag_;
         to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.export_ = exportBuilder_ == null
+            ? export_
+            : exportBuilder_.build();
+        to_bitField0_ |= 0x00000004;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -495,6 +565,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000004;
         onChanged();
       }
+      if (other.hasExport()) {
+        mergeExport(other.getExport());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -538,6 +611,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 34: {
+              input.readMessage(
+                  getExportFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -559,17 +639,29 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.Graph, ai.chalk.protos.chalk.graph.v1.Graph.Builder, ai.chalk.protos.chalk.graph.v1.GraphOrBuilder> graphBuilder_;
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
+     * @deprecated chalk.server.v1.GetGraphResponse.graph is deprecated.
+     *     See chalk/server/v1/graph.proto;l=76
      * @return Whether the graph field is set.
      */
-    public boolean hasGraph() {
+    @java.lang.Deprecated public boolean hasGraph() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
+     * @deprecated chalk.server.v1.GetGraphResponse.graph is deprecated.
+     *     See chalk/server/v1/graph.proto;l=76
      * @return The graph.
      */
-    public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
       if (graphBuilder_ == null) {
         return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
       } else {
@@ -577,9 +669,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public Builder setGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
+    @java.lang.Deprecated public Builder setGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
       if (graphBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -593,9 +689,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public Builder setGraph(
+    @java.lang.Deprecated public Builder setGraph(
         ai.chalk.protos.chalk.graph.v1.Graph.Builder builderForValue) {
       if (graphBuilder_ == null) {
         graph_ = builderForValue.build();
@@ -607,9 +707,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public Builder mergeGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
+    @java.lang.Deprecated public Builder mergeGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
       if (graphBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0) &&
           graph_ != null &&
@@ -628,9 +732,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public Builder clearGraph() {
+    @java.lang.Deprecated public Builder clearGraph() {
       bitField0_ = (bitField0_ & ~0x00000001);
       graph_ = null;
       if (graphBuilder_ != null) {
@@ -641,17 +749,25 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.Graph.Builder getGraphBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph.Builder getGraphBuilder() {
       bitField0_ |= 0x00000001;
       onChanged();
       return getGraphFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
       if (graphBuilder_ != null) {
         return graphBuilder_.getMessageOrBuilder();
       } else {
@@ -660,7 +776,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph"];</code>
+     * <pre>
+     * Use Export instead, which includes a graph + additional metadata
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.Graph graph = 1 [json_name = "graph", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.Graph, ai.chalk.protos.chalk.graph.v1.Graph.Builder, ai.chalk.protos.chalk.graph.v1.GraphOrBuilder> 
@@ -825,6 +945,127 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.artifacts.v1.Export export_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder> exportBuilder_;
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     * @return Whether the export field is set.
+     */
+    public boolean hasExport() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     * @return The export.
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.Export getExport() {
+      if (exportBuilder_ == null) {
+        return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+      } else {
+        return exportBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder setExport(ai.chalk.protos.chalk.artifacts.v1.Export value) {
+      if (exportBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        export_ = value;
+      } else {
+        exportBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder setExport(
+        ai.chalk.protos.chalk.artifacts.v1.Export.Builder builderForValue) {
+      if (exportBuilder_ == null) {
+        export_ = builderForValue.build();
+      } else {
+        exportBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder mergeExport(ai.chalk.protos.chalk.artifacts.v1.Export value) {
+      if (exportBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          export_ != null &&
+          export_ != ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance()) {
+          getExportBuilder().mergeFrom(value);
+        } else {
+          export_ = value;
+        }
+      } else {
+        exportBuilder_.mergeFrom(value);
+      }
+      if (export_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder clearExport() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      export_ = null;
+      if (exportBuilder_ != null) {
+        exportBuilder_.dispose();
+        exportBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.Export.Builder getExportBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getExportFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder() {
+      if (exportBuilder_ != null) {
+        return exportBuilder_.getMessageOrBuilder();
+      } else {
+        return export_ == null ?
+            ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+      }
+    }
+    /**
+     * <code>.chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder> 
+        getExportFieldBuilder() {
+      if (exportBuilder_ == null) {
+        exportBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder>(
+                getExport(),
+                getParentForChildren(),
+                isClean());
+        export_ = null;
+      }
+      return exportBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

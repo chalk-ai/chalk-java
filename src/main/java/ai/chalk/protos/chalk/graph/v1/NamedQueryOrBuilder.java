@@ -303,4 +303,40 @@ java.lang.String defaultValue);
    * <code>optional .chalk.graph.v1.SourceFileReference source_file_reference = 13 [json_name = "sourceFileReference"];</code>
    */
   ai.chalk.protos.chalk.graph.v1.SourceFileReferenceOrBuilder getSourceFileReferenceOrBuilder();
+
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @return A list containing the additionalLoggedFeatures.
+   */
+  java.util.List<java.lang.String>
+      getAdditionalLoggedFeaturesList();
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @return The count of additionalLoggedFeatures.
+   */
+  int getAdditionalLoggedFeaturesCount();
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The additionalLoggedFeatures at the given index.
+   */
+  java.lang.String getAdditionalLoggedFeatures(int index);
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the additionalLoggedFeatures at the given index.
+   */
+  com.google.protobuf.ByteString
+      getAdditionalLoggedFeaturesBytes(int index);
+
+  /**
+   * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+   * @return Whether the validPlanNotRequired field is set.
+   */
+  boolean hasValidPlanNotRequired();
+  /**
+   * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+   * @return The validPlanNotRequired.
+   */
+  boolean getValidPlanNotRequired();
 }

@@ -56,6 +56,7 @@ private static final long serialVersionUID = 0L;
     SPANNER(9),
     TRINO(10),
     DYNAMODB(11),
+    ATHENA(12),
     SOURCE_NOT_SET(0);
     private final int value;
     private SourceCase(int value) {
@@ -84,6 +85,7 @@ private static final long serialVersionUID = 0L;
         case 9: return SPANNER;
         case 10: return TRINO;
         case 11: return DYNAMODB;
+        case 12: return ATHENA;
         case 0: return SOURCE_NOT_SET;
         default: return null;
       }
@@ -440,6 +442,37 @@ private static final long serialVersionUID = 0L;
     return ai.chalk.protos.chalk.graph.v1.DynamoDBSource.getDefaultInstance();
   }
 
+  public static final int ATHENA_FIELD_NUMBER = 12;
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   * @return Whether the athena field is set.
+   */
+  @java.lang.Override
+  public boolean hasAthena() {
+    return sourceCase_ == 12;
+  }
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   * @return The athena.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.AthenaSource getAthena() {
+    if (sourceCase_ == 12) {
+       return (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder getAthenaOrBuilder() {
+    if (sourceCase_ == 12) {
+       return (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_;
+    }
+    return ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -486,6 +519,9 @@ private static final long serialVersionUID = 0L;
     }
     if (sourceCase_ == 11) {
       output.writeMessage(11, (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_);
+    }
+    if (sourceCase_ == 12) {
+      output.writeMessage(12, (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -539,6 +575,10 @@ private static final long serialVersionUID = 0L;
     if (sourceCase_ == 11) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(11, (ai.chalk.protos.chalk.graph.v1.DynamoDBSource) source_);
+    }
+    if (sourceCase_ == 12) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(12, (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -601,6 +641,10 @@ private static final long serialVersionUID = 0L;
         if (!getDynamodb()
             .equals(other.getDynamodb())) return false;
         break;
+      case 12:
+        if (!getAthena()
+            .equals(other.getAthena())) return false;
+        break;
       case 0:
       default:
     }
@@ -659,6 +703,10 @@ private static final long serialVersionUID = 0L;
       case 11:
         hash = (37 * hash) + DYNAMODB_FIELD_NUMBER;
         hash = (53 * hash) + getDynamodb().hashCode();
+        break;
+      case 12:
+        hash = (37 * hash) + ATHENA_FIELD_NUMBER;
+        hash = (53 * hash) + getAthena().hashCode();
         break;
       case 0:
       default:
@@ -827,6 +875,9 @@ private static final long serialVersionUID = 0L;
       if (dynamodbBuilder_ != null) {
         dynamodbBuilder_.clear();
       }
+      if (athenaBuilder_ != null) {
+        athenaBuilder_.clear();
+      }
       sourceCase_ = 0;
       source_ = null;
       return this;
@@ -911,6 +962,10 @@ private static final long serialVersionUID = 0L;
       if (sourceCase_ == 11 &&
           dynamodbBuilder_ != null) {
         result.source_ = dynamodbBuilder_.build();
+      }
+      if (sourceCase_ == 12 &&
+          athenaBuilder_ != null) {
+        result.source_ = athenaBuilder_.build();
       }
     }
 
@@ -1001,6 +1056,10 @@ private static final long serialVersionUID = 0L;
         }
         case DYNAMODB: {
           mergeDynamodb(other.getDynamodb());
+          break;
+        }
+        case ATHENA: {
+          mergeAthena(other.getAthena());
           break;
         }
         case SOURCE_NOT_SET: {
@@ -1110,6 +1169,13 @@ private static final long serialVersionUID = 0L;
               sourceCase_ = 11;
               break;
             } // case 90
+            case 98: {
+              input.readMessage(
+                  getAthenaFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              sourceCase_ = 12;
+              break;
+            } // case 98
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2702,6 +2768,148 @@ private static final long serialVersionUID = 0L;
       sourceCase_ = 11;
       onChanged();
       return dynamodbBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.AthenaSource, ai.chalk.protos.chalk.graph.v1.AthenaSource.Builder, ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder> athenaBuilder_;
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     * @return Whether the athena field is set.
+     */
+    @java.lang.Override
+    public boolean hasAthena() {
+      return sourceCase_ == 12;
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     * @return The athena.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.AthenaSource getAthena() {
+      if (athenaBuilder_ == null) {
+        if (sourceCase_ == 12) {
+          return (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+      } else {
+        if (sourceCase_ == 12) {
+          return athenaBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    public Builder setAthena(ai.chalk.protos.chalk.graph.v1.AthenaSource value) {
+      if (athenaBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        source_ = value;
+        onChanged();
+      } else {
+        athenaBuilder_.setMessage(value);
+      }
+      sourceCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    public Builder setAthena(
+        ai.chalk.protos.chalk.graph.v1.AthenaSource.Builder builderForValue) {
+      if (athenaBuilder_ == null) {
+        source_ = builderForValue.build();
+        onChanged();
+      } else {
+        athenaBuilder_.setMessage(builderForValue.build());
+      }
+      sourceCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    public Builder mergeAthena(ai.chalk.protos.chalk.graph.v1.AthenaSource value) {
+      if (athenaBuilder_ == null) {
+        if (sourceCase_ == 12 &&
+            source_ != ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance()) {
+          source_ = ai.chalk.protos.chalk.graph.v1.AthenaSource.newBuilder((ai.chalk.protos.chalk.graph.v1.AthenaSource) source_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          source_ = value;
+        }
+        onChanged();
+      } else {
+        if (sourceCase_ == 12) {
+          athenaBuilder_.mergeFrom(value);
+        } else {
+          athenaBuilder_.setMessage(value);
+        }
+      }
+      sourceCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    public Builder clearAthena() {
+      if (athenaBuilder_ == null) {
+        if (sourceCase_ == 12) {
+          sourceCase_ = 0;
+          source_ = null;
+          onChanged();
+        }
+      } else {
+        if (sourceCase_ == 12) {
+          sourceCase_ = 0;
+          source_ = null;
+        }
+        athenaBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.AthenaSource.Builder getAthenaBuilder() {
+      return getAthenaFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder getAthenaOrBuilder() {
+      if ((sourceCase_ == 12) && (athenaBuilder_ != null)) {
+        return athenaBuilder_.getMessageOrBuilder();
+      } else {
+        if (sourceCase_ == 12) {
+          return (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_;
+        }
+        return ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.AthenaSource, ai.chalk.protos.chalk.graph.v1.AthenaSource.Builder, ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder> 
+        getAthenaFieldBuilder() {
+      if (athenaBuilder_ == null) {
+        if (!(sourceCase_ == 12)) {
+          source_ = ai.chalk.protos.chalk.graph.v1.AthenaSource.getDefaultInstance();
+        }
+        athenaBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.AthenaSource, ai.chalk.protos.chalk.graph.v1.AthenaSource.Builder, ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v1.AthenaSource) source_,
+                getParentForChildren(),
+                isClean());
+        source_ = null;
+      }
+      sourceCase_ = 12;
+      onChanged();
+      return athenaBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

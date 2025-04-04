@@ -60,6 +60,9 @@ private static final long serialVersionUID = 0L;
     clusterTimescaledbId_ = "";
     backgroundPersistenceDeploymentId_ = "";
     clusterTimescaledbSecret_ = "";
+    grpcEngineUrl_ = "";
+    kubeClusterMode_ = "";
+    dashboardUrl_ = "";
   }
 
   @java.lang.Override
@@ -2433,6 +2436,162 @@ com.google.protobuf.Value defaultValue) {
     }
   }
 
+  public static final int GRPC_ENGINE_URL_FIELD_NUMBER = 52;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object grpcEngineUrl_ = "";
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return Whether the grpcEngineUrl field is set.
+   */
+  @java.lang.Override
+  public boolean hasGrpcEngineUrl() {
+    return ((bitField1_ & 0x00000200) != 0);
+  }
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return The grpcEngineUrl.
+   */
+  @java.lang.Override
+  public java.lang.String getGrpcEngineUrl() {
+    java.lang.Object ref = grpcEngineUrl_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      grpcEngineUrl_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return The bytes for grpcEngineUrl.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGrpcEngineUrlBytes() {
+    java.lang.Object ref = grpcEngineUrl_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      grpcEngineUrl_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int KUBE_CLUSTER_MODE_FIELD_NUMBER = 53;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object kubeClusterMode_ = "";
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return Whether the kubeClusterMode field is set.
+   */
+  @java.lang.Override
+  public boolean hasKubeClusterMode() {
+    return ((bitField1_ & 0x00000400) != 0);
+  }
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return The kubeClusterMode.
+   */
+  @java.lang.Override
+  public java.lang.String getKubeClusterMode() {
+    java.lang.Object ref = kubeClusterMode_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      kubeClusterMode_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return The bytes for kubeClusterMode.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getKubeClusterModeBytes() {
+    java.lang.Object ref = kubeClusterMode_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      kubeClusterMode_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DASHBOARD_URL_FIELD_NUMBER = 54;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object dashboardUrl_ = "";
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return Whether the dashboardUrl field is set.
+   */
+  @java.lang.Override
+  public boolean hasDashboardUrl() {
+    return ((bitField1_ & 0x00000800) != 0);
+  }
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return The dashboardUrl.
+   */
+  @java.lang.Override
+  public java.lang.String getDashboardUrl() {
+    java.lang.Object ref = dashboardUrl_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      dashboardUrl_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return The bytes for dashboardUrl.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDashboardUrlBytes() {
+    java.lang.Object ref = dashboardUrl_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      dashboardUrl_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2608,6 +2767,15 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000100) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 51, clusterTimescaledbSecret_);
+    }
+    if (((bitField1_ & 0x00000200) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 52, grpcEngineUrl_);
+    }
+    if (((bitField1_ & 0x00000400) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 53, kubeClusterMode_);
+    }
+    if (((bitField1_ & 0x00000800) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 54, dashboardUrl_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -2797,6 +2965,15 @@ com.google.protobuf.Value defaultValue) {
     }
     if (((bitField1_ & 0x00000100) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(51, clusterTimescaledbSecret_);
+    }
+    if (((bitField1_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(52, grpcEngineUrl_);
+    }
+    if (((bitField1_ & 0x00000400) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(53, kubeClusterMode_);
+    }
+    if (((bitField1_ & 0x00000800) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(54, dashboardUrl_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -3037,6 +3214,21 @@ com.google.protobuf.Value defaultValue) {
       if (!getClusterTimescaledbSecret()
           .equals(other.getClusterTimescaledbSecret())) return false;
     }
+    if (hasGrpcEngineUrl() != other.hasGrpcEngineUrl()) return false;
+    if (hasGrpcEngineUrl()) {
+      if (!getGrpcEngineUrl()
+          .equals(other.getGrpcEngineUrl())) return false;
+    }
+    if (hasKubeClusterMode() != other.hasKubeClusterMode()) return false;
+    if (hasKubeClusterMode()) {
+      if (!getKubeClusterMode()
+          .equals(other.getKubeClusterMode())) return false;
+    }
+    if (hasDashboardUrl() != other.hasDashboardUrl()) return false;
+    if (hasDashboardUrl()) {
+      if (!getDashboardUrl()
+          .equals(other.getDashboardUrl())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -3239,6 +3431,18 @@ com.google.protobuf.Value defaultValue) {
     if (hasClusterTimescaledbSecret()) {
       hash = (37 * hash) + CLUSTER_TIMESCALEDB_SECRET_FIELD_NUMBER;
       hash = (53 * hash) + getClusterTimescaledbSecret().hashCode();
+    }
+    if (hasGrpcEngineUrl()) {
+      hash = (37 * hash) + GRPC_ENGINE_URL_FIELD_NUMBER;
+      hash = (53 * hash) + getGrpcEngineUrl().hashCode();
+    }
+    if (hasKubeClusterMode()) {
+      hash = (37 * hash) + KUBE_CLUSTER_MODE_FIELD_NUMBER;
+      hash = (53 * hash) + getKubeClusterMode().hashCode();
+    }
+    if (hasDashboardUrl()) {
+      hash = (37 * hash) + DASHBOARD_URL_FIELD_NUMBER;
+      hash = (53 * hash) + getDashboardUrl().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -3473,6 +3677,9 @@ com.google.protobuf.Value defaultValue) {
         environmentBucketsBuilder_ = null;
       }
       clusterTimescaledbSecret_ = "";
+      grpcEngineUrl_ = "";
+      kubeClusterMode_ = "";
+      dashboardUrl_ = "";
       return this;
     }
 
@@ -3716,6 +3923,18 @@ com.google.protobuf.Value defaultValue) {
       if (((from_bitField1_ & 0x00040000) != 0)) {
         result.clusterTimescaledbSecret_ = clusterTimescaledbSecret_;
         to_bitField1_ |= 0x00000100;
+      }
+      if (((from_bitField1_ & 0x00080000) != 0)) {
+        result.grpcEngineUrl_ = grpcEngineUrl_;
+        to_bitField1_ |= 0x00000200;
+      }
+      if (((from_bitField1_ & 0x00100000) != 0)) {
+        result.kubeClusterMode_ = kubeClusterMode_;
+        to_bitField1_ |= 0x00000400;
+      }
+      if (((from_bitField1_ & 0x00200000) != 0)) {
+        result.dashboardUrl_ = dashboardUrl_;
+        to_bitField1_ |= 0x00000800;
       }
       result.bitField0_ |= to_bitField0_;
       result.bitField1_ |= to_bitField1_;
@@ -4000,6 +4219,21 @@ com.google.protobuf.Value defaultValue) {
       if (other.hasClusterTimescaledbSecret()) {
         clusterTimescaledbSecret_ = other.clusterTimescaledbSecret_;
         bitField1_ |= 0x00040000;
+        onChanged();
+      }
+      if (other.hasGrpcEngineUrl()) {
+        grpcEngineUrl_ = other.grpcEngineUrl_;
+        bitField1_ |= 0x00080000;
+        onChanged();
+      }
+      if (other.hasKubeClusterMode()) {
+        kubeClusterMode_ = other.kubeClusterMode_;
+        bitField1_ |= 0x00100000;
+        onChanged();
+      }
+      if (other.hasDashboardUrl()) {
+        dashboardUrl_ = other.dashboardUrl_;
+        bitField1_ |= 0x00200000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -4301,6 +4535,21 @@ com.google.protobuf.Value defaultValue) {
               bitField1_ |= 0x00040000;
               break;
             } // case 410
+            case 418: {
+              grpcEngineUrl_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00080000;
+              break;
+            } // case 418
+            case 426: {
+              kubeClusterMode_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00100000;
+              break;
+            } // case 426
+            case 434: {
+              dashboardUrl_ = input.readStringRequireUtf8();
+              bitField1_ |= 0x00200000;
+              break;
+            } // case 434
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -8582,6 +8831,273 @@ com.google.protobuf.Value defaultValue) {
       checkByteStringIsUtf8(value);
       clusterTimescaledbSecret_ = value;
       bitField1_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object grpcEngineUrl_ = "";
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @return Whether the grpcEngineUrl field is set.
+     */
+    public boolean hasGrpcEngineUrl() {
+      return ((bitField1_ & 0x00080000) != 0);
+    }
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @return The grpcEngineUrl.
+     */
+    public java.lang.String getGrpcEngineUrl() {
+      java.lang.Object ref = grpcEngineUrl_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        grpcEngineUrl_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @return The bytes for grpcEngineUrl.
+     */
+    public com.google.protobuf.ByteString
+        getGrpcEngineUrlBytes() {
+      java.lang.Object ref = grpcEngineUrl_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        grpcEngineUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @param value The grpcEngineUrl to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGrpcEngineUrl(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      grpcEngineUrl_ = value;
+      bitField1_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGrpcEngineUrl() {
+      grpcEngineUrl_ = getDefaultInstance().getGrpcEngineUrl();
+      bitField1_ = (bitField1_ & ~0x00080000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+     * @param value The bytes for grpcEngineUrl to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGrpcEngineUrlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      grpcEngineUrl_ = value;
+      bitField1_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object kubeClusterMode_ = "";
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @return Whether the kubeClusterMode field is set.
+     */
+    public boolean hasKubeClusterMode() {
+      return ((bitField1_ & 0x00100000) != 0);
+    }
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @return The kubeClusterMode.
+     */
+    public java.lang.String getKubeClusterMode() {
+      java.lang.Object ref = kubeClusterMode_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        kubeClusterMode_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @return The bytes for kubeClusterMode.
+     */
+    public com.google.protobuf.ByteString
+        getKubeClusterModeBytes() {
+      java.lang.Object ref = kubeClusterMode_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        kubeClusterMode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @param value The kubeClusterMode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKubeClusterMode(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      kubeClusterMode_ = value;
+      bitField1_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearKubeClusterMode() {
+      kubeClusterMode_ = getDefaultInstance().getKubeClusterMode();
+      bitField1_ = (bitField1_ & ~0x00100000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+     * @param value The bytes for kubeClusterMode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKubeClusterModeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      kubeClusterMode_ = value;
+      bitField1_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object dashboardUrl_ = "";
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @return Whether the dashboardUrl field is set.
+     */
+    public boolean hasDashboardUrl() {
+      return ((bitField1_ & 0x00200000) != 0);
+    }
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @return The dashboardUrl.
+     */
+    public java.lang.String getDashboardUrl() {
+      java.lang.Object ref = dashboardUrl_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dashboardUrl_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @return The bytes for dashboardUrl.
+     */
+    public com.google.protobuf.ByteString
+        getDashboardUrlBytes() {
+      java.lang.Object ref = dashboardUrl_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dashboardUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @param value The dashboardUrl to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDashboardUrl(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      dashboardUrl_ = value;
+      bitField1_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDashboardUrl() {
+      dashboardUrl_ = getDefaultInstance().getDashboardUrl();
+      bitField1_ = (bitField1_ & ~0x00200000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *string created_at: datetime=None,
+     *string updated_at: Optional[datetime]=None,
+     * </pre>
+     *
+     * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+     * @param value The bytes for dashboardUrl to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDashboardUrlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      dashboardUrl_ = value;
+      bitField1_ |= 0x00200000;
       onChanged();
       return this;
     }

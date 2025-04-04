@@ -38,7 +38,7 @@ public final class PermissionsProto {
     java.lang.String[] descriptorData = {
       "\n\037chalk/auth/v1/permissions.proto\022\rchalk" +
       ".auth.v1\032\035chalk/utils/v1/encoding.proto\032" +
-      " google/protobuf/descriptor.proto*\307\n\n\nPe" +
+      " google/protobuf/descriptor.proto*\366\n\n\nPe" +
       "rmission\022\032\n\026PERMISSION_UNSPECIFIED\020\000\022\'\n#" +
       "PERMISSION_INSECURE_UNAUTHENTICATED\020\001\022\034\n" +
       "\030PERMISSION_AUTHENTICATED\020\002\022\033\n\027PERMISSIO" +
@@ -59,27 +59,28 @@ public final class PermissionsProto {
       "_LIST\020\026\022\033\n\027PERMISSION_MIGRATE_READ\020\027\022\033\n\027" +
       "PERMISSION_MIGRATE_PLAN\020\030\022\036\n\032PERMISSION_" +
       "MIGRATE_EXECUTE\020\031\022\035\n\031PERMISSION_PROJECT_" +
-      "CREATE\020\032\022\032\n\026PERMISSION_CHALK_ADMIN\020\033\032\374\003\342" +
-      "\241\'\367\003\n\034\010\001\022\030insecure_unauthenticated\n\021\010\002\022\r" +
-      "authenticated\n\020\010\003\022\014query.online\n\021\010\004\022\rque" +
-      "ry.offline\n\025\010\005\022\021monitoring.create\n\023\010\006\022\017m" +
-      "onitoring.read\n\014\010\007\022\010team.add\n\017\010\010\022\013team.d" +
-      "elete\n\r\010\t\022\tteam.list\n\016\010\n\022\nteam.admin\n\017\010\013" +
-      "\022\013deploy.read\n\021\010\014\022\rdeploy.create\n\022\010\r\022\016de" +
-      "ploy.preview\n\023\010\016\022\017deploy.redeploy\n\r\010\017\022\tl" +
-      "ogs.list\n\r\010\020\022\tcron.read\n\017\010\021\022\013cron.create" +
-      "\n\021\010\022\022\rsecrets.write\n\023\010\023\022\017secrets.decrypt" +
-      "\n\020\010\024\022\014secrets.list\n\020\010\025\022\014tokens.write\n\017\010\026" +
-      "\022\013tokens.list\n\020\010\027\022\014migrate.read\n\020\010\030\022\014mig" +
-      "rate.plan\n\023\010\031\022\017migrate.execute\n\022\010\032\022\016proj" +
-      "ect.create\n\017\010\033\022\013chalk.admin:Z\n\npermissio" +
-      "n\022\036.google.protobuf.MethodOptions\030\320\017 \001(\016" +
-      "2\031.chalk.auth.v1.PermissionR\npermissionB" +
-      "\227\001\n\035ai.chalk.protos.chalk.auth.v1B\020Permi" +
-      "ssionsProtoP\001Z\016auth/v1;authv1\242\002\003CAX\252\002\rCh" +
-      "alk.Auth.V1\312\002\rChalk\\Auth\\V1\342\002\031Chalk\\Auth" +
-      "\\V1\\GPBMetadata\352\002\017Chalk::Auth::V1b\006proto" +
-      "3"
+      "CREATE\020\032\022\032\n\026PERMISSION_CHALK_ADMIN\020\033\022\033\n\027" +
+      "PERMISSION_BILLING_READ\020\034\032\216\004\342\241\'\211\004\n\034\010\001\022\030i" +
+      "nsecure_unauthenticated\n\021\010\002\022\rauthenticat" +
+      "ed\n\020\010\003\022\014query.online\n\021\010\004\022\rquery.offline\n" +
+      "\025\010\005\022\021monitoring.create\n\023\010\006\022\017monitoring.r" +
+      "ead\n\014\010\007\022\010team.add\n\017\010\010\022\013team.delete\n\r\010\t\022\t" +
+      "team.list\n\016\010\n\022\nteam.admin\n\017\010\013\022\013deploy.re" +
+      "ad\n\021\010\014\022\rdeploy.create\n\022\010\r\022\016deploy.previe" +
+      "w\n\023\010\016\022\017deploy.redeploy\n\r\010\017\022\tlogs.list\n\r\010" +
+      "\020\022\tcron.read\n\017\010\021\022\013cron.create\n\021\010\022\022\rsecre" +
+      "ts.write\n\023\010\023\022\017secrets.decrypt\n\020\010\024\022\014secre" +
+      "ts.list\n\020\010\025\022\014tokens.write\n\017\010\026\022\013tokens.li" +
+      "st\n\020\010\027\022\014migrate.read\n\020\010\030\022\014migrate.plan\n\023" +
+      "\010\031\022\017migrate.execute\n\022\010\032\022\016project.create\n" +
+      "\017\010\033\022\013chalk.admin\n\020\010\034\022\014billing.read:Z\n\npe" +
+      "rmission\022\036.google.protobuf.MethodOptions" +
+      "\030\320\017 \001(\0162\031.chalk.auth.v1.PermissionR\nperm" +
+      "issionB\227\001\n\035ai.chalk.protos.chalk.auth.v1" +
+      "B\020PermissionsProtoP\001Z\016auth/v1;authv1\242\002\003C" +
+      "AX\252\002\rChalk.Auth.V1\312\002\rChalk\\Auth\\V1\342\002\031Cha" +
+      "lk\\Auth\\V1\\GPBMetadata\352\002\017Chalk::Auth::V1" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
