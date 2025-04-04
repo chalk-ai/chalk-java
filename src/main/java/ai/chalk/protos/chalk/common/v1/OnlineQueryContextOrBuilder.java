@@ -15,7 +15,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=57
+   *     See chalk/common/v1/online_query.proto;l=65
    * @return The environment.
    */
   @java.lang.Deprecated java.lang.String getEnvironment();
@@ -26,7 +26,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=57
+   *     See chalk/common/v1/online_query.proto;l=65
    * @return The bytes for environment.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -89,7 +89,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return Whether the deploymentId field is set.
    */
   @java.lang.Deprecated boolean hasDeploymentId();
@@ -100,7 +100,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return The deploymentId.
    */
   @java.lang.Deprecated java.lang.String getDeploymentId();
@@ -111,7 +111,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return The bytes for deploymentId.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -124,7 +124,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return Whether the branchId field is set.
    */
   @java.lang.Deprecated boolean hasBranchId();
@@ -135,7 +135,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return The branchId.
    */
   @java.lang.Deprecated java.lang.String getBranchId();
@@ -146,7 +146,7 @@ public interface OnlineQueryContextOrBuilder extends
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return The bytes for branchId.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -305,4 +305,58 @@ com.google.protobuf.Value defaultValue);
    */
   ai.chalk.protos.chalk.common.v1.OutputExprOrBuilder getValueMetricsTagByFeaturesOrBuilder(
       int index);
+
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  int getQueryContextCount();
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  boolean containsQueryContext(
+      java.lang.String key);
+  /**
+   * Use {@link #getQueryContextMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getQueryContext();
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  java.util.Map<java.lang.String, com.google.protobuf.Value>
+  getQueryContextMap();
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  /* nullable */
+com.google.protobuf.Value getQueryContextOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue);
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  com.google.protobuf.Value getQueryContextOrThrow(
+      java.lang.String key);
 }

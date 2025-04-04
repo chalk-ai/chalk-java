@@ -40,6 +40,11 @@ public final class BackfillProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_aggregate_v1_AggregateBackfillJob_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CronAggregateBackfill_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -86,7 +91,7 @@ public final class BackfillProto {
       "aggregate.v1.AggregateBackfillR\010backfill" +
       "\022M\n\010estimate\030\002 \001(\01321.chalk.aggregate.v1." +
       "AggregateBackfillCostEstimateR\010estimate\"" +
-      "\224\003\n\024AggregateBackfillJob\022\016\n\002id\030\001 \001(\tR\002id" +
+      "\245\004\n\024AggregateBackfillJob\022\016\n\002id\030\001 \001(\tR\002id" +
       "\022%\n\016environment_id\030\002 \001(\tR\renvironmentId\022" +
       "\037\n\010resolver\030\003 \001(\tH\000R\010resolver\210\001\001\022\032\n\010feat" +
       "ures\030\004 \003(\tR\010features\022\036\n\010agent_id\030\005 \001(\tH\001" +
@@ -95,12 +100,25 @@ public final class BackfillProto {
       "gle.protobuf.TimestampR\tcreatedAt\0229\n\nupd" +
       "ated_at\030\010 \001(\0132\032.google.protobuf.Timestam" +
       "pR\tupdatedAt\022\034\n\tresolvers\030\t \003(\tR\tresolve" +
-      "rsB\013\n\t_resolverB\013\n\t_agent_idB\020\n\016_deploym" +
-      "ent_idB\267\001\n\"ai.chalk.protos.chalk.aggrega" +
-      "te.v1B\rBackfillProtoP\001Z\030aggregate/v1;agg" +
-      "regatev1\242\002\003CAX\252\002\022Chalk.Aggregate.V1\312\002\022Ch" +
-      "alk\\Aggregate\\V1\342\002\036Chalk\\Aggregate\\V1\\GP" +
-      "BMetadata\352\002\024Chalk::Aggregate::V1b\006proto3"
+      "rs\022@\n\032cron_aggregate_backfill_id\030\n \001(\tH\003" +
+      "R\027cronAggregateBackfillId\210\001\001\022 \n\tplan_has" +
+      "h\030\013 \001(\tH\004R\010planHash\210\001\001B\013\n\t_resolverB\013\n\t_" +
+      "agent_idB\020\n\016_deployment_idB\035\n\033_cron_aggr" +
+      "egate_backfill_idB\014\n\n_plan_hash\"\334\002\n\025Cron" +
+      "AggregateBackfill\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016env" +
+      "ironment_id\030\002 \001(\tR\renvironmentId\022#\n\rdepl" +
+      "oyment_id\030\003 \001(\tR\014deploymentId\022\032\n\010schedul" +
+      "e\030\004 \001(\tR\010schedule\022\033\n\tplan_hash\030\005 \001(\tR\010pl" +
+      "anHash\022\032\n\010features\030\010 \003(\tR\010features\022\034\n\tre" +
+      "solvers\030\t \003(\tR\tresolvers\0229\n\ncreated_at\030\006" +
+      " \001(\0132\032.google.protobuf.TimestampR\tcreate" +
+      "dAt\0229\n\nupdated_at\030\007 \001(\0132\032.google.protobu" +
+      "f.TimestampR\tupdatedAtB\267\001\n\"ai.chalk.prot" +
+      "os.chalk.aggregate.v1B\rBackfillProtoP\001Z\030" +
+      "aggregate/v1;aggregatev1\242\002\003CAX\252\002\022Chalk.A" +
+      "ggregate.V1\312\002\022Chalk\\Aggregate\\V1\342\002\036Chalk" +
+      "\\Aggregate\\V1\\GPBMetadata\352\002\024Chalk::Aggre" +
+      "gate::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -138,7 +156,13 @@ public final class BackfillProto {
     internal_static_chalk_aggregate_v1_AggregateBackfillJob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_AggregateBackfillJob_descriptor,
-        new java.lang.String[] { "Id", "EnvironmentId", "Resolver", "Features", "AgentId", "DeploymentId", "CreatedAt", "UpdatedAt", "Resolvers", });
+        new java.lang.String[] { "Id", "EnvironmentId", "Resolver", "Features", "AgentId", "DeploymentId", "CreatedAt", "UpdatedAt", "Resolvers", "CronAggregateBackfillId", "PlanHash", });
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor,
+        new java.lang.String[] { "Id", "EnvironmentId", "DeploymentId", "Schedule", "PlanHash", "Features", "Resolvers", "CreatedAt", "UpdatedAt", });
     ai.chalk.protos.chalk.aggregate.v1.TimeseriesProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();

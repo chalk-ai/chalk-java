@@ -24,4 +24,29 @@ public interface AWSCloudWatchConfigOrBuilder extends
    */
   com.google.protobuf.ByteString
       getLogGroupPathBytes();
+
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @return A list containing the logGroupPaths.
+   */
+  java.util.List<java.lang.String>
+      getLogGroupPathsList();
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @return The count of logGroupPaths.
+   */
+  int getLogGroupPathsCount();
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @param index The index of the element to return.
+   * @return The logGroupPaths at the given index.
+   */
+  java.lang.String getLogGroupPaths(int index);
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the logGroupPaths at the given index.
+   */
+  com.google.protobuf.ByteString
+      getLogGroupPathsBytes(int index);
 }

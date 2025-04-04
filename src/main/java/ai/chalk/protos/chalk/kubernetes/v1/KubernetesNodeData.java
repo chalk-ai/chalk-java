@@ -73,6 +73,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeData.class, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeData.Builder.class);
   }
 
+  private int bitField0_;
   public static final int TEAM_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object team_ = "";
@@ -1001,6 +1002,58 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int SPEC_FIELD_NUMBER = 24;
+  private ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec spec_;
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   * @return Whether the spec field is set.
+   */
+  @java.lang.Override
+  public boolean hasSpec() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   * @return The spec.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec getSpec() {
+    return spec_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.getDefaultInstance() : spec_;
+  }
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder getSpecOrBuilder() {
+    return spec_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.getDefaultInstance() : spec_;
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 25;
+  private ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus status_;
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   * @return Whether the status field is set.
+   */
+  @java.lang.Override
+  public boolean hasStatus() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   * @return The status.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus getStatus() {
+    return status_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.getDefaultInstance() : status_;
+  }
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder getStatusOrBuilder() {
+    return status_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.getDefaultInstance() : status_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1086,6 +1139,12 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 23, allocatableMemory_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(24, getSpec());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(25, getStatus());
     }
     getUnknownFields().writeTo(output);
   }
@@ -1180,6 +1239,14 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(allocatableMemory_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, allocatableMemory_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(24, getSpec());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(25, getStatus());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1239,6 +1306,16 @@ java.lang.String defaultValue) {
         .equals(other.getAllocatableCpu())) return false;
     if (!getAllocatableMemory()
         .equals(other.getAllocatableMemory())) return false;
+    if (hasSpec() != other.hasSpec()) return false;
+    if (hasSpec()) {
+      if (!getSpec()
+          .equals(other.getSpec())) return false;
+    }
+    if (hasStatus() != other.hasStatus()) return false;
+    if (hasStatus()) {
+      if (!getStatus()
+          .equals(other.getStatus())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1302,6 +1379,14 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getAllocatableCpu().hashCode();
     hash = (37 * hash) + ALLOCATABLE_MEMORY_FIELD_NUMBER;
     hash = (53 * hash) + getAllocatableMemory().hashCode();
+    if (hasSpec()) {
+      hash = (37 * hash) + SPEC_FIELD_NUMBER;
+      hash = (53 * hash) + getSpec().hashCode();
+    }
+    if (hasStatus()) {
+      hash = (37 * hash) + STATUS_FIELD_NUMBER;
+      hash = (53 * hash) + getStatus().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1451,13 +1536,20 @@ java.lang.String defaultValue) {
 
     // Construct using ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeData.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getSpecFieldBuilder();
+        getStatusFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -1485,6 +1577,16 @@ java.lang.String defaultValue) {
       totalMemory_ = "";
       allocatableCpu_ = "";
       allocatableMemory_ = "";
+      spec_ = null;
+      if (specBuilder_ != null) {
+        specBuilder_.dispose();
+        specBuilder_ = null;
+      }
+      status_ = null;
+      if (statusBuilder_ != null) {
+        statusBuilder_.dispose();
+        statusBuilder_ = null;
+      }
       return this;
     }
 
@@ -1586,6 +1688,20 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00200000) != 0)) {
         result.allocatableMemory_ = allocatableMemory_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00400000) != 0)) {
+        result.spec_ = specBuilder_ == null
+            ? spec_
+            : specBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00800000) != 0)) {
+        result.status_ = statusBuilder_ == null
+            ? status_
+            : statusBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -1729,6 +1845,12 @@ java.lang.String defaultValue) {
         allocatableMemory_ = other.allocatableMemory_;
         bitField0_ |= 0x00200000;
         onChanged();
+      }
+      if (other.hasSpec()) {
+        mergeSpec(other.getSpec());
+      }
+      if (other.hasStatus()) {
+        mergeStatus(other.getStatus());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1874,6 +1996,20 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00200000;
               break;
             } // case 186
+            case 194: {
+              input.readMessage(
+                  getSpecFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00400000;
+              break;
+            } // case 194
+            case 202: {
+              input.readMessage(
+                  getStatusFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00800000;
+              break;
+            } // case 202
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -3661,6 +3797,248 @@ java.lang.String defaultValue) {
       bitField0_ |= 0x00200000;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec spec_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder> specBuilder_;
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     * @return Whether the spec field is set.
+     */
+    public boolean hasSpec() {
+      return ((bitField0_ & 0x00400000) != 0);
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     * @return The spec.
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec getSpec() {
+      if (specBuilder_ == null) {
+        return spec_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.getDefaultInstance() : spec_;
+      } else {
+        return specBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public Builder setSpec(ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec value) {
+      if (specBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        spec_ = value;
+      } else {
+        specBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public Builder setSpec(
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.Builder builderForValue) {
+      if (specBuilder_ == null) {
+        spec_ = builderForValue.build();
+      } else {
+        specBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public Builder mergeSpec(ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec value) {
+      if (specBuilder_ == null) {
+        if (((bitField0_ & 0x00400000) != 0) &&
+          spec_ != null &&
+          spec_ != ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.getDefaultInstance()) {
+          getSpecBuilder().mergeFrom(value);
+        } else {
+          spec_ = value;
+        }
+      } else {
+        specBuilder_.mergeFrom(value);
+      }
+      if (spec_ != null) {
+        bitField0_ |= 0x00400000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public Builder clearSpec() {
+      bitField0_ = (bitField0_ & ~0x00400000);
+      spec_ = null;
+      if (specBuilder_ != null) {
+        specBuilder_.dispose();
+        specBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.Builder getSpecBuilder() {
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return getSpecFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder getSpecOrBuilder() {
+      if (specBuilder_ != null) {
+        return specBuilder_.getMessageOrBuilder();
+      } else {
+        return spec_ == null ?
+            ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.getDefaultInstance() : spec_;
+      }
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder> 
+        getSpecFieldBuilder() {
+      if (specBuilder_ == null) {
+        specBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder>(
+                getSpec(),
+                getParentForChildren(),
+                isClean());
+        spec_ = null;
+      }
+      return specBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus status_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder> statusBuilder_;
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     * @return Whether the status field is set.
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00800000) != 0);
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     * @return The status.
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus getStatus() {
+      if (statusBuilder_ == null) {
+        return status_ == null ? ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.getDefaultInstance() : status_;
+      } else {
+        return statusBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public Builder setStatus(ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus value) {
+      if (statusBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        status_ = value;
+      } else {
+        statusBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public Builder setStatus(
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.Builder builderForValue) {
+      if (statusBuilder_ == null) {
+        status_ = builderForValue.build();
+      } else {
+        statusBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public Builder mergeStatus(ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus value) {
+      if (statusBuilder_ == null) {
+        if (((bitField0_ & 0x00800000) != 0) &&
+          status_ != null &&
+          status_ != ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.getDefaultInstance()) {
+          getStatusBuilder().mergeFrom(value);
+        } else {
+          status_ = value;
+        }
+      } else {
+        statusBuilder_.mergeFrom(value);
+      }
+      if (status_ != null) {
+        bitField0_ |= 0x00800000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public Builder clearStatus() {
+      bitField0_ = (bitField0_ & ~0x00800000);
+      status_ = null;
+      if (statusBuilder_ != null) {
+        statusBuilder_.dispose();
+        statusBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.Builder getStatusBuilder() {
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return getStatusFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    public ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder getStatusOrBuilder() {
+      if (statusBuilder_ != null) {
+        return statusBuilder_.getMessageOrBuilder();
+      } else {
+        return status_ == null ?
+            ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.getDefaultInstance() : status_;
+      }
+    }
+    /**
+     * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder> 
+        getStatusFieldBuilder() {
+      if (statusBuilder_ == null) {
+        statusBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus.Builder, ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder>(
+                getStatus(),
+                getParentForChildren(),
+                isClean());
+        status_ = null;
+      }
+      return statusBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

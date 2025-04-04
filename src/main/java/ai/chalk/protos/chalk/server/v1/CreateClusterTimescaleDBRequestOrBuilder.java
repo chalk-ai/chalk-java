@@ -15,7 +15,7 @@ public interface CreateClusterTimescaleDBRequestOrBuilder extends
    *
    * <code>repeated string environment_id = 1 [json_name = "environmentId", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.environment_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=141
+   *     See chalk/server/v1/builder.proto;l=166
    * @return A list containing the environmentId.
    */
   @java.lang.Deprecated java.util.List<java.lang.String>
@@ -27,7 +27,7 @@ public interface CreateClusterTimescaleDBRequestOrBuilder extends
    *
    * <code>repeated string environment_id = 1 [json_name = "environmentId", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.environment_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=141
+   *     See chalk/server/v1/builder.proto;l=166
    * @return The count of environmentId.
    */
   @java.lang.Deprecated int getEnvironmentIdCount();
@@ -38,7 +38,7 @@ public interface CreateClusterTimescaleDBRequestOrBuilder extends
    *
    * <code>repeated string environment_id = 1 [json_name = "environmentId", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.environment_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=141
+   *     See chalk/server/v1/builder.proto;l=166
    * @param index The index of the element to return.
    * @return The environmentId at the given index.
    */
@@ -50,7 +50,7 @@ public interface CreateClusterTimescaleDBRequestOrBuilder extends
    *
    * <code>repeated string environment_id = 1 [json_name = "environmentId", deprecated = true];</code>
    * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.environment_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=141
+   *     See chalk/server/v1/builder.proto;l=166
    * @param index The index of the value to return.
    * @return The bytes of the environmentId at the given index.
    */
@@ -83,14 +83,33 @@ public interface CreateClusterTimescaleDBRequestOrBuilder extends
       getEnvironmentIdsBytes(int index);
 
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=168
    * @return The specsString.
    */
-  java.lang.String getSpecsString();
+  @java.lang.Deprecated java.lang.String getSpecsString();
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterTimescaleDBRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=168
    * @return The bytes for specsString.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getSpecsStringBytes();
+
+  /**
+   * <code>.chalk.server.v1.ClusterTimescaleSpecs specs = 4 [json_name = "specs"];</code>
+   * @return Whether the specs field is set.
+   */
+  boolean hasSpecs();
+  /**
+   * <code>.chalk.server.v1.ClusterTimescaleSpecs specs = 4 [json_name = "specs"];</code>
+   * @return The specs.
+   */
+  ai.chalk.protos.chalk.server.v1.ClusterTimescaleSpecs getSpecs();
+  /**
+   * <code>.chalk.server.v1.ClusterTimescaleSpecs specs = 4 [json_name = "specs"];</code>
+   */
+  ai.chalk.protos.chalk.server.v1.ClusterTimescaleSpecsOrBuilder getSpecsOrBuilder();
 }

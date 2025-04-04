@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private DeployBranchResponse() {
     deploymentId_ = "";
+    deploymentErrors_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -40,6 +41,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.DeployBranchResponse.class, ai.chalk.protos.chalk.server.v1.DeployBranchResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int DEPLOYMENT_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deploymentId_ = "";
@@ -79,6 +81,103 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int GRAPH_FIELD_NUMBER = 2;
+  private ai.chalk.protos.chalk.graph.v1.Graph graph_;
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+   *     See chalk/server/v1/deploy.proto;l=22
+   * @return Whether the graph field is set.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated public boolean hasGraph() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+   *     See chalk/server/v1/deploy.proto;l=22
+   * @return The graph.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
+    return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
+  }
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   */
+  @java.lang.Override
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
+    return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
+  }
+
+  public static final int DEPLOYMENT_ERRORS_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError> deploymentErrors_;
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError> getDeploymentErrorsList() {
+    return deploymentErrors_;
+  }
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder> 
+      getDeploymentErrorsOrBuilderList() {
+    return deploymentErrors_;
+  }
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  @java.lang.Override
+  public int getDeploymentErrorsCount() {
+    return deploymentErrors_.size();
+  }
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.ChalkError getDeploymentErrors(int index) {
+    return deploymentErrors_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder getDeploymentErrorsOrBuilder(
+      int index) {
+    return deploymentErrors_.get(index);
+  }
+
+  public static final int EXPORT_FIELD_NUMBER = 4;
+  private ai.chalk.protos.chalk.artifacts.v1.Export export_;
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return Whether the export field is set.
+   */
+  @java.lang.Override
+  public boolean hasExport() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return The export.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.artifacts.v1.Export getExport() {
+    return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+  }
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder() {
+    return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -96,6 +195,15 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deploymentId_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, deploymentId_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(2, getGraph());
+    }
+    for (int i = 0; i < deploymentErrors_.size(); i++) {
+      output.writeMessage(3, deploymentErrors_.get(i));
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(4, getExport());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -107,6 +215,18 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deploymentId_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, deploymentId_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getGraph());
+    }
+    for (int i = 0; i < deploymentErrors_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, deploymentErrors_.get(i));
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getExport());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -125,6 +245,18 @@ private static final long serialVersionUID = 0L;
 
     if (!getDeploymentId()
         .equals(other.getDeploymentId())) return false;
+    if (hasGraph() != other.hasGraph()) return false;
+    if (hasGraph()) {
+      if (!getGraph()
+          .equals(other.getGraph())) return false;
+    }
+    if (!getDeploymentErrorsList()
+        .equals(other.getDeploymentErrorsList())) return false;
+    if (hasExport() != other.hasExport()) return false;
+    if (hasExport()) {
+      if (!getExport()
+          .equals(other.getExport())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -138,6 +270,18 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + DEPLOYMENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeploymentId().hashCode();
+    if (hasGraph()) {
+      hash = (37 * hash) + GRAPH_FIELD_NUMBER;
+      hash = (53 * hash) + getGraph().hashCode();
+    }
+    if (getDeploymentErrorsCount() > 0) {
+      hash = (37 * hash) + DEPLOYMENT_ERRORS_FIELD_NUMBER;
+      hash = (53 * hash) + getDeploymentErrorsList().hashCode();
+    }
+    if (hasExport()) {
+      hash = (37 * hash) + EXPORT_FIELD_NUMBER;
+      hash = (53 * hash) + getExport().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -257,19 +401,44 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.DeployBranchResponse.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getGraphFieldBuilder();
+        getDeploymentErrorsFieldBuilder();
+        getExportFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
       deploymentId_ = "";
+      graph_ = null;
+      if (graphBuilder_ != null) {
+        graphBuilder_.dispose();
+        graphBuilder_ = null;
+      }
+      if (deploymentErrorsBuilder_ == null) {
+        deploymentErrors_ = java.util.Collections.emptyList();
+      } else {
+        deploymentErrors_ = null;
+        deploymentErrorsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000004);
+      export_ = null;
+      if (exportBuilder_ != null) {
+        exportBuilder_.dispose();
+        exportBuilder_ = null;
+      }
       return this;
     }
 
@@ -296,9 +465,22 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.server.v1.DeployBranchResponse buildPartial() {
       ai.chalk.protos.chalk.server.v1.DeployBranchResponse result = new ai.chalk.protos.chalk.server.v1.DeployBranchResponse(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(ai.chalk.protos.chalk.server.v1.DeployBranchResponse result) {
+      if (deploymentErrorsBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0)) {
+          deploymentErrors_ = java.util.Collections.unmodifiableList(deploymentErrors_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.deploymentErrors_ = deploymentErrors_;
+      } else {
+        result.deploymentErrors_ = deploymentErrorsBuilder_.build();
+      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.server.v1.DeployBranchResponse result) {
@@ -306,6 +488,20 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.deploymentId_ = deploymentId_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.graph_ = graphBuilder_ == null
+            ? graph_
+            : graphBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.export_ = exportBuilder_ == null
+            ? export_
+            : exportBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -357,6 +553,38 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (other.hasGraph()) {
+        mergeGraph(other.getGraph());
+      }
+      if (deploymentErrorsBuilder_ == null) {
+        if (!other.deploymentErrors_.isEmpty()) {
+          if (deploymentErrors_.isEmpty()) {
+            deploymentErrors_ = other.deploymentErrors_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureDeploymentErrorsIsMutable();
+            deploymentErrors_.addAll(other.deploymentErrors_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.deploymentErrors_.isEmpty()) {
+          if (deploymentErrorsBuilder_.isEmpty()) {
+            deploymentErrorsBuilder_.dispose();
+            deploymentErrorsBuilder_ = null;
+            deploymentErrors_ = other.deploymentErrors_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            deploymentErrorsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getDeploymentErrorsFieldBuilder() : null;
+          } else {
+            deploymentErrorsBuilder_.addAllMessages(other.deploymentErrors_);
+          }
+        }
+      }
+      if (other.hasExport()) {
+        mergeExport(other.getExport());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -388,6 +616,33 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              input.readMessage(
+                  getGraphFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
+            case 26: {
+              ai.chalk.protos.chalk.common.v1.ChalkError m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.common.v1.ChalkError.parser(),
+                      extensionRegistry);
+              if (deploymentErrorsBuilder_ == null) {
+                ensureDeploymentErrorsIsMutable();
+                deploymentErrors_.add(m);
+              } else {
+                deploymentErrorsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 26
+            case 34: {
+              input.readMessage(
+                  getExportFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -475,6 +730,492 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.graph.v1.Graph graph_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.Graph, ai.chalk.protos.chalk.graph.v1.Graph.Builder, ai.chalk.protos.chalk.graph.v1.GraphOrBuilder> graphBuilder_;
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+     *     See chalk/server/v1/deploy.proto;l=22
+     * @return Whether the graph field is set.
+     */
+    @java.lang.Deprecated public boolean hasGraph() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+     *     See chalk/server/v1/deploy.proto;l=22
+     * @return The graph.
+     */
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph getGraph() {
+      if (graphBuilder_ == null) {
+        return graph_ == null ? ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
+      } else {
+        return graphBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public Builder setGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
+      if (graphBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        graph_ = value;
+      } else {
+        graphBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public Builder setGraph(
+        ai.chalk.protos.chalk.graph.v1.Graph.Builder builderForValue) {
+      if (graphBuilder_ == null) {
+        graph_ = builderForValue.build();
+      } else {
+        graphBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public Builder mergeGraph(ai.chalk.protos.chalk.graph.v1.Graph value) {
+      if (graphBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0) &&
+          graph_ != null &&
+          graph_ != ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance()) {
+          getGraphBuilder().mergeFrom(value);
+        } else {
+          graph_ = value;
+        }
+      } else {
+        graphBuilder_.mergeFrom(value);
+      }
+      if (graph_ != null) {
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public Builder clearGraph() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      graph_ = null;
+      if (graphBuilder_ != null) {
+        graphBuilder_.dispose();
+        graphBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.Graph.Builder getGraphBuilder() {
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return getGraphFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder() {
+      if (graphBuilder_ != null) {
+        return graphBuilder_.getMessageOrBuilder();
+      } else {
+        return graph_ == null ?
+            ai.chalk.protos.chalk.graph.v1.Graph.getDefaultInstance() : graph_;
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.Graph, ai.chalk.protos.chalk.graph.v1.Graph.Builder, ai.chalk.protos.chalk.graph.v1.GraphOrBuilder> 
+        getGraphFieldBuilder() {
+      if (graphBuilder_ == null) {
+        graphBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.Graph, ai.chalk.protos.chalk.graph.v1.Graph.Builder, ai.chalk.protos.chalk.graph.v1.GraphOrBuilder>(
+                getGraph(),
+                getParentForChildren(),
+                isClean());
+        graph_ = null;
+      }
+      return graphBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError> deploymentErrors_ =
+      java.util.Collections.emptyList();
+    private void ensureDeploymentErrorsIsMutable() {
+      if (!((bitField0_ & 0x00000004) != 0)) {
+        deploymentErrors_ = new java.util.ArrayList<ai.chalk.protos.chalk.common.v1.ChalkError>(deploymentErrors_);
+        bitField0_ |= 0x00000004;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.ChalkError, ai.chalk.protos.chalk.common.v1.ChalkError.Builder, ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder> deploymentErrorsBuilder_;
+
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError> getDeploymentErrorsList() {
+      if (deploymentErrorsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(deploymentErrors_);
+      } else {
+        return deploymentErrorsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public int getDeploymentErrorsCount() {
+      if (deploymentErrorsBuilder_ == null) {
+        return deploymentErrors_.size();
+      } else {
+        return deploymentErrorsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ChalkError getDeploymentErrors(int index) {
+      if (deploymentErrorsBuilder_ == null) {
+        return deploymentErrors_.get(index);
+      } else {
+        return deploymentErrorsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder setDeploymentErrors(
+        int index, ai.chalk.protos.chalk.common.v1.ChalkError value) {
+      if (deploymentErrorsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.set(index, value);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder setDeploymentErrors(
+        int index, ai.chalk.protos.chalk.common.v1.ChalkError.Builder builderForValue) {
+      if (deploymentErrorsBuilder_ == null) {
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder addDeploymentErrors(ai.chalk.protos.chalk.common.v1.ChalkError value) {
+      if (deploymentErrorsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.add(value);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder addDeploymentErrors(
+        int index, ai.chalk.protos.chalk.common.v1.ChalkError value) {
+      if (deploymentErrorsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.add(index, value);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder addDeploymentErrors(
+        ai.chalk.protos.chalk.common.v1.ChalkError.Builder builderForValue) {
+      if (deploymentErrorsBuilder_ == null) {
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.add(builderForValue.build());
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder addDeploymentErrors(
+        int index, ai.chalk.protos.chalk.common.v1.ChalkError.Builder builderForValue) {
+      if (deploymentErrorsBuilder_ == null) {
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder addAllDeploymentErrors(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.common.v1.ChalkError> values) {
+      if (deploymentErrorsBuilder_ == null) {
+        ensureDeploymentErrorsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, deploymentErrors_);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder clearDeploymentErrors() {
+      if (deploymentErrorsBuilder_ == null) {
+        deploymentErrors_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public Builder removeDeploymentErrors(int index) {
+      if (deploymentErrorsBuilder_ == null) {
+        ensureDeploymentErrorsIsMutable();
+        deploymentErrors_.remove(index);
+        onChanged();
+      } else {
+        deploymentErrorsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ChalkError.Builder getDeploymentErrorsBuilder(
+        int index) {
+      return getDeploymentErrorsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder getDeploymentErrorsOrBuilder(
+        int index) {
+      if (deploymentErrorsBuilder_ == null) {
+        return deploymentErrors_.get(index);  } else {
+        return deploymentErrorsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder> 
+         getDeploymentErrorsOrBuilderList() {
+      if (deploymentErrorsBuilder_ != null) {
+        return deploymentErrorsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(deploymentErrors_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ChalkError.Builder addDeploymentErrorsBuilder() {
+      return getDeploymentErrorsFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.common.v1.ChalkError.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.ChalkError.Builder addDeploymentErrorsBuilder(
+        int index) {
+      return getDeploymentErrorsFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.common.v1.ChalkError.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError.Builder> 
+         getDeploymentErrorsBuilderList() {
+      return getDeploymentErrorsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.ChalkError, ai.chalk.protos.chalk.common.v1.ChalkError.Builder, ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder> 
+        getDeploymentErrorsFieldBuilder() {
+      if (deploymentErrorsBuilder_ == null) {
+        deploymentErrorsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.ChalkError, ai.chalk.protos.chalk.common.v1.ChalkError.Builder, ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder>(
+                deploymentErrors_,
+                ((bitField0_ & 0x00000004) != 0),
+                getParentForChildren(),
+                isClean());
+        deploymentErrors_ = null;
+      }
+      return deploymentErrorsBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.artifacts.v1.Export export_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder> exportBuilder_;
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     * @return Whether the export field is set.
+     */
+    public boolean hasExport() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     * @return The export.
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.Export getExport() {
+      if (exportBuilder_ == null) {
+        return export_ == null ? ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+      } else {
+        return exportBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder setExport(ai.chalk.protos.chalk.artifacts.v1.Export value) {
+      if (exportBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        export_ = value;
+      } else {
+        exportBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder setExport(
+        ai.chalk.protos.chalk.artifacts.v1.Export.Builder builderForValue) {
+      if (exportBuilder_ == null) {
+        export_ = builderForValue.build();
+      } else {
+        exportBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder mergeExport(ai.chalk.protos.chalk.artifacts.v1.Export value) {
+      if (exportBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          export_ != null &&
+          export_ != ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance()) {
+          getExportBuilder().mergeFrom(value);
+        } else {
+          export_ = value;
+        }
+      } else {
+        exportBuilder_.mergeFrom(value);
+      }
+      if (export_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public Builder clearExport() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      export_ = null;
+      if (exportBuilder_ != null) {
+        exportBuilder_.dispose();
+        exportBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.Export.Builder getExportBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getExportFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    public ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder() {
+      if (exportBuilder_ != null) {
+        return exportBuilder_.getMessageOrBuilder();
+      } else {
+        return export_ == null ?
+            ai.chalk.protos.chalk.artifacts.v1.Export.getDefaultInstance() : export_;
+      }
+    }
+    /**
+     * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder> 
+        getExportFieldBuilder() {
+      if (exportBuilder_ == null) {
+        exportBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.artifacts.v1.Export, ai.chalk.protos.chalk.artifacts.v1.Export.Builder, ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder>(
+                getExport(),
+                getParentForChildren(),
+                isClean());
+        export_ = null;
+      }
+      return exportBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

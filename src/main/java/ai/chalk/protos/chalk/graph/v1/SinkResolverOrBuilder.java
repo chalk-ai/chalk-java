@@ -92,34 +92,96 @@ public interface SinkResolverOrBuilder extends
   boolean getUpsert();
 
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=299
    * @return Whether the streamSource field is set.
    */
-  boolean hasStreamSource();
+  @java.lang.Deprecated boolean hasStreamSource();
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=299
    * @return The streamSource.
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource();
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder();
 
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=301
    * @return Whether the databaseSource field is set.
    */
-  boolean hasDatabaseSource();
+  @java.lang.Deprecated boolean hasDatabaseSource();
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=301
    * @return The databaseSource.
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource();
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder();
+
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   * @return Whether the streamSourceV2 field is set.
+   */
+  boolean hasStreamSourceV2();
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   * @return The streamSourceV2.
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSourceReference getStreamSourceV2();
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder getStreamSourceV2OrBuilder();
+
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   * @return Whether the databaseSourceV2 field is set.
+   */
+  boolean hasDatabaseSourceV2();
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   * @return The databaseSourceV2.
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDatabaseSourceV2();
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDatabaseSourceV2OrBuilder();
 
   /**
    * <code>optional string machine_type = 9 [json_name = "machineType"];</code>

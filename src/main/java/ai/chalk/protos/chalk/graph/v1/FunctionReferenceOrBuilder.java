@@ -66,4 +66,28 @@ public interface FunctionReferenceOrBuilder extends
    * @return The sourceLine.
    */
   int getSourceLine();
+
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal> 
+      getCapturedGlobalsList();
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobal getCapturedGlobals(int index);
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  int getCapturedGlobalsCount();
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder> 
+      getCapturedGlobalsOrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v1.FunctionReferenceCapturedGlobal captured_globals = 6 [json_name = "capturedGlobals"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.FunctionReferenceCapturedGlobalOrBuilder getCapturedGlobalsOrBuilder(
+      int index);
 }

@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private ActivateDeploymentRequest() {
     existingDeploymentId_ = "";
+    targets_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -79,6 +80,47 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int TARGETS_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> targets_;
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> getTargetsList() {
+    return targets_;
+  }
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder> 
+      getTargetsOrBuilderList() {
+    return targets_;
+  }
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  @java.lang.Override
+  public int getTargetsCount() {
+    return targets_.size();
+  }
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget getTargets(int index) {
+    return targets_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder getTargetsOrBuilder(
+      int index) {
+    return targets_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -96,6 +138,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(existingDeploymentId_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, existingDeploymentId_);
     }
+    for (int i = 0; i < targets_.size(); i++) {
+      output.writeMessage(2, targets_.get(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -107,6 +152,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(existingDeploymentId_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, existingDeploymentId_);
+    }
+    for (int i = 0; i < targets_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, targets_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -125,6 +174,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getExistingDeploymentId()
         .equals(other.getExistingDeploymentId())) return false;
+    if (!getTargetsList()
+        .equals(other.getTargetsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -138,6 +189,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + EXISTING_DEPLOYMENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getExistingDeploymentId().hashCode();
+    if (getTargetsCount() > 0) {
+      hash = (37 * hash) + TARGETS_FIELD_NUMBER;
+      hash = (53 * hash) + getTargetsList().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -270,6 +325,13 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       existingDeploymentId_ = "";
+      if (targetsBuilder_ == null) {
+        targets_ = java.util.Collections.emptyList();
+      } else {
+        targets_ = null;
+        targetsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -296,9 +358,22 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest buildPartial() {
       ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest result = new ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest result) {
+      if (targetsBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0)) {
+          targets_ = java.util.Collections.unmodifiableList(targets_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.targets_ = targets_;
+      } else {
+        result.targets_ = targetsBuilder_.build();
+      }
     }
 
     private void buildPartial0(ai.chalk.protos.chalk.server.v1.ActivateDeploymentRequest result) {
@@ -357,6 +432,32 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (targetsBuilder_ == null) {
+        if (!other.targets_.isEmpty()) {
+          if (targets_.isEmpty()) {
+            targets_ = other.targets_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureTargetsIsMutable();
+            targets_.addAll(other.targets_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.targets_.isEmpty()) {
+          if (targetsBuilder_.isEmpty()) {
+            targetsBuilder_.dispose();
+            targetsBuilder_ = null;
+            targets_ = other.targets_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            targetsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getTargetsFieldBuilder() : null;
+          } else {
+            targetsBuilder_.addAllMessages(other.targets_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -388,6 +489,19 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.parser(),
+                      extensionRegistry);
+              if (targetsBuilder_ == null) {
+                ensureTargetsIsMutable();
+                targets_.add(m);
+              } else {
+                targetsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -475,6 +589,246 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> targets_ =
+      java.util.Collections.emptyList();
+    private void ensureTargetsIsMutable() {
+      if (!((bitField0_ & 0x00000002) != 0)) {
+        targets_ = new java.util.ArrayList<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget>(targets_);
+        bitField0_ |= 0x00000002;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder> targetsBuilder_;
+
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> getTargetsList() {
+      if (targetsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(targets_);
+      } else {
+        return targetsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public int getTargetsCount() {
+      if (targetsBuilder_ == null) {
+        return targets_.size();
+      } else {
+        return targetsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget getTargets(int index) {
+      if (targetsBuilder_ == null) {
+        return targets_.get(index);
+      } else {
+        return targetsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder setTargets(
+        int index, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget value) {
+      if (targetsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureTargetsIsMutable();
+        targets_.set(index, value);
+        onChanged();
+      } else {
+        targetsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder setTargets(
+        int index, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder builderForValue) {
+      if (targetsBuilder_ == null) {
+        ensureTargetsIsMutable();
+        targets_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        targetsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder addTargets(ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget value) {
+      if (targetsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureTargetsIsMutable();
+        targets_.add(value);
+        onChanged();
+      } else {
+        targetsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder addTargets(
+        int index, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget value) {
+      if (targetsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureTargetsIsMutable();
+        targets_.add(index, value);
+        onChanged();
+      } else {
+        targetsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder addTargets(
+        ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder builderForValue) {
+      if (targetsBuilder_ == null) {
+        ensureTargetsIsMutable();
+        targets_.add(builderForValue.build());
+        onChanged();
+      } else {
+        targetsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder addTargets(
+        int index, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder builderForValue) {
+      if (targetsBuilder_ == null) {
+        ensureTargetsIsMutable();
+        targets_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        targetsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder addAllTargets(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget> values) {
+      if (targetsBuilder_ == null) {
+        ensureTargetsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, targets_);
+        onChanged();
+      } else {
+        targetsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder clearTargets() {
+      if (targetsBuilder_ == null) {
+        targets_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+      } else {
+        targetsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public Builder removeTargets(int index) {
+      if (targetsBuilder_ == null) {
+        ensureTargetsIsMutable();
+        targets_.remove(index);
+        onChanged();
+      } else {
+        targetsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder getTargetsBuilder(
+        int index) {
+      return getTargetsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder getTargetsOrBuilder(
+        int index) {
+      if (targetsBuilder_ == null) {
+        return targets_.get(index);  } else {
+        return targetsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder> 
+         getTargetsOrBuilderList() {
+      if (targetsBuilder_ != null) {
+        return targetsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(targets_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder addTargetsBuilder() {
+      return getTargetsFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder addTargetsBuilder(
+        int index) {
+      return getTargetsFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.server.v1.ActivateDeploymentTarget targets = 2 [json_name = "targets"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder> 
+         getTargetsBuilderList() {
+      return getTargetsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder> 
+        getTargetsFieldBuilder() {
+      if (targetsBuilder_ == null) {
+        targetsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTarget.Builder, ai.chalk.protos.chalk.server.v1.ActivateDeploymentTargetOrBuilder>(
+                targets_,
+                ((bitField0_ & 0x00000002) != 0),
+                getParentForChildren(),
+                isClean());
+        targets_ = null;
+      }
+      return targetsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
