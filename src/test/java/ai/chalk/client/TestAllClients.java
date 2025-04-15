@@ -3,6 +3,7 @@ package ai.chalk.client;
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
 import ai.chalk.models.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -29,6 +30,12 @@ class TestAllClients {
         }
     }
 
+    @AfterAll
+    static void tearDown() throws Exception {
+        restClient.close();
+        grpcClient.close();
+    }
+
     public ChalkClient getClient(String clientVersion) {
         return clientVersion.equals("gRPC") ? grpcClient : restClient;
     }
@@ -51,9 +58,17 @@ class TestAllClients {
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .withPlannerOptions(plannerOptions)
                         .build();
-                c.onlineQuery(params);
-                if (plannerVersion.equals(invalidPlannerVersion)) {
-                    fail("Expected exception for invalid planner version");
+                try (var res = c.onlineQuery(params)) {
+                    if (plannerVersion.equals(invalidPlannerVersion)) {
+                        if (clientVersion.equals(grpcClientKey)) {
+                            if (res.getErrors() == null || res.getErrors().length == 0) {
+                                fail("Expected exception for invalid planner version");
+                            }
+                        } else {
+                            fail("Expected exception for invalid planner version");
+                        }
+
+                    }
                 }
             } catch (Exception e) {
                 if (plannerVersion.equals(validPlannerVersion)) {
@@ -171,12 +186,13 @@ class TestAllClients {
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .withTimeout(timeout.get(i))
                         .build();
-                var res = client.onlineQuery(params);
-                if (shouldFail.get(i)) {
-                    fail("Expected exception for timeout value: " + timeout.get(i));
+                try (var res = client.onlineQuery(params);) {
+                    if (shouldFail.get(i)) {
+                        fail("Expected exception for timeout value: " + timeout.get(i));
+                    }
+                    var users = res.unmarshal(User.class);
+                    assert users[0].socure_score.getValue() == 123.0;
                 }
-                var users = res.unmarshal(User.class);
-                assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
                 if (!shouldFail.get(i)) {
                     fail("Expected no timeout but query failed", e);
@@ -201,12 +217,13 @@ class TestAllClients {
                         .withInput(FraudTemplateFeatures.user.id, List.of("1"))
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .build();
-                var res = client.onlineQuery(params);
-                if (shouldFail.get(i)) {
-                    fail("Expected exception for timeout value: " + timeout.get(i));
+                try (var res = client.onlineQuery(params);) {
+                    if (shouldFail.get(i)) {
+                        fail("Expected exception for timeout value: " + timeout.get(i));
+                    }
+                    var users = res.unmarshal(User.class);
+                    assert users[0].socure_score.getValue() == 123.0;
                 }
-                var users = res.unmarshal(User.class);
-                assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
                 if (!shouldFail.get(i)) {
                     fail("Expected no timeout but query failed", e);
@@ -231,12 +248,13 @@ class TestAllClients {
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .withTimeout(requestLevelTimeout.get(i))
                         .build();
-                var res = client.onlineQuery(params);
-                if (shouldFail.get(i)) {
-                    fail("Expected exception for extremely small timeout value");
+                try (var res = client.onlineQuery(params);) {
+                    if (shouldFail.get(i)) {
+                        fail("Expected exception for extremely small timeout value");
+                    }
+                    var users = res.unmarshal(User.class);
+                    assert users[0].socure_score.getValue() == 123.0;
                 }
-                var users = res.unmarshal(User.class);
-                assert users[0].socure_score.getValue() == 123.0;
             } catch (Exception e) {
                 if (!shouldFail.get(i)) {
                     fail("Expected no timeout but query failed", e);
