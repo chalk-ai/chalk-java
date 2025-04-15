@@ -3,6 +3,7 @@ package ai.chalk.client;
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
 import ai.chalk.models.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,6 +28,12 @@ class TestAllClients {
         if (FraudTemplateFeatures.initException != null) {
             throw FraudTemplateFeatures.getInitException();
         }
+    }
+
+    @AfterAll
+    static void tearDown() throws Exception {
+        restClient.close();
+        grpcClient.close();
     }
 
     public ChalkClient getClient(String clientVersion) {
