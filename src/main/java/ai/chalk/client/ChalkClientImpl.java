@@ -83,14 +83,15 @@ public class ChalkClientImpl implements ChalkClient {
                 .build();
 
         HttpResponse<byte[]> response = this.handler.sendRequest(request);
-        var allocator = this.allocator.newChildAllocator(
+        try (var allocator = this.allocator.newChildAllocator(
             "online_query_response",
             0,
             FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
-        );
-        // ignore the warning here, because we don't want to free the memory yet
-        var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
-        return bulkResponse.toResult();
+        )) {
+            // ignore the warning here, because we don't want to free the memory yet
+            var bulkResponse = OnlineQueryBulkResponse.fromBytes(response.body(), allocator);
+            return bulkResponse.toResult();
+        }
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
