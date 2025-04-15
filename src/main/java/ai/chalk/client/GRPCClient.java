@@ -116,7 +116,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             engineHost = builder.getQueryServerOverride();
         } else {
             try {
-                engineHost = token.getEnginesOrThrow(environmentId);
+                engineHost = token.getGrpcEnginesOrThrow(environmentId);
             } catch (Exception e) {
                 throw new ClientException("Error getting engine URI for environment %s".formatted(environmentId), e);
             }
