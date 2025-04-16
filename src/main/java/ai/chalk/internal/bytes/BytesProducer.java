@@ -1,6 +1,7 @@
 package ai.chalk.internal.bytes;
 
 import ai.chalk.internal.arrow.FeatherProcessor;
+import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.memory.BufferAllocator;
@@ -18,21 +19,21 @@ import java.util.Map;
 import static ai.chalk.internal.Utils.toChalkDuration;
 
 public class BytesProducer {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper()
+            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
+            .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params, BufferAllocator allocator) throws Exception {
-        byte[] arrowBytes;
-        if (params.getInputs() == null) {
-            throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");
-        }
+    /**
+     * Builds a JSON header map from OnlineQueryParams object
+     * This method extracts all the fields from params into a map that will be serialized as JSON
+     * 
+     * @param params The query parameters object
+     * @return A map containing all the fields from params that should be included in the JSON header
+     */
+    public static Map<String, Object> buildJsonHeader(OnlineQueryParams params) {
         List<String> resolvedOutputs = params.getOutputs();
         if (resolvedOutputs == null) {
             resolvedOutputs = new ArrayList<>();
-        }
-        try {
-            arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
-        } catch (Exception e) {
-            throw new Exception("failed to convert inputs to Arrow bytes", e);
         }
 
         Map<String, Object> jsonHeader = new HashMap<>();
@@ -74,6 +75,28 @@ public class BytesProducer {
         if (params.getPlannerOptions() != null) {
             jsonHeader.put("planner_options", params.getPlannerOptions());
         }
+        if (params.getNow() != null) {
+            jsonHeader.put("now", params.getNow());
+        }
+        if (params.getRequiredResolverTags() != null) {
+            jsonHeader.put("required_resolver_tags", params.getRequiredResolverTags());
+        }
+
+        return jsonHeader;
+    }
+
+    public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params, BufferAllocator allocator) throws Exception {
+        byte[] arrowBytes;
+        if (params.getInputs() == null) {
+            throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");
+        }
+        try {
+            arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+        } catch (Exception e) {
+            throw new Exception("failed to convert inputs to Arrow bytes", e);
+        }
+
+        Map<String, Object> jsonHeader = buildJsonHeader(params);
 
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         DataOutputStream ioWriter = new DataOutputStream(result);
@@ -85,7 +108,7 @@ public class BytesProducer {
 
         // Placeholder for the sizes
         byte[] placeholder = new byte[8];
-        byte[] jsonBytes = new ObjectMapper().writeValueAsBytes(jsonHeader);
+        byte[] jsonBytes = mapper.writeValueAsBytes(jsonHeader);
 
         // Write json header
         ioWriter.write(placeholder);
