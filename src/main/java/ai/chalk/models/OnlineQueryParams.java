@@ -455,6 +455,10 @@ public class OnlineQueryParams {
             return this._withOutputs(outputs);
         }
 
+        public BuilderComplete withQueryName(String queryName) {
+            return this._withQueryName(queryName);
+        }
+
         public OnlineQueryParamsComplete build() {
             return new OnlineQueryParamsComplete(
                 inputs,

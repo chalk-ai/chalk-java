@@ -450,8 +450,8 @@ public class TestOnlineQueryParams extends AllocatorTest {
         // Test BuilderComplete with optional params
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
                 .withInputs(inputs)
-                .withQueryName("abc")
                 .withOutputs(outputs)
+                .withQueryName("abc")
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
                 }})
