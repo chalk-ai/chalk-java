@@ -444,7 +444,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsComplete.getPlannerOptions().equals(plannerOptions);
 
         // Test serialization
-        byte[] paramsCompleteBytes = BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
+        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
     }
 
     @Test
