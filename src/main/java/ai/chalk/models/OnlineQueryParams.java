@@ -332,7 +332,7 @@ public class OnlineQueryParams {
         }
 
         // withQueryName sets the queryName
-        public T withQueryName(String queryName) {
+        public T _withQueryName(String queryName) {
             this.queryName = queryName;
             return (T) this;
         }
@@ -577,6 +577,10 @@ public class OnlineQueryParams {
         public BuilderComplete withOutputs(FeaturesBase... outputs) {
             return this.newBuilderComplete()._withOutputs(outputs);
         }
+
+        public BuilderComplete withQueryName(String queryName) {
+            return this.newBuilderComplete()._withQueryName(queryName);
+        }
     }
 
     public static class BuilderWithOutputs extends Builder<BuilderWithOutputs> {
@@ -678,6 +682,10 @@ public class OnlineQueryParams {
 
         public BuilderWithOutputs withOutputs(FeaturesBase... outputs) {
             return this._withOutputs(outputs);
+        }
+
+        public BuilderWithOutputs withQueryName(String queryName) {
+            return this._withQueryName(queryName);
         }
     }
 
@@ -807,6 +815,10 @@ public class OnlineQueryParams {
 
         public BuilderWithOutputs withOutputs(StructFeaturesClass... outputs) {
             return newBuilderWithOutputs().withOutputs(outputs);
+        }
+
+        public BuilderWithOutputs withQueryName(String queryName) {
+            return newBuilderWithOutputs().withQueryName(queryName);
         }
     }
 

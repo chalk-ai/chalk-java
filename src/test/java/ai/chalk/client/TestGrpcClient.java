@@ -139,12 +139,12 @@ public class TestGrpcClient {
         var now = ZonedDateTime.now().minusMonths(1);
         var params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
+                .withQueryName("chalk-java::testOnlineQueryOptionalParamsSanity")
+                .withQueryNameVersion("1.0.0")
                 .withOutputs(FraudTemplateFeatures.user.socure_score)
                 // TODO: CHA-4791
                 // .withIncludeMeta(true)
                 // .withExplain(true)
-                .withQueryName("chalk-java::testOnlineQueryOptionalParamsSanity")
-                .withQueryNameVersion("1.0.0")
                 .withStorePlanStages(true)
                 .withStaleness(Map.of(FraudTemplateFeatures.user.socure_score.getFqn(), Duration.ofDays(1)))
                 .withNow(List.of(now, now, now))

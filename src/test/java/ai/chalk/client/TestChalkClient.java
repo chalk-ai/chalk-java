@@ -53,6 +53,31 @@ public class TestChalkClient {
     }
 
     @Test
+    public void testNamedQuery() throws Exception {
+        if (FraudTemplateFeatures.getInitException() != null) {
+            throw FraudTemplateFeatures.getInitException();
+        }
+
+        String[] userIds = new String[3];
+        for (int i = 0; i < userIds.length; i++) {
+            userIds[i] = String.format("%d", i);
+        }
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                .withInput(FraudTemplateFeatures.user.id, userIds)
+                .withQueryName("user_socure_score")
+                .withQueryNameVersion("1.0.0")
+                .build();
+
+        try (OnlineQueryResult result = client.onlineQuery(params)) {
+            assert result.getErrors().length == 0;
+            var users = result.unmarshal(User.class);
+            assert users.length == userIds.length;
+            assert users[0].socure_score.getValue().equals(123.0);
+        }
+    }
+
+    @Test
     public void testBinaryInput() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
             throw FraudTemplateFeatures.getInitException();

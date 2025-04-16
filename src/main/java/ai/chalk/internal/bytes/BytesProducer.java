@@ -10,7 +10,9 @@ import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static ai.chalk.internal.Utils.toChalkDuration;
@@ -23,8 +25,9 @@ public class BytesProducer {
         if (params.getInputs() == null) {
             throw new Exception("`inputs` cannot be null - please use OnlineQueryParams.builder().input(...).build()");
         }
-        if (params.getOutputs() == null) {
-            throw new Exception("`outputs` cannot be null - please use OnlineQueryParams.builder().outputs(...).build()");
+        List<String> resolvedOutputs = params.getOutputs();
+        if (resolvedOutputs == null) {
+            resolvedOutputs = new ArrayList<>();
         }
         try {
             arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
@@ -33,7 +36,7 @@ public class BytesProducer {
         }
 
         Map<String, Object> jsonHeader = new HashMap<>();
-        jsonHeader.put("outputs", params.getOutputs());
+        jsonHeader.put("outputs", resolvedOutputs);
         jsonHeader.put("include_meta", params.isIncludeMeta());
         jsonHeader.put("store_plan_stages", params.isStorePlanStages());
         jsonHeader.put("explain", params.isExplain());
@@ -54,6 +57,9 @@ public class BytesProducer {
         }
         if (params.getQueryName() != null) {
             jsonHeader.put("query_name", params.getQueryName());
+        }
+        if (params.getQueryNameVersion() != null) {
+            jsonHeader.put("query_name_version", params.getQueryNameVersion());
         }
         if (params.getStaleness() != null) {
             var staleness = new HashMap<String, String>();

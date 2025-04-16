@@ -1,6 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.internal.arrow.FeatherProcessor;
+import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
@@ -279,7 +280,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -297,7 +297,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsSeed.isExplain();
         assert paramsSeed.getEnvironmentId().equals("abc");
         assert paramsSeed.getPreviewDeploymentId().equals("abc");
-        assert paramsSeed.getQueryName().equals("abc");
         assert paramsSeed.getCorrelationId().equals("abc");
         assert paramsSeed.getBranch().equals("abc");
         assert paramsSeed.getNow().equals(now);
@@ -323,7 +322,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -346,7 +344,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsWithInputs.isExplain();
         assert paramsWithInputs.getEnvironmentId().equals("abc");
         assert paramsWithInputs.getPreviewDeploymentId().equals("abc");
-        assert paramsWithInputs.getQueryName().equals("abc");
         assert paramsWithInputs.getCorrelationId().equals("abc");
         assert paramsWithInputs.getBranch().equals("abc");
         assert paramsWithInputs.getNow().equals(now);
@@ -398,6 +395,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         // Test BuilderComplete with optional params
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
                 .withInputs(inputs)
+                .withQueryName("abc")
                 .withOutputs(outputs)
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
@@ -413,7 +411,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -447,7 +444,7 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsComplete.getPlannerOptions().equals(plannerOptions);
 
         // Test serialization
-        BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
+        byte[] paramsCompleteBytes = BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
     }
 
     @Test
