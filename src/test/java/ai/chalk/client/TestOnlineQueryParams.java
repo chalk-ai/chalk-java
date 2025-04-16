@@ -1,13 +1,17 @@
 package ai.chalk.client;
 
 import ai.chalk.internal.arrow.FeatherProcessor;
-import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.protos.chalk.common.v1.FeatherBodyType;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryBulkRequest;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryContext;
+import ai.chalk.protos.chalk.common.v1.OnlineQueryResponseOptions;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.protobuf.ByteString;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -821,5 +825,103 @@ public class TestOnlineQueryParams extends AllocatorTest {
         //
         // But this is okay because our backend handles and casts null vectors to vectors
         // of the appropriate type just fine.
+    }
+    
+    /**
+     * Test that OnlineQueryBulkRequest is created correctly with all optional parameters.
+     * This test directly calls GRPCClient's buildOnlineQueryBulkRequest static method.
+     */
+    @Test
+    public void testOnlineQueryParamsToProto() throws Exception {
+        Map<String, List<?>> inputs = new HashMap<>();
+        var userIds = Arrays.asList(1, 2, 3);
+        var emails = Arrays.asList("a", "b", "c");
+        var socureScores = Arrays.asList(1.0, 2.0, 3.0);
+        inputs.put("user.id", userIds);
+        inputs.put("user.email", emails);
+        inputs.put("user.socure_score", socureScores);
+
+        var outputs = new String[]{"user.today", "user.socure_score"};
+        var now = Arrays.asList(ZonedDateTime.now(), ZonedDateTime.now().minusDays(1));
+        var requiredResolverTags = List.of("prod1", "prod2");
+        var queryNameVersion = "queryNameVersionAbc";
+        var plannerOptions = new HashMap<String, Object>() {{
+            put("planner_version", "2");
+        }};
+        
+        // Create test parameters with all optional fields
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withQueryName("queryName789")
+                .withOutputs(outputs)
+                .withStaleness(new HashMap<>() {{
+                    put("user.id", Duration.ofSeconds(1000));
+                }})
+                .withMeta(new HashMap<>() {{
+                    put("user.id", "abc");
+                }})
+                .withTags(Arrays.asList("user.id", "abc"))
+                .withTags("def")
+                .withTag("ghi")
+                .withIncludeMeta(true)
+                .withStorePlanStages(true)
+                .withExplain(true)
+                .withEnvironmentId("env123")
+                .withPreviewDeploymentId("preview456")
+                .withCorrelationId("corr101112")
+                .withBranch("branch131415")
+                .withNow(now)
+                .withRequiredResolverTags(requiredResolverTags)
+                .withQueryNameVersion(queryNameVersion)
+                .withPlannerOptions(plannerOptions)
+                .build();
+
+        // Serialize inputs to bytes for the request
+        byte[] inputBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+        
+        // Now test the OnlineQueryBulkRequest building
+        OnlineQueryBulkRequest request = GRPCClient.buildOnlineQueryBulkRequest(params, inputBytes, "clientBranchId");
+        
+        // Check request basic properties
+        assertEquals(ByteString.copyFrom(inputBytes), request.getInputsFeather());
+        assertEquals(outputs.length, request.getOutputsCount());
+        assertEquals("user.today", request.getOutputs(0).getFeatureFqn());
+        assertEquals("user.socure_score", request.getOutputs(1).getFeatureFqn());
+        assertEquals(2, request.getNowCount());
+        assertEquals(FeatherBodyType.FEATHER_BODY_TYPE_TABLE, request.getBodyType());
+        
+        // Check OnlineQueryContext properties
+        OnlineQueryContext context = request.getContext();
+        assertEquals("branch131415", context.getBranchId());  // Should use params branch, not clientBranchId
+        assertEquals("corr101112", context.getCorrelationId());
+        assertEquals("preview456", context.getDeploymentId());
+        assertEquals("env123", context.getEnvironment());
+        assertEquals("queryName789", context.getQueryName());
+        assertEquals(queryNameVersion, context.getQueryNameVersion());
+        assertEquals(4, context.getTagsCount());
+        assertTrue(context.getTagsList().contains("user.id"));
+        assertTrue(context.getTagsList().contains("abc"));
+        assertTrue(context.getTagsList().contains("def"));
+        assertTrue(context.getTagsList().contains("ghi"));
+        assertEquals(2, context.getRequiredResolverTagsCount());
+        assertTrue(context.getRequiredResolverTagsList().contains("prod1"));
+        assertTrue(context.getRequiredResolverTagsList().contains("prod2"));
+        assertEquals("2", context.getOptionsMap().get("planner_version").getStringValue());
+        
+        // Check response options
+        OnlineQueryResponseOptions options = request.getResponseOptions();
+        assertTrue(options.getIncludeMeta());
+        assertTrue(options.hasExplain());
+        assertEquals(1, options.getMetadataCount());
+        assertEquals("abc", options.getMetadataMap().get("user.id"));
+        assertTrue(options.getEncodingOptions().getEncodeStructsAsObjects());
+        
+        // Test the fallback to clientBranchId
+        OnlineQueryParamsComplete paramsWithoutBranch = OnlineQueryParams.builder()
+                .withInputs(inputs)
+                .withOutputs(outputs)
+                .build();
+        OnlineQueryBulkRequest request2 = GRPCClient.buildOnlineQueryBulkRequest(paramsWithoutBranch, inputBytes, "clientBranchId");
+        assertEquals("clientBranchId", request2.getContext().getBranchId());
     }
 }
