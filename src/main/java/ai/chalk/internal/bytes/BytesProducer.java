@@ -78,9 +78,6 @@ public class BytesProducer {
         if (params.getNow() != null) {
             jsonHeader.put("now", params.getNow());
         }
-        if (params.getRequiredResolverTags() != null) {
-            jsonHeader.put("required_resolver_tags", params.getRequiredResolverTags());
-        }
 
         return jsonHeader;
     }
