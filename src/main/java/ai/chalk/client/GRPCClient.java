@@ -186,22 +186,16 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
     }
-
-
-    public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
-        byte[] bodyBytes;
-        try (
-                var childAllocator = allocator.newChildAllocator(
-                        "grpc_online_query_params",
-                        0,
-                        FeatherProcessor.ALLOCATOR_SIZE_REQUEST
-                )
-        ) {
-            bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
-        } catch (Exception e) {
-            throw new ClientException("Failed to serialize OnlineQueryParams", e);
-        }
-
+    
+    /**
+     * Build an OnlineQueryBulkRequest from OnlineQueryParamsComplete
+     * 
+     * @param params The query parameters
+     * @param bodyBytes The serialized input data
+     * @param clientBranchId Client branch ID to use if not specified in params
+     * @return A properly constructed OnlineQueryBulkRequest
+     */
+    static OnlineQueryBulkRequest buildOnlineQueryBulkRequest(OnlineQueryParamsComplete params, byte[] bodyBytes, String clientBranchId) {
         List<String> resolvedOutputs = params.getOutputs();
         if (resolvedOutputs == null) {
             resolvedOutputs = new ArrayList<>();
@@ -227,8 +221,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         var context = OnlineQueryContext.newBuilder();
         if (params.getBranch() != null && !params.getBranch().isEmpty()) {
             context.setBranchId(params.getBranch());
-        } else if (this.branchId != null && !this.branchId.isEmpty()) {
-            context.setBranchId(this.branchId);
+        } else if (clientBranchId != null && !clientBranchId.isEmpty()) {
+            context.setBranchId(clientBranchId);
         }
         if (params.getCorrelationId() != null) {
             context.setCorrelationId(params.getCorrelationId());
@@ -273,7 +267,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             options.putAllMetadata(params.getMeta());
         }
 
-        var request = OnlineQueryBulkRequest.newBuilder()
+        return OnlineQueryBulkRequest.newBuilder()
                 .setInputsFeather(ByteString.copyFrom(bodyBytes))
                 .addAllOutputs(outputs)
                 .addAllNow(now)
@@ -281,6 +275,24 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .setContext(context)
                 .setResponseOptions(options)
                 .build();
+    }
+
+
+    public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
+        byte[] bodyBytes;
+        try (
+                var childAllocator = allocator.newChildAllocator(
+                        "grpc_online_query_params",
+                        0,
+                        FeatherProcessor.ALLOCATOR_SIZE_REQUEST
+                )
+        ) {
+            bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
+        } catch (Exception e) {
+            throw new ClientException("Failed to serialize OnlineQueryParams", e);
+        }
+
+        OnlineQueryBulkRequest request = buildOnlineQueryBulkRequest(params, bodyBytes, this.branchId);
 
         AtomicReference<Metadata> trailersRef = new AtomicReference<>();
         OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
