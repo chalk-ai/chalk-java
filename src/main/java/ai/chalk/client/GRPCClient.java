@@ -202,8 +202,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
 
+        List<String> resolvedOutputs = params.getOutputs();
+        if (resolvedOutputs == null) {
+            resolvedOutputs = new ArrayList<>();
+        }
+
         List<OutputExpr> outputs = new ArrayList<>();
-        for (var output : params.getOutputs()) {
+        for (var output : resolvedOutputs) {
             outputs.add(OutputExpr.newBuilder().setFeatureFqn(output).build());
         }
 

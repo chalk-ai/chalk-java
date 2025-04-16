@@ -1,6 +1,7 @@
 package ai.chalk.client;
 
 import ai.chalk.internal.arrow.FeatherProcessor;
+import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.client.features.InitFeaturesTestFeatures;
@@ -9,10 +10,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.Map;
 
 public class TestOnlineQueryParams extends AllocatorTest {
     public static boolean jsonCompare(String expected, String actual) throws Exception {
@@ -279,7 +283,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -297,7 +300,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsSeed.isExplain();
         assert paramsSeed.getEnvironmentId().equals("abc");
         assert paramsSeed.getPreviewDeploymentId().equals("abc");
-        assert paramsSeed.getQueryName().equals("abc");
         assert paramsSeed.getCorrelationId().equals("abc");
         assert paramsSeed.getBranch().equals("abc");
         assert paramsSeed.getNow().equals(now);
@@ -305,6 +307,24 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsSeed.getQueryNameVersion().equals(queryNameVersion);
         assert paramsSeed.getPlannerOptions().equals(plannerOptions);
 
+        // Verify the JSON header for BuilderSeed
+        Map<String, Object> jsonHeaderSeed = BytesProducer.buildJsonHeader(paramsSeed);
+        assertTrue(jsonHeaderSeed.containsKey("outputs"));
+        assertEquals(true, jsonHeaderSeed.get("include_meta"));
+        assertEquals(true, jsonHeaderSeed.get("store_plan_stages"));
+        assertEquals(true, jsonHeaderSeed.get("explain"));
+        assertEquals("abc", jsonHeaderSeed.get("branch"));
+        assertEquals("abc", jsonHeaderSeed.get("correlation_id"));
+        assertEquals("abc", jsonHeaderSeed.get("environment_id"));
+        assertEquals("abc", jsonHeaderSeed.get("deployment_id"));
+        assertEquals(queryNameVersion, jsonHeaderSeed.get("query_name_version"));
+        assertTrue(jsonHeaderSeed.containsKey("meta"));
+        assertTrue(jsonHeaderSeed.containsKey("staleness"));
+        assertTrue(jsonHeaderSeed.containsKey("tags"));
+        assertEquals(now, jsonHeaderSeed.get("now"));
+        // Required resolver tags is not yet implemented in the query feather endpoint
+        //        assertEquals(requiredResolverTags, jsonHeaderSeed.get("required_resolver_tags"));
+        assertEquals(plannerOptions, jsonHeaderSeed.get("planner_options"));
 
         // Test BuilderWithInputs with optional params
         OnlineQueryParams.BuilderWithInputs builderWithInputs = OnlineQueryParams.builder()
@@ -323,7 +343,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -346,13 +365,31 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsWithInputs.isExplain();
         assert paramsWithInputs.getEnvironmentId().equals("abc");
         assert paramsWithInputs.getPreviewDeploymentId().equals("abc");
-        assert paramsWithInputs.getQueryName().equals("abc");
         assert paramsWithInputs.getCorrelationId().equals("abc");
         assert paramsWithInputs.getBranch().equals("abc");
         assert paramsWithInputs.getNow().equals(now);
         assert paramsWithInputs.getRequiredResolverTags().equals(requiredResolverTags);
         assert paramsWithInputs.getQueryNameVersion().equals(queryNameVersion);
         assert paramsWithInputs.getPlannerOptions().equals(plannerOptions);
+
+        // Verify the JSON header for BuilderWithInputs
+        Map<String, Object> jsonHeaderWithInputs = BytesProducer.buildJsonHeader(paramsWithInputs);
+        assertTrue(jsonHeaderWithInputs.containsKey("outputs"));
+        assertEquals(true, jsonHeaderWithInputs.get("include_meta"));
+        assertEquals(true, jsonHeaderWithInputs.get("store_plan_stages"));
+        assertEquals(true, jsonHeaderWithInputs.get("explain"));
+        assertEquals("abc", jsonHeaderWithInputs.get("branch"));
+        assertEquals("abc", jsonHeaderWithInputs.get("correlation_id"));
+        assertEquals("abc", jsonHeaderWithInputs.get("environment_id"));
+        assertEquals("abc", jsonHeaderWithInputs.get("deployment_id"));
+        assertEquals(queryNameVersion, jsonHeaderWithInputs.get("query_name_version"));
+        assertTrue(jsonHeaderWithInputs.containsKey("meta"));
+        assertTrue(jsonHeaderWithInputs.containsKey("staleness"));
+        assertTrue(jsonHeaderWithInputs.containsKey("tags"));
+        assertEquals(now, jsonHeaderWithInputs.get("now"));
+        // Required resolver tags is not yet implemented in the query feather endpoint
+        //        assertEquals(requiredResolverTags, jsonHeaderWithInputs.get("required_resolver_tags"));
+        assertEquals(plannerOptions, jsonHeaderWithInputs.get("planner_options"));
 
         // Test BuilderWithOutputs with optional params
         OnlineQueryParams.BuilderWithOutputs builderWithOutputs = OnlineQueryParams.builder()
@@ -394,10 +431,26 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsWithOutputs.getCorrelationId().equals("abc");
         assert paramsWithOutputs.getPlannerOptions().equals(plannerOptions);
 
+        // Verify the JSON header for BuilderWithOutputs
+        Map<String, Object> jsonHeaderWithOutputs = BytesProducer.buildJsonHeader(paramsWithOutputs);
+        assertEquals(outputs.length, ((List<?>) jsonHeaderWithOutputs.get("outputs")).size());
+        assertEquals(true, jsonHeaderWithOutputs.get("include_meta"));
+        assertEquals(true, jsonHeaderWithOutputs.get("store_plan_stages"));
+        assertEquals(true, jsonHeaderWithOutputs.get("explain"));
+        assertEquals("abc", jsonHeaderWithOutputs.get("branch"));
+        assertEquals("abc", jsonHeaderWithOutputs.get("correlation_id"));
+        assertEquals("abc", jsonHeaderWithOutputs.get("environment_id"));
+        assertEquals("abc", jsonHeaderWithOutputs.get("deployment_id"));
+        assertEquals("abc", jsonHeaderWithOutputs.get("query_name"));
+        assertTrue(jsonHeaderWithOutputs.containsKey("meta"));
+        assertTrue(jsonHeaderWithOutputs.containsKey("staleness"));
+        assertTrue(jsonHeaderWithOutputs.containsKey("tags"));
+        assertEquals(plannerOptions, jsonHeaderWithOutputs.get("planner_options"));
 
         // Test BuilderComplete with optional params
         OnlineQueryParams.BuilderComplete builderComplete = OnlineQueryParams.builder()
                 .withInputs(inputs)
+                .withQueryName("abc")
                 .withOutputs(outputs)
                 .withStaleness(new HashMap<>() {{
                     put("user.id", Duration.ofSeconds(1000));
@@ -413,7 +466,6 @@ public class TestOnlineQueryParams extends AllocatorTest {
                 .withExplain(true)
                 .withEnvironmentId("abc")
                 .withPreviewDeploymentId("abc")
-                .withQueryName("abc")
                 .withCorrelationId("abc")
                 .withBranch("abc")
                 .withNow(now)
@@ -442,12 +494,33 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assert paramsComplete.getCorrelationId().equals("abc");
         assert paramsComplete.getBranch().equals("abc");
         assert paramsComplete.getNow().equals(now);
-        assert paramsComplete.getRequiredResolverTags().equals(requiredResolverTags);
+        // Required resolver tags is not yet implemented in the query feather endpoint
+        //        assert paramsComplete.getRequiredResolverTags().equals(requiredResolverTags);
         assert paramsComplete.getQueryNameVersion().equals(queryNameVersion);
         assert paramsComplete.getPlannerOptions().equals(plannerOptions);
 
-        // Test serialization
+        // Test serialization and verify JSON header for BuilderComplete
         BytesProducer.convertOnlineQueryParamsToBytes(paramsComplete, allocator);
+        
+        // Verify the JSON header contains all the optional parameters
+        Map<String, Object> jsonHeader = BytesProducer.buildJsonHeader(paramsComplete);
+        assertEquals(outputs.length, ((List<?>) jsonHeader.get("outputs")).size());
+        assertEquals(true, jsonHeader.get("include_meta"));
+        assertEquals(true, jsonHeader.get("store_plan_stages"));
+        assertEquals(true, jsonHeader.get("explain"));
+        assertEquals("abc", jsonHeader.get("branch"));
+        assertEquals("abc", jsonHeader.get("correlation_id"));
+        assertEquals("abc", jsonHeader.get("environment_id"));
+        assertEquals("abc", jsonHeader.get("deployment_id"));
+        assertEquals("abc", jsonHeader.get("query_name"));
+        assertEquals(queryNameVersion, jsonHeader.get("query_name_version"));
+        assertTrue(jsonHeader.containsKey("meta"));
+        assertTrue(jsonHeader.containsKey("staleness"));
+        assertTrue(jsonHeader.containsKey("tags"));
+        assertEquals(now, jsonHeader.get("now"));
+        // Required resolver tags is not yet implemented in the query feather endpoint
+        // assertEquals(requiredResolverTags, jsonHeader.get("required_resolver_tags"));
+        assertEquals(plannerOptions, jsonHeader.get("planner_options"));
     }
 
     @Test

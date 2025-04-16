@@ -5,6 +5,7 @@ import ai.chalk.client.e2e.User;
 import ai.chalk.models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -260,6 +261,35 @@ class TestAllClients {
                     fail("Expected no timeout but query failed", e);
                 }
             }
+        }
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {grpcClientKey, restClientKey})
+    public void testNamedQuery(String clientType) throws Exception {
+        ChalkClient c = getClient(clientType);
+
+        if (FraudTemplateFeatures.getInitException() != null) {
+            throw FraudTemplateFeatures.getInitException();
+        }
+
+        String[] userIds = new String[3];
+        for (int i = 0; i < userIds.length; i++) {
+            userIds[i] = String.format("%d", i);
+        }
+
+        OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                .withInput(FraudTemplateFeatures.user.id, userIds)
+                .withQueryName("user_socure_score")
+                .withQueryNameVersion("1.0.0")
+                .build();
+
+        try (OnlineQueryResult result = c.onlineQuery(params)) {
+            assert result.getErrors().length == 0;
+            var users = result.unmarshal(User.class);
+            assert users.length == userIds.length;
+            assert users[0].socure_score.getValue().equals(123.0);
         }
     }
 

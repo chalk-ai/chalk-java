@@ -52,6 +52,7 @@ public class TestChalkClient {
         }
     }
 
+
     @Test
     public void testBinaryInput() throws Exception {
         if (FraudTemplateFeatures.getInitException() != null) {
