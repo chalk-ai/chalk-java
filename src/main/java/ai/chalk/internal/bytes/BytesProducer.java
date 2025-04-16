@@ -20,8 +20,7 @@ import static ai.chalk.internal.Utils.toChalkDuration;
 
 public class BytesProducer {
     private static final ObjectMapper mapper = new ObjectMapper()
-            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
-            .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
 
     /**
      * Builds a JSON header map from OnlineQueryParams object
