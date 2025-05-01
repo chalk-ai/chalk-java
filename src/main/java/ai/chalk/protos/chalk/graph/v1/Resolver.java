@@ -30,6 +30,11 @@ private static final long serialVersionUID = 0L;
     environments_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     resourceHint_ = 0;
+    uniqueOn_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    partitionedBy_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    dataSourcesV2_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -207,39 +212,59 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> dataSources_;
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> getDataSourcesList() {
+  @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> getDataSourcesList() {
     return dataSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
+  @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
       getDataSourcesOrBuilderList() {
     return dataSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public int getDataSourcesCount() {
+  @java.lang.Deprecated public int getDataSourcesCount() {
     return dataSources_.size();
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index) {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index) {
     return dataSources_.get(index);
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
       int index) {
     return dataSources_.get(index);
   }
@@ -649,6 +674,173 @@ private static final long serialVersionUID = 0L;
     return isTotal_;
   }
 
+  public static final int UNIQUE_ON_FIELD_NUMBER = 20;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList uniqueOn_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @return A list containing the uniqueOn.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getUniqueOnList() {
+    return uniqueOn_;
+  }
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @return The count of uniqueOn.
+   */
+  public int getUniqueOnCount() {
+    return uniqueOn_.size();
+  }
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @param index The index of the element to return.
+   * @return The uniqueOn at the given index.
+   */
+  public java.lang.String getUniqueOn(int index) {
+    return uniqueOn_.get(index);
+  }
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the uniqueOn at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getUniqueOnBytes(int index) {
+    return uniqueOn_.getByteString(index);
+  }
+
+  public static final int PARTITIONED_BY_FIELD_NUMBER = 21;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList partitionedBy_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @return A list containing the partitionedBy.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getPartitionedByList() {
+    return partitionedBy_;
+  }
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @return The count of partitionedBy.
+   */
+  public int getPartitionedByCount() {
+    return partitionedBy_.size();
+  }
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @param index The index of the element to return.
+   * @return The partitionedBy at the given index.
+   */
+  public java.lang.String getPartitionedBy(int index) {
+    return partitionedBy_.get(index);
+  }
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the partitionedBy at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getPartitionedByBytes(int index) {
+    return partitionedBy_.getByteString(index);
+  }
+
+  public static final int DATA_SOURCES_V2_FIELD_NUMBER = 22;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> dataSourcesV2_;
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> getDataSourcesV2List() {
+    return dataSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> 
+      getDataSourcesV2OrBuilderList() {
+    return dataSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public int getDataSourcesV2Count() {
+    return dataSourcesV2_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDataSourcesV2(int index) {
+    return dataSourcesV2_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDataSourcesV2OrBuilder(
+      int index) {
+    return dataSourcesV2_.get(index);
+  }
+
+  public static final int STATIC_OPERATION_FIELD_NUMBER = 23;
+  private ai.chalk.protos.chalk.expression.v1.LogicalExprNode staticOperation_;
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   * @return Whether the staticOperation field is set.
+   */
+  @java.lang.Override
+  public boolean hasStaticOperation() {
+    return ((bitField0_ & 0x00000200) != 0);
+  }
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   * @return The staticOperation.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getStaticOperation() {
+    return staticOperation_ == null ? ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance() : staticOperation_;
+  }
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getStaticOperationOrBuilder() {
+    return staticOperation_ == null ? ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance() : staticOperation_;
+  }
+
+  public static final int SQL_SETTINGS_FIELD_NUMBER = 24;
+  private ai.chalk.protos.chalk.graph.v1.SQLResolverSettings sqlSettings_;
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   * @return Whether the sqlSettings field is set.
+   */
+  @java.lang.Override
+  public boolean hasSqlSettings() {
+    return ((bitField0_ & 0x00000400) != 0);
+  }
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   * @return The sqlSettings.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.SQLResolverSettings getSqlSettings() {
+    return sqlSettings_ == null ? ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.getDefaultInstance() : sqlSettings_;
+  }
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder getSqlSettingsOrBuilder() {
+    return sqlSettings_ == null ? ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.getDefaultInstance() : sqlSettings_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -719,6 +911,21 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000100) != 0)) {
       output.writeBool(19, isTotal_);
+    }
+    for (int i = 0; i < uniqueOn_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 20, uniqueOn_.getRaw(i));
+    }
+    for (int i = 0; i < partitionedBy_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 21, partitionedBy_.getRaw(i));
+    }
+    for (int i = 0; i < dataSourcesV2_.size(); i++) {
+      output.writeMessage(22, dataSourcesV2_.get(i));
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      output.writeMessage(23, getStaticOperation());
+    }
+    if (((bitField0_ & 0x00000400) != 0)) {
+      output.writeMessage(24, getSqlSettings());
     }
     getUnknownFields().writeTo(output);
   }
@@ -809,6 +1016,34 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(19, isTotal_);
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < uniqueOn_.size(); i++) {
+        dataSize += computeStringSizeNoTag(uniqueOn_.getRaw(i));
+      }
+      size += dataSize;
+      size += 2 * getUniqueOnList().size();
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < partitionedBy_.size(); i++) {
+        dataSize += computeStringSizeNoTag(partitionedBy_.getRaw(i));
+      }
+      size += dataSize;
+      size += 2 * getPartitionedByList().size();
+    }
+    for (int i = 0; i < dataSourcesV2_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(22, dataSourcesV2_.get(i));
+    }
+    if (((bitField0_ & 0x00000200) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(23, getStaticOperation());
+    }
+    if (((bitField0_ & 0x00000400) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(24, getSqlSettings());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -886,6 +1121,22 @@ private static final long serialVersionUID = 0L;
     if (hasIsTotal()) {
       if (getIsTotal()
           != other.getIsTotal()) return false;
+    }
+    if (!getUniqueOnList()
+        .equals(other.getUniqueOnList())) return false;
+    if (!getPartitionedByList()
+        .equals(other.getPartitionedByList())) return false;
+    if (!getDataSourcesV2List()
+        .equals(other.getDataSourcesV2List())) return false;
+    if (hasStaticOperation() != other.hasStaticOperation()) return false;
+    if (hasStaticOperation()) {
+      if (!getStaticOperation()
+          .equals(other.getStaticOperation())) return false;
+    }
+    if (hasSqlSettings() != other.hasSqlSettings()) return false;
+    if (hasSqlSettings()) {
+      if (!getSqlSettings()
+          .equals(other.getSqlSettings())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -966,6 +1217,26 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + IS_TOTAL_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsTotal());
+    }
+    if (getUniqueOnCount() > 0) {
+      hash = (37 * hash) + UNIQUE_ON_FIELD_NUMBER;
+      hash = (53 * hash) + getUniqueOnList().hashCode();
+    }
+    if (getPartitionedByCount() > 0) {
+      hash = (37 * hash) + PARTITIONED_BY_FIELD_NUMBER;
+      hash = (53 * hash) + getPartitionedByList().hashCode();
+    }
+    if (getDataSourcesV2Count() > 0) {
+      hash = (37 * hash) + DATA_SOURCES_V2_FIELD_NUMBER;
+      hash = (53 * hash) + getDataSourcesV2List().hashCode();
+    }
+    if (hasStaticOperation()) {
+      hash = (37 * hash) + STATIC_OPERATION_FIELD_NUMBER;
+      hash = (53 * hash) + getStaticOperation().hashCode();
+    }
+    if (hasSqlSettings()) {
+      hash = (37 * hash) + SQL_SETTINGS_FIELD_NUMBER;
+      hash = (53 * hash) + getSqlSettings().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1105,6 +1376,9 @@ private static final long serialVersionUID = 0L;
         getWhenFieldBuilder();
         getCronFilterFieldBuilder();
         getFunctionFieldBuilder();
+        getDataSourcesV2FieldBuilder();
+        getStaticOperationFieldBuilder();
+        getSqlSettingsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -1170,6 +1444,27 @@ private static final long serialVersionUID = 0L;
       resourceHint_ = 0;
       isStatic_ = false;
       isTotal_ = false;
+      uniqueOn_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      partitionedBy_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      if (dataSourcesV2Builder_ == null) {
+        dataSourcesV2_ = java.util.Collections.emptyList();
+      } else {
+        dataSourcesV2_ = null;
+        dataSourcesV2Builder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00200000);
+      staticOperation_ = null;
+      if (staticOperationBuilder_ != null) {
+        staticOperationBuilder_.dispose();
+        staticOperationBuilder_ = null;
+      }
+      sqlSettings_ = null;
+      if (sqlSettingsBuilder_ != null) {
+        sqlSettingsBuilder_.dispose();
+        sqlSettingsBuilder_ = null;
+      }
       return this;
     }
 
@@ -1229,6 +1524,15 @@ private static final long serialVersionUID = 0L;
         result.dataSources_ = dataSources_;
       } else {
         result.dataSources_ = dataSourcesBuilder_.build();
+      }
+      if (dataSourcesV2Builder_ == null) {
+        if (((bitField0_ & 0x00200000) != 0)) {
+          dataSourcesV2_ = java.util.Collections.unmodifiableList(dataSourcesV2_);
+          bitField0_ = (bitField0_ & ~0x00200000);
+        }
+        result.dataSourcesV2_ = dataSourcesV2_;
+      } else {
+        result.dataSourcesV2_ = dataSourcesV2Builder_.build();
       }
     }
 
@@ -1303,6 +1607,26 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00040000) != 0)) {
         result.isTotal_ = isTotal_;
         to_bitField0_ |= 0x00000100;
+      }
+      if (((from_bitField0_ & 0x00080000) != 0)) {
+        uniqueOn_.makeImmutable();
+        result.uniqueOn_ = uniqueOn_;
+      }
+      if (((from_bitField0_ & 0x00100000) != 0)) {
+        partitionedBy_.makeImmutable();
+        result.partitionedBy_ = partitionedBy_;
+      }
+      if (((from_bitField0_ & 0x00400000) != 0)) {
+        result.staticOperation_ = staticOperationBuilder_ == null
+            ? staticOperation_
+            : staticOperationBuilder_.build();
+        to_bitField0_ |= 0x00000200;
+      }
+      if (((from_bitField0_ & 0x00800000) != 0)) {
+        result.sqlSettings_ = sqlSettingsBuilder_ == null
+            ? sqlSettings_
+            : sqlSettingsBuilder_.build();
+        to_bitField0_ |= 0x00000400;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1499,6 +1823,58 @@ private static final long serialVersionUID = 0L;
       if (other.hasIsTotal()) {
         setIsTotal(other.getIsTotal());
       }
+      if (!other.uniqueOn_.isEmpty()) {
+        if (uniqueOn_.isEmpty()) {
+          uniqueOn_ = other.uniqueOn_;
+          bitField0_ |= 0x00080000;
+        } else {
+          ensureUniqueOnIsMutable();
+          uniqueOn_.addAll(other.uniqueOn_);
+        }
+        onChanged();
+      }
+      if (!other.partitionedBy_.isEmpty()) {
+        if (partitionedBy_.isEmpty()) {
+          partitionedBy_ = other.partitionedBy_;
+          bitField0_ |= 0x00100000;
+        } else {
+          ensurePartitionedByIsMutable();
+          partitionedBy_.addAll(other.partitionedBy_);
+        }
+        onChanged();
+      }
+      if (dataSourcesV2Builder_ == null) {
+        if (!other.dataSourcesV2_.isEmpty()) {
+          if (dataSourcesV2_.isEmpty()) {
+            dataSourcesV2_ = other.dataSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00200000);
+          } else {
+            ensureDataSourcesV2IsMutable();
+            dataSourcesV2_.addAll(other.dataSourcesV2_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.dataSourcesV2_.isEmpty()) {
+          if (dataSourcesV2Builder_.isEmpty()) {
+            dataSourcesV2Builder_.dispose();
+            dataSourcesV2Builder_ = null;
+            dataSourcesV2_ = other.dataSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00200000);
+            dataSourcesV2Builder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getDataSourcesV2FieldBuilder() : null;
+          } else {
+            dataSourcesV2Builder_.addAllMessages(other.dataSourcesV2_);
+          }
+        }
+      }
+      if (other.hasStaticOperation()) {
+        mergeStaticOperation(other.getStaticOperation());
+      }
+      if (other.hasSqlSettings()) {
+        mergeSqlSettings(other.getSqlSettings());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1656,6 +2032,45 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00040000;
               break;
             } // case 152
+            case 162: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureUniqueOnIsMutable();
+              uniqueOn_.add(s);
+              break;
+            } // case 162
+            case 170: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensurePartitionedByIsMutable();
+              partitionedBy_.add(s);
+              break;
+            } // case 170
+            case 178: {
+              ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.parser(),
+                      extensionRegistry);
+              if (dataSourcesV2Builder_ == null) {
+                ensureDataSourcesV2IsMutable();
+                dataSourcesV2_.add(m);
+              } else {
+                dataSourcesV2Builder_.addMessage(m);
+              }
+              break;
+            } // case 178
+            case 186: {
+              input.readMessage(
+                  getStaticOperationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00400000;
+              break;
+            } // case 186
+            case 194: {
+              input.readMessage(
+                  getSqlSettingsFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00800000;
+              break;
+            } // case 194
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2323,9 +2738,13 @@ private static final long serialVersionUID = 0L;
         ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> dataSourcesBuilder_;
 
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> getDataSourcesList() {
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> getDataSourcesList() {
       if (dataSourcesBuilder_ == null) {
         return java.util.Collections.unmodifiableList(dataSources_);
       } else {
@@ -2333,9 +2752,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public int getDataSourcesCount() {
+    @java.lang.Deprecated public int getDataSourcesCount() {
       if (dataSourcesBuilder_ == null) {
         return dataSources_.size();
       } else {
@@ -2343,9 +2766,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index) {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index) {
       if (dataSourcesBuilder_ == null) {
         return dataSources_.get(index);
       } else {
@@ -2353,9 +2780,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder setDataSources(
+    @java.lang.Deprecated public Builder setDataSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
       if (dataSourcesBuilder_ == null) {
         if (value == null) {
@@ -2370,9 +2801,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder setDataSources(
+    @java.lang.Deprecated public Builder setDataSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder builderForValue) {
       if (dataSourcesBuilder_ == null) {
         ensureDataSourcesIsMutable();
@@ -2384,9 +2819,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder addDataSources(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
+    @java.lang.Deprecated public Builder addDataSources(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
       if (dataSourcesBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2400,9 +2839,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder addDataSources(
+    @java.lang.Deprecated public Builder addDataSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
       if (dataSourcesBuilder_ == null) {
         if (value == null) {
@@ -2417,9 +2860,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder addDataSources(
+    @java.lang.Deprecated public Builder addDataSources(
         ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder builderForValue) {
       if (dataSourcesBuilder_ == null) {
         ensureDataSourcesIsMutable();
@@ -2431,9 +2878,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder addDataSources(
+    @java.lang.Deprecated public Builder addDataSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder builderForValue) {
       if (dataSourcesBuilder_ == null) {
         ensureDataSourcesIsMutable();
@@ -2445,9 +2896,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder addAllDataSources(
+    @java.lang.Deprecated public Builder addAllDataSources(
         java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> values) {
       if (dataSourcesBuilder_ == null) {
         ensureDataSourcesIsMutable();
@@ -2460,9 +2915,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder clearDataSources() {
+    @java.lang.Deprecated public Builder clearDataSources() {
       if (dataSourcesBuilder_ == null) {
         dataSources_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -2473,9 +2932,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public Builder removeDataSources(int index) {
+    @java.lang.Deprecated public Builder removeDataSources(int index) {
       if (dataSourcesBuilder_ == null) {
         ensureDataSourcesIsMutable();
         dataSources_.remove(index);
@@ -2486,16 +2949,24 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder getDataSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder getDataSourcesBuilder(
         int index) {
       return getDataSourcesFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
         int index) {
       if (dataSourcesBuilder_ == null) {
         return dataSources_.get(index);  } else {
@@ -2503,9 +2974,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
          getDataSourcesOrBuilderList() {
       if (dataSourcesBuilder_ != null) {
         return dataSourcesBuilder_.getMessageOrBuilderList();
@@ -2514,24 +2989,36 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder addDataSourcesBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder addDataSourcesBuilder() {
       return getDataSourcesFieldBuilder().addBuilder(
           ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder addDataSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder addDataSourcesBuilder(
         int index) {
       return getDataSourcesFieldBuilder().addBuilder(
           index, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+     * <pre>
+     * data_sources is deprecated; see data_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder> 
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder> 
          getDataSourcesBuilderList() {
       return getDataSourcesFieldBuilder().getBuilderList();
     }
@@ -3761,6 +4248,710 @@ private static final long serialVersionUID = 0L;
       isTotal_ = false;
       onChanged();
       return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList uniqueOn_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureUniqueOnIsMutable() {
+      if (!uniqueOn_.isModifiable()) {
+        uniqueOn_ = new com.google.protobuf.LazyStringArrayList(uniqueOn_);
+      }
+      bitField0_ |= 0x00080000;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @return A list containing the uniqueOn.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getUniqueOnList() {
+      uniqueOn_.makeImmutable();
+      return uniqueOn_;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @return The count of uniqueOn.
+     */
+    public int getUniqueOnCount() {
+      return uniqueOn_.size();
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param index The index of the element to return.
+     * @return The uniqueOn at the given index.
+     */
+    public java.lang.String getUniqueOn(int index) {
+      return uniqueOn_.get(index);
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the uniqueOn at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getUniqueOnBytes(int index) {
+      return uniqueOn_.getByteString(index);
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param index The index to set the value at.
+     * @param value The uniqueOn to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUniqueOn(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureUniqueOnIsMutable();
+      uniqueOn_.set(index, value);
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param value The uniqueOn to add.
+     * @return This builder for chaining.
+     */
+    public Builder addUniqueOn(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureUniqueOnIsMutable();
+      uniqueOn_.add(value);
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param values The uniqueOn to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllUniqueOn(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureUniqueOnIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, uniqueOn_);
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUniqueOn() {
+      uniqueOn_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00080000);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+     * @param value The bytes of the uniqueOn to add.
+     * @return This builder for chaining.
+     */
+    public Builder addUniqueOnBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureUniqueOnIsMutable();
+      uniqueOn_.add(value);
+      bitField0_ |= 0x00080000;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList partitionedBy_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensurePartitionedByIsMutable() {
+      if (!partitionedBy_.isModifiable()) {
+        partitionedBy_ = new com.google.protobuf.LazyStringArrayList(partitionedBy_);
+      }
+      bitField0_ |= 0x00100000;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @return A list containing the partitionedBy.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getPartitionedByList() {
+      partitionedBy_.makeImmutable();
+      return partitionedBy_;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @return The count of partitionedBy.
+     */
+    public int getPartitionedByCount() {
+      return partitionedBy_.size();
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param index The index of the element to return.
+     * @return The partitionedBy at the given index.
+     */
+    public java.lang.String getPartitionedBy(int index) {
+      return partitionedBy_.get(index);
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the partitionedBy at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getPartitionedByBytes(int index) {
+      return partitionedBy_.getByteString(index);
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param index The index to set the value at.
+     * @param value The partitionedBy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPartitionedBy(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensurePartitionedByIsMutable();
+      partitionedBy_.set(index, value);
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param value The partitionedBy to add.
+     * @return This builder for chaining.
+     */
+    public Builder addPartitionedBy(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensurePartitionedByIsMutable();
+      partitionedBy_.add(value);
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param values The partitionedBy to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllPartitionedBy(
+        java.lang.Iterable<java.lang.String> values) {
+      ensurePartitionedByIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, partitionedBy_);
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPartitionedBy() {
+      partitionedBy_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00100000);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+     * @param value The bytes of the partitionedBy to add.
+     * @return This builder for chaining.
+     */
+    public Builder addPartitionedByBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensurePartitionedByIsMutable();
+      partitionedBy_.add(value);
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> dataSourcesV2_ =
+      java.util.Collections.emptyList();
+    private void ensureDataSourcesV2IsMutable() {
+      if (!((bitField0_ & 0x00200000) != 0)) {
+        dataSourcesV2_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference>(dataSourcesV2_);
+        bitField0_ |= 0x00200000;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> dataSourcesV2Builder_;
+
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> getDataSourcesV2List() {
+      if (dataSourcesV2Builder_ == null) {
+        return java.util.Collections.unmodifiableList(dataSourcesV2_);
+      } else {
+        return dataSourcesV2Builder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public int getDataSourcesV2Count() {
+      if (dataSourcesV2Builder_ == null) {
+        return dataSourcesV2_.size();
+      } else {
+        return dataSourcesV2Builder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDataSourcesV2(int index) {
+      if (dataSourcesV2Builder_ == null) {
+        return dataSourcesV2_.get(index);
+      } else {
+        return dataSourcesV2Builder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder setDataSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference value) {
+      if (dataSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.set(index, value);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder setDataSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder builderForValue) {
+      if (dataSourcesV2Builder_ == null) {
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder addDataSourcesV2(ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference value) {
+      if (dataSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.add(value);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder addDataSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference value) {
+      if (dataSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.add(index, value);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder addDataSourcesV2(
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder builderForValue) {
+      if (dataSourcesV2Builder_ == null) {
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.add(builderForValue.build());
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder addDataSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder builderForValue) {
+      if (dataSourcesV2Builder_ == null) {
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder addAllDataSourcesV2(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> values) {
+      if (dataSourcesV2Builder_ == null) {
+        ensureDataSourcesV2IsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, dataSourcesV2_);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder clearDataSourcesV2() {
+      if (dataSourcesV2Builder_ == null) {
+        dataSourcesV2_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00200000);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public Builder removeDataSourcesV2(int index) {
+      if (dataSourcesV2Builder_ == null) {
+        ensureDataSourcesV2IsMutable();
+        dataSourcesV2_.remove(index);
+        onChanged();
+      } else {
+        dataSourcesV2Builder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder getDataSourcesV2Builder(
+        int index) {
+      return getDataSourcesV2FieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDataSourcesV2OrBuilder(
+        int index) {
+      if (dataSourcesV2Builder_ == null) {
+        return dataSourcesV2_.get(index);  } else {
+        return dataSourcesV2Builder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> 
+         getDataSourcesV2OrBuilderList() {
+      if (dataSourcesV2Builder_ != null) {
+        return dataSourcesV2Builder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(dataSourcesV2_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder addDataSourcesV2Builder() {
+      return getDataSourcesV2FieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder addDataSourcesV2Builder(
+        int index) {
+      return getDataSourcesV2FieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder> 
+         getDataSourcesV2BuilderList() {
+      return getDataSourcesV2FieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> 
+        getDataSourcesV2FieldBuilder() {
+      if (dataSourcesV2Builder_ == null) {
+        dataSourcesV2Builder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder>(
+                dataSourcesV2_,
+                ((bitField0_ & 0x00200000) != 0),
+                getParentForChildren(),
+                isClean());
+        dataSourcesV2_ = null;
+      }
+      return dataSourcesV2Builder_;
+    }
+
+    private ai.chalk.protos.chalk.expression.v1.LogicalExprNode staticOperation_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> staticOperationBuilder_;
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     * @return Whether the staticOperation field is set.
+     */
+    public boolean hasStaticOperation() {
+      return ((bitField0_ & 0x00400000) != 0);
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     * @return The staticOperation.
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode getStaticOperation() {
+      if (staticOperationBuilder_ == null) {
+        return staticOperation_ == null ? ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance() : staticOperation_;
+      } else {
+        return staticOperationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public Builder setStaticOperation(ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (staticOperationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        staticOperation_ = value;
+      } else {
+        staticOperationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public Builder setStaticOperation(
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder builderForValue) {
+      if (staticOperationBuilder_ == null) {
+        staticOperation_ = builderForValue.build();
+      } else {
+        staticOperationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public Builder mergeStaticOperation(ai.chalk.protos.chalk.expression.v1.LogicalExprNode value) {
+      if (staticOperationBuilder_ == null) {
+        if (((bitField0_ & 0x00400000) != 0) &&
+          staticOperation_ != null &&
+          staticOperation_ != ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance()) {
+          getStaticOperationBuilder().mergeFrom(value);
+        } else {
+          staticOperation_ = value;
+        }
+      } else {
+        staticOperationBuilder_.mergeFrom(value);
+      }
+      if (staticOperation_ != null) {
+        bitField0_ |= 0x00400000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public Builder clearStaticOperation() {
+      bitField0_ = (bitField0_ & ~0x00400000);
+      staticOperation_ = null;
+      if (staticOperationBuilder_ != null) {
+        staticOperationBuilder_.dispose();
+        staticOperationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder getStaticOperationBuilder() {
+      bitField0_ |= 0x00400000;
+      onChanged();
+      return getStaticOperationFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    public ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getStaticOperationOrBuilder() {
+      if (staticOperationBuilder_ != null) {
+        return staticOperationBuilder_.getMessageOrBuilder();
+      } else {
+        return staticOperation_ == null ?
+            ai.chalk.protos.chalk.expression.v1.LogicalExprNode.getDefaultInstance() : staticOperation_;
+      }
+    }
+    /**
+     * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder> 
+        getStaticOperationFieldBuilder() {
+      if (staticOperationBuilder_ == null) {
+        staticOperationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.expression.v1.LogicalExprNode, ai.chalk.protos.chalk.expression.v1.LogicalExprNode.Builder, ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder>(
+                getStaticOperation(),
+                getParentForChildren(),
+                isClean());
+        staticOperation_ = null;
+      }
+      return staticOperationBuilder_;
+    }
+
+    private ai.chalk.protos.chalk.graph.v1.SQLResolverSettings sqlSettings_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.SQLResolverSettings, ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.Builder, ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder> sqlSettingsBuilder_;
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     * @return Whether the sqlSettings field is set.
+     */
+    public boolean hasSqlSettings() {
+      return ((bitField0_ & 0x00800000) != 0);
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     * @return The sqlSettings.
+     */
+    public ai.chalk.protos.chalk.graph.v1.SQLResolverSettings getSqlSettings() {
+      if (sqlSettingsBuilder_ == null) {
+        return sqlSettings_ == null ? ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.getDefaultInstance() : sqlSettings_;
+      } else {
+        return sqlSettingsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public Builder setSqlSettings(ai.chalk.protos.chalk.graph.v1.SQLResolverSettings value) {
+      if (sqlSettingsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        sqlSettings_ = value;
+      } else {
+        sqlSettingsBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public Builder setSqlSettings(
+        ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.Builder builderForValue) {
+      if (sqlSettingsBuilder_ == null) {
+        sqlSettings_ = builderForValue.build();
+      } else {
+        sqlSettingsBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public Builder mergeSqlSettings(ai.chalk.protos.chalk.graph.v1.SQLResolverSettings value) {
+      if (sqlSettingsBuilder_ == null) {
+        if (((bitField0_ & 0x00800000) != 0) &&
+          sqlSettings_ != null &&
+          sqlSettings_ != ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.getDefaultInstance()) {
+          getSqlSettingsBuilder().mergeFrom(value);
+        } else {
+          sqlSettings_ = value;
+        }
+      } else {
+        sqlSettingsBuilder_.mergeFrom(value);
+      }
+      if (sqlSettings_ != null) {
+        bitField0_ |= 0x00800000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public Builder clearSqlSettings() {
+      bitField0_ = (bitField0_ & ~0x00800000);
+      sqlSettings_ = null;
+      if (sqlSettingsBuilder_ != null) {
+        sqlSettingsBuilder_.dispose();
+        sqlSettingsBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.Builder getSqlSettingsBuilder() {
+      bitField0_ |= 0x00800000;
+      onChanged();
+      return getSqlSettingsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder getSqlSettingsOrBuilder() {
+      if (sqlSettingsBuilder_ != null) {
+        return sqlSettingsBuilder_.getMessageOrBuilder();
+      } else {
+        return sqlSettings_ == null ?
+            ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.getDefaultInstance() : sqlSettings_;
+      }
+    }
+    /**
+     * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v1.SQLResolverSettings, ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.Builder, ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder> 
+        getSqlSettingsFieldBuilder() {
+      if (sqlSettingsBuilder_ == null) {
+        sqlSettingsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v1.SQLResolverSettings, ai.chalk.protos.chalk.graph.v1.SQLResolverSettings.Builder, ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder>(
+                getSqlSettings(),
+                getParentForChildren(),
+                isClean());
+        sqlSettings_ = null;
+      }
+      return sqlSettingsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

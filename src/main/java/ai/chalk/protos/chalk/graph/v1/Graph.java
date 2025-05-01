@@ -24,6 +24,9 @@ private static final long serialVersionUID = 0L;
     databaseSources_ = java.util.Collections.emptyList();
     streamSources_ = java.util.Collections.emptyList();
     namedQueries_ = java.util.Collections.emptyList();
+    databaseSourcesV2_ = java.util.Collections.emptyList();
+    databaseSourceGroups_ = java.util.Collections.emptyList();
+    streamSourcesV2_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -214,39 +217,59 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> databaseSources_;
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> getDatabaseSourcesList() {
+  @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> getDatabaseSourcesList() {
     return databaseSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
+  @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
       getDatabaseSourcesOrBuilderList() {
     return databaseSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public int getDatabaseSourcesCount() {
+  @java.lang.Deprecated public int getDatabaseSourcesCount() {
     return databaseSources_.size();
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index) {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index) {
     return databaseSources_.get(index);
   }
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
       int index) {
     return databaseSources_.get(index);
   }
@@ -255,39 +278,59 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> streamSources_;
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> getStreamSourcesList() {
+  @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> getStreamSourcesList() {
     return streamSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
+  @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
       getStreamSourcesOrBuilderList() {
     return streamSources_;
   }
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public int getStreamSourcesCount() {
+  @java.lang.Deprecated public int getStreamSourcesCount() {
     return streamSources_.size();
   }
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index) {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index) {
     return streamSources_.get(index);
   }
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
       int index) {
     return streamSources_.get(index);
   }
@@ -333,6 +376,129 @@ private static final long serialVersionUID = 0L;
     return namedQueries_.get(index);
   }
 
+  public static final int DATABASE_SOURCES_V2_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource> databaseSourcesV2_;
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource> getDatabaseSourcesV2List() {
+    return databaseSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder> 
+      getDatabaseSourcesV2OrBuilderList() {
+    return databaseSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public int getDatabaseSourcesV2Count() {
+    return databaseSourcesV2_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSource getDatabaseSourcesV2(int index) {
+    return databaseSourcesV2_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder getDatabaseSourcesV2OrBuilder(
+      int index) {
+    return databaseSourcesV2_.get(index);
+  }
+
+  public static final int DATABASE_SOURCE_GROUPS_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> databaseSourceGroups_;
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> getDatabaseSourceGroupsList() {
+    return databaseSourceGroups_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder> 
+      getDatabaseSourceGroupsOrBuilderList() {
+    return databaseSourceGroups_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  @java.lang.Override
+  public int getDatabaseSourceGroupsCount() {
+    return databaseSourceGroups_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup getDatabaseSourceGroups(int index) {
+    return databaseSourceGroups_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder getDatabaseSourceGroupsOrBuilder(
+      int index) {
+    return databaseSourceGroups_.get(index);
+  }
+
+  public static final int STREAM_SOURCES_V2_FIELD_NUMBER = 9;
+  @SuppressWarnings("serial")
+  private java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource> streamSourcesV2_;
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource> getStreamSourcesV2List() {
+    return streamSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder> 
+      getStreamSourcesV2OrBuilderList() {
+    return streamSourcesV2_;
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public int getStreamSourcesV2Count() {
+    return streamSourcesV2_.size();
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.StreamSource getStreamSourcesV2(int index) {
+    return streamSourcesV2_.get(index);
+  }
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder getStreamSourcesV2OrBuilder(
+      int index) {
+    return streamSourcesV2_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -367,6 +533,15 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < namedQueries_.size(); i++) {
       output.writeMessage(7, namedQueries_.get(i));
+    }
+    for (int i = 0; i < databaseSourcesV2_.size(); i++) {
+      output.writeMessage(8, databaseSourcesV2_.get(i));
+    }
+    for (int i = 0; i < streamSourcesV2_.size(); i++) {
+      output.writeMessage(9, streamSourcesV2_.get(i));
+    }
+    for (int i = 0; i < databaseSourceGroups_.size(); i++) {
+      output.writeMessage(10, databaseSourceGroups_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -405,6 +580,18 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(7, namedQueries_.get(i));
     }
+    for (int i = 0; i < databaseSourcesV2_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, databaseSourcesV2_.get(i));
+    }
+    for (int i = 0; i < streamSourcesV2_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, streamSourcesV2_.get(i));
+    }
+    for (int i = 0; i < databaseSourceGroups_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, databaseSourceGroups_.get(i));
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -434,6 +621,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getStreamSourcesList())) return false;
     if (!getNamedQueriesList()
         .equals(other.getNamedQueriesList())) return false;
+    if (!getDatabaseSourcesV2List()
+        .equals(other.getDatabaseSourcesV2List())) return false;
+    if (!getDatabaseSourceGroupsList()
+        .equals(other.getDatabaseSourceGroupsList())) return false;
+    if (!getStreamSourcesV2List()
+        .equals(other.getStreamSourcesV2List())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -472,6 +665,18 @@ private static final long serialVersionUID = 0L;
     if (getNamedQueriesCount() > 0) {
       hash = (37 * hash) + NAMED_QUERIES_FIELD_NUMBER;
       hash = (53 * hash) + getNamedQueriesList().hashCode();
+    }
+    if (getDatabaseSourcesV2Count() > 0) {
+      hash = (37 * hash) + DATABASE_SOURCES_V2_FIELD_NUMBER;
+      hash = (53 * hash) + getDatabaseSourcesV2List().hashCode();
+    }
+    if (getDatabaseSourceGroupsCount() > 0) {
+      hash = (37 * hash) + DATABASE_SOURCE_GROUPS_FIELD_NUMBER;
+      hash = (53 * hash) + getDatabaseSourceGroupsList().hashCode();
+    }
+    if (getStreamSourcesV2Count() > 0) {
+      hash = (37 * hash) + STREAM_SOURCES_V2_FIELD_NUMBER;
+      hash = (53 * hash) + getStreamSourcesV2List().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -653,6 +858,27 @@ private static final long serialVersionUID = 0L;
         namedQueriesBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000040);
+      if (databaseSourcesV2Builder_ == null) {
+        databaseSourcesV2_ = java.util.Collections.emptyList();
+      } else {
+        databaseSourcesV2_ = null;
+        databaseSourcesV2Builder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000080);
+      if (databaseSourceGroupsBuilder_ == null) {
+        databaseSourceGroups_ = java.util.Collections.emptyList();
+      } else {
+        databaseSourceGroups_ = null;
+        databaseSourceGroupsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000100);
+      if (streamSourcesV2Builder_ == null) {
+        streamSourcesV2_ = java.util.Collections.emptyList();
+      } else {
+        streamSourcesV2_ = null;
+        streamSourcesV2Builder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000200);
       return this;
     }
 
@@ -748,6 +974,33 @@ private static final long serialVersionUID = 0L;
         result.namedQueries_ = namedQueries_;
       } else {
         result.namedQueries_ = namedQueriesBuilder_.build();
+      }
+      if (databaseSourcesV2Builder_ == null) {
+        if (((bitField0_ & 0x00000080) != 0)) {
+          databaseSourcesV2_ = java.util.Collections.unmodifiableList(databaseSourcesV2_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.databaseSourcesV2_ = databaseSourcesV2_;
+      } else {
+        result.databaseSourcesV2_ = databaseSourcesV2Builder_.build();
+      }
+      if (databaseSourceGroupsBuilder_ == null) {
+        if (((bitField0_ & 0x00000100) != 0)) {
+          databaseSourceGroups_ = java.util.Collections.unmodifiableList(databaseSourceGroups_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.databaseSourceGroups_ = databaseSourceGroups_;
+      } else {
+        result.databaseSourceGroups_ = databaseSourceGroupsBuilder_.build();
+      }
+      if (streamSourcesV2Builder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0)) {
+          streamSourcesV2_ = java.util.Collections.unmodifiableList(streamSourcesV2_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.streamSourcesV2_ = streamSourcesV2_;
+      } else {
+        result.streamSourcesV2_ = streamSourcesV2Builder_.build();
       }
     }
 
@@ -981,6 +1234,84 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (databaseSourcesV2Builder_ == null) {
+        if (!other.databaseSourcesV2_.isEmpty()) {
+          if (databaseSourcesV2_.isEmpty()) {
+            databaseSourcesV2_ = other.databaseSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureDatabaseSourcesV2IsMutable();
+            databaseSourcesV2_.addAll(other.databaseSourcesV2_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.databaseSourcesV2_.isEmpty()) {
+          if (databaseSourcesV2Builder_.isEmpty()) {
+            databaseSourcesV2Builder_.dispose();
+            databaseSourcesV2Builder_ = null;
+            databaseSourcesV2_ = other.databaseSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+            databaseSourcesV2Builder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getDatabaseSourcesV2FieldBuilder() : null;
+          } else {
+            databaseSourcesV2Builder_.addAllMessages(other.databaseSourcesV2_);
+          }
+        }
+      }
+      if (databaseSourceGroupsBuilder_ == null) {
+        if (!other.databaseSourceGroups_.isEmpty()) {
+          if (databaseSourceGroups_.isEmpty()) {
+            databaseSourceGroups_ = other.databaseSourceGroups_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureDatabaseSourceGroupsIsMutable();
+            databaseSourceGroups_.addAll(other.databaseSourceGroups_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.databaseSourceGroups_.isEmpty()) {
+          if (databaseSourceGroupsBuilder_.isEmpty()) {
+            databaseSourceGroupsBuilder_.dispose();
+            databaseSourceGroupsBuilder_ = null;
+            databaseSourceGroups_ = other.databaseSourceGroups_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+            databaseSourceGroupsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getDatabaseSourceGroupsFieldBuilder() : null;
+          } else {
+            databaseSourceGroupsBuilder_.addAllMessages(other.databaseSourceGroups_);
+          }
+        }
+      }
+      if (streamSourcesV2Builder_ == null) {
+        if (!other.streamSourcesV2_.isEmpty()) {
+          if (streamSourcesV2_.isEmpty()) {
+            streamSourcesV2_ = other.streamSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+          } else {
+            ensureStreamSourcesV2IsMutable();
+            streamSourcesV2_.addAll(other.streamSourcesV2_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.streamSourcesV2_.isEmpty()) {
+          if (streamSourcesV2Builder_.isEmpty()) {
+            streamSourcesV2Builder_.dispose();
+            streamSourcesV2Builder_ = null;
+            streamSourcesV2_ = other.streamSourcesV2_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+            streamSourcesV2Builder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getStreamSourcesV2FieldBuilder() : null;
+          } else {
+            streamSourcesV2Builder_.addAllMessages(other.streamSourcesV2_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1098,6 +1429,45 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 58
+            case 66: {
+              ai.chalk.protos.chalk.graph.v2.DatabaseSource m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v2.DatabaseSource.parser(),
+                      extensionRegistry);
+              if (databaseSourcesV2Builder_ == null) {
+                ensureDatabaseSourcesV2IsMutable();
+                databaseSourcesV2_.add(m);
+              } else {
+                databaseSourcesV2Builder_.addMessage(m);
+              }
+              break;
+            } // case 66
+            case 74: {
+              ai.chalk.protos.chalk.graph.v2.StreamSource m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v2.StreamSource.parser(),
+                      extensionRegistry);
+              if (streamSourcesV2Builder_ == null) {
+                ensureStreamSourcesV2IsMutable();
+                streamSourcesV2_.add(m);
+              } else {
+                streamSourcesV2Builder_.addMessage(m);
+              }
+              break;
+            } // case 74
+            case 82: {
+              ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup m =
+                  input.readMessage(
+                      ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.parser(),
+                      extensionRegistry);
+              if (databaseSourceGroupsBuilder_ == null) {
+                ensureDatabaseSourceGroupsIsMutable();
+                databaseSourceGroups_.add(m);
+              } else {
+                databaseSourceGroupsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2088,9 +2458,13 @@ private static final long serialVersionUID = 0L;
         ai.chalk.protos.chalk.graph.v1.DatabaseSource, ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder, ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> databaseSourcesBuilder_;
 
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> getDatabaseSourcesList() {
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> getDatabaseSourcesList() {
       if (databaseSourcesBuilder_ == null) {
         return java.util.Collections.unmodifiableList(databaseSources_);
       } else {
@@ -2098,9 +2472,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public int getDatabaseSourcesCount() {
+    @java.lang.Deprecated public int getDatabaseSourcesCount() {
       if (databaseSourcesBuilder_ == null) {
         return databaseSources_.size();
       } else {
@@ -2108,9 +2486,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index) {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index) {
       if (databaseSourcesBuilder_ == null) {
         return databaseSources_.get(index);
       } else {
@@ -2118,9 +2500,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder setDatabaseSources(
+    @java.lang.Deprecated public Builder setDatabaseSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSource value) {
       if (databaseSourcesBuilder_ == null) {
         if (value == null) {
@@ -2135,9 +2521,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder setDatabaseSources(
+    @java.lang.Deprecated public Builder setDatabaseSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder builderForValue) {
       if (databaseSourcesBuilder_ == null) {
         ensureDatabaseSourcesIsMutable();
@@ -2149,9 +2539,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder addDatabaseSources(ai.chalk.protos.chalk.graph.v1.DatabaseSource value) {
+    @java.lang.Deprecated public Builder addDatabaseSources(ai.chalk.protos.chalk.graph.v1.DatabaseSource value) {
       if (databaseSourcesBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2165,9 +2559,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder addDatabaseSources(
+    @java.lang.Deprecated public Builder addDatabaseSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSource value) {
       if (databaseSourcesBuilder_ == null) {
         if (value == null) {
@@ -2182,9 +2580,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder addDatabaseSources(
+    @java.lang.Deprecated public Builder addDatabaseSources(
         ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder builderForValue) {
       if (databaseSourcesBuilder_ == null) {
         ensureDatabaseSourcesIsMutable();
@@ -2196,9 +2598,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder addDatabaseSources(
+    @java.lang.Deprecated public Builder addDatabaseSources(
         int index, ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder builderForValue) {
       if (databaseSourcesBuilder_ == null) {
         ensureDatabaseSourcesIsMutable();
@@ -2210,9 +2616,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder addAllDatabaseSources(
+    @java.lang.Deprecated public Builder addAllDatabaseSources(
         java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSource> values) {
       if (databaseSourcesBuilder_ == null) {
         ensureDatabaseSourcesIsMutable();
@@ -2225,9 +2635,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder clearDatabaseSources() {
+    @java.lang.Deprecated public Builder clearDatabaseSources() {
       if (databaseSourcesBuilder_ == null) {
         databaseSources_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -2238,9 +2652,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public Builder removeDatabaseSources(int index) {
+    @java.lang.Deprecated public Builder removeDatabaseSources(int index) {
       if (databaseSourcesBuilder_ == null) {
         ensureDatabaseSourcesIsMutable();
         databaseSources_.remove(index);
@@ -2251,16 +2669,24 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder getDatabaseSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder getDatabaseSourcesBuilder(
         int index) {
       return getDatabaseSourcesFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
         int index) {
       if (databaseSourcesBuilder_ == null) {
         return databaseSources_.get(index);  } else {
@@ -2268,9 +2694,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
          getDatabaseSourcesOrBuilderList() {
       if (databaseSourcesBuilder_ != null) {
         return databaseSourcesBuilder_.getMessageOrBuilderList();
@@ -2279,24 +2709,36 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder addDatabaseSourcesBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder addDatabaseSourcesBuilder() {
       return getDatabaseSourcesFieldBuilder().addBuilder(
           ai.chalk.protos.chalk.graph.v1.DatabaseSource.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder addDatabaseSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder addDatabaseSourcesBuilder(
         int index) {
       return getDatabaseSourcesFieldBuilder().addBuilder(
           index, ai.chalk.protos.chalk.graph.v1.DatabaseSource.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+     * <pre>
+     * database_sources is deprecated; see database_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder> 
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource.Builder> 
          getDatabaseSourcesBuilderList() {
       return getDatabaseSourcesFieldBuilder().getBuilderList();
     }
@@ -2328,9 +2770,13 @@ private static final long serialVersionUID = 0L;
         ai.chalk.protos.chalk.graph.v1.StreamSource, ai.chalk.protos.chalk.graph.v1.StreamSource.Builder, ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> streamSourcesBuilder_;
 
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> getStreamSourcesList() {
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> getStreamSourcesList() {
       if (streamSourcesBuilder_ == null) {
         return java.util.Collections.unmodifiableList(streamSources_);
       } else {
@@ -2338,9 +2784,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public int getStreamSourcesCount() {
+    @java.lang.Deprecated public int getStreamSourcesCount() {
       if (streamSourcesBuilder_ == null) {
         return streamSources_.size();
       } else {
@@ -2348,9 +2798,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index) {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index) {
       if (streamSourcesBuilder_ == null) {
         return streamSources_.get(index);
       } else {
@@ -2358,9 +2812,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder setStreamSources(
+    @java.lang.Deprecated public Builder setStreamSources(
         int index, ai.chalk.protos.chalk.graph.v1.StreamSource value) {
       if (streamSourcesBuilder_ == null) {
         if (value == null) {
@@ -2375,9 +2833,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder setStreamSources(
+    @java.lang.Deprecated public Builder setStreamSources(
         int index, ai.chalk.protos.chalk.graph.v1.StreamSource.Builder builderForValue) {
       if (streamSourcesBuilder_ == null) {
         ensureStreamSourcesIsMutable();
@@ -2389,9 +2851,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder addStreamSources(ai.chalk.protos.chalk.graph.v1.StreamSource value) {
+    @java.lang.Deprecated public Builder addStreamSources(ai.chalk.protos.chalk.graph.v1.StreamSource value) {
       if (streamSourcesBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2405,9 +2871,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder addStreamSources(
+    @java.lang.Deprecated public Builder addStreamSources(
         int index, ai.chalk.protos.chalk.graph.v1.StreamSource value) {
       if (streamSourcesBuilder_ == null) {
         if (value == null) {
@@ -2422,9 +2892,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder addStreamSources(
+    @java.lang.Deprecated public Builder addStreamSources(
         ai.chalk.protos.chalk.graph.v1.StreamSource.Builder builderForValue) {
       if (streamSourcesBuilder_ == null) {
         ensureStreamSourcesIsMutable();
@@ -2436,9 +2910,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder addStreamSources(
+    @java.lang.Deprecated public Builder addStreamSources(
         int index, ai.chalk.protos.chalk.graph.v1.StreamSource.Builder builderForValue) {
       if (streamSourcesBuilder_ == null) {
         ensureStreamSourcesIsMutable();
@@ -2450,9 +2928,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder addAllStreamSources(
+    @java.lang.Deprecated public Builder addAllStreamSources(
         java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v1.StreamSource> values) {
       if (streamSourcesBuilder_ == null) {
         ensureStreamSourcesIsMutable();
@@ -2465,9 +2947,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder clearStreamSources() {
+    @java.lang.Deprecated public Builder clearStreamSources() {
       if (streamSourcesBuilder_ == null) {
         streamSources_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -2478,9 +2964,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public Builder removeStreamSources(int index) {
+    @java.lang.Deprecated public Builder removeStreamSources(int index) {
       if (streamSourcesBuilder_ == null) {
         ensureStreamSourcesIsMutable();
         streamSources_.remove(index);
@@ -2491,16 +2981,24 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder getStreamSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder getStreamSourcesBuilder(
         int index) {
       return getStreamSourcesFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
         int index) {
       if (streamSourcesBuilder_ == null) {
         return streamSources_.get(index);  } else {
@@ -2508,9 +3006,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
          getStreamSourcesOrBuilderList() {
       if (streamSourcesBuilder_ != null) {
         return streamSourcesBuilder_.getMessageOrBuilderList();
@@ -2519,24 +3021,36 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder addStreamSourcesBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder addStreamSourcesBuilder() {
       return getStreamSourcesFieldBuilder().addBuilder(
           ai.chalk.protos.chalk.graph.v1.StreamSource.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder addStreamSourcesBuilder(
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSource.Builder addStreamSourcesBuilder(
         int index) {
       return getStreamSourcesFieldBuilder().addBuilder(
           index, ai.chalk.protos.chalk.graph.v1.StreamSource.getDefaultInstance());
     }
     /**
-     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+     * <pre>
+     * stream_sources is deprecated; see stream_sources_v2
+     * </pre>
+     *
+     * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
      */
-    public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource.Builder> 
+    @java.lang.Deprecated public java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource.Builder> 
          getStreamSourcesBuilderList() {
       return getStreamSourcesFieldBuilder().getBuilderList();
     }
@@ -2793,6 +3307,726 @@ private static final long serialVersionUID = 0L;
         namedQueries_ = null;
       }
       return namedQueriesBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource> databaseSourcesV2_ =
+      java.util.Collections.emptyList();
+    private void ensureDatabaseSourcesV2IsMutable() {
+      if (!((bitField0_ & 0x00000080) != 0)) {
+        databaseSourcesV2_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v2.DatabaseSource>(databaseSourcesV2_);
+        bitField0_ |= 0x00000080;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSource, ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder> databaseSourcesV2Builder_;
+
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource> getDatabaseSourcesV2List() {
+      if (databaseSourcesV2Builder_ == null) {
+        return java.util.Collections.unmodifiableList(databaseSourcesV2_);
+      } else {
+        return databaseSourcesV2Builder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public int getDatabaseSourcesV2Count() {
+      if (databaseSourcesV2Builder_ == null) {
+        return databaseSourcesV2_.size();
+      } else {
+        return databaseSourcesV2Builder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSource getDatabaseSourcesV2(int index) {
+      if (databaseSourcesV2Builder_ == null) {
+        return databaseSourcesV2_.get(index);
+      } else {
+        return databaseSourcesV2Builder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder setDatabaseSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSource value) {
+      if (databaseSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.set(index, value);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder setDatabaseSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder builderForValue) {
+      if (databaseSourcesV2Builder_ == null) {
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder addDatabaseSourcesV2(ai.chalk.protos.chalk.graph.v2.DatabaseSource value) {
+      if (databaseSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.add(value);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder addDatabaseSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSource value) {
+      if (databaseSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.add(index, value);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder addDatabaseSourcesV2(
+        ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder builderForValue) {
+      if (databaseSourcesV2Builder_ == null) {
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.add(builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder addDatabaseSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder builderForValue) {
+      if (databaseSourcesV2Builder_ == null) {
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder addAllDatabaseSourcesV2(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSource> values) {
+      if (databaseSourcesV2Builder_ == null) {
+        ensureDatabaseSourcesV2IsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, databaseSourcesV2_);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder clearDatabaseSourcesV2() {
+      if (databaseSourcesV2Builder_ == null) {
+        databaseSourcesV2_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public Builder removeDatabaseSourcesV2(int index) {
+      if (databaseSourcesV2Builder_ == null) {
+        ensureDatabaseSourcesV2IsMutable();
+        databaseSourcesV2_.remove(index);
+        onChanged();
+      } else {
+        databaseSourcesV2Builder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder getDatabaseSourcesV2Builder(
+        int index) {
+      return getDatabaseSourcesV2FieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder getDatabaseSourcesV2OrBuilder(
+        int index) {
+      if (databaseSourcesV2Builder_ == null) {
+        return databaseSourcesV2_.get(index);  } else {
+        return databaseSourcesV2Builder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder> 
+         getDatabaseSourcesV2OrBuilderList() {
+      if (databaseSourcesV2Builder_ != null) {
+        return databaseSourcesV2Builder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(databaseSourcesV2_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder addDatabaseSourcesV2Builder() {
+      return getDatabaseSourcesV2FieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v2.DatabaseSource.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder addDatabaseSourcesV2Builder(
+        int index) {
+      return getDatabaseSourcesV2FieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v2.DatabaseSource.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder> 
+         getDatabaseSourcesV2BuilderList() {
+      return getDatabaseSourcesV2FieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSource, ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder> 
+        getDatabaseSourcesV2FieldBuilder() {
+      if (databaseSourcesV2Builder_ == null) {
+        databaseSourcesV2Builder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.DatabaseSource, ai.chalk.protos.chalk.graph.v2.DatabaseSource.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder>(
+                databaseSourcesV2_,
+                ((bitField0_ & 0x00000080) != 0),
+                getParentForChildren(),
+                isClean());
+        databaseSourcesV2_ = null;
+      }
+      return databaseSourcesV2Builder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> databaseSourceGroups_ =
+      java.util.Collections.emptyList();
+    private void ensureDatabaseSourceGroupsIsMutable() {
+      if (!((bitField0_ & 0x00000100) != 0)) {
+        databaseSourceGroups_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup>(databaseSourceGroups_);
+        bitField0_ |= 0x00000100;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder> databaseSourceGroupsBuilder_;
+
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> getDatabaseSourceGroupsList() {
+      if (databaseSourceGroupsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(databaseSourceGroups_);
+      } else {
+        return databaseSourceGroupsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public int getDatabaseSourceGroupsCount() {
+      if (databaseSourceGroupsBuilder_ == null) {
+        return databaseSourceGroups_.size();
+      } else {
+        return databaseSourceGroupsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup getDatabaseSourceGroups(int index) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        return databaseSourceGroups_.get(index);
+      } else {
+        return databaseSourceGroupsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder setDatabaseSourceGroups(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup value) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.set(index, value);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder setDatabaseSourceGroups(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder builderForValue) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder addDatabaseSourceGroups(ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup value) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.add(value);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder addDatabaseSourceGroups(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup value) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.add(index, value);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder addDatabaseSourceGroups(
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder builderForValue) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.add(builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder addDatabaseSourceGroups(
+        int index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder builderForValue) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder addAllDatabaseSourceGroups(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> values) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        ensureDatabaseSourceGroupsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, databaseSourceGroups_);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder clearDatabaseSourceGroups() {
+      if (databaseSourceGroupsBuilder_ == null) {
+        databaseSourceGroups_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public Builder removeDatabaseSourceGroups(int index) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        ensureDatabaseSourceGroupsIsMutable();
+        databaseSourceGroups_.remove(index);
+        onChanged();
+      } else {
+        databaseSourceGroupsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder getDatabaseSourceGroupsBuilder(
+        int index) {
+      return getDatabaseSourceGroupsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder getDatabaseSourceGroupsOrBuilder(
+        int index) {
+      if (databaseSourceGroupsBuilder_ == null) {
+        return databaseSourceGroups_.get(index);  } else {
+        return databaseSourceGroupsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder> 
+         getDatabaseSourceGroupsOrBuilderList() {
+      if (databaseSourceGroupsBuilder_ != null) {
+        return databaseSourceGroupsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(databaseSourceGroups_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder addDatabaseSourceGroupsBuilder() {
+      return getDatabaseSourceGroupsFieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder addDatabaseSourceGroupsBuilder(
+        int index) {
+      return getDatabaseSourceGroupsFieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder> 
+         getDatabaseSourceGroupsBuilderList() {
+      return getDatabaseSourceGroupsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder> 
+        getDatabaseSourceGroupsFieldBuilder() {
+      if (databaseSourceGroupsBuilder_ == null) {
+        databaseSourceGroupsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder>(
+                databaseSourceGroups_,
+                ((bitField0_ & 0x00000100) != 0),
+                getParentForChildren(),
+                isClean());
+        databaseSourceGroups_ = null;
+      }
+      return databaseSourceGroupsBuilder_;
+    }
+
+    private java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource> streamSourcesV2_ =
+      java.util.Collections.emptyList();
+    private void ensureStreamSourcesV2IsMutable() {
+      if (!((bitField0_ & 0x00000200) != 0)) {
+        streamSourcesV2_ = new java.util.ArrayList<ai.chalk.protos.chalk.graph.v2.StreamSource>(streamSourcesV2_);
+        bitField0_ |= 0x00000200;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.StreamSource, ai.chalk.protos.chalk.graph.v2.StreamSource.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder> streamSourcesV2Builder_;
+
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource> getStreamSourcesV2List() {
+      if (streamSourcesV2Builder_ == null) {
+        return java.util.Collections.unmodifiableList(streamSourcesV2_);
+      } else {
+        return streamSourcesV2Builder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public int getStreamSourcesV2Count() {
+      if (streamSourcesV2Builder_ == null) {
+        return streamSourcesV2_.size();
+      } else {
+        return streamSourcesV2Builder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSource getStreamSourcesV2(int index) {
+      if (streamSourcesV2Builder_ == null) {
+        return streamSourcesV2_.get(index);
+      } else {
+        return streamSourcesV2Builder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder setStreamSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.StreamSource value) {
+      if (streamSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.set(index, value);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder setStreamSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.StreamSource.Builder builderForValue) {
+      if (streamSourcesV2Builder_ == null) {
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder addStreamSourcesV2(ai.chalk.protos.chalk.graph.v2.StreamSource value) {
+      if (streamSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.add(value);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder addStreamSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.StreamSource value) {
+      if (streamSourcesV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.add(index, value);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder addStreamSourcesV2(
+        ai.chalk.protos.chalk.graph.v2.StreamSource.Builder builderForValue) {
+      if (streamSourcesV2Builder_ == null) {
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.add(builderForValue.build());
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder addStreamSourcesV2(
+        int index, ai.chalk.protos.chalk.graph.v2.StreamSource.Builder builderForValue) {
+      if (streamSourcesV2Builder_ == null) {
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder addAllStreamSourcesV2(
+        java.lang.Iterable<? extends ai.chalk.protos.chalk.graph.v2.StreamSource> values) {
+      if (streamSourcesV2Builder_ == null) {
+        ensureStreamSourcesV2IsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, streamSourcesV2_);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder clearStreamSourcesV2() {
+      if (streamSourcesV2Builder_ == null) {
+        streamSourcesV2_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public Builder removeStreamSourcesV2(int index) {
+      if (streamSourcesV2Builder_ == null) {
+        ensureStreamSourcesV2IsMutable();
+        streamSourcesV2_.remove(index);
+        onChanged();
+      } else {
+        streamSourcesV2Builder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSource.Builder getStreamSourcesV2Builder(
+        int index) {
+      return getStreamSourcesV2FieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder getStreamSourcesV2OrBuilder(
+        int index) {
+      if (streamSourcesV2Builder_ == null) {
+        return streamSourcesV2_.get(index);  } else {
+        return streamSourcesV2Builder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public java.util.List<? extends ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder> 
+         getStreamSourcesV2OrBuilderList() {
+      if (streamSourcesV2Builder_ != null) {
+        return streamSourcesV2Builder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(streamSourcesV2_);
+      }
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSource.Builder addStreamSourcesV2Builder() {
+      return getStreamSourcesV2FieldBuilder().addBuilder(
+          ai.chalk.protos.chalk.graph.v2.StreamSource.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSource.Builder addStreamSourcesV2Builder(
+        int index) {
+      return getStreamSourcesV2FieldBuilder().addBuilder(
+          index, ai.chalk.protos.chalk.graph.v2.StreamSource.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+     */
+    public java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource.Builder> 
+         getStreamSourcesV2BuilderList() {
+      return getStreamSourcesV2FieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.StreamSource, ai.chalk.protos.chalk.graph.v2.StreamSource.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder> 
+        getStreamSourcesV2FieldBuilder() {
+      if (streamSourcesV2Builder_ == null) {
+        streamSourcesV2Builder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.StreamSource, ai.chalk.protos.chalk.graph.v2.StreamSource.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder>(
+                streamSourcesV2_,
+                ((bitField0_ & 0x00000200) != 0),
+                getParentForChildren(),
+                isClean());
+        streamSourcesV2_ = null;
+      }
+      return streamSourcesV2Builder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

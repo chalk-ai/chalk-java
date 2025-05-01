@@ -42,6 +42,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.CreateClusterBackgroundPersistenceRequest.class, ai.chalk.protos.chalk.server.v1.CreateClusterBackgroundPersistenceRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ENVIRONMENT_IDS_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private com.google.protobuf.LazyStringArrayList environmentIds_ =
@@ -83,11 +84,17 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object specsString_ = "";
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <pre>
+   * use specs instead
+   * </pre>
+   *
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=267
    * @return The specsString.
    */
   @java.lang.Override
-  public java.lang.String getSpecsString() {
+  @java.lang.Deprecated public java.lang.String getSpecsString() {
     java.lang.Object ref = specsString_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
@@ -100,11 +107,17 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string specs_string = 2 [json_name = "specsString"];</code>
+   * <pre>
+   * use specs instead
+   * </pre>
+   *
+   * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+   * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+   *     See chalk/server/v1/builder.proto;l=267
    * @return The bytes for specsString.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
+  @java.lang.Deprecated public com.google.protobuf.ByteString
       getSpecsStringBytes() {
     java.lang.Object ref = specsString_;
     if (ref instanceof java.lang.String) {
@@ -116,6 +129,32 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int SPECS_FIELD_NUMBER = 3;
+  private ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs_;
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   * @return Whether the specs field is set.
+   */
+  @java.lang.Override
+  public boolean hasSpecs() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   * @return The specs.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs getSpecs() {
+    return specs_ == null ? ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.getDefaultInstance() : specs_;
+  }
+  /**
+   * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder getSpecsOrBuilder() {
+    return specs_ == null ? ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.getDefaultInstance() : specs_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -138,6 +177,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(specsString_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, specsString_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(3, getSpecs());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -158,6 +200,10 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(specsString_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, specsString_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, getSpecs());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -177,6 +223,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getEnvironmentIdsList())) return false;
     if (!getSpecsString()
         .equals(other.getSpecsString())) return false;
+    if (hasSpecs() != other.hasSpecs()) return false;
+    if (hasSpecs()) {
+      if (!getSpecs()
+          .equals(other.getSpecs())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -194,6 +245,10 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + SPECS_STRING_FIELD_NUMBER;
     hash = (53 * hash) + getSpecsString().hashCode();
+    if (hasSpecs()) {
+      hash = (37 * hash) + SPECS_FIELD_NUMBER;
+      hash = (53 * hash) + getSpecs().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -313,13 +368,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.server.v1.CreateClusterBackgroundPersistenceRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getSpecsFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -328,6 +389,11 @@ private static final long serialVersionUID = 0L;
       environmentIds_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       specsString_ = "";
+      specs_ = null;
+      if (specsBuilder_ != null) {
+        specsBuilder_.dispose();
+        specsBuilder_ = null;
+      }
       return this;
     }
 
@@ -368,6 +434,14 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.specsString_ = specsString_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.specs_ = specsBuilder_ == null
+            ? specs_
+            : specsBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -429,6 +503,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
+      if (other.hasSpecs()) {
+        mergeSpecs(other.getSpecs());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -466,6 +543,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              input.readMessage(
+                  getSpecsFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -596,10 +680,16 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object specsString_ = "";
     /**
-     * <code>string specs_string = 2 [json_name = "specsString"];</code>
+     * <pre>
+     * use specs instead
+     * </pre>
+     *
+     * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+     * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+     *     See chalk/server/v1/builder.proto;l=267
      * @return The specsString.
      */
-    public java.lang.String getSpecsString() {
+    @java.lang.Deprecated public java.lang.String getSpecsString() {
       java.lang.Object ref = specsString_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
@@ -612,10 +702,16 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string specs_string = 2 [json_name = "specsString"];</code>
+     * <pre>
+     * use specs instead
+     * </pre>
+     *
+     * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+     * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+     *     See chalk/server/v1/builder.proto;l=267
      * @return The bytes for specsString.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getSpecsStringBytes() {
       java.lang.Object ref = specsString_;
       if (ref instanceof String) {
@@ -629,11 +725,17 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string specs_string = 2 [json_name = "specsString"];</code>
+     * <pre>
+     * use specs instead
+     * </pre>
+     *
+     * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+     * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+     *     See chalk/server/v1/builder.proto;l=267
      * @param value The specsString to set.
      * @return This builder for chaining.
      */
-    public Builder setSpecsString(
+    @java.lang.Deprecated public Builder setSpecsString(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       specsString_ = value;
@@ -642,21 +744,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string specs_string = 2 [json_name = "specsString"];</code>
+     * <pre>
+     * use specs instead
+     * </pre>
+     *
+     * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+     * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+     *     See chalk/server/v1/builder.proto;l=267
      * @return This builder for chaining.
      */
-    public Builder clearSpecsString() {
+    @java.lang.Deprecated public Builder clearSpecsString() {
       specsString_ = getDefaultInstance().getSpecsString();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string specs_string = 2 [json_name = "specsString"];</code>
+     * <pre>
+     * use specs instead
+     * </pre>
+     *
+     * <code>string specs_string = 2 [json_name = "specsString", deprecated = true];</code>
+     * @deprecated chalk.server.v1.CreateClusterBackgroundPersistenceRequest.specs_string is deprecated.
+     *     See chalk/server/v1/builder.proto;l=267
      * @param value The bytes for specsString to set.
      * @return This builder for chaining.
      */
-    public Builder setSpecsStringBytes(
+    @java.lang.Deprecated public Builder setSpecsStringBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
@@ -664,6 +778,127 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.Builder, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder> specsBuilder_;
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     * @return Whether the specs field is set.
+     */
+    public boolean hasSpecs() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     * @return The specs.
+     */
+    public ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs getSpecs() {
+      if (specsBuilder_ == null) {
+        return specs_ == null ? ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.getDefaultInstance() : specs_;
+      } else {
+        return specsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public Builder setSpecs(ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs value) {
+      if (specsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        specs_ = value;
+      } else {
+        specsBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public Builder setSpecs(
+        ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.Builder builderForValue) {
+      if (specsBuilder_ == null) {
+        specs_ = builderForValue.build();
+      } else {
+        specsBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public Builder mergeSpecs(ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs value) {
+      if (specsBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0) &&
+          specs_ != null &&
+          specs_ != ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.getDefaultInstance()) {
+          getSpecsBuilder().mergeFrom(value);
+        } else {
+          specs_ = value;
+        }
+      } else {
+        specsBuilder_.mergeFrom(value);
+      }
+      if (specs_ != null) {
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public Builder clearSpecs() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      specs_ = null;
+      if (specsBuilder_ != null) {
+        specsBuilder_.dispose();
+        specsBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.Builder getSpecsBuilder() {
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return getSpecsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    public ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder getSpecsOrBuilder() {
+      if (specsBuilder_ != null) {
+        return specsBuilder_.getMessageOrBuilder();
+      } else {
+        return specs_ == null ?
+            ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.getDefaultInstance() : specs_;
+      }
+    }
+    /**
+     * <code>.chalk.server.v1.BackgroundPersistenceDeploymentSpecs specs = 3 [json_name = "specs"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.Builder, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder> 
+        getSpecsFieldBuilder() {
+      if (specsBuilder_ == null) {
+        specsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecs.Builder, ai.chalk.protos.chalk.server.v1.BackgroundPersistenceDeploymentSpecsOrBuilder>(
+                getSpecs(),
+                getParentForChildren(),
+                isClean());
+        specs_ = null;
+      }
+      return specsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

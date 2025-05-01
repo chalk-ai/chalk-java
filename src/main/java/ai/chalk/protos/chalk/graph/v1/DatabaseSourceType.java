@@ -57,6 +57,10 @@ public enum DatabaseSourceType
    * <code>DATABASE_SOURCE_TYPE_DYNAMODB = 11;</code>
    */
   DATABASE_SOURCE_TYPE_DYNAMODB(11),
+  /**
+   * <code>DATABASE_SOURCE_TYPE_ATHENA = 12;</code>
+   */
+  DATABASE_SOURCE_TYPE_ATHENA(12),
   UNRECOGNIZED(-1),
   ;
 
@@ -108,6 +112,10 @@ public enum DatabaseSourceType
    * <code>DATABASE_SOURCE_TYPE_DYNAMODB = 11;</code>
    */
   public static final int DATABASE_SOURCE_TYPE_DYNAMODB_VALUE = 11;
+  /**
+   * <code>DATABASE_SOURCE_TYPE_ATHENA = 12;</code>
+   */
+  public static final int DATABASE_SOURCE_TYPE_ATHENA_VALUE = 12;
 
 
   public final int getNumber() {
@@ -146,6 +154,7 @@ public enum DatabaseSourceType
       case 9: return DATABASE_SOURCE_TYPE_SPANNER;
       case 10: return DATABASE_SOURCE_TYPE_TRINO;
       case 11: return DATABASE_SOURCE_TYPE_DYNAMODB;
+      case 12: return DATABASE_SOURCE_TYPE_ATHENA;
       default: return null;
     }
   }

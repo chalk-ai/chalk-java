@@ -9,17 +9,17 @@ package ai.chalk.protos.chalk.common.v1;
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    * @return Whether the chart field is set.
    */
   boolean hasChart();
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    * @return The chart.
    */
-  ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 getChart();
+  ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart getChart();
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    */
-  ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder getChartOrBuilder();
+  ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder getChartOrBuilder();
 }

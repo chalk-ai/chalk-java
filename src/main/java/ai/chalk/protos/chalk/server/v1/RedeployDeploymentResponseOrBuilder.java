@@ -15,7 +15,7 @@ public interface RedeployDeploymentResponseOrBuilder extends
    *
    * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
    * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=43
+   *     See chalk/server/v1/builder.proto;l=53
    * @return The buildId.
    */
   @java.lang.Deprecated java.lang.String getBuildId();
@@ -26,7 +26,7 @@ public interface RedeployDeploymentResponseOrBuilder extends
    *
    * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
    * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=43
+   *     See chalk/server/v1/builder.proto;l=53
    * @return The bytes for buildId.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString

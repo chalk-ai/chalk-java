@@ -7,19 +7,4 @@ package ai.chalk.protos.chalk.common.v1;
 @java.lang.Deprecated public interface GetFeatureValuesTimeSeriesChartResponseOrBuilder extends
     // @@protoc_insertion_point(interface_extends:chalk.common.v1.GetFeatureValuesTimeSeriesChartResponse)
     com.google.protobuf.MessageOrBuilder {
-
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   * @return Whether the chart field is set.
-   */
-  boolean hasChart();
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   * @return The chart.
-   */
-  ai.chalk.protos.chalk.server.v1.TimeSeriesChart getChart();
-  /**
-   * <code>.chalk.server.v1.TimeSeriesChart chart = 1 [json_name = "chart"];</code>
-   */
-  ai.chalk.protos.chalk.server.v1.TimeSeriesChartOrBuilder getChartOrBuilder();
 }

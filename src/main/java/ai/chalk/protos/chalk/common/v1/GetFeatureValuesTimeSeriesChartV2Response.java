@@ -41,9 +41,9 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int CHART_FIELD_NUMBER = 1;
-  private ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 chart_;
+  private ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart chart_;
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    * @return Whether the chart field is set.
    */
   @java.lang.Override
@@ -51,19 +51,19 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    * @return The chart.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 getChart() {
-    return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.getDefaultInstance() : chart_;
+  public ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart getChart() {
+    return chart_ == null ? ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.getDefaultInstance() : chart_;
   }
   /**
-   * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+   * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder getChartOrBuilder() {
-    return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.getDefaultInstance() : chart_;
+  public ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder getChartOrBuilder() {
+    return chart_ == null ? ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.getDefaultInstance() : chart_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -413,31 +413,31 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 chart_;
+    private ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart chart_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder> chartBuilder_;
+        ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.Builder, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder> chartBuilder_;
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      * @return Whether the chart field is set.
      */
     public boolean hasChart() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      * @return The chart.
      */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 getChart() {
+    public ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart getChart() {
       if (chartBuilder_ == null) {
-        return chart_ == null ? ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.getDefaultInstance() : chart_;
+        return chart_ == null ? ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.getDefaultInstance() : chart_;
       } else {
         return chartBuilder_.getMessage();
       }
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
-    public Builder setChart(ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 value) {
+    public Builder setChart(ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart value) {
       if (chartBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -451,10 +451,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
     public Builder setChart(
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.Builder builderForValue) {
+        ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.Builder builderForValue) {
       if (chartBuilder_ == null) {
         chart_ = builderForValue.build();
       } else {
@@ -465,13 +465,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
-    public Builder mergeChart(ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2 value) {
+    public Builder mergeChart(ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart value) {
       if (chartBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0) &&
           chart_ != null &&
-          chart_ != ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.getDefaultInstance()) {
+          chart_ != ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.getDefaultInstance()) {
           getChartBuilder().mergeFrom(value);
         } else {
           chart_ = value;
@@ -486,7 +486,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
     public Builder clearChart() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -499,33 +499,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.Builder getChartBuilder() {
+    public ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.Builder getChartBuilder() {
       bitField0_ |= 0x00000001;
       onChanged();
       return getChartFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
-    public ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder getChartOrBuilder() {
+    public ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder getChartOrBuilder() {
       if (chartBuilder_ != null) {
         return chartBuilder_.getMessageOrBuilder();
       } else {
         return chart_ == null ?
-            ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.getDefaultInstance() : chart_;
+            ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.getDefaultInstance() : chart_;
       }
     }
     /**
-     * <code>.chalk.server.v1.TimeSeriesChartV2 chart = 1 [json_name = "chart"];</code>
+     * <code>.chalk.chart.v1.DenseTimeSeriesChart chart = 1 [json_name = "chart"];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder> 
+        ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.Builder, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder> 
         getChartFieldBuilder() {
       if (chartBuilder_ == null) {
         chartBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2.Builder, ai.chalk.protos.chalk.server.v1.TimeSeriesChartV2OrBuilder>(
+            ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChart.Builder, ai.chalk.protos.chalk.chart.v1.DenseTimeSeriesChartOrBuilder>(
                 getChart(),
                 getParentForChildren(),
                 isClean());
