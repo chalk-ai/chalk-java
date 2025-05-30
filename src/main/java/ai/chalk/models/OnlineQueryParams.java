@@ -186,6 +186,10 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        protected T _withInput(SingleRowInput singleRowInput) {
+            return this._withInputs(singleRowInput.getInputs());
+        }
+
         protected T _withOutputs(String... outputs) {
             if (this.outputs == null) {
                 this.outputs = new ArrayList<>();
@@ -430,6 +434,10 @@ public class OnlineQueryParams {
             return this._withInputs(inputs);
         }
 
+        public BuilderComplete withInput(SingleRowInput singleRowInput) {
+            return this._withInput(singleRowInput);
+        }
+
         @SafeVarargs
         public final <T> BuilderComplete withInput(Feature<T> feature, T... values) {
             return this._withInput(feature, values);
@@ -557,6 +565,10 @@ public class OnlineQueryParams {
             return this._withInputs(inputs);
         }
 
+        public BuilderWithInputs withInput(SingleRowInput singleRowInput) {
+            return this._withInput(singleRowInput);
+        }
+
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... values) {
             return this._withInput(feature, values);
@@ -670,6 +682,10 @@ public class OnlineQueryParams {
 
         public final <T> BuilderComplete withInputs(Map<String, List<?>> inputs) {
             return newBuilderComplete()._withInputs(inputs);
+        }
+
+        public final BuilderComplete withInput(SingleRowInput singleRowInput) {
+            return newBuilderComplete()._withInput(singleRowInput);
         }
 
         public BuilderWithOutputs withOutputs(String... outputs) {
@@ -791,6 +807,10 @@ public class OnlineQueryParams {
             return newBuilderWithInputs().withInputs(inputs);
         }
 
+        public BuilderWithInputs withInput(SingleRowInput singleRowInput) {
+            return newBuilderWithInputs().withInput(singleRowInput);
+        }
+
         @SafeVarargs
         public final <T> BuilderWithInputs withInput(Feature<T> feature, T... value) {
             return newBuilderWithInputs().withInput(feature, value);
@@ -823,6 +843,66 @@ public class OnlineQueryParams {
 
         public BuilderWithOutputs withQueryName(String queryName) {
             return newBuilderWithOutputs().withQueryName(queryName);
+        }
+    }
+
+    /**
+     * Helper class for building input data for single-row online queries.
+     * Provides a more convenient way to add input values for single-row queries
+     * without needing to wrap each value in List.of() or Arrays.asList().
+     */
+    public static class SingleRowInput {
+        private HashMap<String, List<?>> inputs = new HashMap<>();
+
+        /**
+         * Create a new SingleRowInput builder.
+         */
+        public SingleRowInput() {}
+
+        /**
+         * Add a value to the row using a typed Feature.
+         *
+         * @param feature The feature to add a value for
+         * @param value The value for this feature
+         * @return This SingleRowInput for method chaining
+         */
+        public final <T> SingleRowInput withInput(Feature<T> feature, T value) {
+            this.inputs.put(feature.getFqn(), List.of(value));
+            return this;
+        }
+
+        /**
+         * Add a value to the row using a feature fully qualified name (FQN).
+         *
+         * @param featureFqn The fully qualified name of the feature
+         * @param value The value for this feature
+         * @return This SingleRowInput for method chaining
+         */
+        public final SingleRowInput withInput(String featureFqn, Object value) {
+            this.inputs.put(featureFqn, List.of(value));
+            return this;
+        }
+
+        /**
+         * Add multiple values to the row using a map of feature FQNs to values.
+         *
+         * @param inputs Map of feature FQNs to their values
+         * @return This SingleRowInput for method chaining
+         */
+        public final SingleRowInput withInputs(Map<String, Object> inputs) {
+            for (Map.Entry<String, Object> entry : inputs.entrySet()) {
+                this.inputs.put(entry.getKey(), List.of(entry.getValue()));
+            }
+            return this;
+        }
+
+        /**
+         * Get the internal inputs map. Used by builder classes to retrieve the input data.
+         *
+         * @return The inputs map where each feature maps to a list containing a single value
+         */
+        Map<String, List<?>> getInputs() {
+            return inputs;
         }
     }
 
