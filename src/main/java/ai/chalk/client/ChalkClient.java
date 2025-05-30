@@ -67,7 +67,7 @@ public interface ChalkClient extends AutoCloseable {
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
      *
      * <p>
-     * Example usage for multi-row queries:
+     * Example usage for bulk queries:
      * <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
