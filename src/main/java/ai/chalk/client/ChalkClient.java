@@ -67,12 +67,32 @@ public interface ChalkClient extends AutoCloseable {
      * <p> See {@link OnlineQueryParams} for more details on the parameters.
      *
      * <p>
-     * Example usage:
+     * Example usage for bulk queries:
      * <pre>
      *         {@code
      *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
      *             .withInput("user.id", Arrays.asList(1, 2, 3))
      *             .withOutputs("user.email", "user.transactions")
+     *             .build();
+     *
+     *         try (OnlineQueryResult result = client.onlineQuery(params)) {
+     *             // do something with the result
+     *         }
+     *     </pre>
+     * </p>
+     *
+     * <p>
+     * Example usage for single-row queries using SingleRowInput:
+     * <pre>
+     *         {@code
+     *         var singleRow = new OnlineQueryParams.SingleRowInput()
+     *             .withInput("user.id", 123)
+     *             .withInput("user.email", "test@example.com")
+     *             .withInput("user.favorite_foods", Arrays.asList("pizza", "pasta"));
+     *
+     *         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+     *             .withInput(singleRow)
+     *             .withOutputs("user.credit_score", "user.transactions")
      *             .build();
      *
      *         try (OnlineQueryResult result = client.onlineQuery(params)) {

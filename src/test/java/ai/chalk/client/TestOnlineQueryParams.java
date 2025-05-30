@@ -822,4 +822,57 @@ public class TestOnlineQueryParams extends AllocatorTest {
         // But this is okay because our backend handles and casts null vectors to vectors
         // of the appropriate type just fine.
     }
+
+    /**
+     * Tests the SingleRowInput helper class for building single-row inputs.
+     */
+    @Test
+    public void testSingleRowInput() throws Exception {
+        // Test using Feature objects
+        var singleRowInput1 = new OnlineQueryParams.SingleRowInput()
+                .withInput(InitFeaturesTestFeatures.user.id, "123")
+                .withInput(InitFeaturesTestFeatures.user.burrys_membership.membership_id, "mem456");
+
+        var params1 = OnlineQueryParams.builder()
+                .withInput(singleRowInput1)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+
+        assert params1.getInputs().get("test_user.id").equals(Arrays.asList("123"));
+        assert params1.getInputs().get("test_user.burrys_membership.membership_id").equals(Arrays.asList("mem456"));
+
+        // Test using feature FQN strings
+        var singleRowInput2 = new OnlineQueryParams.SingleRowInput()
+                .withInput("user.id", "789")
+                .withInput("user.email", "test@example.com");
+
+        var params2 = OnlineQueryParams.builder()
+                .withInput(singleRowInput2)
+                .withOutputs("user.today", "user.socure_score")
+                .build();
+
+        assert params2.getInputs().get("user.id").equals(Arrays.asList("789"));
+        assert params2.getInputs().get("user.email").equals(Arrays.asList("test@example.com"));
+
+        // Test using withInputs with String map
+        var stringInputs = new HashMap<String, Object>();
+        stringInputs.put("user.id", "111");
+        stringInputs.put("user.score", 95.5);
+
+        var singleRowInput3 = new OnlineQueryParams.SingleRowInput()
+                .withInputs(stringInputs);
+
+        var params3 = OnlineQueryParams.builder()
+                .withInput(singleRowInput3)
+                .withOutputs("user.today")
+                .build();
+
+        assert params3.getInputs().get("user.id").equals(Arrays.asList("111"));
+        assert params3.getInputs().get("user.score").equals(Arrays.asList(95.5));
+
+        // Test that serialization works
+        BytesProducer.convertOnlineQueryParamsToBytes(params1, allocator);
+        BytesProducer.convertOnlineQueryParamsToBytes(params2, allocator);
+        BytesProducer.convertOnlineQueryParamsToBytes(params3, allocator);
+    }
 }
