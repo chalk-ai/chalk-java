@@ -439,6 +439,34 @@ public class OnlineQueryParams {
             return this._withInput(feature, values);
         }
 
+        public static class SingleRowInput {
+            // Create a `SingleRowInput` build to pass to `OnlineQueryParams.withInput()`.
+            public SingleRowInput() {}
+            private HashMap<String, List<?>> inputs = new HashMap();
+
+            // Add a value to the row.
+            public final <T> SingleRowInput withInput(Feature<T> feature, T value) {
+                this.inputs.put(feature.fqn, List.of(value));
+                return this;
+            }
+
+            // Add a value to the row.
+            public final SingleRowInput withInput(String feature_fqn, Object value) {
+                this.inputs.put(feature.fqn, List.of(value));
+                return this;
+            }
+        }
+
+        // Adds a single row of data to this query.
+        // Previously-provided values for the features in the `SingleRowInput` are overwritten.
+        public final <T> BuilderComplete withInput(SingleRowInput single_row) {
+            this.withInput();
+            for (Map.Entry<String, Object> entry : single_row.input.entrySet()) {
+                this.withInput(entry.getKey(), entry.getValue());
+            }
+            return this;
+        }
+
         public BuilderComplete withOutputs(String... outputs) {
             return this._withOutputs(outputs);
         }
