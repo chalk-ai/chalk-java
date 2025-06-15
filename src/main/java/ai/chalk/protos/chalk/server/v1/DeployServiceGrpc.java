@@ -46,6 +46,37 @@ public final class DeployServiceGrpc {
     return getDeployBranchMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> getCreateBranchFromSourceDeploymentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateBranchFromSourceDeployment",
+      requestType = ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest,
+      ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> getCreateBranchFromSourceDeploymentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest, ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> getCreateBranchFromSourceDeploymentMethod;
+    if ((getCreateBranchFromSourceDeploymentMethod = DeployServiceGrpc.getCreateBranchFromSourceDeploymentMethod) == null) {
+      synchronized (DeployServiceGrpc.class) {
+        if ((getCreateBranchFromSourceDeploymentMethod = DeployServiceGrpc.getCreateBranchFromSourceDeploymentMethod) == null) {
+          DeployServiceGrpc.getCreateBranchFromSourceDeploymentMethod = getCreateBranchFromSourceDeploymentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest, ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateBranchFromSourceDeployment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeployServiceMethodDescriptorSupplier("CreateBranchFromSourceDeployment"))
+              .build();
+        }
+      }
+    }
+    return getCreateBranchFromSourceDeploymentMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetDeploymentRequest,
       ai.chalk.protos.chalk.server.v1.GetDeploymentResponse> getGetDeploymentMethod;
 
@@ -289,6 +320,13 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    default void createBranchFromSourceDeployment(ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateBranchFromSourceDeploymentMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void getDeployment(ai.chalk.protos.chalk.server.v1.GetDeploymentRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetDeploymentResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetDeploymentMethod(), responseObserver);
@@ -367,6 +405,14 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    public void createBranchFromSourceDeployment(ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCreateBranchFromSourceDeploymentMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void getDeployment(ai.chalk.protos.chalk.server.v1.GetDeploymentRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetDeploymentResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -439,6 +485,13 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    public ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse createBranchFromSourceDeployment(ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateBranchFromSourceDeploymentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public ai.chalk.protos.chalk.server.v1.GetDeploymentResponse getDeployment(ai.chalk.protos.chalk.server.v1.GetDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetDeploymentMethod(), getCallOptions(), request);
@@ -506,6 +559,14 @@ public final class DeployServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse> createBranchFromSourceDeployment(
+        ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCreateBranchFromSourceDeploymentMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetDeploymentResponse> getDeployment(
         ai.chalk.protos.chalk.server.v1.GetDeploymentRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -554,12 +615,13 @@ public final class DeployServiceGrpc {
   }
 
   private static final int METHODID_DEPLOY_BRANCH = 0;
-  private static final int METHODID_GET_DEPLOYMENT = 1;
-  private static final int METHODID_LIST_DEPLOYMENTS = 2;
-  private static final int METHODID_GET_ACTIVE_DEPLOYMENTS = 3;
-  private static final int METHODID_SUSPEND_DEPLOYMENT = 4;
-  private static final int METHODID_SCALE_DEPLOYMENT = 5;
-  private static final int METHODID_TAG_DEPLOYMENT = 6;
+  private static final int METHODID_CREATE_BRANCH_FROM_SOURCE_DEPLOYMENT = 1;
+  private static final int METHODID_GET_DEPLOYMENT = 2;
+  private static final int METHODID_LIST_DEPLOYMENTS = 3;
+  private static final int METHODID_GET_ACTIVE_DEPLOYMENTS = 4;
+  private static final int METHODID_SUSPEND_DEPLOYMENT = 5;
+  private static final int METHODID_SCALE_DEPLOYMENT = 6;
+  private static final int METHODID_TAG_DEPLOYMENT = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -581,6 +643,10 @@ public final class DeployServiceGrpc {
         case METHODID_DEPLOY_BRANCH:
           serviceImpl.deployBranch((ai.chalk.protos.chalk.server.v1.DeployBranchRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.DeployBranchResponse>) responseObserver);
+          break;
+        case METHODID_CREATE_BRANCH_FROM_SOURCE_DEPLOYMENT:
+          serviceImpl.createBranchFromSourceDeployment((ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse>) responseObserver);
           break;
         case METHODID_GET_DEPLOYMENT:
           serviceImpl.getDeployment((ai.chalk.protos.chalk.server.v1.GetDeploymentRequest) request,
@@ -631,6 +697,13 @@ public final class DeployServiceGrpc {
               ai.chalk.protos.chalk.server.v1.DeployBranchRequest,
               ai.chalk.protos.chalk.server.v1.DeployBranchResponse>(
                 service, METHODID_DEPLOY_BRANCH)))
+        .addMethod(
+          getCreateBranchFromSourceDeploymentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentRequest,
+              ai.chalk.protos.chalk.server.v1.CreateBranchFromSourceDeploymentResponse>(
+                service, METHODID_CREATE_BRANCH_FROM_SOURCE_DEPLOYMENT)))
         .addMethod(
           getGetDeploymentMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -722,6 +795,7 @@ public final class DeployServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DeployServiceFileDescriptorSupplier())
               .addMethod(getDeployBranchMethod())
+              .addMethod(getCreateBranchFromSourceDeploymentMethod())
               .addMethod(getGetDeploymentMethod())
               .addMethod(getListDeploymentsMethod())
               .addMethod(getGetActiveDeploymentsMethod())

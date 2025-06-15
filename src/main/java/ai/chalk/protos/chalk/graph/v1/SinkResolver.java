@@ -53,8 +53,10 @@ private static final long serialVersionUID = 0L;
   public enum IntegrationCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    STREAM_SOURCE(7),
-    DATABASE_SOURCE(8),
+    @java.lang.Deprecated STREAM_SOURCE(7),
+    @java.lang.Deprecated DATABASE_SOURCE(8),
+    STREAM_SOURCE_V2(15),
+    DATABASE_SOURCE_V2(16),
     INTEGRATION_NOT_SET(0);
     private final int value;
     private IntegrationCase(int value) {
@@ -74,6 +76,8 @@ private static final long serialVersionUID = 0L;
       switch (value) {
         case 7: return STREAM_SOURCE;
         case 8: return DATABASE_SOURCE;
+        case 15: return STREAM_SOURCE_V2;
+        case 16: return DATABASE_SOURCE_V2;
         case 0: return INTEGRATION_NOT_SET;
         default: return null;
       }
@@ -253,29 +257,45 @@ private static final long serialVersionUID = 0L;
 
   public static final int STREAM_SOURCE_FIELD_NUMBER = 7;
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=299
    * @return Whether the streamSource field is set.
    */
   @java.lang.Override
-  public boolean hasStreamSource() {
+  @java.lang.Deprecated public boolean hasStreamSource() {
     return integrationCase_ == 7;
   }
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=299
    * @return The streamSource.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource() {
     if (integrationCase_ == 7) {
        return (ai.chalk.protos.chalk.graph.v1.StreamSourceReference) integration_;
     }
     return ai.chalk.protos.chalk.graph.v1.StreamSourceReference.getDefaultInstance();
   }
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+   * <pre>
+   * stream_source is deprecated; see stream_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder() {
     if (integrationCase_ == 7) {
        return (ai.chalk.protos.chalk.graph.v1.StreamSourceReference) integration_;
     }
@@ -284,33 +304,111 @@ private static final long serialVersionUID = 0L;
 
   public static final int DATABASE_SOURCE_FIELD_NUMBER = 8;
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=301
    * @return Whether the databaseSource field is set.
    */
   @java.lang.Override
-  public boolean hasDatabaseSource() {
+  @java.lang.Deprecated public boolean hasDatabaseSource() {
     return integrationCase_ == 8;
   }
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=301
    * @return The databaseSource.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource() {
     if (integrationCase_ == 8) {
        return (ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference) integration_;
     }
     return ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.getDefaultInstance();
   }
   /**
-   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+   * <pre>
+   * database_source is deprecated; see database_source_v2
+   * </pre>
+   *
+   * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder() {
     if (integrationCase_ == 8) {
        return (ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference) integration_;
     }
     return ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.getDefaultInstance();
+  }
+
+  public static final int STREAM_SOURCE_V2_FIELD_NUMBER = 15;
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   * @return Whether the streamSourceV2 field is set.
+   */
+  @java.lang.Override
+  public boolean hasStreamSourceV2() {
+    return integrationCase_ == 15;
+  }
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   * @return The streamSourceV2.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.StreamSourceReference getStreamSourceV2() {
+    if (integrationCase_ == 15) {
+       return (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_;
+    }
+    return ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder getStreamSourceV2OrBuilder() {
+    if (integrationCase_ == 15) {
+       return (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_;
+    }
+    return ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+  }
+
+  public static final int DATABASE_SOURCE_V2_FIELD_NUMBER = 16;
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   * @return Whether the databaseSourceV2 field is set.
+   */
+  @java.lang.Override
+  public boolean hasDatabaseSourceV2() {
+    return integrationCase_ == 16;
+  }
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   * @return The databaseSourceV2.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDatabaseSourceV2() {
+    if (integrationCase_ == 16) {
+       return (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_;
+    }
+    return ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDatabaseSourceV2OrBuilder() {
+    if (integrationCase_ == 16) {
+       return (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_;
+    }
+    return ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
   }
 
   public static final int MACHINE_TYPE_FIELD_NUMBER = 9;
@@ -599,6 +697,12 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000080) != 0)) {
       output.writeMessage(14, getFunction());
     }
+    if (integrationCase_ == 15) {
+      output.writeMessage(15, (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_);
+    }
+    if (integrationCase_ == 16) {
+      output.writeMessage(16, (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -663,6 +767,14 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000080) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(14, getFunction());
+    }
+    if (integrationCase_ == 15) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(15, (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_);
+    }
+    if (integrationCase_ == 16) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(16, (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -737,6 +849,14 @@ private static final long serialVersionUID = 0L;
         if (!getDatabaseSource()
             .equals(other.getDatabaseSource())) return false;
         break;
+      case 15:
+        if (!getStreamSourceV2()
+            .equals(other.getStreamSourceV2())) return false;
+        break;
+      case 16:
+        if (!getDatabaseSourceV2()
+            .equals(other.getDatabaseSourceV2())) return false;
+        break;
       case 0:
       default:
     }
@@ -805,6 +925,14 @@ private static final long serialVersionUID = 0L;
       case 8:
         hash = (37 * hash) + DATABASE_SOURCE_FIELD_NUMBER;
         hash = (53 * hash) + getDatabaseSource().hashCode();
+        break;
+      case 15:
+        hash = (37 * hash) + STREAM_SOURCE_V2_FIELD_NUMBER;
+        hash = (53 * hash) + getStreamSourceV2().hashCode();
+        break;
+      case 16:
+        hash = (37 * hash) + DATABASE_SOURCE_V2_FIELD_NUMBER;
+        hash = (53 * hash) + getDatabaseSourceV2().hashCode();
         break;
       case 0:
       default:
@@ -976,6 +1104,12 @@ private static final long serialVersionUID = 0L;
       if (databaseSourceBuilder_ != null) {
         databaseSourceBuilder_.clear();
       }
+      if (streamSourceV2Builder_ != null) {
+        streamSourceV2Builder_.clear();
+      }
+      if (databaseSourceV2Builder_ != null) {
+        databaseSourceV2Builder_.clear();
+      }
       machineType_ = "";
       doc_ = "";
       owner_ = "";
@@ -1063,29 +1197,29 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.upsert_ = upsert_;
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000400) != 0)) {
         result.machineType_ = machineType_;
         to_bitField0_ |= 0x00000008;
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00000800) != 0)) {
         result.doc_ = doc_;
         to_bitField0_ |= 0x00000010;
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
+      if (((from_bitField0_ & 0x00001000) != 0)) {
         result.owner_ = owner_;
         to_bitField0_ |= 0x00000020;
       }
-      if (((from_bitField0_ & 0x00000800) != 0)) {
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         environments_.makeImmutable();
         result.environments_ = environments_;
       }
-      if (((from_bitField0_ & 0x00001000) != 0)) {
+      if (((from_bitField0_ & 0x00004000) != 0)) {
         result.timeoutDuration_ = timeoutDurationBuilder_ == null
             ? timeoutDuration_
             : timeoutDurationBuilder_.build();
         to_bitField0_ |= 0x00000040;
       }
-      if (((from_bitField0_ & 0x00002000) != 0)) {
+      if (((from_bitField0_ & 0x00008000) != 0)) {
         result.function_ = functionBuilder_ == null
             ? function_
             : functionBuilder_.build();
@@ -1104,6 +1238,14 @@ private static final long serialVersionUID = 0L;
       if (integrationCase_ == 8 &&
           databaseSourceBuilder_ != null) {
         result.integration_ = databaseSourceBuilder_.build();
+      }
+      if (integrationCase_ == 15 &&
+          streamSourceV2Builder_ != null) {
+        result.integration_ = streamSourceV2Builder_.build();
+      }
+      if (integrationCase_ == 16 &&
+          databaseSourceV2Builder_ != null) {
+        result.integration_ = databaseSourceV2Builder_.build();
       }
     }
 
@@ -1196,23 +1338,23 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasMachineType()) {
         machineType_ = other.machineType_;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000400;
         onChanged();
       }
       if (other.hasDoc()) {
         doc_ = other.doc_;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000800;
         onChanged();
       }
       if (other.hasOwner()) {
         owner_ = other.owner_;
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00001000;
         onChanged();
       }
       if (!other.environments_.isEmpty()) {
         if (environments_.isEmpty()) {
           environments_ = other.environments_;
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00002000;
         } else {
           ensureEnvironmentsIsMutable();
           environments_.addAll(other.environments_);
@@ -1232,6 +1374,14 @@ private static final long serialVersionUID = 0L;
         }
         case DATABASE_SOURCE: {
           mergeDatabaseSource(other.getDatabaseSource());
+          break;
+        }
+        case STREAM_SOURCE_V2: {
+          mergeStreamSourceV2(other.getStreamSourceV2());
+          break;
+        }
+        case DATABASE_SOURCE_V2: {
+          mergeDatabaseSourceV2(other.getDatabaseSourceV2());
           break;
         }
         case INTEGRATION_NOT_SET: {
@@ -1322,17 +1472,17 @@ private static final long serialVersionUID = 0L;
             } // case 66
             case 74: {
               machineType_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000400;
               break;
             } // case 74
             case 82: {
               doc_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000800;
               break;
             } // case 82
             case 90: {
               owner_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00001000;
               break;
             } // case 90
             case 98: {
@@ -1345,16 +1495,30 @@ private static final long serialVersionUID = 0L;
               input.readMessage(
                   getTimeoutDurationFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00004000;
               break;
             } // case 106
             case 114: {
               input.readMessage(
                   getFunctionFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00008000;
               break;
             } // case 114
+            case 122: {
+              input.readMessage(
+                  getStreamSourceV2FieldBuilder().getBuilder(),
+                  extensionRegistry);
+              integrationCase_ = 15;
+              break;
+            } // case 122
+            case 130: {
+              input.readMessage(
+                  getDatabaseSourceV2FieldBuilder().getBuilder(),
+                  extensionRegistry);
+              integrationCase_ = 16;
+              break;
+            } // case 130
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2016,19 +2180,31 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.StreamSourceReference, ai.chalk.protos.chalk.graph.v1.StreamSourceReference.Builder, ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder> streamSourceBuilder_;
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=299
      * @return Whether the streamSource field is set.
      */
     @java.lang.Override
-    public boolean hasStreamSource() {
+    @java.lang.Deprecated public boolean hasStreamSource() {
       return integrationCase_ == 7;
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.SinkResolver.stream_source is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=299
      * @return The streamSource.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceReference getStreamSource() {
       if (streamSourceBuilder_ == null) {
         if (integrationCase_ == 7) {
           return (ai.chalk.protos.chalk.graph.v1.StreamSourceReference) integration_;
@@ -2042,9 +2218,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
-    public Builder setStreamSource(ai.chalk.protos.chalk.graph.v1.StreamSourceReference value) {
+    @java.lang.Deprecated public Builder setStreamSource(ai.chalk.protos.chalk.graph.v1.StreamSourceReference value) {
       if (streamSourceBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2058,9 +2238,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
-    public Builder setStreamSource(
+    @java.lang.Deprecated public Builder setStreamSource(
         ai.chalk.protos.chalk.graph.v1.StreamSourceReference.Builder builderForValue) {
       if (streamSourceBuilder_ == null) {
         integration_ = builderForValue.build();
@@ -2072,9 +2256,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
-    public Builder mergeStreamSource(ai.chalk.protos.chalk.graph.v1.StreamSourceReference value) {
+    @java.lang.Deprecated public Builder mergeStreamSource(ai.chalk.protos.chalk.graph.v1.StreamSourceReference value) {
       if (streamSourceBuilder_ == null) {
         if (integrationCase_ == 7 &&
             integration_ != ai.chalk.protos.chalk.graph.v1.StreamSourceReference.getDefaultInstance()) {
@@ -2095,9 +2283,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
-    public Builder clearStreamSource() {
+    @java.lang.Deprecated public Builder clearStreamSource() {
       if (streamSourceBuilder_ == null) {
         if (integrationCase_ == 7) {
           integrationCase_ = 0;
@@ -2114,16 +2306,24 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.StreamSourceReference.Builder getStreamSourceBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceReference.Builder getStreamSourceBuilder() {
       return getStreamSourceFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getStreamSourceOrBuilder() {
       if ((integrationCase_ == 7) && (streamSourceBuilder_ != null)) {
         return streamSourceBuilder_.getMessageOrBuilder();
       } else {
@@ -2134,7 +2334,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource"];</code>
+     * <pre>
+     * stream_source is deprecated; see stream_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.StreamSourceReference stream_source = 7 [json_name = "streamSource", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.StreamSourceReference, ai.chalk.protos.chalk.graph.v1.StreamSourceReference.Builder, ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder> 
@@ -2158,19 +2362,31 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> databaseSourceBuilder_;
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=301
      * @return Whether the databaseSource field is set.
      */
     @java.lang.Override
-    public boolean hasDatabaseSource() {
+    @java.lang.Deprecated public boolean hasDatabaseSource() {
       return integrationCase_ == 8;
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.SinkResolver.database_source is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=301
      * @return The databaseSource.
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDatabaseSource() {
       if (databaseSourceBuilder_ == null) {
         if (integrationCase_ == 8) {
           return (ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference) integration_;
@@ -2184,9 +2400,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
-    public Builder setDatabaseSource(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
+    @java.lang.Deprecated public Builder setDatabaseSource(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
       if (databaseSourceBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2200,9 +2420,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
-    public Builder setDatabaseSource(
+    @java.lang.Deprecated public Builder setDatabaseSource(
         ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder builderForValue) {
       if (databaseSourceBuilder_ == null) {
         integration_ = builderForValue.build();
@@ -2214,9 +2438,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
-    public Builder mergeDatabaseSource(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
+    @java.lang.Deprecated public Builder mergeDatabaseSource(ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference value) {
       if (databaseSourceBuilder_ == null) {
         if (integrationCase_ == 8 &&
             integration_ != ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.getDefaultInstance()) {
@@ -2237,9 +2465,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
-    public Builder clearDatabaseSource() {
+    @java.lang.Deprecated public Builder clearDatabaseSource() {
       if (databaseSourceBuilder_ == null) {
         if (integrationCase_ == 8) {
           integrationCase_ = 0;
@@ -2256,16 +2488,24 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder getDatabaseSourceBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder getDatabaseSourceBuilder() {
       return getDatabaseSourceFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
     @java.lang.Override
-    public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDatabaseSourceOrBuilder() {
       if ((integrationCase_ == 8) && (databaseSourceBuilder_ != null)) {
         return databaseSourceBuilder_.getMessageOrBuilder();
       } else {
@@ -2276,7 +2516,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource"];</code>
+     * <pre>
+     * database_source is deprecated; see database_source_v2
+     * </pre>
+     *
+     * <code>.chalk.graph.v1.DatabaseSourceReference database_source = 8 [json_name = "databaseSource", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
@@ -2297,13 +2541,297 @@ private static final long serialVersionUID = 0L;
       return databaseSourceBuilder_;
     }
 
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.StreamSourceReference, ai.chalk.protos.chalk.graph.v2.StreamSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder> streamSourceV2Builder_;
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     * @return Whether the streamSourceV2 field is set.
+     */
+    @java.lang.Override
+    public boolean hasStreamSourceV2() {
+      return integrationCase_ == 15;
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     * @return The streamSourceV2.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v2.StreamSourceReference getStreamSourceV2() {
+      if (streamSourceV2Builder_ == null) {
+        if (integrationCase_ == 15) {
+          return (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_;
+        }
+        return ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+      } else {
+        if (integrationCase_ == 15) {
+          return streamSourceV2Builder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    public Builder setStreamSourceV2(ai.chalk.protos.chalk.graph.v2.StreamSourceReference value) {
+      if (streamSourceV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        integration_ = value;
+        onChanged();
+      } else {
+        streamSourceV2Builder_.setMessage(value);
+      }
+      integrationCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    public Builder setStreamSourceV2(
+        ai.chalk.protos.chalk.graph.v2.StreamSourceReference.Builder builderForValue) {
+      if (streamSourceV2Builder_ == null) {
+        integration_ = builderForValue.build();
+        onChanged();
+      } else {
+        streamSourceV2Builder_.setMessage(builderForValue.build());
+      }
+      integrationCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    public Builder mergeStreamSourceV2(ai.chalk.protos.chalk.graph.v2.StreamSourceReference value) {
+      if (streamSourceV2Builder_ == null) {
+        if (integrationCase_ == 15 &&
+            integration_ != ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance()) {
+          integration_ = ai.chalk.protos.chalk.graph.v2.StreamSourceReference.newBuilder((ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          integration_ = value;
+        }
+        onChanged();
+      } else {
+        if (integrationCase_ == 15) {
+          streamSourceV2Builder_.mergeFrom(value);
+        } else {
+          streamSourceV2Builder_.setMessage(value);
+        }
+      }
+      integrationCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    public Builder clearStreamSourceV2() {
+      if (streamSourceV2Builder_ == null) {
+        if (integrationCase_ == 15) {
+          integrationCase_ = 0;
+          integration_ = null;
+          onChanged();
+        }
+      } else {
+        if (integrationCase_ == 15) {
+          integrationCase_ = 0;
+          integration_ = null;
+        }
+        streamSourceV2Builder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.StreamSourceReference.Builder getStreamSourceV2Builder() {
+      return getStreamSourceV2FieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder getStreamSourceV2OrBuilder() {
+      if ((integrationCase_ == 15) && (streamSourceV2Builder_ != null)) {
+        return streamSourceV2Builder_.getMessageOrBuilder();
+      } else {
+        if (integrationCase_ == 15) {
+          return (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_;
+        }
+        return ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v2.StreamSourceReference stream_source_v2 = 15 [json_name = "streamSourceV2"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.StreamSourceReference, ai.chalk.protos.chalk.graph.v2.StreamSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder> 
+        getStreamSourceV2FieldBuilder() {
+      if (streamSourceV2Builder_ == null) {
+        if (!(integrationCase_ == 15)) {
+          integration_ = ai.chalk.protos.chalk.graph.v2.StreamSourceReference.getDefaultInstance();
+        }
+        streamSourceV2Builder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.StreamSourceReference, ai.chalk.protos.chalk.graph.v2.StreamSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v2.StreamSourceReference) integration_,
+                getParentForChildren(),
+                isClean());
+        integration_ = null;
+      }
+      integrationCase_ = 15;
+      onChanged();
+      return streamSourceV2Builder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> databaseSourceV2Builder_;
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     * @return Whether the databaseSourceV2 field is set.
+     */
+    @java.lang.Override
+    public boolean hasDatabaseSourceV2() {
+      return integrationCase_ == 16;
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     * @return The databaseSourceV2.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDatabaseSourceV2() {
+      if (databaseSourceV2Builder_ == null) {
+        if (integrationCase_ == 16) {
+          return (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_;
+        }
+        return ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
+      } else {
+        if (integrationCase_ == 16) {
+          return databaseSourceV2Builder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    public Builder setDatabaseSourceV2(ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference value) {
+      if (databaseSourceV2Builder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        integration_ = value;
+        onChanged();
+      } else {
+        databaseSourceV2Builder_.setMessage(value);
+      }
+      integrationCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    public Builder setDatabaseSourceV2(
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder builderForValue) {
+      if (databaseSourceV2Builder_ == null) {
+        integration_ = builderForValue.build();
+        onChanged();
+      } else {
+        databaseSourceV2Builder_.setMessage(builderForValue.build());
+      }
+      integrationCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    public Builder mergeDatabaseSourceV2(ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference value) {
+      if (databaseSourceV2Builder_ == null) {
+        if (integrationCase_ == 16 &&
+            integration_ != ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance()) {
+          integration_ = ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.newBuilder((ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          integration_ = value;
+        }
+        onChanged();
+      } else {
+        if (integrationCase_ == 16) {
+          databaseSourceV2Builder_.mergeFrom(value);
+        } else {
+          databaseSourceV2Builder_.setMessage(value);
+        }
+      }
+      integrationCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    public Builder clearDatabaseSourceV2() {
+      if (databaseSourceV2Builder_ == null) {
+        if (integrationCase_ == 16) {
+          integrationCase_ = 0;
+          integration_ = null;
+          onChanged();
+        }
+      } else {
+        if (integrationCase_ == 16) {
+          integrationCase_ = 0;
+          integration_ = null;
+        }
+        databaseSourceV2Builder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder getDatabaseSourceV2Builder() {
+      return getDatabaseSourceV2FieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDatabaseSourceV2OrBuilder() {
+      if ((integrationCase_ == 16) && (databaseSourceV2Builder_ != null)) {
+        return databaseSourceV2Builder_.getMessageOrBuilder();
+      } else {
+        if (integrationCase_ == 16) {
+          return (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_;
+        }
+        return ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.graph.v2.DatabaseSourceReference database_source_v2 = 16 [json_name = "databaseSourceV2"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> 
+        getDatabaseSourceV2FieldBuilder() {
+      if (databaseSourceV2Builder_ == null) {
+        if (!(integrationCase_ == 16)) {
+          integration_ = ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.getDefaultInstance();
+        }
+        databaseSourceV2Builder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference.Builder, ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder>(
+                (ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference) integration_,
+                getParentForChildren(),
+                isClean());
+        integration_ = null;
+      }
+      integrationCase_ = 16;
+      onChanged();
+      return databaseSourceV2Builder_;
+    }
+
     private java.lang.Object machineType_ = "";
     /**
      * <code>optional string machine_type = 9 [json_name = "machineType"];</code>
      * @return Whether the machineType field is set.
      */
     public boolean hasMachineType() {
-      return ((bitField0_ & 0x00000100) != 0);
+      return ((bitField0_ & 0x00000400) != 0);
     }
     /**
      * <code>optional string machine_type = 9 [json_name = "machineType"];</code>
@@ -2347,7 +2875,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       machineType_ = value;
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -2357,7 +2885,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearMachineType() {
       machineType_ = getDefaultInstance().getMachineType();
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000400);
       onChanged();
       return this;
     }
@@ -2371,7 +2899,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       machineType_ = value;
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -2382,7 +2910,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the doc field is set.
      */
     public boolean hasDoc() {
-      return ((bitField0_ & 0x00000200) != 0);
+      return ((bitField0_ & 0x00000800) != 0);
     }
     /**
      * <code>optional string doc = 10 [json_name = "doc"];</code>
@@ -2426,7 +2954,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       doc_ = value;
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2436,7 +2964,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearDoc() {
       doc_ = getDefaultInstance().getDoc();
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00000800);
       onChanged();
       return this;
     }
@@ -2450,7 +2978,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       doc_ = value;
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2461,7 +2989,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the owner field is set.
      */
     public boolean hasOwner() {
-      return ((bitField0_ & 0x00000400) != 0);
+      return ((bitField0_ & 0x00001000) != 0);
     }
     /**
      * <code>optional string owner = 11 [json_name = "owner"];</code>
@@ -2505,7 +3033,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       owner_ = value;
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00001000;
       onChanged();
       return this;
     }
@@ -2515,7 +3043,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearOwner() {
       owner_ = getDefaultInstance().getOwner();
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00001000);
       onChanged();
       return this;
     }
@@ -2529,7 +3057,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       owner_ = value;
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00001000;
       onChanged();
       return this;
     }
@@ -2540,7 +3068,7 @@ private static final long serialVersionUID = 0L;
       if (!environments_.isModifiable()) {
         environments_ = new com.google.protobuf.LazyStringArrayList(environments_);
       }
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00002000;
     }
     /**
      * <code>repeated string environments = 12 [json_name = "environments"];</code>
@@ -2586,7 +3114,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureEnvironmentsIsMutable();
       environments_.set(index, value);
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2600,7 +3128,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureEnvironmentsIsMutable();
       environments_.add(value);
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2614,7 +3142,7 @@ private static final long serialVersionUID = 0L;
       ensureEnvironmentsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, environments_);
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2625,7 +3153,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearEnvironments() {
       environments_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000800);;
+      bitField0_ = (bitField0_ & ~0x00002000);;
       onChanged();
       return this;
     }
@@ -2640,7 +3168,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureEnvironmentsIsMutable();
       environments_.add(value);
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2653,7 +3181,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the timeoutDuration field is set.
      */
     public boolean hasTimeoutDuration() {
-      return ((bitField0_ & 0x00001000) != 0);
+      return ((bitField0_ & 0x00004000) != 0);
     }
     /**
      * <code>.google.protobuf.Duration timeout_duration = 13 [json_name = "timeoutDuration"];</code>
@@ -2678,7 +3206,7 @@ private static final long serialVersionUID = 0L;
       } else {
         timeoutDurationBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -2692,7 +3220,7 @@ private static final long serialVersionUID = 0L;
       } else {
         timeoutDurationBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -2701,7 +3229,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeTimeoutDuration(com.google.protobuf.Duration value) {
       if (timeoutDurationBuilder_ == null) {
-        if (((bitField0_ & 0x00001000) != 0) &&
+        if (((bitField0_ & 0x00004000) != 0) &&
           timeoutDuration_ != null &&
           timeoutDuration_ != com.google.protobuf.Duration.getDefaultInstance()) {
           getTimeoutDurationBuilder().mergeFrom(value);
@@ -2712,7 +3240,7 @@ private static final long serialVersionUID = 0L;
         timeoutDurationBuilder_.mergeFrom(value);
       }
       if (timeoutDuration_ != null) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00004000;
         onChanged();
       }
       return this;
@@ -2721,7 +3249,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Duration timeout_duration = 13 [json_name = "timeoutDuration"];</code>
      */
     public Builder clearTimeoutDuration() {
-      bitField0_ = (bitField0_ & ~0x00001000);
+      bitField0_ = (bitField0_ & ~0x00004000);
       timeoutDuration_ = null;
       if (timeoutDurationBuilder_ != null) {
         timeoutDurationBuilder_.dispose();
@@ -2734,7 +3262,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Duration timeout_duration = 13 [json_name = "timeoutDuration"];</code>
      */
     public com.google.protobuf.Duration.Builder getTimeoutDurationBuilder() {
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return getTimeoutDurationFieldBuilder().getBuilder();
     }
@@ -2774,7 +3302,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the function field is set.
      */
     public boolean hasFunction() {
-      return ((bitField0_ & 0x00002000) != 0);
+      return ((bitField0_ & 0x00008000) != 0);
     }
     /**
      * <code>.chalk.graph.v1.FunctionReference function = 14 [json_name = "function"];</code>
@@ -2799,7 +3327,7 @@ private static final long serialVersionUID = 0L;
       } else {
         functionBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -2813,7 +3341,7 @@ private static final long serialVersionUID = 0L;
       } else {
         functionBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -2822,7 +3350,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeFunction(ai.chalk.protos.chalk.graph.v1.FunctionReference value) {
       if (functionBuilder_ == null) {
-        if (((bitField0_ & 0x00002000) != 0) &&
+        if (((bitField0_ & 0x00008000) != 0) &&
           function_ != null &&
           function_ != ai.chalk.protos.chalk.graph.v1.FunctionReference.getDefaultInstance()) {
           getFunctionBuilder().mergeFrom(value);
@@ -2833,7 +3361,7 @@ private static final long serialVersionUID = 0L;
         functionBuilder_.mergeFrom(value);
       }
       if (function_ != null) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00008000;
         onChanged();
       }
       return this;
@@ -2842,7 +3370,7 @@ private static final long serialVersionUID = 0L;
      * <code>.chalk.graph.v1.FunctionReference function = 14 [json_name = "function"];</code>
      */
     public Builder clearFunction() {
-      bitField0_ = (bitField0_ & ~0x00002000);
+      bitField0_ = (bitField0_ & ~0x00008000);
       function_ = null;
       if (functionBuilder_ != null) {
         functionBuilder_.dispose();
@@ -2855,7 +3383,7 @@ private static final long serialVersionUID = 0L;
      * <code>.chalk.graph.v1.FunctionReference function = 14 [json_name = "function"];</code>
      */
     public ai.chalk.protos.chalk.graph.v1.FunctionReference.Builder getFunctionBuilder() {
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return getFunctionFieldBuilder().getBuilder();
     }

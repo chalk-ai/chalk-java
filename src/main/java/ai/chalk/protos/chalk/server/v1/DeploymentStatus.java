@@ -61,6 +61,10 @@ public enum DeploymentStatus
    * <code>DEPLOYMENT_STATUS_AWAITING_SOURCE = 12;</code>
    */
   DEPLOYMENT_STATUS_AWAITING_SOURCE(12),
+  /**
+   * <code>DEPLOYMENT_STATUS_DEPLOYING = 13;</code>
+   */
+  DEPLOYMENT_STATUS_DEPLOYING(13),
   UNRECOGNIZED(-1),
   ;
 
@@ -116,6 +120,10 @@ public enum DeploymentStatus
    * <code>DEPLOYMENT_STATUS_AWAITING_SOURCE = 12;</code>
    */
   public static final int DEPLOYMENT_STATUS_AWAITING_SOURCE_VALUE = 12;
+  /**
+   * <code>DEPLOYMENT_STATUS_DEPLOYING = 13;</code>
+   */
+  public static final int DEPLOYMENT_STATUS_DEPLOYING_VALUE = 13;
 
 
   public final int getNumber() {
@@ -155,6 +163,7 @@ public enum DeploymentStatus
       case 10: return DEPLOYMENT_STATUS_EXPIRED;
       case 11: return DEPLOYMENT_STATUS_BOOT_ERRORS;
       case 12: return DEPLOYMENT_STATUS_AWAITING_SOURCE;
+      case 13: return DEPLOYMENT_STATUS_DEPLOYING;
       default: return null;
     }
   }

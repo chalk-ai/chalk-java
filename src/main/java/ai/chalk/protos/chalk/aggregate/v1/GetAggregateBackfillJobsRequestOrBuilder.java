@@ -25,4 +25,21 @@ public interface GetAggregateBackfillJobsRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getCursorBytes();
+
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  boolean hasPlanHash();
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  java.lang.String getPlanHash();
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  com.google.protobuf.ByteString
+      getPlanHashBytes();
 }

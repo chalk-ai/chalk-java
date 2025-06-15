@@ -118,4 +118,21 @@ public interface ParsedBootstrapConfigsOrBuilder extends
    * <code>.chalk.server.v1.BootstrapExtraSettings extra_settings = 5 [json_name = "extraSettings"];</code>
    */
   ai.chalk.protos.chalk.server.v1.BootstrapExtraSettingsOrBuilder getExtraSettingsOrBuilder();
+
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return Whether the globalPinnedBaseImage field is set.
+   */
+  boolean hasGlobalPinnedBaseImage();
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return The globalPinnedBaseImage.
+   */
+  java.lang.String getGlobalPinnedBaseImage();
+  /**
+   * <code>optional string global_pinned_base_image = 6 [json_name = "globalPinnedBaseImage"];</code>
+   * @return The bytes for globalPinnedBaseImage.
+   */
+  com.google.protobuf.ByteString
+      getGlobalPinnedBaseImageBytes();
 }

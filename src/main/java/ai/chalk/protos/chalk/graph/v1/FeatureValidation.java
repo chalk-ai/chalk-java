@@ -45,10 +45,15 @@ private static final long serialVersionUID = 0L;
   public enum ValidationCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    MIN(1),
-    MAX(2),
-    MIN_LENGTH(3),
-    MAX_LENGTH(4),
+    @java.lang.Deprecated MIN(1),
+    @java.lang.Deprecated MAX(2),
+    @java.lang.Deprecated MIN_LENGTH(3),
+    @java.lang.Deprecated MAX_LENGTH(4),
+    MIN_ARROW(6),
+    MAX_ARROW(7),
+    MIN_LENGTH_ARROW(8),
+    MAX_LENGTH_ARROW(9),
+    CONTAINS(10),
     VALIDATION_NOT_SET(0);
     private final int value;
     private ValidationCase(int value) {
@@ -70,6 +75,11 @@ private static final long serialVersionUID = 0L;
         case 2: return MAX;
         case 3: return MIN_LENGTH;
         case 4: return MAX_LENGTH;
+        case 6: return MIN_ARROW;
+        case 7: return MAX_ARROW;
+        case 8: return MIN_LENGTH_ARROW;
+        case 9: return MAX_LENGTH_ARROW;
+        case 10: return CONTAINS;
         case 0: return VALIDATION_NOT_SET;
         default: return null;
       }
@@ -87,19 +97,33 @@ private static final long serialVersionUID = 0L;
 
   public static final int MIN_FIELD_NUMBER = 1;
   /**
-   * <code>float min = 1 [json_name = "min"];</code>
+   * <pre>
+   * Deprecated since they don't store the full type information (e.g. different numeric types)
+   * Use the *_arrow fields (6-9) instead.
+   * </pre>
+   *
+   * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=503
    * @return Whether the min field is set.
    */
   @java.lang.Override
-  public boolean hasMin() {
+  @java.lang.Deprecated public boolean hasMin() {
     return validationCase_ == 1;
   }
   /**
-   * <code>float min = 1 [json_name = "min"];</code>
+   * <pre>
+   * Deprecated since they don't store the full type information (e.g. different numeric types)
+   * Use the *_arrow fields (6-9) instead.
+   * </pre>
+   *
+   * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=503
    * @return The min.
    */
   @java.lang.Override
-  public float getMin() {
+  @java.lang.Deprecated public float getMin() {
     if (validationCase_ == 1) {
       return (java.lang.Float) validation_;
     }
@@ -108,19 +132,23 @@ private static final long serialVersionUID = 0L;
 
   public static final int MAX_FIELD_NUMBER = 2;
   /**
-   * <code>float max = 2 [json_name = "max"];</code>
+   * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=504
    * @return Whether the max field is set.
    */
   @java.lang.Override
-  public boolean hasMax() {
+  @java.lang.Deprecated public boolean hasMax() {
     return validationCase_ == 2;
   }
   /**
-   * <code>float max = 2 [json_name = "max"];</code>
+   * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=504
    * @return The max.
    */
   @java.lang.Override
-  public float getMax() {
+  @java.lang.Deprecated public float getMax() {
     if (validationCase_ == 2) {
       return (java.lang.Float) validation_;
     }
@@ -129,19 +157,23 @@ private static final long serialVersionUID = 0L;
 
   public static final int MIN_LENGTH_FIELD_NUMBER = 3;
   /**
-   * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+   * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=505
    * @return Whether the minLength field is set.
    */
   @java.lang.Override
-  public boolean hasMinLength() {
+  @java.lang.Deprecated public boolean hasMinLength() {
     return validationCase_ == 3;
   }
   /**
-   * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+   * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=505
    * @return The minLength.
    */
   @java.lang.Override
-  public int getMinLength() {
+  @java.lang.Deprecated public int getMinLength() {
     if (validationCase_ == 3) {
       return (java.lang.Integer) validation_;
     }
@@ -150,23 +182,182 @@ private static final long serialVersionUID = 0L;
 
   public static final int MAX_LENGTH_FIELD_NUMBER = 4;
   /**
-   * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+   * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=506
    * @return Whether the maxLength field is set.
    */
   @java.lang.Override
-  public boolean hasMaxLength() {
+  @java.lang.Deprecated public boolean hasMaxLength() {
     return validationCase_ == 4;
   }
   /**
-   * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+   * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=506
    * @return The maxLength.
    */
   @java.lang.Override
-  public int getMaxLength() {
+  @java.lang.Deprecated public int getMaxLength() {
     if (validationCase_ == 4) {
       return (java.lang.Integer) validation_;
     }
     return 0;
+  }
+
+  public static final int MIN_ARROW_FIELD_NUMBER = 6;
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   * @return Whether the minArrow field is set.
+   */
+  @java.lang.Override
+  public boolean hasMinArrow() {
+    return validationCase_ == 6;
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   * @return The minArrow.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinArrow() {
+    if (validationCase_ == 6) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinArrowOrBuilder() {
+    if (validationCase_ == 6) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+
+  public static final int MAX_ARROW_FIELD_NUMBER = 7;
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   * @return Whether the maxArrow field is set.
+   */
+  @java.lang.Override
+  public boolean hasMaxArrow() {
+    return validationCase_ == 7;
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   * @return The maxArrow.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxArrow() {
+    if (validationCase_ == 7) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxArrowOrBuilder() {
+    if (validationCase_ == 7) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+
+  public static final int MIN_LENGTH_ARROW_FIELD_NUMBER = 8;
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   * @return Whether the minLengthArrow field is set.
+   */
+  @java.lang.Override
+  public boolean hasMinLengthArrow() {
+    return validationCase_ == 8;
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   * @return The minLengthArrow.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinLengthArrow() {
+    if (validationCase_ == 8) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinLengthArrowOrBuilder() {
+    if (validationCase_ == 8) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+
+  public static final int MAX_LENGTH_ARROW_FIELD_NUMBER = 9;
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   * @return Whether the maxLengthArrow field is set.
+   */
+  @java.lang.Override
+  public boolean hasMaxLengthArrow() {
+    return validationCase_ == 9;
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   * @return The maxLengthArrow.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxLengthArrow() {
+    if (validationCase_ == 9) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxLengthArrowOrBuilder() {
+    if (validationCase_ == 9) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+
+  public static final int CONTAINS_FIELD_NUMBER = 10;
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   * @return Whether the contains field is set.
+   */
+  @java.lang.Override
+  public boolean hasContains() {
+    return validationCase_ == 10;
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   * @return The contains.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValue getContains() {
+    if (validationCase_ == 10) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getContainsOrBuilder() {
+    if (validationCase_ == 10) {
+       return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+    }
+    return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
   }
 
   public static final int STRICT_FIELD_NUMBER = 5;
@@ -213,6 +404,21 @@ private static final long serialVersionUID = 0L;
     if (strict_ != false) {
       output.writeBool(5, strict_);
     }
+    if (validationCase_ == 6) {
+      output.writeMessage(6, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 7) {
+      output.writeMessage(7, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 8) {
+      output.writeMessage(8, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 9) {
+      output.writeMessage(9, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 10) {
+      output.writeMessage(10, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -245,6 +451,26 @@ private static final long serialVersionUID = 0L;
     if (strict_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(5, strict_);
+    }
+    if (validationCase_ == 6) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 7) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 8) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 9) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
+    }
+    if (validationCase_ == 10) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -283,6 +509,26 @@ private static final long serialVersionUID = 0L;
         if (getMaxLength()
             != other.getMaxLength()) return false;
         break;
+      case 6:
+        if (!getMinArrow()
+            .equals(other.getMinArrow())) return false;
+        break;
+      case 7:
+        if (!getMaxArrow()
+            .equals(other.getMaxArrow())) return false;
+        break;
+      case 8:
+        if (!getMinLengthArrow()
+            .equals(other.getMinLengthArrow())) return false;
+        break;
+      case 9:
+        if (!getMaxLengthArrow()
+            .equals(other.getMaxLengthArrow())) return false;
+        break;
+      case 10:
+        if (!getContains()
+            .equals(other.getContains())) return false;
+        break;
       case 0:
       default:
     }
@@ -318,6 +564,26 @@ private static final long serialVersionUID = 0L;
       case 4:
         hash = (37 * hash) + MAX_LENGTH_FIELD_NUMBER;
         hash = (53 * hash) + getMaxLength();
+        break;
+      case 6:
+        hash = (37 * hash) + MIN_ARROW_FIELD_NUMBER;
+        hash = (53 * hash) + getMinArrow().hashCode();
+        break;
+      case 7:
+        hash = (37 * hash) + MAX_ARROW_FIELD_NUMBER;
+        hash = (53 * hash) + getMaxArrow().hashCode();
+        break;
+      case 8:
+        hash = (37 * hash) + MIN_LENGTH_ARROW_FIELD_NUMBER;
+        hash = (53 * hash) + getMinLengthArrow().hashCode();
+        break;
+      case 9:
+        hash = (37 * hash) + MAX_LENGTH_ARROW_FIELD_NUMBER;
+        hash = (53 * hash) + getMaxLengthArrow().hashCode();
+        break;
+      case 10:
+        hash = (37 * hash) + CONTAINS_FIELD_NUMBER;
+        hash = (53 * hash) + getContains().hashCode();
         break;
       case 0:
       default:
@@ -453,6 +719,21 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      if (minArrowBuilder_ != null) {
+        minArrowBuilder_.clear();
+      }
+      if (maxArrowBuilder_ != null) {
+        maxArrowBuilder_.clear();
+      }
+      if (minLengthArrowBuilder_ != null) {
+        minLengthArrowBuilder_.clear();
+      }
+      if (maxLengthArrowBuilder_ != null) {
+        maxLengthArrowBuilder_.clear();
+      }
+      if (containsBuilder_ != null) {
+        containsBuilder_.clear();
+      }
       strict_ = false;
       validationCase_ = 0;
       validation_ = null;
@@ -490,7 +771,7 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(ai.chalk.protos.chalk.graph.v1.FeatureValidation result) {
       int from_bitField0_ = bitField0_;
-      if (((from_bitField0_ & 0x00000010) != 0)) {
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.strict_ = strict_;
       }
     }
@@ -498,6 +779,26 @@ private static final long serialVersionUID = 0L;
     private void buildPartialOneofs(ai.chalk.protos.chalk.graph.v1.FeatureValidation result) {
       result.validationCase_ = validationCase_;
       result.validation_ = this.validation_;
+      if (validationCase_ == 6 &&
+          minArrowBuilder_ != null) {
+        result.validation_ = minArrowBuilder_.build();
+      }
+      if (validationCase_ == 7 &&
+          maxArrowBuilder_ != null) {
+        result.validation_ = maxArrowBuilder_.build();
+      }
+      if (validationCase_ == 8 &&
+          minLengthArrowBuilder_ != null) {
+        result.validation_ = minLengthArrowBuilder_.build();
+      }
+      if (validationCase_ == 9 &&
+          maxLengthArrowBuilder_ != null) {
+        result.validation_ = maxLengthArrowBuilder_.build();
+      }
+      if (validationCase_ == 10 &&
+          containsBuilder_ != null) {
+        result.validation_ = containsBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -564,6 +865,26 @@ private static final long serialVersionUID = 0L;
           setMaxLength(other.getMaxLength());
           break;
         }
+        case MIN_ARROW: {
+          mergeMinArrow(other.getMinArrow());
+          break;
+        }
+        case MAX_ARROW: {
+          mergeMaxArrow(other.getMaxArrow());
+          break;
+        }
+        case MIN_LENGTH_ARROW: {
+          mergeMinLengthArrow(other.getMinLengthArrow());
+          break;
+        }
+        case MAX_LENGTH_ARROW: {
+          mergeMaxLengthArrow(other.getMaxLengthArrow());
+          break;
+        }
+        case CONTAINS: {
+          mergeContains(other.getContains());
+          break;
+        }
         case VALIDATION_NOT_SET: {
           break;
         }
@@ -616,9 +937,44 @@ private static final long serialVersionUID = 0L;
             } // case 32
             case 40: {
               strict_ = input.readBool();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000200;
               break;
             } // case 40
+            case 50: {
+              input.readMessage(
+                  getMinArrowFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              validationCase_ = 6;
+              break;
+            } // case 50
+            case 58: {
+              input.readMessage(
+                  getMaxArrowFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              validationCase_ = 7;
+              break;
+            } // case 58
+            case 66: {
+              input.readMessage(
+                  getMinLengthArrowFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              validationCase_ = 8;
+              break;
+            } // case 66
+            case 74: {
+              input.readMessage(
+                  getMaxLengthArrowFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              validationCase_ = 9;
+              break;
+            } // case 74
+            case 82: {
+              input.readMessage(
+                  getContainsFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              validationCase_ = 10;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -652,28 +1008,49 @@ private static final long serialVersionUID = 0L;
     private int bitField0_;
 
     /**
-     * <code>float min = 1 [json_name = "min"];</code>
+     * <pre>
+     * Deprecated since they don't store the full type information (e.g. different numeric types)
+     * Use the *_arrow fields (6-9) instead.
+     * </pre>
+     *
+     * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=503
      * @return Whether the min field is set.
      */
-    public boolean hasMin() {
+    @java.lang.Deprecated public boolean hasMin() {
       return validationCase_ == 1;
     }
     /**
-     * <code>float min = 1 [json_name = "min"];</code>
+     * <pre>
+     * Deprecated since they don't store the full type information (e.g. different numeric types)
+     * Use the *_arrow fields (6-9) instead.
+     * </pre>
+     *
+     * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=503
      * @return The min.
      */
-    public float getMin() {
+    @java.lang.Deprecated public float getMin() {
       if (validationCase_ == 1) {
         return (java.lang.Float) validation_;
       }
       return 0F;
     }
     /**
-     * <code>float min = 1 [json_name = "min"];</code>
+     * <pre>
+     * Deprecated since they don't store the full type information (e.g. different numeric types)
+     * Use the *_arrow fields (6-9) instead.
+     * </pre>
+     *
+     * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=503
      * @param value The min to set.
      * @return This builder for chaining.
      */
-    public Builder setMin(float value) {
+    @java.lang.Deprecated public Builder setMin(float value) {
 
       validationCase_ = 1;
       validation_ = value;
@@ -681,10 +1058,17 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>float min = 1 [json_name = "min"];</code>
+     * <pre>
+     * Deprecated since they don't store the full type information (e.g. different numeric types)
+     * Use the *_arrow fields (6-9) instead.
+     * </pre>
+     *
+     * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=503
      * @return This builder for chaining.
      */
-    public Builder clearMin() {
+    @java.lang.Deprecated public Builder clearMin() {
       if (validationCase_ == 1) {
         validationCase_ = 0;
         validation_ = null;
@@ -694,28 +1078,34 @@ private static final long serialVersionUID = 0L;
     }
 
     /**
-     * <code>float max = 2 [json_name = "max"];</code>
+     * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=504
      * @return Whether the max field is set.
      */
-    public boolean hasMax() {
+    @java.lang.Deprecated public boolean hasMax() {
       return validationCase_ == 2;
     }
     /**
-     * <code>float max = 2 [json_name = "max"];</code>
+     * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=504
      * @return The max.
      */
-    public float getMax() {
+    @java.lang.Deprecated public float getMax() {
       if (validationCase_ == 2) {
         return (java.lang.Float) validation_;
       }
       return 0F;
     }
     /**
-     * <code>float max = 2 [json_name = "max"];</code>
+     * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=504
      * @param value The max to set.
      * @return This builder for chaining.
      */
-    public Builder setMax(float value) {
+    @java.lang.Deprecated public Builder setMax(float value) {
 
       validationCase_ = 2;
       validation_ = value;
@@ -723,10 +1113,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>float max = 2 [json_name = "max"];</code>
+     * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=504
      * @return This builder for chaining.
      */
-    public Builder clearMax() {
+    @java.lang.Deprecated public Builder clearMax() {
       if (validationCase_ == 2) {
         validationCase_ = 0;
         validation_ = null;
@@ -736,28 +1128,34 @@ private static final long serialVersionUID = 0L;
     }
 
     /**
-     * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+     * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=505
      * @return Whether the minLength field is set.
      */
-    public boolean hasMinLength() {
+    @java.lang.Deprecated public boolean hasMinLength() {
       return validationCase_ == 3;
     }
     /**
-     * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+     * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=505
      * @return The minLength.
      */
-    public int getMinLength() {
+    @java.lang.Deprecated public int getMinLength() {
       if (validationCase_ == 3) {
         return (java.lang.Integer) validation_;
       }
       return 0;
     }
     /**
-     * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+     * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=505
      * @param value The minLength to set.
      * @return This builder for chaining.
      */
-    public Builder setMinLength(int value) {
+    @java.lang.Deprecated public Builder setMinLength(int value) {
 
       validationCase_ = 3;
       validation_ = value;
@@ -765,10 +1163,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+     * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=505
      * @return This builder for chaining.
      */
-    public Builder clearMinLength() {
+    @java.lang.Deprecated public Builder clearMinLength() {
       if (validationCase_ == 3) {
         validationCase_ = 0;
         validation_ = null;
@@ -778,28 +1178,34 @@ private static final long serialVersionUID = 0L;
     }
 
     /**
-     * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+     * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=506
      * @return Whether the maxLength field is set.
      */
-    public boolean hasMaxLength() {
+    @java.lang.Deprecated public boolean hasMaxLength() {
       return validationCase_ == 4;
     }
     /**
-     * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+     * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=506
      * @return The maxLength.
      */
-    public int getMaxLength() {
+    @java.lang.Deprecated public int getMaxLength() {
       if (validationCase_ == 4) {
         return (java.lang.Integer) validation_;
       }
       return 0;
     }
     /**
-     * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+     * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=506
      * @param value The maxLength to set.
      * @return This builder for chaining.
      */
-    public Builder setMaxLength(int value) {
+    @java.lang.Deprecated public Builder setMaxLength(int value) {
 
       validationCase_ = 4;
       validation_ = value;
@@ -807,16 +1213,728 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+     * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+     * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+     *     See chalk/graph/v1/graph.proto;l=506
      * @return This builder for chaining.
      */
-    public Builder clearMaxLength() {
+    @java.lang.Deprecated public Builder clearMaxLength() {
       if (validationCase_ == 4) {
         validationCase_ = 0;
         validation_ = null;
         onChanged();
       }
       return this;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> minArrowBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     * @return Whether the minArrow field is set.
+     */
+    @java.lang.Override
+    public boolean hasMinArrow() {
+      return validationCase_ == 6;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     * @return The minArrow.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinArrow() {
+      if (minArrowBuilder_ == null) {
+        if (validationCase_ == 6) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      } else {
+        if (validationCase_ == 6) {
+          return minArrowBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    public Builder setMinArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (minArrowBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        validation_ = value;
+        onChanged();
+      } else {
+        minArrowBuilder_.setMessage(value);
+      }
+      validationCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    public Builder setMinArrow(
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
+      if (minArrowBuilder_ == null) {
+        validation_ = builderForValue.build();
+        onChanged();
+      } else {
+        minArrowBuilder_.setMessage(builderForValue.build());
+      }
+      validationCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    public Builder mergeMinArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (minArrowBuilder_ == null) {
+        if (validationCase_ == 6 &&
+            validation_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.newBuilder((ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          validation_ = value;
+        }
+        onChanged();
+      } else {
+        if (validationCase_ == 6) {
+          minArrowBuilder_.mergeFrom(value);
+        } else {
+          minArrowBuilder_.setMessage(value);
+        }
+      }
+      validationCase_ = 6;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    public Builder clearMinArrow() {
+      if (minArrowBuilder_ == null) {
+        if (validationCase_ == 6) {
+          validationCase_ = 0;
+          validation_ = null;
+          onChanged();
+        }
+      } else {
+        if (validationCase_ == 6) {
+          validationCase_ = 0;
+          validation_ = null;
+        }
+        minArrowBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getMinArrowBuilder() {
+      return getMinArrowFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinArrowOrBuilder() {
+      if ((validationCase_ == 6) && (minArrowBuilder_ != null)) {
+        return minArrowBuilder_.getMessageOrBuilder();
+      } else {
+        if (validationCase_ == 6) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
+        getMinArrowFieldBuilder() {
+      if (minArrowBuilder_ == null) {
+        if (!(validationCase_ == 6)) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+        }
+        minArrowBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_,
+                getParentForChildren(),
+                isClean());
+        validation_ = null;
+      }
+      validationCase_ = 6;
+      onChanged();
+      return minArrowBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> maxArrowBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     * @return Whether the maxArrow field is set.
+     */
+    @java.lang.Override
+    public boolean hasMaxArrow() {
+      return validationCase_ == 7;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     * @return The maxArrow.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxArrow() {
+      if (maxArrowBuilder_ == null) {
+        if (validationCase_ == 7) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      } else {
+        if (validationCase_ == 7) {
+          return maxArrowBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    public Builder setMaxArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (maxArrowBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        validation_ = value;
+        onChanged();
+      } else {
+        maxArrowBuilder_.setMessage(value);
+      }
+      validationCase_ = 7;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    public Builder setMaxArrow(
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
+      if (maxArrowBuilder_ == null) {
+        validation_ = builderForValue.build();
+        onChanged();
+      } else {
+        maxArrowBuilder_.setMessage(builderForValue.build());
+      }
+      validationCase_ = 7;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    public Builder mergeMaxArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (maxArrowBuilder_ == null) {
+        if (validationCase_ == 7 &&
+            validation_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.newBuilder((ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          validation_ = value;
+        }
+        onChanged();
+      } else {
+        if (validationCase_ == 7) {
+          maxArrowBuilder_.mergeFrom(value);
+        } else {
+          maxArrowBuilder_.setMessage(value);
+        }
+      }
+      validationCase_ = 7;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    public Builder clearMaxArrow() {
+      if (maxArrowBuilder_ == null) {
+        if (validationCase_ == 7) {
+          validationCase_ = 0;
+          validation_ = null;
+          onChanged();
+        }
+      } else {
+        if (validationCase_ == 7) {
+          validationCase_ = 0;
+          validation_ = null;
+        }
+        maxArrowBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getMaxArrowBuilder() {
+      return getMaxArrowFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxArrowOrBuilder() {
+      if ((validationCase_ == 7) && (maxArrowBuilder_ != null)) {
+        return maxArrowBuilder_.getMessageOrBuilder();
+      } else {
+        if (validationCase_ == 7) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
+        getMaxArrowFieldBuilder() {
+      if (maxArrowBuilder_ == null) {
+        if (!(validationCase_ == 7)) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+        }
+        maxArrowBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_,
+                getParentForChildren(),
+                isClean());
+        validation_ = null;
+      }
+      validationCase_ = 7;
+      onChanged();
+      return maxArrowBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> minLengthArrowBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     * @return Whether the minLengthArrow field is set.
+     */
+    @java.lang.Override
+    public boolean hasMinLengthArrow() {
+      return validationCase_ == 8;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     * @return The minLengthArrow.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinLengthArrow() {
+      if (minLengthArrowBuilder_ == null) {
+        if (validationCase_ == 8) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      } else {
+        if (validationCase_ == 8) {
+          return minLengthArrowBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    public Builder setMinLengthArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (minLengthArrowBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        validation_ = value;
+        onChanged();
+      } else {
+        minLengthArrowBuilder_.setMessage(value);
+      }
+      validationCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    public Builder setMinLengthArrow(
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
+      if (minLengthArrowBuilder_ == null) {
+        validation_ = builderForValue.build();
+        onChanged();
+      } else {
+        minLengthArrowBuilder_.setMessage(builderForValue.build());
+      }
+      validationCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    public Builder mergeMinLengthArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (minLengthArrowBuilder_ == null) {
+        if (validationCase_ == 8 &&
+            validation_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.newBuilder((ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          validation_ = value;
+        }
+        onChanged();
+      } else {
+        if (validationCase_ == 8) {
+          minLengthArrowBuilder_.mergeFrom(value);
+        } else {
+          minLengthArrowBuilder_.setMessage(value);
+        }
+      }
+      validationCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    public Builder clearMinLengthArrow() {
+      if (minLengthArrowBuilder_ == null) {
+        if (validationCase_ == 8) {
+          validationCase_ = 0;
+          validation_ = null;
+          onChanged();
+        }
+      } else {
+        if (validationCase_ == 8) {
+          validationCase_ = 0;
+          validation_ = null;
+        }
+        minLengthArrowBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getMinLengthArrowBuilder() {
+      return getMinLengthArrowFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinLengthArrowOrBuilder() {
+      if ((validationCase_ == 8) && (minLengthArrowBuilder_ != null)) {
+        return minLengthArrowBuilder_.getMessageOrBuilder();
+      } else {
+        if (validationCase_ == 8) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
+        getMinLengthArrowFieldBuilder() {
+      if (minLengthArrowBuilder_ == null) {
+        if (!(validationCase_ == 8)) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+        }
+        minLengthArrowBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_,
+                getParentForChildren(),
+                isClean());
+        validation_ = null;
+      }
+      validationCase_ = 8;
+      onChanged();
+      return minLengthArrowBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> maxLengthArrowBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     * @return Whether the maxLengthArrow field is set.
+     */
+    @java.lang.Override
+    public boolean hasMaxLengthArrow() {
+      return validationCase_ == 9;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     * @return The maxLengthArrow.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxLengthArrow() {
+      if (maxLengthArrowBuilder_ == null) {
+        if (validationCase_ == 9) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      } else {
+        if (validationCase_ == 9) {
+          return maxLengthArrowBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    public Builder setMaxLengthArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (maxLengthArrowBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        validation_ = value;
+        onChanged();
+      } else {
+        maxLengthArrowBuilder_.setMessage(value);
+      }
+      validationCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    public Builder setMaxLengthArrow(
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
+      if (maxLengthArrowBuilder_ == null) {
+        validation_ = builderForValue.build();
+        onChanged();
+      } else {
+        maxLengthArrowBuilder_.setMessage(builderForValue.build());
+      }
+      validationCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    public Builder mergeMaxLengthArrow(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (maxLengthArrowBuilder_ == null) {
+        if (validationCase_ == 9 &&
+            validation_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.newBuilder((ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          validation_ = value;
+        }
+        onChanged();
+      } else {
+        if (validationCase_ == 9) {
+          maxLengthArrowBuilder_.mergeFrom(value);
+        } else {
+          maxLengthArrowBuilder_.setMessage(value);
+        }
+      }
+      validationCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    public Builder clearMaxLengthArrow() {
+      if (maxLengthArrowBuilder_ == null) {
+        if (validationCase_ == 9) {
+          validationCase_ = 0;
+          validation_ = null;
+          onChanged();
+        }
+      } else {
+        if (validationCase_ == 9) {
+          validationCase_ = 0;
+          validation_ = null;
+        }
+        maxLengthArrowBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getMaxLengthArrowBuilder() {
+      return getMaxLengthArrowFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxLengthArrowOrBuilder() {
+      if ((validationCase_ == 9) && (maxLengthArrowBuilder_ != null)) {
+        return maxLengthArrowBuilder_.getMessageOrBuilder();
+      } else {
+        if (validationCase_ == 9) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
+        getMaxLengthArrowFieldBuilder() {
+      if (maxLengthArrowBuilder_ == null) {
+        if (!(validationCase_ == 9)) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+        }
+        maxLengthArrowBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_,
+                getParentForChildren(),
+                isClean());
+        validation_ = null;
+      }
+      validationCase_ = 9;
+      onChanged();
+      return maxLengthArrowBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> containsBuilder_;
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     * @return Whether the contains field is set.
+     */
+    @java.lang.Override
+    public boolean hasContains() {
+      return validationCase_ == 10;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     * @return The contains.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue getContains() {
+      if (containsBuilder_ == null) {
+        if (validationCase_ == 10) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      } else {
+        if (validationCase_ == 10) {
+          return containsBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    public Builder setContains(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (containsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        validation_ = value;
+        onChanged();
+      } else {
+        containsBuilder_.setMessage(value);
+      }
+      validationCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    public Builder setContains(
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder builderForValue) {
+      if (containsBuilder_ == null) {
+        validation_ = builderForValue.build();
+        onChanged();
+      } else {
+        containsBuilder_.setMessage(builderForValue.build());
+      }
+      validationCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    public Builder mergeContains(ai.chalk.protos.chalk.arrow.v1.ScalarValue value) {
+      if (containsBuilder_ == null) {
+        if (validationCase_ == 10 &&
+            validation_ != ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance()) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.newBuilder((ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          validation_ = value;
+        }
+        onChanged();
+      } else {
+        if (validationCase_ == 10) {
+          containsBuilder_.mergeFrom(value);
+        } else {
+          containsBuilder_.setMessage(value);
+        }
+      }
+      validationCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    public Builder clearContains() {
+      if (containsBuilder_ == null) {
+        if (validationCase_ == 10) {
+          validationCase_ = 0;
+          validation_ = null;
+          onChanged();
+        }
+      } else {
+        if (validationCase_ == 10) {
+          validationCase_ = 0;
+          validation_ = null;
+        }
+        containsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder getContainsBuilder() {
+      return getContainsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getContainsOrBuilder() {
+      if ((validationCase_ == 10) && (containsBuilder_ != null)) {
+        return containsBuilder_.getMessageOrBuilder();
+      } else {
+        if (validationCase_ == 10) {
+          return (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_;
+        }
+        return ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder> 
+        getContainsFieldBuilder() {
+      if (containsBuilder_ == null) {
+        if (!(validationCase_ == 10)) {
+          validation_ = ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance();
+        }
+        containsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.arrow.v1.ScalarValue, ai.chalk.protos.chalk.arrow.v1.ScalarValue.Builder, ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder>(
+                (ai.chalk.protos.chalk.arrow.v1.ScalarValue) validation_,
+                getParentForChildren(),
+                isClean());
+        validation_ = null;
+      }
+      validationCase_ = 10;
+      onChanged();
+      return containsBuilder_;
     }
 
     private boolean strict_ ;
@@ -836,7 +1954,7 @@ private static final long serialVersionUID = 0L;
     public Builder setStrict(boolean value) {
 
       strict_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
@@ -845,7 +1963,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearStrict() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000200);
       strict_ = false;
       onChanged();
       return this;

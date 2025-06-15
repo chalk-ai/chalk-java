@@ -17,6 +17,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ListDeploymentsRequest() {
+    cursor_ = "";
+    branchName_ = "";
   }
 
   @java.lang.Override
@@ -39,6 +41,139 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest.class, ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest.Builder.class);
   }
 
+  private int bitField0_;
+  public static final int CURSOR_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object cursor_ = "";
+  /**
+   * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+   * @return Whether the cursor field is set.
+   */
+  @java.lang.Override
+  public boolean hasCursor() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+   * @return The cursor.
+   */
+  @java.lang.Override
+  public java.lang.String getCursor() {
+    java.lang.Object ref = cursor_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      cursor_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+   * @return The bytes for cursor.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCursorBytes() {
+    java.lang.Object ref = cursor_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      cursor_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int LIMIT_FIELD_NUMBER = 2;
+  private int limit_ = 0;
+  /**
+   * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+   * @return Whether the limit field is set.
+   */
+  @java.lang.Override
+  public boolean hasLimit() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+   * @return The limit.
+   */
+  @java.lang.Override
+  public int getLimit() {
+    return limit_;
+  }
+
+  public static final int INCLUDE_BRANCH_FIELD_NUMBER = 3;
+  private boolean includeBranch_ = false;
+  /**
+   * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+   * @return Whether the includeBranch field is set.
+   */
+  @java.lang.Override
+  public boolean hasIncludeBranch() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+   * @return The includeBranch.
+   */
+  @java.lang.Override
+  public boolean getIncludeBranch() {
+    return includeBranch_;
+  }
+
+  public static final int BRANCH_NAME_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object branchName_ = "";
+  /**
+   * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+   * @return Whether the branchName field is set.
+   */
+  @java.lang.Override
+  public boolean hasBranchName() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+   * @return The branchName.
+   */
+  @java.lang.Override
+  public java.lang.String getBranchName() {
+    java.lang.Object ref = branchName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      branchName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+   * @return The bytes for branchName.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBranchNameBytes() {
+    java.lang.Object ref = branchName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      branchName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -53,6 +188,18 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, cursor_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeInt32(2, limit_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeBool(3, includeBranch_);
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, branchName_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -62,6 +209,20 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, cursor_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, limit_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(3, includeBranch_);
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, branchName_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -77,6 +238,26 @@ private static final long serialVersionUID = 0L;
     }
     ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest other = (ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest) obj;
 
+    if (hasCursor() != other.hasCursor()) return false;
+    if (hasCursor()) {
+      if (!getCursor()
+          .equals(other.getCursor())) return false;
+    }
+    if (hasLimit() != other.hasLimit()) return false;
+    if (hasLimit()) {
+      if (getLimit()
+          != other.getLimit()) return false;
+    }
+    if (hasIncludeBranch() != other.hasIncludeBranch()) return false;
+    if (hasIncludeBranch()) {
+      if (getIncludeBranch()
+          != other.getIncludeBranch()) return false;
+    }
+    if (hasBranchName() != other.hasBranchName()) return false;
+    if (hasBranchName()) {
+      if (!getBranchName()
+          .equals(other.getBranchName())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -88,6 +269,23 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    if (hasCursor()) {
+      hash = (37 * hash) + CURSOR_FIELD_NUMBER;
+      hash = (53 * hash) + getCursor().hashCode();
+    }
+    if (hasLimit()) {
+      hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + getLimit();
+    }
+    if (hasIncludeBranch()) {
+      hash = (37 * hash) + INCLUDE_BRANCH_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIncludeBranch());
+    }
+    if (hasBranchName()) {
+      hash = (37 * hash) + BRANCH_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getBranchName().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -218,6 +416,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
+      cursor_ = "";
+      limit_ = 0;
+      includeBranch_ = false;
+      branchName_ = "";
       return this;
     }
 
@@ -244,8 +447,31 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest buildPartial() {
       ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest result = new ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest(this);
+      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartial0(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.cursor_ = cursor_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.limit_ = limit_;
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.includeBranch_ = includeBranch_;
+        to_bitField0_ |= 0x00000004;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.branchName_ = branchName_;
+        to_bitField0_ |= 0x00000008;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -292,6 +518,22 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest other) {
       if (other == ai.chalk.protos.chalk.server.v1.ListDeploymentsRequest.getDefaultInstance()) return this;
+      if (other.hasCursor()) {
+        cursor_ = other.cursor_;
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
+      if (other.hasLimit()) {
+        setLimit(other.getLimit());
+      }
+      if (other.hasIncludeBranch()) {
+        setIncludeBranch(other.getIncludeBranch());
+      }
+      if (other.hasBranchName()) {
+        branchName_ = other.branchName_;
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -318,6 +560,26 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
+            case 10: {
+              cursor_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000001;
+              break;
+            } // case 10
+            case 16: {
+              limit_ = input.readInt32();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 16
+            case 24: {
+              includeBranch_ = input.readBool();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 24
+            case 34: {
+              branchName_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -331,6 +593,245 @@ private static final long serialVersionUID = 0L;
       } finally {
         onChanged();
       } // finally
+      return this;
+    }
+    private int bitField0_;
+
+    private java.lang.Object cursor_ = "";
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @return Whether the cursor field is set.
+     */
+    public boolean hasCursor() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @return The cursor.
+     */
+    public java.lang.String getCursor() {
+      java.lang.Object ref = cursor_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cursor_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @return The bytes for cursor.
+     */
+    public com.google.protobuf.ByteString
+        getCursorBytes() {
+      java.lang.Object ref = cursor_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cursor_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @param value The cursor to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCursor(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      cursor_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCursor() {
+      cursor_ = getDefaultInstance().getCursor();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cursor = 1 [json_name = "cursor"];</code>
+     * @param value The bytes for cursor to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCursorBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      cursor_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private int limit_ ;
+    /**
+     * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+     * @return Whether the limit field is set.
+     */
+    @java.lang.Override
+    public boolean hasLimit() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+     * @return The limit.
+     */
+    @java.lang.Override
+    public int getLimit() {
+      return limit_;
+    }
+    /**
+     * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+     * @param value The limit to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLimit(int value) {
+
+      limit_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional int32 limit = 2 [json_name = "limit"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLimit() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      limit_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean includeBranch_ ;
+    /**
+     * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+     * @return Whether the includeBranch field is set.
+     */
+    @java.lang.Override
+    public boolean hasIncludeBranch() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+     * @return The includeBranch.
+     */
+    @java.lang.Override
+    public boolean getIncludeBranch() {
+      return includeBranch_;
+    }
+    /**
+     * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+     * @param value The includeBranch to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIncludeBranch(boolean value) {
+
+      includeBranch_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional bool include_branch = 3 [json_name = "includeBranch"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIncludeBranch() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      includeBranch_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object branchName_ = "";
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @return Whether the branchName field is set.
+     */
+    public boolean hasBranchName() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @return The branchName.
+     */
+    public java.lang.String getBranchName() {
+      java.lang.Object ref = branchName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        branchName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @return The bytes for branchName.
+     */
+    public com.google.protobuf.ByteString
+        getBranchNameBytes() {
+      java.lang.Object ref = branchName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        branchName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @param value The branchName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBranchName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      branchName_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBranchName() {
+      branchName_ = getDefaultInstance().getBranchName();
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string branch_name = 4 [json_name = "branchName"];</code>
+     * @param value The bytes for branchName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBranchNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      branchName_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
       return this;
     }
     @java.lang.Override

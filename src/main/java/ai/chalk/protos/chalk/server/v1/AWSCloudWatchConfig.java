@@ -18,6 +18,8 @@ private static final long serialVersionUID = 0L;
   }
   private AWSCloudWatchConfig() {
     logGroupPath_ = "";
+    logGroupPaths_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -88,6 +90,43 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int LOG_GROUP_PATHS_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList logGroupPaths_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @return A list containing the logGroupPaths.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getLogGroupPathsList() {
+    return logGroupPaths_;
+  }
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @return The count of logGroupPaths.
+   */
+  public int getLogGroupPathsCount() {
+    return logGroupPaths_.size();
+  }
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @param index The index of the element to return.
+   * @return The logGroupPaths at the given index.
+   */
+  public java.lang.String getLogGroupPaths(int index) {
+    return logGroupPaths_.get(index);
+  }
+  /**
+   * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the logGroupPaths at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getLogGroupPathsBytes(int index) {
+    return logGroupPaths_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -105,6 +144,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, logGroupPath_);
     }
+    for (int i = 0; i < logGroupPaths_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, logGroupPaths_.getRaw(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -116,6 +158,14 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, logGroupPath_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < logGroupPaths_.size(); i++) {
+        dataSize += computeStringSizeNoTag(logGroupPaths_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getLogGroupPathsList().size();
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -137,6 +187,8 @@ private static final long serialVersionUID = 0L;
       if (!getLogGroupPath()
           .equals(other.getLogGroupPath())) return false;
     }
+    if (!getLogGroupPathsList()
+        .equals(other.getLogGroupPathsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -151,6 +203,10 @@ private static final long serialVersionUID = 0L;
     if (hasLogGroupPath()) {
       hash = (37 * hash) + LOG_GROUP_PATH_FIELD_NUMBER;
       hash = (53 * hash) + getLogGroupPath().hashCode();
+    }
+    if (getLogGroupPathsCount() > 0) {
+      hash = (37 * hash) + LOG_GROUP_PATHS_FIELD_NUMBER;
+      hash = (53 * hash) + getLogGroupPathsList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -284,6 +340,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       logGroupPath_ = "";
+      logGroupPaths_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -321,6 +379,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.logGroupPath_ = logGroupPath_;
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        logGroupPaths_.makeImmutable();
+        result.logGroupPaths_ = logGroupPaths_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -374,6 +436,16 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (!other.logGroupPaths_.isEmpty()) {
+        if (logGroupPaths_.isEmpty()) {
+          logGroupPaths_ = other.logGroupPaths_;
+          bitField0_ |= 0x00000002;
+        } else {
+          ensureLogGroupPathsIsMutable();
+          logGroupPaths_.addAll(other.logGroupPaths_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -405,6 +477,12 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureLogGroupPathsIsMutable();
+              logGroupPaths_.add(s);
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -497,6 +575,117 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       logGroupPath_ = value;
       bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList logGroupPaths_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureLogGroupPathsIsMutable() {
+      if (!logGroupPaths_.isModifiable()) {
+        logGroupPaths_ = new com.google.protobuf.LazyStringArrayList(logGroupPaths_);
+      }
+      bitField0_ |= 0x00000002;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @return A list containing the logGroupPaths.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getLogGroupPathsList() {
+      logGroupPaths_.makeImmutable();
+      return logGroupPaths_;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @return The count of logGroupPaths.
+     */
+    public int getLogGroupPathsCount() {
+      return logGroupPaths_.size();
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param index The index of the element to return.
+     * @return The logGroupPaths at the given index.
+     */
+    public java.lang.String getLogGroupPaths(int index) {
+      return logGroupPaths_.get(index);
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the logGroupPaths at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getLogGroupPathsBytes(int index) {
+      return logGroupPaths_.getByteString(index);
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param index The index to set the value at.
+     * @param value The logGroupPaths to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLogGroupPaths(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureLogGroupPathsIsMutable();
+      logGroupPaths_.set(index, value);
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param value The logGroupPaths to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLogGroupPaths(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureLogGroupPathsIsMutable();
+      logGroupPaths_.add(value);
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param values The logGroupPaths to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllLogGroupPaths(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureLogGroupPathsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, logGroupPaths_);
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLogGroupPaths() {
+      logGroupPaths_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000002);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log_group_paths = 2 [json_name = "logGroupPaths"];</code>
+     * @param value The bytes of the logGroupPaths to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLogGroupPathsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureLogGroupPathsIsMutable();
+      logGroupPaths_.add(value);
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }

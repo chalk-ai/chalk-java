@@ -22,4 +22,18 @@ public interface ExprLiteralOrBuilder extends
    * <code>.chalk.arrow.v1.ScalarValue value = 1 [json_name = "value"];</code>
    */
   ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getValueOrBuilder();
+
+  /**
+   * <pre>
+   * All Python literal values are encoded as arrow scalar values.
+   * - If this bool is `False`, then the decoded value was originally a plain
+   * Python value.
+   * - If this bool is `True`, then the decoded value should be a
+   * `pyarrow.Scalar` value.
+   * </pre>
+   *
+   * <code>bool is_arrow_scalar_object = 2 [json_name = "isArrowScalarObject"];</code>
+   * @return The isArrowScalarObject.
+   */
+  boolean getIsArrowScalarObject();
 }

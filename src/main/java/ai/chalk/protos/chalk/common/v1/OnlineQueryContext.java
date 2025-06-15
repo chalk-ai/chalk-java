@@ -53,6 +53,8 @@ private static final long serialVersionUID = 0L;
     switch (number) {
       case 9:
         return internalGetOptions();
+      case 11:
+        return internalGetQueryContext();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -77,7 +79,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=57
+   *     See chalk/common/v1/online_query.proto;l=65
    * @return The environment.
    */
   @java.lang.Override
@@ -100,7 +102,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=57
+   *     See chalk/common/v1/online_query.proto;l=65
    * @return The bytes for environment.
    */
   @java.lang.Override
@@ -202,7 +204,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return Whether the deploymentId field is set.
    */
   @java.lang.Override
@@ -216,7 +218,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return The deploymentId.
    */
   @java.lang.Override
@@ -239,7 +241,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=60
+   *     See chalk/common/v1/online_query.proto;l=68
    * @return The bytes for deploymentId.
    */
   @java.lang.Override
@@ -267,7 +269,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return Whether the branchId field is set.
    */
   @java.lang.Override
@@ -281,7 +283,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return The branchId.
    */
   @java.lang.Override
@@ -304,7 +306,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
    * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-   *     See chalk/common/v1/online_query.proto;l=61
+   *     See chalk/common/v1/online_query.proto;l=69
    * @return The bytes for branchId.
    */
   @java.lang.Override
@@ -623,6 +625,101 @@ com.google.protobuf.Value defaultValue) {
     return valueMetricsTagByFeatures_.get(index);
   }
 
+  public static final int QUERY_CONTEXT_FIELD_NUMBER = 11;
+  private static final class QueryContextDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, com.google.protobuf.Value> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, com.google.protobuf.Value>newDefaultInstance(
+                ai.chalk.protos.chalk.common.v1.OnlineQueryProto.internal_static_chalk_common_v1_OnlineQueryContext_QueryContextEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                com.google.protobuf.Value.getDefaultInstance());
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, com.google.protobuf.Value> queryContext_;
+  private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.Value>
+  internalGetQueryContext() {
+    if (queryContext_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          QueryContextDefaultEntryHolder.defaultEntry);
+    }
+    return queryContext_;
+  }
+  public int getQueryContextCount() {
+    return internalGetQueryContext().getMap().size();
+  }
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  @java.lang.Override
+  public boolean containsQueryContext(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetQueryContext().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getQueryContextMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getQueryContext() {
+    return getQueryContextMap();
+  }
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, com.google.protobuf.Value> getQueryContextMap() {
+    return internalGetQueryContext().getMap();
+  }
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+com.google.protobuf.Value getQueryContextOrDefault(
+      java.lang.String key,
+      /* nullable */
+com.google.protobuf.Value defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetQueryContext().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <pre>
+   * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+   * </pre>
+   *
+   * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.Value getQueryContextOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, com.google.protobuf.Value> map =
+        internalGetQueryContext().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -670,6 +767,12 @@ com.google.protobuf.Value defaultValue) {
     for (int i = 0; i < valueMetricsTagByFeatures_.size(); i++) {
       output.writeMessage(10, valueMetricsTagByFeatures_.get(i));
     }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetQueryContext(),
+        QueryContextDefaultEntryHolder.defaultEntry,
+        11);
     getUnknownFields().writeTo(output);
   }
 
@@ -727,6 +830,16 @@ com.google.protobuf.Value defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(10, valueMetricsTagByFeatures_.get(i));
     }
+    for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> entry
+         : internalGetQueryContext().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+      queryContext__ = QueryContextDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, queryContext__);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -777,6 +890,8 @@ com.google.protobuf.Value defaultValue) {
         other.internalGetOptions())) return false;
     if (!getValueMetricsTagByFeaturesList()
         .equals(other.getValueMetricsTagByFeaturesList())) return false;
+    if (!internalGetQueryContext().equals(
+        other.internalGetQueryContext())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -825,6 +940,10 @@ com.google.protobuf.Value defaultValue) {
     if (getValueMetricsTagByFeaturesCount() > 0) {
       hash = (37 * hash) + VALUE_METRICS_TAG_BY_FEATURES_FIELD_NUMBER;
       hash = (53 * hash) + getValueMetricsTagByFeaturesList().hashCode();
+    }
+    if (!internalGetQueryContext().getMap().isEmpty()) {
+      hash = (37 * hash) + QUERY_CONTEXT_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetQueryContext().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -945,6 +1064,8 @@ com.google.protobuf.Value defaultValue) {
       switch (number) {
         case 9:
           return internalGetOptions();
+        case 11:
+          return internalGetQueryContext();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -956,6 +1077,8 @@ com.google.protobuf.Value defaultValue) {
       switch (number) {
         case 9:
           return internalGetMutableOptions();
+        case 11:
+          return internalGetMutableQueryContext();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -1001,6 +1124,7 @@ com.google.protobuf.Value defaultValue) {
         valueMetricsTagByFeaturesBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000200);
+      internalGetMutableQueryContext().clear();
       return this;
     }
 
@@ -1081,6 +1205,9 @@ com.google.protobuf.Value defaultValue) {
       }
       if (((from_bitField0_ & 0x00000100) != 0)) {
         result.options_ = internalGetOptions().build(OptionsDefaultEntryHolder.defaultEntry);
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.queryContext_ = internalGetQueryContext().build(QueryContextDefaultEntryHolder.defaultEntry);
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1208,6 +1335,9 @@ com.google.protobuf.Value defaultValue) {
           }
         }
       }
+      internalGetMutableQueryContext().mergeFrom(
+          other.internalGetQueryContext());
+      bitField0_ |= 0x00000400;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1298,6 +1428,15 @@ com.google.protobuf.Value defaultValue) {
               }
               break;
             } // case 82
+            case 90: {
+              com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value>
+              queryContext__ = input.readMessage(
+                  QueryContextDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableQueryContext().ensureBuilderMap().put(
+                  queryContext__.getKey(), queryContext__.getValue());
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1323,7 +1462,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=57
+     *     See chalk/common/v1/online_query.proto;l=65
      * @return The environment.
      */
     @java.lang.Deprecated public java.lang.String getEnvironment() {
@@ -1345,7 +1484,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=57
+     *     See chalk/common/v1/online_query.proto;l=65
      * @return The bytes for environment.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1368,7 +1507,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=57
+     *     See chalk/common/v1/online_query.proto;l=65
      * @param value The environment to set.
      * @return This builder for chaining.
      */
@@ -1387,7 +1526,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=57
+     *     See chalk/common/v1/online_query.proto;l=65
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearEnvironment() {
@@ -1403,7 +1542,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>string environment = 1 [json_name = "environment", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.environment is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=57
+     *     See chalk/common/v1/online_query.proto;l=65
      * @param value The bytes for environment to set.
      * @return This builder for chaining.
      */
@@ -1647,7 +1786,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @return Whether the deploymentId field is set.
      */
     @java.lang.Deprecated public boolean hasDeploymentId() {
@@ -1660,7 +1799,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @return The deploymentId.
      */
     @java.lang.Deprecated public java.lang.String getDeploymentId() {
@@ -1682,7 +1821,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @return The bytes for deploymentId.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1705,7 +1844,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @param value The deploymentId to set.
      * @return This builder for chaining.
      */
@@ -1724,7 +1863,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearDeploymentId() {
@@ -1740,7 +1879,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string deployment_id = 4 [json_name = "deploymentId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.deployment_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=60
+     *     See chalk/common/v1/online_query.proto;l=68
      * @param value The bytes for deploymentId to set.
      * @return This builder for chaining.
      */
@@ -1762,7 +1901,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @return Whether the branchId field is set.
      */
     @java.lang.Deprecated public boolean hasBranchId() {
@@ -1775,7 +1914,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @return The branchId.
      */
     @java.lang.Deprecated public java.lang.String getBranchId() {
@@ -1797,7 +1936,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @return The bytes for branchId.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1820,7 +1959,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @param value The branchId to set.
      * @return This builder for chaining.
      */
@@ -1839,7 +1978,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearBranchId() {
@@ -1855,7 +1994,7 @@ com.google.protobuf.Value defaultValue) {
      *
      * <code>optional string branch_id = 5 [json_name = "branchId", deprecated = true];</code>
      * @deprecated chalk.common.v1.OnlineQueryContext.branch_id is deprecated.
-     *     See chalk/common/v1/online_query.proto;l=61
+     *     See chalk/common/v1/online_query.proto;l=69
      * @param value The bytes for branchId to set.
      * @return This builder for chaining.
      */
@@ -2611,6 +2750,193 @@ com.google.protobuf.Value defaultValue) {
         valueMetricsTagByFeatures_ = null;
       }
       return valueMetricsTagByFeaturesBuilder_;
+    }
+
+    private static final class QueryContextConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value> {
+      @java.lang.Override
+      public com.google.protobuf.Value build(com.google.protobuf.ValueOrBuilder val) {
+        if (val instanceof com.google.protobuf.Value) { return (com.google.protobuf.Value) val; }
+        return ((com.google.protobuf.Value.Builder) val).build();
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.Value> defaultEntry() {
+        return QueryContextDefaultEntryHolder.defaultEntry;
+      }
+    };
+    private static final QueryContextConverter queryContextConverter = new QueryContextConverter();
+
+    private com.google.protobuf.MapFieldBuilder<
+        java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder> queryContext_;
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetQueryContext() {
+      if (queryContext_ == null) {
+        return new com.google.protobuf.MapFieldBuilder<>(queryContextConverter);
+      }
+      return queryContext_;
+    }
+    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.google.protobuf.ValueOrBuilder, com.google.protobuf.Value, com.google.protobuf.Value.Builder>
+        internalGetMutableQueryContext() {
+      if (queryContext_ == null) {
+        queryContext_ = new com.google.protobuf.MapFieldBuilder<>(queryContextConverter);
+      }
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return queryContext_;
+    }
+    public int getQueryContextCount() {
+      return internalGetQueryContext().ensureBuilderMap().size();
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    @java.lang.Override
+    public boolean containsQueryContext(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetQueryContext().ensureBuilderMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getQueryContextMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getQueryContext() {
+      return getQueryContextMap();
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, com.google.protobuf.Value> getQueryContextMap() {
+      return internalGetQueryContext().getImmutableMap();
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+com.google.protobuf.Value getQueryContextOrDefault(
+        java.lang.String key,
+        /* nullable */
+com.google.protobuf.Value defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableQueryContext().ensureBuilderMap();
+      return map.containsKey(key) ? queryContextConverter.build(map.get(key)) : defaultValue;
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.Value getQueryContextOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> map = internalGetMutableQueryContext().ensureBuilderMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return queryContextConverter.build(map.get(key));
+    }
+    public Builder clearQueryContext() {
+      bitField0_ = (bitField0_ & ~0x00000400);
+      internalGetMutableQueryContext().clear();
+      return this;
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    public Builder removeQueryContext(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableQueryContext().ensureBuilderMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.google.protobuf.Value>
+        getMutableQueryContext() {
+      bitField0_ |= 0x00000400;
+      return internalGetMutableQueryContext().ensureMessageMap();
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    public Builder putQueryContext(
+        java.lang.String key,
+        com.google.protobuf.Value value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableQueryContext().ensureBuilderMap()
+          .put(key, value);
+      bitField0_ |= 0x00000400;
+      return this;
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    public Builder putAllQueryContext(
+        java.util.Map<java.lang.String, com.google.protobuf.Value> values) {
+      for (java.util.Map.Entry<java.lang.String, com.google.protobuf.Value> e : values.entrySet()) {
+        if (e.getKey() == null || e.getValue() == null) {
+          throw new NullPointerException();
+        }
+      }
+      internalGetMutableQueryContext().ensureBuilderMap()
+          .putAll(values);
+      bitField0_ |= 0x00000400;
+      return this;
+    }
+    /**
+     * <pre>
+     * Query context is a dictionary of JSON-serializable values that can be used in resolvers
+     * </pre>
+     *
+     * <code>map&lt;string, .google.protobuf.Value&gt; query_context = 11 [json_name = "queryContext"];</code>
+     */
+    public com.google.protobuf.Value.Builder putQueryContextBuilderIfAbsent(
+        java.lang.String key) {
+      java.util.Map<java.lang.String, com.google.protobuf.ValueOrBuilder> builderMap = internalGetMutableQueryContext().ensureBuilderMap();
+      com.google.protobuf.ValueOrBuilder entry = builderMap.get(key);
+      if (entry == null) {
+        entry = com.google.protobuf.Value.newBuilder();
+        builderMap.put(key, entry);
+      }
+      if (entry instanceof com.google.protobuf.Value) {
+        entry = ((com.google.protobuf.Value) entry).toBuilder();
+        builderMap.put(key, entry);
+      }
+      return (com.google.protobuf.Value.Builder) entry;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

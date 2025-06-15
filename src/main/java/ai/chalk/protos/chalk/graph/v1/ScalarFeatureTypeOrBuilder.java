@@ -349,4 +349,42 @@ public interface ScalarFeatureTypeOrBuilder extends
    * @return The cacheStrategy.
    */
   ai.chalk.protos.chalk.graph.v1.CacheStrategy getCacheStrategy();
+
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+   * @return Whether the storeOnline field is set.
+   */
+  boolean hasStoreOnline();
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_online = 26 [json_name = "storeOnline"];</code>
+   * @return The storeOnline.
+   */
+  boolean getStoreOnline();
+
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+   * @return Whether the storeOffline field is set.
+   */
+  boolean hasStoreOffline();
+  /**
+   * <pre>
+   * optional because proto default is false, but chalk defaults to true
+   * </pre>
+   *
+   * <code>optional bool store_offline = 27 [json_name = "storeOffline"];</code>
+   * @return The storeOffline.
+   */
+  boolean getStoreOffline();
 }

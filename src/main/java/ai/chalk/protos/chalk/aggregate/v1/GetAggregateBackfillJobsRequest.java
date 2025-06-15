@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   }
   private GetAggregateBackfillJobsRequest() {
     cursor_ = "";
+    planHash_ = "";
   }
 
   @java.lang.Override
@@ -40,6 +41,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobsRequest.class, ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobsRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int LIMIT_FIELD_NUMBER = 1;
   private int limit_ = 0;
   /**
@@ -90,6 +92,53 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int PLAN_HASH_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object planHash_ = "";
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  @java.lang.Override
+  public boolean hasPlanHash() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  @java.lang.Override
+  public java.lang.String getPlanHash() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      planHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPlanHashBytes() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      planHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -110,6 +159,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cursor_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, cursor_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, planHash_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -125,6 +177,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cursor_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, cursor_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, planHash_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -145,6 +200,11 @@ private static final long serialVersionUID = 0L;
         != other.getLimit()) return false;
     if (!getCursor()
         .equals(other.getCursor())) return false;
+    if (hasPlanHash() != other.hasPlanHash()) return false;
+    if (hasPlanHash()) {
+      if (!getPlanHash()
+          .equals(other.getPlanHash())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -160,6 +220,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getLimit();
     hash = (37 * hash) + CURSOR_FIELD_NUMBER;
     hash = (53 * hash) + getCursor().hashCode();
+    if (hasPlanHash()) {
+      hash = (37 * hash) + PLAN_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getPlanHash().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -293,6 +357,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       limit_ = 0;
       cursor_ = "";
+      planHash_ = "";
       return this;
     }
 
@@ -332,6 +397,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.cursor_ = cursor_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.planHash_ = planHash_;
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -386,6 +457,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
+      if (other.hasPlanHash()) {
+        planHash_ = other.planHash_;
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -422,6 +498,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              planHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -539,6 +620,85 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       cursor_ = value;
       bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object planHash_ = "";
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return Whether the planHash field is set.
+     */
+    public boolean hasPlanHash() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return The planHash.
+     */
+    public java.lang.String getPlanHash() {
+      java.lang.Object ref = planHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        planHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return The bytes for planHash.
+     */
+    public com.google.protobuf.ByteString
+        getPlanHashBytes() {
+      java.lang.Object ref = planHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        planHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @param value The planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      planHash_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPlanHash() {
+      planHash_ = getDefaultInstance().getPlanHash();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @param value The bytes for planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      planHash_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
