@@ -92,7 +92,7 @@ def configurePom = { pom ->
 }
 
 task createCentralBundle(type: Zip) {
-    dependsOn 'publishToMavenLocal'
+    dependsOn 'publishAllPublicationsToBundleRepoRepository'
 
     from(layout.buildDirectory.dir('repo')) {
         include '**/*'
