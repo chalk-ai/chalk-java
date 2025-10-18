@@ -91,6 +91,62 @@ def configurePom = { pom ->
     }
 }
 
+task createCentralBundle(type: Zip) {
+    dependsOn 'publishToMavenLocal'
+
+    from(layout.buildDirectory.dir('repo')) {
+        include '**/*'
+    }
+
+    archiveFileName = "bundle.zip"
+    destinationDirectory = layout.buildDirectory.dir("central-bundle")
+}
+
+task publishCentralBundle {
+    dependsOn 'createCentralBundle'
+
+    doLast {
+        def bundleFile = layout.buildDirectory.file("central-bundle/bundle.zip").get().asFile
+
+        if (!bundleFile.exists()) {
+            throw new GradleException("Bundle file not found: ${bundleFile}")
+        }
+
+        def username = System.getenv("CENTRAL_PORTAL_USERNAME")
+        def password = System.getenv("CENTRAL_PORTAL_PASSWORD")
+
+        if (!username || !password) {
+            throw new GradleException("CENTRAL_PORTAL_USERNAME and CENTRAL_PORTAL_PASSWORD must be set")
+        }
+
+        println "Uploading bundle (${bundleFile.length() / 1024 / 1024} MB) to Central Portal..."
+
+        def auth = "${username}:${password}".bytes.encodeBase64().toString()
+        def connection = new URL("https://central.sonatype.com/api/v1/publisher/upload?publishingType=AUTOMATIC")
+                .openConnection() as HttpURLConnection
+
+        connection.setRequestMethod("POST")
+        connection.setRequestProperty("Authorization", "Bearer ${auth}")
+        connection.setRequestProperty("Content-Type", "application/zip")
+        connection.doOutput = true
+
+        bundleFile.withInputStream { input ->
+            connection.outputStream << input
+        }
+
+        def responseCode = connection.responseCode
+        println "Response code: ${responseCode}"
+
+        if (responseCode >= 200 && responseCode < 300) {
+            println "✓ Successfully uploaded to Central Portal!"
+            println connection.inputStream.text
+        } else {
+            def error = connection.errorStream?.text ?: "No error details"
+            throw new GradleException("Upload failed with code ${responseCode}: ${error}")
+        }
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -105,13 +161,8 @@ publishing {
 
     repositories {
         maven {
-            name = 'CentralPortal'
-            url = uri("https://central.sonatype.com/api/v1/publisher/upload?publishingType=AUTOMATIC")
-
-            credentials {
-                username = System.getenv("SONATYPE_USERNAME") ?: project.findProperty("sonatypeUsername")
-                password = System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("sonatypePassword")
-            }
+            name = 'repo'
+            url = layout.buildDirectory.dir('repo')
         }
     }
 }

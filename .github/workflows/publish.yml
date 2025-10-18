@@ -23,10 +23,14 @@ jobs:
           cache: gradle
           distribution: 'oracle'
 
-      - name: Publish to Sonatype
-        run: ./gradlew publish
+      - name: Publish to Local Zip
+        run: ./gradlew createCentralBundle
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+
+      - name: Upload to Central Portal
+        run: ./gradlew publishCentralBundle
+        env:
+          CENTRAL_PORTAL_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          CENTRAL_PORTAL_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
