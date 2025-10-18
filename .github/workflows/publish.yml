@@ -24,7 +24,7 @@ jobs:
           distribution: 'oracle'
 
       - name: Publish to Sonatype
-        run: ./gradlew publish closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew publish
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
