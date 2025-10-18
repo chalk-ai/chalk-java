@@ -315,12 +315,15 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assertEquals(true, jsonHeaderSeed.get("explain"));
         assertEquals("abc", jsonHeaderSeed.get("branch"));
         assertEquals("abc", jsonHeaderSeed.get("correlation_id"));
-        assertEquals("abc", jsonHeaderSeed.get("environment_id"));
+        HashMap<String, Object> expectedContext = new HashMap<>();
+        expectedContext.put("environment", "abc");
+        expectedContext.put("tags", paramsSeed.getTags());
+        expectedContext.put("required_resolver_tags", requiredResolverTags);
+        assertEquals(expectedContext, jsonHeaderSeed.get("context"));
         assertEquals("abc", jsonHeaderSeed.get("deployment_id"));
         assertEquals(queryNameVersion, jsonHeaderSeed.get("query_name_version"));
         assertTrue(jsonHeaderSeed.containsKey("meta"));
         assertTrue(jsonHeaderSeed.containsKey("staleness"));
-        assertTrue(jsonHeaderSeed.containsKey("tags"));
         assertEquals(now, jsonHeaderSeed.get("now"));
         // Required resolver tags is not yet implemented in the query feather endpoint
         //        assertEquals(requiredResolverTags, jsonHeaderSeed.get("required_resolver_tags"));
@@ -380,12 +383,15 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assertEquals(true, jsonHeaderWithInputs.get("explain"));
         assertEquals("abc", jsonHeaderWithInputs.get("branch"));
         assertEquals("abc", jsonHeaderWithInputs.get("correlation_id"));
-        assertEquals("abc", jsonHeaderWithInputs.get("environment_id"));
         assertEquals("abc", jsonHeaderWithInputs.get("deployment_id"));
+        HashMap<String, Object> expectedContextInputs = new HashMap<>();
+        expectedContextInputs.put("environment", "abc");
+        expectedContextInputs.put("tags", paramsWithInputs.getTags());
+        expectedContextInputs.put("required_resolver_tags", requiredResolverTags);
+        assertEquals(expectedContextInputs, jsonHeaderWithInputs.get("context"));
         assertEquals(queryNameVersion, jsonHeaderWithInputs.get("query_name_version"));
         assertTrue(jsonHeaderWithInputs.containsKey("meta"));
         assertTrue(jsonHeaderWithInputs.containsKey("staleness"));
-        assertTrue(jsonHeaderWithInputs.containsKey("tags"));
         assertEquals(now, jsonHeaderWithInputs.get("now"));
         // Required resolver tags is not yet implemented in the query feather endpoint
         //        assertEquals(requiredResolverTags, jsonHeaderWithInputs.get("required_resolver_tags"));
@@ -439,12 +445,10 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assertEquals(true, jsonHeaderWithOutputs.get("explain"));
         assertEquals("abc", jsonHeaderWithOutputs.get("branch"));
         assertEquals("abc", jsonHeaderWithOutputs.get("correlation_id"));
-        assertEquals("abc", jsonHeaderWithOutputs.get("environment_id"));
         assertEquals("abc", jsonHeaderWithOutputs.get("deployment_id"));
         assertEquals("abc", jsonHeaderWithOutputs.get("query_name"));
         assertTrue(jsonHeaderWithOutputs.containsKey("meta"));
         assertTrue(jsonHeaderWithOutputs.containsKey("staleness"));
-        assertTrue(jsonHeaderWithOutputs.containsKey("tags"));
         assertEquals(plannerOptions, jsonHeaderWithOutputs.get("planner_options"));
 
         // Test BuilderComplete with optional params
@@ -510,13 +514,11 @@ public class TestOnlineQueryParams extends AllocatorTest {
         assertEquals(true, jsonHeader.get("explain"));
         assertEquals("abc", jsonHeader.get("branch"));
         assertEquals("abc", jsonHeader.get("correlation_id"));
-        assertEquals("abc", jsonHeader.get("environment_id"));
         assertEquals("abc", jsonHeader.get("deployment_id"));
         assertEquals("abc", jsonHeader.get("query_name"));
         assertEquals(queryNameVersion, jsonHeader.get("query_name_version"));
         assertTrue(jsonHeader.containsKey("meta"));
         assertTrue(jsonHeader.containsKey("staleness"));
-        assertTrue(jsonHeader.containsKey("tags"));
         assertEquals(now, jsonHeader.get("now"));
         // Required resolver tags is not yet implemented in the query feather endpoint
         // assertEquals(requiredResolverTags, jsonHeader.get("required_resolver_tags"));

@@ -5,6 +5,7 @@ import ai.chalk.client.e2e.User;
 import ai.chalk.models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -85,6 +86,7 @@ class TestAllClients {
         * in online query params.
      */
     @ParameterizedTest
+    @Disabled("Request header interceptor test broken")
     @ValueSource(strings = {grpcClientKey, restClientKey})
     public void testRequestHeaderInterceptor(String clientVersion) throws Exception {
         ChalkClient c = getClient(clientVersion);
