@@ -36,6 +36,8 @@ public class BytesProducer {
         }
 
         Map<String, Object> jsonHeader = new HashMap<>();
+        Map<String, Object> onlineQueryContext = new HashMap<>();
+
         jsonHeader.put("outputs", resolvedOutputs);
         jsonHeader.put("include_meta", params.isIncludeMeta());
         jsonHeader.put("store_plan_stages", params.isStorePlanStages());
@@ -47,7 +49,7 @@ public class BytesProducer {
             jsonHeader.put("correlation_id", params.getCorrelationId());
         }
         if (params.getEnvironmentId() != null) {
-            jsonHeader.put("environment_id", params.getEnvironmentId());
+            onlineQueryContext.put("environment", params.getEnvironmentId());
         }
         if (params.getMeta() != null) {
             jsonHeader.put("meta", params.getMeta());
@@ -69,7 +71,7 @@ public class BytesProducer {
             jsonHeader.put("staleness", staleness);
         }
         if (params.getTags() != null) {
-            jsonHeader.put("tags", params.getTags());
+            onlineQueryContext.put("tags", params.getTags());
         }
         if (params.getPlannerOptions() != null) {
             jsonHeader.put("planner_options", params.getPlannerOptions());
@@ -77,6 +79,7 @@ public class BytesProducer {
         if (params.getNow() != null) {
             jsonHeader.put("now", params.getNow());
         }
+        jsonHeader.put("context", onlineQueryContext);
 
         return jsonHeader;
     }
