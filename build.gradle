@@ -124,7 +124,7 @@ task publishCentralBundle {
                 .openConnection() as HttpURLConnection
 
         connection.setRequestMethod("POST")
-        connection.setRequestProperty("Authorization", "Bearer ${auth}")
+        connection.setRequestProperty("Authorization", "Basic ${auth}")
         connection.setRequestProperty("Content-Type", "application/zip")
         connection.doOutput = true
 
