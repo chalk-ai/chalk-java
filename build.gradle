@@ -4,6 +4,7 @@ plugins {
     id "io.freefair.lombok" version "8.6"
     id "signing"
     id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
+    id 'com.vanniktech.maven.publish' version '0.30.0'
 }
 
 group 'ai.chalk'
@@ -52,18 +53,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-// Required for OSSRH publishing
-task javadocJar(type: Jar) {
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
-
-// Required for OSSRH publishing
-task sourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource
-}
-
 def configurePom = { pom ->
     pom.name = 'Chalk Java'
     pom.description = 'The Java client for Chalk'
@@ -91,83 +80,39 @@ def configurePom = { pom ->
     }
 }
 
-task createCentralBundle(type: Zip) {
-    dependsOn 'publishAllPublicationsToRepoRepository'
+import com.vanniktech.maven.publish.SonatypeHost
 
-    from(layout.buildDirectory.dir('repo')) {
-        include '**/*'
-    }
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
 
-    archiveFileName = "bundle.zip"
-    destinationDirectory = layout.buildDirectory.dir("central-bundle")
-}
+    signAllPublications()
 
-task publishCentralBundle {
-    dependsOn 'createCentralBundle'
+    coordinates(project.group.toString(), project.name, project.version.toString())
 
-    doLast {
-        def bundleFile = layout.buildDirectory.file("central-bundle/bundle.zip").get().asFile
+    pom {
+        name = 'Chalk Java'
+        description = 'The Java client for Chalk'
+        url = 'https://github.com/chalk-ai/chalk-java'
 
-        if (!bundleFile.exists()) {
-            throw new GradleException("Bundle file not found: ${bundleFile}")
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
         }
 
-        def auth = System.getenv("CENTRAL_PORTAL_USERPASS_BASE64")
-
-        if (!auth) {
-            throw new GradleException("CENTRAL_PORTAL_USERPASS_BASE64 must be set")
+        developers {
+            developer {
+                id = 'chalk-ai'
+                name = 'Chalk'
+                email = 'support@chalk.ai'
+            }
         }
 
-        println "Uploading bundle (${bundleFile.length() / 1024 / 1024} MB) to Central Portal..."
-
-        def connection = new URL("https://central.sonatype.com/api/v1/publisher/upload?publishingType=AUTOMATIC")
-                .openConnection() as HttpURLConnection
-
-        connection.setRequestMethod("POST")
-        connection.setRequestProperty("Authorization", "Basic ${auth}")
-        connection.setRequestProperty("Content-Type", "application/zip")
-        connection.doOutput = true
-
-        bundleFile.withInputStream { input ->
-            connection.outputStream << input
-        }
-
-        def responseCode = connection.responseCode
-        println "Response code: ${responseCode}"
-
-        if (responseCode >= 200 && responseCode < 300) {
-            println "✓ Successfully uploaded to Central Portal!"
-            println connection.inputStream.text
-        } else {
-            def error = connection.errorStream?.text ?: "No error details"
-            throw new GradleException("Upload failed with code ${responseCode}: ${error}")
+        scm {
+            connection = 'scm:git:git://github.com/chalk-ai/chalk-java.git'
+            developerConnection = 'scm:git:ssh://github.com:chalk-ai/chalk-java.git'
+            url = 'https://github.com/chalk-ai/chalk-java/'
         }
     }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            artifact sourcesJar
-            artifact javadocJar
-
-            pom.with configurePom
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'repo'
-            url = layout.buildDirectory.dir('repo')
-        }
-    }
-}
-
-signing {
-    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
-    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications
 }

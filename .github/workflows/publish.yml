@@ -24,8 +24,9 @@ jobs:
           distribution: 'oracle'
 
       - name: Upload to Central Portal
-        run: ./gradlew publishCentralBundle
+        run: ./gradlew publishAllPublicationsToMavenCentral
         env:
-          SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          CENTRAL_PORTAL_USERPASS_BASE64: ${{ secrets.CENTRAL_PORTAL_USERPASS_BASE64 }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
