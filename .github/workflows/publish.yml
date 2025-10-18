@@ -23,14 +23,10 @@ jobs:
           cache: gradle
           distribution: 'oracle'
 
-      - name: Publish to Local Zip
-        run: ./gradlew createCentralBundle
-        env:
-          SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-
       - name: Upload to Central Portal
         run: ./gradlew publishCentralBundle
         env:
+          SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           CENTRAL_PORTAL_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           CENTRAL_PORTAL_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
