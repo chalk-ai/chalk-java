@@ -4,6 +4,7 @@ plugins {
     id "io.freefair.lombok" version "8.6"
     id "signing"
     id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
+    id 'com.vanniktech.maven.publish' version '0.30.0'
 }
 
 group 'ai.chalk'
@@ -52,18 +53,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-// Required for OSSRH publishing
-task javadocJar(type: Jar) {
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
-
-// Required for OSSRH publishing
-task sourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource
-}
-
 def configurePom = { pom ->
     pom.name = 'Chalk Java'
     pom.description = 'The Java client for Chalk'
@@ -91,45 +80,39 @@ def configurePom = { pom ->
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+import com.vanniktech.maven.publish.SonatypeHost
 
-            artifact sourcesJar
-            artifact javadocJar
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
 
-            pom.with configurePom
-        }
-    }
+    signAllPublications()
 
-    repositories {
-        maven {
-            name = 'OSSRH'
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+    coordinates(project.group.toString(), project.name, project.version.toString())
 
-            credentials {
-                username = System.getenv("SONATYPE_USERNAME") ?: project.findProperty("sonatypeUsername")
-                password = System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("sonatypePassword")
+    pom {
+        name = 'Chalk Java'
+        description = 'The Java client for Chalk'
+        url = 'https://github.com/chalk-ai/chalk-java'
+
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
             }
         }
-    }
-}
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username = System.getenv("SONATYPE_USERNAME") ?: project.findProperty("sonatypeUsername")
-            password = System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("sonatypePassword")
+        developers {
+            developer {
+                id = 'chalk-ai'
+                name = 'Chalk'
+                email = 'support@chalk.ai'
+            }
+        }
+
+        scm {
+            connection = 'scm:git:git://github.com/chalk-ai/chalk-java.git'
+            developerConnection = 'scm:git:ssh://github.com:chalk-ai/chalk-java.git'
+            url = 'https://github.com/chalk-ai/chalk-java/'
         }
     }
-}
-
-signing {
-    def signingKey = System.getenv("SIGNING_PRIVATE_KEY") ?: project.findProperty("signingPrivateKey")
-    def signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.findProperty("signingPassword")
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications
 }
