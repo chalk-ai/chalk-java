@@ -182,9 +182,10 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     private RequestHeaderInterceptor getRequestHeaderInterceptor(
-        @Nullable String environmentIdOverride
+        @Nullable String environmentIdOverride,
+        @Nullable String queryName
     ) {
-        return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId);
+        return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId, queryName);
     }
 
 
@@ -286,7 +287,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
                 .withInterceptors(
                     MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                    this.getRequestHeaderInterceptor(params.getEnvironmentId())
+                    this.getRequestHeaderInterceptor(params.getEnvironmentId(), params.getQueryName())
                 )
                 .onlineQueryBulk(request);
 
@@ -359,7 +360,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         UploadFeaturesResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
             .withInterceptors(
-                this.getRequestHeaderInterceptor(params.getEnvironmentId())
+                this.getRequestHeaderInterceptor(params.getEnvironmentId(), null)
             )
             .uploadFeatures(
                 UploadFeaturesRequest.newBuilder()

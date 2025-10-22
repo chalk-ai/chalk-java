@@ -15,13 +15,17 @@ import java.util.Map;
 public class RequestHeaderInterceptor implements ClientInterceptor {
     public RequestHeaderInterceptor(
         @Nullable String requestEnvironmentId,
-        @NonNull String clientEnvironmentId
+        @NonNull String clientEnvironmentId,
+        @Nullable String queryName
     ) {
         this.allHeaders = new HashMap<>();
         if (requestEnvironmentId != null && !requestEnvironmentId.isEmpty()) {
             this.allHeaders.put(GrpcHeaders.ENVIRONMENT_ID_KEY, requestEnvironmentId);
         } else {
             this.allHeaders.put(GrpcHeaders.ENVIRONMENT_ID_KEY, clientEnvironmentId);
+        }
+        if (queryName != null && !queryName.isEmpty()) {
+            this.allHeaders.put(GrpcHeaders.QUERY_NAME_KEY, queryName);
         }
     }
 
