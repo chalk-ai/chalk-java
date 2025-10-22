@@ -22,4 +22,7 @@ public class GrpcHeaders {
     static final Metadata.Key<String> DEPLOYMENT_TAG = Metadata.Key.of(
             "x-chalk-deployment-tag", Metadata.ASCII_STRING_MARSHALLER
     );
+    static final Metadata.Key<String> QUERY_NAME_KEY = Metadata.Key.of(
+            "x-chalk-query-name", Metadata.ASCII_STRING_MARSHALLER
+    );
 }
