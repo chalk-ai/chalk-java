@@ -4,28 +4,53 @@ import ai.chalk.internal.Utils;
 import org.apache.arrow.compression.CommonsCompressionFactory;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.BufferAllocator;
-import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.*;
+import org.apache.arrow.vector.BigIntVector;
+import org.apache.arrow.vector.BitVector;
+import org.apache.arrow.vector.FieldVector;
+import org.apache.arrow.vector.Float8Vector;
+import org.apache.arrow.vector.LargeVarBinaryVector;
+import org.apache.arrow.vector.LargeVarCharVector;
+import org.apache.arrow.vector.NullVector;
+import org.apache.arrow.vector.TimeStampMicroTZVector;
+import org.apache.arrow.vector.TimeStampMicroVector;
+import org.apache.arrow.vector.VectorSchemaRoot;
 import org.apache.arrow.vector.complex.LargeListVector;
 import org.apache.arrow.vector.complex.StructVector;
-import org.apache.arrow.vector.complex.impl.*;
-import org.apache.arrow.vector.complex.writer.*;
+import org.apache.arrow.vector.complex.impl.BigIntWriterImpl;
+import org.apache.arrow.vector.complex.impl.BitWriterImpl;
+import org.apache.arrow.vector.complex.impl.Float8WriterImpl;
+import org.apache.arrow.vector.complex.impl.LargeVarBinaryWriterImpl;
+import org.apache.arrow.vector.complex.impl.LargeVarCharWriterImpl;
+import org.apache.arrow.vector.complex.impl.NullableStructWriter;
+import org.apache.arrow.vector.complex.impl.TimeStampMicroTZWriterImpl;
+import org.apache.arrow.vector.complex.impl.TimeStampMicroWriterImpl;
+import org.apache.arrow.vector.complex.impl.UnionLargeListWriter;
+import org.apache.arrow.vector.complex.impl.UnionListWriter;
+import org.apache.arrow.vector.complex.writer.BaseWriter;
+import org.apache.arrow.vector.complex.writer.BigIntWriter;
+import org.apache.arrow.vector.complex.writer.BitWriter;
+import org.apache.arrow.vector.complex.writer.Float8Writer;
+import org.apache.arrow.vector.complex.writer.LargeVarBinaryWriter;
+import org.apache.arrow.vector.complex.writer.LargeVarCharWriter;
+import org.apache.arrow.vector.complex.writer.TimeStampMicroTZWriter;
+import org.apache.arrow.vector.complex.writer.TimeStampMicroWriter;
 import org.apache.arrow.vector.holders.TimeStampMicroHolder;
 import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
 import org.apache.arrow.vector.ipc.ArrowFileReader;
 import org.apache.arrow.vector.ipc.ArrowFileWriter;
 import org.apache.arrow.vector.ipc.SeekableReadChannel;
-import org.apache.arrow.vector.util.ByteArrayReadableSeekableByteChannel;
 import org.apache.arrow.vector.table.Table;
+import org.apache.arrow.vector.util.ByteArrayReadableSeekableByteChannel;
 import org.apache.arrow.vector.util.VectorSchemaRootAppender;
-
 
 import java.io.ByteArrayOutputStream;
 import java.nio.channels.Channels;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class FeatherProcessor {
     public static final long ALLOCATOR_SIZE_REQUEST = 1_000_000_000;
@@ -63,6 +88,36 @@ public class FeatherProcessor {
         } else {
             return getEntriesFromObject(obj);
         }
+    }
+
+    private static void writeStructValue(BaseWriter.StructWriter structWriter, Object value, BufferAllocator allocator) throws Exception {
+        structWriter.start();
+        for (var pair : getEntries(value)) {
+            var fieldVal = pair.value();
+            var fieldName = pair.key();
+            if (fieldVal instanceof Integer) {
+                writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof Long) {
+                writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof Double) {
+                writeValue(structWriter.float8(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof String) {
+                writeValue(structWriter.largeVarChar(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof Boolean) {
+                writeValue(structWriter.bit(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof byte[]) {
+                writeValue(structWriter.largeVarBinary(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof ZonedDateTime) {
+                writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof LocalDateTime) {
+                writeValue(structWriter.timeStampMicro(fieldName), fieldVal, allocator);
+            } else if (fieldVal instanceof List) {
+                writeValue(structWriter.list(fieldName), fieldVal, allocator);
+            } else {
+                throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
+            }
+        }
+        structWriter.end();
     }
 
     public static void writeValue(BaseWriter writer, Object value, BufferAllocator allocator) throws Exception {
@@ -161,64 +216,12 @@ public class FeatherProcessor {
             }
             listWriter.endList();
         } else if (writer instanceof NullableStructWriter structWriter) {
-            // Yes, this is duplicated with `UnionListWriter` below.
-            structWriter.start();
-            for (var pair: getEntries(value)) {
-                var fieldVal = pair.value();
-                var fieldName = pair.key();
-                if (fieldVal instanceof Integer) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Long) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Double) {
-                    writeValue(structWriter.float8(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof String) {
-                    writeValue(structWriter.largeVarChar(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Boolean) {
-                    writeValue(structWriter.bit(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof byte[]) {
-                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof ZonedDateTime) {
-                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof LocalDateTime) {
-                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof List) {
-                    writeValue(structWriter.list(fieldName), fieldVal, allocator);
-                } else {
-                    throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
-                }
-            }
-            structWriter.end();
-        }  else if (writer instanceof UnionListWriter structWriter) {
-            // The mystery of the century presents itself:
-            // when we do `.struct()` we get a `UnionListWriter` instead of a `NullableStructWriter`
-            structWriter.start();
-            for (var pair: getEntries(value)) {
-                var fieldVal = pair.value();
-                var fieldName = pair.key();
-                if (fieldVal instanceof Integer) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Long) {
-                    writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Double) {
-                    writeValue(structWriter.float8(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof String) {
-                    writeValue(structWriter.largeVarChar(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof Boolean) {
-                    writeValue(structWriter.bit(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof ZonedDateTime) {
-                    writeValue(structWriter.timeStampMicroTZ(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof LocalDateTime) {
-                    writeValue(structWriter.timeStampMicro(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof byte[]) {
-                    writeValue(structWriter.largeVarBinary(fieldName), fieldVal, allocator);
-                } else if (fieldVal instanceof List) {
-                    writeValue(structWriter.list(fieldName), fieldVal, allocator);
-                } else {
-                    throw new Exception("Unsupported data type: " + fieldVal.getClass().getSimpleName());
-                }
-            }
-            structWriter.end();
+            writeStructValue(structWriter, value, allocator);
+        } else if (writer instanceof UnionListWriter structWriter) {
+            // When we call `.struct()` on a list writer we sometimes receive a `UnionListWriter`.
+            writeStructValue(structWriter, value, allocator);
+        } else if (writer instanceof UnionLargeListWriter structWriter) {
+            writeStructValue(structWriter, value, allocator);
         } else {
             throw new Exception("Unsupported data type: " + value.getClass().getSimpleName());
         }
