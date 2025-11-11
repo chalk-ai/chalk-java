@@ -3,17 +3,27 @@ package ai.chalk.arrow;
 
 import ai.chalk.arrow.test_features.User;
 import ai.chalk.client.AllocatorTest;
+import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
-import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.models.OnlineQueryParams;
 import ai.chalk.models.OnlineQueryResult;
-import org.apache.arrow.memory.BufferAllocator;
-import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.*;
-import org.apache.arrow.vector.complex.impl.*;
-import org.apache.arrow.vector.complex.writer.*;
+import org.apache.arrow.vector.BigIntVector;
+import org.apache.arrow.vector.BitVector;
+import org.apache.arrow.vector.DateMilliVector;
+import org.apache.arrow.vector.Float8Vector;
+import org.apache.arrow.vector.LargeVarCharVector;
+import org.apache.arrow.vector.TimeStampMicroTZVector;
+import org.apache.arrow.vector.complex.LargeListVector;
+import org.apache.arrow.vector.complex.impl.BigIntWriterImpl;
+import org.apache.arrow.vector.complex.impl.DateMilliWriterImpl;
+import org.apache.arrow.vector.complex.impl.Float8WriterImpl;
+import org.apache.arrow.vector.complex.impl.TimeStampMicroTZWriterImpl;
+import org.apache.arrow.vector.complex.writer.BigIntWriter;
+import org.apache.arrow.vector.complex.writer.DateMilliWriter;
+import org.apache.arrow.vector.complex.writer.Float8Writer;
+import org.apache.arrow.vector.complex.writer.TimeStampMicroTZWriter;
 import org.apache.arrow.vector.holders.TimeStampMicroTZHolder;
 import org.apache.arrow.vector.table.Table;
 import org.apache.arrow.vector.types.DateUnit;
@@ -21,11 +31,17 @@ import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.util.JsonStringHashMap;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestFeather extends AllocatorTest {
     /**
@@ -292,5 +308,45 @@ public class TestFeather extends AllocatorTest {
         BytesConsumer.ConsumptionResult<Long> result = BytesConsumer.consume8ByteLen(0, intBytes);
         assert result.getIndex() == 8;
         assert result.getResult() == 123;
+    }
+
+    @Test
+    public void testNestedListOfMaps() throws Exception {
+        Map<String, Object> firstMap = new HashMap<>();
+        firstMap.put("key1", "value1");
+        firstMap.put("key2", 2.0);
+
+        Map<String, Object> secondMap = new HashMap<>();
+        secondMap.put("key1", "value2");
+        secondMap.put("key2", 3.5);
+
+        List<List<Map<String, Object>>> nested = new ArrayList<>();
+        nested.add(Arrays.asList(firstMap, secondMap));
+        nested.add(Arrays.asList(secondMap));
+
+        OnlineQueryParams params = OnlineQueryParams.builder()
+                .withInput("listOfMaps", nested)
+                .build();
+
+        byte[] arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+
+        try (
+                Table table = FeatherProcessor.convertBytesToTable(arrowBytes, allocator);
+                LargeListVector vector = (LargeListVector) table.getVectorCopy("listOfMaps")
+        ) {
+            assert table.getRowCount() == 2;
+
+            List<?> firstRow = (List<?>) vector.getObject(0);
+            assert firstRow.size() == 2;
+            Map<?, ?> firstEntry = (Map<?, ?>) firstRow.get(0);
+            assert String.valueOf(firstEntry.get("key1")).equals("value1") : firstEntry;
+            assert ((Number) firstEntry.get("key2")).doubleValue() == 2.0 : firstEntry;
+
+            List<?> secondRow = (List<?>) vector.getObject(1);
+            assert secondRow.size() == 1;
+            Map<?, ?> nestedEntry = (Map<?, ?>) secondRow.get(0);
+            assert String.valueOf(nestedEntry.get("key1")).equals("value2") : nestedEntry;
+            assert ((Number) nestedEntry.get("key2")).doubleValue() == 3.5 : nestedEntry;
+        }
     }
 }
