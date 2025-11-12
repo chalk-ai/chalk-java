@@ -2,16 +2,23 @@ package ai.chalk.client;
 
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
-import ai.chalk.models.*;
+import ai.chalk.models.OnlineQueryParams;
+import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -292,6 +299,8 @@ class TestAllClients {
             var users = result.unmarshal(User.class);
             assert users.length == userIds.length;
             assert users[0].socure_score.getValue().equals(123.0);
+        } catch (Exception e) {
+			fail(e.getMessage());
         }
     }
 
