@@ -95,9 +95,7 @@ public class FeatherProcessor {
         for (var pair : getEntries(value)) {
             var fieldVal = pair.value();
             var fieldName = pair.key();
-			if (fieldVal == null) {
-				writeValue(structWriter.struct(fieldName), null, allocator);
-			} else if (fieldVal instanceof Integer) {
+            if (fieldVal instanceof Integer) {
                 writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
             } else if (fieldVal instanceof Long) {
                 writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
@@ -181,48 +179,39 @@ public class FeatherProcessor {
             TimeStampMicroHolder holder = new TimeStampMicroHolder();
             holder.value = localDt.atZone(ZoneId.of("UTC")).toInstant().getEpochSecond() * 1_000_000 + localDt.getNano() / 1_000;
             timestampWriter.write(holder);
-        } else if (value instanceof List<?> vl) {
-            if (!(writer instanceof BaseWriter.ListWriter listWriter)) {
+        } else if (value instanceof List) {
+            if (!(writer instanceof BaseWriter.ListWriter)) {
                 throw new Exception(String.format("Have `List` value but mismatched writer type '%s': ", writer.getClass().getSimpleName()));
             }
-	        BaseWriter innerWriter;
-            if (vl.isEmpty()) {
+            BaseWriter.ListWriter listWriter = (BaseWriter.ListWriter) writer;
+            BaseWriter innerWriter;
+            if (((List<?>) value).size() == 0) {
                 throw new Exception("Input values is an `Array` or a `List` of length 0");
             }
-
-			Object typeItem = null;
-	        for (int index = 0; index < vl.size() && typeItem == null; ++index) {
-				typeItem = vl.get(index);
-			}
-
-			if (typeItem == null) {
-				listWriter.writeNull();
-				return;
-			}
-
-			if (typeItem instanceof Integer) {
+            var firstItem = ((List<?>) value).get(0);
+            if (firstItem instanceof Integer) {
                 innerWriter = listWriter.bigInt();
-            } else if (typeItem instanceof Long) {
+            } else if (firstItem instanceof Long) {
                 innerWriter = listWriter.bigInt();
-            } else if (typeItem instanceof Double) {
+            } else if (firstItem instanceof Double) {
                 innerWriter = listWriter.float8();
-            } else if (typeItem instanceof String) {
+            } else if (firstItem instanceof String) {
                 innerWriter = listWriter.largeVarChar();
-            } else if (typeItem instanceof Boolean) {
+            } else if (firstItem instanceof Boolean) {
                 innerWriter = listWriter.bit();
-            } else if (typeItem instanceof byte[]) {
+            } else if (firstItem instanceof byte[]) {
                 innerWriter = listWriter.largeVarBinary();
-            } else if (typeItem instanceof ZonedDateTime) {
+            } else if (firstItem instanceof ZonedDateTime) {
                 innerWriter = listWriter.timeStampMicroTZ();
-            } else if (typeItem instanceof LocalDateTime) {
+            } else if (firstItem instanceof LocalDateTime) {
                 innerWriter = listWriter.timeStampMicro();
-            } else if (typeItem instanceof List) {
+            } else if (firstItem instanceof List) {
                 innerWriter = listWriter.list();
             } else {
                 innerWriter = listWriter.struct();
             }
             listWriter.startList();
-            for (Object item: vl) {
+            for (Object item: (List<?>) value) {
                 writeValue(innerWriter, item, allocator);
             }
             listWriter.endList();
