@@ -890,8 +890,10 @@ public class TestOnlineQueryParams extends AllocatorTest {
 	public void testNUllValue() throws Exception {
 		Map<String, Object> firstMap = new HashMap<>();
 		Map<String, Object> secondMap = new HashMap<>();
+		var nullList = new ArrayList<Integer>();
+		nullList.add(null);
 		firstMap.put("key1", null);
-
+		firstMap.put("key2", nullList);
         List<List<Map<String, Object>>> nested = new ArrayList<>();
 		nested.add(Arrays.asList(firstMap, secondMap));
 
