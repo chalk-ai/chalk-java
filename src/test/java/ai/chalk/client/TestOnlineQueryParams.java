@@ -1,22 +1,30 @@
 package ai.chalk.client;
 
+import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.internal.arrow.FeatherProcessor;
-import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.internal.bytes.BytesProducer;
 import ai.chalk.models.OnlineQueryParams;
-import ai.chalk.client.features.InitFeaturesTestFeatures;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.*;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.Map;
 
 public class TestOnlineQueryParams extends AllocatorTest {
     public static boolean jsonCompare(String expected, String actual) throws Exception {
@@ -877,4 +885,22 @@ public class TestOnlineQueryParams extends AllocatorTest {
         BytesProducer.convertOnlineQueryParamsToBytes(params2, allocator);
         BytesProducer.convertOnlineQueryParamsToBytes(params3, allocator);
     }
+
+	@Test
+	public void testNUllValue() throws Exception {
+		Map<String, Object> firstMap = new HashMap<>();
+		Map<String, Object> secondMap = new HashMap<>();
+		var nullList = new ArrayList<Integer>();
+		nullList.add(null);
+		firstMap.put("key1", null);
+		firstMap.put("key2", nullList);
+        List<List<Map<String, Object>>> nested = new ArrayList<>();
+		nested.add(Arrays.asList(firstMap, secondMap));
+
+		OnlineQueryParams params = OnlineQueryParams.builder()
+		                                            .withInput("listOfMaps", nested)
+		                                            .build();
+
+		byte[] arrowBytes = FeatherProcessor.inputsToArrowBytes(params.getInputs(), allocator);
+	}
 }
