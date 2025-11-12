@@ -95,7 +95,9 @@ public class FeatherProcessor {
         for (var pair : getEntries(value)) {
             var fieldVal = pair.value();
             var fieldName = pair.key();
-            if (fieldVal instanceof Integer) {
+			if (fieldVal == null) {
+				writeValue(structWriter.struct(fieldName), null, allocator);
+			} else if (fieldVal instanceof Integer) {
                 writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
             } else if (fieldVal instanceof Long) {
                 writeValue(structWriter.bigInt(fieldName), fieldVal, allocator);
