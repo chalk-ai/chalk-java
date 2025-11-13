@@ -2,17 +2,30 @@ package ai.chalk.client;
 
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
-import ai.chalk.models.*;
+import ai.chalk.exceptions.ChalkException;
+import ai.chalk.models.OnlineQueryParams;
+import ai.chalk.models.OnlineQueryParamsComplete;
+import ai.chalk.models.OnlineQueryResult;
+import ai.chalk.models.UploadFeaturesParams;
+import ai.chalk.models.UploadFeaturesResult;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
@@ -45,38 +58,33 @@ class TestAllClients {
     @ParameterizedTest
     @ValueSource(strings = {grpcClientKey, restClientKey})
     public void testPlannerOptions(String clientVersion) {
-        ChalkClient c = getClient(clientVersion);
+        ChalkClient client = getClient(clientVersion);
+        String context = "[client=" + clientVersion + "] ";
 
-        var validPlannerVersion = "2";
-        var invalidPlannerVersion = "abc";
-        var plannerVersions = List.of(validPlannerVersion, invalidPlannerVersion);
-
-        for (var plannerVersion : plannerVersions) {
-            var plannerOptions = new HashMap<String, Object>();
-            plannerOptions.put("planner_version", plannerVersion);
-            try {
-                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
-                        .withOutputs(FraudTemplateFeatures.user.socure_score)
-                        .withPlannerOptions(plannerOptions)
-                        .build();
-                try (var res = c.onlineQuery(params)) {
-                    if (plannerVersion.equals(invalidPlannerVersion)) {
-                        if (clientVersion.equals(grpcClientKey)) {
-                            if (res.getErrors() == null || res.getErrors().length == 0) {
-                                fail("Expected exception for invalid planner version");
-                            }
-                        } else {
-                            fail("Expected exception for invalid planner version");
-                        }
-
-                    }
-                }
-            } catch (Exception e) {
-                if (plannerVersion.equals(validPlannerVersion)) {
-                    fail("Expected no exception for valid planner version");
+        OnlineQueryParamsComplete validParams = buildPlannerVersionParams("2");
+        assertDoesNotThrow(() -> {
+            try (var res = client.onlineQuery(validParams)) {
+                if (clientVersion.equals(grpcClientKey)) {
+                    assertNotNull(res.getErrors(), context + "Expected errors array");
+                    assertEquals(0, res.getErrors().length, context + "Valid planner version should not produce errors");
                 }
             }
+        }, context + "Valid planner version should succeed");
+
+        OnlineQueryParamsComplete invalidParams = buildPlannerVersionParams("abc");
+        if (clientVersion.equals(grpcClientKey)) {
+            assertDoesNotThrow(() -> {
+                try (var res = client.onlineQuery(invalidParams)) {
+                    assertTrue(res.getErrors() != null && res.getErrors().length > 0,
+                            context + "Expected planner errors to be returned for invalid version");
+                }
+            }, context + "gRPC client should surface planner errors in response");
+        } else {
+            assertThrows(ChalkException.class, () -> {
+                try (var ignored = client.onlineQuery(invalidParams)) {
+                    // AutoCloseable will handle cleanup
+                }
+            }, context + "REST client should raise exception for invalid planner version");
         }
     }
 
@@ -107,10 +115,10 @@ class TestAllClients {
         for (String envId : Arrays.asList(qaEnvId, devEnvId)) {
             var params = builder.withEnvironmentId(envId).build();
             try (OnlineQueryResult queryRes = c.onlineQuery(params)) {
-                assert queryRes.getErrors().length == 0;
+                assertEquals(0, queryRes.getErrors().length, "Expected no errors for env " + envId);
                 User[] users = queryRes.unmarshal(User.class);
-                assert users.length == 1;
-                assert users[0].environmentId.getValue().equals(envId);
+                assertEquals(1, users.length, "Expected single user result for env " + envId);
+                assertEquals(envId, users[0].environmentId.getValue(), "Environment id mismatch");
             }
         }
     }
@@ -132,8 +140,9 @@ class TestAllClients {
                 .withInputs(Map.of("user.id", userIds,"user.socure_score", scoreList))
                 .build();
         UploadFeaturesResult res = c.uploadFeatures(uploadParams);
-        assert res.getErrors().size() == 0;
-        assert !res.getOperationId().equals("");
+        String context = "[client=" + clientVersion + "] ";
+        assertEquals(0, res.getErrors().size(), context + "Upload should not return errors");
+        assertFalse(res.getOperationId().isBlank(), context + "Operation id should be populated");
 
         OnlineQueryParamsComplete params = OnlineQueryParams.builder()
                 .withInput(FraudTemplateFeatures.user.id, userIds)
@@ -141,12 +150,12 @@ class TestAllClients {
                 .build();
 
         try (OnlineQueryResult queryRes = c.onlineQuery(params)) {
-            assert queryRes.getErrors().length == 0;
+            assertEquals(0, queryRes.getErrors().length, context + "Query should not return errors");
             User[] users = queryRes.unmarshal(User.class);
-            assert users.length == 3;
-            assert users[0].socure_score.getValue().equals(scoreList.get(0));
-            assert users[1].socure_score.getValue().equals(scoreList.get(1));
-            assert users[2].socure_score.getValue().equals(scoreList.get(2));
+            assertEquals(3, users.length, context + "Expected three users returned");
+            assertEquals(scoreList.get(0), users[0].socure_score.getValue(), context + "User[0] socure score mismatch");
+            assertEquals(scoreList.get(1), users[1].socure_score.getValue(), context + "User[1] socure score mismatch");
+            assertEquals(scoreList.get(2), users[2].socure_score.getValue(), context + "User[2] socure score mismatch");
         };
     }
 
@@ -157,21 +166,22 @@ class TestAllClients {
         var shouldFail = List.of(true, false, false);
         var client = getClient(clientType);
         for (int i = 0; i < timeout.size(); i++) {
-            try {
-                UploadFeaturesParams params = UploadFeaturesParams.builder()
-                        .withInput(FraudTemplateFeatures.user.id, List.of("8868"))
-                        .withInput(FraudTemplateFeatures.user.socure_score, List.of(5526.0))
-                        .withTimeout(timeout.get(i))
-                        .build();
-                var res = client.uploadFeatures(params);
-                if (shouldFail.get(i)) {
-                    fail("Expected exception for timeout value: " + timeout.get(i));
-                }
-                assert res.getErrors().size() == 0;
-            } catch (Exception e) {
-                if (!shouldFail.get(i)) {
-                    fail("Expected no timeout but query failed", e);
-                }
+            Duration currentTimeout = timeout.get(i);
+            String context = "[client=" + clientType + ",timeout=" + currentTimeout + ",idx=" + i + "] ";
+            UploadFeaturesParams params = UploadFeaturesParams.builder()
+                    .withInput(FraudTemplateFeatures.user.id, List.of("8868"))
+                    .withInput(FraudTemplateFeatures.user.socure_score, List.of(5526.0))
+                    .withTimeout(currentTimeout)
+                    .build();
+
+            if (shouldFail.get(i)) {
+                assertThrows(ChalkException.class, () -> client.uploadFeatures(params),
+                        context + "Expected request to fail due to extremely small timeout");
+            } else {
+                assertDoesNotThrow(() -> {
+                    var res = client.uploadFeatures(params);
+                    assertEquals(0, res.getErrors().size(), context + "Upload should not return errors");
+                }, context + "Upload should complete successfully");
             }
         }
     }
@@ -183,23 +193,26 @@ class TestAllClients {
         var shouldFail = List.of(true, false, false);
         var client = getClient(clientType);
         for (int i = 0; i < timeout.size(); i++) {
-            try {
-                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
-                        .withOutputs(FraudTemplateFeatures.user.socure_score)
-                        .withTimeout(timeout.get(i))
-                        .build();
-                try (var res = client.onlineQuery(params);) {
-                    if (shouldFail.get(i)) {
-                        fail("Expected exception for timeout value: " + timeout.get(i));
+            Duration currentTimeout = timeout.get(i);
+            String context = "[client=" + clientType + ",timeout=" + currentTimeout + ",idx=" + i + "] ";
+            OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                    .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                    .withOutputs(FraudTemplateFeatures.user.socure_score)
+                    .withTimeout(currentTimeout)
+                    .build();
+            if (shouldFail.get(i)) {
+                assertThrows(ChalkException.class, () -> {
+                    try (var ignored = client.onlineQuery(params)) {
+                        // no-op
                     }
-                    var users = res.unmarshal(User.class);
-                    assert users[0].socure_score.getValue() == 123.0;
-                }
-            } catch (Exception e) {
-                if (!shouldFail.get(i)) {
-                    fail("Expected no timeout but query failed", e);
-                }
+                }, context + "Expected timeout to fail request");
+            } else {
+                assertDoesNotThrow(() -> {
+                    try (var res = client.onlineQuery(params)) {
+                        var users = res.unmarshal(User.class);
+                        assertEquals(123.0, users[0].socure_score.getValue(), context + "Unexpected socure score");
+                    }
+                }, context + "Online query should succeed");
             }
         }
     }
@@ -213,23 +226,25 @@ class TestAllClients {
         for (int i = 0; i < timeout.size(); i++) {
             var builder = ChalkClient.builder().withTimeout(timeout.get(i));
             try (ChalkClient client = clientType.equals(grpcClientKey) ? builder.withGrpc().build() : builder.build()) {
-                if (shouldFail.get(i) && clientType.equals(grpcClientKey)) {
-                    fail("Expected exception for timeout value: " + timeout.get(i));
-                }
+                Duration clientTimeout = timeout.get(i);
+                String context = "[client=" + clientType + ",clientTimeout=" + clientTimeout + ",idx=" + i + "] ";
                 OnlineQueryParamsComplete params = OnlineQueryParams.builder()
                         .withInput(FraudTemplateFeatures.user.id, List.of("1"))
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .build();
-                try (var res = client.onlineQuery(params);) {
-                    if (shouldFail.get(i)) {
-                        fail("Expected exception for timeout value: " + timeout.get(i));
-                    }
-                    var users = res.unmarshal(User.class);
-                    assert users[0].socure_score.getValue() == 123.0;
-                }
-            } catch (Exception e) {
-                if (!shouldFail.get(i)) {
-                    fail("Expected no timeout but query failed", e);
+                if (shouldFail.get(i)) {
+                    assertThrows(ChalkException.class, () -> {
+                        try (var ignored = client.onlineQuery(params)) {
+                            // no-op
+                        }
+                    }, context + "Expected timeout failure at client configuration level");
+                } else {
+                    assertDoesNotThrow(() -> {
+                        try (var res = client.onlineQuery(params)) {
+                            var users = res.unmarshal(User.class);
+                            assertEquals(123.0, users[0].socure_score.getValue(), context + "Unexpected socure score");
+                        }
+                    }, context + "Online query should respect client-level timeout");
                 }
             }
         }
@@ -246,21 +261,26 @@ class TestAllClients {
             var builder = ChalkClient.builder().withTimeout(clientLevelTimeout.get(i));
 
             try (ChalkClient client = clientType.equals(grpcClientKey) ? builder.withGrpc().build() : builder.build()) {
+                String context = "[client=" + clientType + ",clientTimeout=" + clientLevelTimeout.get(i)
+                        + ",requestTimeout=" + requestLevelTimeout.get(i) + ",idx=" + i + "] ";
                 OnlineQueryParamsComplete params = OnlineQueryParams.builder()
                         .withInput(FraudTemplateFeatures.user.id, List.of("1"))
                         .withOutputs(FraudTemplateFeatures.user.socure_score)
                         .withTimeout(requestLevelTimeout.get(i))
                         .build();
-                try (var res = client.onlineQuery(params);) {
-                    if (shouldFail.get(i)) {
-                        fail("Expected exception for extremely small timeout value");
-                    }
-                    var users = res.unmarshal(User.class);
-                    assert users[0].socure_score.getValue() == 123.0;
-                }
-            } catch (Exception e) {
-                if (!shouldFail.get(i)) {
-                    fail("Expected no timeout but query failed", e);
+                if (shouldFail.get(i)) {
+                    assertThrows(ChalkException.class, () -> {
+                        try (var ignored = client.onlineQuery(params)) {
+                            // no-op
+                        }
+                    }, context + "Expected exception when request timeout overrides client timeout with invalid value");
+                } else {
+                    assertDoesNotThrow(() -> {
+                        try (var res = client.onlineQuery(params)) {
+                            var users = res.unmarshal(User.class);
+                            assertEquals(123.0, users[0].socure_score.getValue(), context + "Unexpected socure score");
+                        }
+                    }, context + "Expected request-level override to succeed");
                 }
             }
         }
@@ -287,13 +307,22 @@ class TestAllClients {
                 .withQueryNameVersion("1.0.0")
                 .build();
 
-        try (OnlineQueryResult result = c.onlineQuery(params)) {
-            assert result.getErrors().length == 0;
-            var users = result.unmarshal(User.class);
-            assert users.length == userIds.length;
-            assert users[0].socure_score.getValue().equals(123.0);
-        }
+        String context = "[client=" + clientType + "] ";
+        assertDoesNotThrow(() -> {
+            try (OnlineQueryResult result = c.onlineQuery(params)) {
+                assertEquals(0, result.getErrors().length, context + "Expected no server errors");
+                var users = result.unmarshal(User.class);
+                assertEquals(userIds.length, users.length, context + "Unexpected user count");
+                assertEquals(123.0, users[0].socure_score.getValue(), context + "Unexpected socure score");
+            }
+        }, context + "Named query should succeed");
     }
 
-
+    private static OnlineQueryParamsComplete buildPlannerVersionParams(String plannerVersion) {
+        return OnlineQueryParams.builder()
+                .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                .withOutputs(FraudTemplateFeatures.user.socure_score)
+                .withPlannerOptions(Map.of("planner_version", plannerVersion))
+                .build();
+    }
 }
