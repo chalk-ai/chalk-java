@@ -239,126 +239,121 @@ public class FeatherProcessor {
     }
 
 
-    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs, BufferAllocator allocator) throws Exception {
-        List<FieldVector> fieldVectors = new ArrayList<>();
-        var uniformListLength = -1;
-        for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
-            List<?> value = entry.getValue();
-            List<Object> values;
-            try {
-                values = new ArrayList<>(value);
-            } catch (Exception e) {
-                throw new Exception(String.format("error converting '%s' value to a `List<Object>`: %s", entry.getKey(), e.getMessage()));
-            }
-            if (values.size() == 0) {
-                throw new Exception("Input values is an `Array` or a `List` of length 0");
-            } else if (uniformListLength == -1) {
-                uniformListLength = values.size();
-            } else if (uniformListLength != values.size()) {
-                throw new Exception(String.format("Input values have different lengths - expected %d but got %d: %s", uniformListLength, values.size(), values));
-            }
-            
-            Object firstNonNull = null;
-            for (Object item : values) {
-                if (item != null) {
-                    firstNonNull = item;
-                    break;
-                }
-            }
+    private static List<?> copyValues(String columnName, List<?> rawValues) throws Exception {
+        if (rawValues == null) {
+            throw new Exception(String.format("Input values for '%s' is null", columnName));
+        }
+        try {
+            return new ArrayList<>(rawValues);
+        } catch (Exception e) {
+            throw new Exception(String.format("error converting '%s' value to a `List<Object>`: %s", columnName, e.getMessage()), e);
+        }
+    }
 
-            var fqn = entry.getKey();
-            if (firstNonNull == null) {
-                NullVector nullVector = new NullVector(entry.getKey(), values.size());
-                fieldVectors.add(nullVector);
-            } else if (firstNonNull instanceof Integer) {
-                BigIntVector intVector = new BigIntVector(fqn, allocator);
-                fieldVectors.add(intVector);
-                var writer = new BigIntWriterImpl(intVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof Long) {
-                BigIntVector longVector = new BigIntVector(fqn, allocator);
-                fieldVectors.add(longVector);
-                var writer = new BigIntWriterImpl(longVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof Double) {
-                Float8Vector doubleVector = new Float8Vector(fqn, allocator);
-                fieldVectors.add(doubleVector);
-                var writer = new Float8WriterImpl(doubleVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof String) {
-                LargeVarCharVector stringVector = new LargeVarCharVector(fqn, allocator);
-                fieldVectors.add(stringVector);
-                var writer = new LargeVarCharWriterImpl(stringVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof Boolean) {
-                BitVector boolVector = new BitVector(fqn, allocator);
-                fieldVectors.add(boolVector);
-                var writer = new BitWriterImpl(boolVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof byte[]) {
-                LargeVarBinaryVector binaryVector = new LargeVarBinaryVector(fqn, allocator);
-                fieldVectors.add(binaryVector);
-                var writer = new LargeVarBinaryWriterImpl(binaryVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof ZonedDateTime zonedDt) {
-                String tz = zonedDt.getZone().toString();
-                TimeStampMicroTZVector timestampVector = new TimeStampMicroTZVector(fqn, allocator, tz);
-                fieldVectors.add(timestampVector);
-                var writer = new TimeStampMicroTZWriterImpl(timestampVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof LocalDateTime localDt) {
-                TimeStampMicroVector timestampVector = new TimeStampMicroVector(fqn, allocator);
-                fieldVectors.add(timestampVector);
-                var writer = new TimeStampMicroWriterImpl(timestampVector);
-                for (int i = 0; i < values.size(); i++) {
-                    writer.setPosition(i);
-                    writeValue(writer, values.get(i), allocator);
-                }
-            } else if (firstNonNull instanceof List) {
-                var listVector = LargeListVector.empty(fqn, allocator);
-                fieldVectors.add(listVector);
-                var writer = listVector.getWriter();
-                for (Object o : values) {
-                    writeValue(writer, o, allocator);
-                }
-                writer.setValueCount(values.size());
-            } else if (firstNonNull instanceof Map) {
-                var structVector = StructVector.empty(fqn, allocator);
-                fieldVectors.add(structVector);
-                var writer = structVector.getWriter();
-                for (Object o : values) {
-                    writeValue(writer, o, allocator);
-                }
-                // Importante to `setValueCount` otherwise values all null.
-                writer.setValueCount(values.size());
-            } else {
-                throw new Exception("Unsupported data type: " + firstNonNull.getClass().getSimpleName());
+    private static Object firstNonNull(List<?> values) {
+        for (Object value : values) {
+            if (value != null) {
+                return value;
             }
         }
+        return null;
+    }
 
+    private static void writeColumnValues(BaseWriter writer, List<?> values, BufferAllocator allocator) throws Exception {
+        for (int i = 0; i < values.size(); i++) {
+            writer.setPosition(i);
+            writeValue(writer, values.get(i), allocator);
+        }
+    }
+
+    private static FieldVector buildVectorForColumn(String columnName, List<?> values, BufferAllocator allocator) throws Exception {
+        if (values.isEmpty()) {
+            throw new Exception("Input values is an `Array` or a `List` of length 0");
+        }
+
+        Object firstNonNull = firstNonNull(values);
+        if (firstNonNull == null) {
+            NullVector nullVector = new NullVector(columnName, values.size());
+            nullVector.setValueCount(values.size());
+            return nullVector;
+        }
+
+        if (firstNonNull instanceof Integer || firstNonNull instanceof Long) {
+            BigIntVector vector = new BigIntVector(columnName, allocator);
+            vector.allocateNew(values.size());
+            var writer = new BigIntWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof Double) {
+            Float8Vector vector = new Float8Vector(columnName, allocator);
+            vector.allocateNew(values.size());
+            var writer = new Float8WriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof String) {
+            LargeVarCharVector vector = new LargeVarCharVector(columnName, allocator);
+            vector.setInitialCapacity(values.size());
+            vector.allocateNew();
+            var writer = new LargeVarCharWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof Boolean) {
+            BitVector vector = new BitVector(columnName, allocator);
+            vector.allocateNew(values.size());
+            var writer = new BitWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof byte[]) {
+            LargeVarBinaryVector vector = new LargeVarBinaryVector(columnName, allocator);
+            vector.setInitialCapacity(values.size());
+            vector.allocateNew();
+            var writer = new LargeVarBinaryWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof ZonedDateTime zonedDt) {
+            String tz = zonedDt.getZone().toString();
+            TimeStampMicroTZVector vector = new TimeStampMicroTZVector(columnName, allocator, tz);
+            vector.allocateNew(values.size());
+            var writer = new TimeStampMicroTZWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof LocalDateTime) {
+            TimeStampMicroVector vector = new TimeStampMicroVector(columnName, allocator);
+            vector.allocateNew(values.size());
+            var writer = new TimeStampMicroWriterImpl(vector);
+            writeColumnValues(writer, values, allocator);
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof List) {
+            LargeListVector vector = LargeListVector.empty(columnName, allocator);
+            vector.allocateNew();
+            var writer = vector.getWriter();
+            writeColumnValues(writer, values, allocator);
+            writer.setValueCount(values.size());
+            vector.setValueCount(values.size());
+            return vector;
+        } else if (firstNonNull instanceof Map) {
+            StructVector vector = StructVector.empty(columnName, allocator);
+            vector.allocateNew();
+            var writer = vector.getWriter();
+            writeColumnValues(writer, values, allocator);
+            writer.setValueCount(values.size());
+            vector.setValueCount(values.size());
+            return vector;
+        } else {
+            throw new Exception("Unsupported data type: " + firstNonNull.getClass().getSimpleName());
+        }
+    }
+
+    private static byte[] writeVectorsToBytes(List<FieldVector> vectors) throws Exception {
         try (
-            VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(fieldVectors, FieldVector.class));
+            VectorSchemaRoot root = VectorSchemaRoot.of(Utils.listToArray(vectors, FieldVector.class));
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             ArrowFileWriter writer = new ArrowFileWriter(root, null, Channels.newChannel(out));
         ) {
@@ -366,6 +361,41 @@ public class FeatherProcessor {
             writer.writeBatch();
             writer.end();
             return out.toByteArray();
+        }
+    }
+
+    private static void closeVectors(List<FieldVector> vectors) {
+        for (FieldVector vector : vectors) {
+            if (vector != null) {
+                vector.close();
+            }
+        }
+    }
+
+    public static byte[] inputsToArrowBytes(Map<String, List<?>> inputs, BufferAllocator allocator) throws Exception {
+        List<FieldVector> fieldVectors = new ArrayList<>();
+        int uniformListLength = -1;
+        boolean success = false;
+        try {
+            for (Map.Entry<String, List<?>> entry : inputs.entrySet()) {
+                var columnName = entry.getKey();
+                List<?> values = copyValues(columnName, entry.getValue());
+                if (uniformListLength == -1) {
+                    uniformListLength = values.size();
+                } else if (uniformListLength != values.size()) {
+                    throw new Exception(String.format("Input values have different lengths - expected %d but got %d: %s", uniformListLength, values.size(), values));
+                }
+                FieldVector vector = buildVectorForColumn(columnName, values, allocator);
+                fieldVectors.add(vector);
+            }
+
+            byte[] arrowBytes = writeVectorsToBytes(fieldVectors);
+            success = true;
+            return arrowBytes;
+        } finally {
+            if (!success) {
+                closeVectors(fieldVectors);
+            }
         }
     }
 
