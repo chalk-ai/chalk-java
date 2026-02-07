@@ -77,10 +77,10 @@ public class TestGrpcClient {
 
             try (OnlineQueryResult result = client.onlineQuery(params)) {
                 assert result.getErrors().length == 0;
-                var serieses = result.unmarshal(Series.class);
-                assert serieses.length == seedIds.size();
-                assert serieses[0].investors.getValue().size() > 0;
-                assert serieses[0].investors.getValue().get(0).seriesId.getValue().equals("seed");
+                var series = result.unmarshal(Series.class);
+                assert series.length == seedIds.size();
+                assert series[0].investors.getValue().size() > 0;
+                assert series[0].investors.getValue().get(0).seriesId.getValue().equals("seed");
             }
         }
 
