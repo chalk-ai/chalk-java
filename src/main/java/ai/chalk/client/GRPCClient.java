@@ -339,6 +339,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 table.close();
             }
             responseAlloc.close();
+	        throw new ClientException(
+			        e.getMessage()
+	        );
         }
 
         return new OnlineQueryResult(
