@@ -1464,7 +1464,6 @@ public class TestUnmarshaller {
     public void testUnmarshalOnlineQueryResultWithNullableNestedStructList() throws Exception {
         var localAllocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
         var structVector = StructVector.empty("arrow_user.favorite_struct_complex", localAllocator);
-        structVector.setValueCount(1);
         structVector.allocateNew();
 
         var structWriter = structVector.getWriter();
@@ -1476,7 +1475,10 @@ public class TestUnmarshaller {
         goodNumberWriter.writeBigInt(42L);
         structWriter.end();
 
-        var table = new Table(VectorSchemaRoot.of(structVector));
+        structVector.setValueCount(1);
+        var root = VectorSchemaRoot.of(structVector);
+        root.setRowCount(1);
+        var table = new Table(root);
         try (var result = new OnlineQueryResult(table, Map.of(), null, null, localAllocator)) {
             var users = result.unmarshal(ArrowUser.class);
 
