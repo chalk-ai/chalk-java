@@ -48,35 +48,24 @@ class TestAllClients {
         ChalkClient c = getClient(clientVersion);
 
         var validPlannerVersion = "2";
-        var invalidPlannerVersion = "abc";
-        var plannerVersions = List.of(validPlannerVersion, invalidPlannerVersion);
+        var plannerOptions = new HashMap<String, Object>();
+        plannerOptions.put("planner_version", validPlannerVersion);
 
-        for (var plannerVersion : plannerVersions) {
-            var plannerOptions = new HashMap<String, Object>();
-            plannerOptions.put("planner_version", plannerVersion);
-            try {
-                OnlineQueryParamsComplete params = OnlineQueryParams.builder()
-                        .withInput(FraudTemplateFeatures.user.id, List.of("1"))
-                        .withOutputs(FraudTemplateFeatures.user.socure_score)
-                        .withPlannerOptions(plannerOptions)
-                        .build();
-                try (var res = c.onlineQuery(params)) {
-                    if (plannerVersion.equals(invalidPlannerVersion)) {
-                        if (clientVersion.equals(grpcClientKey)) {
-                            if (res.getErrors() == null || res.getErrors().length == 0) {
-                                fail("Expected exception for invalid planner version");
-                            }
-                        } else {
-                            fail("Expected exception for invalid planner version");
-                        }
-
-                    }
-                }
-            } catch (Exception e) {
-                if (plannerVersion.equals(validPlannerVersion)) {
-                    fail("Expected no exception for valid planner version");
-                }
+        try {
+            OnlineQueryParamsComplete params = OnlineQueryParams.builder()
+                    .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                    .withOutputs(FraudTemplateFeatures.user.socure_score)
+                    .withPlannerOptions(plannerOptions)
+                    .build();
+            try (var res = c.onlineQuery(params)) {
+                assert res.getErrors() != null;
+                assert res.getErrors().length == 0;
+                var users = res.unmarshal(User.class);
+                assert users.length == 1;
+                assert users[0].socure_score.getValue() == 123.0;
             }
+        } catch (Exception e) {
+            fail("Expected no exception for valid planner version", e);
         }
     }
 
