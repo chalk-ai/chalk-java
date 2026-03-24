@@ -6,6 +6,7 @@ import ai.chalk.arrow.test_features.VersionedFeaturesClass;
 import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.arrow.Unmarshaller;
+import ai.chalk.models.OnlineQueryResult;
 import org.apache.arrow.memory.ArrowBuf;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -1457,6 +1458,36 @@ public class TestUnmarshaller {
         assert namedClasses[0].abc_7d7_efg.getValue().equals("a");
         assert namedClasses[1].abc_7d7_efg.getValue().equals("b");
         assert namedClasses[2].abc_7d7_efg.getValue().equals("c");
+    }
+
+    @Test
+    public void testUnmarshalOnlineQueryResultWithNullableNestedStructList() throws Exception {
+        var localAllocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_TEST);
+        var structVector = StructVector.empty("arrow_user.favorite_struct_complex", localAllocator);
+        structVector.allocateNew();
+
+        var structWriter = structVector.getWriter();
+        var goodNumberWriter = structWriter.bigInt("good_number");
+        // Creating the child field without writing any entries leaves this nested list null.
+        structWriter.list("good_dataclasses");
+
+        structWriter.start();
+        goodNumberWriter.writeBigInt(42L);
+        structWriter.end();
+
+        structVector.setValueCount(1);
+        var root = VectorSchemaRoot.of(structVector);
+        root.setRowCount(1);
+        var table = new Table(root);
+        try (var result = new OnlineQueryResult(table, Map.of(), null, null, localAllocator)) {
+            var users = result.unmarshal(ArrowUser.class);
+
+            assert users.length == 1;
+            assert users[0].favoriteStructComplex != null;
+            assert users[0].favoriteStructComplex.goodNumber.getValue().equals(42L);
+            assert users[0].favoriteStructComplex.goodDataclasses != null;
+            assert users[0].favoriteStructComplex.goodDataclasses.getValue() == null;
+        }
     }
 
     @Test

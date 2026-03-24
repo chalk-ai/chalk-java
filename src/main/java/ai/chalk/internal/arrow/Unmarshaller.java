@@ -400,9 +400,14 @@ public class Unmarshaller {
     ) throws Exception {
         var fieldType = meta.field().getType();
         if (meta.isList()) {
+            Feature<?> newFeature = new Feature<>();
+            if (primitiveVal == null) {
+                newFeature.setValue(null);
+                return newFeature;
+            }
+
             List<?> primitiveList = (List<?>) primitiveVal;
             NamespaceMemoItem currMemo = allMemo.get(meta.listUnderlyingClass());
-            Feature<?> newFeature = new Feature<>();
 
             if (currMemo == null) {
                 // Not a struct or features class, since it's not in the memo
