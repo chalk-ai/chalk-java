@@ -16,6 +16,11 @@ public final class BuilderProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_ActivateDeploymentTarget_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_ActivateDeploymentTarget_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_ActivateDeploymentRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -75,6 +80,16 @@ public final class BuilderProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_UploadSourceResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_LintSourceRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_LintSourceRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_LintSourceResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_LintSourceResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_GetDeploymentStepsRequest_descriptor;
   static final 
@@ -141,6 +156,21 @@ public final class BuilderProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_CreateClusterTimescaleDBRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_KubeResourceConfig_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_KubeResourceConfig_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_ClusterTimescaleSpecs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_PostgresParametersEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_ClusterTimescaleSpecs_PostgresParametersEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_CreateClusterTimescaleDBResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -161,6 +191,41 @@ public final class BuilderProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_CreateClusterGatewayRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_EnvoyGatewaySpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_EnvoyGatewaySpecs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_EnvoyGatewayListener_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_EnvoyGatewayListener_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedRoutes_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_EnvoyGatewayAllowedRoutes_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedNamespaces_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_EnvoyGatewayAllowedNamespaces_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GatewayProviderConfig_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GatewayProviderConfig_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_EnvoyGatewayProviderConfig_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_EnvoyGatewayProviderConfig_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GCPGatewayProviderConfig_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GCPGatewayProviderConfig_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_CreateClusterGatewayResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -170,6 +235,26 @@ public final class BuilderProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_BackgroundPersistenceCommonSpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_BackgroundPersistenceCommonSpecs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterHpaSpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_BackgroundPersistenceWriterHpaSpecs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterSpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_BackgroundPersistenceWriterSpecs_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_BackgroundPersistenceDeploymentSpecs_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_BackgroundPersistenceDeploymentSpecs_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceResponse_descriptor;
   static final 
@@ -185,6 +270,136 @@ public final class BuilderProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_GetSearchConfigResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_EnvironmentVariablesEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_EnvironmentVariablesEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateEnvironmentVariablesResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_StartBranchRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_StartBranchRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_StartBranchResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_StartBranchResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_KafkaTopic_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_KafkaTopic_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_CreateKafkaTopicsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_CreateKafkaTopicsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_CreateKafkaTopicsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_CreateKafkaTopicsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKafkaTopicsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKafkaTopicsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKafkaTopicsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKafkaTopicsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKarpenterNodepoolsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKarpenterNodepoolsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_AddKarpenterNodepoolRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_AddKarpenterNodepoolRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_AddKarpenterNodepoolResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_AddKarpenterNodepoolResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateKarpenterNodepoolRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_UpdateKarpenterNodepoolResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_DeleteKarpenterNodepoolRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_DeleteKarpenterNodepoolResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKarpenterInstallationMetadataRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_DeploymentLabelsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_DeploymentLabelsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_DeploymentTag_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_DeploymentTag_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetTagWeightsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetTagWeightsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetTagWeightsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetTagWeightsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SetTagWeightsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SetTagWeightsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SetTagWeightsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SetTagWeightsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -196,387 +411,928 @@ public final class BuilderProto {
     java.lang.String[] descriptorData = {
       "\n\035chalk/server/v1/builder.proto\022\017chalk.s" +
       "erver.v1\032\037chalk/auth/v1/permissions.prot" +
-      "o\032 chalk/server/v1/deployment.proto\032\031cha" +
-      "lk/server/v1/log.proto\032\037google/protobuf/" +
-      "timestamp.proto\"Q\n\031ActivateDeploymentReq" +
+      "o\032\032chalk/graph/v1/graph.proto\032\026chalk/lsp" +
+      "/v1/lsp.proto\032\"chalk/nodepools/v1/karpen" +
+      "ter.proto\032 chalk/server/v1/deployment.pr" +
+      "oto\032\031chalk/server/v1/log.proto\032\037google/p" +
+      "rotobuf/timestamp.proto\"m\n\030ActivateDeplo" +
+      "ymentTarget\022!\n\014service_kind\030\001 \001(\tR\013servi" +
+      "ceKind\022.\n\023resource_group_name\030\002 \001(\tR\021res" +
+      "ourceGroupName\"\226\001\n\031ActivateDeploymentReq" +
       "uest\0224\n\026existing_deployment_id\030\001 \001(\tR\024ex" +
-      "istingDeploymentId\"\034\n\032ActivateDeployment" +
-      "Response\"N\n\026IndexDeploymentRequest\0224\n\026ex" +
-      "isting_deployment_id\030\001 \001(\tR\024existingDepl" +
-      "oymentId\"\031\n\027IndexDeploymentResponse\"S\n\033D" +
-      "eployKubeComponentsRequest\0224\n\026existing_d" +
-      "eployment_id\030\001 \001(\tR\024existingDeploymentId" +
-      "\"\036\n\034DeployKubeComponentsResponse\"\354\001\n\030Reb" +
-      "uildDeploymentRequest\0224\n\026existing_deploy" +
-      "ment_id\030\001 \001(\tR\024existingDeploymentId\022\"\n\rn" +
-      "ew_image_tag\030\002 \001(\tR\013newImageTag\0223\n\023base_" +
-      "image_override\030\003 \001(\tH\000R\021baseImageOverrid" +
-      "e\210\001\001\022)\n\020enable_profiling\030\004 \001(\010R\017enablePr" +
-      "ofilingB\026\n\024_base_image_override\"6\n\031Rebui" +
-      "ldDeploymentResponse\022\031\n\010build_id\030\001 \001(\tR\007" +
-      "buildId\"|\n\031RedeployDeploymentRequest\0224\n\026" +
-      "existing_deployment_id\030\001 \001(\tR\024existingDe" +
-      "ploymentId\022)\n\020enable_profiling\030\002 \001(\010R\017en" +
-      "ableProfiling\"`\n\032RedeployDeploymentRespo" +
-      "nse\022\035\n\010build_id\030\001 \001(\tB\002\030\001R\007buildId\022#\n\rde" +
-      "ployment_id\030\002 \001(\tR\014deploymentId\"\310\002\n\023Uplo" +
-      "adSourceRequest\022#\n\rdeployment_id\030\007 \001(\tR\014" +
-      "deploymentId\022\030\n\007archive\030\001 \001(\014R\007archive\022\035" +
-      "\n\nno_promote\030\002 \001(\010R\tnoPromote\022,\n\017depende" +
-      "ncy_hash\030\003 \001(\tH\000R\016dependencyHash\210\001\001\0223\n\023b" +
-      "ase_image_override\030\004 \001(\tH\001R\021baseImageOve" +
-      "rride\210\001\001\022\031\n\010use_grpc\030\005 \001(\010R\007useGrpc\022)\n\020e" +
-      "nable_profiling\030\006 \001(\010R\017enableProfilingB\022" +
-      "\n\020_dependency_hashB\026\n\024_base_image_overri" +
-      "de\"Q\n\024UploadSourceResponse\022\026\n\006status\030\001 \001" +
-      "(\tR\006status\022!\n\014progress_url\030\002 \001(\tR\013progre" +
-      "ssUrl\"@\n\031GetDeploymentStepsRequest\022#\n\rde" +
-      "ployment_id\030\001 \001(\tR\014deploymentId\"\372\001\n\023Depl" +
-      "oymentBuildStep\022\016\n\002id\030\001 \001(\tR\002id\022!\n\014displ" +
-      "ay_name\030\002 \001(\tR\013displayName\022>\n\006status\030\003 \001" +
-      "(\0162&.chalk.server.v1.DeploymentBuildStat" +
-      "usR\006status\0229\n\nstart_time\030\004 \001(\0132\032.google." +
-      "protobuf.TimestampR\tstartTime\0225\n\010end_tim" +
-      "e\030\005 \001(\0132\032.google.protobuf.TimestampR\007end" +
-      "Time\"\225\001\n\032GetDeploymentStepsResponse\022:\n\005s" +
-      "teps\030\001 \003(\0132$.chalk.server.v1.DeploymentB" +
-      "uildStepR\005steps\022;\n\ndeployment\030\002 \001(\0132\033.ch" +
-      "alk.server.v1.DeploymentR\ndeployment\"?\n\030" +
-      "GetDeploymentLogsRequest\022#\n\rdeployment_i" +
-      "d\030\001 \001(\tR\014deploymentId\"J\n\031GetDeploymentLo" +
-      "gsResponse\022-\n\004logs\030\001 \003(\0132\031.chalk.server." +
-      "v1.LogEntryR\004logs\"E\n\034GetClusterTimescale" +
-      "DBRequest\022%\n\016environment_id\030\001 \001(\tR\renvir" +
-      "onmentId\"\310\001\n\035GetClusterTimescaleDBRespon" +
-      "se\022\016\n\002id\030\001 \001(\tR\002id\022!\n\014specs_string\030\002 \001(\t" +
-      "R\013specsString\0229\n\ncreated_at\030\003 \001(\0132\032.goog" +
-      "le.protobuf.TimestampR\tcreatedAt\0229\n\nupda" +
-      "ted_at\030\004 \001(\0132\032.google.protobuf.Timestamp" +
-      "R\tupdatedAt\"A\n\030GetClusterGatewayRequest\022" +
-      "%\n\016environment_id\030\001 \001(\tR\renvironmentId\"\304" +
-      "\001\n\031GetClusterGatewayResponse\022\016\n\002id\030\001 \001(\t" +
-      "R\002id\022!\n\014specs_string\030\002 \001(\tR\013specsString\022" +
-      "9\n\ncreated_at\030\003 \001(\0132\032.google.protobuf.Ti" +
-      "mestampR\tcreatedAt\0229\n\nupdated_at\030\004 \001(\0132\032" +
-      ".google.protobuf.TimestampR\tupdatedAt\"\324\001" +
-      "\n\025BackgroundPersistence\022\016\n\002id\030\001 \001(\tR\002id\022" +
-      "\022\n\004kind\030\002 \001(\tR\004kind\022!\n\014specs_string\030\003 \001(" +
-      "\tR\013specsString\0229\n\ncreated_at\030\004 \001(\0132\032.goo" +
-      "gle.protobuf.TimestampR\tcreatedAt\0229\n\nupd" +
-      "ated_at\030\005 \001(\0132\032.google.protobuf.Timestam" +
-      "pR\tupdatedAt\"O\n&GetClusterBackgroundPers" +
-      "istenceRequest\022%\n\016environment_id\030\001 \001(\tR\r" +
-      "environmentId\"\210\001\n\'GetClusterBackgroundPe" +
-      "rsistenceResponse\022]\n\026background_persiste" +
-      "nce\030\001 \001(\0132&.chalk.server.v1.BackgroundPe" +
-      "rsistenceR\025backgroundPersistence\"\230\001\n\037Cre" +
-      "ateClusterTimescaleDBRequest\022)\n\016environm" +
-      "ent_id\030\001 \003(\tB\002\030\001R\renvironmentId\022\'\n\017envir" +
-      "onment_ids\030\003 \003(\tR\016environmentIds\022!\n\014spec" +
-      "s_string\030\002 \001(\tR\013specsString\"\"\n CreateClu" +
-      "sterTimescaleDBResponse\"\277\001\n MigrateClust" +
-      "erTimescaleDBRequest\0220\n\024cluster_timescal" +
-      "e_id\030\001 \001(\tR\022clusterTimescaleId\022,\n\017migrat" +
-      "ion_image\030\002 \001(\tH\000R\016migrationImage\210\001\001\022\'\n\017" +
-      "environment_ids\030\003 \003(\tR\016environmentIdsB\022\n" +
-      "\020_migration_image\"#\n!MigrateClusterTimes" +
-      "caleDBResponse\"\224\001\n\033CreateClusterGatewayR" +
-      "equest\022)\n\016environment_id\030\001 \003(\tB\002\030\001R\renvi" +
-      "ronmentId\022\'\n\017environment_ids\030\003 \003(\tR\016envi" +
-      "ronmentIds\022!\n\014specs_string\030\002 \001(\tR\013specsS" +
-      "tring\"\036\n\034CreateClusterGatewayResponse\"w\n" +
-      ")CreateClusterBackgroundPersistenceReque" +
-      "st\022\'\n\017environment_ids\030\001 \003(\tR\016environment" +
-      "Ids\022!\n\014specs_string\030\002 \001(\tR\013specsString\"," +
-      "\n*CreateClusterBackgroundPersistenceResp" +
-      "onse\"\030\n\026GetSearchConfigRequest\"T\n\027GetSea" +
-      "rchConfigResponse\022\027\n\007team_id\030\001 \001(\tR\006team" +
-      "Id\022 \n\014team_api_key\030\002 \001(\tR\nteamApiKey*\343\003\n" +
-      "\025DeploymentBuildStatus\022\'\n#DEPLOYMENT_BUI" +
-      "LD_STATUS_UNSPECIFIED\020\000\022#\n\037DEPLOYMENT_BU" +
-      "ILD_STATUS_UNKNOWN\020\001\022#\n\037DEPLOYMENT_BUILD" +
-      "_STATUS_PENDING\020\002\022\"\n\036DEPLOYMENT_BUILD_ST" +
-      "ATUS_QUEUED\020\003\022#\n\037DEPLOYMENT_BUILD_STATUS" +
-      "_WORKING\020\004\022#\n\037DEPLOYMENT_BUILD_STATUS_SU" +
-      "CCESS\020\005\022#\n\037DEPLOYMENT_BUILD_STATUS_FAILU" +
-      "RE\020\006\022*\n&DEPLOYMENT_BUILD_STATUS_INTERNAL" +
-      "_ERROR\020\007\022#\n\037DEPLOYMENT_BUILD_STATUS_TIME" +
-      "OUT\020\010\022%\n!DEPLOYMENT_BUILD_STATUS_CANCELL" +
-      "ED\020\t\022#\n\037DEPLOYMENT_BUILD_STATUS_EXPIRED\020" +
-      "\n\022\'\n#DEPLOYMENT_BUILD_STATUS_BOOT_ERRORS" +
-      "\020\0132\275\017\n\016BuilderService\022l\n\017GetSearchConfig" +
-      "\022\'.chalk.server.v1.GetSearchConfigReques" +
-      "t\032(.chalk.server.v1.GetSearchConfigRespo" +
-      "nse\"\006\220\002\001\200}\002\022r\n\022ActivateDeployment\022*.chal" +
-      "k.server.v1.ActivateDeploymentRequest\032+." +
-      "chalk.server.v1.ActivateDeploymentRespon" +
-      "se\"\003\200}\016\022i\n\017IndexDeployment\022\'.chalk.serve" +
-      "r.v1.IndexDeploymentRequest\032(.chalk.serv" +
-      "er.v1.IndexDeploymentResponse\"\003\200}\016\022x\n\024De" +
-      "ployKubeComponents\022,.chalk.server.v1.Dep" +
-      "loyKubeComponentsRequest\032-.chalk.server." +
-      "v1.DeployKubeComponentsResponse\"\003\200}\014\022o\n\021" +
-      "RebuildDeployment\022).chalk.server.v1.Rebu" +
-      "ildDeploymentRequest\032*.chalk.server.v1.R" +
-      "ebuildDeploymentResponse\"\003\200}\016\022r\n\022Redeplo" +
-      "yDeployment\022*.chalk.server.v1.RedeployDe" +
-      "ploymentRequest\032+.chalk.server.v1.Redepl" +
-      "oyDeploymentResponse\"\003\200}\016\022`\n\014UploadSourc" +
-      "e\022$.chalk.server.v1.UploadSourceRequest\032" +
-      "%.chalk.server.v1.UploadSourceResponse\"\003" +
-      "\200}\013\022r\n\022GetDeploymentSteps\022*.chalk.server" +
-      ".v1.GetDeploymentStepsRequest\032+.chalk.se" +
-      "rver.v1.GetDeploymentStepsResponse\"\003\200}\013\022" +
-      "o\n\021GetDeploymentLogs\022).chalk.server.v1.G" +
-      "etDeploymentLogsRequest\032*.chalk.server.v" +
-      "1.GetDeploymentLogsResponse\"\003\200}\013\022{\n\025GetC" +
-      "lusterTimescaleDB\022-.chalk.server.v1.GetC" +
-      "lusterTimescaleDBRequest\032..chalk.server." +
-      "v1.GetClusterTimescaleDBResponse\"\003\200}\013\022o\n" +
-      "\021GetClusterGateway\022).chalk.server.v1.Get" +
-      "ClusterGatewayRequest\032*.chalk.server.v1." +
-      "GetClusterGatewayResponse\"\003\200}\013\022\231\001\n\037GetCl" +
-      "usterBackgroundPersistence\0227.chalk.serve" +
-      "r.v1.GetClusterBackgroundPersistenceRequ" +
-      "est\0328.chalk.server.v1.GetClusterBackgrou" +
-      "ndPersistenceResponse\"\003\200}\013\022\204\001\n\030CreateClu" +
-      "sterTimescaleDB\0220.chalk.server.v1.Create" +
-      "ClusterTimescaleDBRequest\0321.chalk.server" +
-      ".v1.CreateClusterTimescaleDBResponse\"\003\200}" +
-      "\n\022\207\001\n\031MigrateClusterTimescaleDB\0221.chalk." +
-      "server.v1.MigrateClusterTimescaleDBReque" +
-      "st\0322.chalk.server.v1.MigrateClusterTimes" +
-      "caleDBResponse\"\003\200}\n\022x\n\024CreateClusterGate" +
-      "way\022,.chalk.server.v1.CreateClusterGatew" +
-      "ayRequest\032-.chalk.server.v1.CreateCluste" +
-      "rGatewayResponse\"\003\200}\n\022\242\001\n\"CreateClusterB" +
-      "ackgroundPersistence\022:.chalk.server.v1.C" +
-      "reateClusterBackgroundPersistenceRequest" +
-      "\032;.chalk.server.v1.CreateClusterBackgrou" +
-      "ndPersistenceResponse\"\003\200}\nB\241\001\n\037ai.chalk." +
-      "protos.chalk.server.v1B\014BuilderProtoP\001Z\022" +
-      "server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server." +
-      "V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\G" +
-      "PBMetadata\352\002\021Chalk::Server::V1b\006proto3"
+      "istingDeploymentId\022C\n\007targets\030\002 \003(\0132).ch" +
+      "alk.server.v1.ActivateDeploymentTargetR\007" +
+      "targets\"\034\n\032ActivateDeploymentResponse\"N\n" +
+      "\026IndexDeploymentRequest\0224\n\026existing_depl" +
+      "oyment_id\030\001 \001(\tR\024existingDeploymentId\"\031\n" +
+      "\027IndexDeploymentResponse\"S\n\033DeployKubeCo" +
+      "mponentsRequest\0224\n\026existing_deployment_i" +
+      "d\030\001 \001(\tR\024existingDeploymentId\"\036\n\034DeployK" +
+      "ubeComponentsResponse\"\354\001\n\030RebuildDeploym" +
+      "entRequest\0224\n\026existing_deployment_id\030\001 \001" +
+      "(\tR\024existingDeploymentId\022\"\n\rnew_image_ta" +
+      "g\030\002 \001(\tR\013newImageTag\0223\n\023base_image_overr" +
+      "ide\030\003 \001(\tH\000R\021baseImageOverride\210\001\001\022)\n\020ena" +
+      "ble_profiling\030\004 \001(\010R\017enableProfilingB\026\n\024" +
+      "_base_image_override\"6\n\031RebuildDeploymen" +
+      "tResponse\022\031\n\010build_id\030\001 \001(\tR\007buildId\"|\n\031" +
+      "RedeployDeploymentRequest\0224\n\026existing_de" +
+      "ployment_id\030\001 \001(\tR\024existingDeploymentId\022" +
+      ")\n\020enable_profiling\030\002 \001(\010R\017enableProfili" +
+      "ng\"`\n\032RedeployDeploymentResponse\022\035\n\010buil" +
+      "d_id\030\001 \001(\tB\002\030\001R\007buildId\022#\n\rdeployment_id" +
+      "\030\002 \001(\tR\014deploymentId\"\310\002\n\023UploadSourceReq" +
+      "uest\022#\n\rdeployment_id\030\007 \001(\tR\014deploymentI" +
+      "d\022\030\n\007archive\030\001 \001(\014R\007archive\022\035\n\nno_promot" +
+      "e\030\002 \001(\010R\tnoPromote\022,\n\017dependency_hash\030\003 " +
+      "\001(\tH\000R\016dependencyHash\210\001\001\0223\n\023base_image_o" +
+      "verride\030\004 \001(\tH\001R\021baseImageOverride\210\001\001\022\031\n" +
+      "\010use_grpc\030\005 \001(\010R\007useGrpc\022)\n\020enable_profi" +
+      "ling\030\006 \001(\010R\017enableProfilingB\022\n\020_dependen" +
+      "cy_hashB\026\n\024_base_image_override\"Q\n\024Uploa" +
+      "dSourceResponse\022\026\n\006status\030\001 \001(\tR\006status\022" +
+      "!\n\014progress_url\030\002 \001(\tR\013progressUrl\"-\n\021Li" +
+      "ntSourceRequest\022\030\n\007archive\030\001 \001(\014R\007archiv" +
+      "e\"f\n\022LintSourceResponse\022+\n\005graph\030\001 \001(\0132\025" +
+      ".chalk.graph.v1.GraphR\005graph\022#\n\003lsp\030\002 \001(" +
+      "\0132\021.chalk.lsp.v1.LSPR\003lsp\"@\n\031GetDeployme" +
+      "ntStepsRequest\022#\n\rdeployment_id\030\001 \001(\tR\014d" +
+      "eploymentId\"\372\001\n\023DeploymentBuildStep\022\016\n\002i" +
+      "d\030\001 \001(\tR\002id\022!\n\014display_name\030\002 \001(\tR\013displ" +
+      "ayName\022>\n\006status\030\003 \001(\0162&.chalk.server.v1" +
+      ".DeploymentBuildStatusR\006status\0229\n\nstart_" +
+      "time\030\004 \001(\0132\032.google.protobuf.TimestampR\t" +
+      "startTime\0225\n\010end_time\030\005 \001(\0132\032.google.pro" +
+      "tobuf.TimestampR\007endTime\"\225\001\n\032GetDeployme" +
+      "ntStepsResponse\022:\n\005steps\030\001 \003(\0132$.chalk.s" +
+      "erver.v1.DeploymentBuildStepR\005steps\022;\n\nd" +
+      "eployment\030\002 \001(\0132\033.chalk.server.v1.Deploy" +
+      "mentR\ndeployment\"?\n\030GetDeploymentLogsReq" +
+      "uest\022#\n\rdeployment_id\030\001 \001(\tR\014deploymentI" +
+      "d\"J\n\031GetDeploymentLogsResponse\022-\n\004logs\030\001" +
+      " \003(\0132\031.chalk.server.v1.LogEntryR\004logs\"E\n" +
+      "\034GetClusterTimescaleDBRequest\022%\n\016environ" +
+      "ment_id\030\001 \001(\tR\renvironmentId\"\212\002\n\035GetClus" +
+      "terTimescaleDBResponse\022\016\n\002id\030\001 \001(\tR\002id\022%" +
+      "\n\014specs_string\030\002 \001(\tB\002\030\001R\013specsString\0229\n" +
+      "\ncreated_at\030\003 \001(\0132\032.google.protobuf.Time" +
+      "stampR\tcreatedAt\0229\n\nupdated_at\030\004 \001(\0132\032.g" +
+      "oogle.protobuf.TimestampR\tupdatedAt\022<\n\005s" +
+      "pecs\030\005 \001(\0132&.chalk.server.v1.ClusterTime" +
+      "scaleSpecsR\005specs\"A\n\030GetClusterGatewayRe" +
+      "quest\022%\n\016environment_id\030\001 \001(\tR\renvironme" +
+      "ntId\"\202\002\n\031GetClusterGatewayResponse\022\016\n\002id" +
+      "\030\001 \001(\tR\002id\022%\n\014specs_string\030\002 \001(\tB\002\030\001R\013sp" +
+      "ecsString\0229\n\ncreated_at\030\003 \001(\0132\032.google.p" +
+      "rotobuf.TimestampR\tcreatedAt\0229\n\nupdated_" +
+      "at\030\004 \001(\0132\032.google.protobuf.TimestampR\tup" +
+      "datedAt\0228\n\005specs\030\005 \001(\0132\".chalk.server.v1" +
+      ".EnvoyGatewaySpecsR\005specs\"\245\002\n\025Background" +
+      "Persistence\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004kind\030\002 \001(" +
+      "\tR\004kind\022%\n\014specs_string\030\003 \001(\tB\002\030\001R\013specs" +
+      "String\0229\n\ncreated_at\030\004 \001(\0132\032.google.prot" +
+      "obuf.TimestampR\tcreatedAt\0229\n\nupdated_at\030" +
+      "\005 \001(\0132\032.google.protobuf.TimestampR\tupdat" +
+      "edAt\022K\n\005specs\030\006 \001(\01325.chalk.server.v1.Ba" +
+      "ckgroundPersistenceDeploymentSpecsR\005spec" +
+      "s\"O\n&GetClusterBackgroundPersistenceRequ" +
+      "est\022%\n\016environment_id\030\001 \001(\tR\renvironment" +
+      "Id\"\210\001\n\'GetClusterBackgroundPersistenceRe" +
+      "sponse\022]\n\026background_persistence\030\001 \001(\0132&" +
+      ".chalk.server.v1.BackgroundPersistenceR\025" +
+      "backgroundPersistence\"\332\001\n\037CreateClusterT" +
+      "imescaleDBRequest\022)\n\016environment_id\030\001 \003(" +
+      "\tB\002\030\001R\renvironmentId\022\'\n\017environment_ids\030" +
+      "\003 \003(\tR\016environmentIds\022%\n\014specs_string\030\002 " +
+      "\001(\tB\002\030\001R\013specsString\022<\n\005specs\030\004 \001(\0132&.ch" +
+      "alk.server.v1.ClusterTimescaleSpecsR\005spe" +
+      "cs\"\205\001\n\022KubeResourceConfig\022\020\n\003cpu\030\001 \001(\tR\003" +
+      "cpu\022\026\n\006memory\030\002 \001(\tR\006memory\022+\n\021ephemeral" +
+      "_storage\030\003 \001(\tR\020ephemeralStorage\022\030\n\007stor" +
+      "age\030\004 \001(\tR\007storage\"\272\t\n\025ClusterTimescaleS" +
+      "pecs\022\'\n\017timescale_image\030\001 \001(\tR\016timescale" +
+      "Image\022#\n\rdatabase_name\030\002 \001(\tR\014databaseNa" +
+      "me\022+\n\021database_replicas\030\003 \001(\005R\020databaseR" +
+      "eplicas\022\030\n\007storage\030\004 \001(\tR\007storage\022(\n\rsto" +
+      "rage_class\030\005 \001(\tH\000R\014storageClass\210\001\001\022\034\n\tn" +
+      "amespace\030\006 \001(\tR\tnamespace\022B\n\007request\030\007 \001" +
+      "(\0132#.chalk.server.v1.KubeResourceConfigH" +
+      "\001R\007request\210\001\001\022>\n\005limit\030\010 \001(\0132#.chalk.ser" +
+      "ver.v1.KubeResourceConfigH\002R\005limit\210\001\001\0228\n" +
+      "\030connection_pool_replicas\030\t \001(\005R\026connect" +
+      "ionPoolReplicas\022E\n\037connection_pool_max_c" +
+      "onnections\030\n \001(\tR\034connectionPoolMaxConne" +
+      "ctions\0220\n\024connection_pool_size\030\013 \001(\tR\022co" +
+      "nnectionPoolSize\0220\n\024connection_pool_mode" +
+      "\030\014 \001(\tR\022connectionPoolMode\022#\n\rbackup_buc" +
+      "ket\030\r \001(\tR\014backupBucket\022-\n\023backup_iam_ro" +
+      "le_arn\030\016 \001(\tR\020backupIamRoleArn\022\037\n\013secret" +
+      "_name\030\017 \001(\tR\nsecretName\022\037\n\010internal\030\020 \001(" +
+      "\010H\003R\010internal\210\001\001\022&\n\014service_type\030\021 \001(\tH\004" +
+      "R\013serviceType\210\001\001\022o\n\023postgres_parameters\030" +
+      "\022 \003(\0132>.chalk.server.v1.ClusterTimescale" +
+      "Specs.PostgresParametersEntryR\022postgresP" +
+      "arameters\022=\n\033include_chalk_node_selector" +
+      "\030\023 \001(\010R\030includeChalkNodeSelector\022;\n\032back" +
+      "up_gcp_service_account\030\024 \001(\tR\027backupGcpS" +
+      "erviceAccount\022#\n\rinstance_type\030\025 \001(\tR\014in" +
+      "stanceType\032E\n\027PostgresParametersEntry\022\020\n" +
+      "\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028" +
+      "\001B\020\n\016_storage_classB\n\n\010_requestB\010\n\006_limi" +
+      "tB\013\n\t_internalB\017\n\r_service_type\"\"\n Creat" +
+      "eClusterTimescaleDBResponse\"\277\001\n MigrateC" +
+      "lusterTimescaleDBRequest\0220\n\024cluster_time" +
+      "scale_id\030\001 \001(\tR\022clusterTimescaleId\022,\n\017mi" +
+      "gration_image\030\002 \001(\tH\000R\016migrationImage\210\001\001" +
+      "\022\'\n\017environment_ids\030\003 \003(\tR\016environmentId" +
+      "sB\022\n\020_migration_image\"#\n!MigrateClusterT" +
+      "imescaleDBResponse\"\322\001\n\033CreateClusterGate" +
+      "wayRequest\022)\n\016environment_id\030\001 \003(\tB\002\030\001R\r" +
+      "environmentId\022\'\n\017environment_ids\030\003 \003(\tR\016" +
+      "environmentIds\022%\n\014specs_string\030\002 \001(\tB\002\030\001" +
+      "R\013specsString\0228\n\005specs\030\004 \001(\0132\".chalk.ser" +
+      "ver.v1.EnvoyGatewaySpecsR\005specs\"\326\002\n\021Envo" +
+      "yGatewaySpecs\022\034\n\tnamespace\030\001 \001(\tR\tnamesp" +
+      "ace\022!\n\014gateway_name\030\002 \001(\tR\013gatewayName\022," +
+      "\n\022gateway_class_name\030\003 \001(\tR\020gatewayClass" +
+      "Name\022C\n\tlisteners\030\004 \003(\0132%.chalk.server.v" +
+      "1.EnvoyGatewayListenerR\tlisteners\022C\n\006con" +
+      "fig\030\005 \001(\0132&.chalk.server.v1.GatewayProvi" +
+      "derConfigH\000R\006config\210\001\001\022=\n\033include_chalk_" +
+      "node_selector\030\006 \001(\010R\030includeChalkNodeSel" +
+      "ectorB\t\n\007_config\"\255\001\n\024EnvoyGatewayListene" +
+      "r\022\022\n\004port\030\001 \001(\005R\004port\022\032\n\010protocol\030\002 \001(\tR" +
+      "\010protocol\022\022\n\004name\030\003 \001(\tR\004name\022Q\n\016allowed" +
+      "_routes\030\004 \001(\0132*.chalk.server.v1.EnvoyGat" +
+      "ewayAllowedRoutesR\rallowedRoutes\"k\n\031Envo" +
+      "yGatewayAllowedRoutes\022N\n\nnamespaces\030\001 \001(" +
+      "\0132..chalk.server.v1.EnvoyGatewayAllowedN" +
+      "amespacesR\nnamespaces\"3\n\035EnvoyGatewayAll" +
+      "owedNamespaces\022\022\n\004from\030\001 \001(\tR\004from\"\245\001\n\025G" +
+      "atewayProviderConfig\022C\n\005envoy\030\001 \001(\0132+.ch" +
+      "alk.server.v1.EnvoyGatewayProviderConfig" +
+      "H\000R\005envoy\022=\n\003gcp\030\002 \001(\0132).chalk.server.v1" +
+      ".GCPGatewayProviderConfigH\000R\003gcpB\010\n\006conf" +
+      "ig\"\204\002\n\032EnvoyGatewayProviderConfig\022.\n\020tim" +
+      "eout_duration\030\001 \001(\tH\000R\017timeoutDuration\210\001" +
+      "\001\022&\n\014dns_hostname\030\002 \001(\tH\001R\013dnsHostname\210\001" +
+      "\001\022\037\n\010replicas\030\003 \001(\005H\002R\010replicas\210\001\001\022(\n\rmi" +
+      "n_available\030\004 \001(\005H\003R\014minAvailable\210\001\001B\023\n\021" +
+      "_timeout_durationB\017\n\r_dns_hostnameB\013\n\t_r" +
+      "eplicasB\020\n\016_min_available\"=\n\030GCPGatewayP" +
+      "roviderConfig\022!\n\014dns_hostname\030\001 \001(\tR\013dns" +
+      "Hostname\"\036\n\034CreateClusterGatewayResponse" +
+      "\"\310\001\n)CreateClusterBackgroundPersistenceR" +
+      "equest\022\'\n\017environment_ids\030\001 \003(\tR\016environ" +
+      "mentIds\022%\n\014specs_string\030\002 \001(\tB\002\030\001R\013specs" +
+      "String\022K\n\005specs\030\003 \001(\01325.chalk.server.v1." +
+      "BackgroundPersistenceDeploymentSpecsR\005sp" +
+      "ecs\"\322\014\n BackgroundPersistenceCommonSpecs" +
+      "\022\034\n\tnamespace\030\001 \001(\tR\tnamespace\022-\n\023bus_wr" +
+      "iter_image_go\030\002 \001(\tR\020busWriterImageGo\0225\n" +
+      "\027bus_writer_image_python\030\003 \001(\tR\024busWrite" +
+      "rImagePython\0221\n\025bus_writer_image_bswl\030\004 " +
+      "\001(\tR\022busWriterImageBswl\0220\n\024service_accou" +
+      "nt_name\030\005 \001(\tR\022serviceAccountName\022\037\n\013bus" +
+      "_backend\030\006 \001(\tR\nbusBackend\022#\n\rsecret_cli" +
+      "ent\030\007 \001(\tR\014secretClient\022T\n\'bigquery_parq" +
+      "uet_upload_subscription_id\030\010 \001(\tR#bigque" +
+      "ryParquetUploadSubscriptionId\022V\n(bigquer" +
+      "y_streaming_write_subscription_id\030\t \001(\tR" +
+      "$bigqueryStreamingWriteSubscriptionId\022C\n" +
+      "\036bigquery_streaming_write_topic\030\n \001(\tR\033b" +
+      "igqueryStreamingWriteTopic\0228\n\026bigquery_u" +
+      "pload_bucket\030\013 \001(\tB\002\030\001R\024bigqueryUploadBu" +
+      "cket\0226\n\025bigquery_upload_topic\030\014 \001(\tB\002\030\001R" +
+      "\023bigqueryUploadTopic\0220\n\024google_cloud_pro" +
+      "ject\030\r \001(\tR\022googleCloudProject\022&\n\017kafka_" +
+      "dlq_topic\030\016 \001(\tR\rkafkaDlqTopic\022=\n\033metric" +
+      "s_bus_subscription_id\030\017 \001(\tR\030metricsBusS" +
+      "ubscriptionId\022/\n\024metrics_bus_topic_id\030\020 " +
+      "\001(\tR\021metricsBusTopicId\022:\n\031operation_subs" +
+      "cription_id\030\021 \001(\tR\027operationSubscription" +
+      "Id\0223\n\026query_log_result_topic\030\022 \001(\tR\023quer" +
+      "yLogResultTopic\0229\n\031query_log_subscriptio" +
+      "n_id\030\023 \001(\tR\026queryLogSubscriptionId\022J\n\"re" +
+      "sult_bus_metrics_subscription_id\030\024 \001(\tR\036" +
+      "resultBusMetricsSubscriptionId\022U\n(result" +
+      "_bus_offline_store_subscription_id\030\025 \001(\t" +
+      "R#resultBusOfflineStoreSubscriptionId\022S\n" +
+      "\'result_bus_online_store_subscription_id" +
+      "\030\026 \001(\tR\"resultBusOnlineStoreSubscription" +
+      "Id\022-\n\023result_bus_topic_id\030\027 \001(\tR\020resultB" +
+      "usTopicId\022+\n\022usage_bus_topic_id\030\030 \001(\tR\017u" +
+      "sageBusTopicId\022?\n\034usage_events_subscript" +
+      "ion_id\030\031 \001(\tR\031usageEventsSubscriptionId\022" +
+      "(\n\020bq_upload_bucket\030\032 \001(\tR\016bqUploadBucke" +
+      "t\022&\n\017bq_upload_topic\030\033 \001(\tR\rbqUploadTopi" +
+      "c\022=\n\033include_chalk_node_selector\030\034 \001(\010R\030" +
+      "includeChalkNodeSelector\"\305\002\n#BackgroundP" +
+      "ersistenceWriterHpaSpecs\022;\n\032hpa_pubsub_s" +
+      "ubscription_id\030\001 \001(\tR\027hpaPubsubSubscript" +
+      "ionId\022-\n\020hpa_min_replicas\030\002 \001(\005H\000R\016hpaMi" +
+      "nReplicas\210\001\001\022-\n\020hpa_max_replicas\030\003 \001(\005H\001" +
+      "R\016hpaMaxReplicas\210\001\001\022<\n\030hpa_target_averag" +
+      "e_value\030\004 \001(\005H\002R\025hpaTargetAverageValue\210\001" +
+      "\001B\023\n\021_hpa_min_replicasB\023\n\021_hpa_max_repli" +
+      "casB\033\n\031_hpa_target_average_value\"\224\013\n Bac" +
+      "kgroundPersistenceWriterSpecs\022\022\n\004name\030\001 " +
+      "\001(\tR\004name\022%\n\016image_override\030\002 \001(\tR\rimage" +
+      "Override\022V\n\thpa_specs\030\003 \001(\01324.chalk.serv" +
+      "er.v1.BackgroundPersistenceWriterHpaSpec" +
+      "sH\000R\010hpaSpecs\210\001\001\022\036\n\010gke_spot\030\004 \001(\010H\001R\007gk" +
+      "eSpot\210\001\001\0227\n\025load_writer_configmap\030\005 \001(\010H" +
+      "\002R\023loadWriterConfigmap\210\001\001\022\030\n\007version\030\006 \001" +
+      "(\tR\007version\022B\n\007request\030\007 \001(\0132#.chalk.ser" +
+      "ver.v1.KubeResourceConfigH\003R\007request\210\001\001\022" +
+      ">\n\005limit\030\010 \001(\0132#.chalk.server.v1.KubeRes" +
+      "ourceConfigH\004R\005limit\210\001\001\022.\n\023bus_subscribe" +
+      "r_type\030\t \001(\tR\021busSubscriberType\0222\n\025defau" +
+      "lt_replica_count\030\n \001(\005R\023defaultReplicaCo" +
+      "unt\022A\n\035kafka_consumer_group_override\030\013 \001" +
+      "(\tR\032kafkaConsumerGroupOverride\022)\n\016max_ba" +
+      "tch_size\030\014 \001(\005H\005R\014maxBatchSize\210\001\001\022I\n\036mes" +
+      "sage_processing_concurrency\030\r \001(\005H\006R\034mes" +
+      "sageProcessingConcurrency\210\001\001\022C\n\037metadata" +
+      "_sql_ssl_ca_cert_secret\030\016 \001(\tR\032metadataS" +
+      "qlSslCaCertSecret\022K\n#metadata_sql_ssl_cl" +
+      "ient_cert_secret\030\017 \001(\tR\036metadataSqlSslCl" +
+      "ientCertSecret\022I\n\"metadata_sql_ssl_clien" +
+      "t_key_secret\030\020 \001(\tR\035metadataSqlSslClient" +
+      "KeySecret\0225\n\027metadata_sql_uri_secret\030\021 \001" +
+      "(\tR\024metadataSqlUriSecret\022B\n\036offline_stor" +
+      "e_inserter_db_type\030\022 \001(\tR\032offlineStoreIn" +
+      "serterDbType\0220\n\024storage_cache_prefix\030\023 \001" +
+      "(\tR\022storageCachePrefix\022&\n\017usage_store_ur" +
+      "i\030\024 \001(\tR\rusageStoreUri\022d\n-results_writer" +
+      "_skip_producing_feature_metrics\030\025 \001(\010H\007R" +
+      "(resultsWriterSkipProducingFeatureMetric" +
+      "s\210\001\001B\014\n\n_hpa_specsB\013\n\t_gke_spotB\030\n\026_load" +
+      "_writer_configmapB\n\n\010_requestB\010\n\006_limitB" +
+      "\021\n\017_max_batch_sizeB!\n\037_message_processin" +
+      "g_concurrencyB0\n._results_writer_skip_pr" +
+      "oducing_feature_metrics\"\344\005\n$BackgroundPe" +
+      "rsistenceDeploymentSpecs\022k\n\030common_persi" +
+      "stence_specs\030\001 \001(\01321.chalk.server.v1.Bac" +
+      "kgroundPersistenceCommonSpecsR\026commonPer" +
+      "sistenceSpecs\022&\n\017api_server_host\030\002 \001(\tR\r" +
+      "apiServerHost\022*\n\021kafka_sasl_secret\030\003 \001(\t" +
+      "R\017kafkaSaslSecret\022+\n\021metadata_provider\030\004" +
+      " \001(\tR\020metadataProvider\0226\n\027kafka_bootstra" +
+      "p_servers\030\005 \001(\tR\025kafkaBootstrapServers\0226" +
+      "\n\027kafka_security_protocol\030\006 \001(\tR\025kafkaSe" +
+      "curityProtocol\0220\n\024kafka_sasl_mechanism\030\007" +
+      " \001(\tR\022kafkaSaslMechanism\022,\n\022redis_is_clu" +
+      "stered\030\010 \001(\tR\020redisIsClustered\022K\n\"snowfl" +
+      "ake_storage_integration_name\030\t \001(\tR\037snow" +
+      "flakeStorageIntegrationName\022H\n!redis_lig" +
+      "htning_supports_has_many\030\n \001(\010R\035redisLig" +
+      "htningSupportsHasMany\022\032\n\010insecure\030\013 \001(\010R" +
+      "\010insecure\022K\n\007writers\030\014 \003(\01321.chalk.serve" +
+      "r.v1.BackgroundPersistenceWriterSpecsR\007w" +
+      "riters\",\n*CreateClusterBackgroundPersist" +
+      "enceResponse\"\030\n\026GetSearchConfigRequest\"T" +
+      "\n\027GetSearchConfigResponse\022\027\n\007team_id\030\001 \001" +
+      "(\tR\006teamId\022 \n\014team_api_key\030\002 \001(\tR\nteamAp" +
+      "iKey\"\360\001\n!UpdateEnvironmentVariablesReque" +
+      "st\022\201\001\n\025environment_variables\030\001 \003(\0132L.cha" +
+      "lk.server.v1.UpdateEnvironmentVariablesR" +
+      "equest.EnvironmentVariablesEntryR\024enviro" +
+      "nmentVariables\032G\n\031EnvironmentVariablesEn" +
+      "try\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005va" +
+      "lue:\0028\001\"$\n\"UpdateEnvironmentVariablesRes" +
+      "ponse\"\024\n\022StartBranchRequest\"P\n\023StartBran" +
+      "chResponse\0229\n\005state\030\001 \001(\0162#.chalk.server" +
+      ".v1.BranchScalingStateR\005state\"\232\001\n\nKafkaT" +
+      "opic\022\022\n\004name\030\001 \001(\tR\004name\022\036\n\npartitions\030\002" +
+      " \001(\005R\npartitions\022%\n\013replication\030\003 \001(\005H\000R" +
+      "\013replication\210\001\001\022!\n\014retention_ms\030\004 \001(\005R\013r" +
+      "etentionMsB\016\n\014_replication\"O\n\030CreateKafk" +
+      "aTopicsRequest\0223\n\006topics\030\001 \003(\0132\033.chalk.s" +
+      "erver.v1.KafkaTopicR\006topics\"\033\n\031CreateKaf" +
+      "kaTopicsResponse\"\027\n\025GetKafkaTopicsReques" +
+      "t\"M\n\026GetKafkaTopicsResponse\0223\n\006topics\030\001 " +
+      "\003(\0132\033.chalk.server.v1.KafkaTopicR\006topics" +
+      "\"\036\n\034GetKarpenterNodepoolsRequest\"d\n\035GetK" +
+      "arpenterNodepoolsResponse\022C\n\tnodepools\030\001" +
+      " \003(\0132%.chalk.nodepools.v1.KarpenterNodep" +
+      "oolR\tnodepools\"`\n\033AddKarpenterNodepoolRe" +
+      "quest\022A\n\010nodepool\030\001 \001(\0132%.chalk.nodepool" +
+      "s.v1.KarpenterNodepoolR\010nodepool\"a\n\034AddK" +
+      "arpenterNodepoolResponse\022A\n\010nodepool\030\001 \001" +
+      "(\0132%.chalk.nodepools.v1.KarpenterNodepoo" +
+      "lR\010nodepool\"w\n\036UpdateKarpenterNodepoolRe" +
+      "quest\022\022\n\004name\030\001 \001(\tR\004name\022A\n\010nodepool\030\002 " +
+      "\001(\0132%.chalk.nodepools.v1.KarpenterNodepo" +
+      "olR\010nodepool\"d\n\037UpdateKarpenterNodepoolR" +
+      "esponse\022A\n\010nodepool\030\001 \001(\0132%.chalk.nodepo" +
+      "ols.v1.KarpenterNodepoolR\010nodepool\"4\n\036De" +
+      "leteKarpenterNodepoolRequest\022\022\n\004name\030\001 \001" +
+      "(\tR\004name\"!\n\037DeleteKarpenterNodepoolRespo" +
+      "nse\")\n\'GetKarpenterInstallationMetadataR" +
+      "equest\"\355\001\n(GetKarpenterInstallationMetad" +
+      "ataResponse\022|\n\021deployment_labels\030\001 \003(\0132O" +
+      ".chalk.server.v1.GetKarpenterInstallatio" +
+      "nMetadataResponse.DeploymentLabelsEntryR" +
+      "\020deploymentLabels\032C\n\025DeploymentLabelsEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
+      "ue:\0028\001\"I\n\rDeploymentTag\022\020\n\003tag\030\001 \001(\tR\003ta" +
+      "g\022\033\n\006weight\030\002 \001(\005H\000R\006weight\210\001\001B\t\n\007_weigh" +
+      "t\"\026\n\024GetTagWeightsRequest\"K\n\025GetTagWeigh" +
+      "tsResponse\0222\n\004tags\030\001 \003(\0132\036.chalk.server." +
+      "v1.DeploymentTagR\004tags\"J\n\024SetTagWeightsR" +
+      "equest\0222\n\004tags\030\001 \003(\0132\036.chalk.server.v1.D" +
+      "eploymentTagR\004tags\"K\n\025SetTagWeightsRespo" +
+      "nse\0222\n\004tags\030\001 \003(\0132\036.chalk.server.v1.Depl" +
+      "oymentTagR\004tags*\343\003\n\025DeploymentBuildStatu" +
+      "s\022\'\n#DEPLOYMENT_BUILD_STATUS_UNSPECIFIED" +
+      "\020\000\022#\n\037DEPLOYMENT_BUILD_STATUS_UNKNOWN\020\001\022" +
+      "#\n\037DEPLOYMENT_BUILD_STATUS_PENDING\020\002\022\"\n\036" +
+      "DEPLOYMENT_BUILD_STATUS_QUEUED\020\003\022#\n\037DEPL" +
+      "OYMENT_BUILD_STATUS_WORKING\020\004\022#\n\037DEPLOYM" +
+      "ENT_BUILD_STATUS_SUCCESS\020\005\022#\n\037DEPLOYMENT" +
+      "_BUILD_STATUS_FAILURE\020\006\022*\n&DEPLOYMENT_BU" +
+      "ILD_STATUS_INTERNAL_ERROR\020\007\022#\n\037DEPLOYMEN" +
+      "T_BUILD_STATUS_TIMEOUT\020\010\022%\n!DEPLOYMENT_B" +
+      "UILD_STATUS_CANCELLED\020\t\022#\n\037DEPLOYMENT_BU" +
+      "ILD_STATUS_EXPIRED\020\n\022\'\n#DEPLOYMENT_BUILD" +
+      "_STATUS_BOOT_ERRORS\020\013*\202\001\n\022BranchScalingS" +
+      "tate\022$\n BRANCH_SCALING_STATE_UNSPECIFIED" +
+      "\020\000\022 \n\034BRANCH_SCALING_STATE_SUCCESS\020\001\022$\n " +
+      "BRANCH_SCALING_STATE_IN_PROGRESS\020\0022\363\030\n\016B" +
+      "uilderService\022l\n\017GetSearchConfig\022\'.chalk" +
+      ".server.v1.GetSearchConfigRequest\032(.chal" +
+      "k.server.v1.GetSearchConfigResponse\"\006\220\002\001" +
+      "\200}\002\022r\n\022ActivateDeployment\022*.chalk.server" +
+      ".v1.ActivateDeploymentRequest\032+.chalk.se" +
+      "rver.v1.ActivateDeploymentResponse\"\003\200}\016\022" +
+      "i\n\017IndexDeployment\022\'.chalk.server.v1.Ind" +
+      "exDeploymentRequest\032(.chalk.server.v1.In" +
+      "dexDeploymentResponse\"\003\200}\016\022x\n\024DeployKube" +
+      "Components\022,.chalk.server.v1.DeployKubeC" +
+      "omponentsRequest\032-.chalk.server.v1.Deplo" +
+      "yKubeComponentsResponse\"\003\200}\014\022o\n\021RebuildD" +
+      "eployment\022).chalk.server.v1.RebuildDeplo" +
+      "ymentRequest\032*.chalk.server.v1.RebuildDe" +
+      "ploymentResponse\"\003\200}\016\022r\n\022RedeployDeploym" +
+      "ent\022*.chalk.server.v1.RedeployDeployment" +
+      "Request\032+.chalk.server.v1.RedeployDeploy" +
+      "mentResponse\"\003\200}\016\022`\n\014UploadSource\022$.chal" +
+      "k.server.v1.UploadSourceRequest\032%.chalk." +
+      "server.v1.UploadSourceResponse\"\003\200}\013\022Z\n\nL" +
+      "intSource\022\".chalk.server.v1.LintSourceRe" +
+      "quest\032#.chalk.server.v1.LintSourceRespon" +
+      "se\"\003\200}\013\022r\n\022GetDeploymentSteps\022*.chalk.se" +
+      "rver.v1.GetDeploymentStepsRequest\032+.chal" +
+      "k.server.v1.GetDeploymentStepsResponse\"\003" +
+      "\200}\013\022o\n\021GetDeploymentLogs\022).chalk.server." +
+      "v1.GetDeploymentLogsRequest\032*.chalk.serv" +
+      "er.v1.GetDeploymentLogsResponse\"\003\200}\013\022{\n\025" +
+      "GetClusterTimescaleDB\022-.chalk.server.v1." +
+      "GetClusterTimescaleDBRequest\032..chalk.ser" +
+      "ver.v1.GetClusterTimescaleDBResponse\"\003\200}" +
+      "\013\022o\n\021GetClusterGateway\022).chalk.server.v1" +
+      ".GetClusterGatewayRequest\032*.chalk.server" +
+      ".v1.GetClusterGatewayResponse\"\003\200}\013\022\231\001\n\037G" +
+      "etClusterBackgroundPersistence\0227.chalk.s" +
+      "erver.v1.GetClusterBackgroundPersistence" +
+      "Request\0328.chalk.server.v1.GetClusterBack" +
+      "groundPersistenceResponse\"\003\200}\013\022\204\001\n\030Creat" +
+      "eClusterTimescaleDB\0220.chalk.server.v1.Cr" +
+      "eateClusterTimescaleDBRequest\0321.chalk.se" +
+      "rver.v1.CreateClusterTimescaleDBResponse" +
+      "\"\003\200}\n\022\207\001\n\031MigrateClusterTimescaleDB\0221.ch" +
+      "alk.server.v1.MigrateClusterTimescaleDBR" +
+      "equest\0322.chalk.server.v1.MigrateClusterT" +
+      "imescaleDBResponse\"\003\200}\n\022x\n\024CreateCluster" +
+      "Gateway\022,.chalk.server.v1.CreateClusterG" +
+      "atewayRequest\032-.chalk.server.v1.CreateCl" +
+      "usterGatewayResponse\"\003\200}\n\022\242\001\n\"CreateClus" +
+      "terBackgroundPersistence\022:.chalk.server.",
+      "v1.CreateClusterBackgroundPersistenceReq" +
+      "uest\032;.chalk.server.v1.CreateClusterBack" +
+      "groundPersistenceResponse\"\003\200}\n\022\212\001\n\032Updat" +
+      "eEnvironmentVariables\0222.chalk.server.v1." +
+      "UpdateEnvironmentVariablesRequest\0323.chal" +
+      "k.server.v1.UpdateEnvironmentVariablesRe" +
+      "sponse\"\003\200}\014\022]\n\013StartBranch\022#.chalk.serve" +
+      "r.v1.StartBranchRequest\032$.chalk.server.v" +
+      "1.StartBranchResponse\"\003\200}\003\022~\n\025GetKarpent" +
+      "erNodepools\022-.chalk.server.v1.GetKarpent" +
+      "erNodepoolsRequest\032..chalk.server.v1.Get" +
+      "KarpenterNodepoolsResponse\"\006\220\002\001\200}\013\022x\n\024Ad" +
+      "dKarpenterNodepool\022,.chalk.server.v1.Add" +
+      "KarpenterNodepoolRequest\032-.chalk.server." +
+      "v1.AddKarpenterNodepoolResponse\"\003\200}\014\022\201\001\n" +
+      "\027UpdateKarpenterNodepool\022/.chalk.server." +
+      "v1.UpdateKarpenterNodepoolRequest\0320.chal" +
+      "k.server.v1.UpdateKarpenterNodepoolRespo" +
+      "nse\"\003\200}\014\022\201\001\n\027DeleteKarpenterNodepool\022/.c" +
+      "halk.server.v1.DeleteKarpenterNodepoolRe" +
+      "quest\0320.chalk.server.v1.DeleteKarpenterN" +
+      "odepoolResponse\"\003\200}\014\022\237\001\n GetKarpenterIns" +
+      "tallationMetadata\0228.chalk.server.v1.GetK" +
+      "arpenterInstallationMetadataRequest\0329.ch" +
+      "alk.server.v1.GetKarpenterInstallationMe" +
+      "tadataResponse\"\006\220\002\001\200}\013\022c\n\rGetTagWeights\022" +
+      "%.chalk.server.v1.GetTagWeightsRequest\032&" +
+      ".chalk.server.v1.GetTagWeightsResponse\"\003" +
+      "\200}\013\022c\n\rSetTagWeights\022%.chalk.server.v1.S" +
+      "etTagWeightsRequest\032&.chalk.server.v1.Se" +
+      "tTagWeightsResponse\"\003\200}\0142\360\001\n\025ClusterBuil" +
+      "derService\022o\n\021CreateKafkaTopics\022).chalk." +
+      "server.v1.CreateKafkaTopicsRequest\032*.cha" +
+      "lk.server.v1.CreateKafkaTopicsResponse\"\003" +
+      "\200}\n\022f\n\016GetKafkaTopics\022&.chalk.server.v1." +
+      "GetKafkaTopicsRequest\032\'.chalk.server.v1." +
+      "GetKafkaTopicsResponse\"\003\200}\nB\241\001\n\037ai.chalk" +
+      ".protos.chalk.server.v1B\014BuilderProtoP\001Z" +
+      "\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server" +
+      ".V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\" +
+      "GPBMetadata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
+          ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor(),
+          ai.chalk.protos.chalk.lsp.v1.LspProto.getDescriptor(),
+          ai.chalk.protos.chalk.nodepools.v1.KarpenterProto.getDescriptor(),
           ai.chalk.protos.chalk.server.v1.DeploymentProto.getDescriptor(),
           ai.chalk.protos.chalk.server.v1.LogProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
-    internal_static_chalk_server_v1_ActivateDeploymentRequest_descriptor =
+    internal_static_chalk_server_v1_ActivateDeploymentTarget_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_chalk_server_v1_ActivateDeploymentTarget_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_ActivateDeploymentTarget_descriptor,
+        new java.lang.String[] { "ServiceKind", "ResourceGroupName", });
+    internal_static_chalk_server_v1_ActivateDeploymentRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_chalk_server_v1_ActivateDeploymentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ActivateDeploymentRequest_descriptor,
-        new java.lang.String[] { "ExistingDeploymentId", });
+        new java.lang.String[] { "ExistingDeploymentId", "Targets", });
     internal_static_chalk_server_v1_ActivateDeploymentResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_server_v1_ActivateDeploymentResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ActivateDeploymentResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_IndexDeploymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_chalk_server_v1_IndexDeploymentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_IndexDeploymentRequest_descriptor,
         new java.lang.String[] { "ExistingDeploymentId", });
     internal_static_chalk_server_v1_IndexDeploymentResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_chalk_server_v1_IndexDeploymentResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_IndexDeploymentResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_server_v1_DeployKubeComponentsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeployKubeComponentsRequest_descriptor,
         new java.lang.String[] { "ExistingDeploymentId", });
     internal_static_chalk_server_v1_DeployKubeComponentsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_chalk_server_v1_DeployKubeComponentsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeployKubeComponentsResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_RebuildDeploymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_server_v1_RebuildDeploymentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_RebuildDeploymentRequest_descriptor,
         new java.lang.String[] { "ExistingDeploymentId", "NewImageTag", "BaseImageOverride", "EnableProfiling", });
     internal_static_chalk_server_v1_RebuildDeploymentResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_chalk_server_v1_RebuildDeploymentResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_RebuildDeploymentResponse_descriptor,
         new java.lang.String[] { "BuildId", });
     internal_static_chalk_server_v1_RedeployDeploymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_chalk_server_v1_RedeployDeploymentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_RedeployDeploymentRequest_descriptor,
         new java.lang.String[] { "ExistingDeploymentId", "EnableProfiling", });
     internal_static_chalk_server_v1_RedeployDeploymentResponse_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_chalk_server_v1_RedeployDeploymentResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_RedeployDeploymentResponse_descriptor,
         new java.lang.String[] { "BuildId", "DeploymentId", });
     internal_static_chalk_server_v1_UploadSourceRequest_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_chalk_server_v1_UploadSourceRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UploadSourceRequest_descriptor,
         new java.lang.String[] { "DeploymentId", "Archive", "NoPromote", "DependencyHash", "BaseImageOverride", "UseGrpc", "EnableProfiling", });
     internal_static_chalk_server_v1_UploadSourceResponse_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_chalk_server_v1_UploadSourceResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UploadSourceResponse_descriptor,
         new java.lang.String[] { "Status", "ProgressUrl", });
+    internal_static_chalk_server_v1_LintSourceRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_chalk_server_v1_LintSourceRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_LintSourceRequest_descriptor,
+        new java.lang.String[] { "Archive", });
+    internal_static_chalk_server_v1_LintSourceResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_chalk_server_v1_LintSourceResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_LintSourceResponse_descriptor,
+        new java.lang.String[] { "Graph", "Lsp", });
     internal_static_chalk_server_v1_GetDeploymentStepsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_chalk_server_v1_GetDeploymentStepsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetDeploymentStepsRequest_descriptor,
         new java.lang.String[] { "DeploymentId", });
     internal_static_chalk_server_v1_DeploymentBuildStep_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_chalk_server_v1_DeploymentBuildStep_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_DeploymentBuildStep_descriptor,
         new java.lang.String[] { "Id", "DisplayName", "Status", "StartTime", "EndTime", });
     internal_static_chalk_server_v1_GetDeploymentStepsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_chalk_server_v1_GetDeploymentStepsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetDeploymentStepsResponse_descriptor,
         new java.lang.String[] { "Steps", "Deployment", });
     internal_static_chalk_server_v1_GetDeploymentLogsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_chalk_server_v1_GetDeploymentLogsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetDeploymentLogsRequest_descriptor,
         new java.lang.String[] { "DeploymentId", });
     internal_static_chalk_server_v1_GetDeploymentLogsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_chalk_server_v1_GetDeploymentLogsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetDeploymentLogsResponse_descriptor,
         new java.lang.String[] { "Logs", });
     internal_static_chalk_server_v1_GetClusterTimescaleDBRequest_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_chalk_server_v1_GetClusterTimescaleDBRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterTimescaleDBRequest_descriptor,
         new java.lang.String[] { "EnvironmentId", });
     internal_static_chalk_server_v1_GetClusterTimescaleDBResponse_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_chalk_server_v1_GetClusterTimescaleDBResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterTimescaleDBResponse_descriptor,
-        new java.lang.String[] { "Id", "SpecsString", "CreatedAt", "UpdatedAt", });
+        new java.lang.String[] { "Id", "SpecsString", "CreatedAt", "UpdatedAt", "Specs", });
     internal_static_chalk_server_v1_GetClusterGatewayRequest_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_chalk_server_v1_GetClusterGatewayRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterGatewayRequest_descriptor,
         new java.lang.String[] { "EnvironmentId", });
     internal_static_chalk_server_v1_GetClusterGatewayResponse_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_chalk_server_v1_GetClusterGatewayResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterGatewayResponse_descriptor,
-        new java.lang.String[] { "Id", "SpecsString", "CreatedAt", "UpdatedAt", });
+        new java.lang.String[] { "Id", "SpecsString", "CreatedAt", "UpdatedAt", "Specs", });
     internal_static_chalk_server_v1_BackgroundPersistence_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_chalk_server_v1_BackgroundPersistence_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_BackgroundPersistence_descriptor,
-        new java.lang.String[] { "Id", "Kind", "SpecsString", "CreatedAt", "UpdatedAt", });
+        new java.lang.String[] { "Id", "Kind", "SpecsString", "CreatedAt", "UpdatedAt", "Specs", });
     internal_static_chalk_server_v1_GetClusterBackgroundPersistenceRequest_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_chalk_server_v1_GetClusterBackgroundPersistenceRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterBackgroundPersistenceRequest_descriptor,
         new java.lang.String[] { "EnvironmentId", });
     internal_static_chalk_server_v1_GetClusterBackgroundPersistenceResponse_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_chalk_server_v1_GetClusterBackgroundPersistenceResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetClusterBackgroundPersistenceResponse_descriptor,
         new java.lang.String[] { "BackgroundPersistence", });
     internal_static_chalk_server_v1_CreateClusterTimescaleDBRequest_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_chalk_server_v1_CreateClusterTimescaleDBRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterTimescaleDBRequest_descriptor,
-        new java.lang.String[] { "EnvironmentId", "EnvironmentIds", "SpecsString", });
+        new java.lang.String[] { "EnvironmentId", "EnvironmentIds", "SpecsString", "Specs", });
+    internal_static_chalk_server_v1_KubeResourceConfig_descriptor =
+      getDescriptor().getMessageTypes().get(28);
+    internal_static_chalk_server_v1_KubeResourceConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_KubeResourceConfig_descriptor,
+        new java.lang.String[] { "Cpu", "Memory", "EphemeralStorage", "Storage", });
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_descriptor =
+      getDescriptor().getMessageTypes().get(29);
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_ClusterTimescaleSpecs_descriptor,
+        new java.lang.String[] { "TimescaleImage", "DatabaseName", "DatabaseReplicas", "Storage", "StorageClass", "Namespace", "Request", "Limit", "ConnectionPoolReplicas", "ConnectionPoolMaxConnections", "ConnectionPoolSize", "ConnectionPoolMode", "BackupBucket", "BackupIamRoleArn", "SecretName", "Internal", "ServiceType", "PostgresParameters", "IncludeChalkNodeSelector", "BackupGcpServiceAccount", "InstanceType", });
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_PostgresParametersEntry_descriptor =
+      internal_static_chalk_server_v1_ClusterTimescaleSpecs_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_server_v1_ClusterTimescaleSpecs_PostgresParametersEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_ClusterTimescaleSpecs_PostgresParametersEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_chalk_server_v1_CreateClusterTimescaleDBResponse_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_chalk_server_v1_CreateClusterTimescaleDBResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterTimescaleDBResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_MigrateClusterTimescaleDBRequest_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_chalk_server_v1_MigrateClusterTimescaleDBRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_MigrateClusterTimescaleDBRequest_descriptor,
         new java.lang.String[] { "ClusterTimescaleId", "MigrationImage", "EnvironmentIds", });
     internal_static_chalk_server_v1_MigrateClusterTimescaleDBResponse_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_chalk_server_v1_MigrateClusterTimescaleDBResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_MigrateClusterTimescaleDBResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_CreateClusterGatewayRequest_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_chalk_server_v1_CreateClusterGatewayRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterGatewayRequest_descriptor,
-        new java.lang.String[] { "EnvironmentId", "EnvironmentIds", "SpecsString", });
+        new java.lang.String[] { "EnvironmentId", "EnvironmentIds", "SpecsString", "Specs", });
+    internal_static_chalk_server_v1_EnvoyGatewaySpecs_descriptor =
+      getDescriptor().getMessageTypes().get(34);
+    internal_static_chalk_server_v1_EnvoyGatewaySpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_EnvoyGatewaySpecs_descriptor,
+        new java.lang.String[] { "Namespace", "GatewayName", "GatewayClassName", "Listeners", "Config", "IncludeChalkNodeSelector", });
+    internal_static_chalk_server_v1_EnvoyGatewayListener_descriptor =
+      getDescriptor().getMessageTypes().get(35);
+    internal_static_chalk_server_v1_EnvoyGatewayListener_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_EnvoyGatewayListener_descriptor,
+        new java.lang.String[] { "Port", "Protocol", "Name", "AllowedRoutes", });
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedRoutes_descriptor =
+      getDescriptor().getMessageTypes().get(36);
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedRoutes_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_EnvoyGatewayAllowedRoutes_descriptor,
+        new java.lang.String[] { "Namespaces", });
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedNamespaces_descriptor =
+      getDescriptor().getMessageTypes().get(37);
+    internal_static_chalk_server_v1_EnvoyGatewayAllowedNamespaces_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_EnvoyGatewayAllowedNamespaces_descriptor,
+        new java.lang.String[] { "From", });
+    internal_static_chalk_server_v1_GatewayProviderConfig_descriptor =
+      getDescriptor().getMessageTypes().get(38);
+    internal_static_chalk_server_v1_GatewayProviderConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GatewayProviderConfig_descriptor,
+        new java.lang.String[] { "Envoy", "Gcp", "Config", });
+    internal_static_chalk_server_v1_EnvoyGatewayProviderConfig_descriptor =
+      getDescriptor().getMessageTypes().get(39);
+    internal_static_chalk_server_v1_EnvoyGatewayProviderConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_EnvoyGatewayProviderConfig_descriptor,
+        new java.lang.String[] { "TimeoutDuration", "DnsHostname", "Replicas", "MinAvailable", });
+    internal_static_chalk_server_v1_GCPGatewayProviderConfig_descriptor =
+      getDescriptor().getMessageTypes().get(40);
+    internal_static_chalk_server_v1_GCPGatewayProviderConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GCPGatewayProviderConfig_descriptor,
+        new java.lang.String[] { "DnsHostname", });
     internal_static_chalk_server_v1_CreateClusterGatewayResponse_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(41);
     internal_static_chalk_server_v1_CreateClusterGatewayResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterGatewayResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceRequest_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(42);
     internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceRequest_descriptor,
-        new java.lang.String[] { "EnvironmentIds", "SpecsString", });
+        new java.lang.String[] { "EnvironmentIds", "SpecsString", "Specs", });
+    internal_static_chalk_server_v1_BackgroundPersistenceCommonSpecs_descriptor =
+      getDescriptor().getMessageTypes().get(43);
+    internal_static_chalk_server_v1_BackgroundPersistenceCommonSpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_BackgroundPersistenceCommonSpecs_descriptor,
+        new java.lang.String[] { "Namespace", "BusWriterImageGo", "BusWriterImagePython", "BusWriterImageBswl", "ServiceAccountName", "BusBackend", "SecretClient", "BigqueryParquetUploadSubscriptionId", "BigqueryStreamingWriteSubscriptionId", "BigqueryStreamingWriteTopic", "BigqueryUploadBucket", "BigqueryUploadTopic", "GoogleCloudProject", "KafkaDlqTopic", "MetricsBusSubscriptionId", "MetricsBusTopicId", "OperationSubscriptionId", "QueryLogResultTopic", "QueryLogSubscriptionId", "ResultBusMetricsSubscriptionId", "ResultBusOfflineStoreSubscriptionId", "ResultBusOnlineStoreSubscriptionId", "ResultBusTopicId", "UsageBusTopicId", "UsageEventsSubscriptionId", "BqUploadBucket", "BqUploadTopic", "IncludeChalkNodeSelector", });
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterHpaSpecs_descriptor =
+      getDescriptor().getMessageTypes().get(44);
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterHpaSpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_BackgroundPersistenceWriterHpaSpecs_descriptor,
+        new java.lang.String[] { "HpaPubsubSubscriptionId", "HpaMinReplicas", "HpaMaxReplicas", "HpaTargetAverageValue", });
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterSpecs_descriptor =
+      getDescriptor().getMessageTypes().get(45);
+    internal_static_chalk_server_v1_BackgroundPersistenceWriterSpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_BackgroundPersistenceWriterSpecs_descriptor,
+        new java.lang.String[] { "Name", "ImageOverride", "HpaSpecs", "GkeSpot", "LoadWriterConfigmap", "Version", "Request", "Limit", "BusSubscriberType", "DefaultReplicaCount", "KafkaConsumerGroupOverride", "MaxBatchSize", "MessageProcessingConcurrency", "MetadataSqlSslCaCertSecret", "MetadataSqlSslClientCertSecret", "MetadataSqlSslClientKeySecret", "MetadataSqlUriSecret", "OfflineStoreInserterDbType", "StorageCachePrefix", "UsageStoreUri", "ResultsWriterSkipProducingFeatureMetrics", });
+    internal_static_chalk_server_v1_BackgroundPersistenceDeploymentSpecs_descriptor =
+      getDescriptor().getMessageTypes().get(46);
+    internal_static_chalk_server_v1_BackgroundPersistenceDeploymentSpecs_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_BackgroundPersistenceDeploymentSpecs_descriptor,
+        new java.lang.String[] { "CommonPersistenceSpecs", "ApiServerHost", "KafkaSaslSecret", "MetadataProvider", "KafkaBootstrapServers", "KafkaSecurityProtocol", "KafkaSaslMechanism", "RedisIsClustered", "SnowflakeStorageIntegrationName", "RedisLightningSupportsHasMany", "Insecure", "Writers", });
     internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceResponse_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(47);
     internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_CreateClusterBackgroundPersistenceResponse_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetSearchConfigRequest_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(48);
     internal_static_chalk_server_v1_GetSearchConfigRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetSearchConfigRequest_descriptor,
         new java.lang.String[] { });
     internal_static_chalk_server_v1_GetSearchConfigResponse_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(49);
     internal_static_chalk_server_v1_GetSearchConfigResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetSearchConfigResponse_descriptor,
         new java.lang.String[] { "TeamId", "TeamApiKey", });
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_descriptor =
+      getDescriptor().getMessageTypes().get(50);
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_descriptor,
+        new java.lang.String[] { "EnvironmentVariables", });
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_EnvironmentVariablesEntry_descriptor =
+      internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_EnvironmentVariablesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentVariablesRequest_EnvironmentVariablesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesResponse_descriptor =
+      getDescriptor().getMessageTypes().get(51);
+    internal_static_chalk_server_v1_UpdateEnvironmentVariablesResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateEnvironmentVariablesResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_StartBranchRequest_descriptor =
+      getDescriptor().getMessageTypes().get(52);
+    internal_static_chalk_server_v1_StartBranchRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_StartBranchRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_StartBranchResponse_descriptor =
+      getDescriptor().getMessageTypes().get(53);
+    internal_static_chalk_server_v1_StartBranchResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_StartBranchResponse_descriptor,
+        new java.lang.String[] { "State", });
+    internal_static_chalk_server_v1_KafkaTopic_descriptor =
+      getDescriptor().getMessageTypes().get(54);
+    internal_static_chalk_server_v1_KafkaTopic_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_KafkaTopic_descriptor,
+        new java.lang.String[] { "Name", "Partitions", "Replication", "RetentionMs", });
+    internal_static_chalk_server_v1_CreateKafkaTopicsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(55);
+    internal_static_chalk_server_v1_CreateKafkaTopicsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_CreateKafkaTopicsRequest_descriptor,
+        new java.lang.String[] { "Topics", });
+    internal_static_chalk_server_v1_CreateKafkaTopicsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(56);
+    internal_static_chalk_server_v1_CreateKafkaTopicsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_CreateKafkaTopicsResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetKafkaTopicsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(57);
+    internal_static_chalk_server_v1_GetKafkaTopicsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKafkaTopicsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetKafkaTopicsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(58);
+    internal_static_chalk_server_v1_GetKafkaTopicsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKafkaTopicsResponse_descriptor,
+        new java.lang.String[] { "Topics", });
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(59);
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKarpenterNodepoolsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(60);
+    internal_static_chalk_server_v1_GetKarpenterNodepoolsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKarpenterNodepoolsResponse_descriptor,
+        new java.lang.String[] { "Nodepools", });
+    internal_static_chalk_server_v1_AddKarpenterNodepoolRequest_descriptor =
+      getDescriptor().getMessageTypes().get(61);
+    internal_static_chalk_server_v1_AddKarpenterNodepoolRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_AddKarpenterNodepoolRequest_descriptor,
+        new java.lang.String[] { "Nodepool", });
+    internal_static_chalk_server_v1_AddKarpenterNodepoolResponse_descriptor =
+      getDescriptor().getMessageTypes().get(62);
+    internal_static_chalk_server_v1_AddKarpenterNodepoolResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_AddKarpenterNodepoolResponse_descriptor,
+        new java.lang.String[] { "Nodepool", });
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolRequest_descriptor =
+      getDescriptor().getMessageTypes().get(63);
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateKarpenterNodepoolRequest_descriptor,
+        new java.lang.String[] { "Name", "Nodepool", });
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolResponse_descriptor =
+      getDescriptor().getMessageTypes().get(64);
+    internal_static_chalk_server_v1_UpdateKarpenterNodepoolResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_UpdateKarpenterNodepoolResponse_descriptor,
+        new java.lang.String[] { "Nodepool", });
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolRequest_descriptor =
+      getDescriptor().getMessageTypes().get(65);
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_DeleteKarpenterNodepoolRequest_descriptor,
+        new java.lang.String[] { "Name", });
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolResponse_descriptor =
+      getDescriptor().getMessageTypes().get(66);
+    internal_static_chalk_server_v1_DeleteKarpenterNodepoolResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_DeleteKarpenterNodepoolResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataRequest_descriptor =
+      getDescriptor().getMessageTypes().get(67);
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKarpenterInstallationMetadataRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_descriptor =
+      getDescriptor().getMessageTypes().get(68);
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_descriptor,
+        new java.lang.String[] { "DeploymentLabels", });
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_DeploymentLabelsEntry_descriptor =
+      internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_DeploymentLabelsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetKarpenterInstallationMetadataResponse_DeploymentLabelsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_server_v1_DeploymentTag_descriptor =
+      getDescriptor().getMessageTypes().get(69);
+    internal_static_chalk_server_v1_DeploymentTag_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_DeploymentTag_descriptor,
+        new java.lang.String[] { "Tag", "Weight", });
+    internal_static_chalk_server_v1_GetTagWeightsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(70);
+    internal_static_chalk_server_v1_GetTagWeightsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetTagWeightsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetTagWeightsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(71);
+    internal_static_chalk_server_v1_GetTagWeightsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetTagWeightsResponse_descriptor,
+        new java.lang.String[] { "Tags", });
+    internal_static_chalk_server_v1_SetTagWeightsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(72);
+    internal_static_chalk_server_v1_SetTagWeightsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SetTagWeightsRequest_descriptor,
+        new java.lang.String[] { "Tags", });
+    internal_static_chalk_server_v1_SetTagWeightsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(73);
+    internal_static_chalk_server_v1_SetTagWeightsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SetTagWeightsResponse_descriptor,
+        new java.lang.String[] { "Tags", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
+    ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor();
+    ai.chalk.protos.chalk.lsp.v1.LspProto.getDescriptor();
+    ai.chalk.protos.chalk.nodepools.v1.KarpenterProto.getDescriptor();
     ai.chalk.protos.chalk.server.v1.DeploymentProto.getDescriptor();
     ai.chalk.protos.chalk.server.v1.LogProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();

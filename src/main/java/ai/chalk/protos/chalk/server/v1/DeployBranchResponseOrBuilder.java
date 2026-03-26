@@ -19,4 +19,62 @@ public interface DeployBranchResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getDeploymentIdBytes();
+
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+   *     See chalk/server/v1/deploy.proto;l=22
+   * @return Whether the graph field is set.
+   */
+  @java.lang.Deprecated boolean hasGraph();
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   * @deprecated chalk.server.v1.DeployBranchResponse.graph is deprecated.
+   *     See chalk/server/v1/deploy.proto;l=22
+   * @return The graph.
+   */
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.Graph getGraph();
+  /**
+   * <code>optional .chalk.graph.v1.Graph graph = 2 [json_name = "graph", deprecated = true];</code>
+   */
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.GraphOrBuilder getGraphOrBuilder();
+
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.common.v1.ChalkError> 
+      getDeploymentErrorsList();
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.ChalkError getDeploymentErrors(int index);
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  int getDeploymentErrorsCount();
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder> 
+      getDeploymentErrorsOrBuilderList();
+  /**
+   * <code>repeated .chalk.common.v1.ChalkError deployment_errors = 3 [json_name = "deploymentErrors"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.ChalkErrorOrBuilder getDeploymentErrorsOrBuilder(
+      int index);
+
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return Whether the export field is set.
+   */
+  boolean hasExport();
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   * @return The export.
+   */
+  ai.chalk.protos.chalk.artifacts.v1.Export getExport();
+  /**
+   * <code>optional .chalk.artifacts.v1.Export export = 4 [json_name = "export"];</code>
+   */
+  ai.chalk.protos.chalk.artifacts.v1.ExportOrBuilder getExportOrBuilder();
 }

@@ -369,4 +369,21 @@ public interface DeploymentOrBuilder extends
    */
   com.google.protobuf.ByteString
       getPinnedPlatformVersionBytes();
+
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return Whether the previewDeploymentTag field is set.
+   */
+  boolean hasPreviewDeploymentTag();
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return The previewDeploymentTag.
+   */
+  java.lang.String getPreviewDeploymentTag();
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return The bytes for previewDeploymentTag.
+   */
+  com.google.protobuf.ByteString
+      getPreviewDeploymentTagBytes();
 }

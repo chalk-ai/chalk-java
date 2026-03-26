@@ -234,6 +234,14 @@ public enum Permission
    * <code>PERMISSION_CHALK_ADMIN = 27;</code>
    */
   PERMISSION_CHALK_ADMIN(27),
+  /**
+   * <pre>
+   * Read billing information
+   * </pre>
+   *
+   * <code>PERMISSION_BILLING_READ = 28;</code>
+   */
+  PERMISSION_BILLING_READ(28),
   UNRECOGNIZED(-1),
   ;
 
@@ -462,6 +470,14 @@ public enum Permission
    * <code>PERMISSION_CHALK_ADMIN = 27;</code>
    */
   public static final int PERMISSION_CHALK_ADMIN_VALUE = 27;
+  /**
+   * <pre>
+   * Read billing information
+   * </pre>
+   *
+   * <code>PERMISSION_BILLING_READ = 28;</code>
+   */
+  public static final int PERMISSION_BILLING_READ_VALUE = 28;
 
 
   public final int getNumber() {
@@ -516,6 +532,7 @@ public enum Permission
       case 25: return PERMISSION_MIGRATE_EXECUTE;
       case 26: return PERMISSION_PROJECT_CREATE;
       case 27: return PERMISSION_CHALK_ADMIN;
+      case 28: return PERMISSION_BILLING_READ;
       default: return null;
     }
   }

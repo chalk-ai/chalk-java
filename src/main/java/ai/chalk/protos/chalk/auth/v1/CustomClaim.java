@@ -5,6 +5,12 @@
 package ai.chalk.protos.chalk.auth.v1;
 
 /**
+ * <pre>
+ * CustomClaim is used to encode customer permissions.
+ * The keys used are:
+ * - `query_tags`: The tags of features that the user is allowed to query.
+ * </pre>
+ *
  * Protobuf type {@code chalk.auth.v1.CustomClaim}
  */
 public final class CustomClaim extends
@@ -292,6 +298,12 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * CustomClaim is used to encode customer permissions.
+   * The keys used are:
+   * - `query_tags`: The tags of features that the user is allowed to query.
+   * </pre>
+   *
    * Protobuf type {@code chalk.auth.v1.CustomClaim}
    */
   public static final class Builder extends
