@@ -8,7 +8,7 @@ import ai.chalk.internal.bytes.BytesConsumer;
 import ai.chalk.models.QueryMeta;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.vector.table.Table;
@@ -34,7 +34,7 @@ public record OnlineQueryResultFeather(Boolean hasData, Table scalarData, Map<St
     public static OnlineQueryResultFeather fromBytes(byte[] bytes, BufferAllocator allocator) throws ChalkException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
         mapper.registerModule(new JavaTimeModule());
 
         Map<String, Object> res;
