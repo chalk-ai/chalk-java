@@ -358,11 +358,20 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             throw new ClientException("Failed to convert inputs to Arrow bytes", e);
         }
 
-        UploadFeaturesOptions options = UploadFeaturesOptions.newBuilder()
-            .setWriteOnline(params.isWriteOnline())
-            .setWriteOffline(params.isWriteOffline())
-            .setUpdateMataggs(params.isUpdateMataggs())
-            .build();
+        // Only set fields that deviate from the server defaults, mirroring the Python client
+        // (upload_features in client_grpc.py). write_online defaults to true server-side, so it is
+        // sent only when the caller opts out; this keeps prior callers wire-identical.
+        UploadFeaturesOptions.Builder optionsBuilder = UploadFeaturesOptions.newBuilder();
+        if (params.isUpdateMataggs()) {
+            optionsBuilder.setUpdateMataggs(true);
+        }
+        if (params.isWriteOffline()) {
+            optionsBuilder.setWriteOffline(true);
+        }
+        if (!params.isWriteOnline()) {
+            optionsBuilder.setWriteOnline(false);
+        }
+        UploadFeaturesOptions options = optionsBuilder.build();
 
         UploadFeaturesResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
             .withInterceptors(
