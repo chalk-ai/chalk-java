@@ -45,8 +45,6 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.slf4j:slf4j-simple:2.0.9'
-    testImplementation "org.apache.flink:flink-streaming-java:${versions.flinkVersion}"
-    testImplementation "org.apache.flink:flink-clients:${versions.flinkVersion}"
 }
 
 test {
