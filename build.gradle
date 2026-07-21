@@ -18,7 +18,8 @@ def versions = [
     grpcVersion: '1.64.0',
     arrowVersion: '17.0.0',
     jacksonVersion: '2.15.2',
-    protobufVersion: '3.25.1'
+    protobufVersion: '3.25.1',
+    flinkVersion: '1.19.2'
 ]
 
 dependencies {
@@ -34,8 +35,18 @@ dependencies {
     api "org.apache.arrow:arrow-memory-netty:${versions.arrowVersion}"
     api "org.apache.arrow:arrow-vector:${versions.arrowVersion}"
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+    // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
+    // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
+    // already run Flink. slf4j-api likewise comes from the Flink runtime at execution time.
+    compileOnly "org.apache.flink:flink-streaming-java:${versions.flinkVersion}"
+    compileOnly "org.apache.flink:flink-core:${versions.flinkVersion}"
+    compileOnly 'org.slf4j:slf4j-api:2.0.9'
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+    testImplementation "org.apache.flink:flink-streaming-java:${versions.flinkVersion}"
+    testImplementation "org.apache.flink:flink-clients:${versions.flinkVersion}"
 }
 
 test {
