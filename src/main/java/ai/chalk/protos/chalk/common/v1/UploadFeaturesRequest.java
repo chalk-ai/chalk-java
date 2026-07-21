@@ -40,6 +40,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.class, ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int INPUTS_TABLE_FIELD_NUMBER = 1;
   private com.google.protobuf.ByteString inputsTable_ = com.google.protobuf.ByteString.EMPTY;
   /**
@@ -49,6 +50,32 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public com.google.protobuf.ByteString getInputsTable() {
     return inputsTable_;
+  }
+
+  public static final int OPTIONS_FIELD_NUMBER = 2;
+  private ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions options_;
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   * @return Whether the options field is set.
+   */
+  @java.lang.Override
+  public boolean hasOptions() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   * @return The options.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions getOptions() {
+    return options_ == null ? ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.getDefaultInstance() : options_;
+  }
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder getOptionsOrBuilder() {
+    return options_ == null ? ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.getDefaultInstance() : options_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -68,6 +95,9 @@ private static final long serialVersionUID = 0L;
     if (!inputsTable_.isEmpty()) {
       output.writeBytes(1, inputsTable_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(2, getOptions());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -80,6 +110,10 @@ private static final long serialVersionUID = 0L;
     if (!inputsTable_.isEmpty()) {
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(1, inputsTable_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getOptions());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -98,6 +132,11 @@ private static final long serialVersionUID = 0L;
 
     if (!getInputsTable()
         .equals(other.getInputsTable())) return false;
+    if (hasOptions() != other.hasOptions()) return false;
+    if (hasOptions()) {
+      if (!getOptions()
+          .equals(other.getOptions())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -111,6 +150,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + INPUTS_TABLE_FIELD_NUMBER;
     hash = (53 * hash) + getInputsTable().hashCode();
+    if (hasOptions()) {
+      hash = (37 * hash) + OPTIONS_FIELD_NUMBER;
+      hash = (53 * hash) + getOptions().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -230,19 +273,30 @@ private static final long serialVersionUID = 0L;
 
     // Construct using ai.chalk.protos.chalk.common.v1.UploadFeaturesRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getOptionsFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
       inputsTable_ = com.google.protobuf.ByteString.EMPTY;
+      options_ = null;
+      if (optionsBuilder_ != null) {
+        optionsBuilder_.dispose();
+        optionsBuilder_ = null;
+      }
       return this;
     }
 
@@ -279,6 +333,14 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.inputsTable_ = inputsTable_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.options_ = optionsBuilder_ == null
+            ? options_
+            : optionsBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -328,6 +390,9 @@ private static final long serialVersionUID = 0L;
       if (other.getInputsTable() != com.google.protobuf.ByteString.EMPTY) {
         setInputsTable(other.getInputsTable());
       }
+      if (other.hasOptions()) {
+        mergeOptions(other.getOptions());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -359,6 +424,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              input.readMessage(
+                  getOptionsFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -406,6 +478,127 @@ private static final long serialVersionUID = 0L;
       inputsTable_ = getDefaultInstance().getInputsTable();
       onChanged();
       return this;
+    }
+
+    private ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions options_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.Builder, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder> optionsBuilder_;
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     * @return Whether the options field is set.
+     */
+    public boolean hasOptions() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     * @return The options.
+     */
+    public ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions getOptions() {
+      if (optionsBuilder_ == null) {
+        return options_ == null ? ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.getDefaultInstance() : options_;
+      } else {
+        return optionsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public Builder setOptions(ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions value) {
+      if (optionsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        options_ = value;
+      } else {
+        optionsBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public Builder setOptions(
+        ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.Builder builderForValue) {
+      if (optionsBuilder_ == null) {
+        options_ = builderForValue.build();
+      } else {
+        optionsBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public Builder mergeOptions(ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions value) {
+      if (optionsBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0) &&
+          options_ != null &&
+          options_ != ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.getDefaultInstance()) {
+          getOptionsBuilder().mergeFrom(value);
+        } else {
+          options_ = value;
+        }
+      } else {
+        optionsBuilder_.mergeFrom(value);
+      }
+      if (options_ != null) {
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public Builder clearOptions() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      options_ = null;
+      if (optionsBuilder_ != null) {
+        optionsBuilder_.dispose();
+        optionsBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.Builder getOptionsBuilder() {
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return getOptionsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder getOptionsOrBuilder() {
+      if (optionsBuilder_ != null) {
+        return optionsBuilder_.getMessageOrBuilder();
+      } else {
+        return options_ == null ?
+            ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.getDefaultInstance() : options_;
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.Builder, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder> 
+        getOptionsFieldBuilder() {
+      if (optionsBuilder_ == null) {
+        optionsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions.Builder, ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder>(
+                getOptions(),
+                getParentForChildren(),
+                isClean());
+        options_ = null;
+      }
+      return optionsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

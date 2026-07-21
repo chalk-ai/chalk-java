@@ -13,4 +13,19 @@ public interface UploadFeaturesRequestOrBuilder extends
    * @return The inputsTable.
    */
   com.google.protobuf.ByteString getInputsTable();
+
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   * @return Whether the options field is set.
+   */
+  boolean hasOptions();
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   * @return The options.
+   */
+  ai.chalk.protos.chalk.common.v1.UploadFeaturesOptions getOptions();
+  /**
+   * <code>.chalk.common.v1.UploadFeaturesOptions options = 2 [json_name = "options"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.UploadFeaturesOptionsOrBuilder getOptionsOrBuilder();
 }
