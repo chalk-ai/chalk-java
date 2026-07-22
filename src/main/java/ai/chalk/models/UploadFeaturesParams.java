@@ -19,6 +19,11 @@ public class UploadFeaturesParams {
     private final String environmentId;
     @Nullable
     private final Duration timeout;
+    // Write targets (mirror chalk.common.v1.UploadFeaturesOptions). Defaults preserve prior
+    // behavior: online store only.
+    private final boolean writeOnline;
+    private final boolean writeOffline;
+    private final boolean updateMataggs;
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -26,9 +31,18 @@ public class UploadFeaturesParams {
         protected Map<String, List<?>> inputs;
         protected String environmentId;
         protected Duration timeout;
+        protected boolean writeOnline = true;
+        protected boolean writeOffline = false;
+        protected boolean updateMataggs = false;
 
         public UploadFeaturesParams build() {
-            return new UploadFeaturesParams(this.inputs, this.environmentId, this.timeout);
+            return new UploadFeaturesParams(
+                this.inputs,
+                this.environmentId,
+                this.timeout,
+                this.writeOnline,
+                this.writeOffline,
+                this.updateMataggs);
         }
 
         private void initInputs() {
@@ -65,6 +79,24 @@ public class UploadFeaturesParams {
 
         public Builder withTimeout(Duration timeout) {
             this.timeout = timeout;
+            return this;
+        }
+
+        /** Write uploaded values to the online store. Defaults to {@code true}. */
+        public Builder withWriteOnline(boolean writeOnline) {
+            this.writeOnline = writeOnline;
+            return this;
+        }
+
+        /** Also write uploaded values to the offline store. Defaults to {@code false}. */
+        public Builder withWriteOffline(boolean writeOffline) {
+            this.writeOffline = writeOffline;
+            return this;
+        }
+
+        /** Update materialized (streaming) aggregations on upload. Defaults to {@code false}. */
+        public Builder withUpdateMataggs(boolean updateMataggs) {
+            this.updateMataggs = updateMataggs;
             return this;
         }
     }

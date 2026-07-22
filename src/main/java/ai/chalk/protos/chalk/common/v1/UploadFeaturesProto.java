@@ -16,6 +16,11 @@ public final class UploadFeaturesProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_common_v1_UploadFeaturesOptions_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_common_v1_UploadFeaturesOptions_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -36,29 +41,42 @@ public final class UploadFeaturesProto {
     java.lang.String[] descriptorData = {
       "\n%chalk/common/v1/upload_features.proto\022" +
       "\017chalk.common.v1\032!chalk/common/v1/chalk_" +
-      "error.proto\":\n\025UploadFeaturesRequest\022!\n\014" +
-      "inputs_table\030\001 \001(\014R\013inputsTable\"p\n\026Uploa" +
-      "dFeaturesResponse\0223\n\006errors\030\001 \003(\0132\033.chal" +
-      "k.common.v1.ChalkErrorR\006errors\022!\n\014operat" +
-      "ion_id\030\002 \001(\tR\013operationIdB\224\001\n\037ai.chalk.p" +
-      "rotos.chalk.common.v1B\023UploadFeaturesPro" +
-      "toP\001\242\002\003CCX\252\002\017Chalk.Common.V1\312\002\017Chalk\\Com" +
-      "mon\\V1\342\002\033Chalk\\Common\\V1\\GPBMetadata\352\002\021C" +
-      "halk::Common::V1b\006proto3"
+      "error.proto\"\313\001\n\025UploadFeaturesOptions\022*\n" +
+      "\016update_mataggs\030\001 \001(\010H\000R\rupdateMataggs\210\001" +
+      "\001\022(\n\rwrite_offline\030\002 \001(\010H\001R\014writeOffline" +
+      "\210\001\001\022&\n\014write_online\030\003 \001(\010H\002R\013writeOnline" +
+      "\210\001\001B\021\n\017_update_mataggsB\020\n\016_write_offline" +
+      "B\017\n\r_write_online\"|\n\025UploadFeaturesReque" +
+      "st\022!\n\014inputs_table\030\001 \001(\014R\013inputsTable\022@\n" +
+      "\007options\030\002 \001(\0132&.chalk.common.v1.UploadF" +
+      "eaturesOptionsR\007options\"p\n\026UploadFeature" +
+      "sResponse\0223\n\006errors\030\001 \003(\0132\033.chalk.common" +
+      ".v1.ChalkErrorR\006errors\022!\n\014operation_id\030\002" +
+      " \001(\tR\013operationIdB\224\001\n\037ai.chalk.protos.ch" +
+      "alk.common.v1B\023UploadFeaturesProtoP\001\242\002\003C" +
+      "CX\252\002\017Chalk.Common.V1\312\002\017Chalk\\Common\\V1\342\002" +
+      "\033Chalk\\Common\\V1\\GPBMetadata\352\002\021Chalk::Co" +
+      "mmon::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor(),
         });
-    internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor =
+    internal_static_chalk_common_v1_UploadFeaturesOptions_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_chalk_common_v1_UploadFeaturesOptions_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_common_v1_UploadFeaturesOptions_descriptor,
+        new java.lang.String[] { "UpdateMataggs", "WriteOffline", "WriteOnline", });
+    internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_chalk_common_v1_UploadFeaturesRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesRequest_descriptor,
-        new java.lang.String[] { "InputsTable", });
+        new java.lang.String[] { "InputsTable", "Options", });
     internal_static_chalk_common_v1_UploadFeaturesResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_common_v1_UploadFeaturesResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_common_v1_UploadFeaturesResponse_descriptor,
