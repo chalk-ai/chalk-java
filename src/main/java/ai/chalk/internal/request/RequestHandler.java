@@ -142,6 +142,8 @@ public class RequestHandler {
             bodyBytes = (byte[]) body;
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             bodyBytes = objectMapper.writeValueAsBytes(body);
