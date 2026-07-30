@@ -84,7 +84,93 @@ public class BytesProducer {
         }
         jsonHeader.put("context", onlineQueryContext);
 
+        Map<String, String> hints = buildInputSchemaHint(params);
+        if (!hints.isEmpty()) {
+            jsonHeader.put("input_schema_hint", hints);
+        }
+
         return jsonHeader;
+    }
+
+    /**
+     * Builds the input_schema_hint map by merging auto-detected has-many inputs
+     * with any user-provided hints. User-provided hints take precedence.
+     */
+    static Map<String, String> buildInputSchemaHint(OnlineQueryParams params) {
+        Map<String, String> hints = new HashMap<>();
+
+        if (params.getInputs() != null) {
+            for (var entry : params.getInputs().entrySet()) {
+                String fqn = entry.getKey();
+                List<?> values = entry.getValue();
+                String hint = detectHasManyHint(fqn, values);
+                if (hint != null) {
+                    hints.put(fqn, hint);
+                }
+            }
+        }
+
+        if (params.getInputSchemaHint() != null) {
+            hints.putAll(params.getInputSchemaHint());
+        }
+
+        return hints;
+    }
+
+    /**
+     * Detects whether an input value represents a has-many (list of structs/maps)
+     * and generates the bracketed projection hint string.
+     * Returns null if the input is not a has-many.
+     */
+    private static String detectHasManyHint(String fqn, List<?> values) {
+        if (values == null || values.isEmpty()) {
+            return null;
+        }
+
+        // Scan all rows to find a non-empty inner list with Map elements
+        for (Object v : values) {
+            if (!(v instanceof List<?> innerList) || innerList.isEmpty()) {
+                continue;
+            }
+            for (Object item : innerList) {
+                if (item instanceof Map<?, ?> mapItem) {
+                    var sb = new StringBuilder(fqn).append('[');
+                    boolean first = true;
+                    for (Object key : mapItem.keySet()) {
+                        if (!first) sb.append(',');
+                        sb.append(key);
+                        first = false;
+                    }
+                    sb.append(']');
+                    return sb.toString();
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Map<String, Object> buildJsonOnlineQueryBody(OnlineQueryParamsComplete params) {
+        Map<String, Object> body = buildJsonHeader(params);
+
+        Map<String, Object> singleRowInputs = new HashMap<>();
+        for (var entry : params.getInputs().entrySet()) {
+            List<?> values = entry.getValue();
+            singleRowInputs.put(entry.getKey(), values.get(0));
+        }
+        body.put("inputs", singleRowInputs);
+        body.put("encoding_options", Map.of("encode_structs_as_objects", true));
+
+        return body;
+    }
+
+    public static boolean hasHasManyInputs(OnlineQueryParams params) {
+        if (params.getInputs() == null) return false;
+        for (List<?> values : params.getInputs().values()) {
+            if (values == null || values.isEmpty()) continue;
+            Object first = values.get(0);
+            if (first instanceof List<?>) return true;
+        }
+        return false;
     }
 
     public static byte[] convertOnlineQueryParamsToBytes(OnlineQueryParamsComplete params, BufferAllocator allocator) throws Exception {

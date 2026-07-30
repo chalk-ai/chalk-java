@@ -139,6 +139,15 @@ public class OnlineQueryParams {
      */
     private Duration timeout;
 
+    /**
+     * Schema hints for has-many input features. Maps a has-many feature FQN to its
+     * bracketed column projection string, e.g.
+     * {@code "user.txns" -> "user.txns[user.txns.txn_id,user.txns.amount]"}.
+     * Required when passing empty has-many inputs so the server knows the expected schema.
+     * Auto-generated from non-empty has-many input data when not explicitly set.
+     */
+    private Map<String, String> inputSchemaHint;
+
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -161,6 +170,7 @@ public class OnlineQueryParams {
         protected List<String> requiredResolverTags;
         protected Map<String, Object> plannerOptions;
         protected Duration timeout;
+        protected Map<String, String> inputSchemaHint;
 
         protected T _withInput(String fqn, List<?> values) {
             if (this.inputs == null) {
@@ -296,6 +306,22 @@ public class OnlineQueryParams {
             return (T) this;
         }
 
+        public T withInputSchemaHint(Map<String, String> inputSchemaHint) {
+            if (this.inputSchemaHint == null) {
+                this.inputSchemaHint = new HashMap<>();
+            }
+            this.inputSchemaHint.putAll(inputSchemaHint);
+            return (T) this;
+        }
+
+        public T withInputSchemaHint(String fqn, String bracketedProjection) {
+            if (this.inputSchemaHint == null) {
+                this.inputSchemaHint = new HashMap<>();
+            }
+            this.inputSchemaHint.put(fqn, bracketedProjection);
+            return (T) this;
+        }
+
         // withNow takes a list of ZonedDateTimes and adds them to the now list
         public T withNow(List<ZonedDateTime> now) {
             if (this.now == null) {
@@ -378,7 +404,8 @@ public class OnlineQueryParams {
                     now,
                     requiredResolverTags,
                     plannerOptions,
-                    timeout
+                    timeout,
+                    inputSchemaHint
             );
         }
     }
@@ -402,7 +429,8 @@ public class OnlineQueryParams {
             List<ZonedDateTime> now,
             List<String> requiredResolverTags,
             Map<String, Object> plannerOptions,
-            Duration timeout
+            Duration timeout,
+            Map<String, String> inputSchemaHint
         ) {
             super(
                 inputs,
@@ -422,7 +450,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
 
@@ -486,7 +515,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
     }
@@ -510,7 +540,8 @@ public class OnlineQueryParams {
             List<ZonedDateTime> now,
             List<String> requiredResolverTags,
             Map<String, Object> plannerOptions,
-            Duration timeout
+            Duration timeout,
+            Map<String, String> inputSchemaHint
         ) {
             super(
                 inputs,
@@ -530,7 +561,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
 
@@ -553,7 +585,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
                 );
         }
 
@@ -618,7 +651,8 @@ public class OnlineQueryParams {
                 List<ZonedDateTime> now,
                 List<String> requiredResolverTags,
                 Map<String, Object> plannerOptions,
-                Duration timeout
+                Duration timeout,
+                Map<String, String> inputSchemaHint
         ) {
             super(
                 inputs,
@@ -638,7 +672,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
 
@@ -662,7 +697,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
 
@@ -729,7 +765,8 @@ public class OnlineQueryParams {
                 List<ZonedDateTime> now,
                 List<String> requiredResolverTags,
                 Map<String, Object> plannerOptions,
-                Duration timeout
+                Duration timeout,
+                Map<String, String> inputSchemaHint
         ) {
             super(
                 inputs,
@@ -749,7 +786,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
             );
         }
 
@@ -772,7 +810,8 @@ public class OnlineQueryParams {
                     now,
                     requiredResolverTags,
                     plannerOptions,
-                    timeout
+                    timeout,
+                    inputSchemaHint
                 );
         }
 
@@ -795,7 +834,8 @@ public class OnlineQueryParams {
                 now,
                 requiredResolverTags,
                 plannerOptions,
-                timeout
+                timeout,
+                inputSchemaHint
          );
         }
 
@@ -893,6 +933,19 @@ public class OnlineQueryParams {
             for (Map.Entry<String, Object> entry : inputs.entrySet()) {
                 this.inputs.put(entry.getKey(), List.of(entry.getValue()));
             }
+            return this;
+        }
+
+        /**
+         * Add a has-many input: a list of child rows (each row a Map of column FQN to value)
+         * for a single-row query. The child rows represent the has-many relationship data.
+         *
+         * @param featureFqn The fully qualified name of the has-many feature (e.g. "user.transactions")
+         * @param rows The list of child row maps
+         * @return This SingleRowInput for method chaining
+         */
+        public final SingleRowInput withHasManyInput(String featureFqn, List<Map<String, Object>> rows) {
+            this.inputs.put(featureFqn, List.of(rows));
             return this;
         }
 
