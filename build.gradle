@@ -5,6 +5,7 @@ plugins {
     id "signing"
     id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
     id 'com.vanniktech.maven.publish' version '0.30.0'
+    id 'com.gradleup.shadow' version '8.3.5'
 }
 
 group 'ai.chalk'
@@ -45,6 +46,35 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+}
+
+// Self-contained "shaded" jar: relocates ALL third-party deps into ai.chalk.shaded.* so the artifact
+// is immune to whatever versions a consumer (or their Flink runtime) pins. Flink is compileOnly, so
+// it is not bundled (stays provided by the cluster). Publish as the `shaded` classifier.
+shadowJar {
+    archiveClassifier = 'shaded'
+    mergeServiceFiles()   // rewrite META-INF/services (grpc providers, jackson, etc.) to shaded names
+
+    // slf4j-api is the logging facade — let the runtime (Flink) own it exclusively, so there's no
+    // facade version skew (1.x vs 2.x binding). chalk-java's org.slf4j refs bind to the runtime's.
+    dependencies { exclude(dependency('org.slf4j:slf4j-api')) }
+
+    relocate 'com.google', 'ai.chalk.shaded.google'          // protobuf, guava, gson, flatbuffers, api-protos
+    relocate 'io.grpc', 'ai.chalk.shaded.grpc'               // incl. grpc-netty-shaded
+    relocate 'io.netty', 'ai.chalk.shaded.netty'             // arrow-memory-netty (pure JVM here)
+    relocate 'io.perfmark', 'ai.chalk.shaded.perfmark'
+    relocate 'com.fasterxml.jackson', 'ai.chalk.shaded.jackson'
+    relocate 'org.apache.arrow', 'ai.chalk.shaded.arrow'
+    relocate 'org.apache.commons', 'ai.chalk.shaded.commons' // codec, io, compress, lang3
+    relocate 'org.yaml.snakeyaml', 'ai.chalk.shaded.snakeyaml'
+    relocate 'org.checkerframework', 'ai.chalk.shaded.checkerframework'
+    relocate 'org.codehaus.mojo', 'ai.chalk.shaded.mojo'
+    // Intentionally NOT relocated:
+    //   ai.chalk.*            -> the public API (consumers import these)
+    //   org.slf4j             -> logging facade; must bind to the runtime's logging
+    //   javax.annotation      -> standard annotations, no conflict
+    //   com.github.luben      -> zstd-jni: native JNI, relocating its package breaks the .so binding
+    //   org.apache.flink.*    -> provided by the cluster (compileOnly, not bundled)
 }
 
 test {
@@ -122,6 +152,24 @@ mavenPublishing {
             connection = 'scm:git:git://github.com/chalk-ai/chalk-java.git'
             developerConnection = 'scm:git:ssh://github.com:chalk-ai/chalk-java.git'
             url = 'https://github.com/chalk-ai/chalk-java/'
+        }
+    }
+}
+
+// Second coordinate: ai.chalk:chalk-java-shaded. Identical classes to chalk-java, but every
+// third-party dependency is relocated into ai.chalk.shaded.* (see the shadowJar block). Its POM is
+// intentionally DEPENDENCY-FREE — the deps live inside the jar — so a consumer pinned to older
+// protobuf/grpc/jackson/arrow/netty never gets a conflicting transitive pulled in. Built as a manual
+// publication (not `from components.java`), so no dependencies are written to the POM.
+publishing {
+    publications {
+        shaded(MavenPublication) {
+            artifactId = 'chalk-java-shaded'
+            // Publish the shaded jar as the module's main artifact (strip the 'shaded' classifier).
+            artifact(tasks.shadowJar) { classifier = null }
+            // POM name/license/scm/developers are applied to all publications by the vanniktech
+            // mavenPublishing block below. No <dependencies> are declared here on purpose — every
+            // third-party dep is bundled + relocated inside the jar.
         }
     }
 }
