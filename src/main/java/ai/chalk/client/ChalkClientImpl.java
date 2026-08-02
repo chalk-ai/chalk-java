@@ -162,12 +162,14 @@ public class ChalkClientImpl implements ChalkClient {
                     var dataItem = (Map<String, Object>) item;
                     String fieldName = (String) dataItem.get("field");
                     Object value = dataItem.get("value");
-                    if (fieldName == null) continue;
+                    if (fieldName == null || value == null) continue;
 
                     FieldVector vector = createVectorForValue(fieldName, value, childAllocator);
                     if (vector != null) vectors.add(vector);
                 }
-                scalarTable = new Table(vectors);
+                if (!vectors.isEmpty()) {
+                    scalarTable = new Table(vectors);
+                }
             } catch (Exception e) {
                 for (FieldVector v : vectors) v.close();
                 childAllocator.close();
@@ -179,9 +181,7 @@ public class ChalkClientImpl implements ChalkClient {
     }
 
     private static FieldVector createVectorForValue(String name, Object value, BufferAllocator allocator) {
-        if (value == null) {
-            return new NullVector(name, 1);
-        } else if (value instanceof Integer intVal) {
+        if (value instanceof Integer intVal) {
             BigIntVector v = new BigIntVector(name, allocator);
             v.allocateNew(1);
             v.set(0, intVal.longValue());
