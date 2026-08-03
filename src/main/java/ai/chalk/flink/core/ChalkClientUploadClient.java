@@ -29,9 +29,11 @@ final class ChalkClientUploadClient implements ChalkUploadClient {
     private final boolean writeOnline;
     private final boolean writeOffline;
     private final boolean updateMataggs;
+    private final String resourceGroup;
 
     ChalkClientUploadClient(ChalkSinkConfig config) {
         this.uploadTimeout = config.uploadTimeout();
+        this.resourceGroup = config.resourceGroup();
         // Captured for the future upgrade path (see the commented withWrite* lines in upload()).
         // Non-default values are already rejected up front in ChalkSinkConfig.build(), so here they
         // are always the online-only defaults until the dependency exposes UploadFeaturesOptions.
@@ -67,6 +69,8 @@ final class ChalkClientUploadClient implements ChalkUploadClient {
         UploadFeaturesParams params = UploadFeaturesParams.builder()
                 .withInputs(columnarInputs)
                 .withTimeout(uploadTimeout)
+                // Null/empty leaves the header unset, i.e. the environment's default engines.
+                .withResourceGroup(resourceGroup)
                 // Write targets. Uncomment once the dependency is bumped to a chalk-java release that
                 // exposes these on UploadFeaturesParams (see chalk-java-pr/ and README "Write targets").
                 // Until then, uploads target the online store (the engine default).

@@ -87,7 +87,8 @@ public class RequestHandler {
             String environmentOverride,
             String previewDeploymentId,
             String branchOverride,
-            String queryName
+            String queryName,
+            String resourceGroup
     ) {
 
         Map<String, String> headers = new HashMap<>();
@@ -127,6 +128,11 @@ public class RequestHandler {
             headers.put("X-Chalk-Query-Name", queryName);
         }
 
+        // Routes the request to a resource group's engines; the ingress matches on this header.
+        if (resourceGroup != null && !resourceGroup.isEmpty()) {
+            headers.put("X-Chalk-Resource-Group", resourceGroup);
+        }
+
         return headers;
     }
 
@@ -164,7 +170,8 @@ public class RequestHandler {
                 args.getEnvironmentOverride(),
                 args.getPreviewDeploymentId(),
                 args.getBranch(),
-                args.getQueryName()
+                args.getQueryName(),
+                args.getResourceGroup()
         );
 
         HttpRequest.Builder builder = HttpRequest.newBuilder();

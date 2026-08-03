@@ -18,6 +18,15 @@ public class RequestHeaderInterceptor implements ClientInterceptor {
         @NonNull String clientEnvironmentId,
         @Nullable String queryName
     ) {
+        this(requestEnvironmentId, clientEnvironmentId, queryName, null);
+    }
+
+    public RequestHeaderInterceptor(
+        @Nullable String requestEnvironmentId,
+        @NonNull String clientEnvironmentId,
+        @Nullable String queryName,
+        @Nullable String resourceGroup
+    ) {
         this.allHeaders = new HashMap<>();
         if (requestEnvironmentId != null && !requestEnvironmentId.isEmpty()) {
             this.allHeaders.put(GrpcHeaders.ENVIRONMENT_ID_KEY, requestEnvironmentId);
@@ -26,6 +35,9 @@ public class RequestHeaderInterceptor implements ClientInterceptor {
         }
         if (queryName != null && !queryName.isEmpty()) {
             this.allHeaders.put(GrpcHeaders.QUERY_NAME_KEY, queryName);
+        }
+        if (resourceGroup != null && !resourceGroup.isEmpty()) {
+            this.allHeaders.put(GrpcHeaders.RESOURCE_GROUP_KEY, resourceGroup);
         }
     }
 

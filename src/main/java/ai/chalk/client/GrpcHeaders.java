@@ -25,4 +25,8 @@ public class GrpcHeaders {
     static final Metadata.Key<String> QUERY_NAME_KEY = Metadata.Key.of(
             "x-chalk-query-name", Metadata.ASCII_STRING_MARSHALLER
     );
+
+    static final Metadata.Key<String> RESOURCE_GROUP_KEY = Metadata.Key.of(
+            "x-chalk-resource-group", Metadata.ASCII_STRING_MARSHALLER
+    );
 }

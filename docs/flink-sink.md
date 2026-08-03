@@ -102,6 +102,7 @@ Each element maps to `Map<feature_fqn, value>`. Rules:
 | `environmentId` | token primary env | Target environment. |
 | `queryServer` | resolved from token | Override the gRPC engine URL. |
 | `branch` | none | Target a branch deployment. |
+| `resourceGroup` | none | Send uploads to a named resource group's engines (`x-chalk-resource-group`) instead of the environment's default engines. |
 | `batchSize` | `1000` | Flush when this many rows are buffered. |
 | `flushInterval` | `5s` | Flush a non-empty buffer at least this often. |
 | `uploadTimeout` | `30s` | Per-call deadline. |

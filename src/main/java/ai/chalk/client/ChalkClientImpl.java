@@ -239,6 +239,7 @@ public class ChalkClientImpl implements ChalkClient {
                 .body(body)
                 .method("POST")
                 .environmentOverride(params.getEnvironmentId())
+                .resourceGroup(params.getResourceGroup())
                 .isEngineRequest(true)
                 .build();
 

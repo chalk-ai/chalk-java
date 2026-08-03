@@ -22,6 +22,7 @@ public final class ChalkSinkConfig implements Serializable {
     private final String environmentId;  // nullable -> token's primary environment
     private final String queryServer;    // nullable -> resolved gRPC engine from the token
     private final String branch;         // nullable -> non-branch (production) deployment
+    private final String resourceGroup;  // nullable -> the environment's default engines
 
     private final int batchSize;
     private final long flushIntervalMillis;
@@ -41,6 +42,7 @@ public final class ChalkSinkConfig implements Serializable {
         this.environmentId = b.environmentId;
         this.queryServer = b.queryServer;
         this.branch = b.branch;
+        this.resourceGroup = b.resourceGroup;
         this.batchSize = b.batchSize;
         this.flushIntervalMillis = b.flushIntervalMillis;
         this.uploadTimeoutMillis = b.uploadTimeoutMillis;
@@ -58,6 +60,7 @@ public final class ChalkSinkConfig implements Serializable {
     public String environmentId() { return environmentId; }
     public String queryServer() { return queryServer; }
     public String branch() { return branch; }
+    public String resourceGroup() { return resourceGroup; }
     public int batchSize() { return batchSize; }
     public long flushIntervalMillis() { return flushIntervalMillis; }
     public Duration uploadTimeout() { return Duration.ofMillis(uploadTimeoutMillis); }
@@ -79,6 +82,7 @@ public final class ChalkSinkConfig implements Serializable {
         private String environmentId;
         private String queryServer;
         private String branch;
+        private String resourceGroup;
         private int batchSize = 1_000;
         private long flushIntervalMillis = 5_000;
         private long uploadTimeoutMillis = 30_000;
@@ -106,6 +110,12 @@ public final class ChalkSinkConfig implements Serializable {
 
         /** Target a branch deployment instead of production. */
         public Builder branch(String v) { this.branch = v; return this; }
+
+        /**
+         * Send uploads to a named resource group's engines instead of the environment's default
+         * engines. Defaults to unset.
+         */
+        public Builder resourceGroup(String v) { this.resourceGroup = v; return this; }
 
         /** Flush when this many rows are buffered. Default 1000. */
         public Builder batchSize(int v) { this.batchSize = v; return this; }

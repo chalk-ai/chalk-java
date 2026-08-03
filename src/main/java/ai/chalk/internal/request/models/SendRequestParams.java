@@ -23,6 +23,7 @@ public class SendRequestParams {
     private String queryName;
     private Boolean isEngineRequest;
     private Duration requestLevelTimeout;
+    private String resourceGroup;
 
     public static class Builder {
         private Object body;
@@ -35,6 +36,7 @@ public class SendRequestParams {
         private String queryName;
         private Boolean isEngineRequest;
         private @Nullable Duration requestLevelTimeout;
+        private @Nullable String resourceGroup;
 
         public Builder(Duration requestLevelTimeout) {
             this.requestLevelTimeout = requestLevelTimeout;
@@ -86,11 +88,17 @@ public class SendRequestParams {
             return this;
         }
 
+        /** Routes the request to a named resource group's engines. Null/empty leaves it unset. */
+        public Builder resourceGroup(String resourceGroup) {
+            this.resourceGroup = resourceGroup;
+            return this;
+        }
+
         public SendRequestParams build() {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
-                    isEngineRequest, requestLevelTimeout
+                    isEngineRequest, requestLevelTimeout, resourceGroup
             );
         }
     }

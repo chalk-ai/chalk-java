@@ -24,6 +24,10 @@ public class UploadFeaturesParams {
     private final boolean writeOnline;
     private final boolean writeOffline;
     private final boolean updateMataggs;
+    // Routes the upload to the engines of a named resource group, via the
+    // `x-chalk-resource-group` header. Null/empty means the environment's default engines.
+    @Nullable
+    private final String resourceGroup;
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -34,6 +38,7 @@ public class UploadFeaturesParams {
         protected boolean writeOnline = true;
         protected boolean writeOffline = false;
         protected boolean updateMataggs = false;
+        protected String resourceGroup;
 
         public UploadFeaturesParams build() {
             return new UploadFeaturesParams(
@@ -42,7 +47,8 @@ public class UploadFeaturesParams {
                 this.timeout,
                 this.writeOnline,
                 this.writeOffline,
-                this.updateMataggs);
+                this.updateMataggs,
+                this.resourceGroup);
         }
 
         private void initInputs() {
@@ -97,6 +103,16 @@ public class UploadFeaturesParams {
         /** Update materialized (streaming) aggregations on upload. Defaults to {@code false}. */
         public Builder withUpdateMataggs(boolean updateMataggs) {
             this.updateMataggs = updateMataggs;
+            return this;
+        }
+
+        /**
+         * Route this upload to the engines of a named resource group instead of the environment's
+         * default engines. Sent as the {@code x-chalk-resource-group} header, which the ingress
+         * routes on. Defaults to unset (the default engines).
+         */
+        public Builder withResourceGroup(String resourceGroup) {
+            this.resourceGroup = resourceGroup;
             return this;
         }
     }

@@ -130,6 +130,18 @@ public interface ChalkClient extends AutoCloseable {
      *     </pre>
      * </p>
      *
+     * <p>To send the upload to a resource group's engines rather than the environment's default
+     * engines, set {@code withResourceGroup} on the params:
+     *     <pre>
+     *         {@code
+     *         UploadFeaturesParams params = UploadFeaturesParams.builder()
+     *             .withInputs(Map.of("user.id", userIds, "user.credit_score", scoreList))
+     *             .withResourceGroup("uploads")
+     *             .build();
+     *         }
+     *     </pre>
+     * </p>
+     *
      */
     UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException;
 
