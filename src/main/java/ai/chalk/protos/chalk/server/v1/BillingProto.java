@@ -55,6 +55,16 @@ public final class BillingProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_GetNodesAndPodsUIResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SyncUtilizationRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SyncUtilizationRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SyncUtilizationResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SyncUtilizationResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -100,33 +110,37 @@ public final class BillingProto {
       "_id\"\226\001\n\031GetNodesAndPodsUIResponse\022=\n\005nod" +
       "es\030\001 \003(\0132\'.chalk.kubernetes.v1.Kubernete" +
       "sNodeDataR\005nodes\022:\n\004pods\030\002 \003(\0132&.chalk.k" +
-      "ubernetes.v1.KubernetesPodDataR\004pods*t\n\020" +
-      "UsageChartPeriod\022\"\n\036USAGE_CHART_PERIOD_U" +
-      "NSPECIFIED\020\000\022\034\n\030USAGE_CHART_PERIOD_DAILY" +
-      "\020\001\022\036\n\032USAGE_CHART_PERIOD_MONTHLY\020\002*\204\001\n\022U" +
-      "sageChartGrouping\022$\n USAGE_CHART_GROUPIN" +
-      "G_UNSPECIFIED\020\000\022&\n\"USAGE_CHART_GROUPING_" +
-      "INSTANCE_TYPE\020\001\022 \n\034USAGE_CHART_GROUPING_" +
-      "CLUSTER\020\0022\316\004\n\016BillingService\022r\n\021GetNodes" +
-      "AndPodsUI\022).chalk.server.v1.GetNodesAndP" +
-      "odsUIRequest\032*.chalk.server.v1.GetNodesA" +
-      "ndPodsUIResponse\"\006\220\002\001\200}\013\022l\n\017GetNodesAndP" +
-      "ods\022\'.chalk.server.v1.GetNodesAndPodsReq" +
-      "uest\032(.chalk.server.v1.GetNodesAndPodsRe" +
-      "sponse\"\006\220\002\001\200}\013\022f\n\rGetUsageChart\022%.chalk." +
-      "server.v1.GetUsageChartRequest\032&.chalk.s" +
-      "erver.v1.GetUsageChartResponse\"\006\220\002\001\200}\006\022x" +
-      "\n\023GetUtilizationRates\022+.chalk.server.v1." +
-      "GetUtilizationRatesRequest\032,.chalk.serve" +
-      "r.v1.GetUtilizationRatesResponse\"\006\220\002\001\200}\001" +
-      "\022x\n\023GetPodRequestCharts\022+.chalk.server.v" +
-      "1.GetPodRequestChartsRequest\032,.chalk.ser" +
-      "ver.v1.GetPodRequestChartsResponse\"\006\220\002\001\200" +
-      "}\006B\241\001\n\037ai.chalk.protos.chalk.server.v1B\014" +
-      "BillingProtoP\001Z\022server/v1;serverv1\242\002\003CSX" +
-      "\252\002\017Chalk.Server.V1\312\002\017Chalk\\Server\\V1\342\002\033C" +
-      "halk\\Server\\V1\\GPBMetadata\352\002\021Chalk::Serv" +
-      "er::V1b\006proto3"
+      "ubernetes.v1.KubernetesPodDataR\004pods\"\030\n\026" +
+      "SyncUtilizationRequest\"\031\n\027SyncUtilizatio" +
+      "nResponse*t\n\020UsageChartPeriod\022\"\n\036USAGE_C" +
+      "HART_PERIOD_UNSPECIFIED\020\000\022\034\n\030USAGE_CHART" +
+      "_PERIOD_DAILY\020\001\022\036\n\032USAGE_CHART_PERIOD_MO" +
+      "NTHLY\020\002*\204\001\n\022UsageChartGrouping\022$\n USAGE_" +
+      "CHART_GROUPING_UNSPECIFIED\020\000\022&\n\"USAGE_CH" +
+      "ART_GROUPING_INSTANCE_TYPE\020\001\022 \n\034USAGE_CH" +
+      "ART_GROUPING_CLUSTER\020\0022\274\005\n\016BillingServic" +
+      "e\022r\n\021GetNodesAndPodsUI\022).chalk.server.v1" +
+      ".GetNodesAndPodsUIRequest\032*.chalk.server" +
+      ".v1.GetNodesAndPodsUIResponse\"\006\220\002\001\200}\013\022l\n" +
+      "\017GetNodesAndPods\022\'.chalk.server.v1.GetNo" +
+      "desAndPodsRequest\032(.chalk.server.v1.GetN" +
+      "odesAndPodsResponse\"\006\220\002\001\200}\013\022f\n\rGetUsageC" +
+      "hart\022%.chalk.server.v1.GetUsageChartRequ" +
+      "est\032&.chalk.server.v1.GetUsageChartRespo" +
+      "nse\"\006\220\002\001\200}\034\022x\n\023GetUtilizationRates\022+.cha" +
+      "lk.server.v1.GetUtilizationRatesRequest\032" +
+      ",.chalk.server.v1.GetUtilizationRatesRes" +
+      "ponse\"\006\220\002\001\200}\001\022x\n\023GetPodRequestCharts\022+.c" +
+      "halk.server.v1.GetPodRequestChartsReques" +
+      "t\032,.chalk.server.v1.GetPodRequestChartsR" +
+      "esponse\"\006\220\002\001\200}\006\022l\n\017SyncUtilization\022\'.cha" +
+      "lk.server.v1.SyncUtilizationRequest\032(.ch" +
+      "alk.server.v1.SyncUtilizationResponse\"\006\220" +
+      "\002\001\200}\033B\241\001\n\037ai.chalk.protos.chalk.server.v" +
+      "1B\014BillingProtoP\001Z\022server/v1;serverv1\242\002\003" +
+      "CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Server\\V1\342" +
+      "\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Chalk::S" +
+      "erver::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -188,6 +202,18 @@ public final class BillingProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetNodesAndPodsUIResponse_descriptor,
         new java.lang.String[] { "Nodes", "Pods", });
+    internal_static_chalk_server_v1_SyncUtilizationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_chalk_server_v1_SyncUtilizationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SyncUtilizationRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_SyncUtilizationResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_chalk_server_v1_SyncUtilizationResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SyncUtilizationResponse_descriptor,
+        new java.lang.String[] { });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);

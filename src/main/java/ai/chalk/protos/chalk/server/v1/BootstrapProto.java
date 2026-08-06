@@ -71,7 +71,7 @@ public final class BootstrapProto {
       ":\0028\001\032s\n\021EnvironmentsEntry\022\020\n\003key\030\001 \001(\tR\003" +
       "key\022H\n\005value\030\002 \001(\01322.chalk.server.v1.Boo" +
       "tstrapExtraSettingsEnvironmentR\005value:\0028" +
-      "\001\"\315\002\n\026ParsedBootstrapConfigs\022+\n\005teams\030\001 " +
+      "\001\"\250\003\n\026ParsedBootstrapConfigs\022+\n\005teams\030\001 " +
       "\003(\0132\025.chalk.server.v1.TeamR\005teams\0224\n\010pro" +
       "jects\030\002 \003(\0132\030.chalk.server.v1.ProjectR\010p" +
       "rojects\022@\n\014environments\030\003 \003(\0132\034.chalk.se" +
@@ -79,11 +79,14 @@ public final class BootstrapProto {
       "m_invites\030\004 \003(\0132\033.chalk.server.v1.TeamIn" +
       "viteR\013teamInvites\022N\n\016extra_settings\030\005 \001(" +
       "\0132\'.chalk.server.v1.BootstrapExtraSettin" +
-      "gsR\rextraSettingsB\243\001\n\037ai.chalk.protos.ch" +
-      "alk.server.v1B\016BootstrapProtoP\001Z\022server/" +
-      "v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Ch" +
-      "alk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetad" +
-      "ata\352\002\021Chalk::Server::V1b\006proto3"
+      "gsR\rextraSettings\022<\n\030global_pinned_base_" +
+      "image\030\006 \001(\tH\000R\025globalPinnedBaseImage\210\001\001B" +
+      "\033\n\031_global_pinned_base_imageB\243\001\n\037ai.chal" +
+      "k.protos.chalk.server.v1B\016BootstrapProto" +
+      "P\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Ser" +
+      "ver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\" +
+      "V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -126,7 +129,7 @@ public final class BootstrapProto {
     internal_static_chalk_server_v1_ParsedBootstrapConfigs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_ParsedBootstrapConfigs_descriptor,
-        new java.lang.String[] { "Teams", "Projects", "Environments", "TeamInvites", "ExtraSettings", });
+        new java.lang.String[] { "Teams", "Projects", "Environments", "TeamInvites", "ExtraSettings", "GlobalPinnedBaseImage", });
     ai.chalk.protos.chalk.server.v1.EnvironmentProto.getDescriptor();
     ai.chalk.protos.chalk.server.v1.TeamProto.getDescriptor();
   }

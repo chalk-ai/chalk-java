@@ -268,6 +268,37 @@ public final class TeamServiceGrpc {
     return getCreateEnvironmentMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest,
+      ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> getUpdateEnvironmentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateEnvironment",
+      requestType = ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest,
+      ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> getUpdateEnvironmentMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest, ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> getUpdateEnvironmentMethod;
+    if ((getUpdateEnvironmentMethod = TeamServiceGrpc.getUpdateEnvironmentMethod) == null) {
+      synchronized (TeamServiceGrpc.class) {
+        if ((getUpdateEnvironmentMethod = TeamServiceGrpc.getUpdateEnvironmentMethod) == null) {
+          TeamServiceGrpc.getUpdateEnvironmentMethod = getUpdateEnvironmentMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest, ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateEnvironment"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TeamServiceMethodDescriptorSupplier("UpdateEnvironment"))
+              .build();
+        }
+      }
+    }
+    return getUpdateEnvironmentMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest,
       ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> getGetAvailablePermissionsMethod;
 
@@ -716,6 +747,13 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    default void updateEnvironment(ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateEnvironmentMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void getAvailablePermissions(ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAvailablePermissionsMethod(), responseObserver);
@@ -885,6 +923,14 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public void updateEnvironment(ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateEnvironmentMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void getAvailablePermissions(ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request,
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -1042,6 +1088,13 @@ public final class TeamServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.CreateEnvironmentResponse createEnvironment(ai.chalk.protos.chalk.server.v1.CreateEnvironmentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCreateEnvironmentMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse updateEnvironment(ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateEnvironmentMethod(), getCallOptions(), request);
     }
 
     /**
@@ -1204,6 +1257,14 @@ public final class TeamServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse> updateEnvironment(
+        ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateEnvironmentMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsResponse> getAvailablePermissions(
         ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -1299,17 +1360,18 @@ public final class TeamServiceGrpc {
   private static final int METHODID_CREATE_TEAM = 5;
   private static final int METHODID_CREATE_PROJECT = 6;
   private static final int METHODID_CREATE_ENVIRONMENT = 7;
-  private static final int METHODID_GET_AVAILABLE_PERMISSIONS = 8;
-  private static final int METHODID_CREATE_SERVICE_TOKEN = 9;
-  private static final int METHODID_DELETE_SERVICE_TOKEN = 10;
-  private static final int METHODID_LIST_SERVICE_TOKENS = 11;
-  private static final int METHODID_UPDATE_SERVICE_TOKEN = 12;
-  private static final int METHODID_INVITE_TEAM_MEMBER = 13;
-  private static final int METHODID_EXPIRE_TEAM_INVITE = 14;
-  private static final int METHODID_LIST_TEAM_INVITES = 15;
-  private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 16;
-  private static final int METHODID_UPDATE_SCIM_GROUP_SETTINGS = 17;
-  private static final int METHODID_GET_TEAM_PERMISSIONS = 18;
+  private static final int METHODID_UPDATE_ENVIRONMENT = 8;
+  private static final int METHODID_GET_AVAILABLE_PERMISSIONS = 9;
+  private static final int METHODID_CREATE_SERVICE_TOKEN = 10;
+  private static final int METHODID_DELETE_SERVICE_TOKEN = 11;
+  private static final int METHODID_LIST_SERVICE_TOKENS = 12;
+  private static final int METHODID_UPDATE_SERVICE_TOKEN = 13;
+  private static final int METHODID_INVITE_TEAM_MEMBER = 14;
+  private static final int METHODID_EXPIRE_TEAM_INVITE = 15;
+  private static final int METHODID_LIST_TEAM_INVITES = 16;
+  private static final int METHODID_UPSERT_FEATURE_PERMISSIONS = 17;
+  private static final int METHODID_UPDATE_SCIM_GROUP_SETTINGS = 18;
+  private static final int METHODID_GET_TEAM_PERMISSIONS = 19;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1359,6 +1421,10 @@ public final class TeamServiceGrpc {
         case METHODID_CREATE_ENVIRONMENT:
           serviceImpl.createEnvironment((ai.chalk.protos.chalk.server.v1.CreateEnvironmentRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.CreateEnvironmentResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_ENVIRONMENT:
+          serviceImpl.updateEnvironment((ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse>) responseObserver);
           break;
         case METHODID_GET_AVAILABLE_PERMISSIONS:
           serviceImpl.getAvailablePermissions((ai.chalk.protos.chalk.server.v1.GetAvailablePermissionsRequest) request,
@@ -1478,6 +1544,13 @@ public final class TeamServiceGrpc {
               ai.chalk.protos.chalk.server.v1.CreateEnvironmentRequest,
               ai.chalk.protos.chalk.server.v1.CreateEnvironmentResponse>(
                 service, METHODID_CREATE_ENVIRONMENT)))
+        .addMethod(
+          getUpdateEnvironmentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.UpdateEnvironmentRequest,
+              ai.chalk.protos.chalk.server.v1.UpdateEnvironmentResponse>(
+                service, METHODID_UPDATE_ENVIRONMENT)))
         .addMethod(
           getGetAvailablePermissionsMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1611,6 +1684,7 @@ public final class TeamServiceGrpc {
               .addMethod(getCreateTeamMethod())
               .addMethod(getCreateProjectMethod())
               .addMethod(getCreateEnvironmentMethod())
+              .addMethod(getUpdateEnvironmentMethod())
               .addMethod(getGetAvailablePermissionsMethod())
               .addMethod(getCreateServiceTokenMethod())
               .addMethod(getDeleteServiceTokenMethod())

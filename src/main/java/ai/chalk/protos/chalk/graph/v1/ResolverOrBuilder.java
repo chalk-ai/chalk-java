@@ -86,27 +86,47 @@ public interface ResolverOrBuilder extends
   boolean getIsGenerator();
 
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
-  java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> 
+  @java.lang.Deprecated java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference> 
       getDataSourcesList();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index);
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSourceReference getDataSources(int index);
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
-  int getDataSourcesCount();
+  @java.lang.Deprecated int getDataSourcesCount();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
-  java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
+  @java.lang.Deprecated java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder> 
       getDataSourcesOrBuilderList();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources"];</code>
+   * <pre>
+   * data_sources is deprecated; see data_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSourceReference data_sources = 6 [json_name = "dataSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSourceReferenceOrBuilder getDataSourcesOrBuilder(
       int index);
 
   /**
@@ -324,4 +344,108 @@ public interface ResolverOrBuilder extends
    * @return The isTotal.
    */
   boolean getIsTotal();
+
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @return A list containing the uniqueOn.
+   */
+  java.util.List<java.lang.String>
+      getUniqueOnList();
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @return The count of uniqueOn.
+   */
+  int getUniqueOnCount();
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @param index The index of the element to return.
+   * @return The uniqueOn at the given index.
+   */
+  java.lang.String getUniqueOn(int index);
+  /**
+   * <code>repeated string unique_on = 20 [json_name = "uniqueOn"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the uniqueOn at the given index.
+   */
+  com.google.protobuf.ByteString
+      getUniqueOnBytes(int index);
+
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @return A list containing the partitionedBy.
+   */
+  java.util.List<java.lang.String>
+      getPartitionedByList();
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @return The count of partitionedBy.
+   */
+  int getPartitionedByCount();
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @param index The index of the element to return.
+   * @return The partitionedBy at the given index.
+   */
+  java.lang.String getPartitionedBy(int index);
+  /**
+   * <code>repeated string partitioned_by = 21 [json_name = "partitionedBy"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the partitionedBy at the given index.
+   */
+  com.google.protobuf.ByteString
+      getPartitionedByBytes(int index);
+
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference> 
+      getDataSourcesV2List();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceReference getDataSourcesV2(int index);
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  int getDataSourcesV2Count();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder> 
+      getDataSourcesV2OrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceReference data_sources_v2 = 22 [json_name = "dataSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceReferenceOrBuilder getDataSourcesV2OrBuilder(
+      int index);
+
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   * @return Whether the staticOperation field is set.
+   */
+  boolean hasStaticOperation();
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   * @return The staticOperation.
+   */
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNode getStaticOperation();
+  /**
+   * <code>.chalk.expression.v1.LogicalExprNode static_operation = 23 [json_name = "staticOperation"];</code>
+   */
+  ai.chalk.protos.chalk.expression.v1.LogicalExprNodeOrBuilder getStaticOperationOrBuilder();
+
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   * @return Whether the sqlSettings field is set.
+   */
+  boolean hasSqlSettings();
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   * @return The sqlSettings.
+   */
+  ai.chalk.protos.chalk.graph.v1.SQLResolverSettings getSqlSettings();
+  /**
+   * <code>optional .chalk.graph.v1.SQLResolverSettings sql_settings = 24 [json_name = "sqlSettings"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.SQLResolverSettingsOrBuilder getSqlSettingsOrBuilder();
 }

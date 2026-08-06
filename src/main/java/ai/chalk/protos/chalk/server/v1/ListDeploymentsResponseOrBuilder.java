@@ -31,4 +31,21 @@ public interface ListDeploymentsResponseOrBuilder extends
    */
   ai.chalk.protos.chalk.server.v1.DeploymentOrBuilder getDeploymentsOrBuilder(
       int index);
+
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return Whether the cursor field is set.
+   */
+  boolean hasCursor();
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return The cursor.
+   */
+  java.lang.String getCursor();
+  /**
+   * <code>optional string cursor = 2 [json_name = "cursor"];</code>
+   * @return The bytes for cursor.
+   */
+  com.google.protobuf.ByteString
+      getCursorBytes();
 }

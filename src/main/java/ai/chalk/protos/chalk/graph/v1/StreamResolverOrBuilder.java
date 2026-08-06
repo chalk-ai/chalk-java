@@ -108,19 +108,23 @@ public interface StreamResolverOrBuilder extends
       int index);
 
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source"];</code>
+   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.StreamResolver.source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=326
    * @return Whether the source field is set.
    */
-  boolean hasSource();
+  @java.lang.Deprecated boolean hasSource();
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source"];</code>
+   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.StreamResolver.source is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=326
    * @return The source.
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSourceReference getSource();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSourceReference getSource();
   /**
-   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source"];</code>
+   * <code>.chalk.graph.v1.StreamSourceReference source = 6 [json_name = "source", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getSourceOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSourceReferenceOrBuilder getSourceOrBuilder();
 
   /**
    * <code>.chalk.graph.v1.ParseInfo parse_info = 7 [json_name = "parseInfo"];</code>
@@ -270,4 +274,19 @@ public interface StreamResolverOrBuilder extends
    * <code>.chalk.graph.v1.FunctionReference function = 15 [json_name = "function"];</code>
    */
   ai.chalk.protos.chalk.graph.v1.FunctionReferenceOrBuilder getFunctionOrBuilder();
+
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference source_v2 = 16 [json_name = "sourceV2"];</code>
+   * @return Whether the sourceV2 field is set.
+   */
+  boolean hasSourceV2();
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference source_v2 = 16 [json_name = "sourceV2"];</code>
+   * @return The sourceV2.
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSourceReference getSourceV2();
+  /**
+   * <code>.chalk.graph.v2.StreamSourceReference source_v2 = 16 [json_name = "sourceV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSourceReferenceOrBuilder getSourceV2OrBuilder();
 }

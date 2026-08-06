@@ -88,7 +88,7 @@ private static final long serialVersionUID = 0L;
   public static final int OPERATION_ID_IDENTIFIER_FIELD_NUMBER = 1;
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -101,7 +101,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -117,7 +117,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -225,7 +225,7 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.Timestamp queryTimestampUpperBoundExclusive_;
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -237,7 +237,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -249,7 +249,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -265,7 +265,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -278,7 +278,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -290,7 +290,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -303,7 +303,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -336,7 +336,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object pageToken_ = "";
   /**
    * <pre>
-   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
    * Leave empty if querying for the zeroth page.
    * </pre>
    *
@@ -358,7 +358,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
    * Leave empty if querying for the zeroth page.
    * </pre>
    *
@@ -958,7 +958,7 @@ private static final long serialVersionUID = 0L;
         ai.chalk.protos.chalk.engine.v2.OperationIdTableIdentifier, ai.chalk.protos.chalk.engine.v2.OperationIdTableIdentifier.Builder, ai.chalk.protos.chalk.engine.v2.OperationIdTableIdentifierOrBuilder> operationIdIdentifierBuilder_;
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -971,7 +971,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -994,7 +994,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1015,7 +1015,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1034,7 +1034,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1062,7 +1062,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1086,7 +1086,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1097,7 +1097,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1116,7 +1116,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+     * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
      * and the engine can figure out what table to query.
      * </pre>
      *
@@ -1508,7 +1508,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> queryTimestampUpperBoundExclusiveBuilder_;
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1519,7 +1519,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1534,7 +1534,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1554,7 +1554,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1572,7 +1572,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1597,7 +1597,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1614,7 +1614,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1626,7 +1626,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1641,7 +1641,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+     * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -1670,7 +1670,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1684,7 +1684,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1696,7 +1696,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1709,7 +1709,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1723,7 +1723,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1743,7 +1743,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1762,7 +1762,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1781,7 +1781,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1797,7 +1797,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+     * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
      * If empty, all features will be returned
      * </pre>
      *
@@ -1863,7 +1863,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object pageToken_ = "";
     /**
      * <pre>
-     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
      * Leave empty if querying for the zeroth page.
      * </pre>
      *
@@ -1884,7 +1884,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
      * Leave empty if querying for the zeroth page.
      * </pre>
      *
@@ -1906,7 +1906,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
      * Leave empty if querying for the zeroth page.
      * </pre>
      *
@@ -1924,7 +1924,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
      * Leave empty if querying for the zeroth page.
      * </pre>
      *
@@ -1939,7 +1939,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+     * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
      * Leave empty if querying for the zeroth page.
      * </pre>
      *

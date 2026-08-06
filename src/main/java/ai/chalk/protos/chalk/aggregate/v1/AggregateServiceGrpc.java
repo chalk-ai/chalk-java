@@ -143,6 +143,70 @@ public final class AggregateServiceGrpc {
     return getGetAggregateBackfillJobMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest,
+      ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> getGetCronAggregateBackfillMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetCronAggregateBackfill",
+      requestType = ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest.class,
+      responseType = ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest,
+      ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> getGetCronAggregateBackfillMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest, ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> getGetCronAggregateBackfillMethod;
+    if ((getGetCronAggregateBackfillMethod = AggregateServiceGrpc.getGetCronAggregateBackfillMethod) == null) {
+      synchronized (AggregateServiceGrpc.class) {
+        if ((getGetCronAggregateBackfillMethod = AggregateServiceGrpc.getGetCronAggregateBackfillMethod) == null) {
+          AggregateServiceGrpc.getGetCronAggregateBackfillMethod = getGetCronAggregateBackfillMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest, ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetCronAggregateBackfill"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AggregateServiceMethodDescriptorSupplier("GetCronAggregateBackfill"))
+              .build();
+        }
+      }
+    }
+    return getGetCronAggregateBackfillMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest,
+      ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> getGetActiveCronAggregateBackfillsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetActiveCronAggregateBackfills",
+      requestType = ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest.class,
+      responseType = ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest,
+      ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> getGetActiveCronAggregateBackfillsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest, ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> getGetActiveCronAggregateBackfillsMethod;
+    if ((getGetActiveCronAggregateBackfillsMethod = AggregateServiceGrpc.getGetActiveCronAggregateBackfillsMethod) == null) {
+      synchronized (AggregateServiceGrpc.class) {
+        if ((getGetActiveCronAggregateBackfillsMethod = AggregateServiceGrpc.getGetActiveCronAggregateBackfillsMethod) == null) {
+          AggregateServiceGrpc.getGetActiveCronAggregateBackfillsMethod = getGetActiveCronAggregateBackfillsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest, ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetActiveCronAggregateBackfills"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AggregateServiceMethodDescriptorSupplier("GetActiveCronAggregateBackfills"))
+              .build();
+        }
+      }
+    }
+    return getGetActiveCronAggregateBackfillsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -232,6 +296,20 @@ public final class AggregateServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAggregateBackfillJobMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getCronAggregateBackfill(ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetCronAggregateBackfillMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getActiveCronAggregateBackfills(ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetActiveCronAggregateBackfillsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -306,6 +384,22 @@ public final class AggregateServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAggregateBackfillJobMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getCronAggregateBackfill(ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetCronAggregateBackfillMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getActiveCronAggregateBackfills(ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetActiveCronAggregateBackfillsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -364,6 +458,20 @@ public final class AggregateServiceGrpc {
     public ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobResponse getAggregateBackfillJob(ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAggregateBackfillJobMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse getCronAggregateBackfill(ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetCronAggregateBackfillMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse getActiveCronAggregateBackfills(ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetActiveCronAggregateBackfillsMethod(), getCallOptions(), request);
     }
   }
 
@@ -428,12 +536,30 @@ public final class AggregateServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAggregateBackfillJobMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse> getCronAggregateBackfill(
+        ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetCronAggregateBackfillMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse> getActiveCronAggregateBackfills(
+        ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetActiveCronAggregateBackfillsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PLAN_AGGREGATE_BACKFILL = 0;
   private static final int METHODID_GET_AGGREGATES = 1;
   private static final int METHODID_GET_AGGREGATE_BACKFILL_JOBS = 2;
   private static final int METHODID_GET_AGGREGATE_BACKFILL_JOB = 3;
+  private static final int METHODID_GET_CRON_AGGREGATE_BACKFILL = 4;
+  private static final int METHODID_GET_ACTIVE_CRON_AGGREGATE_BACKFILLS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -467,6 +593,14 @@ public final class AggregateServiceGrpc {
         case METHODID_GET_AGGREGATE_BACKFILL_JOB:
           serviceImpl.getAggregateBackfillJob((ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobResponse>) responseObserver);
+          break;
+        case METHODID_GET_CRON_AGGREGATE_BACKFILL:
+          serviceImpl.getCronAggregateBackfill((ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse>) responseObserver);
+          break;
+        case METHODID_GET_ACTIVE_CRON_AGGREGATE_BACKFILLS:
+          serviceImpl.getActiveCronAggregateBackfills((ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -514,6 +648,20 @@ public final class AggregateServiceGrpc {
               ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest,
               ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobResponse>(
                 service, METHODID_GET_AGGREGATE_BACKFILL_JOB)))
+        .addMethod(
+          getGetCronAggregateBackfillMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillRequest,
+              ai.chalk.protos.chalk.aggregate.v1.GetCronAggregateBackfillResponse>(
+                service, METHODID_GET_CRON_AGGREGATE_BACKFILL)))
+        .addMethod(
+          getGetActiveCronAggregateBackfillsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsRequest,
+              ai.chalk.protos.chalk.aggregate.v1.GetActiveCronAggregateBackfillsResponse>(
+                service, METHODID_GET_ACTIVE_CRON_AGGREGATE_BACKFILLS)))
         .build();
   }
 
@@ -566,6 +714,8 @@ public final class AggregateServiceGrpc {
               .addMethod(getGetAggregatesMethod())
               .addMethod(getGetAggregateBackfillJobsMethod())
               .addMethod(getGetAggregateBackfillJobMethod())
+              .addMethod(getGetCronAggregateBackfillMethod())
+              .addMethod(getGetActiveCronAggregateBackfillsMethod())
               .build();
         }
       }

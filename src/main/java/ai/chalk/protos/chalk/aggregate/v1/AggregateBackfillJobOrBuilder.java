@@ -162,4 +162,38 @@ public interface AggregateBackfillJobOrBuilder extends
    */
   com.google.protobuf.ByteString
       getResolversBytes(int index);
+
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return Whether the cronAggregateBackfillId field is set.
+   */
+  boolean hasCronAggregateBackfillId();
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The cronAggregateBackfillId.
+   */
+  java.lang.String getCronAggregateBackfillId();
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The bytes for cronAggregateBackfillId.
+   */
+  com.google.protobuf.ByteString
+      getCronAggregateBackfillIdBytes();
+
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  boolean hasPlanHash();
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  java.lang.String getPlanHash();
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  com.google.protobuf.ByteString
+      getPlanHashBytes();
 }

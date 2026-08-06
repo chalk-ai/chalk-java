@@ -9,48 +9,149 @@ public interface FeatureValidationOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>float min = 1 [json_name = "min"];</code>
+   * <pre>
+   * Deprecated since they don't store the full type information (e.g. different numeric types)
+   * Use the *_arrow fields (6-9) instead.
+   * </pre>
+   *
+   * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=503
    * @return Whether the min field is set.
    */
-  boolean hasMin();
+  @java.lang.Deprecated boolean hasMin();
   /**
-   * <code>float min = 1 [json_name = "min"];</code>
+   * <pre>
+   * Deprecated since they don't store the full type information (e.g. different numeric types)
+   * Use the *_arrow fields (6-9) instead.
+   * </pre>
+   *
+   * <code>float min = 1 [json_name = "min", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=503
    * @return The min.
    */
-  float getMin();
+  @java.lang.Deprecated float getMin();
 
   /**
-   * <code>float max = 2 [json_name = "max"];</code>
+   * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=504
    * @return Whether the max field is set.
    */
-  boolean hasMax();
+  @java.lang.Deprecated boolean hasMax();
   /**
-   * <code>float max = 2 [json_name = "max"];</code>
+   * <code>float max = 2 [json_name = "max", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=504
    * @return The max.
    */
-  float getMax();
+  @java.lang.Deprecated float getMax();
 
   /**
-   * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+   * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=505
    * @return Whether the minLength field is set.
    */
-  boolean hasMinLength();
+  @java.lang.Deprecated boolean hasMinLength();
   /**
-   * <code>uint32 min_length = 3 [json_name = "minLength"];</code>
+   * <code>uint32 min_length = 3 [json_name = "minLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.min_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=505
    * @return The minLength.
    */
-  int getMinLength();
+  @java.lang.Deprecated int getMinLength();
 
   /**
-   * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+   * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=506
    * @return Whether the maxLength field is set.
    */
-  boolean hasMaxLength();
+  @java.lang.Deprecated boolean hasMaxLength();
   /**
-   * <code>uint32 max_length = 4 [json_name = "maxLength"];</code>
+   * <code>uint32 max_length = 4 [json_name = "maxLength", deprecated = true];</code>
+   * @deprecated chalk.graph.v1.FeatureValidation.max_length is deprecated.
+   *     See chalk/graph/v1/graph.proto;l=506
    * @return The maxLength.
    */
-  int getMaxLength();
+  @java.lang.Deprecated int getMaxLength();
+
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   * @return Whether the minArrow field is set.
+   */
+  boolean hasMinArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   * @return The minArrow.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_arrow = 6 [json_name = "minArrow"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinArrowOrBuilder();
+
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   * @return Whether the maxArrow field is set.
+   */
+  boolean hasMaxArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   * @return The maxArrow.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_arrow = 7 [json_name = "maxArrow"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxArrowOrBuilder();
+
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   * @return Whether the minLengthArrow field is set.
+   */
+  boolean hasMinLengthArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   * @return The minLengthArrow.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValue getMinLengthArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue min_length_arrow = 8 [json_name = "minLengthArrow"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMinLengthArrowOrBuilder();
+
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   * @return Whether the maxLengthArrow field is set.
+   */
+  boolean hasMaxLengthArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   * @return The maxLengthArrow.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValue getMaxLengthArrow();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue max_length_arrow = 9 [json_name = "maxLengthArrow"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getMaxLengthArrowOrBuilder();
+
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   * @return Whether the contains field is set.
+   */
+  boolean hasContains();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   * @return The contains.
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValue getContains();
+  /**
+   * <code>.chalk.arrow.v1.ScalarValue contains = 10 [json_name = "contains"];</code>
+   */
+  ai.chalk.protos.chalk.arrow.v1.ScalarValueOrBuilder getContainsOrBuilder();
 
   /**
    * <code>bool strict = 5 [json_name = "strict"];</code>

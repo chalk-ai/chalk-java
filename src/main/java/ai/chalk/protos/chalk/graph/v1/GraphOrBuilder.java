@@ -105,51 +105,91 @@ public interface GraphOrBuilder extends
       int index);
 
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
-  java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> 
+  @java.lang.Deprecated java.util.List<ai.chalk.protos.chalk.graph.v1.DatabaseSource> 
       getDatabaseSourcesList();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index);
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSource getDatabaseSources(int index);
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
-  int getDatabaseSourcesCount();
+  @java.lang.Deprecated int getDatabaseSourcesCount();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
-  java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
+  @java.lang.Deprecated java.util.List<? extends ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder> 
       getDatabaseSourcesOrBuilderList();
   /**
-   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources"];</code>
+   * <pre>
+   * database_sources is deprecated; see database_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.DatabaseSource database_sources = 5 [json_name = "databaseSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.DatabaseSourceOrBuilder getDatabaseSourcesOrBuilder(
       int index);
 
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
-  java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> 
+  @java.lang.Deprecated java.util.List<ai.chalk.protos.chalk.graph.v1.StreamSource> 
       getStreamSourcesList();
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index);
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSource getStreamSources(int index);
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
-  int getStreamSourcesCount();
+  @java.lang.Deprecated int getStreamSourcesCount();
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
-  java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
+  @java.lang.Deprecated java.util.List<? extends ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder> 
       getStreamSourcesOrBuilderList();
   /**
-   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources"];</code>
+   * <pre>
+   * stream_sources is deprecated; see stream_sources_v2
+   * </pre>
+   *
+   * <code>repeated .chalk.graph.v1.StreamSource stream_sources = 6 [json_name = "streamSources", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
+  @java.lang.Deprecated ai.chalk.protos.chalk.graph.v1.StreamSourceOrBuilder getStreamSourcesOrBuilder(
       int index);
 
   /**
@@ -174,5 +214,77 @@ public interface GraphOrBuilder extends
    * <code>repeated .chalk.graph.v1.NamedQuery named_queries = 7 [json_name = "namedQueries"];</code>
    */
   ai.chalk.protos.chalk.graph.v1.NamedQueryOrBuilder getNamedQueriesOrBuilder(
+      int index);
+
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSource> 
+      getDatabaseSourcesV2List();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSource getDatabaseSourcesV2(int index);
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  int getDatabaseSourcesV2Count();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder> 
+      getDatabaseSourcesV2OrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSource database_sources_v2 = 8 [json_name = "databaseSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceOrBuilder getDatabaseSourcesV2OrBuilder(
+      int index);
+
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup> 
+      getDatabaseSourceGroupsList();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroup getDatabaseSourceGroups(int index);
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  int getDatabaseSourceGroupsCount();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder> 
+      getDatabaseSourceGroupsOrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v2.DatabaseSourceGroup database_source_groups = 10 [json_name = "databaseSourceGroups"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.DatabaseSourceGroupOrBuilder getDatabaseSourceGroupsOrBuilder(
+      int index);
+
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  java.util.List<ai.chalk.protos.chalk.graph.v2.StreamSource> 
+      getStreamSourcesV2List();
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSource getStreamSourcesV2(int index);
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  int getStreamSourcesV2Count();
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  java.util.List<? extends ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder> 
+      getStreamSourcesV2OrBuilderList();
+  /**
+   * <code>repeated .chalk.graph.v2.StreamSource stream_sources_v2 = 9 [json_name = "streamSourcesV2"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v2.StreamSourceOrBuilder getStreamSourcesV2OrBuilder(
       int index);
 }

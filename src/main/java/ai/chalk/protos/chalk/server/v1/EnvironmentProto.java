@@ -96,9 +96,10 @@ public final class EnvironmentProto {
     java.lang.String[] descriptorData = {
       "\n!chalk/server/v1/environment.proto\022\017cha" +
       "lk.server.v1\032\034google/protobuf/struct.pro" +
-      "to\032\037google/protobuf/timestamp.proto\"S\n\023A" +
+      "to\032\037google/protobuf/timestamp.proto\"{\n\023A" +
       "WSCloudWatchConfig\022)\n\016log_group_path\030\001 \001" +
-      "(\tH\000R\014logGroupPath\210\001\001B\021\n\017_log_group_path" +
+      "(\tH\000R\014logGroupPath\210\001\001\022&\n\017log_group_paths" +
+      "\030\002 \003(\tR\rlogGroupPathsB\021\n\017_log_group_path" +
       "\"\253\002\n\026AWSSecretManagerConfig\022)\n\016secret_km" +
       "s_arn\030\001 \001(\tH\000R\014secretKmsArn\210\001\001\022X\n\013secret" +
       "_tags\030\002 \003(\01327.chalk.server.v1.AWSSecretM" +
@@ -157,7 +158,7 @@ public final class EnvironmentProto {
       "ectStorageConfig\022%\n\016dataset_bucket\030\001 \001(\t" +
       "R\rdatasetBucket\022,\n\022plan_stages_bucket\030\002 " +
       "\001(\tR\020planStagesBucket\0220\n\024source_bundle_b" +
-      "ucket\030\003 \001(\tR\022sourceBundleBucket\"\203!\n\013Envi" +
+      "ucket\030\003 \001(\tR\022sourceBundleBucket\"\307\"\n\013Envi" +
       "ronment\022\022\n\004name\030\001 \001(\tR\004name\022\035\n\nproject_i" +
       "d\030\002 \001(\tR\tprojectId\022\016\n\002id\030\003 \001(\tR\002id\022\027\n\007te" +
       "am_id\030\004 \001(\tR\006teamId\0225\n\024active_deployment" +
@@ -232,46 +233,51 @@ public final class EnvironmentProto {
       "1.EnvironmentObjectStorageConfigH\'R\022envi" +
       "ronmentBuckets\210\001\001\022A\n\032cluster_timescaledb" +
       "_secret\0303 \001(\tH(R\030clusterTimescaledbSecre" +
-      "t\210\001\001\032D\n\026AdditionalEnvVarsEntry\022\020\n\003key\030\001 " +
-      "\001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032H\n\032Ad" +
-      "ditionalCronEnvVarsEntry\022\020\n\003key\030\001 \001(\tR\003k" +
-      "ey\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032Y\n\023SpecConf" +
-      "igJsonEntry\022\020\n\003key\030\001 \001(\tR\003key\022,\n\005value\030\002" +
-      " \001(\0132\026.google.protobuf.ValueR\005value:\0028\001B" +
-      "\027\n\025_active_deployment_idB\r\n\013_worker_urlB" +
-      "\016\n\014_service_urlB\r\n\013_branch_urlB\027\n\025_offli" +
-      "ne_store_secretB\026\n\024_online_store_secretB" +
-      "\027\n\025_feature_store_secretB\022\n\020_postgres_se" +
-      "cretB\024\n\022_online_store_kindB\n\n\010_emq_uriB\025" +
-      "\n\023_vpc_connector_nameB\024\n\022_kube_cluster_n" +
-      "ameB\033\n\031_branch_kube_cluster_nameB\033\n\031_eng" +
-      "ine_kube_cluster_nameB\"\n _shadow_engine_" +
-      "kube_cluster_nameB\025\n\023_kube_job_namespace" +
-      "B\031\n\027_kube_preview_namespaceB\034\n\032_kube_ser" +
-      "vice_account_nameB\036\n\034_streaming_query_se" +
-      "rvice_uriB\023\n\021_result_bus_topicB\032\n\030_onlin" +
-      "e_persistence_modeB\024\n\022_metrics_bus_topic" +
-      "B\031\n\027_bigtable_instance_nameB\026\n\024_bigtable" +
-      "_table_nameB\030\n\026_cloud_account_locatorB\017\n" +
-      "\r_cloud_regionB\023\n\021_cloud_tenancy_idB\027\n\025_" +
-      "source_bundle_bucketB\036\n\034_engine_docker_r" +
-      "egistry_pathB\022\n\020_default_plannerB\033\n\031_pri" +
-      "vate_pip_repositoriesB\017\n\r_cloud_configB\016" +
-      "\n\014_archived_atB\'\n%_metadata_server_metri" +
-      "cs_store_secretB$\n\"_query_server_metrics" +
-      "_store_secretB\024\n\022_pinned_base_imageB\025\n\023_" +
-      "cluster_gateway_idB\031\n\027_cluster_timescale" +
-      "db_idB\'\n%_background_persistence_deploym" +
-      "ent_idB\026\n\024_environment_bucketsB\035\n\033_clust" +
-      "er_timescaledb_secret*\223\001\n\021CloudProviderK" +
-      "ind\022#\n\037CLOUD_PROVIDER_KIND_UNSPECIFIED\020\000" +
-      "\022\037\n\033CLOUD_PROVIDER_KIND_UNKNOWN\020\001\022\033\n\027CLO" +
-      "UD_PROVIDER_KIND_GCP\020\002\022\033\n\027CLOUD_PROVIDER" +
-      "_KIND_AWS\020\003B\245\001\n\037ai.chalk.protos.chalk.se" +
-      "rver.v1B\020EnvironmentProtoP\001Z\022server/v1;s" +
-      "erverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\" +
-      "Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352" +
-      "\002\021Chalk::Server::V1b\006proto3"
+      "t\210\001\001\022+\n\017grpc_engine_url\0304 \001(\tH)R\rgrpcEng" +
+      "ineUrl\210\001\001\022/\n\021kube_cluster_mode\0305 \001(\tH*R\017" +
+      "kubeClusterMode\210\001\001\022(\n\rdashboard_url\0306 \001(" +
+      "\tH+R\014dashboardUrl\210\001\001\032D\n\026AdditionalEnvVar" +
+      "sEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
+      "\005value:\0028\001\032H\n\032AdditionalCronEnvVarsEntry" +
+      "\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value" +
+      ":\0028\001\032Y\n\023SpecConfigJsonEntry\022\020\n\003key\030\001 \001(\t" +
+      "R\003key\022,\n\005value\030\002 \001(\0132\026.google.protobuf.V" +
+      "alueR\005value:\0028\001B\027\n\025_active_deployment_id" +
+      "B\r\n\013_worker_urlB\016\n\014_service_urlB\r\n\013_bran" +
+      "ch_urlB\027\n\025_offline_store_secretB\026\n\024_onli" +
+      "ne_store_secretB\027\n\025_feature_store_secret" +
+      "B\022\n\020_postgres_secretB\024\n\022_online_store_ki" +
+      "ndB\n\n\010_emq_uriB\025\n\023_vpc_connector_nameB\024\n" +
+      "\022_kube_cluster_nameB\033\n\031_branch_kube_clus" +
+      "ter_nameB\033\n\031_engine_kube_cluster_nameB\"\n" +
+      " _shadow_engine_kube_cluster_nameB\025\n\023_ku" +
+      "be_job_namespaceB\031\n\027_kube_preview_namesp" +
+      "aceB\034\n\032_kube_service_account_nameB\036\n\034_st" +
+      "reaming_query_service_uriB\023\n\021_result_bus" +
+      "_topicB\032\n\030_online_persistence_modeB\024\n\022_m" +
+      "etrics_bus_topicB\031\n\027_bigtable_instance_n" +
+      "ameB\026\n\024_bigtable_table_nameB\030\n\026_cloud_ac" +
+      "count_locatorB\017\n\r_cloud_regionB\023\n\021_cloud" +
+      "_tenancy_idB\027\n\025_source_bundle_bucketB\036\n\034" +
+      "_engine_docker_registry_pathB\022\n\020_default" +
+      "_plannerB\033\n\031_private_pip_repositoriesB\017\n" +
+      "\r_cloud_configB\016\n\014_archived_atB\'\n%_metad" +
+      "ata_server_metrics_store_secretB$\n\"_quer" +
+      "y_server_metrics_store_secretB\024\n\022_pinned" +
+      "_base_imageB\025\n\023_cluster_gateway_idB\031\n\027_c" +
+      "luster_timescaledb_idB\'\n%_background_per" +
+      "sistence_deployment_idB\026\n\024_environment_b" +
+      "ucketsB\035\n\033_cluster_timescaledb_secretB\022\n" +
+      "\020_grpc_engine_urlB\024\n\022_kube_cluster_modeB" +
+      "\020\n\016_dashboard_url*\223\001\n\021CloudProviderKind\022" +
+      "#\n\037CLOUD_PROVIDER_KIND_UNSPECIFIED\020\000\022\037\n\033" +
+      "CLOUD_PROVIDER_KIND_UNKNOWN\020\001\022\033\n\027CLOUD_P" +
+      "ROVIDER_KIND_GCP\020\002\022\033\n\027CLOUD_PROVIDER_KIN" +
+      "D_AWS\020\003B\245\001\n\037ai.chalk.protos.chalk.server" +
+      ".v1B\020EnvironmentProtoP\001Z\022server/v1;serve" +
+      "rv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Serv" +
+      "er\\V1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Ch" +
+      "alk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -284,7 +290,7 @@ public final class EnvironmentProto {
     internal_static_chalk_server_v1_AWSCloudWatchConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_AWSCloudWatchConfig_descriptor,
-        new java.lang.String[] { "LogGroupPath", });
+        new java.lang.String[] { "LogGroupPath", "LogGroupPaths", });
     internal_static_chalk_server_v1_AWSSecretManagerConfig_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_chalk_server_v1_AWSSecretManagerConfig_fieldAccessorTable = new
@@ -344,7 +350,7 @@ public final class EnvironmentProto {
     internal_static_chalk_server_v1_Environment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_Environment_descriptor,
-        new java.lang.String[] { "Name", "ProjectId", "Id", "TeamId", "ActiveDeploymentId", "WorkerUrl", "ServiceUrl", "BranchUrl", "OfflineStoreSecret", "OnlineStoreSecret", "FeatureStoreSecret", "PostgresSecret", "OnlineStoreKind", "EmqUri", "VpcConnectorName", "KubeClusterName", "BranchKubeClusterName", "EngineKubeClusterName", "ShadowEngineKubeClusterName", "KubeJobNamespace", "KubePreviewNamespace", "KubeServiceAccountName", "StreamingQueryServiceUri", "SkipOfflineWritesForOnlineCachedFeatures", "ResultBusTopic", "OnlinePersistenceMode", "MetricsBusTopic", "BigtableInstanceName", "BigtableTableName", "CloudAccountLocator", "CloudRegion", "CloudTenancyId", "SourceBundleBucket", "EngineDockerRegistryPath", "DefaultPlanner", "AdditionalEnvVars", "AdditionalCronEnvVars", "PrivatePipRepositories", "IsSandbox", "CloudProvider", "CloudConfig", "SpecConfigJson", "ArchivedAt", "MetadataServerMetricsStoreSecret", "QueryServerMetricsStoreSecret", "PinnedBaseImage", "ClusterGatewayId", "ClusterTimescaledbId", "BackgroundPersistenceDeploymentId", "EnvironmentBuckets", "ClusterTimescaledbSecret", });
+        new java.lang.String[] { "Name", "ProjectId", "Id", "TeamId", "ActiveDeploymentId", "WorkerUrl", "ServiceUrl", "BranchUrl", "OfflineStoreSecret", "OnlineStoreSecret", "FeatureStoreSecret", "PostgresSecret", "OnlineStoreKind", "EmqUri", "VpcConnectorName", "KubeClusterName", "BranchKubeClusterName", "EngineKubeClusterName", "ShadowEngineKubeClusterName", "KubeJobNamespace", "KubePreviewNamespace", "KubeServiceAccountName", "StreamingQueryServiceUri", "SkipOfflineWritesForOnlineCachedFeatures", "ResultBusTopic", "OnlinePersistenceMode", "MetricsBusTopic", "BigtableInstanceName", "BigtableTableName", "CloudAccountLocator", "CloudRegion", "CloudTenancyId", "SourceBundleBucket", "EngineDockerRegistryPath", "DefaultPlanner", "AdditionalEnvVars", "AdditionalCronEnvVars", "PrivatePipRepositories", "IsSandbox", "CloudProvider", "CloudConfig", "SpecConfigJson", "ArchivedAt", "MetadataServerMetricsStoreSecret", "QueryServerMetricsStoreSecret", "PinnedBaseImage", "ClusterGatewayId", "ClusterTimescaledbId", "BackgroundPersistenceDeploymentId", "EnvironmentBuckets", "ClusterTimescaledbSecret", "GrpcEngineUrl", "KubeClusterMode", "DashboardUrl", });
     internal_static_chalk_server_v1_Environment_AdditionalEnvVarsEntry_descriptor =
       internal_static_chalk_server_v1_Environment_descriptor.getNestedTypes().get(0);
     internal_static_chalk_server_v1_Environment_AdditionalEnvVarsEntry_fieldAccessorTable = new

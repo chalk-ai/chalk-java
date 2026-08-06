@@ -25,5 +25,20 @@ public interface OutputExprOrBuilder extends
   com.google.protobuf.ByteString
       getFeatureFqnBytes();
 
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   * @return Whether the featureExpression field is set.
+   */
+  boolean hasFeatureExpression();
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   * @return The featureExpression.
+   */
+  ai.chalk.protos.chalk.common.v1.FeatureExpression getFeatureExpression();
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   */
+  ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder getFeatureExpressionOrBuilder();
+
   ai.chalk.protos.chalk.common.v1.OutputExpr.ExprCase getExprCase();
 }

@@ -40,6 +40,7 @@ private static final long serialVersionUID = 0L;
     gitTag_ = "";
     baseImageSha_ = "";
     pinnedPlatformVersion_ = "";
+    previewDeploymentTag_ = "";
   }
 
   @java.lang.Override
@@ -1043,6 +1044,53 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int PREVIEW_DEPLOYMENT_TAG_FIELD_NUMBER = 27;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object previewDeploymentTag_ = "";
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return Whether the previewDeploymentTag field is set.
+   */
+  @java.lang.Override
+  public boolean hasPreviewDeploymentTag() {
+    return ((bitField0_ & 0x00000400) != 0);
+  }
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return The previewDeploymentTag.
+   */
+  @java.lang.Override
+  public java.lang.String getPreviewDeploymentTag() {
+    java.lang.Object ref = previewDeploymentTag_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      previewDeploymentTag_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+   * @return The bytes for previewDeploymentTag.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPreviewDeploymentTagBytes() {
+    java.lang.Object ref = previewDeploymentTag_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      previewDeploymentTag_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1134,6 +1182,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000200) != 0)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 26, pinnedPlatformVersion_);
+    }
+    if (((bitField0_ & 0x00000400) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 27, previewDeploymentTag_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -1232,6 +1283,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000200) != 0)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(26, pinnedPlatformVersion_);
     }
+    if (((bitField0_ & 0x00000400) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(27, previewDeploymentTag_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -1328,6 +1382,11 @@ private static final long serialVersionUID = 0L;
       if (!getPinnedPlatformVersion()
           .equals(other.getPinnedPlatformVersion())) return false;
     }
+    if (hasPreviewDeploymentTag() != other.hasPreviewDeploymentTag()) return false;
+    if (hasPreviewDeploymentTag()) {
+      if (!getPreviewDeploymentTag()
+          .equals(other.getPreviewDeploymentTag())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1413,6 +1472,10 @@ private static final long serialVersionUID = 0L;
     if (hasPinnedPlatformVersion()) {
       hash = (37 * hash) + PINNED_PLATFORM_VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getPinnedPlatformVersion().hashCode();
+    }
+    if (hasPreviewDeploymentTag()) {
+      hash = (37 * hash) + PREVIEW_DEPLOYMENT_TAG_FIELD_NUMBER;
+      hash = (53 * hash) + getPreviewDeploymentTag().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1592,6 +1655,7 @@ private static final long serialVersionUID = 0L;
         statusChangedAtBuilder_ = null;
       }
       pinnedPlatformVersion_ = "";
+      previewDeploymentTag_ = "";
       return this;
     }
 
@@ -1720,6 +1784,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x02000000) != 0)) {
         result.pinnedPlatformVersion_ = pinnedPlatformVersion_;
         to_bitField0_ |= 0x00000200;
+      }
+      if (((from_bitField0_ & 0x04000000) != 0)) {
+        result.previewDeploymentTag_ = previewDeploymentTag_;
+        to_bitField0_ |= 0x00000400;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1893,6 +1961,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x02000000;
         onChanged();
       }
+      if (other.hasPreviewDeploymentTag()) {
+        previewDeploymentTag_ = other.previewDeploymentTag_;
+        bitField0_ |= 0x04000000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -2056,6 +2129,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x02000000;
               break;
             } // case 210
+            case 218: {
+              previewDeploymentTag_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x04000000;
+              break;
+            } // case 218
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -4118,6 +4196,85 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       pinnedPlatformVersion_ = value;
       bitField0_ |= 0x02000000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object previewDeploymentTag_ = "";
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @return Whether the previewDeploymentTag field is set.
+     */
+    public boolean hasPreviewDeploymentTag() {
+      return ((bitField0_ & 0x04000000) != 0);
+    }
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @return The previewDeploymentTag.
+     */
+    public java.lang.String getPreviewDeploymentTag() {
+      java.lang.Object ref = previewDeploymentTag_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        previewDeploymentTag_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @return The bytes for previewDeploymentTag.
+     */
+    public com.google.protobuf.ByteString
+        getPreviewDeploymentTagBytes() {
+      java.lang.Object ref = previewDeploymentTag_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        previewDeploymentTag_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @param value The previewDeploymentTag to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPreviewDeploymentTag(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      previewDeploymentTag_ = value;
+      bitField0_ |= 0x04000000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPreviewDeploymentTag() {
+      previewDeploymentTag_ = getDefaultInstance().getPreviewDeploymentTag();
+      bitField0_ = (bitField0_ & ~0x04000000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string preview_deployment_tag = 27 [json_name = "previewDeploymentTag"];</code>
+     * @param value The bytes for previewDeploymentTag to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPreviewDeploymentTagBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      previewDeploymentTag_ = value;
+      bitField0_ |= 0x04000000;
       onChanged();
       return this;
     }

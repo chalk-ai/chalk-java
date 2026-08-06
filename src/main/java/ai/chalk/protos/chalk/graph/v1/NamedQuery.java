@@ -29,6 +29,8 @@ private static final long serialVersionUID = 0L;
     owner_ = "";
     fileName_ = "";
     deploymentId_ = "";
+    additionalLoggedFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -720,6 +722,62 @@ java.lang.String defaultValue) {
     return sourceFileReference_ == null ? ai.chalk.protos.chalk.graph.v1.SourceFileReference.getDefaultInstance() : sourceFileReference_;
   }
 
+  public static final int ADDITIONAL_LOGGED_FEATURES_FIELD_NUMBER = 14;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList additionalLoggedFeatures_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @return A list containing the additionalLoggedFeatures.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getAdditionalLoggedFeaturesList() {
+    return additionalLoggedFeatures_;
+  }
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @return The count of additionalLoggedFeatures.
+   */
+  public int getAdditionalLoggedFeaturesCount() {
+    return additionalLoggedFeatures_.size();
+  }
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The additionalLoggedFeatures at the given index.
+   */
+  public java.lang.String getAdditionalLoggedFeatures(int index) {
+    return additionalLoggedFeatures_.get(index);
+  }
+  /**
+   * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the additionalLoggedFeatures at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getAdditionalLoggedFeaturesBytes(int index) {
+    return additionalLoggedFeatures_.getByteString(index);
+  }
+
+  public static final int VALID_PLAN_NOT_REQUIRED_FIELD_NUMBER = 15;
+  private boolean validPlanNotRequired_ = false;
+  /**
+   * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+   * @return Whether the validPlanNotRequired field is set.
+   */
+  @java.lang.Override
+  public boolean hasValidPlanNotRequired() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
+   * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+   * @return The validPlanNotRequired.
+   */
+  @java.lang.Override
+  public boolean getValidPlanNotRequired() {
+    return validPlanNotRequired_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -781,6 +839,12 @@ java.lang.String defaultValue) {
     }
     if (((bitField0_ & 0x00000010) != 0)) {
       output.writeMessage(13, getSourceFileReference());
+    }
+    for (int i = 0; i < additionalLoggedFeatures_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 14, additionalLoggedFeatures_.getRaw(i));
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeBool(15, validPlanNotRequired_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -867,6 +931,18 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(13, getSourceFileReference());
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < additionalLoggedFeatures_.size(); i++) {
+        dataSize += computeStringSizeNoTag(additionalLoggedFeatures_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getAdditionalLoggedFeaturesList().size();
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(15, validPlanNotRequired_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -922,6 +998,13 @@ java.lang.String defaultValue) {
     if (hasSourceFileReference()) {
       if (!getSourceFileReference()
           .equals(other.getSourceFileReference())) return false;
+    }
+    if (!getAdditionalLoggedFeaturesList()
+        .equals(other.getAdditionalLoggedFeaturesList())) return false;
+    if (hasValidPlanNotRequired() != other.hasValidPlanNotRequired()) return false;
+    if (hasValidPlanNotRequired()) {
+      if (getValidPlanNotRequired()
+          != other.getValidPlanNotRequired()) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -981,6 +1064,15 @@ java.lang.String defaultValue) {
     if (hasSourceFileReference()) {
       hash = (37 * hash) + SOURCE_FILE_REFERENCE_FIELD_NUMBER;
       hash = (53 * hash) + getSourceFileReference().hashCode();
+    }
+    if (getAdditionalLoggedFeaturesCount() > 0) {
+      hash = (37 * hash) + ADDITIONAL_LOGGED_FEATURES_FIELD_NUMBER;
+      hash = (53 * hash) + getAdditionalLoggedFeaturesList().hashCode();
+    }
+    if (hasValidPlanNotRequired()) {
+      hash = (37 * hash) + VALID_PLAN_NOT_REQUIRED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getValidPlanNotRequired());
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1169,6 +1261,9 @@ java.lang.String defaultValue) {
         sourceFileReferenceBuilder_.dispose();
         sourceFileReferenceBuilder_ = null;
       }
+      additionalLoggedFeatures_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      validPlanNotRequired_ = false;
       return this;
     }
 
@@ -1253,6 +1348,14 @@ java.lang.String defaultValue) {
             ? sourceFileReference_
             : sourceFileReferenceBuilder_.build();
         to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
+        additionalLoggedFeatures_.makeImmutable();
+        result.additionalLoggedFeatures_ = additionalLoggedFeatures_;
+      }
+      if (((from_bitField0_ & 0x00004000) != 0)) {
+        result.validPlanNotRequired_ = validPlanNotRequired_;
+        to_bitField0_ |= 0x00000020;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1373,6 +1476,19 @@ java.lang.String defaultValue) {
       if (other.hasSourceFileReference()) {
         mergeSourceFileReference(other.getSourceFileReference());
       }
+      if (!other.additionalLoggedFeatures_.isEmpty()) {
+        if (additionalLoggedFeatures_.isEmpty()) {
+          additionalLoggedFeatures_ = other.additionalLoggedFeatures_;
+          bitField0_ |= 0x00002000;
+        } else {
+          ensureAdditionalLoggedFeaturesIsMutable();
+          additionalLoggedFeatures_.addAll(other.additionalLoggedFeatures_);
+        }
+        onChanged();
+      }
+      if (other.hasValidPlanNotRequired()) {
+        setValidPlanNotRequired(other.getValidPlanNotRequired());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1481,6 +1597,17 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00001000;
               break;
             } // case 106
+            case 114: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureAdditionalLoggedFeaturesIsMutable();
+              additionalLoggedFeatures_.add(s);
+              break;
+            } // case 114
+            case 120: {
+              validPlanNotRequired_ = input.readBool();
+              bitField0_ |= 0x00004000;
+              break;
+            } // case 120
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2843,6 +2970,157 @@ java.lang.String defaultValue) {
         sourceFileReference_ = null;
       }
       return sourceFileReferenceBuilder_;
+    }
+
+    private com.google.protobuf.LazyStringArrayList additionalLoggedFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureAdditionalLoggedFeaturesIsMutable() {
+      if (!additionalLoggedFeatures_.isModifiable()) {
+        additionalLoggedFeatures_ = new com.google.protobuf.LazyStringArrayList(additionalLoggedFeatures_);
+      }
+      bitField0_ |= 0x00002000;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @return A list containing the additionalLoggedFeatures.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getAdditionalLoggedFeaturesList() {
+      additionalLoggedFeatures_.makeImmutable();
+      return additionalLoggedFeatures_;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @return The count of additionalLoggedFeatures.
+     */
+    public int getAdditionalLoggedFeaturesCount() {
+      return additionalLoggedFeatures_.size();
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param index The index of the element to return.
+     * @return The additionalLoggedFeatures at the given index.
+     */
+    public java.lang.String getAdditionalLoggedFeatures(int index) {
+      return additionalLoggedFeatures_.get(index);
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the additionalLoggedFeatures at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getAdditionalLoggedFeaturesBytes(int index) {
+      return additionalLoggedFeatures_.getByteString(index);
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param index The index to set the value at.
+     * @param value The additionalLoggedFeatures to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAdditionalLoggedFeatures(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureAdditionalLoggedFeaturesIsMutable();
+      additionalLoggedFeatures_.set(index, value);
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param value The additionalLoggedFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAdditionalLoggedFeatures(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureAdditionalLoggedFeaturesIsMutable();
+      additionalLoggedFeatures_.add(value);
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param values The additionalLoggedFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllAdditionalLoggedFeatures(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureAdditionalLoggedFeaturesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, additionalLoggedFeatures_);
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAdditionalLoggedFeatures() {
+      additionalLoggedFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00002000);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string additional_logged_features = 14 [json_name = "additionalLoggedFeatures"];</code>
+     * @param value The bytes of the additionalLoggedFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAdditionalLoggedFeaturesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureAdditionalLoggedFeaturesIsMutable();
+      additionalLoggedFeatures_.add(value);
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+
+    private boolean validPlanNotRequired_ ;
+    /**
+     * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+     * @return Whether the validPlanNotRequired field is set.
+     */
+    @java.lang.Override
+    public boolean hasValidPlanNotRequired() {
+      return ((bitField0_ & 0x00004000) != 0);
+    }
+    /**
+     * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+     * @return The validPlanNotRequired.
+     */
+    @java.lang.Override
+    public boolean getValidPlanNotRequired() {
+      return validPlanNotRequired_;
+    }
+    /**
+     * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+     * @param value The validPlanNotRequired to set.
+     * @return This builder for chaining.
+     */
+    public Builder setValidPlanNotRequired(boolean value) {
+
+      validPlanNotRequired_ = value;
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional bool valid_plan_not_required = 15 [json_name = "validPlanNotRequired"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearValidPlanNotRequired() {
+      bitField0_ = (bitField0_ & ~0x00004000);
+      validPlanNotRequired_ = false;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

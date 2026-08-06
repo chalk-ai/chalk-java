@@ -911,4 +911,70 @@ com.google.protobuf.Value defaultValue);
    */
   com.google.protobuf.ByteString
       getClusterTimescaledbSecretBytes();
+
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return Whether the grpcEngineUrl field is set.
+   */
+  boolean hasGrpcEngineUrl();
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return The grpcEngineUrl.
+   */
+  java.lang.String getGrpcEngineUrl();
+  /**
+   * <code>optional string grpc_engine_url = 52 [json_name = "grpcEngineUrl"];</code>
+   * @return The bytes for grpcEngineUrl.
+   */
+  com.google.protobuf.ByteString
+      getGrpcEngineUrlBytes();
+
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return Whether the kubeClusterMode field is set.
+   */
+  boolean hasKubeClusterMode();
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return The kubeClusterMode.
+   */
+  java.lang.String getKubeClusterMode();
+  /**
+   * <code>optional string kube_cluster_mode = 53 [json_name = "kubeClusterMode"];</code>
+   * @return The bytes for kubeClusterMode.
+   */
+  com.google.protobuf.ByteString
+      getKubeClusterModeBytes();
+
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return Whether the dashboardUrl field is set.
+   */
+  boolean hasDashboardUrl();
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return The dashboardUrl.
+   */
+  java.lang.String getDashboardUrl();
+  /**
+   * <pre>
+   *string created_at: datetime=None,
+   *string updated_at: Optional[datetime]=None,
+   * </pre>
+   *
+   * <code>optional string dashboard_url = 54 [json_name = "dashboardUrl"];</code>
+   * @return The bytes for dashboardUrl.
+   */
+  com.google.protobuf.ByteString
+      getDashboardUrlBytes();
 }
