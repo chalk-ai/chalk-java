@@ -157,10 +157,10 @@ mavenPublishing {
 }
 
 // Second coordinate: ai.chalk:chalk-java-shaded. Identical classes to chalk-java, but every
-// third-party dependency is relocated into ai.chalk.shaded.* (see the shadowJar block). Its POM is
-// intentionally DEPENDENCY-FREE — the deps live inside the jar — so a consumer pinned to older
-// protobuf/grpc/jackson/arrow/netty never gets a conflicting transitive pulled in. Built as a manual
-// publication (not `from components.java`), so no dependencies are written to the POM.
+// third-party dependency is relocated into ai.chalk.shaded.* (see the shadowJar block). Its POM
+// declares only slf4j-api (a non-relocatable logging facade) — every other dep lives inside the jar,
+// so a consumer pinned to older protobuf/grpc/jackson/arrow/netty never gets a conflicting transitive
+// pulled in. Built as a manual publication (not `from components.java`) to keep the POM minimal.
 publishing {
     publications {
         shaded(MavenPublication) {
@@ -168,8 +168,20 @@ publishing {
             // Publish the shaded jar as the module's main artifact (strip the 'shaded' classifier).
             artifact(tasks.shadowJar) { classifier = null }
             // POM name/license/scm/developers are applied to all publications by the vanniktech
-            // mavenPublishing block below. No <dependencies> are declared here on purpose — every
-            // third-party dep is bundled + relocated inside the jar.
+            // mavenPublishing block below. The ONLY declared dependency is slf4j-api: bundled
+            // arrow/netty classes reference org.slf4j, but it is not relocatable (it's a logging
+            // facade that must bind to the runtime's logging). Declaring it guarantees the class is
+            // present for any consumer; in a Flink runtime, Flink parent-first-loads org.slf4j, so
+            // its own version always wins regardless of what we declare. Everything else is bundled +
+            // relocated inside the jar, so no other (conflict-prone) dependency is declared.
+            pom.withXml {
+                def deps = asNode().appendNode('dependencies')
+                def slf4j = deps.appendNode('dependency')
+                slf4j.appendNode('groupId', 'org.slf4j')
+                slf4j.appendNode('artifactId', 'slf4j-api')
+                slf4j.appendNode('version', '2.0.9')
+                slf4j.appendNode('scope', 'runtime')
+            }
         }
     }
 }
