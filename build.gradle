@@ -185,3 +185,13 @@ publishing {
         }
     }
 }
+
+// With two publications (maven + shaded), both sign tasks write their .asc into build/libs, and each
+// publish task reads from build/libs — so Gradle's strict validation flags an implicit dependency
+// between publish and the *other* publication's sign task and fails the build. Order all publish
+// tasks after all sign tasks to make the dependency explicit.
+import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
+import org.gradle.plugins.signing.Sign
+tasks.withType(AbstractPublishToMaven).configureEach {
+    mustRunAfter(tasks.withType(Sign))
+}
