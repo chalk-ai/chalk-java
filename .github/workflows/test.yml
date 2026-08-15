@@ -37,3 +37,9 @@ jobs:
           CHALK_ACTIVE_ENVIRONMENT: ${{ secrets.CHALK_ACTIVE_ENVIRONMENT }}
           STAGING_QA_ENV_ID: ${{ secrets.STAGING_QA_ENV_ID }}
           STAGING_DEV_ENV_ID: ${{ secrets.STAGING_DEV_ENV_ID }}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: chalk-java
