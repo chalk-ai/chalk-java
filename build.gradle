@@ -186,6 +186,17 @@ publishing {
     }
 }
 
+// Central rejects any component missing sources/javadoc, and one bad component fails the whole
+// deployment bundle — which would take chalk-java down with it. Reuse the unshaded jars: relocation
+// is a bytecode rewrite, so the sources are identical and the public ai.chalk.* API is unrelocated.
+// Deferred to afterEvaluate because the vanniktech plugin registers both tasks after this file runs.
+afterEvaluate {
+    publishing.publications.named('shaded') {
+        artifact(tasks.named('sourcesJar')) { classifier = 'sources' }
+        artifact(tasks.named('mavenPlainJavadocJar')) { classifier = 'javadoc' }
+    }
+}
+
 // With two publications (maven + shaded), both sign tasks write their .asc into build/libs, and each
 // publish task reads from build/libs — so Gradle's strict validation flags an implicit dependency
 // between publish and the *other* publication's sign task and fails the build. Order all publish
