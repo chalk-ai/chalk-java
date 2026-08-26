@@ -105,11 +105,17 @@ Each element maps to `Map<feature_fqn, value>`. Rules:
 | `batchSize` | `1000` | Flush when this many rows are buffered. |
 | `flushInterval` | `5s` | Flush a non-empty buffer at least this often. |
 | `uploadTimeout` | `30s` | Per-call deadline. |
-| `maxRetries` | `3` | Retries per batch on transient failure (exponential backoff). |
+| `retryTimeout` | `120s` | Total wall-clock budget for retrying one batch's transient failures. The primary retry bound — sized to outlast a routine query-server rollout. |
+| `maxRetries` | unlimited | Optional hard cap on retries per batch. Off by default so `retryTimeout` governs; set it to stop after a fixed number of attempts regardless of remaining budget. |
 | `retryBackoff` | `500ms` | Base backoff, doubled per attempt (capped 30s). |
 | `failOnUploadErrors` | `true` | `true`: fail the sink on engine data-level errors (replay). `false`: log a WARN and **drop** the rejected rows, continuing. |
 
 > **Poison-pill note:** engine *data-level* errors (e.g. a bad feature type) are deterministic — with `failOnUploadErrors=true`, replaying the same batch after a checkpoint restart hits the same error, wedging the pipeline in a restart loop. Fix such rows upstream, or set `failOnUploadErrors=false` to drop them. (Transient transport errors are handled separately by retry + Flink restart and do make progress.)
+
+> **Retry budget:** retries block the task thread, so `retryTimeout` is also the worst-case stall for
+> that subtask — keep it below the checkpoint timeout. An outage longer than the budget still surfaces
+> as a task failure and a restart from the last checkpoint; that is at-least-once working as intended,
+> not data loss.
 
 ## Write targets
 

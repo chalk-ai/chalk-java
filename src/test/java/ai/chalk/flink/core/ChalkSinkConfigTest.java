@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ChalkSinkConfigTest {
@@ -28,9 +29,18 @@ class ChalkSinkConfigTest {
     @Test
     void rejectsInvalidDurationsAndCounts() {
         assertThrows(IllegalArgumentException.class, () -> base().retryBackoff(Duration.ofMillis(-1)).build());
+        assertThrows(IllegalArgumentException.class, () -> base().retryTimeout(Duration.ofMillis(-1)).build());
         assertThrows(IllegalArgumentException.class, () -> base().flushInterval(Duration.ofMillis(-1)).build());
         assertThrows(IllegalArgumentException.class, () -> base().uploadTimeout(Duration.ZERO).build());
         assertThrows(IllegalArgumentException.class, () -> base().batchSize(0).build());
+    }
+
+    @Test
+    void retryBudgetDefaultsToTimeNotAttempts() {
+        ChalkSinkConfig c = base().build();
+        assertEquals(Duration.ofSeconds(120), c.retryTimeout());
+        // Unlimited by default so retryTimeout is the effective bound.
+        assertEquals(Integer.MAX_VALUE, c.maxRetries());
     }
 
     @Test
