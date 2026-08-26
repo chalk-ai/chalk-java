@@ -10,14 +10,20 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Flink-free batching engine for Chalk {@code upload_features}. Accumulates feature rows and flushes
  * them as a single columnar upload when the buffer fills (see {@link #add}), or when the owning sink
  * asks (checkpoint / close). Retries <em>transient</em> failures (gRPC UNAVAILABLE / DEADLINE_EXCEEDED
- * / RESOURCE_EXHAUSTED / ABORTED) with exponential backoff; non-transient failures (auth, invalid
- * argument) are thrown immediately. On exhaustion it throws, letting the caller (a Flink sink) fail
- * and replay from the last checkpoint — at-least-once, made safe by upsert semantics.
+ * / RESOURCE_EXHAUSTED / ABORTED) with exponential backoff until the {@code retryTimeout} budget is
+ * spent; non-transient failures (auth, invalid argument) are thrown immediately. On exhaustion it
+ * throws, letting the caller (a Flink sink) fail and replay from the last checkpoint — at-least-once,
+ * made safe by upsert semantics.
+ *
+ * <p>The budget is <em>time</em>, not attempts, so it survives a backend rollout of a known duration
+ * regardless of how the backoff is tuned. Retries run inline on the task thread, so the budget is
+ * also the worst-case subtask stall.
  *
  * <p><b>Flush latency</b> is bounded by {@code min(batchSize reached, checkpoint interval)}. The
  * configured flush interval is a best-effort upper bound evaluated when the next element arrives; on
@@ -98,26 +104,39 @@ public final class ChalkFeatureUploader implements AutoCloseable {
     }
 
     private UploadOutcome uploadWithRetry(Map<String, List<?>> columnar) {
-        int attempts = config.maxRetries() + 1;
+        // nanoTime, not currentTimeMillis: the budget must not shift under an NTP step.
+        long start = System.nanoTime();
+        long budgetNanos = TimeUnit.MILLISECONDS.toNanos(config.retryTimeoutMillis());
         Exception last = null;
-        for (int attempt = 0; attempt < attempts; attempt++) {
+        int attempts = 0;
+        while (true) {
             try {
                 return client.upload(columnar);
             } catch (Exception e) {
                 last = e;
+                attempts++;
                 // Fail fast on non-transient errors (auth, invalid argument, ...): retrying them
-                // just burns backoff and then triggers a Flink restart storm on the same error.
-                if (attempt >= attempts - 1 || !isRetryable(e)) {
+                // just burns the budget and then triggers a Flink restart storm on the same error.
+                if (!isRetryable(e) || attempts > config.maxRetries()) {
                     break;
                 }
-                LOG.warn("transient upload_features failure (attempt {}/{}), retrying: {}",
-                        attempt + 1, attempts, e.toString());
-                sleepBackoff(attempt);
+                long backoff = backoffMillis(attempts - 1);
+                // Stop once the next sleep would outlast the budget: sleeping past the deadline
+                // delays the restart without buying another attempt.
+                long remaining = TimeUnit.NANOSECONDS.toMillis(budgetNanos - (System.nanoTime() - start));
+                if (backoff >= remaining) {
+                    break;
+                }
+                LOG.warn("transient upload_features failure (attempt {}, {}ms of retry budget left), "
+                                + "retrying in {}ms: {}", attempts, remaining, backoff, e.toString());
+                sleep(backoff);
             }
         }
-        boolean retryable = isRetryable(last);
+        long elapsedMillis = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
         throw new ChalkUploadException(
-                "upload_features failed" + (retryable ? " after " + attempts + " attempt(s)"
+                "upload_features failed" + (isRetryable(last)
+                        ? " after " + attempts + " attempt(s) over " + elapsedMillis + "ms"
+                                + " (retryTimeout=" + config.retryTimeoutMillis() + "ms)"
                         : " with a non-retryable error"), last);
     }
 
@@ -135,13 +154,19 @@ public final class ChalkFeatureUploader implements AutoCloseable {
         return false;
     }
 
-    private void sleepBackoff(int attempt) {
-        // Exponential backoff, capped at 30s to bound restart latency. Cap the shift and detect
-        // overflow (a huge maxRetries could otherwise wrap the product negative -> bad Thread.sleep).
-        long scaled = config.retryBackoffMillis() << Math.min(attempt, 20);
-        long backoff = (scaled < 0) ? 30_000L : Math.min(scaled, 30_000L);
+    /**
+     * Exponential backoff for the given zero-based retry index, capped at 30s so a long budget is
+     * spent on many attempts rather than a few enormous sleeps. The shift is capped and overflow
+     * detected: an unbounded attempt count could otherwise wrap the product negative.
+     */
+    private long backoffMillis(int retryIndex) {
+        long scaled = config.retryBackoffMillis() << Math.min(retryIndex, 20);
+        return (scaled < 0) ? 30_000L : Math.min(scaled, 30_000L);
+    }
+
+    private void sleep(long millis) {
         try {
-            Thread.sleep(backoff);
+            Thread.sleep(millis);
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
             throw new ChalkUploadException("interrupted while backing off before upload retry", ie);

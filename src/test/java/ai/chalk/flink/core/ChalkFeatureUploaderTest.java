@@ -116,6 +116,54 @@ class ChalkFeatureUploaderTest {
     }
 
     @Test
+    void stopsRetryingWhenTimeBudgetSpent() {
+        FakeClient fake = new FakeClient();
+        fake.failFirstN = Integer.MAX_VALUE; // never recovers
+        ChalkFeatureUploader uploader = new ChalkFeatureUploader(
+                config(ChalkSinkConfig.builder().batchSize(1)
+                        .retryTimeout(Duration.ofMillis(300))
+                        .retryBackoff(Duration.ofMillis(50))), fake);
+
+        // maxRetries is unlimited by default, so the time budget is the only thing that can stop this.
+        long start = System.nanoTime();
+        ChalkUploadException e = assertThrows(ChalkUploadException.class,
+                () -> uploader.add(Map.of("user.id", 1L)));
+        long elapsedMillis = (System.nanoTime() - start) / 1_000_000;
+
+        assertTrue(e.getMessage().contains("retryTimeout"), e.getMessage());
+        // Never sleeps past the deadline; generous ceiling so a slow CI box can't flake this.
+        assertTrue(elapsedMillis < 3_000, "took " + elapsedMillis + "ms, expected to stop near 300ms");
+    }
+
+    @Test
+    void timeBudgetAllowsMoreAttemptsThanTheOldFixedCap() {
+        FakeClient fake = new FakeClient();
+        fake.failFirstN = Integer.MAX_VALUE;
+        ChalkFeatureUploader uploader = new ChalkFeatureUploader(
+                config(ChalkSinkConfig.builder().batchSize(1)
+                        .retryTimeout(Duration.ofMillis(1_000))
+                        .retryBackoff(Duration.ofMillis(1))), fake);
+
+        assertThrows(ChalkUploadException.class, () -> uploader.add(Map.of("user.id", 1L)));
+        // The old behaviour was a hard 4 attempts (maxRetries=3 + 1) regardless of remaining budget;
+        // with a 1s budget and 1ms base backoff there is room for many more.
+        assertTrue(fake.attempts.get() > 4, "only " + fake.attempts.get() + " attempts");
+    }
+
+    @Test
+    void explicitMaxRetriesStillCapsBeforeBudget() {
+        FakeClient fake = new FakeClient();
+        fake.failFirstN = Integer.MAX_VALUE;
+        ChalkFeatureUploader uploader = new ChalkFeatureUploader(
+                config(ChalkSinkConfig.builder().batchSize(1).maxRetries(2)
+                        .retryTimeout(Duration.ofMinutes(5)) // budget far larger than the cap
+                        .retryBackoff(Duration.ofMillis(1))), fake);
+
+        assertThrows(ChalkUploadException.class, () -> uploader.add(Map.of("user.id", 1L)));
+        assertEquals(3, fake.attempts.get()); // 1 initial + 2 retries, budget untouched
+    }
+
+    @Test
     void failsFastOnNonRetryableError() {
         FakeClient fake = new FakeClient();
         fake.failFirstN = 99;

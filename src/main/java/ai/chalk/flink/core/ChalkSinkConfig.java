@@ -28,6 +28,7 @@ public final class ChalkSinkConfig implements Serializable {
     private final long uploadTimeoutMillis;
     private final int maxRetries;
     private final long retryBackoffMillis;
+    private final long retryTimeoutMillis;
     private final boolean failOnUploadErrors;
 
     private final boolean writeOnline;
@@ -46,6 +47,7 @@ public final class ChalkSinkConfig implements Serializable {
         this.uploadTimeoutMillis = b.uploadTimeoutMillis;
         this.maxRetries = b.maxRetries;
         this.retryBackoffMillis = b.retryBackoffMillis;
+        this.retryTimeoutMillis = b.retryTimeoutMillis;
         this.failOnUploadErrors = b.failOnUploadErrors;
         this.writeOnline = b.writeOnline;
         this.writeOffline = b.writeOffline;
@@ -63,6 +65,8 @@ public final class ChalkSinkConfig implements Serializable {
     public Duration uploadTimeout() { return Duration.ofMillis(uploadTimeoutMillis); }
     public int maxRetries() { return maxRetries; }
     public long retryBackoffMillis() { return retryBackoffMillis; }
+    public long retryTimeoutMillis() { return retryTimeoutMillis; }
+    public Duration retryTimeout() { return Duration.ofMillis(retryTimeoutMillis); }
     public boolean failOnUploadErrors() { return failOnUploadErrors; }
     public boolean writeOnline() { return writeOnline; }
     public boolean writeOffline() { return writeOffline; }
@@ -82,8 +86,12 @@ public final class ChalkSinkConfig implements Serializable {
         private int batchSize = 1_000;
         private long flushIntervalMillis = 5_000;
         private long uploadTimeoutMillis = 30_000;
-        private int maxRetries = 3;
+        // Unlimited by default: retryTimeout is the real bound. A fixed attempt count can't express
+        // "survive a backend rollout" — with the default backoff, 3 retries covered only ~3.5s, which
+        // is shorter than a routine query-server deploy and caused Flink restarts in production.
+        private int maxRetries = Integer.MAX_VALUE;
         private long retryBackoffMillis = 500;
+        private long retryTimeoutMillis = 120_000;
         private boolean failOnUploadErrors = true;
         private boolean writeOnline = true;
         private boolean writeOffline = false;
@@ -116,11 +124,25 @@ public final class ChalkSinkConfig implements Serializable {
         /** Per-call upload deadline. Default 30s. */
         public Builder uploadTimeout(Duration v) { this.uploadTimeoutMillis = v.toMillis(); return this; }
 
-        /** Retries per batch on transient failures (in addition to the first attempt). Default 3. */
+        /**
+         * Optional hard cap on retries per batch, in addition to the first attempt. Unlimited by
+         * default — {@link #retryTimeout} is the primary bound. Set this only to stop retrying after
+         * a fixed number of attempts regardless of how much time budget remains.
+         */
         public Builder maxRetries(int v) { this.maxRetries = v; return this; }
 
-        /** Base backoff between retries, in millis (doubled each attempt). Default 500. */
+        /** Base backoff between retries, in millis (doubled each attempt, capped at 30s). Default 500. */
         public Builder retryBackoff(Duration v) { this.retryBackoffMillis = v.toMillis(); return this; }
+
+        /**
+         * Total wall-clock budget for retrying one batch's transient failures. Default 120s, chosen to
+         * outlast a routine query-server rollout: a shorter budget surfaces the outage as a Flink task
+         * failure and a restart from the last checkpoint.
+         *
+         * <p>Retries block the task thread, so this is also the worst-case stall for the subtask.
+         * Keep it below the checkpoint timeout.
+         */
+        public Builder retryTimeout(Duration v) { this.retryTimeoutMillis = v.toMillis(); return this; }
 
         /**
          * When true (default), a batch whose response carries engine data-level errors fails the sink.
@@ -170,6 +192,9 @@ public final class ChalkSinkConfig implements Serializable {
             }
             if (retryBackoffMillis < 0) {
                 throw new IllegalArgumentException("retryBackoff must be >= 0");
+            }
+            if (retryTimeoutMillis < 0) {
+                throw new IllegalArgumentException("retryTimeout must be >= 0");
             }
             // Fail fast at job-construction time (not later on the TaskManager) for write targets the
             // pinned chalk-java can't honor. See README "Write targets".
