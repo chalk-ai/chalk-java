@@ -36,6 +36,7 @@ public record ResolvedConfig(
                 SourcedConfig.firstNonEmpty(
                         SourcedConfig.fromBuilder(builder.getEnvironmentId()),
                         SourcedConfig.fromEnvVar(ConfigEnvVars.environmentIdKey),
+                        SourcedConfig.fromEnvVar(ConfigEnvVars.legacyEnvironmentIdKey),
                         SourcedConfig.fromConfigFile(chalkYamlConfig.getActiveEnvironment())
                 ),
                 SourcedConfig.firstNonEmpty(

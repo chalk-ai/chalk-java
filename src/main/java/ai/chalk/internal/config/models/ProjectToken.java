@@ -1,5 +1,6 @@
 package ai.chalk.internal.config.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectToken {
     private String name;
     private String clientId;

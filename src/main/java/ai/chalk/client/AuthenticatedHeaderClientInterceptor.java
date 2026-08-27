@@ -47,7 +47,9 @@ public class AuthenticatedHeaderClientInterceptor implements ClientInterceptor {
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 GetTokenResponse token = tokenRefresher.getToken();
                 for (Map.Entry<Metadata.Key<String>, String> entry : allHeaders.entrySet()) {
-                    headers.put(entry.getKey(), entry.getValue());
+                    if (!headers.containsKey(entry.getKey())) {
+                        headers.put(entry.getKey(), entry.getValue());
+                    }
                 }
                 headers.put(GrpcHeaders.AUTHORIZATION_KEY, "Bearer " + token.getAccessToken());
                 super.start(responseListener, headers);

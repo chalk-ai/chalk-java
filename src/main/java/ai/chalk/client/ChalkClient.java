@@ -7,6 +7,7 @@ import java.net.http.HttpClient;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 public interface ChalkClient extends AutoCloseable {
 
@@ -61,6 +62,27 @@ public interface ChalkClient extends AutoCloseable {
     static ChalkClient createGrpc() throws ChalkException {
         return builder().withGrpc().build();
     }
+
+    /**
+     * Pings the Chalk engine with a random number and returns the number echoed
+     * by the engine.
+     *
+     * @return the number echoed by the engine
+     * @throws ChalkException if the engine cannot be reached
+     */
+    default int ping() throws ChalkException {
+        return ping(ThreadLocalRandom.current().nextInt(1000));
+    }
+
+    /**
+     * Pings the Chalk engine with {@code num} and returns the number echoed by
+     * the engine.
+     *
+     * @param num the number to send to the engine
+     * @return the number echoed by the engine
+     * @throws ChalkException if the engine cannot be reached
+     */
+    int ping(int num) throws ChalkException;
 
     /**
      * OnlineQuery computes features values using online resolvers.

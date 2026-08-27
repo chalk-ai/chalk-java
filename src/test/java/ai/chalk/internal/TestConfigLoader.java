@@ -23,6 +23,7 @@ public class TestConfigLoader {
                 validUntil: 2025-05-02T17:32:46.165000
                 apiServer: https://api.chalk.ai
                 activeEnvironment: myprojectenvid
+                activeEnvironmentName: My Project
               default:
                 name: Default Token
                 clientId: client-default
@@ -54,4 +55,3 @@ public class TestConfigLoader {
         assert defaultToken.getValidUntil().equals(LocalDateTime.of(2024, 9, 11, 15, 7, 50, 812_000_000));
     }
 }
-

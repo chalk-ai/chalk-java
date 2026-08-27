@@ -21,7 +21,12 @@ public class ConfigEnvVars {
      * This is the identifier that distinguishes between different
      * environments in your Chalk project.
      */
-    public static String environmentIdKey = "CHALK_ACTIVE_ENVIRONMENT";
+    public static String environmentIdKey = "CHALK_ENVIRONMENT";
+
+    /**
+     * Legacy environment variable supported for backwards compatibility.
+     */
+    public static String legacyEnvironmentIdKey = "CHALK_ACTIVE_ENVIRONMENT";
     /**
      * The path to the root CA certificate file.
      */
