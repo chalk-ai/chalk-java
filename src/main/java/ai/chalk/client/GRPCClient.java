@@ -12,6 +12,7 @@ import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
 import ai.chalk.protos.chalk.common.v1.*;
+import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -122,6 +123,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             }
         }
         engineHost = engineHost.replaceFirst("^https?://", "");
+        boolean queryThroughApiServer = engineHost.equals(grpcHost);
 
         /**
          * Create static retry policy (TODO: make it configurable)
@@ -145,8 +147,13 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 .maxInboundMessageSize(1024 * 1024 * 500)
                 .intercept(
                         new AuthenticatedHeaderClientInterceptor(
-                                ServerType.ENGINE,
-                                Map.of(),
+                                queryThroughApiServer ? ServerType.SERVER : ServerType.ENGINE,
+                                queryThroughApiServer
+                                        ? Map.of(
+                                                "x-chalk-env-id", resolvedEnvironmentId,
+                                                "x-chalk-deployment-type", "engine-grpc"
+                                        )
+                                        : Map.of("x-chalk-env-id", resolvedEnvironmentId),
                                 tokenRefresher,
                                 builder.getDeploymentTag()
                         )
@@ -186,6 +193,14 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         @Nullable String queryName
     ) {
         return new RequestHeaderInterceptor(environmentIdOverride, this.resolvedEnvironmentId, queryName);
+    }
+
+    @Override
+    public int ping(int num) {
+        return this.stubsProvider.getQueryStub(Optional.empty())
+                .withInterceptors(this.getRequestHeaderInterceptor(null, null))
+                .ping(PingRequest.newBuilder().setNum(num).build())
+                .getNum();
     }
 
 

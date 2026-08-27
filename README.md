@@ -68,6 +68,17 @@ ChalkClient client = ChalkClient.builder()
 ```
 
 
+## Ping
+
+Use `ping` to check connectivity to the Chalk engine. The engine echoes the
+number sent by the client. Calling `ping()` without an argument sends a random
+number between 0 and 999.
+
+```java
+int echoed = client.ping(3); // 3
+int randomEcho = client.ping();
+```
+
 ## Memory management
 Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be
 closed to free up memory. 

@@ -11,6 +11,8 @@ import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
+import ai.chalk.internal.request.models.PingRequest;
+import ai.chalk.internal.request.models.PingResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
@@ -72,6 +74,19 @@ public class ChalkClientImpl implements ChalkClient {
             return onlineQueryJson(params);
         }
         return onlineQueryFeather(params);
+    }
+
+    @Override
+    public int ping(int num) throws ChalkException {
+        SendRequestParams request = new SendRequestParams.Builder(null)
+                .path("/ping")
+                .body(new PingRequest(num))
+                .method("POST")
+                .isEngineRequest(true)
+                .build();
+
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), PingResponse.class).num();
     }
 
     private OnlineQueryResult onlineQueryFeather(OnlineQueryParamsComplete params) throws ChalkException {
