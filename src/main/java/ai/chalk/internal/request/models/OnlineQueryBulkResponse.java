@@ -43,6 +43,14 @@ public record OnlineQueryBulkResponse(Map<String, OnlineQueryResultFeather> quer
         return new OnlineQueryBulkResponse(resultFeatherMap);
     }
 
+    /*
+     * TODO: the REST wire format is already multi-query shaped -- `query_results_bytes`
+     * is a map keyed by query index, and this reads only key "0". Generalizing this is
+     * what a REST implementation of ChalkClient.onlineQueryMulti would need. Note that
+     * OnlineQueryResultFeather.close() closes a *shared* allocator once per map entry,
+     * which must be fixed first: with more than one entry it would release the allocator
+     * while the other entries' tables still hold buffers.
+     */
     public OnlineQueryResult toResult() throws ChalkException {
         if (!(this.queryResults.containsKey("0"))) {
             throw new ClientException("malformed online query bulk response");

@@ -378,3 +378,67 @@ public class Main {
     }
 }
 ```
+
+### Multi-query
+
+`onlineQueryMulti` runs several *independent* queries in parallel, using a single request. Reach for
+it when the queries are rooted in different feature classes, or otherwise ask for unrelated outputs,
+and you would rather not pay a round trip for each. To run one query over many rows of input, use
+`onlineQuery` — it is already a bulk operation.
+
+Multi-query requires the gRPC client.
+
+```java
+import ai.chalk.client.ChalkClient;
+import ai.chalk.exceptions.ServerError;
+import ai.chalk.models.OnlineQueryMultiResult;
+import ai.chalk.models.OnlineQueryParams;
+import ai.chalk.models.OnlineQueryResult;
+
+import java.util.Arrays;
+import java.util.List;
+
+ChalkClient client = ChalkClient.createGrpc();
+
+var users = OnlineQueryParams.builder()
+        .withInput("user.id", Arrays.asList(1, 2, 3))
+        .withOutputs("user.email")
+        .build();
+var merchants = OnlineQueryParams.builder()
+        .withInput("merchant.id", Arrays.asList("a", "b"))
+        .withOutputs("merchant.risk_score")
+        .build();
+
+try (OnlineQueryMultiResult multi = client.onlineQueryMulti(List.of(users, merchants))) {
+    for (ServerError error : multi.getGlobalErrors()) {
+        // errors that do not belong to any one query
+    }
+    for (OnlineQueryResult result : multi.getResults()) {
+        if (result.getErrors().length > 0) {
+            // this query failed; the others are unaffected
+            continue;
+        }
+        // do something with the result
+    }
+}
+```
+
+A few things to know:
+
+- **Results are positional.** `getResults()` holds one result per query, in the order you passed
+  them in.
+- **Queries fail independently.** A resolver that fails while computing one query is reported on
+  that query's own result, and leaves the others intact. `getGlobalErrors()` holds the errors the
+  engine did not attach to a specific result. Note that a query which failed to *run* at all — it
+  was rate limited, or the engine hit an internal error on it — is reported there, naming the query
+  by its 1-based position in the message, while its slot in `getResults()` holds an empty result
+  with no errors of its own. So check the global errors too, rather than reading an empty result as
+  a successful one.
+- **Close the wrapper, not the results.** Closing the `OnlineQueryMultiResult` closes every one of
+  its results and releases all of their Arrow memory.
+- **Some settings apply to the whole request,** which carries one deadline and one set of headers.
+  Every query must agree on `environmentId`, `branch`, `queryName` and `queryNameVersion`, or the
+  call throws `ClientException` — a request resolves one branch to one deployment and routes named
+  queries by an exact match on the query name, so a mixed batch could not be honored. Run those as
+  separate queries. The deadline is the longest of the per-query timeouts, falling back to the
+  client-level timeout, so per-query timeouts are not independently enforced.

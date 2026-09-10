@@ -1,11 +1,14 @@
 package ai.chalk.client;
 
 import ai.chalk.exceptions.ChalkException;
+import ai.chalk.exceptions.ClientException;
 import ai.chalk.models.*;
 
 import java.net.http.HttpClient;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -128,6 +131,105 @@ public interface ChalkClient extends AutoCloseable {
      * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
      */
     OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException;
+
+    /**
+     * OnlineQueryMulti computes several independent online queries in parallel,
+     * using a single request to the Chalk engine. Use it when the queries are
+     * rooted in different feature classes, or otherwise ask for unrelated
+     * outputs, and you would rather not pay a round trip for each one. To run
+     * one query over many rows of input, use {@link #onlineQuery} instead,
+     * which is already a bulk operation.
+     *
+     * <p> This is supported only by the gRPC client; see {@link ChalkClient#createGrpc()}.
+     *
+     * <p>
+     * Example usage:
+     * <pre>
+     *         {@code
+     *         OnlineQueryParamsComplete users = OnlineQueryParams.builder()
+     *             .withInput("user.id", Arrays.asList(1, 2, 3))
+     *             .withOutputs("user.email")
+     *             .build();
+     *         OnlineQueryParamsComplete merchants = OnlineQueryParams.builder()
+     *             .withInput("merchant.id", Arrays.asList("a", "b"))
+     *             .withOutputs("merchant.risk_score")
+     *             .build();
+     *
+     *         try (OnlineQueryMultiResult multi = client.onlineQueryMulti(List.of(users, merchants))) {
+     *             for (OnlineQueryResult result : multi.getResults()) {
+     *                 if (result.getErrors().length > 0) {
+     *                     // handle this query's failure; the other queries are unaffected
+     *                     continue;
+     *                 }
+     *                 // do something with the result
+     *             }
+     *         }
+     *         }
+     *     </pre>
+     * </p>
+     *
+     * <p> <b>Results are positional.</b> {@link OnlineQueryMultiResult#getResults()}
+     * holds one result per query, in the order the queries were passed in.
+     *
+     * <p> <b>Queries fail independently.</b> A resolver that fails while computing
+     * one query is reported on that query's own result, via
+     * {@link OnlineQueryResult#getErrors()}, and leaves the other queries' results
+     * intact. {@link OnlineQueryMultiResult#getGlobalErrors()} holds the errors the
+     * engine did not attach to a specific result -- including the case where a query
+     * failed to run at all, which is reported there with the query's 1-based position
+     * in the message rather than on the result. That query still occupies its slot,
+     * but its result is empty and reports no errors of its own, so check the global
+     * errors as well before treating an empty result as a successful one.
+     *
+     * <p> <b>Resources.</b> Closing the returned {@link OnlineQueryMultiResult}
+     * closes every one of its results and releases all of their Arrow memory.
+     * Do not close the individual results yourself.
+     *
+     * <p> <b>Some settings apply to the whole request.</b> A request carries one
+     * deadline and one set of headers, so:
+     * <ul>
+     *   <li>Every query must agree on {@code environmentId}, {@code branch},
+     *       {@code queryName} and {@code queryNameVersion}. A disagreement throws
+     *       {@link ai.chalk.exceptions.ClientException}, because a request resolves
+     *       one branch to one deployment and routes named queries by an exact match
+     *       on the query name, so a mixed batch could not be honored. Run those as
+     *       separate queries.</li>
+     *   <li>The deadline is the longest of the per-query timeouts, falling back to
+     *       the client-level timeout. Per-query timeouts are not independently
+     *       enforced.</li>
+     *   <li>Branch selection is currently inert on the gRPC path for both single and
+     *       multi queries: the client does not yet send the header the API server
+     *       routes branches on.</li>
+     * </ul>
+     *
+     * @param params the queries to run, one result per query
+     * @return {@link OnlineQueryMultiResult}
+     * @throws ChalkException if the request fails, or if the queries disagree on a
+     *                        setting that applies to the whole request
+     * @see <a href="https://docs.chalk.ai/docs/query-basics">query basics</a>
+     */
+    default OnlineQueryMultiResult onlineQueryMulti(List<OnlineQueryParamsComplete> params)
+            throws ChalkException {
+        throw new ClientException(
+                "onlineQueryMulti is only supported by the gRPC client. Build one with "
+                        + "ChalkClient.builder().withGrpc().build() or ChalkClient.createGrpc()."
+        );
+    }
+
+    /**
+     * OnlineQueryMulti computes several independent online queries in parallel,
+     * using a single request to the Chalk engine.
+     *
+     * <p> See {@link #onlineQueryMulti(List)} for details and for the settings that
+     * every query must agree on.
+     *
+     * @return {@link OnlineQueryMultiResult}
+     * @throws ChalkException
+     */
+    default OnlineQueryMultiResult onlineQueryMulti(OnlineQueryParamsComplete... params)
+            throws ChalkException {
+        return onlineQueryMulti(Arrays.asList(params));
+    }
 
     /**
      * UploadFeatures synchronously persists feature values to the online store and

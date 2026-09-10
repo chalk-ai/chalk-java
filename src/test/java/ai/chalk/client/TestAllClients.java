@@ -2,6 +2,7 @@ package ai.chalk.client;
 
 import ai.chalk.client.e2e.FraudTemplateFeatures;
 import ai.chalk.client.e2e.User;
+import ai.chalk.exceptions.ClientException;
 import ai.chalk.models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,6 +14,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.Duration;
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
@@ -284,5 +287,19 @@ class TestAllClients {
         }
     }
 
+    /**
+     * Multi-query is a gRPC-only capability today. The REST client inherits the
+     * rejecting default on ChalkClient; make that contract explicit.
+     */
+    @Test
+    public void testOnlineQueryMultiUnsupportedOnRest() {
+        var params = OnlineQueryParams.builder()
+                .withInput(FraudTemplateFeatures.user.id, List.of("1"))
+                .withOutputs(FraudTemplateFeatures.user.socure_score)
+                .build();
 
+        var thrown = assertThrows(
+                ClientException.class, () -> restClient.onlineQueryMulti(List.of(params)));
+        assertTrue(thrown.getMessage().contains("gRPC"));
+    }
 }
