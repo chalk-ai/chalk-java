@@ -30,6 +30,17 @@ public class Unmarshaller {
     public static List<String> prefixToSkip = List.of(Constants.chalkDunderPrefix);
 
     public static <T extends FeaturesClass> T[] unmarshalOnlineQueryResult(OnlineQueryResult result, Class<T> target) throws ClientException {
+        if (result.getScalarsTable() == null) {
+            // No scalar data came back. For a multi-query this is what a sub-query that failed
+            // to execute leaves behind: an empty result whose reason sits in the multi-result's
+            // global errors rather than on the result itself.
+            throw new ClientException(
+                    "Cannot unmarshal an online query result that has no scalar data. Check "
+                            + "getErrors() on this result, and, if it came from onlineQueryMulti, "
+                            + "getGlobalErrors() on the OnlineQueryMultiResult -- a query that "
+                            + "failed to execute is reported there."
+            );
+        }
         try {
             var rootFeatureClasses = unmarshalTable(result.getScalarsTable(), target);
             // This only unmarshals if has-many features gets returned in `result.groupsTables`

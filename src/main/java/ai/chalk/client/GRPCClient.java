@@ -7,6 +7,7 @@ import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.models.OnlineQueryMultiResult;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
@@ -22,6 +23,7 @@ import com.google.protobuf.Value;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
 import lombok.NonNull;
+import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.table.Table;
 
@@ -31,6 +33,7 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 import static ai.chalk.internal.arrow.FeatherProcessor.inputsToArrowBytes;
 
@@ -205,19 +208,97 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
 
     public OnlineQueryResult onlineQuery(OnlineQueryParamsComplete params) throws ChalkException {
-        byte[] bodyBytes;
+        byte[] bodyBytes = serializeInputs(params, this.allocator, "grpc_online_query_params");
+        OnlineQueryBulkRequest request = buildBulkRequest(params, bodyBytes, this.branchId);
+
+        AtomicReference<Metadata> trailersRef = new AtomicReference<>();
+        OnlineQueryBulkResponse response = queryStub(
+                params.getTimeout(),
+                params.getEnvironmentId(),
+                params.getQueryName(),
+                trailersRef
+        ).onlineQueryBulk(request);
+
+        return decodeBulkResponse(
+                response,
+                traceIdFrom(trailersRef),
+                newResponseAllocator("grpc_online_query_response")
+        );
+    }
+
+    /**
+     * OnlineQueryMulti computes several independent online queries in parallel,
+     * using a single request to the Chalk engine.
+     */
+    @Override
+    public OnlineQueryMultiResult onlineQueryMulti(List<OnlineQueryParamsComplete> paramsList)
+            throws ChalkException {
+        validateMultiParams(paramsList);
+        if (paramsList.isEmpty()) {
+            return new OnlineQueryMultiResult(List.of(), new ServerError[0], null);
+        }
+
+        // Resolve the request-level settings before serializing anything, so a batch that
+        // cannot be satisfied fails before doing the work of encoding its inputs.
+        Duration deadline = resolveDeadline(paramsList, this.timeout).orElse(null);
+        String environmentId = resolveEnvironment(paramsList, this.resolvedEnvironmentId);
+        String queryName = resolveQueryName(paramsList);
+        // Validated for agreement but deliberately unused: the gRPC client does not send the
+        // "x-chalk-branch-id" header that the API server routes branches on, so branch
+        // selection is inert on this path for single and multi queries alike. See the
+        // branch/preview-deployment follow-up.
+        resolveBranch(paramsList, this.branchId);
+
+        OnlineQueryMultiRequest request = buildMultiRequest(paramsList, this.allocator, this.branchId);
+
+        AtomicReference<Metadata> trailersRef = new AtomicReference<>();
+        OnlineQueryMultiResponse response = queryStub(deadline, environmentId, queryName, trailersRef)
+                .onlineQueryMulti(request);
+
+        return decodeMultiResponse(
+                response,
+                paramsList.size(),
+                traceIdFrom(trailersRef),
+                this.allocator
+        );
+    }
+
+    /**
+     * Serializes the query's inputs to Arrow IPC bytes, using a short-lived
+     * child allocator that is released before returning.
+     */
+    static byte[] serializeInputs(
+            OnlineQueryParamsComplete params,
+            BufferAllocator parentAllocator,
+            String allocatorName
+    ) throws ClientException {
         try (
-                var childAllocator = allocator.newChildAllocator(
-                        "grpc_online_query_params",
+                var childAllocator = parentAllocator.newChildAllocator(
+                        allocatorName,
                         0,
                         FeatherProcessor.ALLOCATOR_SIZE_REQUEST
                 )
         ) {
-            bodyBytes = inputsToArrowBytes(params.getInputs(), childAllocator);
+            return inputsToArrowBytes(params.getInputs(), childAllocator);
         } catch (Exception e) {
             throw new ClientException("Failed to serialize OnlineQueryParams", e);
         }
+    }
 
+    /*
+     * Builds the bulk request for a single query. Shared by the single-query and
+     * multi-query paths, so both produce byte-identical sub-requests.
+     *
+     * TODO: params.getStaleness() and params.isStorePlanStages() are not sent on the
+     * gRPC path, even though OnlineQueryBulkRequest has a `staleness` field. Wiring
+     * staleness up requires deciding how to encode a Duration as the bucket string
+     * the server expects.
+     */
+    static OnlineQueryBulkRequest buildBulkRequest(
+            OnlineQueryParamsComplete params,
+            byte[] inputsFeather,
+            @Nullable String clientBranchId
+    ) {
         List<String> resolvedOutputs = params.getOutputs();
         if (resolvedOutputs == null) {
             resolvedOutputs = new ArrayList<>();
@@ -243,8 +324,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         var context = OnlineQueryContext.newBuilder();
         if (params.getBranch() != null && !params.getBranch().isEmpty()) {
             context.setBranchId(params.getBranch());
-        } else if (this.branchId != null && !this.branchId.isEmpty()) {
-            context.setBranchId(this.branchId);
+        } else if (clientBranchId != null && !clientBranchId.isEmpty()) {
+            context.setBranchId(clientBranchId);
         }
         if (params.getCorrelationId() != null) {
             context.setCorrelationId(params.getCorrelationId());
@@ -289,44 +370,92 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
             options.putAllMetadata(params.getMeta());
         }
 
-        var request = OnlineQueryBulkRequest.newBuilder()
-                .setInputsFeather(ByteString.copyFrom(bodyBytes))
+        return OnlineQueryBulkRequest.newBuilder()
+                .setInputsFeather(ByteString.copyFrom(inputsFeather))
                 .addAllOutputs(outputs)
                 .addAllNow(now)
                 .setBodyType(FeatherBodyType.FEATHER_BODY_TYPE_TABLE)
                 .setContext(context)
                 .setResponseOptions(options)
                 .build();
+    }
 
-        AtomicReference<Metadata> trailersRef = new AtomicReference<>();
-        OnlineQueryBulkResponse response = this.stubsProvider.getQueryStub(Optional.ofNullable(params.getTimeout()))
-                .withInterceptors(
-                    MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
-                    this.getRequestHeaderInterceptor(params.getEnvironmentId(), params.getQueryName())
-                )
-                .onlineQueryBulk(request);
-
-        var meta = GrpcSerializer.toQueryMeta(
-                response.getResponseMeta(),
-                trailersRef.get().get(CHALK_TRACE_ID_KEY)
-        );
-
-        ServerError[] errors = new ServerError[response.getErrorsCount()];
-        for (int i = 0; i < response.getErrorsCount(); i++) {
-            errors[i] = GrpcSerializer.toServerError(response.getErrors(i));
+    /*
+     * Wraps each set of params as a bulk sub-query, preserving order. The engine
+     * rejects `single_request` outright ("OnlineQueryRequest is unsupported; Please
+     * use OnlineQueryBulkRequest w/ a single row"), so every sub-query is a bulk
+     * request, exactly as the reference Python client does.
+     */
+    static OnlineQueryMultiRequest buildMultiRequest(
+            List<OnlineQueryParamsComplete> paramsList,
+            BufferAllocator parentAllocator,
+            @Nullable String clientBranchId
+    ) throws ClientException {
+        var request = OnlineQueryMultiRequest.newBuilder();
+        for (int i = 0; i < paramsList.size(); i++) {
+            OnlineQueryParamsComplete params = paramsList.get(i);
+            byte[] inputsFeather = serializeInputs(
+                    params, parentAllocator, "grpc_online_query_multi_params[" + i + "]"
+            );
+            request.addQueries(
+                    GenericSingleQuery.newBuilder()
+                            .setBulkRequest(buildBulkRequest(params, inputsFeather, clientBranchId))
+                            .build()
+            );
         }
+        return request.build();
+    }
 
+    private QueryServiceGrpc.QueryServiceBlockingStub queryStub(
+            @Nullable Duration timeout,
+            @Nullable String environmentIdOverride,
+            @Nullable String queryName,
+            AtomicReference<Metadata> trailersRef
+    ) {
+        return this.stubsProvider.getQueryStub(Optional.ofNullable(timeout))
+                .withInterceptors(
+                        MetadataUtils.newCaptureMetadataInterceptor(new AtomicReference<>(), trailersRef),
+                        this.getRequestHeaderInterceptor(environmentIdOverride, queryName)
+                );
+    }
+
+    private static @Nullable String traceIdFrom(AtomicReference<Metadata> trailersRef) {
+        Metadata trailers = trailersRef.get();
+        return trailers == null ? null : trailers.get(CHALK_TRACE_ID_KEY);
+    }
+
+    private BufferAllocator newResponseAllocator(String name) {
+        return this.allocator.newChildAllocator(name, 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE);
+    }
+
+    /*
+     * Decodes one bulk response.
+     *
+     * Takes ownership of responseAllocator: on success it is handed to the returned
+     * OnlineQueryResult, which releases it when closed. On any failure this method
+     * closes the tables it decoded along with the allocator, and rethrows, so no
+     * Arrow memory is retained.
+     */
+    static OnlineQueryResult decodeBulkResponse(
+            OnlineQueryBulkResponse response,
+            @Nullable String traceId,
+            BufferAllocator responseAllocator
+    ) throws ChalkException {
         Table scalars = null;
         Map<String, Table> groups = new HashMap<>();
-        var responseAlloc = this.allocator.newChildAllocator(
-                "grpc_online_query_response", 0, FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
-        );
         try {
+            var meta = GrpcSerializer.toQueryMeta(response.getResponseMeta(), traceId);
+
+            ServerError[] errors = new ServerError[response.getErrorsCount()];
+            for (int i = 0; i < response.getErrorsCount(); i++) {
+                errors[i] = GrpcSerializer.toServerError(response.getErrors(i));
+            }
+
             if (!response.getScalarsData().isEmpty()) {
                 try {
                     scalars = FeatherProcessor.convertBytesToTable(
                             response.getScalarsData().toByteArray(),
-                            responseAlloc
+                            responseAllocator
                     );
                 } catch (Exception e) {
                     throw new ClientException("Failed to convert scalar data bytes to table", e);
@@ -338,7 +467,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 try {
                     groups.put(
                             fqn,
-                            FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), responseAlloc)
+                            FeatherProcessor.convertBytesToTable(entry.getValue().toByteArray(), responseAllocator)
                     );
                 } catch (Exception e) {
                     throw new ClientException(
@@ -346,23 +475,268 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                     );
                 }
             }
+
+            return new OnlineQueryResult(scalars, groups, errors, meta, responseAllocator);
         } catch (Exception e) {
-            if (scalars != null) {
-                scalars.close();
-            }
-            for (var table : groups.values()) {
-                table.close();
-            }
-            responseAlloc.close();
+            releaseQuietly(e, scalars, groups.values(), responseAllocator);
+            throw asChalkException(e, "Failed to decode online query response");
+        }
+    }
+
+    /*
+     * Decodes a multi-query response into one OnlineQueryResult per sub-query.
+     *
+     * Each sub-result gets its own child allocator of rootAllocator, because
+     * OnlineQueryResult.close() closes the allocator it is handed: sharing one
+     * allocator across sub-results would release it while the other sub-results'
+     * tables still held buffers. On any failure, every result decoded so far is
+     * closed and the exception is rethrown, so no Arrow memory is retained.
+     */
+    static OnlineQueryMultiResult decodeMultiResponse(
+            OnlineQueryMultiResponse response,
+            int expectedCount,
+            @Nullable String traceId,
+            BufferAllocator rootAllocator
+    ) throws ChalkException {
+        ServerError[] globalErrors = new ServerError[response.getErrorsCount()];
+        for (int i = 0; i < response.getErrorsCount(); i++) {
+            globalErrors[i] = GrpcSerializer.toServerError(response.getErrors(i));
         }
 
-        return new OnlineQueryResult(
-                scalars,
-                groups,
-                errors,
-                meta,
-                responseAlloc
+        // The engine returns no sub-responses at all when the request failed before any
+        // sub-query was dispatched; the global errors explain why. This is the one case
+        // where the results are not 1:1 with the submitted queries.
+        if (response.getResponsesCount() == 0 && globalErrors.length > 0) {
+            return new OnlineQueryMultiResult(List.of(), globalErrors, traceId);
+        }
+
+        // Sub-responses are correlated with sub-queries only by position, so a count
+        // mismatch leaves every result unattributable. Fail rather than guess.
+        if (response.getResponsesCount() != expectedCount) {
+            throw new ClientException(String.format(
+                    "Expected %d sub-responses, one per query, but got %d%s",
+                    expectedCount,
+                    response.getResponsesCount(),
+                    globalErrors.length == 0 ? "" : "; errors: " + describeErrors(globalErrors)
+            ));
+        }
+
+        List<OnlineQueryResult> decoded = new ArrayList<>(expectedCount);
+        try {
+            for (int i = 0; i < response.getResponsesCount(); i++) {
+                GenericSingleResponse single = response.getResponses(i);
+                // The engine sets the bulk_response case up front for every bulk sub-query, so
+                // this only fires if it rejected the sub-query's type outright -- which it does
+                // for single_request, and this client only ever sends bulk_request.
+                if (single.getQueryCase() != GenericSingleResponse.QueryCase.BULK_RESPONSE) {
+                    throw new ClientException(String.format(
+                            "Sub-response at index %d is not a bulk response (got %s); "
+                                    + "the Java client only issues bulk sub-queries",
+                            i, single.getQueryCase()
+                    ));
+                }
+                BufferAllocator subAllocator = rootAllocator.newChildAllocator(
+                        "grpc_online_query_multi_response[" + i + "]",
+                        0,
+                        FeatherProcessor.ALLOCATOR_SIZE_RESPONSE
+                );
+                try {
+                    // decodeBulkResponse releases subAllocator itself if it throws.
+                    decoded.add(decodeBulkResponse(single.getBulkResponse(), traceId, subAllocator));
+                } catch (Exception e) {
+                    throw new ClientException(
+                            String.format("Failed to decode sub-response at index %d", i), e
+                    );
+                }
+            }
+        } catch (Exception e) {
+            for (OnlineQueryResult result : decoded) {
+                try {
+                    result.close();
+                } catch (Exception closeError) {
+                    e.addSuppressed(closeError);
+                }
+            }
+            throw asChalkException(e, "Failed to decode multi-query response");
+        }
+
+        return new OnlineQueryMultiResult(decoded, globalErrors, traceId);
+    }
+
+    /**
+     * Validates the per-query parameters of a multi-query.
+     */
+    static void validateMultiParams(List<OnlineQueryParamsComplete> paramsList) throws ClientException {
+        if (paramsList == null) {
+            throw new ClientException("onlineQueryMulti requires a non-null list of queries");
+        }
+        for (int i = 0; i < paramsList.size(); i++) {
+            OnlineQueryParamsComplete params = paramsList.get(i);
+            if (params == null) {
+                throw new ClientException(
+                        String.format("onlineQueryMulti received a null query at index %d", i)
+                );
+            }
+            if (!isBlank(params.getQueryNameVersion()) && isBlank(params.getQueryName())) {
+                throw new ClientException(String.format(
+                        "The query at index %d specifies a queryNameVersion without a queryName", i
+                ));
+            }
+        }
+    }
+
+    /**
+     * Resolves the deadline for the whole request as the longest of the effective
+     * per-query timeouts, so that no sub-query is cancelled before the time its
+     * caller allowed. Per-query timeouts are not independently enforced: a single
+     * request carries a single deadline.
+     *
+     * <p> A query that sets no timeout of its own is bounded by the client-level
+     * timeout, so that is its effective timeout and it takes part in the maximum.
+     * Leaving it out would let one query's short timeout cut short a query that was
+     * relying on a longer client-level default. If any query is effectively
+     * unbounded -- it sets no timeout and the client sets none either -- the request
+     * gets no deadline.
+     */
+    static Optional<Duration> resolveDeadline(
+            List<OnlineQueryParamsComplete> paramsList,
+            Optional<Duration> clientLevelTimeout
+    ) {
+        Duration longest = null;
+        for (OnlineQueryParamsComplete params : paramsList) {
+            Duration timeout = params.getTimeout() != null
+                    ? params.getTimeout()
+                    : clientLevelTimeout.orElse(null);
+            if (timeout == null) {
+                // This query is unbounded, so the request cannot carry a deadline.
+                return Optional.empty();
+            }
+            if (longest == null || timeout.compareTo(longest) > 0) {
+                longest = timeout;
+            }
+        }
+        return Optional.ofNullable(longest);
+    }
+
+    static @Nullable String resolveEnvironment(
+            List<OnlineQueryParamsComplete> paramsList,
+            @Nullable String clientEnvironmentId
+    ) throws ClientException {
+        return requireAgreement(
+                paramsList,
+                params -> isBlank(params.getEnvironmentId())
+                        ? clientEnvironmentId
+                        : params.getEnvironmentId(),
+                "environmentId"
         );
+    }
+
+    static @Nullable String resolveBranch(
+            List<OnlineQueryParamsComplete> paramsList,
+            @Nullable String clientBranchId
+    ) throws ClientException {
+        return requireAgreement(
+                paramsList,
+                params -> isBlank(params.getBranch()) ? clientBranchId : params.getBranch(),
+                "branch"
+        );
+    }
+
+    /*
+     * Only the name has to agree. Envoy route-matches named queries on the
+     * "x-chalk-query-name" header, of which the request has one. There is no
+     * corresponding header for the version -- each sub-request carries its own in its
+     * OnlineQueryContext -- so queries that differ only by version are satisfiable.
+     */
+    static @Nullable String resolveQueryName(List<OnlineQueryParamsComplete> paramsList)
+            throws ClientException {
+        return requireAgreement(paramsList, OnlineQueryParamsComplete::getQueryName, "queryName");
+    }
+
+    /*
+     * Returns the value that every query agrees on, or throws if two queries disagree.
+     *
+     * Branch, environment and query name are all carried by per-request headers, of
+     * which a single request has exactly one set: the API server resolves one branch
+     * to one deployment, and named queries are routed by an exact match on the
+     * "x-chalk-query-name" header. A batch that mixed these values could not be
+     * satisfied, and silently picking one would run a sub-query somewhere its caller
+     * never asked for.
+     */
+    private static @Nullable String requireAgreement(
+            List<OnlineQueryParamsComplete> paramsList,
+            Function<OnlineQueryParamsComplete, String> getter,
+            String settingName
+    ) throws ClientException {
+        if (paramsList.isEmpty()) {
+            return null;
+        }
+        String resolved = blankToNull(getter.apply(paramsList.get(0)));
+        for (int i = 1; i < paramsList.size(); i++) {
+            String candidate = blankToNull(getter.apply(paramsList.get(i)));
+            if (!Objects.equals(resolved, candidate)) {
+                throw new ClientException(String.format(
+                        "onlineQueryMulti requires every query to agree on %s, but found %s at "
+                                + "index 0 and %s at index %d. A single request carries one %s for "
+                                + "all of its queries, so run these as separate queries instead.",
+                        settingName, describe(resolved), describe(candidate), i, settingName
+                ));
+            }
+        }
+        return resolved;
+    }
+
+    private static ChalkException asChalkException(Exception e, String fallbackMessage) {
+        return e instanceof ChalkException ? (ChalkException) e : new ClientException(fallbackMessage, e);
+    }
+
+    private static void releaseQuietly(
+            Throwable primary,
+            @Nullable Table scalars,
+            Collection<Table> groups,
+            @Nullable BufferAllocator allocator
+    ) {
+        if (scalars != null) {
+            try {
+                scalars.close();
+            } catch (Exception e) {
+                primary.addSuppressed(e);
+            }
+        }
+        for (Table table : groups) {
+            try {
+                table.close();
+            } catch (Exception e) {
+                primary.addSuppressed(e);
+            }
+        }
+        if (allocator != null) {
+            try {
+                allocator.close();
+            } catch (Exception e) {
+                primary.addSuppressed(e);
+            }
+        }
+    }
+
+    private static String describeErrors(ServerError[] errors) {
+        List<String> messages = new ArrayList<>();
+        for (ServerError error : errors) {
+            messages.add(error.getMessage() == null ? "(no message)" : error.getMessage());
+        }
+        return String.join("; ", messages);
+    }
+
+    private static String describe(@Nullable String value) {
+        return value == null ? "none" : "'" + value + "'";
+    }
+
+    private static boolean isBlank(@Nullable String value) {
+        return value == null || value.isEmpty();
+    }
+
+    private static @Nullable String blankToNull(@Nullable String value) {
+        return isBlank(value) ? null : value;
     }
 
     public UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException {
