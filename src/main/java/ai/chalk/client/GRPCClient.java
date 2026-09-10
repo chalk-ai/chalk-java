@@ -240,8 +240,8 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         // Resolve the request-level settings before serializing anything, so a batch that
         // cannot be satisfied fails before doing the work of encoding its inputs.
-        Duration deadline = resolveDeadline(paramsList).orElse(null);
-        String environmentId = resolveEnvironment(paramsList);
+        Duration deadline = resolveDeadline(paramsList, this.timeout).orElse(null);
+        String environmentId = resolveEnvironment(paramsList, this.resolvedEnvironmentId);
         String queryName = resolveQueryName(paramsList);
         // Validated for agreement but deliberately unused: the gRPC client does not send the
         // "x-chalk-branch-id" header that the API server routes branches on, so branch
@@ -514,8 +514,7 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         // mismatch leaves every result unattributable. Fail rather than guess.
         if (response.getResponsesCount() != expectedCount) {
             throw new ClientException(String.format(
-                    "Expected %d sub-responses for %d queries, but got %d%s",
-                    expectedCount,
+                    "Expected %d sub-responses, one per query, but got %d%s",
                     expectedCount,
                     response.getResponsesCount(),
                     globalErrors.length == 0 ? "" : "; errors: " + describeErrors(globalErrors)
@@ -587,18 +586,30 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     /**
-     * Resolves the deadline for the whole request as the longest of the per-query
-     * timeouts, so that no sub-query is cancelled before the time its caller
-     * allowed. Returns empty when no query sets one, which lets the client-level
-     * timeout apply. Per-query timeouts are not independently enforced: a single
+     * Resolves the deadline for the whole request as the longest of the effective
+     * per-query timeouts, so that no sub-query is cancelled before the time its
+     * caller allowed. Per-query timeouts are not independently enforced: a single
      * request carries a single deadline.
+     *
+     * <p> A query that sets no timeout of its own is bounded by the client-level
+     * timeout, so that is its effective timeout and it takes part in the maximum.
+     * Leaving it out would let one query's short timeout cut short a query that was
+     * relying on a longer client-level default. If any query is effectively
+     * unbounded -- it sets no timeout and the client sets none either -- the request
+     * gets no deadline.
      */
-    static Optional<Duration> resolveDeadline(List<OnlineQueryParamsComplete> paramsList) {
+    static Optional<Duration> resolveDeadline(
+            List<OnlineQueryParamsComplete> paramsList,
+            Optional<Duration> clientLevelTimeout
+    ) {
         Duration longest = null;
         for (OnlineQueryParamsComplete params : paramsList) {
-            Duration timeout = params.getTimeout();
+            Duration timeout = params.getTimeout() != null
+                    ? params.getTimeout()
+                    : clientLevelTimeout.orElse(null);
             if (timeout == null) {
-                continue;
+                // This query is unbounded, so the request cannot carry a deadline.
+                return Optional.empty();
             }
             if (longest == null || timeout.compareTo(longest) > 0) {
                 longest = timeout;
@@ -607,9 +618,17 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         return Optional.ofNullable(longest);
     }
 
-    static @Nullable String resolveEnvironment(List<OnlineQueryParamsComplete> paramsList)
-            throws ClientException {
-        return requireAgreement(paramsList, OnlineQueryParamsComplete::getEnvironmentId, "environmentId");
+    static @Nullable String resolveEnvironment(
+            List<OnlineQueryParamsComplete> paramsList,
+            @Nullable String clientEnvironmentId
+    ) throws ClientException {
+        return requireAgreement(
+                paramsList,
+                params -> isBlank(params.getEnvironmentId())
+                        ? clientEnvironmentId
+                        : params.getEnvironmentId(),
+                "environmentId"
+        );
     }
 
     static @Nullable String resolveBranch(
@@ -623,11 +642,15 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
         );
     }
 
+    /*
+     * Only the name has to agree. Envoy route-matches named queries on the
+     * "x-chalk-query-name" header, of which the request has one. There is no
+     * corresponding header for the version -- each sub-request carries its own in its
+     * OnlineQueryContext -- so queries that differ only by version are satisfiable.
+     */
     static @Nullable String resolveQueryName(List<OnlineQueryParamsComplete> paramsList)
             throws ClientException {
-        String queryName = requireAgreement(paramsList, OnlineQueryParamsComplete::getQueryName, "queryName");
-        requireAgreement(paramsList, OnlineQueryParamsComplete::getQueryNameVersion, "queryNameVersion");
-        return queryName;
+        return requireAgreement(paramsList, OnlineQueryParamsComplete::getQueryName, "queryName");
     }
 
     /*

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -209,24 +210,57 @@ public class TestGrpcMultiQuery extends AllocatorTest {
 
     // ------------------------------------------------------- settings resolvers
 
+    private static OnlineQueryParamsComplete paramsWithTimeout(Duration timeout) {
+        return OnlineQueryParams.builder()
+                .withInput("user.id", List.of(1))
+                .withOutputs("user.socure_score")
+                .withTimeout(timeout)
+                .build();
+    }
+
     @Test
     public void testResolveDeadlineTakesTheLongest() {
-        assertTrue(GRPCClient.resolveDeadline(List.of(simpleParams(), simpleParams())).isEmpty());
+        var noClientTimeout = Optional.<Duration>empty();
 
-        OnlineQueryParamsComplete shortTimeout = OnlineQueryParams.builder()
-                .withInput("user.id", List.of(1))
-                .withOutputs("user.socure_score")
-                .withTimeout(Duration.ofSeconds(1))
-                .build();
-        OnlineQueryParamsComplete longTimeout = OnlineQueryParams.builder()
-                .withInput("user.id", List.of(1))
-                .withOutputs("user.socure_score")
-                .withTimeout(Duration.ofSeconds(30))
-                .build();
+        // nothing set anywhere -> no deadline
+        assertTrue(GRPCClient.resolveDeadline(
+                List.of(simpleParams(), simpleParams()), noClientTimeout).isEmpty());
+
+        var shortTimeout = paramsWithTimeout(Duration.ofSeconds(1));
+        var longTimeout = paramsWithTimeout(Duration.ofSeconds(30));
 
         assertEquals(
                 Duration.ofSeconds(30),
-                GRPCClient.resolveDeadline(List.of(shortTimeout, longTimeout, simpleParams())).orElseThrow());
+                GRPCClient.resolveDeadline(List.of(shortTimeout, longTimeout), noClientTimeout)
+                        .orElseThrow());
+    }
+
+    /**
+     * A query that sets no timeout is bounded by the client-level timeout, so that is
+     * its effective timeout. Ignoring it would let one query's short timeout cut short
+     * a query that was relying on a longer client default.
+     */
+    @Test
+    public void testResolveDeadlineHonoursClientLevelTimeout() {
+        var fast = paramsWithTimeout(Duration.ofSeconds(1));
+        var clientTimeout = Optional.of(Duration.ofMinutes(5));
+
+        // `fast` wants 1s, the unset one is entitled to the client's 5m -> 5m wins
+        assertEquals(
+                Duration.ofMinutes(5),
+                GRPCClient.resolveDeadline(List.of(fast, simpleParams()), clientTimeout).orElseThrow());
+
+        // every query explicit -> the client default is irrelevant
+        assertEquals(
+                Duration.ofSeconds(30),
+                GRPCClient.resolveDeadline(
+                        List.of(fast, paramsWithTimeout(Duration.ofSeconds(30))), clientTimeout)
+                        .orElseThrow());
+
+        // an unset query with no client timeout is unbounded, so the request cannot
+        // carry a deadline at all
+        assertTrue(GRPCClient.resolveDeadline(
+                List.of(fast, simpleParams()), Optional.empty()).isEmpty());
     }
 
     @Test
@@ -246,31 +280,6 @@ public class TestGrpcMultiQuery extends AllocatorTest {
                 () -> GRPCClient.resolveQueryName(List.of(params("a"), simpleParams())));
     }
 
-    /**
-     * When both the name and the version disagree, the name is the more useful
-     * thing to report: it is what the caller actually set.
-     */
-    @Test
-    public void testResolveQueryNameReportsNameBeforeVersion() {
-        OnlineQueryParamsComplete a = OnlineQueryParams.builder()
-                .withInput("user.id", List.of(1))
-                .withOutputs("user.socure_score")
-                .withQueryName("a")
-                .withQueryNameVersion("1")
-                .build();
-        OnlineQueryParamsComplete b = OnlineQueryParams.builder()
-                .withInput("user.id", List.of(1))
-                .withOutputs("user.socure_score")
-                .withQueryName("b")
-                .withQueryNameVersion("2")
-                .build();
-
-        var conflict = assertThrows(
-                ClientException.class, () -> GRPCClient.resolveQueryName(List.of(a, b)));
-        assertTrue(conflict.getMessage().contains("queryName,"));
-        assertTrue(!conflict.getMessage().contains("queryNameVersion"));
-    }
-
     @Test
     public void testResolveEnvironmentRequiresAgreement() throws Exception {
         OnlineQueryParamsComplete envA = OnlineQueryParams.builder()
@@ -284,13 +293,45 @@ public class TestGrpcMultiQuery extends AllocatorTest {
                 .withEnvironmentId("env-b")
                 .build();
 
-        assertEquals("env-a", GRPCClient.resolveEnvironment(List.of(envA, envA)));
+        assertEquals("env-a", GRPCClient.resolveEnvironment(List.of(envA, envA), null));
 
         var conflict = assertThrows(
-                ClientException.class, () -> GRPCClient.resolveEnvironment(List.of(envA, envB)));
+                ClientException.class,
+                () -> GRPCClient.resolveEnvironment(List.of(envA, envB), null));
         assertTrue(conflict.getMessage().contains("environmentId"));
         assertTrue(conflict.getMessage().contains("'env-a'"));
         assertTrue(conflict.getMessage().contains("'env-b'"));
+
+        // An unset environmentId means the client's environment, so naming that same
+        // environment explicitly on one query is not a conflict.
+        assertEquals(
+                "env-a",
+                GRPCClient.resolveEnvironment(List.of(envA, simpleParams()), "env-a"));
+        assertThrows(
+                ClientException.class,
+                () -> GRPCClient.resolveEnvironment(List.of(envA, simpleParams()), "env-other"));
+    }
+
+    /**
+     * The version rides along in each sub-request's own context and has no header of
+     * its own, so queries that differ only by version are satisfiable.
+     */
+    @Test
+    public void testResolveQueryNameAllowsDifferingVersions() throws Exception {
+        OnlineQueryParamsComplete v1 = OnlineQueryParams.builder()
+                .withInput("user.id", List.of(1))
+                .withOutputs("user.socure_score")
+                .withQueryName("same")
+                .withQueryNameVersion("1")
+                .build();
+        OnlineQueryParamsComplete v2 = OnlineQueryParams.builder()
+                .withInput("user.id", List.of(1))
+                .withOutputs("user.socure_score")
+                .withQueryName("same")
+                .withQueryNameVersion("2")
+                .build();
+
+        assertEquals("same", GRPCClient.resolveQueryName(List.of(v1, v2)));
     }
 
     @Test
@@ -437,6 +478,30 @@ public class TestGrpcMultiQuery extends AllocatorTest {
             // ... and the reason lives in the global errors, naming the query
             assertEquals(1, multi.getGlobalErrors().length);
             assertTrue(multi.getGlobalErrors()[0].getMessage().contains("query 2/2"));
+        }
+        assertEquals(0, this.allocator.getAllocatedMemory());
+    }
+
+    /**
+     * Unmarshalling the empty slot left by a query that failed to execute must explain
+     * itself rather than surfacing an opaque NPE from deep inside the Arrow reader.
+     */
+    @Test
+    public void testUnmarshalEmptySlotExplainsItself() throws Exception {
+        var response = OnlineQueryMultiResponse.newBuilder()
+                .addResponses(wrap(OnlineQueryBulkResponse.newBuilder().build()))
+                .addErrors(error("Encountered an error occurred while executing query 1/1: rate limited"))
+                .build();
+
+        try (OnlineQueryMultiResult multi =
+                     GRPCClient.decodeMultiResponse(response, 1, TRACE_ID, this.allocator)) {
+            OnlineQueryResult empty = multi.getResults().get(0);
+            assertNull(empty.getScalarsTable());
+
+            var thrown = assertThrows(
+                    ClientException.class, () -> empty.unmarshal(TestGrpcMultiQueryUser.class));
+            assertTrue(thrown.getMessage().contains("no scalar data"));
+            assertTrue(thrown.getMessage().contains("getGlobalErrors()"));
         }
         assertEquals(0, this.allocator.getAllocatedMemory());
     }

@@ -188,15 +188,17 @@ public interface ChalkClient extends AutoCloseable {
      * <p> <b>Some settings apply to the whole request.</b> A request carries one
      * deadline and one set of headers, so:
      * <ul>
-     *   <li>Every query must agree on {@code environmentId}, {@code branch},
-     *       {@code queryName} and {@code queryNameVersion}. A disagreement throws
+     *   <li>Every query must agree on {@code environmentId}, {@code branch} and
+     *       {@code queryName}. A disagreement throws
      *       {@link ai.chalk.exceptions.ClientException}, because a request resolves
      *       one branch to one deployment and routes named queries by an exact match
      *       on the query name, so a mixed batch could not be honored. Run those as
-     *       separate queries.</li>
-     *   <li>The deadline is the longest of the per-query timeouts, falling back to
-     *       the client-level timeout. Per-query timeouts are not independently
-     *       enforced.</li>
+     *       separate queries. A query that leaves one of these unset simply takes the
+     *       client's value, which is not a disagreement. {@code queryNameVersion} may
+     *       differ freely: each query carries its own.</li>
+     *   <li>The deadline is the longest of the effective per-query timeouts, where a
+     *       query that sets none is bounded by the client-level timeout. Per-query
+     *       timeouts are not independently enforced.</li>
      *   <li>Branch selection is currently inert on the gRPC path for both single and
      *       multi queries: the client does not yet send the header the API server
      *       routes branches on.</li>
@@ -228,7 +230,7 @@ public interface ChalkClient extends AutoCloseable {
      */
     default OnlineQueryMultiResult onlineQueryMulti(OnlineQueryParamsComplete... params)
             throws ChalkException {
-        return onlineQueryMulti(Arrays.asList(params));
+        return onlineQueryMulti(params == null ? null : Arrays.asList(params));
     }
 
     /**

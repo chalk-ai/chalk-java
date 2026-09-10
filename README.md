@@ -418,6 +418,10 @@ try (OnlineQueryMultiResult multi = client.onlineQueryMulti(List.of(users, merch
             // this query failed; the others are unaffected
             continue;
         }
+        if (result.getScalarsTable() == null) {
+            // this query never ran -- see getGlobalErrors() above for the reason
+            continue;
+        }
         // do something with the result
     }
 }
@@ -437,8 +441,10 @@ A few things to know:
 - **Close the wrapper, not the results.** Closing the `OnlineQueryMultiResult` closes every one of
   its results and releases all of their Arrow memory.
 - **Some settings apply to the whole request,** which carries one deadline and one set of headers.
-  Every query must agree on `environmentId`, `branch`, `queryName` and `queryNameVersion`, or the
-  call throws `ClientException` — a request resolves one branch to one deployment and routes named
-  queries by an exact match on the query name, so a mixed batch could not be honored. Run those as
-  separate queries. The deadline is the longest of the per-query timeouts, falling back to the
+  Every query must agree on `environmentId`, `branch` and `queryName`, or the call throws
+  `ClientException` — a request resolves one branch to one deployment and routes named queries by
+  an exact match on the query name, so a mixed batch could not be honored. Run those as separate
+  queries. Leaving one of these unset just takes the client's value, which is not a disagreement,
+  and `queryNameVersion` may differ freely since each query carries its own. The deadline is the
+  longest of the effective per-query timeouts, where a query that sets none is bounded by the
   client-level timeout, so per-query timeouts are not independently enforced.
