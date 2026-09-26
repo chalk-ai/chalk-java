@@ -51,7 +51,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
    * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=43
+   *     See chalk/server/v1/builder.proto;l=53
    * @return The buildId.
    */
   @java.lang.Override
@@ -74,7 +74,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
    * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-   *     See chalk/server/v1/builder.proto;l=43
+   *     See chalk/server/v1/builder.proto;l=53
    * @return The bytes for buildId.
    */
   @java.lang.Override
@@ -489,7 +489,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
      * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-     *     See chalk/server/v1/builder.proto;l=43
+     *     See chalk/server/v1/builder.proto;l=53
      * @return The buildId.
      */
     @java.lang.Deprecated public java.lang.String getBuildId() {
@@ -511,7 +511,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
      * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-     *     See chalk/server/v1/builder.proto;l=43
+     *     See chalk/server/v1/builder.proto;l=53
      * @return The bytes for buildId.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -534,7 +534,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
      * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-     *     See chalk/server/v1/builder.proto;l=43
+     *     See chalk/server/v1/builder.proto;l=53
      * @param value The buildId to set.
      * @return This builder for chaining.
      */
@@ -553,7 +553,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
      * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-     *     See chalk/server/v1/builder.proto;l=43
+     *     See chalk/server/v1/builder.proto;l=53
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearBuildId() {
@@ -569,7 +569,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string build_id = 1 [json_name = "buildId", deprecated = true];</code>
      * @deprecated chalk.server.v1.RedeployDeploymentResponse.build_id is deprecated.
-     *     See chalk/server/v1/builder.proto;l=43
+     *     See chalk/server/v1/builder.proto;l=53
      * @param value The bytes for buildId to set.
      * @return This builder for chaining.
      */

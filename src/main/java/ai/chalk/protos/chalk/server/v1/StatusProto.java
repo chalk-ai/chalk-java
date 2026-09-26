@@ -50,6 +50,16 @@ public final class StatusProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_GetHealthResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetClusterMetricsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetClusterMetricsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetClusterMetricsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetClusterMetricsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -84,19 +94,24 @@ public final class StatusProto {
       "alk.server.v1.HealthCheckFiltersH\000R\007filt" +
       "ers\210\001\001B\n\n\010_filters\"I\n\021GetHealthResponse\022" +
       "4\n\006checks\030\001 \003(\0132\034.chalk.server.v1.Health" +
-      "CheckR\006checks*u\n\021HealthCheckStatus\022#\n\037HE" +
-      "ALTH_CHECK_STATUS_UNSPECIFIED\020\000\022\032\n\026HEALT" +
-      "H_CHECK_STATUS_OK\020\001\022\037\n\033HEALTH_CHECK_STAT" +
-      "US_FAILING\020\0022\315\001\n\rHealthService\022`\n\013CheckH" +
-      "ealth\022#.chalk.server.v1.CheckHealthReque" +
-      "st\032$.chalk.server.v1.CheckHealthResponse" +
-      "\"\006\220\002\001\200}\001\022Z\n\tGetHealth\022!.chalk.server.v1." +
-      "GetHealthRequest\032\".chalk.server.v1.GetHe" +
-      "althResponse\"\006\220\002\001\200}\002B\240\001\n\037ai.chalk.protos" +
-      ".chalk.server.v1B\013StatusProtoP\001Z\022server/" +
-      "v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Ch" +
-      "alk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetad" +
-      "ata\352\002\021Chalk::Server::V1b\006proto3"
+      "CheckR\006checks\"\032\n\030GetClusterMetricsReques" +
+      "t\"5\n\031GetClusterMetricsResponse\022\030\n\007metric" +
+      "s\030\001 \001(\tR\007metrics*u\n\021HealthCheckStatus\022#\n" +
+      "\037HEALTH_CHECK_STATUS_UNSPECIFIED\020\000\022\032\n\026HE" +
+      "ALTH_CHECK_STATUS_OK\020\001\022\037\n\033HEALTH_CHECK_S" +
+      "TATUS_FAILING\020\0022\301\002\n\rHealthService\022`\n\013Che" +
+      "ckHealth\022#.chalk.server.v1.CheckHealthRe" +
+      "quest\032$.chalk.server.v1.CheckHealthRespo" +
+      "nse\"\006\220\002\001\200}\001\022Z\n\tGetHealth\022!.chalk.server." +
+      "v1.GetHealthRequest\032\".chalk.server.v1.Ge" +
+      "tHealthResponse\"\006\220\002\001\200}\002\022r\n\021GetClusterMet" +
+      "rics\022).chalk.server.v1.GetClusterMetrics" +
+      "Request\032*.chalk.server.v1.GetClusterMetr" +
+      "icsResponse\"\006\220\002\001\200}\002B\240\001\n\037ai.chalk.protos." +
+      "chalk.server.v1B\013StatusProtoP\001Z\022server/v" +
+      "1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Cha" +
+      "lk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBMetada" +
+      "ta\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -147,6 +162,18 @@ public final class StatusProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetHealthResponse_descriptor,
         new java.lang.String[] { "Checks", });
+    internal_static_chalk_server_v1_GetClusterMetricsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_chalk_server_v1_GetClusterMetricsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetClusterMetricsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_server_v1_GetClusterMetricsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_chalk_server_v1_GetClusterMetricsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetClusterMetricsResponse_descriptor,
+        new java.lang.String[] { "Metrics", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);

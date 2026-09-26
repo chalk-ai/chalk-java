@@ -70,6 +70,25 @@ private static final long serialVersionUID = 0L;
     return value_ == null ? ai.chalk.protos.chalk.arrow.v1.ScalarValue.getDefaultInstance() : value_;
   }
 
+  public static final int IS_ARROW_SCALAR_OBJECT_FIELD_NUMBER = 2;
+  private boolean isArrowScalarObject_ = false;
+  /**
+   * <pre>
+   * All Python literal values are encoded as arrow scalar values.
+   * - If this bool is `False`, then the decoded value was originally a plain
+   * Python value.
+   * - If this bool is `True`, then the decoded value should be a
+   * `pyarrow.Scalar` value.
+   * </pre>
+   *
+   * <code>bool is_arrow_scalar_object = 2 [json_name = "isArrowScalarObject"];</code>
+   * @return The isArrowScalarObject.
+   */
+  @java.lang.Override
+  public boolean getIsArrowScalarObject() {
+    return isArrowScalarObject_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -87,6 +106,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(1, getValue());
     }
+    if (isArrowScalarObject_ != false) {
+      output.writeBool(2, isArrowScalarObject_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -99,6 +121,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getValue());
+    }
+    if (isArrowScalarObject_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, isArrowScalarObject_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -120,6 +146,8 @@ private static final long serialVersionUID = 0L;
       if (!getValue()
           .equals(other.getValue())) return false;
     }
+    if (getIsArrowScalarObject()
+        != other.getIsArrowScalarObject()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -135,6 +163,9 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + getValue().hashCode();
     }
+    hash = (37 * hash) + IS_ARROW_SCALAR_OBJECT_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIsArrowScalarObject());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -281,6 +312,7 @@ private static final long serialVersionUID = 0L;
         valueBuilder_.dispose();
         valueBuilder_ = null;
       }
+      isArrowScalarObject_ = false;
       return this;
     }
 
@@ -320,6 +352,9 @@ private static final long serialVersionUID = 0L;
             ? value_
             : valueBuilder_.build();
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.isArrowScalarObject_ = isArrowScalarObject_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -371,6 +406,9 @@ private static final long serialVersionUID = 0L;
       if (other.hasValue()) {
         mergeValue(other.getValue());
       }
+      if (other.getIsArrowScalarObject() != false) {
+        setIsArrowScalarObject(other.getIsArrowScalarObject());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -404,6 +442,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 16: {
+              isArrowScalarObject_ = input.readBool();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 16
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -540,6 +583,62 @@ private static final long serialVersionUID = 0L;
         value_ = null;
       }
       return valueBuilder_;
+    }
+
+    private boolean isArrowScalarObject_ ;
+    /**
+     * <pre>
+     * All Python literal values are encoded as arrow scalar values.
+     * - If this bool is `False`, then the decoded value was originally a plain
+     * Python value.
+     * - If this bool is `True`, then the decoded value should be a
+     * `pyarrow.Scalar` value.
+     * </pre>
+     *
+     * <code>bool is_arrow_scalar_object = 2 [json_name = "isArrowScalarObject"];</code>
+     * @return The isArrowScalarObject.
+     */
+    @java.lang.Override
+    public boolean getIsArrowScalarObject() {
+      return isArrowScalarObject_;
+    }
+    /**
+     * <pre>
+     * All Python literal values are encoded as arrow scalar values.
+     * - If this bool is `False`, then the decoded value was originally a plain
+     * Python value.
+     * - If this bool is `True`, then the decoded value should be a
+     * `pyarrow.Scalar` value.
+     * </pre>
+     *
+     * <code>bool is_arrow_scalar_object = 2 [json_name = "isArrowScalarObject"];</code>
+     * @param value The isArrowScalarObject to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIsArrowScalarObject(boolean value) {
+
+      isArrowScalarObject_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * All Python literal values are encoded as arrow scalar values.
+     * - If this bool is `False`, then the decoded value was originally a plain
+     * Python value.
+     * - If this bool is `True`, then the decoded value should be a
+     * `pyarrow.Scalar` value.
+     * </pre>
+     *
+     * <code>bool is_arrow_scalar_object = 2 [json_name = "isArrowScalarObject"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIsArrowScalarObject() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      isArrowScalarObject_ = false;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

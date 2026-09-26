@@ -51,6 +51,7 @@ private static final long serialVersionUID = 0L;
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     FEATURE_FQN(1),
+    FEATURE_EXPRESSION(2),
     EXPR_NOT_SET(0);
     private final int value;
     private ExprCase(int value) {
@@ -69,6 +70,7 @@ private static final long serialVersionUID = 0L;
     public static ExprCase forNumber(int value) {
       switch (value) {
         case 1: return FEATURE_FQN;
+        case 2: return FEATURE_EXPRESSION;
         case 0: return EXPR_NOT_SET;
         default: return null;
       }
@@ -136,6 +138,37 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int FEATURE_EXPRESSION_FIELD_NUMBER = 2;
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   * @return Whether the featureExpression field is set.
+   */
+  @java.lang.Override
+  public boolean hasFeatureExpression() {
+    return exprCase_ == 2;
+  }
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   * @return The featureExpression.
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.FeatureExpression getFeatureExpression() {
+    if (exprCase_ == 2) {
+       return (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_;
+    }
+    return ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+  }
+  /**
+   * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+   */
+  @java.lang.Override
+  public ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder getFeatureExpressionOrBuilder() {
+    if (exprCase_ == 2) {
+       return (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_;
+    }
+    return ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -153,6 +186,9 @@ private static final long serialVersionUID = 0L;
     if (exprCase_ == 1) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, expr_);
     }
+    if (exprCase_ == 2) {
+      output.writeMessage(2, (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -164,6 +200,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (exprCase_ == 1) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, expr_);
+    }
+    if (exprCase_ == 2) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -186,6 +226,10 @@ private static final long serialVersionUID = 0L;
         if (!getFeatureFqn()
             .equals(other.getFeatureFqn())) return false;
         break;
+      case 2:
+        if (!getFeatureExpression()
+            .equals(other.getFeatureExpression())) return false;
+        break;
       case 0:
       default:
     }
@@ -204,6 +248,10 @@ private static final long serialVersionUID = 0L;
       case 1:
         hash = (37 * hash) + FEATURE_FQN_FIELD_NUMBER;
         hash = (53 * hash) + getFeatureFqn().hashCode();
+        break;
+      case 2:
+        hash = (37 * hash) + FEATURE_EXPRESSION_FIELD_NUMBER;
+        hash = (53 * hash) + getFeatureExpression().hashCode();
         break;
       case 0:
       default:
@@ -344,6 +392,9 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      if (featureExpressionBuilder_ != null) {
+        featureExpressionBuilder_.clear();
+      }
       exprCase_ = 0;
       expr_ = null;
       return this;
@@ -385,6 +436,10 @@ private static final long serialVersionUID = 0L;
     private void buildPartialOneofs(ai.chalk.protos.chalk.common.v1.OutputExpr result) {
       result.exprCase_ = exprCase_;
       result.expr_ = this.expr_;
+      if (exprCase_ == 2 &&
+          featureExpressionBuilder_ != null) {
+        result.expr_ = featureExpressionBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -438,6 +493,10 @@ private static final long serialVersionUID = 0L;
           onChanged();
           break;
         }
+        case FEATURE_EXPRESSION: {
+          mergeFeatureExpression(other.getFeatureExpression());
+          break;
+        }
         case EXPR_NOT_SET: {
           break;
         }
@@ -474,6 +533,13 @@ private static final long serialVersionUID = 0L;
               expr_ = s;
               break;
             } // case 10
+            case 18: {
+              input.readMessage(
+                  getFeatureExpressionFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              exprCase_ = 2;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -597,6 +663,148 @@ private static final long serialVersionUID = 0L;
       expr_ = value;
       onChanged();
       return this;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.FeatureExpression, ai.chalk.protos.chalk.common.v1.FeatureExpression.Builder, ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder> featureExpressionBuilder_;
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     * @return Whether the featureExpression field is set.
+     */
+    @java.lang.Override
+    public boolean hasFeatureExpression() {
+      return exprCase_ == 2;
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     * @return The featureExpression.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.common.v1.FeatureExpression getFeatureExpression() {
+      if (featureExpressionBuilder_ == null) {
+        if (exprCase_ == 2) {
+          return (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_;
+        }
+        return ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+      } else {
+        if (exprCase_ == 2) {
+          return featureExpressionBuilder_.getMessage();
+        }
+        return ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    public Builder setFeatureExpression(ai.chalk.protos.chalk.common.v1.FeatureExpression value) {
+      if (featureExpressionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        expr_ = value;
+        onChanged();
+      } else {
+        featureExpressionBuilder_.setMessage(value);
+      }
+      exprCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    public Builder setFeatureExpression(
+        ai.chalk.protos.chalk.common.v1.FeatureExpression.Builder builderForValue) {
+      if (featureExpressionBuilder_ == null) {
+        expr_ = builderForValue.build();
+        onChanged();
+      } else {
+        featureExpressionBuilder_.setMessage(builderForValue.build());
+      }
+      exprCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    public Builder mergeFeatureExpression(ai.chalk.protos.chalk.common.v1.FeatureExpression value) {
+      if (featureExpressionBuilder_ == null) {
+        if (exprCase_ == 2 &&
+            expr_ != ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance()) {
+          expr_ = ai.chalk.protos.chalk.common.v1.FeatureExpression.newBuilder((ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          expr_ = value;
+        }
+        onChanged();
+      } else {
+        if (exprCase_ == 2) {
+          featureExpressionBuilder_.mergeFrom(value);
+        } else {
+          featureExpressionBuilder_.setMessage(value);
+        }
+      }
+      exprCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    public Builder clearFeatureExpression() {
+      if (featureExpressionBuilder_ == null) {
+        if (exprCase_ == 2) {
+          exprCase_ = 0;
+          expr_ = null;
+          onChanged();
+        }
+      } else {
+        if (exprCase_ == 2) {
+          exprCase_ = 0;
+          expr_ = null;
+        }
+        featureExpressionBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    public ai.chalk.protos.chalk.common.v1.FeatureExpression.Builder getFeatureExpressionBuilder() {
+      return getFeatureExpressionFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder getFeatureExpressionOrBuilder() {
+      if ((exprCase_ == 2) && (featureExpressionBuilder_ != null)) {
+        return featureExpressionBuilder_.getMessageOrBuilder();
+      } else {
+        if (exprCase_ == 2) {
+          return (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_;
+        }
+        return ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chalk.common.v1.FeatureExpression feature_expression = 2 [json_name = "featureExpression"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        ai.chalk.protos.chalk.common.v1.FeatureExpression, ai.chalk.protos.chalk.common.v1.FeatureExpression.Builder, ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder> 
+        getFeatureExpressionFieldBuilder() {
+      if (featureExpressionBuilder_ == null) {
+        if (!(exprCase_ == 2)) {
+          expr_ = ai.chalk.protos.chalk.common.v1.FeatureExpression.getDefaultInstance();
+        }
+        featureExpressionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            ai.chalk.protos.chalk.common.v1.FeatureExpression, ai.chalk.protos.chalk.common.v1.FeatureExpression.Builder, ai.chalk.protos.chalk.common.v1.FeatureExpressionOrBuilder>(
+                (ai.chalk.protos.chalk.common.v1.FeatureExpression) expr_,
+                getParentForChildren(),
+                isClean());
+        expr_ = null;
+      }
+      exprCase_ = 2;
+      onChanged();
+      return featureExpressionBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

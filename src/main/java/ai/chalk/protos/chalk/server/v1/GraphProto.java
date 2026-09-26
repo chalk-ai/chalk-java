@@ -65,6 +65,16 @@ public final class GraphProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_GetGraphResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -75,69 +85,86 @@ public final class GraphProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\033chalk/server/v1/graph.proto\022\017chalk.ser" +
-      "ver.v1\032\037chalk/auth/v1/permissions.proto\032" +
-      "\032chalk/graph/v1/graph.proto\"\330\004\n\nFeatureS" +
-      "QL\022\016\n\002id\030\001 \001(\003R\002id\022%\n\016environment_id\030\002 \001" +
-      "(\tR\renvironmentId\022(\n\rdeployment_id\030\003 \001(\t" +
-      "H\000R\014deploymentId\210\001\001\022\020\n\003fqn\030\004 \001(\tR\003fqn\022\022\n" +
-      "\004name\030\005 \001(\tR\004name\022\034\n\tnamespace\030\006 \001(\tR\tna" +
-      "mespace\022(\n\rmax_staleness\030\007 \001(\tH\001R\014maxSta" +
-      "leness\210\001\001\0221\n\025etl_offline_to_online\030\010 \001(\010" +
-      "R\022etlOfflineToOnline\022%\n\013description\030\t \001(" +
-      "\tH\002R\013description\210\001\001\022\031\n\005owner\030\n \001(\tH\003R\005ow" +
-      "ner\210\001\001\022\022\n\004tags\030\013 \003(\tR\004tags\022\033\n\tkind_enum\030" +
-      "\014 \001(\tR\010kindEnum\022\022\n\004kind\030\r \001(\tR\004kind\022\033\n\tw" +
-      "as_reset\030\016 \001(\010R\010wasReset\022.\n\020internal_ver" +
-      "sion\030\017 \001(\003H\004R\017internalVersion\210\001\001\022!\n\014is_s" +
-      "ingleton\030\020 \001(\010R\013isSingletonB\020\n\016_deployme" +
-      "nt_idB\020\n\016_max_stalenessB\016\n\014_descriptionB" +
-      "\010\n\006_ownerB\023\n\021_internal_version\"P\n\025GetFea" +
-      "tureSQLResponse\0227\n\010features\030\001 \003(\0132\033.chal" +
-      "k.server.v1.FeatureSQLR\010features\";\n\024GetF" +
-      "eatureSQLRequest\022#\n\rdeployment_id\030\001 \001(\tR" +
-      "\014deploymentId\"\264\002\n\017FeatureMetadata\022\020\n\003fqn" +
-      "\030\001 \001(\tR\003fqn\022\022\n\004name\030\002 \001(\tR\004name\022\034\n\tnames" +
-      "pace\030\003 \001(\tR\tnamespace\022%\n\013description\030\004 \001" +
-      "(\tH\000R\013description\210\001\001\022\031\n\005owner\030\005 \001(\tH\001R\005o" +
-      "wner\210\001\001\022\022\n\004tags\030\006 \003(\tR\004tags\022(\n\rmax_stale" +
-      "ness\030\007 \001(\tH\002R\014maxStaleness\210\001\001\0221\n\025etl_off" +
-      "line_to_online\030\010 \001(\010R\022etlOfflineToOnline" +
-      "B\016\n\014_descriptionB\010\n\006_ownerB\020\n\016_max_stale" +
-      "ness\"\247\001\n\033GetFeaturesMetadataResponse\022<\n\010" +
-      "features\030\001 \003(\0132 .chalk.server.v1.Feature" +
-      "MetadataR\010features\022%\n\016environment_id\030\002 \001" +
-      "(\tR\renvironmentId\022#\n\rdeployment_id\030\003 \001(\t" +
-      "R\014deploymentId\"\034\n\032GetFeaturesMetadataReq" +
-      "uest\"\256\001\n\022UpdateGraphRequest\022#\n\rdeploymen" +
-      "t_id\030\001 \001(\tR\014deploymentId\022+\n\005graph\030\002 \001(\0132" +
-      "\025.chalk.graph.v1.GraphR\005graph\022\'\n\017chalkpy" +
-      "_version\030\003 \001(\tR\016chalkpyVersion\022\025\n\003tag\030\004 " +
-      "\001(\tH\000R\003tag\210\001\001B\006\n\004_tag\"\025\n\023UpdateGraphResp" +
-      "onse\"6\n\017GetGraphRequest\022#\n\rdeployment_id" +
-      "\030\001 \001(\tR\014deploymentId\"\207\001\n\020GetGraphRespons" +
-      "e\022+\n\005graph\030\001 \001(\0132\025.chalk.graph.v1.GraphR" +
-      "\005graph\022\'\n\017chalkpy_version\030\002 \001(\tR\016chalkpy" +
-      "Version\022\025\n\003tag\030\003 \001(\tH\000R\003tag\210\001\001B\006\n\004_tag2\250" +
-      "\003\n\014GraphService\022f\n\rGetFeatureSQL\022%.chalk" +
-      ".server.v1.GetFeatureSQLRequest\032&.chalk." +
-      "server.v1.GetFeatureSQLResponse\"\006\220\002\001\200}\013\022" +
-      "x\n\023GetFeaturesMetadata\022+.chalk.server.v1" +
-      ".GetFeaturesMetadataRequest\032,.chalk.serv" +
-      "er.v1.GetFeaturesMetadataResponse\"\006\220\002\001\200}" +
-      "\013\022W\n\010GetGraph\022 .chalk.server.v1.GetGraph" +
-      "Request\032!.chalk.server.v1.GetGraphRespon" +
-      "se\"\006\220\002\001\200}\013\022]\n\013UpdateGraph\022#.chalk.server" +
-      ".v1.UpdateGraphRequest\032$.chalk.server.v1" +
-      ".UpdateGraphResponse\"\003\200}\013B\237\001\n\037ai.chalk.p" +
-      "rotos.chalk.server.v1B\nGraphProtoP\001Z\022ser" +
-      "ver/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server.V1\312" +
-      "\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\GPBM" +
-      "etadata\352\002\021Chalk::Server::V1b\006proto3"
+      "ver.v1\032\037chalk/artifacts/v1/export.proto\032" +
+      "\037chalk/auth/v1/permissions.proto\032!chalk/" +
+      "common/v1/chalk_error.proto\032\032chalk/graph" +
+      "/v1/graph.proto\"\330\004\n\nFeatureSQL\022\016\n\002id\030\001 \001" +
+      "(\003R\002id\022%\n\016environment_id\030\002 \001(\tR\renvironm" +
+      "entId\022(\n\rdeployment_id\030\003 \001(\tH\000R\014deployme" +
+      "ntId\210\001\001\022\020\n\003fqn\030\004 \001(\tR\003fqn\022\022\n\004name\030\005 \001(\tR" +
+      "\004name\022\034\n\tnamespace\030\006 \001(\tR\tnamespace\022(\n\rm" +
+      "ax_staleness\030\007 \001(\tH\001R\014maxStaleness\210\001\001\0221\n" +
+      "\025etl_offline_to_online\030\010 \001(\010R\022etlOffline" +
+      "ToOnline\022%\n\013description\030\t \001(\tH\002R\013descrip" +
+      "tion\210\001\001\022\031\n\005owner\030\n \001(\tH\003R\005owner\210\001\001\022\022\n\004ta" +
+      "gs\030\013 \003(\tR\004tags\022\033\n\tkind_enum\030\014 \001(\tR\010kindE" +
+      "num\022\022\n\004kind\030\r \001(\tR\004kind\022\033\n\twas_reset\030\016 \001" +
+      "(\010R\010wasReset\022.\n\020internal_version\030\017 \001(\003H\004" +
+      "R\017internalVersion\210\001\001\022!\n\014is_singleton\030\020 \001" +
+      "(\010R\013isSingletonB\020\n\016_deployment_idB\020\n\016_ma" +
+      "x_stalenessB\016\n\014_descriptionB\010\n\006_ownerB\023\n" +
+      "\021_internal_version\"P\n\025GetFeatureSQLRespo" +
+      "nse\0227\n\010features\030\001 \003(\0132\033.chalk.server.v1." +
+      "FeatureSQLR\010features\";\n\024GetFeatureSQLReq" +
+      "uest\022#\n\rdeployment_id\030\001 \001(\tR\014deploymentI" +
+      "d\"\264\002\n\017FeatureMetadata\022\020\n\003fqn\030\001 \001(\tR\003fqn\022" +
+      "\022\n\004name\030\002 \001(\tR\004name\022\034\n\tnamespace\030\003 \001(\tR\t" +
+      "namespace\022%\n\013description\030\004 \001(\tH\000R\013descri" +
+      "ption\210\001\001\022\031\n\005owner\030\005 \001(\tH\001R\005owner\210\001\001\022\022\n\004t" +
+      "ags\030\006 \003(\tR\004tags\022(\n\rmax_staleness\030\007 \001(\tH\002" +
+      "R\014maxStaleness\210\001\001\0221\n\025etl_offline_to_onli" +
+      "ne\030\010 \001(\010R\022etlOfflineToOnlineB\016\n\014_descrip" +
+      "tionB\010\n\006_ownerB\020\n\016_max_staleness\"\247\001\n\033Get" +
+      "FeaturesMetadataResponse\022<\n\010features\030\001 \003" +
+      "(\0132 .chalk.server.v1.FeatureMetadataR\010fe" +
+      "atures\022%\n\016environment_id\030\002 \001(\tR\renvironm" +
+      "entId\022#\n\rdeployment_id\030\003 \001(\tR\014deployment" +
+      "Id\"\034\n\032GetFeaturesMetadataRequest\"\346\001\n\022Upd" +
+      "ateGraphRequest\022#\n\rdeployment_id\030\001 \001(\tR\014" +
+      "deploymentId\022/\n\005graph\030\002 \001(\0132\025.chalk.grap" +
+      "h.v1.GraphB\002\030\001R\005graph\022\'\n\017chalkpy_version" +
+      "\030\003 \001(\tR\016chalkpyVersion\022\025\n\003tag\030\004 \001(\tH\000R\003t" +
+      "ag\210\001\001\0222\n\006export\030\005 \001(\0132\032.chalk.artifacts." +
+      "v1.ExportR\006exportB\006\n\004_tag\"\025\n\023UpdateGraph" +
+      "Response\"6\n\017GetGraphRequest\022#\n\rdeploymen" +
+      "t_id\030\001 \001(\tR\014deploymentId\"\277\001\n\020GetGraphRes" +
+      "ponse\022/\n\005graph\030\001 \001(\0132\025.chalk.graph.v1.Gr" +
+      "aphB\002\030\001R\005graph\022\'\n\017chalkpy_version\030\002 \001(\tR" +
+      "\016chalkpyVersion\022\025\n\003tag\030\003 \001(\tH\000R\003tag\210\001\001\0222" +
+      "\n\006export\030\004 \001(\0132\032.chalk.artifacts.v1.Expo" +
+      "rtR\006exportB\006\n\004_tag\"\210\001\n\"GetCodegenFeature" +
+      "sFromGraphRequest\022(\n\rdeployment_id\030\001 \001(\t" +
+      "H\000R\014deploymentId\210\001\001\022\033\n\006branch\030\002 \001(\tH\001R\006b" +
+      "ranch\210\001\001B\020\n\016_deployment_idB\t\n\007_branch\"t\n" +
+      "#GetCodegenFeaturesFromGraphResponse\022\030\n\007" +
+      "codegen\030\001 \001(\tR\007codegen\0223\n\006errors\030\002 \003(\0132\033" +
+      ".chalk.common.v1.ChalkErrorR\006errors2\273\004\n\014" +
+      "GraphService\022f\n\rGetFeatureSQL\022%.chalk.se" +
+      "rver.v1.GetFeatureSQLRequest\032&.chalk.ser" +
+      "ver.v1.GetFeatureSQLResponse\"\006\220\002\001\200}\013\022x\n\023" +
+      "GetFeaturesMetadata\022+.chalk.server.v1.Ge" +
+      "tFeaturesMetadataRequest\032,.chalk.server." +
+      "v1.GetFeaturesMetadataResponse\"\006\220\002\001\200}\013\022W" +
+      "\n\010GetGraph\022 .chalk.server.v1.GetGraphReq" +
+      "uest\032!.chalk.server.v1.GetGraphResponse\"" +
+      "\006\220\002\001\200}\013\022]\n\013UpdateGraph\022#.chalk.server.v1" +
+      ".UpdateGraphRequest\032$.chalk.server.v1.Up" +
+      "dateGraphResponse\"\003\200}\013\022\220\001\n\033GetCodegenFea" +
+      "turesFromGraph\0223.chalk.server.v1.GetCode" +
+      "genFeaturesFromGraphRequest\0324.chalk.serv" +
+      "er.v1.GetCodegenFeaturesFromGraphRespons" +
+      "e\"\006\220\002\001\200}\013B\237\001\n\037ai.chalk.protos.chalk.serv" +
+      "er.v1B\nGraphProtoP\001Z\022server/v1;serverv1\242" +
+      "\002\003CSX\252\002\017Chalk.Server.V1\312\002\017Chalk\\Server\\V" +
+      "1\342\002\033Chalk\\Server\\V1\\GPBMetadata\352\002\021Chalk:" +
+      ":Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          ai.chalk.protos.chalk.artifacts.v1.ExportProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
+          ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor(),
           ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_FeatureSQL_descriptor =
@@ -181,7 +208,7 @@ public final class GraphProto {
     internal_static_chalk_server_v1_UpdateGraphRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_UpdateGraphRequest_descriptor,
-        new java.lang.String[] { "DeploymentId", "Graph", "ChalkpyVersion", "Tag", });
+        new java.lang.String[] { "DeploymentId", "Graph", "ChalkpyVersion", "Tag", "Export", });
     internal_static_chalk_server_v1_UpdateGraphResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_server_v1_UpdateGraphResponse_fieldAccessorTable = new
@@ -199,13 +226,27 @@ public final class GraphProto {
     internal_static_chalk_server_v1_GetGraphResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_GetGraphResponse_descriptor,
-        new java.lang.String[] { "Graph", "ChalkpyVersion", "Tag", });
+        new java.lang.String[] { "Graph", "ChalkpyVersion", "Tag", "Export", });
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphRequest_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphRequest_descriptor,
+        new java.lang.String[] { "DeploymentId", "Branch", });
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphResponse_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_GetCodegenFeaturesFromGraphResponse_descriptor,
+        new java.lang.String[] { "Codegen", "Errors", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
+    ai.chalk.protos.chalk.artifacts.v1.ExportProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
+    ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor();
     ai.chalk.protos.chalk.graph.v1.GraphProto.getDescriptor();
   }
 

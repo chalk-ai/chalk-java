@@ -215,6 +215,21 @@ public final class SourcesProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_graph_v1_TrinoSource_AsyncEngineArgsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_graph_v1_AthenaSource_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_graph_v1_AthenaSource_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_graph_v1_AthenaSource_EngineArgsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_graph_v1_AthenaSource_EngineArgsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_graph_v1_AthenaSource_AsyncEngineArgsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_graph_v1_AthenaSource_AsyncEngineArgsEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -269,7 +284,7 @@ public final class SourcesProto {
       "\024deadLetterQueueTopic\"e\n\027DatabaseSourceR" +
       "eference\0226\n\004type\030\001 \001(\0162\".chalk.graph.v1." +
       "DatabaseSourceTypeR\004type\022\022\n\004name\030\002 \001(\tR\004" +
-      "name\"\262\005\n\016DatabaseSource\022<\n\010bigquery\030\001 \001(" +
+      "name\"\352\005\n\016DatabaseSource\022<\n\010bigquery\030\001 \001(" +
       "\0132\036.chalk.graph.v1.BigQuerySourceH\000R\010big" +
       "query\022<\n\010cloudsql\030\002 \001(\0132\036.chalk.graph.v1" +
       ".CloudSQLSourceH\000R\010cloudsql\022B\n\ndatabrick" +
@@ -286,178 +301,200 @@ public final class SourcesProto {
       "eH\000R\007spanner\0223\n\005trino\030\n \001(\0132\033.chalk.grap" +
       "h.v1.TrinoSourceH\000R\005trino\022<\n\010dynamodb\030\013 " +
       "\001(\0132\036.chalk.graph.v1.DynamoDBSourceH\000R\010d" +
-      "ynamodbB\010\n\006source\"\275\004\n\016BigQuerySource\022\022\n\004" +
-      "name\030\001 \001(\tR\004name\022\030\n\007project\030\002 \001(\tR\007proje" +
-      "ct\022\030\n\007dataset\030\003 \001(\tR\007dataset\022\032\n\010location" +
-      "\030\004 \001(\tR\010location\022-\n\022credentials_base64\030\005" +
-      " \001(\tR\021credentialsBase64\022)\n\020credentials_p" +
-      "ath\030\006 \001(\tR\017credentialsPath\022O\n\013engine_arg" +
-      "s\030\007 \003(\0132..chalk.graph.v1.BigQuerySource." +
-      "EngineArgsEntryR\nengineArgs\022_\n\021async_eng" +
-      "ine_args\030\010 \003(\01323.chalk.graph.v1.BigQuery" +
-      "Source.AsyncEngineArgsEntryR\017asyncEngine" +
-      "Args\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
-      "y\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Scalar" +
-      "ValueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry" +
-      "\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chal" +
-      "k.arrow.v1.ScalarValueR\005value:\0028\001\"\370\003\n\016Cl" +
-      "oudSQLSource\022\022\n\004name\030\001 \001(\tR\004name\022\016\n\002db\030\002" +
-      " \001(\tR\002db\022\022\n\004user\030\003 \001(\tR\004user\022\032\n\010password" +
-      "\030\004 \001(\tR\010password\022#\n\rinstance_name\030\005 \001(\tR" +
-      "\014instanceName\022O\n\013engine_args\030\006 \003(\0132..cha" +
-      "lk.graph.v1.CloudSQLSource.EngineArgsEnt" +
-      "ryR\nengineArgs\022_\n\021async_engine_args\030\007 \003(" +
-      "\01323.chalk.graph.v1.CloudSQLSource.AsyncE" +
-      "ngineArgsEntryR\017asyncEngineArgs\032Z\n\017Engin" +
-      "eArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 " +
-      "\001(\0132\033.chalk.arrow.v1.ScalarValueR\005value:" +
-      "\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sc" +
-      "alarValueR\005value:\0028\001\"\221\004\n\020DatabricksSourc" +
-      "e\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004hos" +
-      "t\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\033\n" +
-      "\thttp_path\030\005 \001(\tR\010httpPath\022!\n\014access_tok" +
-      "en\030\006 \001(\tR\013accessToken\022Q\n\013engine_args\030\007 \003" +
-      "(\01320.chalk.graph.v1.DatabricksSource.Eng" +
-      "ineArgsEntryR\nengineArgs\022a\n\021async_engine" +
-      "_args\030\010 \003(\01325.chalk.graph.v1.DatabricksS" +
-      "ource.AsyncEngineArgsEntryR\017asyncEngineA" +
-      "rgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key" +
-      "\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarV" +
-      "alueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022" +
+      "ynamodb\0226\n\006athena\030\014 \001(\0132\034.chalk.graph.v1" +
+      ".AthenaSourceH\000R\006athenaB\010\n\006source\"\275\004\n\016Bi" +
+      "gQuerySource\022\022\n\004name\030\001 \001(\tR\004name\022\030\n\007proj" +
+      "ect\030\002 \001(\tR\007project\022\030\n\007dataset\030\003 \001(\tR\007dat" +
+      "aset\022\032\n\010location\030\004 \001(\tR\010location\022-\n\022cred" +
+      "entials_base64\030\005 \001(\tR\021credentialsBase64\022" +
+      ")\n\020credentials_path\030\006 \001(\tR\017credentialsPa" +
+      "th\022O\n\013engine_args\030\007 \003(\0132..chalk.graph.v1" +
+      ".BigQuerySource.EngineArgsEntryR\nengineA" +
+      "rgs\022_\n\021async_engine_args\030\010 \003(\01323.chalk.g" +
+      "raph.v1.BigQuerySource.AsyncEngineArgsEn" +
+      "tryR\017asyncEngineArgs\032Z\n\017EngineArgsEntry\022" +
       "\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk" +
-      ".arrow.v1.ScalarValueR\005value:\0028\001\"\336\005\n\016Dyn" +
-      "amoDBSource\022\022\n\004name\030\001 \001(\tR\004name\0228\n\026aws_c" +
-      "lient_id_override\030\002 \001(\tH\000R\023awsClientIdOv" +
-      "erride\210\001\001\022@\n\032aws_client_secret_override\030" +
-      "\003 \001(\tH\001R\027awsClientSecretOverride\210\001\001\0223\n\023a" +
-      "ws_region_override\030\004 \001(\tH\002R\021awsRegionOve" +
-      "rride\210\001\001\0220\n\021endpoint_override\030\005 \001(\tH\003R\020e" +
-      "ndpointOverride\210\001\001\022O\n\013engine_args\030\006 \003(\0132" +
-      "..chalk.graph.v1.DynamoDBSource.EngineAr" +
-      "gsEntryR\nengineArgs\022_\n\021async_engine_args" +
-      "\030\007 \003(\01323.chalk.graph.v1.DynamoDBSource.A" +
-      "syncEngineArgsEntryR\017asyncEngineArgs\032Z\n\017" +
+      ".arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024Asyn" +
+      "cEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005va" +
+      "lue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005" +
+      "value:\0028\001\"\370\003\n\016CloudSQLSource\022\022\n\004name\030\001 \001" +
+      "(\tR\004name\022\016\n\002db\030\002 \001(\tR\002db\022\022\n\004user\030\003 \001(\tR\004" +
+      "user\022\032\n\010password\030\004 \001(\tR\010password\022#\n\rinst" +
+      "ance_name\030\005 \001(\tR\014instanceName\022O\n\013engine_" +
+      "args\030\006 \003(\0132..chalk.graph.v1.CloudSQLSour" +
+      "ce.EngineArgsEntryR\nengineArgs\022_\n\021async_" +
+      "engine_args\030\007 \003(\01323.chalk.graph.v1.Cloud" +
+      "SQLSource.AsyncEngineArgsEntryR\017asyncEng" +
+      "ineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR" +
+      "\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sca" +
+      "larValueR\005value:\0028\001\032_\n\024AsyncEngineArgsEn" +
+      "try\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.c" +
+      "halk.arrow.v1.ScalarValueR\005value:\0028\001\"\221\004\n" +
+      "\020DatabricksSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n" +
+      "\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\016\n" +
+      "\002db\030\004 \001(\tR\002db\022\033\n\thttp_path\030\005 \001(\tR\010httpPa" +
+      "th\022!\n\014access_token\030\006 \001(\tR\013accessToken\022Q\n" +
+      "\013engine_args\030\007 \003(\01320.chalk.graph.v1.Data" +
+      "bricksSource.EngineArgsEntryR\nengineArgs" +
+      "\022a\n\021async_engine_args\030\010 \003(\01325.chalk.grap" +
+      "h.v1.DatabricksSource.AsyncEngineArgsEnt" +
+      "ryR\017asyncEngineArgs\032Z\n\017EngineArgsEntry\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk." +
+      "arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024Async" +
       "EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005val" +
       "ue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005v" +
-      "alue:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030" +
-      "\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow." +
-      "v1.ScalarValueR\005value:\0028\001B\031\n\027_aws_client" +
-      "_id_overrideB\035\n\033_aws_client_secret_overr" +
-      "ideB\026\n\024_aws_region_overrideB\024\n\022_endpoint" +
-      "_override\"\362\003\n\013MySQLSource\022\022\n\004name\030\001 \001(\tR" +
+      "alue:\0028\001\"\336\005\n\016DynamoDBSource\022\022\n\004name\030\001 \001(" +
+      "\tR\004name\0228\n\026aws_client_id_override\030\002 \001(\tH" +
+      "\000R\023awsClientIdOverride\210\001\001\022@\n\032aws_client_" +
+      "secret_override\030\003 \001(\tH\001R\027awsClientSecret" +
+      "Override\210\001\001\0223\n\023aws_region_override\030\004 \001(\t" +
+      "H\002R\021awsRegionOverride\210\001\001\0220\n\021endpoint_ove" +
+      "rride\030\005 \001(\tH\003R\020endpointOverride\210\001\001\022O\n\013en" +
+      "gine_args\030\006 \003(\0132..chalk.graph.v1.DynamoD" +
+      "BSource.EngineArgsEntryR\nengineArgs\022_\n\021a" +
+      "sync_engine_args\030\007 \003(\01323.chalk.graph.v1." +
+      "DynamoDBSource.AsyncEngineArgsEntryR\017asy" +
+      "ncEngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001" +
+      " \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v" +
+      "1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngineA" +
+      "rgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(" +
+      "\0132\033.chalk.arrow.v1.ScalarValueR\005value:\0028" +
+      "\001B\031\n\027_aws_client_id_overrideB\035\n\033_aws_cli" +
+      "ent_secret_overrideB\026\n\024_aws_region_overr" +
+      "ideB\024\n\022_endpoint_override\"\362\003\n\013MySQLSourc" +
+      "e\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004hos" +
+      "t\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n" +
+      "\004user\030\005 \001(\tR\004user\022\032\n\010password\030\006 \001(\tR\010pas" +
+      "sword\022L\n\013engine_args\030\007 \003(\0132+.chalk.graph" +
+      ".v1.MySQLSource.EngineArgsEntryR\nengineA" +
+      "rgs\022\\\n\021async_engine_args\030\010 \003(\01320.chalk.g" +
+      "raph.v1.MySQLSource.AsyncEngineArgsEntry" +
+      "R\017asyncEngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003" +
+      "key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.ar" +
+      "row.v1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEn" +
+      "gineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value" +
+      "\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005val" +
+      "ue:\0028\001\"\373\003\n\016PostgresSource\022\022\n\004name\030\001 \001(\tR" +
       "\004name\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\tR" +
       "\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004user\030\005 \001(\tR\004use" +
-      "r\022\032\n\010password\030\006 \001(\tR\010password\022L\n\013engine_" +
-      "args\030\007 \003(\0132+.chalk.graph.v1.MySQLSource." +
-      "EngineArgsEntryR\nengineArgs\022\\\n\021async_eng" +
-      "ine_args\030\010 \003(\01320.chalk.graph.v1.MySQLSou" +
-      "rce.AsyncEngineArgsEntryR\017asyncEngineArg" +
-      "s\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221" +
-      "\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarVal" +
-      "ueR\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n" +
-      "\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.a" +
-      "rrow.v1.ScalarValueR\005value:\0028\001\"\373\003\n\016Postg" +
-      "resSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 " +
-      "\001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(" +
-      "\tR\002db\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010password\030\006 " +
-      "\001(\tR\010password\022O\n\013engine_args\030\007 \003(\0132..cha" +
-      "lk.graph.v1.PostgresSource.EngineArgsEnt" +
-      "ryR\nengineArgs\022_\n\021async_engine_args\030\010 \003(" +
-      "\01323.chalk.graph.v1.PostgresSource.AsyncE" +
-      "ngineArgsEntryR\017asyncEngineArgs\032Z\n\017Engin" +
-      "eArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 " +
-      "\001(\0132\033.chalk.arrow.v1.ScalarValueR\005value:" +
-      "\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sc" +
-      "alarValueR\005value:\0028\001\"\335\004\n\016RedshiftSource\022" +
-      "\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004host\022" +
-      "\022\n\004port\030\003 \001(\tR\004port\022\016\n\002db\030\004 \001(\tR\002db\022\022\n\004u" +
-      "ser\030\005 \001(\tR\004user\022\032\n\010password\030\006 \001(\tR\010passw" +
-      "ord\022\033\n\ts3_client\030\007 \001(\tR\010s3Client\022\033\n\ts3_b" +
-      "ucket\030\010 \001(\tR\010s3Bucket\022O\n\013engine_args\030\t \003" +
-      "(\0132..chalk.graph.v1.RedshiftSource.Engin" +
-      "eArgsEntryR\nengineArgs\022_\n\021async_engine_a" +
-      "rgs\030\n \003(\01323.chalk.graph.v1.RedshiftSourc" +
-      "e.AsyncEngineArgsEntryR\017asyncEngineArgs\022" +
-      "&\n\017unload_iam_role\030\013 \001(\tR\runloadIamRole\032" +
-      "Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005" +
-      "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
-      "R\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003k" +
-      "ey\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arr" +
-      "ow.v1.ScalarValueR\005value:\0028\001\"\367\004\n\017Snowfla" +
-      "keSource\022\022\n\004name\030\001 \001(\tR\004name\022\016\n\002db\030\002 \001(\t" +
-      "R\002db\022\026\n\006schema\030\003 \001(\tR\006schema\022\022\n\004role\030\004 \001" +
-      "(\tR\004role\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010password" +
-      "\030\006 \001(\tR\010password\022-\n\022account_identifier\030\007" +
-      " \001(\tR\021accountIdentifier\022\034\n\twarehouse\030\010 \001" +
-      "(\tR\twarehouse\022P\n\013engine_args\030\t \003(\0132/.cha" +
-      "lk.graph.v1.SnowflakeSource.EngineArgsEn" +
-      "tryR\nengineArgs\022`\n\021async_engine_args\030\n \003" +
-      "(\01324.chalk.graph.v1.SnowflakeSource.Asyn" +
-      "cEngineArgsEntryR\017asyncEngineArgs\022&\n\017pri" +
-      "vate_key_b64\030\013 \001(\tR\rprivateKeyB64\032Z\n\017Eng" +
-      "ineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030" +
-      "\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005valu" +
-      "e:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1." +
-      "ScalarValueR\005value:\0028\001\"\252\003\n\014SQLiteSource\022" +
-      "\022\n\004name\030\001 \001(\tR\004name\022\033\n\tfile_name\030\002 \001(\tR\010" +
-      "fileName\022M\n\013engine_args\030\003 \003(\0132,.chalk.gr" +
-      "aph.v1.SQLiteSource.EngineArgsEntryR\neng" +
-      "ineArgs\022]\n\021async_engine_args\030\004 \003(\01321.cha" +
-      "lk.graph.v1.SQLiteSource.AsyncEngineArgs" +
-      "EntryR\017asyncEngineArgs\032Z\n\017EngineArgsEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.cha" +
-      "lk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024As" +
-      "yncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005" +
-      "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
-      "R\005value:\0028\001\"\205\004\n\rSpannerSource\022\022\n\004name\030\001 " +
-      "\001(\tR\004name\022\030\n\007project\030\002 \001(\tR\007project\022\032\n\010i" +
-      "nstance\030\003 \001(\tR\010instance\022\016\n\002db\030\004 \001(\tR\002db\022" +
-      "-\n\022credentials_base64\030\005 \001(\tR\021credentials" +
-      "Base64\022N\n\013engine_args\030\006 \003(\0132-.chalk.grap" +
-      "h.v1.SpannerSource.EngineArgsEntryR\nengi" +
-      "neArgs\022^\n\021async_engine_args\030\007 \003(\01322.chal" +
-      "k.graph.v1.SpannerSource.AsyncEngineArgs" +
-      "EntryR\017asyncEngineArgs\032Z\n\017EngineArgsEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.cha" +
-      "lk.arrow.v1.ScalarValueR\005value:\0028\001\032_\n\024As" +
-      "yncEngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005" +
-      "value\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValue" +
-      "R\005value:\0028\001\"\224\004\n\013TrinoSource\022\022\n\004name\030\001 \001(" +
-      "\tR\004name\022\022\n\004host\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(" +
-      "\tR\004port\022\030\n\007catalog\030\004 \001(\tR\007catalog\022\026\n\006sch" +
-      "ema\030\005 \001(\tR\006schema\022\022\n\004user\030\006 \001(\tR\004user\022\032\n" +
-      "\010password\030\007 \001(\tR\010password\022L\n\013engine_args" +
-      "\030\010 \003(\0132+.chalk.graph.v1.TrinoSource.Engi" +
-      "neArgsEntryR\nengineArgs\022\\\n\021async_engine_" +
-      "args\030\t \003(\01320.chalk.graph.v1.TrinoSource." +
-      "AsyncEngineArgsEntryR\017asyncEngineArgs\032Z\n" +
-      "\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005va" +
-      "lue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR\005" +
-      "value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003key" +
-      "\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow" +
-      ".v1.ScalarValueR\005value:\0028\001*\223\001\n\020StreamSou" +
-      "rceType\022\"\n\036STREAM_SOURCE_TYPE_UNSPECIFIE" +
-      "D\020\000\022\034\n\030STREAM_SOURCE_TYPE_KAFKA\020\001\022\036\n\032STR" +
-      "EAM_SOURCE_TYPE_KINESIS\020\002\022\035\n\031STREAM_SOUR" +
-      "CE_TYPE_PUBSUB\020\003*\265\003\n\022DatabaseSourceType\022" +
-      "$\n DATABASE_SOURCE_TYPE_UNSPECIFIED\020\000\022!\n" +
-      "\035DATABASE_SOURCE_TYPE_BIGQUERY\020\001\022!\n\035DATA" +
-      "BASE_SOURCE_TYPE_CLOUDSQL\020\002\022#\n\037DATABASE_" +
-      "SOURCE_TYPE_DATABRICKS\020\003\022\036\n\032DATABASE_SOU" +
-      "RCE_TYPE_MYSQL\020\004\022!\n\035DATABASE_SOURCE_TYPE" +
-      "_POSTGRES\020\005\022!\n\035DATABASE_SOURCE_TYPE_REDS" +
-      "HIFT\020\006\022\"\n\036DATABASE_SOURCE_TYPE_SNOWFLAKE" +
-      "\020\007\022\037\n\033DATABASE_SOURCE_TYPE_SQLITE\020\010\022 \n\034D" +
-      "ATABASE_SOURCE_TYPE_SPANNER\020\t\022\036\n\032DATABAS" +
-      "E_SOURCE_TYPE_TRINO\020\n\022!\n\035DATABASE_SOURCE" +
-      "_TYPE_DYNAMODB\020\013B\210\001\n\036ai.chalk.protos.cha" +
-      "lk.graph.v1B\014SourcesProtoP\001\242\002\003CGX\252\002\016Chal" +
-      "k.Graph.V1\312\002\016Chalk\\Graph\\V1\342\002\032Chalk\\Grap" +
-      "h\\V1\\GPBMetadata\352\002\020Chalk::Graph::V1b\006pro" +
-      "to3"
+      "r\022\032\n\010password\030\006 \001(\tR\010password\022O\n\013engine_" +
+      "args\030\007 \003(\0132..chalk.graph.v1.PostgresSour" +
+      "ce.EngineArgsEntryR\nengineArgs\022_\n\021async_" +
+      "engine_args\030\010 \003(\01323.chalk.graph.v1.Postg" +
+      "resSource.AsyncEngineArgsEntryR\017asyncEng" +
+      "ineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR" +
+      "\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.Sca" +
+      "larValueR\005value:\0028\001\032_\n\024AsyncEngineArgsEn" +
+      "try\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.c" +
+      "halk.arrow.v1.ScalarValueR\005value:\0028\001\"\335\004\n" +
+      "\016RedshiftSource\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004h" +
+      "ost\030\002 \001(\tR\004host\022\022\n\004port\030\003 \001(\tR\004port\022\016\n\002d" +
+      "b\030\004 \001(\tR\002db\022\022\n\004user\030\005 \001(\tR\004user\022\032\n\010passw" +
+      "ord\030\006 \001(\tR\010password\022\033\n\ts3_client\030\007 \001(\tR\010" +
+      "s3Client\022\033\n\ts3_bucket\030\010 \001(\tR\010s3Bucket\022O\n" +
+      "\013engine_args\030\t \003(\0132..chalk.graph.v1.Reds" +
+      "hiftSource.EngineArgsEntryR\nengineArgs\022_" +
+      "\n\021async_engine_args\030\n \003(\01323.chalk.graph." +
+      "v1.RedshiftSource.AsyncEngineArgsEntryR\017" +
+      "asyncEngineArgs\022&\n\017unload_iam_role\030\013 \001(\t" +
+      "R\runloadIamRole\032Z\n\017EngineArgsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arro" +
+      "w.v1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngi" +
+      "neArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002" +
+      " \001(\0132\033.chalk.arrow.v1.ScalarValueR\005value" +
+      ":\0028\001\"\367\004\n\017SnowflakeSource\022\022\n\004name\030\001 \001(\tR\004" +
+      "name\022\016\n\002db\030\002 \001(\tR\002db\022\026\n\006schema\030\003 \001(\tR\006sc" +
+      "hema\022\022\n\004role\030\004 \001(\tR\004role\022\022\n\004user\030\005 \001(\tR\004" +
+      "user\022\032\n\010password\030\006 \001(\tR\010password\022-\n\022acco" +
+      "unt_identifier\030\007 \001(\tR\021accountIdentifier\022" +
+      "\034\n\twarehouse\030\010 \001(\tR\twarehouse\022P\n\013engine_" +
+      "args\030\t \003(\0132/.chalk.graph.v1.SnowflakeSou" +
+      "rce.EngineArgsEntryR\nengineArgs\022`\n\021async" +
+      "_engine_args\030\n \003(\01324.chalk.graph.v1.Snow" +
+      "flakeSource.AsyncEngineArgsEntryR\017asyncE" +
+      "ngineArgs\022&\n\017private_key_b64\030\013 \001(\tR\rpriv" +
+      "ateKeyB64\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(" +
+      "\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v1.S" +
+      "calarValueR\005value:\0028\001\032_\n\024AsyncEngineArgs" +
+      "Entry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033" +
+      ".chalk.arrow.v1.ScalarValueR\005value:\0028\001\"\252" +
+      "\003\n\014SQLiteSource\022\022\n\004name\030\001 \001(\tR\004name\022\033\n\tf" +
+      "ile_name\030\002 \001(\tR\010fileName\022M\n\013engine_args\030" +
+      "\003 \003(\0132,.chalk.graph.v1.SQLiteSource.Engi" +
+      "neArgsEntryR\nengineArgs\022]\n\021async_engine_" +
+      "args\030\004 \003(\01321.chalk.graph.v1.SQLiteSource" +
+      ".AsyncEngineArgsEntryR\017asyncEngineArgs\032Z" +
+      "\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005v" +
+      "alue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR" +
+      "\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arro" +
+      "w.v1.ScalarValueR\005value:\0028\001\"\205\004\n\rSpannerS" +
+      "ource\022\022\n\004name\030\001 \001(\tR\004name\022\030\n\007project\030\002 \001" +
+      "(\tR\007project\022\032\n\010instance\030\003 \001(\tR\010instance\022" +
+      "\016\n\002db\030\004 \001(\tR\002db\022-\n\022credentials_base64\030\005 " +
+      "\001(\tR\021credentialsBase64\022N\n\013engine_args\030\006 " +
+      "\003(\0132-.chalk.graph.v1.SpannerSource.Engin" +
+      "eArgsEntryR\nengineArgs\022^\n\021async_engine_a" +
+      "rgs\030\007 \003(\01322.chalk.graph.v1.SpannerSource" +
+      ".AsyncEngineArgsEntryR\017asyncEngineArgs\032Z" +
+      "\n\017EngineArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005v" +
+      "alue\030\002 \001(\0132\033.chalk.arrow.v1.ScalarValueR" +
+      "\005value:\0028\001\032_\n\024AsyncEngineArgsEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arro" +
+      "w.v1.ScalarValueR\005value:\0028\001\"\224\004\n\013TrinoSou" +
+      "rce\022\022\n\004name\030\001 \001(\tR\004name\022\022\n\004host\030\002 \001(\tR\004h" +
+      "ost\022\022\n\004port\030\003 \001(\tR\004port\022\030\n\007catalog\030\004 \001(\t" +
+      "R\007catalog\022\026\n\006schema\030\005 \001(\tR\006schema\022\022\n\004use" +
+      "r\030\006 \001(\tR\004user\022\032\n\010password\030\007 \001(\tR\010passwor" +
+      "d\022L\n\013engine_args\030\010 \003(\0132+.chalk.graph.v1." +
+      "TrinoSource.EngineArgsEntryR\nengineArgs\022" +
+      "\\\n\021async_engine_args\030\t \003(\01320.chalk.graph" +
+      ".v1.TrinoSource.AsyncEngineArgsEntryR\017as" +
+      "yncEngineArgs\032Z\n\017EngineArgsEntry\022\020\n\003key\030" +
+      "\001 \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow." +
+      "v1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngine" +
+      "ArgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001" +
+      "(\0132\033.chalk.arrow.v1.ScalarValueR\005value:\002" +
+      "8\001\"\271\006\n\014AthenaSource\022\022\n\004name\030\001 \001(\tR\004name\022" +
+      "\035\n\naws_region\030\002 \001(\tR\tawsRegion\022.\n\021aws_ac" +
+      "cess_key_id\030\003 \001(\tH\000R\016awsAccessKeyId\210\001\001\0226" +
+      "\n\025aws_access_key_secret\030\004 \001(\tH\001R\022awsAcce" +
+      "ssKeySecret\210\001\001\022$\n\016s3_staging_dir\030\005 \001(\tR\014" +
+      "s3StagingDir\022&\n\014catalog_name\030\006 \001(\tH\002R\013ca" +
+      "talogName\210\001\001\022$\n\013schema_name\030\007 \001(\tH\003R\nsch" +
+      "emaName\210\001\001\022\036\n\010role_arn\030\010 \001(\tH\004R\007roleArn\210" +
+      "\001\001\022M\n\013engine_args\030\t \003(\0132,.chalk.graph.v1" +
+      ".AthenaSource.EngineArgsEntryR\nengineArg" +
+      "s\022]\n\021async_engine_args\030\n \003(\01321.chalk.gra" +
+      "ph.v1.AthenaSource.AsyncEngineArgsEntryR" +
+      "\017asyncEngineArgs\022\"\n\nwork_group\030\013 \001(\tH\005R\t" +
+      "workGroup\210\001\001\032Z\n\017EngineArgsEntry\022\020\n\003key\030\001" +
+      " \001(\tR\003key\0221\n\005value\030\002 \001(\0132\033.chalk.arrow.v" +
+      "1.ScalarValueR\005value:\0028\001\032_\n\024AsyncEngineA" +
+      "rgsEntry\022\020\n\003key\030\001 \001(\tR\003key\0221\n\005value\030\002 \001(" +
+      "\0132\033.chalk.arrow.v1.ScalarValueR\005value:\0028" +
+      "\001B\024\n\022_aws_access_key_idB\030\n\026_aws_access_k" +
+      "ey_secretB\017\n\r_catalog_nameB\016\n\014_schema_na" +
+      "meB\013\n\t_role_arnB\r\n\013_work_group*\223\001\n\020Strea" +
+      "mSourceType\022\"\n\036STREAM_SOURCE_TYPE_UNSPEC" +
+      "IFIED\020\000\022\034\n\030STREAM_SOURCE_TYPE_KAFKA\020\001\022\036\n" +
+      "\032STREAM_SOURCE_TYPE_KINESIS\020\002\022\035\n\031STREAM_" +
+      "SOURCE_TYPE_PUBSUB\020\003*\326\003\n\022DatabaseSourceT" +
+      "ype\022$\n DATABASE_SOURCE_TYPE_UNSPECIFIED\020" +
+      "\000\022!\n\035DATABASE_SOURCE_TYPE_BIGQUERY\020\001\022!\n\035" +
+      "DATABASE_SOURCE_TYPE_CLOUDSQL\020\002\022#\n\037DATAB" +
+      "ASE_SOURCE_TYPE_DATABRICKS\020\003\022\036\n\032DATABASE" +
+      "_SOURCE_TYPE_MYSQL\020\004\022!\n\035DATABASE_SOURCE_" +
+      "TYPE_POSTGRES\020\005\022!\n\035DATABASE_SOURCE_TYPE_" +
+      "REDSHIFT\020\006\022\"\n\036DATABASE_SOURCE_TYPE_SNOWF" +
+      "LAKE\020\007\022\037\n\033DATABASE_SOURCE_TYPE_SQLITE\020\010\022" +
+      " \n\034DATABASE_SOURCE_TYPE_SPANNER\020\t\022\036\n\032DAT" +
+      "ABASE_SOURCE_TYPE_TRINO\020\n\022!\n\035DATABASE_SO" +
+      "URCE_TYPE_DYNAMODB\020\013\022\037\n\033DATABASE_SOURCE_" +
+      "TYPE_ATHENA\020\014B\210\001\n\036ai.chalk.protos.chalk." +
+      "graph.v1B\014SourcesProtoP\001\242\002\003CGX\252\002\016Chalk.G" +
+      "raph.V1\312\002\016Chalk\\Graph\\V1\342\002\032Chalk\\Graph\\V" +
+      "1\\GPBMetadata\352\002\020Chalk::Graph::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -506,7 +543,7 @@ public final class SourcesProto {
     internal_static_chalk_graph_v1_DatabaseSource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_DatabaseSource_descriptor,
-        new java.lang.String[] { "Bigquery", "Cloudsql", "Databricks", "Mysql", "Postgres", "Redshift", "Snowflake", "Sqlite", "Spanner", "Trino", "Dynamodb", "Source", });
+        new java.lang.String[] { "Bigquery", "Cloudsql", "Databricks", "Mysql", "Postgres", "Redshift", "Snowflake", "Sqlite", "Spanner", "Trino", "Dynamodb", "Athena", "Source", });
     internal_static_chalk_graph_v1_BigQuerySource_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_chalk_graph_v1_BigQuerySource_fieldAccessorTable = new
@@ -704,6 +741,24 @@ public final class SourcesProto {
     internal_static_chalk_graph_v1_TrinoSource_AsyncEngineArgsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_graph_v1_TrinoSource_AsyncEngineArgsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_graph_v1_AthenaSource_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_chalk_graph_v1_AthenaSource_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_graph_v1_AthenaSource_descriptor,
+        new java.lang.String[] { "Name", "AwsRegion", "AwsAccessKeyId", "AwsAccessKeySecret", "S3StagingDir", "CatalogName", "SchemaName", "RoleArn", "EngineArgs", "AsyncEngineArgs", "WorkGroup", });
+    internal_static_chalk_graph_v1_AthenaSource_EngineArgsEntry_descriptor =
+      internal_static_chalk_graph_v1_AthenaSource_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_graph_v1_AthenaSource_EngineArgsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_graph_v1_AthenaSource_EngineArgsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_graph_v1_AthenaSource_AsyncEngineArgsEntry_descriptor =
+      internal_static_chalk_graph_v1_AthenaSource_descriptor.getNestedTypes().get(1);
+    internal_static_chalk_graph_v1_AthenaSource_AsyncEngineArgsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_graph_v1_AthenaSource_AsyncEngineArgsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     ai.chalk.protos.chalk.arrow.v1.ArrowProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();

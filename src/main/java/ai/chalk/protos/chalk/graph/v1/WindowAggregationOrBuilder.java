@@ -325,4 +325,31 @@ public interface WindowAggregationOrBuilder extends
    */
   com.google.protobuf.ByteString
       getBackfillScheduleBytes();
+
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   * @return Whether the bucketStart field is set.
+   */
+  boolean hasBucketStart();
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   * @return The bucketStart.
+   */
+  com.google.protobuf.Timestamp getBucketStart();
+  /**
+   * <pre>
+   * The lower bound of the first bucket. All buckets are aligned to this time.
+   * </pre>
+   *
+   * <code>.google.protobuf.Timestamp bucket_start = 14 [json_name = "bucketStart"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getBucketStartOrBuilder();
 }

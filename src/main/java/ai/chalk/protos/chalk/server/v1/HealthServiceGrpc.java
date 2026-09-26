@@ -79,6 +79,38 @@ public final class HealthServiceGrpc {
     return getGetHealthMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest,
+      ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> getGetClusterMetricsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetClusterMetrics",
+      requestType = ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest,
+      ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> getGetClusterMetricsMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest, ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> getGetClusterMetricsMethod;
+    if ((getGetClusterMetricsMethod = HealthServiceGrpc.getGetClusterMetricsMethod) == null) {
+      synchronized (HealthServiceGrpc.class) {
+        if ((getGetClusterMetricsMethod = HealthServiceGrpc.getGetClusterMetricsMethod) == null) {
+          HealthServiceGrpc.getGetClusterMetricsMethod = getGetClusterMetricsMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest, ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetClusterMetrics"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new HealthServiceMethodDescriptorSupplier("GetClusterMetrics"))
+              .build();
+        }
+      }
+    }
+    return getGetClusterMetricsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -146,6 +178,16 @@ public final class HealthServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetHealthResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetHealthMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * Return collected cluster prometheus metrics
+     * </pre>
+     */
+    default void getClusterMetrics(ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetClusterMetricsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -196,6 +238,17 @@ public final class HealthServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetHealthMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Return collected cluster prometheus metrics
+     * </pre>
+     */
+    public void getClusterMetrics(ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetClusterMetricsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -232,6 +285,16 @@ public final class HealthServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.GetHealthResponse getHealth(ai.chalk.protos.chalk.server.v1.GetHealthRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetHealthMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Return collected cluster prometheus metrics
+     * </pre>
+     */
+    public ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse getClusterMetrics(ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetClusterMetricsMethod(), getCallOptions(), request);
     }
   }
 
@@ -272,10 +335,22 @@ public final class HealthServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetHealthMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Return collected cluster prometheus metrics
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse> getClusterMetrics(
+        ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetClusterMetricsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CHECK_HEALTH = 0;
   private static final int METHODID_GET_HEALTH = 1;
+  private static final int METHODID_GET_CLUSTER_METRICS = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -301,6 +376,10 @@ public final class HealthServiceGrpc {
         case METHODID_GET_HEALTH:
           serviceImpl.getHealth((ai.chalk.protos.chalk.server.v1.GetHealthRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetHealthResponse>) responseObserver);
+          break;
+        case METHODID_GET_CLUSTER_METRICS:
+          serviceImpl.getClusterMetrics((ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -334,6 +413,13 @@ public final class HealthServiceGrpc {
               ai.chalk.protos.chalk.server.v1.GetHealthRequest,
               ai.chalk.protos.chalk.server.v1.GetHealthResponse>(
                 service, METHODID_GET_HEALTH)))
+        .addMethod(
+          getGetClusterMetricsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetClusterMetricsRequest,
+              ai.chalk.protos.chalk.server.v1.GetClusterMetricsResponse>(
+                service, METHODID_GET_CLUSTER_METRICS)))
         .build();
   }
 
@@ -384,6 +470,7 @@ public final class HealthServiceGrpc {
               .setSchemaDescriptor(new HealthServiceFileDescriptorSupplier())
               .addMethod(getCheckHealthMethod())
               .addMethod(getGetHealthMethod())
+              .addMethod(getGetClusterMetricsMethod())
               .build();
         }
       }

@@ -142,6 +142,38 @@ public final class GraphServiceGrpc {
     return getUpdateGraphMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest,
+      ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> getGetCodegenFeaturesFromGraphMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetCodegenFeaturesFromGraph",
+      requestType = ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest.class,
+      responseType = ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest,
+      ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> getGetCodegenFeaturesFromGraphMethod() {
+    io.grpc.MethodDescriptor<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest, ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> getGetCodegenFeaturesFromGraphMethod;
+    if ((getGetCodegenFeaturesFromGraphMethod = GraphServiceGrpc.getGetCodegenFeaturesFromGraphMethod) == null) {
+      synchronized (GraphServiceGrpc.class) {
+        if ((getGetCodegenFeaturesFromGraphMethod = GraphServiceGrpc.getGetCodegenFeaturesFromGraphMethod) == null) {
+          GraphServiceGrpc.getGetCodegenFeaturesFromGraphMethod = getGetCodegenFeaturesFromGraphMethod =
+              io.grpc.MethodDescriptor.<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest, ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetCodegenFeaturesFromGraph"))
+              .setSafe(true)
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GraphServiceMethodDescriptorSupplier("GetCodegenFeaturesFromGraph"))
+              .build();
+        }
+      }
+    }
+    return getGetCodegenFeaturesFromGraphMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -223,6 +255,16 @@ public final class GraphServiceGrpc {
         io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateGraphResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateGraphMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * GetCodegenFeaturesFromGraph returns Chalk features generated from the protograph
+     * </pre>
+     */
+    default void getCodegenFeaturesFromGraph(ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetCodegenFeaturesFromGraphMethod(), responseObserver);
+    }
   }
 
   /**
@@ -289,6 +331,17 @@ public final class GraphServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUpdateGraphMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * GetCodegenFeaturesFromGraph returns Chalk features generated from the protograph
+     * </pre>
+     */
+    public void getCodegenFeaturesFromGraph(ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest request,
+        io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetCodegenFeaturesFromGraphMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -339,6 +392,16 @@ public final class GraphServiceGrpc {
     public ai.chalk.protos.chalk.server.v1.UpdateGraphResponse updateGraph(ai.chalk.protos.chalk.server.v1.UpdateGraphRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUpdateGraphMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * GetCodegenFeaturesFromGraph returns Chalk features generated from the protograph
+     * </pre>
+     */
+    public ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse getCodegenFeaturesFromGraph(ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetCodegenFeaturesFromGraphMethod(), getCallOptions(), request);
     }
   }
 
@@ -395,12 +458,24 @@ public final class GraphServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getUpdateGraphMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * GetCodegenFeaturesFromGraph returns Chalk features generated from the protograph
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse> getCodegenFeaturesFromGraph(
+        ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetCodegenFeaturesFromGraphMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_FEATURE_SQL = 0;
   private static final int METHODID_GET_FEATURES_METADATA = 1;
   private static final int METHODID_GET_GRAPH = 2;
   private static final int METHODID_UPDATE_GRAPH = 3;
+  private static final int METHODID_GET_CODEGEN_FEATURES_FROM_GRAPH = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -434,6 +509,10 @@ public final class GraphServiceGrpc {
         case METHODID_UPDATE_GRAPH:
           serviceImpl.updateGraph((ai.chalk.protos.chalk.server.v1.UpdateGraphRequest) request,
               (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.UpdateGraphResponse>) responseObserver);
+          break;
+        case METHODID_GET_CODEGEN_FEATURES_FROM_GRAPH:
+          serviceImpl.getCodegenFeaturesFromGraph((ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest) request,
+              (io.grpc.stub.StreamObserver<ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -481,6 +560,13 @@ public final class GraphServiceGrpc {
               ai.chalk.protos.chalk.server.v1.UpdateGraphRequest,
               ai.chalk.protos.chalk.server.v1.UpdateGraphResponse>(
                 service, METHODID_UPDATE_GRAPH)))
+        .addMethod(
+          getGetCodegenFeaturesFromGraphMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphRequest,
+              ai.chalk.protos.chalk.server.v1.GetCodegenFeaturesFromGraphResponse>(
+                service, METHODID_GET_CODEGEN_FEATURES_FROM_GRAPH)))
         .build();
   }
 
@@ -533,6 +619,7 @@ public final class GraphServiceGrpc {
               .addMethod(getGetFeaturesMetadataMethod())
               .addMethod(getGetGraphMethod())
               .addMethod(getUpdateGraphMethod())
+              .addMethod(getGetCodegenFeaturesFromGraphMethod())
               .build();
         }
       }

@@ -173,5 +173,20 @@ public interface DatabaseSourceOrBuilder extends
    */
   ai.chalk.protos.chalk.graph.v1.DynamoDBSourceOrBuilder getDynamodbOrBuilder();
 
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   * @return Whether the athena field is set.
+   */
+  boolean hasAthena();
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   * @return The athena.
+   */
+  ai.chalk.protos.chalk.graph.v1.AthenaSource getAthena();
+  /**
+   * <code>.chalk.graph.v1.AthenaSource athena = 12 [json_name = "athena"];</code>
+   */
+  ai.chalk.protos.chalk.graph.v1.AthenaSourceOrBuilder getAthenaOrBuilder();
+
   ai.chalk.protos.chalk.graph.v1.DatabaseSource.SourceCase getSourceCase();
 }

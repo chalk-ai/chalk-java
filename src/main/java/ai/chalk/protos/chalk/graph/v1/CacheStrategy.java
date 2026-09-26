@@ -25,6 +25,22 @@ public enum CacheStrategy
    * <code>CACHE_STRATEGY_EVICT_NULLS = 3;</code>
    */
   CACHE_STRATEGY_EVICT_NULLS(3),
+  /**
+   * <code>CACHE_STRATEGY_NO_DEFAULTS = 4;</code>
+   */
+  CACHE_STRATEGY_NO_DEFAULTS(4),
+  /**
+   * <code>CACHE_STRATEGY_EVICT_DEFAULTS = 5;</code>
+   */
+  CACHE_STRATEGY_EVICT_DEFAULTS(5),
+  /**
+   * <code>CACHE_STRATEGY_NO_NULLS_OR_DEFAULTS = 6;</code>
+   */
+  CACHE_STRATEGY_NO_NULLS_OR_DEFAULTS(6),
+  /**
+   * <code>CACHE_STRATEGY_EVICT_NULLS_AND_DEFAULTS = 7;</code>
+   */
+  CACHE_STRATEGY_EVICT_NULLS_AND_DEFAULTS(7),
   UNRECOGNIZED(-1),
   ;
 
@@ -44,6 +60,22 @@ public enum CacheStrategy
    * <code>CACHE_STRATEGY_EVICT_NULLS = 3;</code>
    */
   public static final int CACHE_STRATEGY_EVICT_NULLS_VALUE = 3;
+  /**
+   * <code>CACHE_STRATEGY_NO_DEFAULTS = 4;</code>
+   */
+  public static final int CACHE_STRATEGY_NO_DEFAULTS_VALUE = 4;
+  /**
+   * <code>CACHE_STRATEGY_EVICT_DEFAULTS = 5;</code>
+   */
+  public static final int CACHE_STRATEGY_EVICT_DEFAULTS_VALUE = 5;
+  /**
+   * <code>CACHE_STRATEGY_NO_NULLS_OR_DEFAULTS = 6;</code>
+   */
+  public static final int CACHE_STRATEGY_NO_NULLS_OR_DEFAULTS_VALUE = 6;
+  /**
+   * <code>CACHE_STRATEGY_EVICT_NULLS_AND_DEFAULTS = 7;</code>
+   */
+  public static final int CACHE_STRATEGY_EVICT_NULLS_AND_DEFAULTS_VALUE = 7;
 
 
   public final int getNumber() {
@@ -74,6 +106,10 @@ public enum CacheStrategy
       case 1: return CACHE_STRATEGY_ALL;
       case 2: return CACHE_STRATEGY_NO_NULLS;
       case 3: return CACHE_STRATEGY_EVICT_NULLS;
+      case 4: return CACHE_STRATEGY_NO_DEFAULTS;
+      case 5: return CACHE_STRATEGY_EVICT_DEFAULTS;
+      case 6: return CACHE_STRATEGY_NO_NULLS_OR_DEFAULTS;
+      case 7: return CACHE_STRATEGY_EVICT_NULLS_AND_DEFAULTS;
       default: return null;
     }
   }

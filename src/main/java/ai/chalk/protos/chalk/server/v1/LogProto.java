@@ -20,6 +20,21 @@ public final class LogProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_server_v1_LogEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SearchLogEntriesPageToken_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SearchLogEntriesPageToken_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SearchLogEntriesRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SearchLogEntriesRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_server_v1_SearchLogEntriesResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_server_v1_SearchLogEntriesResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -30,20 +45,35 @@ public final class LogProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\031chalk/server/v1/log.proto\022\017chalk.serve" +
-      "r.v1\032\037google/protobuf/timestamp.proto\"\234\001" +
-      "\n\010LogEntry\022\016\n\002id\030\001 \001(\tR\002id\022\037\n\010severity\030\002" +
-      " \001(\tH\000R\010severity\210\001\001\0228\n\ttimestamp\030\003 \001(\0132\032" +
-      ".google.protobuf.TimestampR\ttimestamp\022\030\n" +
-      "\007message\030\004 \001(\tR\007messageB\013\n\t_severityB\235\001\n" +
-      "\037ai.chalk.protos.chalk.server.v1B\010LogPro" +
-      "toP\001Z\022server/v1;serverv1\242\002\003CSX\252\002\017Chalk.S" +
-      "erver.V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Serve" +
-      "r\\V1\\GPBMetadata\352\002\021Chalk::Server::V1b\006pr" +
-      "oto3"
+      "r.v1\032\037chalk/auth/v1/permissions.proto\032\037g" +
+      "oogle/protobuf/timestamp.proto\"\234\001\n\010LogEn" +
+      "try\022\016\n\002id\030\001 \001(\tR\002id\022\037\n\010severity\030\002 \001(\tH\000R" +
+      "\010severity\210\001\001\0228\n\ttimestamp\030\003 \001(\0132\032.google" +
+      ".protobuf.TimestampR\ttimestamp\022\030\n\007messag" +
+      "e\030\004 \001(\tR\007messageB\013\n\t_severity\"C\n\031SearchL" +
+      "ogEntriesPageToken\022&\n\017next_page_token\030\001 " +
+      "\001(\tR\rnextPageToken\"\235\001\n\027SearchLogEntriesR" +
+      "equest\022\031\n\005query\030\001 \001(\tH\000R\005query\210\001\001\022N\n\npag" +
+      "e_token\030\002 \001(\0132*.chalk.server.v1.SearchLo" +
+      "gEntriesPageTokenH\001R\tpageToken\210\001\001B\010\n\006_qu" +
+      "eryB\r\n\013_page_token\"\303\001\n\030SearchLogEntriesR" +
+      "esponse\022:\n\013log_entries\030\001 \003(\0132\031.chalk.ser" +
+      "ver.v1.LogEntryR\nlogEntries\022W\n\017next_page" +
+      "_token\030\002 \001(\0132*.chalk.server.v1.SearchLog" +
+      "EntriesPageTokenH\000R\rnextPageToken\210\001\001B\022\n\020" +
+      "_next_page_token2\203\001\n\020LogSearchService\022o\n" +
+      "\020SearchLogEntries\022(.chalk.server.v1.Sear" +
+      "chLogEntriesRequest\032).chalk.server.v1.Se" +
+      "archLogEntriesResponse\"\006\220\002\001\200}\006B\235\001\n\037ai.ch" +
+      "alk.protos.chalk.server.v1B\010LogProtoP\001Z\022" +
+      "server/v1;serverv1\242\002\003CSX\252\002\017Chalk.Server." +
+      "V1\312\002\017Chalk\\Server\\V1\342\002\033Chalk\\Server\\V1\\G" +
+      "PBMetadata\352\002\021Chalk::Server::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_server_v1_LogEntry_descriptor =
@@ -52,6 +82,30 @@ public final class LogProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_server_v1_LogEntry_descriptor,
         new java.lang.String[] { "Id", "Severity", "Timestamp", "Message", });
+    internal_static_chalk_server_v1_SearchLogEntriesPageToken_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_chalk_server_v1_SearchLogEntriesPageToken_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SearchLogEntriesPageToken_descriptor,
+        new java.lang.String[] { "NextPageToken", });
+    internal_static_chalk_server_v1_SearchLogEntriesRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_chalk_server_v1_SearchLogEntriesRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SearchLogEntriesRequest_descriptor,
+        new java.lang.String[] { "Query", "PageToken", });
+    internal_static_chalk_server_v1_SearchLogEntriesResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_chalk_server_v1_SearchLogEntriesResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_server_v1_SearchLogEntriesResponse_descriptor,
+        new java.lang.String[] { "LogEntries", "NextPageToken", });
+    com.google.protobuf.ExtensionRegistry registry =
+        com.google.protobuf.ExtensionRegistry.newInstance();
+    registry.add(ai.chalk.protos.chalk.auth.v1.PermissionsProto.permission);
+    com.google.protobuf.Descriptors.FileDescriptor
+        .internalUpdateFileDescriptor(descriptor, registry);
+    ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

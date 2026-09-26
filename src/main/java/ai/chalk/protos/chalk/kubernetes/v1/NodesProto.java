@@ -16,6 +16,31 @@ public final class NodesProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_kubernetes_v1_KubernetesNodeTaint_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_kubernetes_v1_KubernetesNodeTaint_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_kubernetes_v1_KubernetesNodeSpec_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_kubernetes_v1_KubernetesNodeSpec_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_kubernetes_v1_KubernetesNodeCondition_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_kubernetes_v1_KubernetesNodeCondition_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_kubernetes_v1_KubernetesAttachedVolume_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_kubernetes_v1_KubernetesAttachedVolume_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_kubernetes_v1_KubernetesNodeStatus_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_kubernetes_v1_KubernetesNodeStatus_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chalk_kubernetes_v1_KubernetesNodeData_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -40,47 +65,106 @@ public final class NodesProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037chalk/kubernetes/v1/nodes.proto\022\023chalk" +
-      ".kubernetes.v1\"\300\007\n\022KubernetesNodeData\022\022\n" +
-      "\004team\030\001 \001(\tR\004team\022\022\n\004name\030\002 \001(\tR\004name\022\020\n" +
-      "\003uid\030\003 \001(\tR\003uid\022#\n\rinstance_type\030\004 \001(\tR\014" +
-      "instanceType\022\026\n\006region\030\005 \001(\tR\006region\022\022\n\004" +
-      "zone\030\006 \001(\tR\004zone\022-\n\022creation_timestamp\030\010" +
-      " \001(\003R\021creationTimestamp\022-\n\022deletion_time" +
-      "stamp\030\t \001(\003R\021deletionTimestamp\022-\n\022observ" +
-      "ed_timestamp\030\n \001(\003R\021observedTimestamp\022K\n" +
-      "\006labels\030\013 \003(\01323.chalk.kubernetes.v1.Kube" +
-      "rnetesNodeData.LabelsEntryR\006labels\022Z\n\013an" +
-      "notations\030\014 \003(\01328.chalk.kubernetes.v1.Ku" +
-      "bernetesNodeData.AnnotationsEntryR\013annot" +
-      "ations\022\035\n\nmachine_id\030\r \001(\tR\tmachineId\022\037\n" +
-      "\013system_uuid\030\016 \001(\tR\nsystemUuid\022\027\n\007boot_i" +
-      "d\030\017 \001(\tR\006bootId\022$\n\runschedulable\030\020 \001(\010R\r" +
-      "unschedulable\022\034\n\tnamespace\030\021 \001(\tR\tnamesp" +
-      "ace\022\037\n\013instance_id\030\022 \001(\tR\ninstanceId\022\030\n\007" +
-      "cluster\030\023 \001(\tR\007cluster\022\033\n\ttotal_cpu\030\024 \001(" +
-      "\tR\010totalCpu\022!\n\014total_memory\030\025 \001(\tR\013total" +
-      "Memory\022\'\n\017allocatable_cpu\030\026 \001(\tR\016allocat" +
-      "ableCpu\022-\n\022allocatable_memory\030\027 \001(\tR\021all" +
-      "ocatableMemory\0329\n\013LabelsEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032>\n\020Ann" +
-      "otationsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value" +
-      "\030\002 \001(\tR\005value:\0028\001B\273\001\n#ai.chalk.protos.ch" +
-      "alk.kubernetes.v1B\nNodesProtoP\001Z\032kuberne" +
-      "tes/v1;kubernetesv1\242\002\003CKX\252\002\023Chalk.Kubern" +
-      "etes.V1\312\002\023Chalk\\Kubernetes\\V1\342\002\037Chalk\\Ku" +
-      "bernetes\\V1\\GPBMetadata\352\002\025Chalk::Kuberne" +
-      "tes::V1b\006proto3"
+      ".kubernetes.v1\"\227\001\n\023KubernetesNodeTaint\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\022\031\n\005value\030\002 \001(\tH\000R\005value" +
+      "\210\001\001\022\026\n\006effect\030\003 \001(\tR\006effect\022\"\n\ntime_adde" +
+      "d\030\004 \001(\003H\001R\ttimeAdded\210\001\001B\010\n\006_valueB\r\n\013_ti" +
+      "me_added\"\223\002\n\022KubernetesNodeSpec\022\036\n\010pod_c" +
+      "idr\030\001 \001(\tH\000R\007podCidr\210\001\001\022@\n\006taints\030\002 \003(\0132" +
+      "(.chalk.kubernetes.v1.KubernetesNodeTain" +
+      "tR\006taints\022\033\n\tpod_cidrs\030\003 \003(\tR\010podCidrs\022$" +
+      "\n\013provider_id\030\004 \001(\tH\001R\nproviderId\210\001\001\022)\n\r" +
+      "unschedulable\030\005 \001(\010H\002R\runschedulable\210\001\001B" +
+      "\013\n\t_pod_cidrB\016\n\014_provider_idB\020\n\016_unsched" +
+      "ulable\"\372\001\n\027KubernetesNodeCondition\022\022\n\004ty" +
+      "pe\030\001 \001(\tR\004type\022\026\n\006status\030\002 \001(\tR\006status\022." +
+      "\n\023last_heartbeat_time\030\003 \001(\003R\021lastHeartbe" +
+      "atTime\0220\n\024last_transition_time\030\004 \001(\003R\022la" +
+      "stTransitionTime\022\033\n\006reason\030\005 \001(\tH\000R\006reas" +
+      "on\210\001\001\022\035\n\007message\030\006 \001(\tH\001R\007message\210\001\001B\t\n\007" +
+      "_reasonB\n\n\010_message\"O\n\030KubernetesAttache" +
+      "dVolume\022\022\n\004name\030\001 \001(\tR\004name\022\037\n\013device_pa" +
+      "th\030\002 \001(\tR\ndevicePath\"\344\001\n\024KubernetesNodeS" +
+      "tatus\022L\n\nconditions\030\001 \003(\0132,.chalk.kubern" +
+      "etes.v1.KubernetesNodeConditionR\nconditi" +
+      "ons\022$\n\016volumes_in_use\030\002 \003(\tR\014volumesInUs" +
+      "e\022X\n\020volumes_attached\030\003 \003(\0132-.chalk.kube" +
+      "rnetes.v1.KubernetesAttachedVolumeR\017volu" +
+      "mesAttached\"\336\010\n\022KubernetesNodeData\022\022\n\004te" +
+      "am\030\001 \001(\tR\004team\022\022\n\004name\030\002 \001(\tR\004name\022\020\n\003ui" +
+      "d\030\003 \001(\tR\003uid\022#\n\rinstance_type\030\004 \001(\tR\014ins" +
+      "tanceType\022\026\n\006region\030\005 \001(\tR\006region\022\022\n\004zon" +
+      "e\030\006 \001(\tR\004zone\022-\n\022creation_timestamp\030\010 \001(" +
+      "\003R\021creationTimestamp\022-\n\022deletion_timesta" +
+      "mp\030\t \001(\003R\021deletionTimestamp\022-\n\022observed_" +
+      "timestamp\030\n \001(\003R\021observedTimestamp\022K\n\006la" +
+      "bels\030\013 \003(\01323.chalk.kubernetes.v1.Kuberne" +
+      "tesNodeData.LabelsEntryR\006labels\022Z\n\013annot" +
+      "ations\030\014 \003(\01328.chalk.kubernetes.v1.Kuber" +
+      "netesNodeData.AnnotationsEntryR\013annotati" +
+      "ons\022\035\n\nmachine_id\030\r \001(\tR\tmachineId\022\037\n\013sy" +
+      "stem_uuid\030\016 \001(\tR\nsystemUuid\022\027\n\007boot_id\030\017" +
+      " \001(\tR\006bootId\022$\n\runschedulable\030\020 \001(\010R\runs" +
+      "chedulable\022\034\n\tnamespace\030\021 \001(\tR\tnamespace" +
+      "\022\037\n\013instance_id\030\022 \001(\tR\ninstanceId\022\030\n\007clu" +
+      "ster\030\023 \001(\tR\007cluster\022\033\n\ttotal_cpu\030\024 \001(\tR\010" +
+      "totalCpu\022!\n\014total_memory\030\025 \001(\tR\013totalMem" +
+      "ory\022\'\n\017allocatable_cpu\030\026 \001(\tR\016allocatabl" +
+      "eCpu\022-\n\022allocatable_memory\030\027 \001(\tR\021alloca" +
+      "tableMemory\022@\n\004spec\030\030 \001(\0132\'.chalk.kubern" +
+      "etes.v1.KubernetesNodeSpecH\000R\004spec\210\001\001\022F\n" +
+      "\006status\030\031 \001(\0132).chalk.kubernetes.v1.Kube" +
+      "rnetesNodeStatusH\001R\006status\210\001\001\0329\n\013LabelsE" +
+      "ntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005v" +
+      "alue:\0028\001\032>\n\020AnnotationsEntry\022\020\n\003key\030\001 \001(" +
+      "\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\007\n\005_spe" +
+      "cB\t\n\007_statusB\273\001\n#ai.chalk.protos.chalk.k" +
+      "ubernetes.v1B\nNodesProtoP\001Z\032kubernetes/v" +
+      "1;kubernetesv1\242\002\003CKX\252\002\023Chalk.Kubernetes." +
+      "V1\312\002\023Chalk\\Kubernetes\\V1\342\002\037Chalk\\Kuberne" +
+      "tes\\V1\\GPBMetadata\352\002\025Chalk::Kubernetes::" +
+      "V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_chalk_kubernetes_v1_KubernetesNodeData_descriptor =
+    internal_static_chalk_kubernetes_v1_KubernetesNodeTaint_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_chalk_kubernetes_v1_KubernetesNodeTaint_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_kubernetes_v1_KubernetesNodeTaint_descriptor,
+        new java.lang.String[] { "Key", "Value", "Effect", "TimeAdded", });
+    internal_static_chalk_kubernetes_v1_KubernetesNodeSpec_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_chalk_kubernetes_v1_KubernetesNodeSpec_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_kubernetes_v1_KubernetesNodeSpec_descriptor,
+        new java.lang.String[] { "PodCidr", "Taints", "PodCidrs", "ProviderId", "Unschedulable", });
+    internal_static_chalk_kubernetes_v1_KubernetesNodeCondition_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_chalk_kubernetes_v1_KubernetesNodeCondition_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_kubernetes_v1_KubernetesNodeCondition_descriptor,
+        new java.lang.String[] { "Type", "Status", "LastHeartbeatTime", "LastTransitionTime", "Reason", "Message", });
+    internal_static_chalk_kubernetes_v1_KubernetesAttachedVolume_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_chalk_kubernetes_v1_KubernetesAttachedVolume_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_kubernetes_v1_KubernetesAttachedVolume_descriptor,
+        new java.lang.String[] { "Name", "DevicePath", });
+    internal_static_chalk_kubernetes_v1_KubernetesNodeStatus_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_chalk_kubernetes_v1_KubernetesNodeStatus_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_kubernetes_v1_KubernetesNodeStatus_descriptor,
+        new java.lang.String[] { "Conditions", "VolumesInUse", "VolumesAttached", });
+    internal_static_chalk_kubernetes_v1_KubernetesNodeData_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_kubernetes_v1_KubernetesNodeData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_kubernetes_v1_KubernetesNodeData_descriptor,
-        new java.lang.String[] { "Team", "Name", "Uid", "InstanceType", "Region", "Zone", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "MachineId", "SystemUuid", "BootId", "Unschedulable", "Namespace", "InstanceId", "Cluster", "TotalCpu", "TotalMemory", "AllocatableCpu", "AllocatableMemory", });
+        new java.lang.String[] { "Team", "Name", "Uid", "InstanceType", "Region", "Zone", "CreationTimestamp", "DeletionTimestamp", "ObservedTimestamp", "Labels", "Annotations", "MachineId", "SystemUuid", "BootId", "Unschedulable", "Namespace", "InstanceId", "Cluster", "TotalCpu", "TotalMemory", "AllocatableCpu", "AllocatableMemory", "Spec", "Status", });
     internal_static_chalk_kubernetes_v1_KubernetesNodeData_LabelsEntry_descriptor =
       internal_static_chalk_kubernetes_v1_KubernetesNodeData_descriptor.getNestedTypes().get(0);
     internal_static_chalk_kubernetes_v1_KubernetesNodeData_LabelsEntry_fieldAccessorTable = new

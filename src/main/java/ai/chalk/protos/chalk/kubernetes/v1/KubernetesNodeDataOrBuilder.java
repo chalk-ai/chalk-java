@@ -401,4 +401,34 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getAllocatableMemoryBytes();
+
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   * @return Whether the spec field is set.
+   */
+  boolean hasSpec();
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   * @return The spec.
+   */
+  ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpec getSpec();
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeSpec spec = 24 [json_name = "spec"];</code>
+   */
+  ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeSpecOrBuilder getSpecOrBuilder();
+
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   * @return Whether the status field is set.
+   */
+  boolean hasStatus();
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   * @return The status.
+   */
+  ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatus getStatus();
+  /**
+   * <code>optional .chalk.kubernetes.v1.KubernetesNodeStatus status = 25 [json_name = "status"];</code>
+   */
+  ai.chalk.protos.chalk.kubernetes.v1.KubernetesNodeStatusOrBuilder getStatusOrBuilder();
 }

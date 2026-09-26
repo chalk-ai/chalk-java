@@ -10,7 +10,7 @@ public interface GetQueryValuesRequestOrBuilder extends
 
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -20,7 +20,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   boolean hasOperationIdIdentifier();
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -30,7 +30,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   ai.chalk.protos.chalk.engine.v2.OperationIdTableIdentifier getOperationIdIdentifier();
   /**
    * <pre>
-   * Forcing the client to specify the table name can be a bit narly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
+   * Forcing the client to specify the table name can be a bit gnarly. Instead, for use case 1), it can be easier to allow the client to specify the operation id,
    * and the engine can figure out what table to query.
    * </pre>
    *
@@ -103,7 +103,7 @@ public interface GetQueryValuesRequestOrBuilder extends
 
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -112,7 +112,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   boolean hasQueryTimestampUpperBoundExclusive();
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -121,7 +121,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   com.google.protobuf.Timestamp getQueryTimestampUpperBoundExclusive();
   /**
    * <pre>
-   * If the upper bound is ommitted, then the lower bound will be used as an exact (equality) filter
+   * If the upper bound is omitted, then the lower bound will be used as an exact (equality) filter
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp query_timestamp_upper_bound_exclusive = 4 [json_name = "queryTimestampUpperBoundExclusive"];</code>
@@ -130,7 +130,7 @@ public interface GetQueryValuesRequestOrBuilder extends
 
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -141,7 +141,7 @@ public interface GetQueryValuesRequestOrBuilder extends
       getFeaturesList();
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -151,7 +151,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   int getFeaturesCount();
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -162,7 +162,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   java.lang.String getFeatures(int index);
   /**
    * <pre>
-   * If you're insterested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
+   * If you're interested in a subset of features, specify those here. Other columns won't be selected from the database, which will help reduce query costs.
    * If empty, all features will be returned
    * </pre>
    *
@@ -185,7 +185,7 @@ public interface GetQueryValuesRequestOrBuilder extends
 
   /**
    * <pre>
-   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
    * Leave empty if querying for the zeroth page.
    * </pre>
    *
@@ -195,7 +195,7 @@ public interface GetQueryValuesRequestOrBuilder extends
   java.lang.String getPageToken();
   /**
    * <pre>
-   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identicial to the original (except for the value of the next_token)
+   * When dealing with paginated responses, specify the next token to resume where you left off. The subsequent request must be identical to the original (except for the value of the next_token)
    * Leave empty if querying for the zeroth page.
    * </pre>
    *
