@@ -10,10 +10,13 @@ import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
 import ai.chalk.internal.config.models.SourcedConfig;
 import ai.chalk.internal.request.RequestHandler;
+import ai.chalk.internal.request.models.FeatureObservationDeletionRequest;
 import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.PingRequest;
 import ai.chalk.internal.request.models.PingResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.models.DeleteFeaturesParams;
+import ai.chalk.models.DeleteFeaturesResult;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.QueryMeta;
@@ -37,6 +40,7 @@ public class ChalkClientImpl implements ChalkClient {
     private final SourcedConfig clientId;
     private final SourcedConfig environmentId;
     private final SourcedConfig clientSecret;
+    private final String branch;
     private final RequestHandler handler;
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
@@ -54,6 +58,7 @@ public class ChalkClientImpl implements ChalkClient {
         if (branch != null && deploymentTag != null) {
             throw new ClientException("Cannot set both branch and deploymentTag");
         }
+        this.branch = branch;
 
         this.handler = new RequestHandler(
                 config.getHttpClient(),
@@ -259,6 +264,35 @@ public class ChalkClientImpl implements ChalkClient {
 
         HttpResponse<byte[]> response = this.handler.sendRequest(request);
         return this.handler.deserializeResponseBody(response.body(), UploadFeaturesResult.class);
+    }
+
+    @Override
+    public DeleteFeaturesResult deleteFeatures(DeleteFeaturesParams params) throws ChalkException {
+        String branch = params.getBranch() != null ? params.getBranch() : this.branch;
+        if (branch != null) {
+            throw new ClientException(
+                    "Feature deletion is not currently supported for branch deployments. "
+                            + "Client is currently connected to the branch '" + branch + "'."
+            );
+        }
+
+        SendRequestParams request = new SendRequestParams.Builder(null)
+                .path("/v1/features/rows")
+                .body(new FeatureObservationDeletionRequest(
+                        params.getNamespace(),
+                        params.getFeatures(),
+                        params.getTags(),
+                        params.getPrimaryKeys(),
+                        params.isRetainOffline(),
+                        params.isRetainOnline()
+                ))
+                .method("DELETE")
+                .environmentOverride(params.getEnvironmentId())
+                .isEngineRequest(false)
+                .build();
+
+        HttpResponse<byte[]> response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), DeleteFeaturesResult.class);
     }
 
     private ResolvedConfig resolveConfig(BuilderImpl builder) throws ClientException {
