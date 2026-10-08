@@ -259,6 +259,38 @@ public interface ChalkClient extends AutoCloseable {
      */
     UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException;
 
+    /**
+     * DeleteFeatures targets feature observation values for deletion and performs
+     * deletion online and offline.
+     * <p> See {@link DeleteFeaturesParams} for more details on the parameters.
+     *
+     * <p>
+     * Example usage:
+     *     <pre>
+     *         {@code
+     *         DeleteFeaturesParams params = DeleteFeaturesParams.builder()
+     *             .withNamespace("user")
+     *             .withFeatures(List.of("name", "email", "age"))
+     *             .withPrimaryKeys(List.of("1", "2", "3"))
+     *             .build();
+     *         DeleteFeaturesResult res = client.deleteFeatures(params);
+     *         if (res.getErrors() != null && res.getErrors().size() > 0) {
+     *             throw new Exception("delete failed");
+     *         }
+     *
+     *     </pre>
+     * </p>
+     *
+     * @return {@link DeleteFeaturesResult}, which holds any errors that occurred during the
+     *         request. Deletion of a feature may partially succeed.
+     */
+    default DeleteFeaturesResult deleteFeatures(DeleteFeaturesParams params) throws ChalkException {
+        throw new ClientException(
+                "deleteFeatures is only supported by the HTTP client. Build one with "
+                        + "ChalkClient.builder().build() or ChalkClient.create()."
+        );
+    }
+
 
 
 
