@@ -7,11 +7,14 @@ import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.models.AggregateBackfillParams;
+import ai.chalk.models.AggregateBackfillResponse;
 import ai.chalk.models.OnlineQueryMultiResult;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
+import ai.chalk.protos.chalk.aggregate.v1.AggregateServiceGrpc;
 import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
@@ -167,7 +170,15 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
 
         var queryStub = QueryServiceGrpc.newBlockingStub(engineChannel);
 
-        this.stubsProvider = new StubsProvider(queryStub, this.timeout);
+        // API-server services (e.g. AggregateService) share the token-exchange channel,
+        // authenticated per call, as the Python client's server channel does.
+        Channel serverChannel = ClientInterceptors.intercept(
+                unauthServerChannel,
+                new AuthenticatedHeaderClientInterceptor(ServerType.SERVER, Map.of(), tokenRefresher, null)
+        );
+        var aggregateStub = AggregateServiceGrpc.newBlockingStub(serverChannel);
+
+        this.stubsProvider = new StubsProvider(queryStub, aggregateStub, this.timeout);
     }
 
     private static ChannelCredentials getChannelCredentials(String grpcHost, ResolvedConfig resolvedConfig) throws ClientException {
@@ -782,6 +793,16 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     }
 
     @Override
+    public AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
+            throws ChalkException {
+        return AggregateBackfills.trigger(
+                this.stubsProvider.getAggregateStub(Optional.ofNullable(params.getTimeout()))
+                        .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null)),
+                params
+        );
+    }
+
+    @Override
     public void close() throws InterruptedException {
         this.allocator.close();
         this.unauthServerChannel.shutdown().awaitTermination(600, java.util.concurrent.TimeUnit.SECONDS);
@@ -796,17 +817,43 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
      */
     public static class StubsProvider {
         private final @NonNull QueryServiceGrpc.QueryServiceBlockingStub queryStub;
+        private final @Nullable AggregateServiceGrpc.AggregateServiceBlockingStub aggregateStub;
         private final Optional<Duration> clientLevelTimeout;
 
         public StubsProvider(
             QueryServiceGrpc.QueryServiceBlockingStub queryStub,
             Optional<Duration> clientLevelTimeout
         ) {
+            this(queryStub, null, clientLevelTimeout);
+        }
+
+        public StubsProvider(
+            QueryServiceGrpc.QueryServiceBlockingStub queryStub,
+            @Nullable AggregateServiceGrpc.AggregateServiceBlockingStub aggregateStub,
+            Optional<Duration> clientLevelTimeout
+        ) {
             this.queryStub = queryStub;
+            this.aggregateStub = aggregateStub;
             this.clientLevelTimeout = clientLevelTimeout;
         }
 
         public QueryServiceGrpc.QueryServiceBlockingStub getQueryStub(Optional<Duration> requestLevelTimeout) {
+            return withTimeout(queryStub, requestLevelTimeout);
+        }
+
+        public AggregateServiceGrpc.AggregateServiceBlockingStub getAggregateStub(
+            Optional<Duration> requestLevelTimeout
+        ) throws ClientException {
+            if (aggregateStub == null) {
+                throw new ClientException("The gRPC API server's AggregateService is not configured.");
+            }
+            return withTimeout(aggregateStub, requestLevelTimeout);
+        }
+
+        private <S extends io.grpc.stub.AbstractStub<S>> S withTimeout(
+            S stub,
+            Optional<Duration> requestLevelTimeout
+        ) {
             Duration timeout = null;
             if (requestLevelTimeout.isPresent()) {
                 timeout = requestLevelTimeout.get();
@@ -814,9 +861,9 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                 timeout = this.clientLevelTimeout.get();
             }
             if (timeout != null) {
-                return queryStub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+                return stub.withDeadlineAfter(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
             }
-            return queryStub;
+            return stub;
         }
     }
 }

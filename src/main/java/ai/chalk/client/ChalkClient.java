@@ -291,6 +291,52 @@ public interface ChalkClient extends AutoCloseable {
         );
     }
 
+    /**
+     * TriggerAggregateBackfill triggers one or more aggregate backfill jobs, the same
+     * operation as the {@code chalk aggregate backfill} CLI command.
+     * <p> See {@link AggregateBackfillParams} for more details on the parameters.
+     *
+     * <p> This is supported only by the gRPC client; see {@link ChalkClient#createGrpc()}.
+     *
+     * <p>
+     * Example usage:
+     *     <pre>
+     *         {@code
+     *         AggregateBackfillParams params = AggregateBackfillParams.builder()
+     *             .withFeatures("user.spend_30d")
+     *             .build();
+     *         AggregateBackfillResponse res = client.triggerAggregateBackfill(params);
+     *         String backfillId = res.getJob().getId();
+     *
+     *         // Validate the request and see the planner's cost estimates without creating anything:
+     *         AggregateBackfillResponse plan = client.triggerAggregateBackfill(
+     *             AggregateBackfillParams.builder()
+     *                 .withFeatures("user.spend_30d")
+     *                 .withPlanOnly(true)
+     *                 .build()
+     *         );
+     *         }
+     *     </pre>
+     * </p>
+     *
+     * @return {@link AggregateBackfillResponse}. Its {@code job} is the single aggregate
+     *         backfill row covering every job this request launched -- {@code job.getId()}
+     *         is the aggregate backfill id -- and is null when {@code planOnly} is set. Its
+     *         {@code subBackfills} is the planner's split of the request, each entry pairing
+     *         the features it covers with its cost estimate.
+     * @throws ai.chalk.exceptions.AggregateBackfillException if the server fails to plan or
+     *         create the backfill
+     * @throws ChalkException if the parameters are invalid, or the server does not support a
+     *         requested option
+     */
+    default AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
+            throws ChalkException {
+        throw new ClientException(
+                "triggerAggregateBackfill is only supported by the gRPC client. Build one with "
+                        + "ChalkClient.builder().withGrpc().build() or ChalkClient.createGrpc()."
+        );
+    }
+
 
 
 

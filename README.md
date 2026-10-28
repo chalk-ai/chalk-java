@@ -448,3 +448,39 @@ A few things to know:
   and `queryNameVersion` may differ freely since each query carries its own. The deadline is the
   longest of the effective per-query timeouts, where a query that sets none is bounded by the
   client-level timeout, so per-query timeouts are not independently enforced.
+
+## Aggregate backfill
+
+`triggerAggregateBackfill` backfills materialized aggregate features, the same operation as the
+`chalk aggregate backfill` CLI command. It requires the gRPC client.
+
+```java
+import ai.chalk.client.ChalkClient;
+import ai.chalk.models.AggregateBackfillParams;
+import ai.chalk.models.AggregateBackfillResponse;
+
+ChalkClient client = ChalkClient.createGrpc();
+
+// Validate the request and see the planner's split and cost estimates, without creating anything.
+AggregateBackfillResponse plan = client.triggerAggregateBackfill(
+        AggregateBackfillParams.builder()
+                .withFeatures("user.spend_30d")
+                .withPlanOnly(true)
+                .build()
+);
+plan.getSubBackfills().forEach(sub -> System.out.println(sub.getFeatures() + " " + sub.getEstimate()));
+
+// Run it. The job id is the aggregate backfill id, which you can poll for status.
+AggregateBackfillResponse response = client.triggerAggregateBackfill(
+        AggregateBackfillParams.builder()
+                .withFeatures("user.spend_30d")
+                .build()
+);
+String backfillId = response.getJob().getId();
+```
+
+Setting `withStoreOffline(true)` requires both `withLowerBound` and `withUpperBound`, and
+`withNumShards` must be greater than 1. If the server rejects the request, the call throws
+`AggregateBackfillException`, which carries the server's detail. Servers that predate server-side
+planning are handled by planning and creating the jobs client-side, except for `planOnly` and
+`numShards` requests, which need a current server.
