@@ -284,7 +284,8 @@ public class ChalkClientImpl implements ChalkClient {
                         params.getTags(),
                         params.getPrimaryKeys(),
                         params.isRetainOffline(),
-                        params.isRetainOnline()
+                        params.isRetainOnline(),
+                        params.isDeleteMaterializedAggregates()
                 ))
                 .method("DELETE")
                 .environmentOverride(params.getEnvironmentId())
