@@ -102,4 +102,24 @@ public interface AggregateTimeSeriesRuleOrBuilder extends
    */
   com.google.protobuf.ByteString
       getDatetimeFeatureBytes();
+
+  /**
+   * <pre>
+   * The tile-manifest materialization_key_hash this rule's lookups read.
+   * </pre>
+   *
+   * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+   * @return The materializationKeyHash.
+   */
+  java.lang.String getMaterializationKeyHash();
+  /**
+   * <pre>
+   * The tile-manifest materialization_key_hash this rule's lookups read.
+   * </pre>
+   *
+   * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+   * @return The bytes for materializationKeyHash.
+   */
+  com.google.protobuf.ByteString
+      getMaterializationKeyHashBytes();
 }

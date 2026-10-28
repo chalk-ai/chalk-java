@@ -162,4 +162,91 @@ public interface AggregateBackfillJobOrBuilder extends
    */
   com.google.protobuf.ByteString
       getResolversBytes(int index);
+
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return Whether the cronAggregateBackfillId field is set.
+   */
+  boolean hasCronAggregateBackfillId();
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The cronAggregateBackfillId.
+   */
+  java.lang.String getCronAggregateBackfillId();
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The bytes for cronAggregateBackfillId.
+   */
+  com.google.protobuf.ByteString
+      getCronAggregateBackfillIdBytes();
+
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  boolean hasPlanHash();
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  java.lang.String getPlanHash();
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  com.google.protobuf.ByteString
+      getPlanHashBytes();
+
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  int getStatusValue();
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+   * @return The status.
+   */
+  ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getStatus();
+
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @return A list containing the queryTags.
+   */
+  java.util.List<java.lang.String>
+      getQueryTagsList();
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @return The count of queryTags.
+   */
+  int getQueryTagsCount();
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @param index The index of the element to return.
+   * @return The queryTags at the given index.
+   */
+  java.lang.String getQueryTags(int index);
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the queryTags at the given index.
+   */
+  com.google.protobuf.ByteString
+      getQueryTagsBytes(int index);
+
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return Whether the cronAggregateBackfillName field is set.
+   */
+  boolean hasCronAggregateBackfillName();
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return The cronAggregateBackfillName.
+   */
+  java.lang.String getCronAggregateBackfillName();
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return The bytes for cronAggregateBackfillName.
+   */
+  com.google.protobuf.ByteString
+      getCronAggregateBackfillNameBytes();
 }

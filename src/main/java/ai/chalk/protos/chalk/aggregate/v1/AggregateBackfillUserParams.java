@@ -21,6 +21,9 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.LazyStringArrayList.emptyList();
     resolver_ = "";
     timestampColumnName_ = "";
+    tags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    inputSql_ = "";
   }
 
   @java.lang.Override
@@ -134,7 +137,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return Whether the timestampColumnName field is set.
    */
   @java.lang.Override
@@ -144,7 +147,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return The timestampColumnName.
    */
   @java.lang.Override
@@ -163,7 +166,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return The bytes for timestampColumnName.
    */
   @java.lang.Override
@@ -244,6 +247,90 @@ private static final long serialVersionUID = 0L;
     return exact_;
   }
 
+  public static final int TAGS_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList tags_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @return A list containing the tags.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getTagsList() {
+    return tags_;
+  }
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @return The count of tags.
+   */
+  public int getTagsCount() {
+    return tags_.size();
+  }
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @param index The index of the element to return.
+   * @return The tags at the given index.
+   */
+  public java.lang.String getTags(int index) {
+    return tags_.get(index);
+  }
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the tags at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getTagsBytes(int index) {
+    return tags_.getByteString(index);
+  }
+
+  public static final int INPUT_SQL_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object inputSql_ = "";
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return Whether the inputSql field is set.
+   */
+  @java.lang.Override
+  public boolean hasInputSql() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return The inputSql.
+   */
+  @java.lang.Override
+  public java.lang.String getInputSql() {
+    java.lang.Object ref = inputSql_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      inputSql_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return The bytes for inputSql.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getInputSqlBytes() {
+    java.lang.Object ref = inputSql_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      inputSql_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -275,6 +362,12 @@ private static final long serialVersionUID = 0L;
     }
     if (exact_ != false) {
       output.writeBool(6, exact_);
+    }
+    for (int i = 0; i < tags_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, tags_.getRaw(i));
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, inputSql_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -310,6 +403,17 @@ private static final long serialVersionUID = 0L;
     if (exact_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(6, exact_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < tags_.size(); i++) {
+        dataSize += computeStringSizeNoTag(tags_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getTagsList().size();
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, inputSql_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -350,6 +454,13 @@ private static final long serialVersionUID = 0L;
     }
     if (getExact()
         != other.getExact()) return false;
+    if (!getTagsList()
+        .equals(other.getTagsList())) return false;
+    if (hasInputSql() != other.hasInputSql()) return false;
+    if (hasInputSql()) {
+      if (!getInputSql()
+          .equals(other.getInputSql())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -384,6 +495,14 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + EXACT_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getExact());
+    if (getTagsCount() > 0) {
+      hash = (37 * hash) + TAGS_FIELD_NUMBER;
+      hash = (53 * hash) + getTagsList().hashCode();
+    }
+    if (hasInputSql()) {
+      hash = (37 * hash) + INPUT_SQL_FIELD_NUMBER;
+      hash = (53 * hash) + getInputSql().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -537,6 +656,9 @@ private static final long serialVersionUID = 0L;
         upperBoundBuilder_ = null;
       }
       exact_ = false;
+      tags_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      inputSql_ = "";
       return this;
     }
 
@@ -597,6 +719,14 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.exact_ = exact_;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        tags_.makeImmutable();
+        result.tags_ = tags_;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.inputSql_ = inputSql_;
+        to_bitField0_ |= 0x00000010;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -674,6 +804,21 @@ private static final long serialVersionUID = 0L;
       if (other.getExact() != false) {
         setExact(other.getExact());
       }
+      if (!other.tags_.isEmpty()) {
+        if (tags_.isEmpty()) {
+          tags_ = other.tags_;
+          bitField0_ |= 0x00000040;
+        } else {
+          ensureTagsIsMutable();
+          tags_.addAll(other.tags_);
+        }
+        onChanged();
+      }
+      if (other.hasInputSql()) {
+        inputSql_ = other.inputSql_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -735,6 +880,17 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 48
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureTagsIsMutable();
+              tags_.add(s);
+              break;
+            } // case 58
+            case 66: {
+              inputSql_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -946,7 +1102,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @return Whether the timestampColumnName field is set.
      */
     @java.lang.Deprecated public boolean hasTimestampColumnName() {
@@ -955,7 +1111,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @return The timestampColumnName.
      */
     @java.lang.Deprecated public java.lang.String getTimestampColumnName() {
@@ -973,7 +1129,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @return The bytes for timestampColumnName.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -992,7 +1148,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @param value The timestampColumnName to set.
      * @return This builder for chaining.
      */
@@ -1007,7 +1163,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearTimestampColumnName() {
@@ -1019,7 +1175,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
      * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-     *     See chalk/aggregate/v1/backfill.proto;l=21
+     *     See chalk/aggregate/v1/backfill.proto;l=35
      * @param value The bytes for timestampColumnName to set.
      * @return This builder for chaining.
      */
@@ -1303,6 +1459,196 @@ private static final long serialVersionUID = 0L;
     public Builder clearExact() {
       bitField0_ = (bitField0_ & ~0x00000020);
       exact_ = false;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList tags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureTagsIsMutable() {
+      if (!tags_.isModifiable()) {
+        tags_ = new com.google.protobuf.LazyStringArrayList(tags_);
+      }
+      bitField0_ |= 0x00000040;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @return A list containing the tags.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getTagsList() {
+      tags_.makeImmutable();
+      return tags_;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @return The count of tags.
+     */
+    public int getTagsCount() {
+      return tags_.size();
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param index The index of the element to return.
+     * @return The tags at the given index.
+     */
+    public java.lang.String getTags(int index) {
+      return tags_.get(index);
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the tags at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getTagsBytes(int index) {
+      return tags_.getByteString(index);
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param index The index to set the value at.
+     * @param value The tags to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTags(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureTagsIsMutable();
+      tags_.set(index, value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param value The tags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addTags(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureTagsIsMutable();
+      tags_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param values The tags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllTags(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureTagsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, tags_);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTags() {
+      tags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000040);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string tags = 7 [json_name = "tags"];</code>
+     * @param value The bytes of the tags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addTagsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureTagsIsMutable();
+      tags_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object inputSql_ = "";
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @return Whether the inputSql field is set.
+     */
+    public boolean hasInputSql() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @return The inputSql.
+     */
+    public java.lang.String getInputSql() {
+      java.lang.Object ref = inputSql_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        inputSql_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @return The bytes for inputSql.
+     */
+    public com.google.protobuf.ByteString
+        getInputSqlBytes() {
+      java.lang.Object ref = inputSql_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        inputSql_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @param value The inputSql to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInputSql(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      inputSql_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearInputSql() {
+      inputSql_ = getDefaultInstance().getInputSql();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+     * @param value The bytes for inputSql to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInputSqlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      inputSql_ = value;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }

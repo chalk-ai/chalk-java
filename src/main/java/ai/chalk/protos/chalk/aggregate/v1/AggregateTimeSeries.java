@@ -24,6 +24,12 @@ private static final long serialVersionUID = 0L;
     rules_ = java.util.Collections.emptyList();
     filtersDescription_ = "";
     bucketFeature_ = "";
+    aggregateOnFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    filterFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    projectionFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -89,11 +95,13 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object aggregateOn_ = "";
   /**
-   * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+   * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+   *     See chalk/aggregate/v1/timeseries.proto;l=22
    * @return The aggregateOn.
    */
   @java.lang.Override
-  public java.lang.String getAggregateOn() {
+  @java.lang.Deprecated public java.lang.String getAggregateOn() {
     java.lang.Object ref = aggregateOn_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
@@ -106,11 +114,13 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+   * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+   *     See chalk/aggregate/v1/timeseries.proto;l=22
    * @return The bytes for aggregateOn.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
+  @java.lang.Deprecated public com.google.protobuf.ByteString
       getAggregateOnBytes() {
     java.lang.Object ref = aggregateOn_;
     if (ref instanceof java.lang.String) {
@@ -280,6 +290,149 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int AGGREGATE_ON_FEATURES_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList aggregateOnFeatures_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @return A list containing the aggregateOnFeatures.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getAggregateOnFeaturesList() {
+    return aggregateOnFeatures_;
+  }
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @return The count of aggregateOnFeatures.
+   */
+  public int getAggregateOnFeaturesCount() {
+    return aggregateOnFeatures_.size();
+  }
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The aggregateOnFeatures at the given index.
+   */
+  public java.lang.String getAggregateOnFeatures(int index) {
+    return aggregateOnFeatures_.get(index);
+  }
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the aggregateOnFeatures at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getAggregateOnFeaturesBytes(int index) {
+    return aggregateOnFeatures_.getByteString(index);
+  }
+
+  public static final int FILTER_FEATURES_FIELD_NUMBER = 9;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList filterFeatures_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @return A list containing the filterFeatures.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getFilterFeaturesList() {
+    return filterFeatures_;
+  }
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @return The count of filterFeatures.
+   */
+  public int getFilterFeaturesCount() {
+    return filterFeatures_.size();
+  }
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The filterFeatures at the given index.
+   */
+  public java.lang.String getFilterFeatures(int index) {
+    return filterFeatures_.get(index);
+  }
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the filterFeatures at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getFilterFeaturesBytes(int index) {
+    return filterFeatures_.getByteString(index);
+  }
+
+  public static final int PROJECTION_FEATURES_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList projectionFeatures_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @return A list containing the projectionFeatures.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getProjectionFeaturesList() {
+    return projectionFeatures_;
+  }
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @return The count of projectionFeatures.
+   */
+  public int getProjectionFeaturesCount() {
+    return projectionFeatures_.size();
+  }
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The projectionFeatures at the given index.
+   */
+  public java.lang.String getProjectionFeatures(int index) {
+    return projectionFeatures_.get(index);
+  }
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the projectionFeatures at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getProjectionFeaturesBytes(int index) {
+    return projectionFeatures_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -311,6 +464,15 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(bucketFeature_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 7, bucketFeature_);
+    }
+    for (int i = 0; i < aggregateOnFeatures_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, aggregateOnFeatures_.getRaw(i));
+    }
+    for (int i = 0; i < filterFeatures_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, filterFeatures_.getRaw(i));
+    }
+    for (int i = 0; i < projectionFeatures_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 10, projectionFeatures_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -345,6 +507,30 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(bucketFeature_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, bucketFeature_);
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < aggregateOnFeatures_.size(); i++) {
+        dataSize += computeStringSizeNoTag(aggregateOnFeatures_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getAggregateOnFeaturesList().size();
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < filterFeatures_.size(); i++) {
+        dataSize += computeStringSizeNoTag(filterFeatures_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getFilterFeaturesList().size();
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < projectionFeatures_.size(); i++) {
+        dataSize += computeStringSizeNoTag(projectionFeatures_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getProjectionFeaturesList().size();
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -372,6 +558,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getFiltersDescription())) return false;
     if (!getBucketFeature()
         .equals(other.getBucketFeature())) return false;
+    if (!getAggregateOnFeaturesList()
+        .equals(other.getAggregateOnFeaturesList())) return false;
+    if (!getFilterFeaturesList()
+        .equals(other.getFilterFeaturesList())) return false;
+    if (!getProjectionFeaturesList()
+        .equals(other.getProjectionFeaturesList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -399,6 +591,18 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getFiltersDescription().hashCode();
     hash = (37 * hash) + BUCKET_FEATURE_FIELD_NUMBER;
     hash = (53 * hash) + getBucketFeature().hashCode();
+    if (getAggregateOnFeaturesCount() > 0) {
+      hash = (37 * hash) + AGGREGATE_ON_FEATURES_FIELD_NUMBER;
+      hash = (53 * hash) + getAggregateOnFeaturesList().hashCode();
+    }
+    if (getFilterFeaturesCount() > 0) {
+      hash = (37 * hash) + FILTER_FEATURES_FIELD_NUMBER;
+      hash = (53 * hash) + getFilterFeaturesList().hashCode();
+    }
+    if (getProjectionFeaturesCount() > 0) {
+      hash = (37 * hash) + PROJECTION_FEATURES_FIELD_NUMBER;
+      hash = (53 * hash) + getProjectionFeaturesList().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -543,6 +747,12 @@ private static final long serialVersionUID = 0L;
       bitField0_ = (bitField0_ & ~0x00000008);
       filtersDescription_ = "";
       bucketFeature_ = "";
+      aggregateOnFeatures_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      filterFeatures_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      projectionFeatures_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -604,6 +814,18 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.bucketFeature_ = bucketFeature_;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        aggregateOnFeatures_.makeImmutable();
+        result.aggregateOnFeatures_ = aggregateOnFeatures_;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        filterFeatures_.makeImmutable();
+        result.filterFeatures_ = filterFeatures_;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        projectionFeatures_.makeImmutable();
+        result.projectionFeatures_ = projectionFeatures_;
       }
     }
 
@@ -707,6 +929,36 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000020;
         onChanged();
       }
+      if (!other.aggregateOnFeatures_.isEmpty()) {
+        if (aggregateOnFeatures_.isEmpty()) {
+          aggregateOnFeatures_ = other.aggregateOnFeatures_;
+          bitField0_ |= 0x00000040;
+        } else {
+          ensureAggregateOnFeaturesIsMutable();
+          aggregateOnFeatures_.addAll(other.aggregateOnFeatures_);
+        }
+        onChanged();
+      }
+      if (!other.filterFeatures_.isEmpty()) {
+        if (filterFeatures_.isEmpty()) {
+          filterFeatures_ = other.filterFeatures_;
+          bitField0_ |= 0x00000080;
+        } else {
+          ensureFilterFeaturesIsMutable();
+          filterFeatures_.addAll(other.filterFeatures_);
+        }
+        onChanged();
+      }
+      if (!other.projectionFeatures_.isEmpty()) {
+        if (projectionFeatures_.isEmpty()) {
+          projectionFeatures_ = other.projectionFeatures_;
+          bitField0_ |= 0x00000100;
+        } else {
+          ensureProjectionFeaturesIsMutable();
+          projectionFeatures_.addAll(other.projectionFeatures_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -772,6 +1024,24 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 58
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureAggregateOnFeaturesIsMutable();
+              aggregateOnFeatures_.add(s);
+              break;
+            } // case 66
+            case 74: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureFilterFeaturesIsMutable();
+              filterFeatures_.add(s);
+              break;
+            } // case 74
+            case 82: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureProjectionFeaturesIsMutable();
+              projectionFeatures_.add(s);
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -863,10 +1133,12 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object aggregateOn_ = "";
     /**
-     * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+     * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+     *     See chalk/aggregate/v1/timeseries.proto;l=22
      * @return The aggregateOn.
      */
-    public java.lang.String getAggregateOn() {
+    @java.lang.Deprecated public java.lang.String getAggregateOn() {
       java.lang.Object ref = aggregateOn_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
@@ -879,10 +1151,12 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+     * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+     *     See chalk/aggregate/v1/timeseries.proto;l=22
      * @return The bytes for aggregateOn.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getAggregateOnBytes() {
       java.lang.Object ref = aggregateOn_;
       if (ref instanceof String) {
@@ -896,11 +1170,13 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+     * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+     *     See chalk/aggregate/v1/timeseries.proto;l=22
      * @param value The aggregateOn to set.
      * @return This builder for chaining.
      */
-    public Builder setAggregateOn(
+    @java.lang.Deprecated public Builder setAggregateOn(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       aggregateOn_ = value;
@@ -909,21 +1185,25 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+     * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+     *     See chalk/aggregate/v1/timeseries.proto;l=22
      * @return This builder for chaining.
      */
-    public Builder clearAggregateOn() {
+    @java.lang.Deprecated public Builder clearAggregateOn() {
       aggregateOn_ = getDefaultInstance().getAggregateOn();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+     * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+     *     See chalk/aggregate/v1/timeseries.proto;l=22
      * @param value The bytes for aggregateOn to set.
      * @return This builder for chaining.
      */
-    public Builder setAggregateOnBytes(
+    @java.lang.Deprecated public Builder setAggregateOnBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
@@ -1424,6 +1704,411 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       bucketFeature_ = value;
       bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList aggregateOnFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureAggregateOnFeaturesIsMutable() {
+      if (!aggregateOnFeatures_.isModifiable()) {
+        aggregateOnFeatures_ = new com.google.protobuf.LazyStringArrayList(aggregateOnFeatures_);
+      }
+      bitField0_ |= 0x00000040;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @return A list containing the aggregateOnFeatures.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getAggregateOnFeaturesList() {
+      aggregateOnFeatures_.makeImmutable();
+      return aggregateOnFeatures_;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @return The count of aggregateOnFeatures.
+     */
+    public int getAggregateOnFeaturesCount() {
+      return aggregateOnFeatures_.size();
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param index The index of the element to return.
+     * @return The aggregateOnFeatures at the given index.
+     */
+    public java.lang.String getAggregateOnFeatures(int index) {
+      return aggregateOnFeatures_.get(index);
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the aggregateOnFeatures at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getAggregateOnFeaturesBytes(int index) {
+      return aggregateOnFeatures_.getByteString(index);
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param index The index to set the value at.
+     * @param value The aggregateOnFeatures to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAggregateOnFeatures(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureAggregateOnFeaturesIsMutable();
+      aggregateOnFeatures_.set(index, value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param value The aggregateOnFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAggregateOnFeatures(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureAggregateOnFeaturesIsMutable();
+      aggregateOnFeatures_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param values The aggregateOnFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllAggregateOnFeatures(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureAggregateOnFeaturesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, aggregateOnFeatures_);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAggregateOnFeatures() {
+      aggregateOnFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000040);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+     * @param value The bytes of the aggregateOnFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAggregateOnFeaturesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureAggregateOnFeaturesIsMutable();
+      aggregateOnFeatures_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList filterFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureFilterFeaturesIsMutable() {
+      if (!filterFeatures_.isModifiable()) {
+        filterFeatures_ = new com.google.protobuf.LazyStringArrayList(filterFeatures_);
+      }
+      bitField0_ |= 0x00000080;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @return A list containing the filterFeatures.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFilterFeaturesList() {
+      filterFeatures_.makeImmutable();
+      return filterFeatures_;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @return The count of filterFeatures.
+     */
+    public int getFilterFeaturesCount() {
+      return filterFeatures_.size();
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param index The index of the element to return.
+     * @return The filterFeatures at the given index.
+     */
+    public java.lang.String getFilterFeatures(int index) {
+      return filterFeatures_.get(index);
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the filterFeatures at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getFilterFeaturesBytes(int index) {
+      return filterFeatures_.getByteString(index);
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param index The index to set the value at.
+     * @param value The filterFeatures to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFilterFeatures(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureFilterFeaturesIsMutable();
+      filterFeatures_.set(index, value);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param value The filterFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addFilterFeatures(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureFilterFeaturesIsMutable();
+      filterFeatures_.add(value);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param values The filterFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllFilterFeatures(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureFilterFeaturesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, filterFeatures_);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFilterFeatures() {
+      filterFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000080);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+     * </pre>
+     *
+     * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+     * @param value The bytes of the filterFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addFilterFeaturesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureFilterFeaturesIsMutable();
+      filterFeatures_.add(value);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList projectionFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureProjectionFeaturesIsMutable() {
+      if (!projectionFeatures_.isModifiable()) {
+        projectionFeatures_ = new com.google.protobuf.LazyStringArrayList(projectionFeatures_);
+      }
+      bitField0_ |= 0x00000100;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @return A list containing the projectionFeatures.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getProjectionFeaturesList() {
+      projectionFeatures_.makeImmutable();
+      return projectionFeatures_;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @return The count of projectionFeatures.
+     */
+    public int getProjectionFeaturesCount() {
+      return projectionFeatures_.size();
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param index The index of the element to return.
+     * @return The projectionFeatures at the given index.
+     */
+    public java.lang.String getProjectionFeatures(int index) {
+      return projectionFeatures_.get(index);
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the projectionFeatures at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getProjectionFeaturesBytes(int index) {
+      return projectionFeatures_.getByteString(index);
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param index The index to set the value at.
+     * @param value The projectionFeatures to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProjectionFeatures(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureProjectionFeaturesIsMutable();
+      projectionFeatures_.set(index, value);
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param value The projectionFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addProjectionFeatures(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureProjectionFeaturesIsMutable();
+      projectionFeatures_.add(value);
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param values The projectionFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllProjectionFeatures(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureProjectionFeaturesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, projectionFeatures_);
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProjectionFeatures() {
+      projectionFeatures_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000100);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+     * </pre>
+     *
+     * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+     * @param value The bytes of the projectionFeatures to add.
+     * @return This builder for chaining.
+     */
+    public Builder addProjectionFeaturesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureProjectionFeaturesIsMutable();
+      projectionFeatures_.add(value);
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }

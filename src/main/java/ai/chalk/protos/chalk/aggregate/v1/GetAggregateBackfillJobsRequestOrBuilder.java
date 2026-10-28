@@ -25,4 +25,49 @@ public interface GetAggregateBackfillJobsRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getCursorBytes();
+
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  boolean hasPlanHash();
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  java.lang.String getPlanHash();
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  com.google.protobuf.ByteString
+      getPlanHashBytes();
+
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+   * @return The enum numeric value on the wire for initStatus.
+   */
+  int getInitStatusValue();
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+   * @return The initStatus.
+   */
+  ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getInitStatus();
+
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return Whether the name field is set.
+   */
+  boolean hasName();
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return The name.
+   */
+  java.lang.String getName();
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return The bytes for name.
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
 }

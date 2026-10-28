@@ -53,21 +53,21 @@ public interface AggregateBackfillUserParamsOrBuilder extends
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return Whether the timestampColumnName field is set.
    */
   @java.lang.Deprecated boolean hasTimestampColumnName();
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return The timestampColumnName.
    */
   @java.lang.Deprecated java.lang.String getTimestampColumnName();
   /**
    * <code>optional string timestamp_column_name = 3 [json_name = "timestampColumnName", deprecated = true];</code>
    * @deprecated chalk.aggregate.v1.AggregateBackfillUserParams.timestamp_column_name is deprecated.
-   *     See chalk/aggregate/v1/backfill.proto;l=21
+   *     See chalk/aggregate/v1/backfill.proto;l=35
    * @return The bytes for timestampColumnName.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -108,4 +108,46 @@ public interface AggregateBackfillUserParamsOrBuilder extends
    * @return The exact.
    */
   boolean getExact();
+
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @return A list containing the tags.
+   */
+  java.util.List<java.lang.String>
+      getTagsList();
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @return The count of tags.
+   */
+  int getTagsCount();
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @param index The index of the element to return.
+   * @return The tags at the given index.
+   */
+  java.lang.String getTags(int index);
+  /**
+   * <code>repeated string tags = 7 [json_name = "tags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the tags at the given index.
+   */
+  com.google.protobuf.ByteString
+      getTagsBytes(int index);
+
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return Whether the inputSql field is set.
+   */
+  boolean hasInputSql();
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return The inputSql.
+   */
+  java.lang.String getInputSql();
+  /**
+   * <code>optional string input_sql = 8 [json_name = "inputSql"];</code>
+   * @return The bytes for inputSql.
+   */
+  com.google.protobuf.ByteString
+      getInputSqlBytes();
 }

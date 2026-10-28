@@ -23,6 +23,7 @@ private static final long serialVersionUID = 0L;
     filtersDescription_ = "";
     groupBy_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    inputSql_ = "";
   }
 
   @java.lang.Override
@@ -345,6 +346,53 @@ private static final long serialVersionUID = 0L;
     return upperBound_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : upperBound_;
   }
 
+  public static final int INPUT_SQL_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object inputSql_ = "";
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return Whether the inputSql field is set.
+   */
+  @java.lang.Override
+  public boolean hasInputSql() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return The inputSql.
+   */
+  @java.lang.Override
+  public java.lang.String getInputSql() {
+    java.lang.Object ref = inputSql_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      inputSql_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return The bytes for inputSql.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getInputSqlBytes() {
+    java.lang.Object ref = inputSql_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      inputSql_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -385,6 +433,9 @@ private static final long serialVersionUID = 0L;
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(9, getUpperBound());
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 10, inputSql_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -432,6 +483,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(9, getUpperBound());
     }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, inputSql_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -477,6 +531,11 @@ private static final long serialVersionUID = 0L;
       if (!getUpperBound()
           .equals(other.getUpperBound())) return false;
     }
+    if (hasInputSql() != other.hasInputSql()) return false;
+    if (hasInputSql()) {
+      if (!getInputSql()
+          .equals(other.getInputSql())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -517,6 +576,10 @@ private static final long serialVersionUID = 0L;
     if (hasUpperBound()) {
       hash = (37 * hash) + UPPER_BOUND_FIELD_NUMBER;
       hash = (53 * hash) + getUpperBound().hashCode();
+    }
+    if (hasInputSql()) {
+      hash = (37 * hash) + INPUT_SQL_FIELD_NUMBER;
+      hash = (53 * hash) + getInputSql().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -691,6 +754,7 @@ private static final long serialVersionUID = 0L;
         upperBoundBuilder_.dispose();
         upperBoundBuilder_ = null;
       }
+      inputSql_ = "";
       return this;
     }
 
@@ -774,6 +838,10 @@ private static final long serialVersionUID = 0L;
             ? upperBound_
             : upperBoundBuilder_.build();
         to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.inputSql_ = inputSql_;
+        to_bitField0_ |= 0x00000010;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -885,6 +953,11 @@ private static final long serialVersionUID = 0L;
       if (other.hasUpperBound()) {
         mergeUpperBound(other.getUpperBound());
       }
+      if (other.hasInputSql()) {
+        inputSql_ = other.inputSql_;
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -973,6 +1046,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              inputSql_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2039,6 +2117,85 @@ private static final long serialVersionUID = 0L;
         upperBound_ = null;
       }
       return upperBoundBuilder_;
+    }
+
+    private java.lang.Object inputSql_ = "";
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @return Whether the inputSql field is set.
+     */
+    public boolean hasInputSql() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @return The inputSql.
+     */
+    public java.lang.String getInputSql() {
+      java.lang.Object ref = inputSql_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        inputSql_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @return The bytes for inputSql.
+     */
+    public com.google.protobuf.ByteString
+        getInputSqlBytes() {
+      java.lang.Object ref = inputSql_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        inputSql_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @param value The inputSql to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInputSql(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      inputSql_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearInputSql() {
+      inputSql_ = getDefaultInstance().getInputSql();
+      bitField0_ = (bitField0_ & ~0x00000200);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+     * @param value The bytes for inputSql to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInputSqlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      inputSql_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

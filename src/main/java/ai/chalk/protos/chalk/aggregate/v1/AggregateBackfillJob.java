@@ -26,6 +26,12 @@ private static final long serialVersionUID = 0L;
     deploymentId_ = "";
     resolvers_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    cronAggregateBackfillId_ = "";
+    planHash_ = "";
+    status_ = 0;
+    queryTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    cronAggregateBackfillName_ = "";
   }
 
   @java.lang.Override
@@ -394,6 +400,202 @@ private static final long serialVersionUID = 0L;
     return resolvers_.getByteString(index);
   }
 
+  public static final int CRON_AGGREGATE_BACKFILL_ID_FIELD_NUMBER = 10;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object cronAggregateBackfillId_ = "";
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return Whether the cronAggregateBackfillId field is set.
+   */
+  @java.lang.Override
+  public boolean hasCronAggregateBackfillId() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The cronAggregateBackfillId.
+   */
+  @java.lang.Override
+  public java.lang.String getCronAggregateBackfillId() {
+    java.lang.Object ref = cronAggregateBackfillId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      cronAggregateBackfillId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+   * @return The bytes for cronAggregateBackfillId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCronAggregateBackfillIdBytes() {
+    java.lang.Object ref = cronAggregateBackfillId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      cronAggregateBackfillId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int PLAN_HASH_FIELD_NUMBER = 11;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object planHash_ = "";
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  @java.lang.Override
+  public boolean hasPlanHash() {
+    return ((bitField0_ & 0x00000040) != 0);
+  }
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  @java.lang.Override
+  public java.lang.String getPlanHash() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      planHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPlanHashBytes() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      planHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 12;
+  private int status_ = 0;
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  @java.lang.Override public int getStatusValue() {
+    return status_;
+  }
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+   * @return The status.
+   */
+  @java.lang.Override public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getStatus() {
+    ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus result = ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.forNumber(status_);
+    return result == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.UNRECOGNIZED : result;
+  }
+
+  public static final int QUERY_TAGS_FIELD_NUMBER = 13;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList queryTags_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @return A list containing the queryTags.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getQueryTagsList() {
+    return queryTags_;
+  }
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @return The count of queryTags.
+   */
+  public int getQueryTagsCount() {
+    return queryTags_.size();
+  }
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @param index The index of the element to return.
+   * @return The queryTags at the given index.
+   */
+  public java.lang.String getQueryTags(int index) {
+    return queryTags_.get(index);
+  }
+  /**
+   * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the queryTags at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getQueryTagsBytes(int index) {
+    return queryTags_.getByteString(index);
+  }
+
+  public static final int CRON_AGGREGATE_BACKFILL_NAME_FIELD_NUMBER = 14;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object cronAggregateBackfillName_ = "";
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return Whether the cronAggregateBackfillName field is set.
+   */
+  @java.lang.Override
+  public boolean hasCronAggregateBackfillName() {
+    return ((bitField0_ & 0x00000080) != 0);
+  }
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return The cronAggregateBackfillName.
+   */
+  @java.lang.Override
+  public java.lang.String getCronAggregateBackfillName() {
+    java.lang.Object ref = cronAggregateBackfillName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      cronAggregateBackfillName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+   * @return The bytes for cronAggregateBackfillName.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCronAggregateBackfillNameBytes() {
+    java.lang.Object ref = cronAggregateBackfillName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      cronAggregateBackfillName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -434,6 +636,21 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < resolvers_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 9, resolvers_.getRaw(i));
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 10, cronAggregateBackfillId_);
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 11, planHash_);
+    }
+    if (status_ != ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_UNSPECIFIED.getNumber()) {
+      output.writeEnum(12, status_);
+    }
+    for (int i = 0; i < queryTags_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 13, queryTags_.getRaw(i));
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 14, cronAggregateBackfillName_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -483,6 +700,27 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getResolversList().size();
     }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, cronAggregateBackfillId_);
+    }
+    if (((bitField0_ & 0x00000040) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, planHash_);
+    }
+    if (status_ != ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(12, status_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < queryTags_.size(); i++) {
+        dataSize += computeStringSizeNoTag(queryTags_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getQueryTagsList().size();
+    }
+    if (((bitField0_ & 0x00000080) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, cronAggregateBackfillName_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -531,6 +769,24 @@ private static final long serialVersionUID = 0L;
     }
     if (!getResolversList()
         .equals(other.getResolversList())) return false;
+    if (hasCronAggregateBackfillId() != other.hasCronAggregateBackfillId()) return false;
+    if (hasCronAggregateBackfillId()) {
+      if (!getCronAggregateBackfillId()
+          .equals(other.getCronAggregateBackfillId())) return false;
+    }
+    if (hasPlanHash() != other.hasPlanHash()) return false;
+    if (hasPlanHash()) {
+      if (!getPlanHash()
+          .equals(other.getPlanHash())) return false;
+    }
+    if (status_ != other.status_) return false;
+    if (!getQueryTagsList()
+        .equals(other.getQueryTagsList())) return false;
+    if (hasCronAggregateBackfillName() != other.hasCronAggregateBackfillName()) return false;
+    if (hasCronAggregateBackfillName()) {
+      if (!getCronAggregateBackfillName()
+          .equals(other.getCronAggregateBackfillName())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -573,6 +829,24 @@ private static final long serialVersionUID = 0L;
     if (getResolversCount() > 0) {
       hash = (37 * hash) + RESOLVERS_FIELD_NUMBER;
       hash = (53 * hash) + getResolversList().hashCode();
+    }
+    if (hasCronAggregateBackfillId()) {
+      hash = (37 * hash) + CRON_AGGREGATE_BACKFILL_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getCronAggregateBackfillId().hashCode();
+    }
+    if (hasPlanHash()) {
+      hash = (37 * hash) + PLAN_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getPlanHash().hashCode();
+    }
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + status_;
+    if (getQueryTagsCount() > 0) {
+      hash = (37 * hash) + QUERY_TAGS_FIELD_NUMBER;
+      hash = (53 * hash) + getQueryTagsList().hashCode();
+    }
+    if (hasCronAggregateBackfillName()) {
+      hash = (37 * hash) + CRON_AGGREGATE_BACKFILL_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getCronAggregateBackfillName().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -731,6 +1005,12 @@ private static final long serialVersionUID = 0L;
       }
       resolvers_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      cronAggregateBackfillId_ = "";
+      planHash_ = "";
+      status_ = 0;
+      queryTags_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      cronAggregateBackfillName_ = "";
       return this;
     }
 
@@ -802,6 +1082,25 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000100) != 0)) {
         resolvers_.makeImmutable();
         result.resolvers_ = resolvers_;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.cronAggregateBackfillId_ = cronAggregateBackfillId_;
+        to_bitField0_ |= 0x00000020;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.planHash_ = planHash_;
+        to_bitField0_ |= 0x00000040;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.status_ = status_;
+      }
+      if (((from_bitField0_ & 0x00001000) != 0)) {
+        queryTags_.makeImmutable();
+        result.queryTags_ = queryTags_;
+      }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
+        result.cronAggregateBackfillName_ = cronAggregateBackfillName_;
+        to_bitField0_ |= 0x00000080;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -901,6 +1200,34 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       }
+      if (other.hasCronAggregateBackfillId()) {
+        cronAggregateBackfillId_ = other.cronAggregateBackfillId_;
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      if (other.hasPlanHash()) {
+        planHash_ = other.planHash_;
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
+      if (other.status_ != 0) {
+        setStatusValue(other.getStatusValue());
+      }
+      if (!other.queryTags_.isEmpty()) {
+        if (queryTags_.isEmpty()) {
+          queryTags_ = other.queryTags_;
+          bitField0_ |= 0x00001000;
+        } else {
+          ensureQueryTagsIsMutable();
+          queryTags_.addAll(other.queryTags_);
+        }
+        onChanged();
+      }
+      if (other.hasCronAggregateBackfillName()) {
+        cronAggregateBackfillName_ = other.cronAggregateBackfillName_;
+        bitField0_ |= 0x00002000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -978,6 +1305,32 @@ private static final long serialVersionUID = 0L;
               resolvers_.add(s);
               break;
             } // case 74
+            case 82: {
+              cronAggregateBackfillId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
+            case 90: {
+              planHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
+            case 96: {
+              status_ = input.readEnum();
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 96
+            case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureQueryTagsIsMutable();
+              queryTags_.add(s);
+              break;
+            } // case 106
+            case 114: {
+              cronAggregateBackfillName_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00002000;
+              break;
+            } // case 114
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1836,6 +2189,407 @@ private static final long serialVersionUID = 0L;
       ensureResolversIsMutable();
       resolvers_.add(value);
       bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object cronAggregateBackfillId_ = "";
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @return Whether the cronAggregateBackfillId field is set.
+     */
+    public boolean hasCronAggregateBackfillId() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @return The cronAggregateBackfillId.
+     */
+    public java.lang.String getCronAggregateBackfillId() {
+      java.lang.Object ref = cronAggregateBackfillId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cronAggregateBackfillId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @return The bytes for cronAggregateBackfillId.
+     */
+    public com.google.protobuf.ByteString
+        getCronAggregateBackfillIdBytes() {
+      java.lang.Object ref = cronAggregateBackfillId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cronAggregateBackfillId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @param value The cronAggregateBackfillId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCronAggregateBackfillId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      cronAggregateBackfillId_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCronAggregateBackfillId() {
+      cronAggregateBackfillId_ = getDefaultInstance().getCronAggregateBackfillId();
+      bitField0_ = (bitField0_ & ~0x00000200);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_id = 10 [json_name = "cronAggregateBackfillId"];</code>
+     * @param value The bytes for cronAggregateBackfillId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCronAggregateBackfillIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      cronAggregateBackfillId_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object planHash_ = "";
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @return Whether the planHash field is set.
+     */
+    public boolean hasPlanHash() {
+      return ((bitField0_ & 0x00000400) != 0);
+    }
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @return The planHash.
+     */
+    public java.lang.String getPlanHash() {
+      java.lang.Object ref = planHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        planHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @return The bytes for planHash.
+     */
+    public com.google.protobuf.ByteString
+        getPlanHashBytes() {
+      java.lang.Object ref = planHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        planHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @param value The planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      planHash_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPlanHash() {
+      planHash_ = getDefaultInstance().getPlanHash();
+      bitField0_ = (bitField0_ & ~0x00000400);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 11 [json_name = "planHash"];</code>
+     * @param value The bytes for planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      planHash_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+
+    private int status_ = 0;
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    @java.lang.Override public int getStatusValue() {
+      return status_;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+     * @param value The enum numeric value on the wire for status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatusValue(int value) {
+      status_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+     * @return The status.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getStatus() {
+      ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus result = ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.forNumber(status_);
+      return result == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+     * @param value The status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatus(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000800;
+      status_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus status = 12 [json_name = "status"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStatus() {
+      bitField0_ = (bitField0_ & ~0x00000800);
+      status_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList queryTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureQueryTagsIsMutable() {
+      if (!queryTags_.isModifiable()) {
+        queryTags_ = new com.google.protobuf.LazyStringArrayList(queryTags_);
+      }
+      bitField0_ |= 0x00001000;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @return A list containing the queryTags.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getQueryTagsList() {
+      queryTags_.makeImmutable();
+      return queryTags_;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @return The count of queryTags.
+     */
+    public int getQueryTagsCount() {
+      return queryTags_.size();
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param index The index of the element to return.
+     * @return The queryTags at the given index.
+     */
+    public java.lang.String getQueryTags(int index) {
+      return queryTags_.get(index);
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the queryTags at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getQueryTagsBytes(int index) {
+      return queryTags_.getByteString(index);
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param index The index to set the value at.
+     * @param value The queryTags to set.
+     * @return This builder for chaining.
+     */
+    public Builder setQueryTags(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureQueryTagsIsMutable();
+      queryTags_.set(index, value);
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param value The queryTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addQueryTags(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureQueryTagsIsMutable();
+      queryTags_.add(value);
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param values The queryTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllQueryTags(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureQueryTagsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, queryTags_);
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearQueryTags() {
+      queryTags_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00001000);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string query_tags = 13 [json_name = "queryTags"];</code>
+     * @param value The bytes of the queryTags to add.
+     * @return This builder for chaining.
+     */
+    public Builder addQueryTagsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureQueryTagsIsMutable();
+      queryTags_.add(value);
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object cronAggregateBackfillName_ = "";
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @return Whether the cronAggregateBackfillName field is set.
+     */
+    public boolean hasCronAggregateBackfillName() {
+      return ((bitField0_ & 0x00002000) != 0);
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @return The cronAggregateBackfillName.
+     */
+    public java.lang.String getCronAggregateBackfillName() {
+      java.lang.Object ref = cronAggregateBackfillName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cronAggregateBackfillName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @return The bytes for cronAggregateBackfillName.
+     */
+    public com.google.protobuf.ByteString
+        getCronAggregateBackfillNameBytes() {
+      java.lang.Object ref = cronAggregateBackfillName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cronAggregateBackfillName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @param value The cronAggregateBackfillName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCronAggregateBackfillName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      cronAggregateBackfillName_ = value;
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCronAggregateBackfillName() {
+      cronAggregateBackfillName_ = getDefaultInstance().getCronAggregateBackfillName();
+      bitField0_ = (bitField0_ & ~0x00002000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string cron_aggregate_backfill_name = 14 [json_name = "cronAggregateBackfillName"];</code>
+     * @param value The bytes for cronAggregateBackfillName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCronAggregateBackfillNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      cronAggregateBackfillName_ = value;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
