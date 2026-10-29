@@ -129,6 +129,41 @@ public class TestDeleteFeatures {
     }
 
     @Test
+    public void testDeleteMaterializedAggregatesRejectsFeatureSelection() throws Exception {
+        AtomicReference<Boolean> deleteCalled = new AtomicReference<>(false);
+        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
+        server.createContext("/v1/features/rows", exchange -> {
+            deleteCalled.set(true);
+            respondJson(exchange, "{\"errors\": []}");
+        });
+        server.start();
+
+        String serverUrl = "http://localhost:" + server.getAddress().getPort();
+        try (ChalkClient client = ChalkClient.builder()
+                .withApiServer(serverUrl)
+                .withClientId("test-client")
+                .withClientSecret("test-secret")
+                .withEnvironmentId(ENVIRONMENT_ID)
+                .build()) {
+            for (DeleteFeaturesParams.Builder builder : List.of(
+                    DeleteFeaturesParams.builder().withFeatures(List.of("name")),
+                    DeleteFeaturesParams.builder().withTags(List.of("pii"))
+            )) {
+                ClientException e = assertThrows(ClientException.class, () -> client.deleteFeatures(
+                        builder.withNamespace("user")
+                                .withPrimaryKeys(List.of("1"))
+                                .withDeleteMaterializedAggregates(true)
+                                .build()
+                ));
+                assertTrue(e.getMessage().contains("cannot be combined"));
+            }
+            assertFalse(deleteCalled.get());
+        } finally {
+            server.stop(0);
+        }
+    }
+
+    @Test
     public void testHttpDeleteFeaturesRejectsBranch() throws Exception {
         AtomicReference<Boolean> deleteCalled = new AtomicReference<>(false);
         HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);

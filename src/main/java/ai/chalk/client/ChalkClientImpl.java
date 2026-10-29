@@ -268,6 +268,12 @@ public class ChalkClientImpl implements ChalkClient {
 
     @Override
     public DeleteFeaturesResult deleteFeatures(DeleteFeaturesParams params) throws ChalkException {
+        if (params.isDeleteMaterializedAggregates() && (params.getFeatures() != null || params.getTags() != null)) {
+            throw new ClientException(
+                    "deleteMaterializedAggregates deletes every materialized aggregation of the primary keys "
+                            + "and cannot be combined with features or tags."
+            );
+        }
         String branch = params.getBranch() != null ? params.getBranch() : this.branch;
         if (branch != null) {
             throw new ClientException(

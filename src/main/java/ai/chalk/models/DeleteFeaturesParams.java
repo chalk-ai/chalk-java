@@ -55,10 +55,10 @@ public class DeleteFeaturesParams {
      */
     private final boolean retainOnline;
     /**
-     * If true, also delete every online bucket of the namespace's materialized windowed
-     * aggregations stored under the given primary keys (restricted by {@code features} /
-     * {@code tags} if given). Ignored when {@code retainOnline} is true. Buckets are not rebuilt:
-     * later stream updates and backfills write them again as usual.
+     * If true, also delete every online bucket of every materialized windowed aggregation of the
+     * namespace stored under the given primary keys. Cannot be combined with {@code features} or
+     * {@code tags}. Ignored when {@code retainOnline} is true. Buckets are not rebuilt: later stream
+     * updates and backfills write them again as usual.
      */
     private final boolean deleteMaterializedAggregates;
 
@@ -159,8 +159,9 @@ public class DeleteFeaturesParams {
         }
 
         /**
-         * Also delete every online bucket of the namespace's materialized windowed aggregations
-         * stored under the given primary keys. Defaults to {@code false}.
+         * Also delete every online bucket of every materialized windowed aggregation of the namespace
+         * stored under the given primary keys. Cannot be combined with features or tags. Defaults to
+         * {@code false}.
          */
         public Builder withDeleteMaterializedAggregates(boolean deleteMaterializedAggregates) {
             this.deleteMaterializedAggregates = deleteMaterializedAggregates;
