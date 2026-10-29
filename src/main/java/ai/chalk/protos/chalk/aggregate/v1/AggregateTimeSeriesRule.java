@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     dependentFeatures_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     datetimeFeature_ = "";
+    materializationKeyHash_ = "";
   }
 
   @java.lang.Override
@@ -227,6 +228,53 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int MATERIALIZATION_KEY_HASH_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object materializationKeyHash_ = "";
+  /**
+   * <pre>
+   * The tile-manifest materialization_key_hash this rule's lookups read.
+   * </pre>
+   *
+   * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+   * @return The materializationKeyHash.
+   */
+  @java.lang.Override
+  public java.lang.String getMaterializationKeyHash() {
+    java.lang.Object ref = materializationKeyHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      materializationKeyHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The tile-manifest materialization_key_hash this rule's lookups read.
+   * </pre>
+   *
+   * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+   * @return The bytes for materializationKeyHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMaterializationKeyHashBytes() {
+    java.lang.Object ref = materializationKeyHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      materializationKeyHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -255,6 +303,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(datetimeFeature_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, datetimeFeature_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(materializationKeyHash_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, materializationKeyHash_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -287,6 +338,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(datetimeFeature_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, datetimeFeature_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(materializationKeyHash_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, materializationKeyHash_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -318,6 +372,8 @@ private static final long serialVersionUID = 0L;
     }
     if (!getDatetimeFeature()
         .equals(other.getDatetimeFeature())) return false;
+    if (!getMaterializationKeyHash()
+        .equals(other.getMaterializationKeyHash())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -345,6 +401,8 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + DATETIME_FEATURE_FIELD_NUMBER;
     hash = (53 * hash) + getDatetimeFeature().hashCode();
+    hash = (37 * hash) + MATERIALIZATION_KEY_HASH_FIELD_NUMBER;
+    hash = (53 * hash) + getMaterializationKeyHash().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -497,6 +555,7 @@ private static final long serialVersionUID = 0L;
         retentionBuilder_ = null;
       }
       datetimeFeature_ = "";
+      materializationKeyHash_ = "";
       return this;
     }
 
@@ -552,6 +611,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.datetimeFeature_ = datetimeFeature_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.materializationKeyHash_ = materializationKeyHash_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -626,6 +688,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000010;
         onChanged();
       }
+      if (!other.getMaterializationKeyHash().isEmpty()) {
+        materializationKeyHash_ = other.materializationKeyHash_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -682,6 +749,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              materializationKeyHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1228,6 +1300,98 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       datetimeFeature_ = value;
       bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object materializationKeyHash_ = "";
+    /**
+     * <pre>
+     * The tile-manifest materialization_key_hash this rule's lookups read.
+     * </pre>
+     *
+     * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+     * @return The materializationKeyHash.
+     */
+    public java.lang.String getMaterializationKeyHash() {
+      java.lang.Object ref = materializationKeyHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        materializationKeyHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The tile-manifest materialization_key_hash this rule's lookups read.
+     * </pre>
+     *
+     * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+     * @return The bytes for materializationKeyHash.
+     */
+    public com.google.protobuf.ByteString
+        getMaterializationKeyHashBytes() {
+      java.lang.Object ref = materializationKeyHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        materializationKeyHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The tile-manifest materialization_key_hash this rule's lookups read.
+     * </pre>
+     *
+     * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+     * @param value The materializationKeyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMaterializationKeyHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      materializationKeyHash_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The tile-manifest materialization_key_hash this rule's lookups read.
+     * </pre>
+     *
+     * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMaterializationKeyHash() {
+      materializationKeyHash_ = getDefaultInstance().getMaterializationKeyHash();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The tile-manifest materialization_key_hash this rule's lookups read.
+     * </pre>
+     *
+     * <code>string materialization_key_hash = 6 [json_name = "materializationKeyHash"];</code>
+     * @param value The bytes for materializationKeyHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMaterializationKeyHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      materializationKeyHash_ = value;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }

@@ -152,4 +152,21 @@ public interface AggregateBackfillOrBuilder extends
    * <code>.google.protobuf.Timestamp upper_bound = 9 [json_name = "upperBound"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getUpperBoundOrBuilder();
+
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return Whether the inputSql field is set.
+   */
+  boolean hasInputSql();
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return The inputSql.
+   */
+  java.lang.String getInputSql();
+  /**
+   * <code>optional string input_sql = 10 [json_name = "inputSql"];</code>
+   * @return The bytes for inputSql.
+   */
+  com.google.protobuf.ByteString
+      getInputSqlBytes();
 }

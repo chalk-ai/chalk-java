@@ -55,6 +55,56 @@ public final class ServiceProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_aggregate_v1_GetAggregateBackfillJobResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_GetCronAggregateBackfillRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_GetCronAggregateBackfillResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CronAggregateBackfillWithLatestRun_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CronAggregateBackfillWithLatestRun_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_PlannerOptionsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_PlannerOptionsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Response_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Response_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -68,49 +118,150 @@ public final class ServiceProto {
       "k.aggregate.v1\032!chalk/aggregate/v1/backf" +
       "ill.proto\032#chalk/aggregate/v1/timeseries" +
       ".proto\032\031chalk/auth/v1/audit.proto\032\037chalk" +
-      "/auth/v1/permissions.proto\"g\n\034PlanAggreg" +
-      "ateBackfillRequest\022G\n\006params\030\001 \001(\0132/.cha" +
-      "lk.aggregate.v1.AggregateBackfillUserPar" +
-      "amsR\006params\"\217\002\n\035PlanAggregateBackfillRes" +
-      "ponse\022M\n\010estimate\030\002 \001(\01321.chalk.aggregat" +
-      "e.v1.AggregateBackfillCostEstimateR\010esti" +
-      "mate\022\026\n\006errors\030\004 \003(\tR\006errors\022S\n\tbackfill" +
-      "s\030\006 \003(\01325.chalk.aggregate.v1.AggregateBa" +
-      "ckfillWithCostEstimateR\tbackfills\0222\n\025agg" +
-      "regate_backfill_id\030\007 \001(\tR\023aggregateBackf" +
-      "illId\"9\n\024GetAggregatesRequest\022!\n\014for_fea" +
-      "tures\030\001 \003(\tR\013forFeatures\"p\n\025GetAggregate" +
-      "sResponse\022?\n\006series\030\001 \003(\0132\'.chalk.aggreg" +
-      "ate.v1.AggregateTimeSeriesR\006series\022\026\n\006er" +
-      "rors\030\002 \003(\tR\006errors\"O\n\037GetAggregateBackfi" +
-      "llJobsRequest\022\024\n\005limit\030\001 \001(\005R\005limit\022\026\n\006c" +
-      "ursor\030\002 \001(\tR\006cursor\"x\n GetAggregateBackf" +
-      "illJobsResponse\022<\n\004jobs\030\001 \003(\0132(.chalk.ag" +
-      "gregate.v1.AggregateBackfillJobR\004jobs\022\026\n" +
-      "\006cursor\030\002 \001(\tR\006cursor\"T\n\036GetAggregateBac" +
-      "kfillJobRequest\0222\n\025aggregate_backfill_id" +
-      "\030\001 \001(\tR\023aggregateBackfillId\"]\n\037GetAggreg" +
-      "ateBackfillJobResponse\022:\n\003job\030\001 \001(\0132(.ch" +
-      "alk.aggregate.v1.AggregateBackfillJobR\003j" +
-      "ob2\260\004\n\020AggregateService\022\212\001\n\025PlanAggregat" +
-      "eBackfill\0220.chalk.aggregate.v1.PlanAggre" +
-      "gateBackfillRequest\0321.chalk.aggregate.v1" +
-      ".PlanAggregateBackfillResponse\"\014\220\002\001\200}\014\212\323" +
-      "\016\002\010\002\022r\n\rGetAggregates\022(.chalk.aggregate." +
-      "v1.GetAggregatesRequest\032).chalk.aggregat" +
-      "e.v1.GetAggregatesResponse\"\014\220\002\001\200}\013\212\323\016\002\010\002" +
-      "\022\215\001\n\030GetAggregateBackfillJobs\0223.chalk.ag" +
-      "gregate.v1.GetAggregateBackfillJobsReque" +
-      "st\0324.chalk.aggregate.v1.GetAggregateBack" +
-      "fillJobsResponse\"\006\220\002\001\200}\013\022\212\001\n\027GetAggregat" +
-      "eBackfillJob\0222.chalk.aggregate.v1.GetAgg" +
-      "regateBackfillJobRequest\0323.chalk.aggrega" +
-      "te.v1.GetAggregateBackfillJobResponse\"\006\220" +
-      "\002\001\200}\013B\266\001\n\"ai.chalk.protos.chalk.aggregat" +
-      "e.v1B\014ServiceProtoP\001Z\030aggregate/v1;aggre" +
-      "gatev1\242\002\003CAX\252\002\022Chalk.Aggregate.V1\312\002\022Chal" +
-      "k\\Aggregate\\V1\342\002\036Chalk\\Aggregate\\V1\\GPBM" +
-      "etadata\352\002\024Chalk::Aggregate::V1b\006proto3"
+      "/auth/v1/permissions.proto\032!chalk/common" +
+      "/v1/chalk_error.proto\032\037google/protobuf/t" +
+      "imestamp.proto\"g\n\034PlanAggregateBackfillR" +
+      "equest\022G\n\006params\030\001 \001(\0132/.chalk.aggregate" +
+      ".v1.AggregateBackfillUserParamsR\006params\"" +
+      "\223\002\n\035PlanAggregateBackfillResponse\022Q\n\010est" +
+      "imate\030\002 \001(\01321.chalk.aggregate.v1.Aggrega" +
+      "teBackfillCostEstimateB\002\030\001R\010estimate\022\026\n\006" +
+      "errors\030\004 \003(\tR\006errors\022S\n\tbackfills\030\006 \003(\0132" +
+      "5.chalk.aggregate.v1.AggregateBackfillWi" +
+      "thCostEstimateR\tbackfills\0222\n\025aggregate_b" +
+      "ackfill_id\030\007 \001(\tR\023aggregateBackfillId\"9\n" +
+      "\024GetAggregatesRequest\022!\n\014for_features\030\001 " +
+      "\003(\tR\013forFeatures\"p\n\025GetAggregatesRespons" +
+      "e\022?\n\006series\030\001 \003(\0132\'.chalk.aggregate.v1.A" +
+      "ggregateTimeSeriesR\006series\022\026\n\006errors\030\002 \003" +
+      "(\tR\006errors\"\357\001\n\037GetAggregateBackfillJobsR" +
+      "equest\022\024\n\005limit\030\001 \001(\005R\005limit\022\026\n\006cursor\030\002" +
+      " \001(\tR\006cursor\022 \n\tplan_hash\030\003 \001(\tH\000R\010planH" +
+      "ash\210\001\001\022L\n\013init_status\030\004 \001(\0162+.chalk.aggr" +
+      "egate.v1.AggregateBackfillStatusR\ninitSt" +
+      "atus\022\027\n\004name\030\005 \001(\tH\001R\004name\210\001\001B\014\n\n_plan_h" +
+      "ashB\007\n\005_name\"x\n GetAggregateBackfillJobs" +
+      "Response\022<\n\004jobs\030\001 \003(\0132(.chalk.aggregate" +
+      ".v1.AggregateBackfillJobR\004jobs\022\026\n\006cursor" +
+      "\030\002 \001(\tR\006cursor\"T\n\036GetAggregateBackfillJo" +
+      "bRequest\0222\n\025aggregate_backfill_id\030\001 \001(\tR" +
+      "\023aggregateBackfillId\"]\n\037GetAggregateBack" +
+      "fillJobResponse\022:\n\003job\030\001 \001(\0132(.chalk.agg" +
+      "regate.v1.AggregateBackfillJobR\003job\"\177\n\037G" +
+      "etCronAggregateBackfillRequest\022?\n\032cron_a" +
+      "ggregate_backfill_id\030\001 \001(\tB\002\030\001R\027cronAggr" +
+      "egateBackfillId\022\033\n\tplan_hash\030\002 \001(\tR\010plan" +
+      "Hash\"\205\001\n GetCronAggregateBackfillRespons" +
+      "e\022a\n\027cron_aggregate_backfill\030\001 \001(\0132).cha" +
+      "lk.aggregate.v1.CronAggregateBackfillR\025c" +
+      "ronAggregateBackfill\"(\n&GetActiveCronAgg" +
+      "regateBackfillsRequest\"\320\001\n\"CronAggregate" +
+      "BackfillWithLatestRun\022a\n\027cron_aggregate_" +
+      "backfill\030\001 \001(\0132).chalk.aggregate.v1.Cron" +
+      "AggregateBackfillR\025cronAggregateBackfill" +
+      "\022G\n\nlatest_job\030\002 \001(\0132(.chalk.aggregate.v" +
+      "1.AggregateBackfillJobR\tlatestJob\"\233\001\n\'Ge" +
+      "tActiveCronAggregateBackfillsResponse\022p\n" +
+      "\030cron_aggregate_backfills\030\001 \003(\01326.chalk." +
+      "aggregate.v1.CronAggregateBackfillWithLa" +
+      "testRunR\026cronAggregateBackfills\"\215\007\n!Crea" +
+      "teAggregateBackfillJobRequest\022\032\n\010feature" +
+      "s\030\001 \003(\tR\010features\022@\n\013lower_bound\030\002 \001(\0132\032" +
+      ".google.protobuf.TimestampH\000R\nlowerBound" +
+      "\210\001\001\022@\n\013upper_bound\030\003 \001(\0132\032.google.protob" +
+      "uf.TimestampH\001R\nupperBound\210\001\001\022\037\n\010resolve" +
+      "r\030\004 \001(\tH\002R\010resolver\210\001\001\022*\n\016bucket_feature" +
+      "\030\005 \001(\tH\003R\rbucketFeature\210\001\001\022)\n\020enable_pro" +
+      "filing\030\006 \001(\010R\017enableProfiling\0227\n\025aggrega" +
+      "te_backfill_id\030\007 \001(\tH\004R\023aggregateBackfil" +
+      "lId\210\001\001\022*\n\016resource_group\030\010 \001(\tH\005R\rresour" +
+      "ceGroup\210\001\001\022\035\n\nquery_tags\030\t \003(\tR\tqueryTag" +
+      "s\022(\n\rstore_offline\030\n \001(\010H\006R\014storeOffline" +
+      "\210\001\001\022,\n\017use_metaplanner\030\013 \001(\010H\007R\016useMetap" +
+      "lanner\210\001\001\022/\n\021allow_empty_tiles\030\014 \001(\010H\010R\017" +
+      "allowEmptyTiles\210\001\001\022&\n\014store_online\030\r \001(\010" +
+      "H\tR\013storeOnline\210\001\001\022 \n\tinput_sql\030\016 \001(\tH\nR" +
+      "\010inputSql\210\001\001\022\"\n\nnum_shards\030\017 \001(\005H\013R\tnumS" +
+      "hards\210\001\001B\016\n\014_lower_boundB\016\n\014_upper_bound" +
+      "B\013\n\t_resolverB\021\n\017_bucket_featureB\030\n\026_agg" +
+      "regate_backfill_idB\021\n\017_resource_groupB\020\n" +
+      "\016_store_offlineB\022\n\020_use_metaplannerB\024\n\022_" +
+      "allow_empty_tilesB\017\n\r_store_onlineB\014\n\n_i" +
+      "nput_sqlB\r\n\013_num_shards\"\214\001\n\"CreateAggreg" +
+      "ateBackfillJobResponse\022\025\n\006job_id\030\001 \001(\tR\005" +
+      "jobId\022\032\n\010features\030\002 \003(\tR\010features\0223\n\006err" +
+      "ors\030\003 \003(\0132\033.chalk.common.v1.ChalkErrorR\006" +
+      "errors\"\270\007\n CreateAggregateBackfillV2Requ" +
+      "est\022\032\n\010features\030\001 \003(\tR\010features\022\037\n\010resol" +
+      "ver\030\002 \001(\tH\000R\010resolver\210\001\001\022 \n\tinput_sql\030\003 " +
+      "\001(\tH\001R\010inputSql\210\001\001\022@\n\013lower_bound\030\004 \001(\0132" +
+      "\032.google.protobuf.TimestampH\002R\nlowerBoun" +
+      "d\210\001\001\022@\n\013upper_bound\030\005 \001(\0132\032.google.proto" +
+      "buf.TimestampH\003R\nupperBound\210\001\001\022\022\n\004tags\030\006" +
+      " \003(\tR\004tags\022\024\n\005exact\030\007 \001(\010R\005exact\022&\n\014stor" +
+      "e_online\030\010 \001(\010H\004R\013storeOnline\210\001\001\022(\n\rstor" +
+      "e_offline\030\t \001(\010H\005R\014storeOffline\210\001\001\022/\n\021al" +
+      "low_empty_tiles\030\n \001(\010H\006R\017allowEmptyTiles" +
+      "\210\001\001\022)\n\020enable_profiling\030\013 \001(\010R\017enablePro" +
+      "filing\022*\n\016resource_group\030\014 \001(\tH\007R\rresour" +
+      "ceGroup\210\001\001\022q\n\017planner_options\030\r \003(\0132H.ch" +
+      "alk.aggregate.v1.CreateAggregateBackfill" +
+      "V2Request.PlannerOptionsEntryR\016plannerOp" +
+      "tions\022=\n\004mode\030\016 \001(\0162).chalk.aggregate.v1" +
+      ".AggregateBackfillModeR\004mode\022\"\n\nnum_shar" +
+      "ds\030\017 \001(\005H\010R\tnumShards\210\001\001\032A\n\023PlannerOptio" +
+      "nsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\t" +
+      "R\005value:\0028\001B\013\n\t_resolverB\014\n\n_input_sqlB\016" +
+      "\n\014_lower_boundB\016\n\014_upper_boundB\017\n\r_store" +
+      "_onlineB\020\n\016_store_offlineB\024\n\022_allow_empt" +
+      "y_tilesB\021\n\017_resource_groupB\r\n\013_num_shard" +
+      "s\"\310\001\n!CreateAggregateBackfillV2Response\022" +
+      "?\n\003job\030\001 \001(\0132(.chalk.aggregate.v1.Aggreg" +
+      "ateBackfillJobH\000R\003job\210\001\001\022Z\n\rsub_backfill" +
+      "s\030\002 \003(\01325.chalk.aggregate.v1.AggregateBa" +
+      "ckfillWithCostEstimateR\014subBackfillsB\006\n\004" +
+      "_job*\206\001\n\025AggregateBackfillMode\022\'\n#AGGREG" +
+      "ATE_BACKFILL_MODE_UNSPECIFIED\020\000\022 \n\034AGGRE" +
+      "GATE_BACKFILL_MODE_PLAN\020\001\022\"\n\036AGGREGATE_B" +
+      "ACKFILL_MODE_CREATE\020\0022\243\n\n\020AggregateServi" +
+      "ce\022\303\001\n\025PlanAggregateBackfill\0220.chalk.agg" +
+      "regate.v1.PlanAggregateBackfillRequest\0321" +
+      ".chalk.aggregate.v1.PlanAggregateBackfil" +
+      "lResponse\"E\220\002\001\200}\004\212\323\016;\010\002\0227Estimated the r" +
+      "esources needed to backfill an aggregate" +
+      "\022\256\001\n\rGetAggregates\022(.chalk.aggregate.v1." +
+      "GetAggregatesRequest\032).chalk.aggregate.v" +
+      "1.GetAggregatesResponse\"H\220\002\001\200}\013\212\323\016>\010\002\022:R" +
+      "etrieved aggregate time series for the r" +
+      "equested features\022\215\001\n\030GetAggregateBackfi" +
+      "llJobs\0223.chalk.aggregate.v1.GetAggregate" +
+      "BackfillJobsRequest\0324.chalk.aggregate.v1" +
+      ".GetAggregateBackfillJobsResponse\"\006\220\002\001\200}" +
+      "\013\022\212\001\n\027GetAggregateBackfillJob\0222.chalk.ag" +
+      "gregate.v1.GetAggregateBackfillJobReques" +
+      "t\0323.chalk.aggregate.v1.GetAggregateBackf" +
+      "illJobResponse\"\006\220\002\001\200}\013\022\215\001\n\030GetCronAggreg" +
+      "ateBackfill\0223.chalk.aggregate.v1.GetCron" +
+      "AggregateBackfillRequest\0324.chalk.aggrega" +
+      "te.v1.GetCronAggregateBackfillResponse\"\006" +
+      "\220\002\001\200}\013\022\242\001\n\037GetActiveCronAggregateBackfil" +
+      "ls\022:.chalk.aggregate.v1.GetActiveCronAgg" +
+      "regateBackfillsRequest\032;.chalk.aggregate" +
+      ".v1.GetActiveCronAggregateBackfillsRespo" +
+      "nse\"\006\220\002\001\200}\013\022\220\001\n\032CreateAggregateBackfillJ" +
+      "ob\0225.chalk.aggregate.v1.CreateAggregateB" +
+      "ackfillJobRequest\0326.chalk.aggregate.v1.C" +
+      "reateAggregateBackfillJobResponse\"\003\200}\004\022\262" +
+      "\001\n\031CreateAggregateBackfillV2\0224.chalk.agg" +
+      "regate.v1.CreateAggregateBackfillV2Reque" +
+      "st\0325.chalk.aggregate.v1.CreateAggregateB" +
+      "ackfillV2Response\"(\200}\004\212\323\016!\010\002\022\035Created an" +
+      " aggregate backfillB\266\001\n\"ai.chalk.protos." +
+      "chalk.aggregate.v1B\014ServiceProtoP\001Z\030aggr" +
+      "egate/v1;aggregatev1\242\002\003CAX\252\002\022Chalk.Aggre" +
+      "gate.V1\312\002\022Chalk\\Aggregate\\V1\342\002\036Chalk\\Agg" +
+      "regate\\V1\\GPBMetadata\352\002\024Chalk::Aggregate" +
+      "::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -119,6 +270,8 @@ public final class ServiceProto {
           ai.chalk.protos.chalk.aggregate.v1.TimeseriesProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor(),
           ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor(),
+          ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor(),
+          com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_chalk_aggregate_v1_PlanAggregateBackfillRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -149,7 +302,7 @@ public final class ServiceProto {
     internal_static_chalk_aggregate_v1_GetAggregateBackfillJobsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_GetAggregateBackfillJobsRequest_descriptor,
-        new java.lang.String[] { "Limit", "Cursor", });
+        new java.lang.String[] { "Limit", "Cursor", "PlanHash", "InitStatus", "Name", });
     internal_static_chalk_aggregate_v1_GetAggregateBackfillJobsResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_chalk_aggregate_v1_GetAggregateBackfillJobsResponse_fieldAccessorTable = new
@@ -168,6 +321,66 @@ public final class ServiceProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_GetAggregateBackfillJobResponse_descriptor,
         new java.lang.String[] { "Job", });
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_GetCronAggregateBackfillRequest_descriptor,
+        new java.lang.String[] { "CronAggregateBackfillId", "PlanHash", });
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_chalk_aggregate_v1_GetCronAggregateBackfillResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_GetCronAggregateBackfillResponse_descriptor,
+        new java.lang.String[] { "CronAggregateBackfill", });
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_chalk_aggregate_v1_CronAggregateBackfillWithLatestRun_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_chalk_aggregate_v1_CronAggregateBackfillWithLatestRun_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CronAggregateBackfillWithLatestRun_descriptor,
+        new java.lang.String[] { "CronAggregateBackfill", "LatestJob", });
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_GetActiveCronAggregateBackfillsResponse_descriptor,
+        new java.lang.String[] { "CronAggregateBackfills", });
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobRequest_descriptor,
+        new java.lang.String[] { "Features", "LowerBound", "UpperBound", "Resolver", "BucketFeature", "EnableProfiling", "AggregateBackfillId", "ResourceGroup", "QueryTags", "StoreOffline", "UseMetaplanner", "AllowEmptyTiles", "StoreOnline", "InputSql", "NumShards", });
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CreateAggregateBackfillJobResponse_descriptor,
+        new java.lang.String[] { "JobId", "Features", "Errors", });
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_descriptor,
+        new java.lang.String[] { "Features", "Resolver", "InputSql", "LowerBound", "UpperBound", "Tags", "Exact", "StoreOnline", "StoreOffline", "AllowEmptyTiles", "EnableProfiling", "ResourceGroup", "PlannerOptions", "Mode", "NumShards", });
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_PlannerOptionsEntry_descriptor =
+      internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_descriptor.getNestedTypes().get(0);
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_PlannerOptionsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Request_PlannerOptionsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Response_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Response_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CreateAggregateBackfillV2Response_descriptor,
+        new java.lang.String[] { "Job", "SubBackfills", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(ai.chalk.protos.chalk.auth.v1.AuditProto.audit);
@@ -178,6 +391,8 @@ public final class ServiceProto {
     ai.chalk.protos.chalk.aggregate.v1.TimeseriesProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.AuditProto.getDescriptor();
     ai.chalk.protos.chalk.auth.v1.PermissionsProto.getDescriptor();
+    ai.chalk.protos.chalk.common.v1.ChalkErrorProto.getDescriptor();
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

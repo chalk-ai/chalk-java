@@ -18,6 +18,9 @@ private static final long serialVersionUID = 0L;
   }
   private GetAggregateBackfillJobsRequest() {
     cursor_ = "";
+    planHash_ = "";
+    initStatus_ = 0;
+    name_ = "";
   }
 
   @java.lang.Override
@@ -40,6 +43,7 @@ private static final long serialVersionUID = 0L;
             ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobsRequest.class, ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobsRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int LIMIT_FIELD_NUMBER = 1;
   private int limit_ = 0;
   /**
@@ -90,6 +94,118 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int PLAN_HASH_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object planHash_ = "";
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return Whether the planHash field is set.
+   */
+  @java.lang.Override
+  public boolean hasPlanHash() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The planHash.
+   */
+  @java.lang.Override
+  public java.lang.String getPlanHash() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      planHash_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+   * @return The bytes for planHash.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPlanHashBytes() {
+    java.lang.Object ref = planHash_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      planHash_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int INIT_STATUS_FIELD_NUMBER = 4;
+  private int initStatus_ = 0;
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+   * @return The enum numeric value on the wire for initStatus.
+   */
+  @java.lang.Override public int getInitStatusValue() {
+    return initStatus_;
+  }
+  /**
+   * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+   * @return The initStatus.
+   */
+  @java.lang.Override public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getInitStatus() {
+    ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus result = ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.forNumber(initStatus_);
+    return result == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.UNRECOGNIZED : result;
+  }
+
+  public static final int NAME_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object name_ = "";
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return Whether the name field is set.
+   */
+  @java.lang.Override
+  public boolean hasName() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return The name.
+   */
+  @java.lang.Override
+  public java.lang.String getName() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      name_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>optional string name = 5 [json_name = "name"];</code>
+   * @return The bytes for name.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getNameBytes() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      name_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -110,6 +226,15 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cursor_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, cursor_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, planHash_);
+    }
+    if (initStatus_ != ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_UNSPECIFIED.getNumber()) {
+      output.writeEnum(4, initStatus_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, name_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -125,6 +250,16 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cursor_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, cursor_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, planHash_);
+    }
+    if (initStatus_ != ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(4, initStatus_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, name_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -145,6 +280,17 @@ private static final long serialVersionUID = 0L;
         != other.getLimit()) return false;
     if (!getCursor()
         .equals(other.getCursor())) return false;
+    if (hasPlanHash() != other.hasPlanHash()) return false;
+    if (hasPlanHash()) {
+      if (!getPlanHash()
+          .equals(other.getPlanHash())) return false;
+    }
+    if (initStatus_ != other.initStatus_) return false;
+    if (hasName() != other.hasName()) return false;
+    if (hasName()) {
+      if (!getName()
+          .equals(other.getName())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -160,6 +306,16 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getLimit();
     hash = (37 * hash) + CURSOR_FIELD_NUMBER;
     hash = (53 * hash) + getCursor().hashCode();
+    if (hasPlanHash()) {
+      hash = (37 * hash) + PLAN_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getPlanHash().hashCode();
+    }
+    hash = (37 * hash) + INIT_STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + initStatus_;
+    if (hasName()) {
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -293,6 +449,9 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       limit_ = 0;
       cursor_ = "";
+      planHash_ = "";
+      initStatus_ = 0;
+      name_ = "";
       return this;
     }
 
@@ -332,6 +491,19 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.cursor_ = cursor_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.planHash_ = planHash_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.initStatus_ = initStatus_;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.name_ = name_;
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -386,6 +558,19 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
+      if (other.hasPlanHash()) {
+        planHash_ = other.planHash_;
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      if (other.initStatus_ != 0) {
+        setInitStatusValue(other.getInitStatusValue());
+      }
+      if (other.hasName()) {
+        name_ = other.name_;
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -422,6 +607,21 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              planHash_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
+            case 32: {
+              initStatus_ = input.readEnum();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 32
+            case 42: {
+              name_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -539,6 +739,217 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       cursor_ = value;
       bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object planHash_ = "";
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return Whether the planHash field is set.
+     */
+    public boolean hasPlanHash() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return The planHash.
+     */
+    public java.lang.String getPlanHash() {
+      java.lang.Object ref = planHash_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        planHash_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return The bytes for planHash.
+     */
+    public com.google.protobuf.ByteString
+        getPlanHashBytes() {
+      java.lang.Object ref = planHash_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        planHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @param value The planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHash(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      planHash_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPlanHash() {
+      planHash_ = getDefaultInstance().getPlanHash();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string plan_hash = 3 [json_name = "planHash"];</code>
+     * @param value The bytes for planHash to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlanHashBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      planHash_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+
+    private int initStatus_ = 0;
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+     * @return The enum numeric value on the wire for initStatus.
+     */
+    @java.lang.Override public int getInitStatusValue() {
+      return initStatus_;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+     * @param value The enum numeric value on the wire for initStatus to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInitStatusValue(int value) {
+      initStatus_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+     * @return The initStatus.
+     */
+    @java.lang.Override
+    public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus getInitStatus() {
+      ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus result = ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.forNumber(initStatus_);
+      return result == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+     * @param value The initStatus to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInitStatus(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000008;
+      initStatus_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chalk.aggregate.v1.AggregateBackfillStatus init_status = 4 [json_name = "initStatus"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearInitStatus() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      initStatus_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object name_ = "";
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @return Whether the name field is set.
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @return The name.
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @param value The name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      name_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+      name_ = getDefaultInstance().getName();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string name = 5 [json_name = "name"];</code>
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      name_ = value;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }

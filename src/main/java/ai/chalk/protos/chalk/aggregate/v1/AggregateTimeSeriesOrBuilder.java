@@ -21,15 +21,19 @@ public interface AggregateTimeSeriesOrBuilder extends
       getNamespaceBytes();
 
   /**
-   * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+   * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+   *     See chalk/aggregate/v1/timeseries.proto;l=22
    * @return The aggregateOn.
    */
-  java.lang.String getAggregateOn();
+  @java.lang.Deprecated java.lang.String getAggregateOn();
   /**
-   * <code>string aggregate_on = 2 [json_name = "aggregateOn"];</code>
+   * <code>string aggregate_on = 2 [json_name = "aggregateOn", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateTimeSeries.aggregate_on is deprecated.
+   *     See chalk/aggregate/v1/timeseries.proto;l=22
    * @return The bytes for aggregateOn.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getAggregateOnBytes();
 
   /**
@@ -104,4 +108,111 @@ public interface AggregateTimeSeriesOrBuilder extends
    */
   com.google.protobuf.ByteString
       getBucketFeatureBytes();
+
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @return A list containing the aggregateOnFeatures.
+   */
+  java.util.List<java.lang.String>
+      getAggregateOnFeaturesList();
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @return The count of aggregateOnFeatures.
+   */
+  int getAggregateOnFeaturesCount();
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The aggregateOnFeatures at the given index.
+   */
+  java.lang.String getAggregateOnFeatures(int index);
+  /**
+   * <code>repeated string aggregate_on_features = 8 [json_name = "aggregateOnFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the aggregateOnFeatures at the given index.
+   */
+  com.google.protobuf.ByteString
+      getAggregateOnFeaturesBytes(int index);
+
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @return A list containing the filterFeatures.
+   */
+  java.util.List<java.lang.String>
+      getFilterFeaturesList();
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @return The count of filterFeatures.
+   */
+  int getFilterFeaturesCount();
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The filterFeatures at the given index.
+   */
+  java.lang.String getFilterFeatures(int index);
+  /**
+   * <pre>
+   * Features the series' filters read, e.g. `transaction.status` in `_.status == "approved"`.
+   * </pre>
+   *
+   * <code>repeated string filter_features = 9 [json_name = "filterFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the filterFeatures at the given index.
+   */
+  com.google.protobuf.ByteString
+      getFilterFeaturesBytes(int index);
+
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @return A list containing the projectionFeatures.
+   */
+  java.util.List<java.lang.String>
+      getProjectionFeaturesList();
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @return The count of projectionFeatures.
+   */
+  int getProjectionFeaturesCount();
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @param index The index of the element to return.
+   * @return The projectionFeatures at the given index.
+   */
+  java.lang.String getProjectionFeatures(int index);
+  /**
+   * <pre>
+   * Features read by projections in the aggregated column, e.g. `transaction.fx_rate` in `_.amount * _.fx_rate`.
+   * </pre>
+   *
+   * <code>repeated string projection_features = 10 [json_name = "projectionFeatures"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the projectionFeatures at the given index.
+   */
+  com.google.protobuf.ByteString
+      getProjectionFeaturesBytes(int index);
 }

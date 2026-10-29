@@ -69,26 +69,30 @@ private static final long serialVersionUID = 0L;
   public static final int ESTIMATE_FIELD_NUMBER = 2;
   private ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate_;
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateBackfillWithCostEstimate.estimate is deprecated.
+   *     See chalk/aggregate/v1/backfill.proto;l=58
    * @return Whether the estimate field is set.
    */
   @java.lang.Override
-  public boolean hasEstimate() {
+  @java.lang.Deprecated public boolean hasEstimate() {
     return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.AggregateBackfillWithCostEstimate.estimate is deprecated.
+   *     See chalk/aggregate/v1/backfill.proto;l=58
    * @return The estimate.
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate() {
     return estimate_ == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.getDefaultInstance() : estimate_;
   }
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
    */
   @java.lang.Override
-  public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder() {
+  @java.lang.Deprecated public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder() {
     return estimate_ == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.getDefaultInstance() : estimate_;
   }
 
@@ -602,17 +606,21 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate, ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.Builder, ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder> estimateBuilder_;
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateBackfillWithCostEstimate.estimate is deprecated.
+     *     See chalk/aggregate/v1/backfill.proto;l=58
      * @return Whether the estimate field is set.
      */
-    public boolean hasEstimate() {
+    @java.lang.Deprecated public boolean hasEstimate() {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+     * @deprecated chalk.aggregate.v1.AggregateBackfillWithCostEstimate.estimate is deprecated.
+     *     See chalk/aggregate/v1/backfill.proto;l=58
      * @return The estimate.
      */
-    public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate() {
       if (estimateBuilder_ == null) {
         return estimate_ == null ? ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.getDefaultInstance() : estimate_;
       } else {
@@ -620,9 +628,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public Builder setEstimate(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate value) {
+    @java.lang.Deprecated public Builder setEstimate(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate value) {
       if (estimateBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -636,9 +644,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public Builder setEstimate(
+    @java.lang.Deprecated public Builder setEstimate(
         ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.Builder builderForValue) {
       if (estimateBuilder_ == null) {
         estimate_ = builderForValue.build();
@@ -650,9 +658,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public Builder mergeEstimate(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate value) {
+    @java.lang.Deprecated public Builder mergeEstimate(ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate value) {
       if (estimateBuilder_ == null) {
         if (((bitField0_ & 0x00000002) != 0) &&
           estimate_ != null &&
@@ -671,9 +679,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public Builder clearEstimate() {
+    @java.lang.Deprecated public Builder clearEstimate() {
       bitField0_ = (bitField0_ & ~0x00000002);
       estimate_ = null;
       if (estimateBuilder_ != null) {
@@ -684,17 +692,17 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.Builder getEstimateBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.Builder getEstimateBuilder() {
       bitField0_ |= 0x00000002;
       onChanged();
       return getEstimateFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
-    public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder() {
+    @java.lang.Deprecated public ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder() {
       if (estimateBuilder_ != null) {
         return estimateBuilder_.getMessageOrBuilder();
       } else {
@@ -703,7 +711,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+     * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate, ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate.Builder, ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder> 

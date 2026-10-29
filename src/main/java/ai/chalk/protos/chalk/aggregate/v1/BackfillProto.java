@@ -40,6 +40,11 @@ public final class BackfillProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chalk_aggregate_v1_AggregateBackfillJob_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chalk_aggregate_v1_CronAggregateBackfill_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -59,7 +64,7 @@ public final class BackfillProto {
       "bytes\030\003 \001(\003R\rexpectedBytes\0222\n\025expected_s" +
       "torage_cost\030\004 \001(\001R\023expectedStorageCost\022D" +
       "\n\020expected_runtime\030\005 \001(\0132\031.google.protob" +
-      "uf.DurationR\017expectedRuntime\"\370\002\n\033Aggrega" +
+      "uf.DurationR\017expectedRuntime\"\274\003\n\033Aggrega" +
       "teBackfillUserParams\022\032\n\010features\030\001 \003(\tR\010" +
       "features\022\037\n\010resolver\030\002 \001(\tH\000R\010resolver\210\001" +
       "\001\022;\n\025timestamp_column_name\030\003 \001(\tB\002\030\001H\001R\023" +
@@ -67,26 +72,29 @@ public final class BackfillProto {
       "\001(\0132\032.google.protobuf.TimestampH\002R\nlower" +
       "Bound\210\001\001\022@\n\013upper_bound\030\005 \001(\0132\032.google.p" +
       "rotobuf.TimestampH\003R\nupperBound\210\001\001\022\024\n\005ex" +
-      "act\030\006 \001(\010R\005exactB\013\n\t_resolverB\030\n\026_timest" +
-      "amp_column_nameB\016\n\014_lower_boundB\016\n\014_uppe" +
-      "r_bound\"\345\003\n\021AggregateBackfill\022?\n\006series\030" +
-      "\001 \003(\0132\'.chalk.aggregate.v1.AggregateTime" +
-      "SeriesR\006series\022\032\n\010resolver\030\002 \001(\tR\010resolv" +
-      "er\022)\n\020datetime_feature\030\003 \001(\tR\017datetimeFe" +
-      "ature\022B\n\017bucket_duration\030\004 \001(\0132\031.google." +
-      "protobuf.DurationR\016bucketDuration\022/\n\023fil" +
-      "ters_description\030\005 \001(\tR\022filtersDescripti" +
-      "on\022\031\n\010group_by\030\006 \003(\tR\007groupBy\022>\n\rmax_ret" +
-      "ention\030\007 \001(\0132\031.google.protobuf.DurationR" +
-      "\014maxRetention\022;\n\013lower_bound\030\010 \001(\0132\032.goo" +
-      "gle.protobuf.TimestampR\nlowerBound\022;\n\013up" +
-      "per_bound\030\t \001(\0132\032.google.protobuf.Timest" +
-      "ampR\nupperBound\"\265\001\n!AggregateBackfillWit" +
-      "hCostEstimate\022A\n\010backfill\030\001 \001(\0132%.chalk." +
-      "aggregate.v1.AggregateBackfillR\010backfill" +
-      "\022M\n\010estimate\030\002 \001(\01321.chalk.aggregate.v1." +
-      "AggregateBackfillCostEstimateR\010estimate\"" +
-      "\224\003\n\024AggregateBackfillJob\022\016\n\002id\030\001 \001(\tR\002id" +
+      "act\030\006 \001(\010R\005exact\022\022\n\004tags\030\007 \003(\tR\004tags\022 \n\t" +
+      "input_sql\030\010 \001(\tH\004R\010inputSql\210\001\001B\013\n\t_resol" +
+      "verB\030\n\026_timestamp_column_nameB\016\n\014_lower_" +
+      "boundB\016\n\014_upper_boundB\014\n\n_input_sql\"\225\004\n\021" +
+      "AggregateBackfill\022?\n\006series\030\001 \003(\0132\'.chal" +
+      "k.aggregate.v1.AggregateTimeSeriesR\006seri" +
+      "es\022\032\n\010resolver\030\002 \001(\tR\010resolver\022)\n\020dateti" +
+      "me_feature\030\003 \001(\tR\017datetimeFeature\022B\n\017buc" +
+      "ket_duration\030\004 \001(\0132\031.google.protobuf.Dur" +
+      "ationR\016bucketDuration\022/\n\023filters_descrip" +
+      "tion\030\005 \001(\tR\022filtersDescription\022\031\n\010group_" +
+      "by\030\006 \003(\tR\007groupBy\022>\n\rmax_retention\030\007 \001(\013" +
+      "2\031.google.protobuf.DurationR\014maxRetentio" +
+      "n\022;\n\013lower_bound\030\010 \001(\0132\032.google.protobuf" +
+      ".TimestampR\nlowerBound\022;\n\013upper_bound\030\t " +
+      "\001(\0132\032.google.protobuf.TimestampR\nupperBo" +
+      "und\022 \n\tinput_sql\030\n \001(\tH\000R\010inputSql\210\001\001B\014\n" +
+      "\n_input_sql\"\271\001\n!AggregateBackfillWithCos" +
+      "tEstimate\022A\n\010backfill\030\001 \001(\0132%.chalk.aggr" +
+      "egate.v1.AggregateBackfillR\010backfill\022Q\n\010" +
+      "estimate\030\002 \001(\01321.chalk.aggregate.v1.Aggr" +
+      "egateBackfillCostEstimateB\002\030\001R\010estimate\"" +
+      "\360\005\n\024AggregateBackfillJob\022\016\n\002id\030\001 \001(\tR\002id" +
       "\022%\n\016environment_id\030\002 \001(\tR\renvironmentId\022" +
       "\037\n\010resolver\030\003 \001(\tH\000R\010resolver\210\001\001\022\032\n\010feat" +
       "ures\030\004 \003(\tR\010features\022\036\n\010agent_id\030\005 \001(\tH\001" +
@@ -95,12 +103,51 @@ public final class BackfillProto {
       "gle.protobuf.TimestampR\tcreatedAt\0229\n\nupd" +
       "ated_at\030\010 \001(\0132\032.google.protobuf.Timestam" +
       "pR\tupdatedAt\022\034\n\tresolvers\030\t \003(\tR\tresolve" +
-      "rsB\013\n\t_resolverB\013\n\t_agent_idB\020\n\016_deploym" +
-      "ent_idB\267\001\n\"ai.chalk.protos.chalk.aggrega" +
-      "te.v1B\rBackfillProtoP\001Z\030aggregate/v1;agg" +
-      "regatev1\242\002\003CAX\252\002\022Chalk.Aggregate.V1\312\002\022Ch" +
-      "alk\\Aggregate\\V1\342\002\036Chalk\\Aggregate\\V1\\GP" +
-      "BMetadata\352\002\024Chalk::Aggregate::V1b\006proto3"
+      "rs\022@\n\032cron_aggregate_backfill_id\030\n \001(\tH\003" +
+      "R\027cronAggregateBackfillId\210\001\001\022 \n\tplan_has" +
+      "h\030\013 \001(\tH\004R\010planHash\210\001\001\022C\n\006status\030\014 \001(\0162+" +
+      ".chalk.aggregate.v1.AggregateBackfillSta" +
+      "tusR\006status\022\035\n\nquery_tags\030\r \003(\tR\tqueryTa" +
+      "gs\022D\n\034cron_aggregate_backfill_name\030\016 \001(\t" +
+      "H\005R\031cronAggregateBackfillName\210\001\001B\013\n\t_res" +
+      "olverB\013\n\t_agent_idB\020\n\016_deployment_idB\035\n\033" +
+      "_cron_aggregate_backfill_idB\014\n\n_plan_has" +
+      "hB\037\n\035_cron_aggregate_backfill_name\"\210\005\n\025C" +
+      "ronAggregateBackfill\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016" +
+      "environment_id\030\002 \001(\tR\renvironmentId\022#\n\rd" +
+      "eployment_id\030\003 \001(\tR\014deploymentId\022\022\n\004name" +
+      "\030\013 \001(\tR\004name\022\032\n\010schedule\030\004 \001(\tR\010schedule" +
+      "\022\037\n\010filename\030\014 \001(\tH\000R\010filename\210\001\001\022\033\n\tpla" +
+      "n_hash\030\005 \001(\tR\010planHash\022\032\n\010features\030\010 \003(\t" +
+      "R\010features\022\034\n\tresolvers\030\t \003(\tR\tresolvers" +
+      "\022\035\n\nquery_tags\030\n \003(\tR\tqueryTags\022C\n\006targe" +
+      "t\030\r \001(\0162+.chalk.aggregate.v1.AggregateBa" +
+      "ckfillTargetR\006target\022*\n\016resource_group\030\016" +
+      " \001(\tH\001R\rresourceGroup\210\001\001\022E\n\007targets\030\017 \003(" +
+      "\0162+.chalk.aggregate.v1.AggregateBackfill" +
+      "TargetR\007targets\0229\n\ncreated_at\030\006 \001(\0132\032.go" +
+      "ogle.protobuf.TimestampR\tcreatedAt\0229\n\nup" +
+      "dated_at\030\007 \001(\0132\032.google.protobuf.Timesta" +
+      "mpR\tupdatedAtB\013\n\t_filenameB\021\n\017_resource_" +
+      "group*\206\003\n\027AggregateBackfillStatus\022)\n%AGG" +
+      "REGATE_BACKFILL_STATUS_UNSPECIFIED\020\000\022*\n&" +
+      "AGGREGATE_BACKFILL_STATUS_INITIALIZING\020\001" +
+      "\022)\n%AGGREGATE_BACKFILL_STATUS_INIT_FAILE" +
+      "D\020\002\022%\n!AGGREGATE_BACKFILL_STATUS_SKIPPED" +
+      "\020\003\022$\n AGGREGATE_BACKFILL_STATUS_QUEUED\020\004" +
+      "\022%\n!AGGREGATE_BACKFILL_STATUS_WORKING\020\005\022" +
+      "\'\n#AGGREGATE_BACKFILL_STATUS_COMPLETED\020\006" +
+      "\022$\n AGGREGATE_BACKFILL_STATUS_FAILED\020\007\022&" +
+      "\n\"AGGREGATE_BACKFILL_STATUS_CANCELED\020\010*\221" +
+      "\001\n\027AggregateBackfillTarget\022)\n%AGGREGATE_" +
+      "BACKFILL_TARGET_UNSPECIFIED\020\000\022$\n AGGREGA" +
+      "TE_BACKFILL_TARGET_ONLINE\020\001\022%\n!AGGREGATE" +
+      "_BACKFILL_TARGET_OFFLINE\020\002B\267\001\n\"ai.chalk." +
+      "protos.chalk.aggregate.v1B\rBackfillProto" +
+      "P\001Z\030aggregate/v1;aggregatev1\242\002\003CAX\252\002\022Cha" +
+      "lk.Aggregate.V1\312\002\022Chalk\\Aggregate\\V1\342\002\036C" +
+      "halk\\Aggregate\\V1\\GPBMetadata\352\002\024Chalk::A" +
+      "ggregate::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -120,13 +167,13 @@ public final class BackfillProto {
     internal_static_chalk_aggregate_v1_AggregateBackfillUserParams_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_AggregateBackfillUserParams_descriptor,
-        new java.lang.String[] { "Features", "Resolver", "TimestampColumnName", "LowerBound", "UpperBound", "Exact", });
+        new java.lang.String[] { "Features", "Resolver", "TimestampColumnName", "LowerBound", "UpperBound", "Exact", "Tags", "InputSql", });
     internal_static_chalk_aggregate_v1_AggregateBackfill_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_chalk_aggregate_v1_AggregateBackfill_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_AggregateBackfill_descriptor,
-        new java.lang.String[] { "Series", "Resolver", "DatetimeFeature", "BucketDuration", "FiltersDescription", "GroupBy", "MaxRetention", "LowerBound", "UpperBound", });
+        new java.lang.String[] { "Series", "Resolver", "DatetimeFeature", "BucketDuration", "FiltersDescription", "GroupBy", "MaxRetention", "LowerBound", "UpperBound", "InputSql", });
     internal_static_chalk_aggregate_v1_AggregateBackfillWithCostEstimate_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_chalk_aggregate_v1_AggregateBackfillWithCostEstimate_fieldAccessorTable = new
@@ -138,7 +185,13 @@ public final class BackfillProto {
     internal_static_chalk_aggregate_v1_AggregateBackfillJob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chalk_aggregate_v1_AggregateBackfillJob_descriptor,
-        new java.lang.String[] { "Id", "EnvironmentId", "Resolver", "Features", "AgentId", "DeploymentId", "CreatedAt", "UpdatedAt", "Resolvers", });
+        new java.lang.String[] { "Id", "EnvironmentId", "Resolver", "Features", "AgentId", "DeploymentId", "CreatedAt", "UpdatedAt", "Resolvers", "CronAggregateBackfillId", "PlanHash", "Status", "QueryTags", "CronAggregateBackfillName", });
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_chalk_aggregate_v1_CronAggregateBackfill_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chalk_aggregate_v1_CronAggregateBackfill_descriptor,
+        new java.lang.String[] { "Id", "EnvironmentId", "DeploymentId", "Name", "Schedule", "Filename", "PlanHash", "Features", "Resolvers", "QueryTags", "Target", "ResourceGroup", "Targets", "CreatedAt", "UpdatedAt", });
     ai.chalk.protos.chalk.aggregate.v1.TimeseriesProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();

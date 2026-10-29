@@ -9,19 +9,23 @@ public interface PlanAggregateBackfillResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.PlanAggregateBackfillResponse.estimate is deprecated.
+   *     See chalk/aggregate/v1/service.proto;l=17
    * @return Whether the estimate field is set.
    */
-  boolean hasEstimate();
+  @java.lang.Deprecated boolean hasEstimate();
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
+   * @deprecated chalk.aggregate.v1.PlanAggregateBackfillResponse.estimate is deprecated.
+   *     See chalk/aggregate/v1/service.proto;l=17
    * @return The estimate.
    */
-  ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate();
+  @java.lang.Deprecated ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimate getEstimate();
   /**
-   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate"];</code>
+   * <code>.chalk.aggregate.v1.AggregateBackfillCostEstimate estimate = 2 [json_name = "estimate", deprecated = true];</code>
    */
-  ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder();
+  @java.lang.Deprecated ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillCostEstimateOrBuilder getEstimateOrBuilder();
 
   /**
    * <code>repeated string errors = 4 [json_name = "errors"];</code>
