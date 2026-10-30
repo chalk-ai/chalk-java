@@ -18,10 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DeleteFeaturesResult {
     private List<ServerError> errors;
-    /**
-     * The number of online store entries removed by {@code deleteMaterializedAggregates},
-     * or {@code null} if that was not requested.
-     */
+    /** Online store entries removed when {@code retainMaterializedAggregates} is false, else null. */
     @Nullable
     private Long materializedAggregateKeysDeleted;
 

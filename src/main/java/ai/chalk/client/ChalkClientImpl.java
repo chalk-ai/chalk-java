@@ -268,9 +268,9 @@ public class ChalkClientImpl implements ChalkClient {
 
     @Override
     public DeleteFeaturesResult deleteFeatures(DeleteFeaturesParams params) throws ChalkException {
-        if (params.isDeleteMaterializedAggregates() && (params.getFeatures() != null || params.getTags() != null)) {
+        if (!params.isRetainMaterializedAggregates() && (params.getFeatures() != null || params.getTags() != null)) {
             throw new ClientException(
-                    "deleteMaterializedAggregates deletes every materialized aggregation of the primary keys "
+                    "retainMaterializedAggregates=false deletes every materialized aggregation of the primary keys "
                             + "and cannot be combined with features or tags."
             );
         }
@@ -291,7 +291,7 @@ public class ChalkClientImpl implements ChalkClient {
                         params.getPrimaryKeys(),
                         params.isRetainOffline(),
                         params.isRetainOnline(),
-                        params.isDeleteMaterializedAggregates()
+                        params.isRetainMaterializedAggregates()
                 ))
                 .method("DELETE")
                 .environmentOverride(params.getEnvironmentId())

@@ -54,15 +54,10 @@ public class DeleteFeaturesParams {
      * If true, the given observations will not be dropped from the online store.
      */
     private final boolean retainOnline;
-    /**
-     * If true, also delete every online bucket of every materialized windowed aggregation of the
-     * namespace stored under the given primary keys. Cannot be combined with {@code features} or
-     * {@code tags}. Ignored when {@code retainOnline} is true. Buckets are not rebuilt: later stream
-     * updates and backfills write them again as usual.
-     */
-    private final boolean deleteMaterializedAggregates;
+    /** If false, also delete the keys' materialized aggregation buckets (not with features or tags). */
+    private final boolean retainMaterializedAggregates;
 
-    /** Equivalent to the full constructor with {@code deleteMaterializedAggregates = false}. */
+    /** Equivalent to the full constructor with {@code retainMaterializedAggregates = true}. */
     public DeleteFeaturesParams(
             String namespace,
             @Nullable List<String> features,
@@ -73,7 +68,7 @@ public class DeleteFeaturesParams {
             boolean retainOffline,
             boolean retainOnline
     ) {
-        this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, false);
+        this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, true);
     }
 
     @AllArgsConstructor
@@ -87,9 +82,9 @@ public class DeleteFeaturesParams {
         protected String branch;
         protected boolean retainOffline = false;
         protected boolean retainOnline = false;
-        protected boolean deleteMaterializedAggregates = false;
+        protected boolean retainMaterializedAggregates = true;
 
-        /** Equivalent to the full constructor with {@code deleteMaterializedAggregates = false}. */
+        /** Equivalent to the full constructor with {@code retainMaterializedAggregates = true}. */
         public Builder(
                 String namespace,
                 List<String> features,
@@ -100,7 +95,7 @@ public class DeleteFeaturesParams {
                 boolean retainOffline,
                 boolean retainOnline
         ) {
-            this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, false);
+            this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, true);
         }
 
         public DeleteFeaturesParams build() {
@@ -113,7 +108,7 @@ public class DeleteFeaturesParams {
                 this.branch,
                 this.retainOffline,
                 this.retainOnline,
-                this.deleteMaterializedAggregates);
+                this.retainMaterializedAggregates);
         }
 
         public Builder withNamespace(String namespace) {
@@ -158,13 +153,9 @@ public class DeleteFeaturesParams {
             return this;
         }
 
-        /**
-         * Also delete every online bucket of every materialized windowed aggregation of the namespace
-         * stored under the given primary keys. Cannot be combined with features or tags. Defaults to
-         * {@code false}.
-         */
-        public Builder withDeleteMaterializedAggregates(boolean deleteMaterializedAggregates) {
-            this.deleteMaterializedAggregates = deleteMaterializedAggregates;
+        /** Pass false to also delete the keys' materialized aggregation buckets. Defaults to {@code true}. */
+        public Builder withRetainMaterializedAggregates(boolean retainMaterializedAggregates) {
+            this.retainMaterializedAggregates = retainMaterializedAggregates;
             return this;
         }
     }

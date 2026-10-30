@@ -68,7 +68,7 @@ public class TestDeleteFeatures {
             assertEquals(
                     "{\"namespace\":\"user\",\"features\":[\"name\",\"email\"],\"tags\":null,"
                             + "\"primary_keys\":[\"1\",\"2\"],\"retain_offline\":false,\"retain_online\":false,"
-                            + "\"delete_materialized_aggregates\":false}",
+                            + "\"retain_materialized_aggregates\":true}",
                     body.get()
             );
             assertEquals("Bearer test-token", authorization.get());
@@ -82,7 +82,7 @@ public class TestDeleteFeatures {
     }
 
     @Test
-    public void testHttpDeleteFeaturesWithMaterializedAggregates() throws Exception {
+    public void testHttpDeleteFeaturesDeletingMaterializedAggregates() throws Exception {
         AtomicReference<String> body = new AtomicReference<>();
         HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
         server.createContext("/v1/oauth/token", exchange -> respondJson(
@@ -112,13 +112,13 @@ public class TestDeleteFeatures {
             DeleteFeaturesResult result = client.deleteFeatures(DeleteFeaturesParams.builder()
                     .withNamespace("user")
                     .withPrimaryKeys(List.of("1"))
-                    .withDeleteMaterializedAggregates(true)
+                    .withRetainMaterializedAggregates(false)
                     .build());
 
             assertEquals(
                     "{\"namespace\":\"user\",\"features\":null,\"tags\":null,\"primary_keys\":[\"1\"],"
                             + "\"retain_offline\":false,\"retain_online\":false,"
-                            + "\"delete_materialized_aggregates\":true}",
+                            + "\"retain_materialized_aggregates\":false}",
                     body.get()
             );
             assertTrue(result.getErrors().isEmpty());
@@ -129,7 +129,7 @@ public class TestDeleteFeatures {
     }
 
     @Test
-    public void testDeleteMaterializedAggregatesRejectsFeatureSelection() throws Exception {
+    public void testNotRetainingMaterializedAggregatesRejectsFeatureSelection() throws Exception {
         AtomicReference<Boolean> deleteCalled = new AtomicReference<>(false);
         HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
         server.createContext("/v1/features/rows", exchange -> {
@@ -152,7 +152,7 @@ public class TestDeleteFeatures {
                 ClientException e = assertThrows(ClientException.class, () -> client.deleteFeatures(
                         builder.withNamespace("user")
                                 .withPrimaryKeys(List.of("1"))
-                                .withDeleteMaterializedAggregates(true)
+                                .withRetainMaterializedAggregates(false)
                                 .build()
                 ));
                 assertTrue(e.getMessage().contains("cannot be combined"));

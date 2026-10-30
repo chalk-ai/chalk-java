@@ -9,6 +9,6 @@ public record FeatureObservationDeletionRequest(
         List<String> primaryKeys,
         boolean retainOffline,
         boolean retainOnline,
-        boolean deleteMaterializedAggregates
+        boolean retainMaterializedAggregates
 ) {
 }
