@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -66,13 +67,97 @@ public class TestDeleteFeatures {
             assertEquals("DELETE", method.get());
             assertEquals(
                     "{\"namespace\":\"user\",\"features\":[\"name\",\"email\"],\"tags\":null,"
-                            + "\"primary_keys\":[\"1\",\"2\"],\"retain_offline\":false,\"retain_online\":false}",
+                            + "\"primary_keys\":[\"1\",\"2\"],\"retain_offline\":false,\"retain_online\":false,"
+                            + "\"retain_materialized_aggregates\":null}",
                     body.get()
             );
             assertEquals("Bearer test-token", authorization.get());
             assertEquals(ENVIRONMENT_ID, environmentHeader.get());
             assertEquals(1, result.getErrors().size());
             assertEquals("partial failure", result.getErrors().get(0).getMessage());
+            assertNull(result.getMaterializedAggregateKeysDeleted());
+        } finally {
+            server.stop(0);
+        }
+    }
+
+    @Test
+    public void testHttpDeleteFeaturesDeletingMaterializedAggregates() throws Exception {
+        AtomicReference<String> body = new AtomicReference<>();
+        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
+        server.createContext("/v1/oauth/token", exchange -> respondJson(
+                exchange,
+                """
+                {
+                  "access_token": "test-token",
+                  "expires_in": 3600,
+                  "primary_environment": "%s",
+                  "engines": {}
+                }
+                """.formatted(ENVIRONMENT_ID)
+        ));
+        server.createContext("/v1/features/rows", exchange -> {
+            body.set(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
+            respondJson(exchange, "{\"errors\": [], \"materialized_aggregate_keys_deleted\": 7}");
+        });
+        server.start();
+
+        String serverUrl = "http://localhost:" + server.getAddress().getPort();
+        try (ChalkClient client = ChalkClient.builder()
+                .withApiServer(serverUrl)
+                .withClientId("test-client")
+                .withClientSecret("test-secret")
+                .withEnvironmentId(ENVIRONMENT_ID)
+                .build()) {
+            DeleteFeaturesResult result = client.deleteFeatures(DeleteFeaturesParams.builder()
+                    .withNamespace("user")
+                    .withPrimaryKeys(List.of("1"))
+                    .withRetainMaterializedAggregates(false)
+                    .build());
+
+            assertEquals(
+                    "{\"namespace\":\"user\",\"features\":null,\"tags\":null,\"primary_keys\":[\"1\"],"
+                            + "\"retain_offline\":false,\"retain_online\":false,"
+                            + "\"retain_materialized_aggregates\":false}",
+                    body.get()
+            );
+            assertTrue(result.getErrors().isEmpty());
+            assertEquals(7L, result.getMaterializedAggregateKeysDeleted());
+        } finally {
+            server.stop(0);
+        }
+    }
+
+    @Test
+    public void testNotRetainingMaterializedAggregatesRejectsFeatureSelection() throws Exception {
+        AtomicReference<Boolean> deleteCalled = new AtomicReference<>(false);
+        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
+        server.createContext("/v1/features/rows", exchange -> {
+            deleteCalled.set(true);
+            respondJson(exchange, "{\"errors\": []}");
+        });
+        server.start();
+
+        String serverUrl = "http://localhost:" + server.getAddress().getPort();
+        try (ChalkClient client = ChalkClient.builder()
+                .withApiServer(serverUrl)
+                .withClientId("test-client")
+                .withClientSecret("test-secret")
+                .withEnvironmentId(ENVIRONMENT_ID)
+                .build()) {
+            for (DeleteFeaturesParams.Builder builder : List.of(
+                    DeleteFeaturesParams.builder().withFeatures(List.of("name")),
+                    DeleteFeaturesParams.builder().withTags(List.of("pii"))
+            )) {
+                ClientException e = assertThrows(ClientException.class, () -> client.deleteFeatures(
+                        builder.withNamespace("user")
+                                .withPrimaryKeys(List.of("1"))
+                                .withRetainMaterializedAggregates(false)
+                                .build()
+                ));
+                assertTrue(e.getMessage().contains("cannot be combined"));
+            }
+            assertFalse(deleteCalled.get());
         } finally {
             server.stop(0);
         }
