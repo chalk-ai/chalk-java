@@ -68,7 +68,7 @@ public class TestDeleteFeatures {
             assertEquals(
                     "{\"namespace\":\"user\",\"features\":[\"name\",\"email\"],\"tags\":null,"
                             + "\"primary_keys\":[\"1\",\"2\"],\"retain_offline\":false,\"retain_online\":false,"
-                            + "\"retain_materialized_aggregates\":true}",
+                            + "\"retain_materialized_aggregates\":null}",
                     body.get()
             );
             assertEquals("Bearer test-token", authorization.get());

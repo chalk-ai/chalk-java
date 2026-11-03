@@ -54,10 +54,14 @@ public class DeleteFeaturesParams {
      * If true, the given observations will not be dropped from the online store.
      */
     private final boolean retainOnline;
-    /** If false, also delete the keys' materialized aggregation buckets (not with features or tags). */
-    private final boolean retainMaterializedAggregates;
+    /**
+     * If false, also delete the keys' materialized aggregation buckets (not with features or tags).
+     * Null leaves the default to the API server, which keeps the buckets.
+     */
+    @Nullable
+    private final Boolean retainMaterializedAggregates;
 
-    /** Equivalent to the full constructor with {@code retainMaterializedAggregates = true}. */
+    /** Equivalent to the full constructor with {@code retainMaterializedAggregates = null}. */
     public DeleteFeaturesParams(
             String namespace,
             @Nullable List<String> features,
@@ -68,7 +72,7 @@ public class DeleteFeaturesParams {
             boolean retainOffline,
             boolean retainOnline
     ) {
-        this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, true);
+        this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, null);
     }
 
     @AllArgsConstructor
@@ -82,9 +86,9 @@ public class DeleteFeaturesParams {
         protected String branch;
         protected boolean retainOffline = false;
         protected boolean retainOnline = false;
-        protected boolean retainMaterializedAggregates = true;
+        protected Boolean retainMaterializedAggregates = null;
 
-        /** Equivalent to the full constructor with {@code retainMaterializedAggregates = true}. */
+        /** Equivalent to the full constructor with {@code retainMaterializedAggregates = null}. */
         public Builder(
                 String namespace,
                 List<String> features,
@@ -95,7 +99,7 @@ public class DeleteFeaturesParams {
                 boolean retainOffline,
                 boolean retainOnline
         ) {
-            this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, true);
+            this(namespace, features, tags, primaryKeys, environmentId, branch, retainOffline, retainOnline, null);
         }
 
         public DeleteFeaturesParams build() {
