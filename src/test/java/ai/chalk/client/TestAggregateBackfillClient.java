@@ -1,6 +1,6 @@
 package ai.chalk.client;
 
-import ai.chalk.exceptions.ClientException;
+import ai.chalk.exceptions.AggregateBackfillException;
 import ai.chalk.models.AggregateBackfillParams;
 import ai.chalk.models.AggregateBackfillResponse;
 import ai.chalk.models.AggregateBackfillStatus;
@@ -15,6 +15,7 @@ import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenRequest;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
 import com.google.protobuf.Timestamp;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import io.grpc.Metadata;
@@ -36,12 +37,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_WORKING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Exercises {@link ChalkClient#triggerAggregateBackfill} through the public client, to check
- * that the request reaches the API server's AggregateService with credentials attached.
+ * Exercises the aggregate backfill methods through both public clients, to check that the
+ * requests reach the API server's AggregateService with credentials attached.
  */
 public class TestAggregateBackfillClient {
     private static final String ENVIRONMENT_ID = "test-environment";
@@ -157,7 +159,9 @@ public class TestAggregateBackfillClient {
     }
 
     @Test
-    public void testHttpClientDirectsCallersToTheGrpcClient() throws Exception {
+    public void testHttpClientCallsTheApiServerOverConnect() throws Exception {
+        AtomicReference<Headers> headers = new AtomicReference<>();
+        AtomicReference<CreateAggregateBackfillV2Request> received = new AtomicReference<>();
         HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 0), 0);
         server.createContext("/v1/oauth/token", exchange -> respondJson(
                 exchange,
@@ -170,6 +174,34 @@ public class TestAggregateBackfillClient {
                 }
                 """.formatted(ENVIRONMENT_ID)
         ));
+        server.createContext("/chalk.aggregate.v1.AggregateService/", exchange -> {
+            headers.set(exchange.getRequestHeaders());
+            byte[] body = exchange.getRequestBody().readAllBytes();
+            switch (exchange.getRequestURI().getPath()) {
+                case "/chalk.aggregate.v1.AggregateService/CreateAggregateBackfillV2" -> {
+                    var request = CreateAggregateBackfillV2Request.parseFrom(body);
+                    if (request.getFeaturesList().contains("user.unknown")) {
+                        respond(exchange, 400, "application/json",
+                                "{\"code\": \"invalid_argument\", \"message\": \"invalid feature\"}");
+                        return;
+                    }
+                    received.set(request);
+                    respond(exchange, 200, "application/proto", CreateAggregateBackfillV2Response.newBuilder()
+                            .setJob(AggregateBackfillJob.newBuilder().setId("agg-backfill-123"))
+                            .build()
+                            .toByteArray());
+                }
+                case "/chalk.aggregate.v1.AggregateService/GetAggregateBackfillJob" -> respond(
+                        exchange, 200, "application/proto", GetAggregateBackfillJobResponse.newBuilder()
+                                .setJob(AggregateBackfillJob.newBuilder()
+                                        .setId(GetAggregateBackfillJobRequest.parseFrom(body).getAggregateBackfillId())
+                                        .setStatus(AGGREGATE_BACKFILL_STATUS_WORKING))
+                                .build()
+                                .toByteArray()
+                );
+                default -> respond(exchange, 404, "application/json", "{\"code\": \"unimplemented\"}");
+            }
+        });
         server.start();
 
         String serverUrl = "http://localhost:" + server.getAddress().getPort();
@@ -180,31 +212,55 @@ public class TestAggregateBackfillClient {
                 .withClientSecret("test-secret")
                 .withEnvironmentId(ENVIRONMENT_ID)
                 .build()) {
-            var e = assertThrows(
-                    ClientException.class,
-                    () -> client.triggerAggregateBackfill(
-                            AggregateBackfillParams.builder().withFeatures("user.spend_30d").build()
-                    )
+            AggregateBackfillResponse response = client.triggerAggregateBackfill(
+                    AggregateBackfillParams.builder().withFeatures("user.spend_30d").build()
             );
-            assertTrue(e.getMessage().contains("only supported by the gRPC client"));
+            assertEquals("agg-backfill-123", response.getJob().getId());
+            assertEquals(List.of("user.spend_30d"), received.get().getFeaturesList());
+            assertEquals("application/proto", headers.get().getFirst("Content-Type"));
+            assertEquals("Bearer test-token", headers.get().getFirst("Authorization"));
+            assertEquals(ENVIRONMENT_ID, headers.get().getFirst("X-Chalk-Env-Id"));
+            assertEquals("go-api", headers.get().getFirst("X-Chalk-Server"));
+            assertNull(headers.get().getFirst("X-Chalk-Deployment-Type"));
 
-            var getError = assertThrows(
-                    ClientException.class,
-                    () -> client.getAggregateBackfillJob(
-                            GetAggregateBackfillJobParams.builder().withAggregateBackfillId("agg-backfill-123").build()
+            ai.chalk.models.AggregateBackfillJob job = client.getAggregateBackfillJob(
+                    GetAggregateBackfillJobParams.builder()
+                            .withAggregateBackfillId("agg-backfill-123")
+                            .withEnvironmentId("other-environment")
+                            .build()
+            );
+            assertEquals("agg-backfill-123", job.getId());
+            assertEquals(AggregateBackfillStatus.WORKING, job.getStatus());
+            assertEquals("other-environment", headers.get().getFirst("X-Chalk-Env-Id"));
+
+            // Connect errors decode to the same status codes as gRPC, so the shared error
+            // handling applies.
+            var e = assertThrows(
+                    AggregateBackfillException.class,
+                    () -> client.triggerAggregateBackfill(
+                            AggregateBackfillParams.builder().withFeatures("user.unknown").build()
                     )
             );
-            assertTrue(getError.getMessage().contains("only supported by the gRPC client"));
+            assertEquals("invalid feature", e.getDetail());
         } finally {
             server.stop(0);
         }
     }
 
     private static void respondJson(HttpExchange exchange, String body) throws IOException {
-        byte[] response = body.getBytes(StandardCharsets.UTF_8);
-        exchange.getResponseHeaders().set("Content-Type", "application/json");
-        exchange.sendResponseHeaders(200, response.length);
-        exchange.getResponseBody().write(response);
+        respond(exchange, 200, "application/json", body);
+    }
+
+    private static void respond(HttpExchange exchange, int status, String contentType, String body)
+            throws IOException {
+        respond(exchange, status, contentType, body.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static void respond(HttpExchange exchange, int status, String contentType, byte[] body)
+            throws IOException {
+        exchange.getResponseHeaders().set("Content-Type", contentType);
+        exchange.sendResponseHeaders(status, body.length);
+        exchange.getResponseBody().write(body);
         exchange.close();
     }
 }

@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -166,6 +167,10 @@ public class RequestHandler {
                 args.getBranch(),
                 args.getQueryName()
         );
+        if (args.getHeaders() != null) {
+            headers.putAll(args.getHeaders());
+            headers.values().removeIf(Objects::isNull);
+        }
 
         HttpRequest.Builder builder = HttpRequest.newBuilder();
         if (args.getRequestLevelTimeout() != null) {
@@ -223,7 +228,7 @@ public class RequestHandler {
             }
         }
 
-        if (response.statusCode() != 200) {
+        if (response.statusCode() != 200 && !args.isReturnErrorResponses()) {
             throw getHttpException(response, request.uri().toString());
         }
 

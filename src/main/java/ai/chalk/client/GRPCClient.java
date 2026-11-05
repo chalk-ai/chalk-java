@@ -17,7 +17,6 @@ import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateServiceGrpc;
-import ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest;
 import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
@@ -798,29 +797,21 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     @Override
     public AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
             throws ChalkException {
-        return AggregateBackfills.trigger(
-                this.stubsProvider.getAggregateStub(Optional.ofNullable(params.getTimeout()))
-                        .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null)),
-                params
-        );
+        return AggregateBackfills.trigger(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
     }
 
     @Override
     public AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
             throws ChalkException {
-        if (params.getAggregateBackfillId() == null || params.getAggregateBackfillId().isEmpty()) {
-            throw new ClientException("aggregateBackfillId is required to get an aggregate backfill job.");
-        }
-        var response = this.stubsProvider.getAggregateStub(Optional.ofNullable(params.getTimeout()))
-                .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null))
-                .getAggregateBackfillJob(
-                        GetAggregateBackfillJobRequest.newBuilder()
-                                .setAggregateBackfillId(params.getAggregateBackfillId())
-                                .build()
-                );
-        // An unset `job` reads back as an empty message, which would otherwise be returned
-        // as a job with no id.
-        return response.hasJob() ? AggregateBackfillConverter.jobDecode(response.getJob()) : null;
+        return AggregateBackfills.get(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
+    }
+
+    private AggregateRpc aggregateRpc(@Nullable Duration timeout, @Nullable String environmentId)
+            throws ClientException {
+        return AggregateRpc.grpc(
+                this.stubsProvider.getAggregateStub(Optional.ofNullable(timeout))
+                        .withInterceptors(this.getRequestHeaderInterceptor(environmentId, null))
+        );
     }
 
     @Override

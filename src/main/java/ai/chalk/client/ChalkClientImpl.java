@@ -15,24 +15,37 @@ import ai.chalk.internal.request.models.OnlineQueryBulkResponse;
 import ai.chalk.internal.request.models.PingRequest;
 import ai.chalk.internal.request.models.PingResponse;
 import ai.chalk.internal.request.models.SendRequestParams;
+import ai.chalk.models.AggregateBackfillJob;
+import ai.chalk.models.AggregateBackfillParams;
+import ai.chalk.models.AggregateBackfillResponse;
 import ai.chalk.models.DeleteFeaturesParams;
 import ai.chalk.models.DeleteFeaturesResult;
+import ai.chalk.models.GetAggregateBackfillJobParams;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.QueryMeta;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.grpc.MethodDescriptor;
+import io.grpc.Status;
+import io.grpc.StatusRuntimeException;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.table.Table;
 
+import javax.annotation.Nullable;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.*;
 
 public class ChalkClientImpl implements ChalkClient {
@@ -45,6 +58,19 @@ public class ChalkClientImpl implements ChalkClient {
 
     private static final System.Logger logger = System.getLogger(ChalkClientImpl.class.getName());
     private final RootAllocator allocator = new RootAllocator(FeatherProcessor.ALLOCATOR_SIZE_ROOT);
+
+    // Connect protocol headers for AggregateService calls. The rest mirror the gRPC client's
+    // AggregateService calls, which carry no deployment-routing headers.
+    private static final Map<String, String> CONNECT_HEADERS = new HashMap<>();
+    static {
+        CONNECT_HEADERS.put("Content-Type", "application/proto");
+        CONNECT_HEADERS.put("Accept", "application/proto");
+        CONNECT_HEADERS.put("Connect-Protocol-Version", "1");
+        CONNECT_HEADERS.put("x-chalk-server", ServerType.SERVER.headerName());
+        CONNECT_HEADERS.put("X-Chalk-Deployment-Type", null);
+        CONNECT_HEADERS.put("X-Chalk-Branch-Id", null);
+        CONNECT_HEADERS.put("X-Chalk-Deployment-Tag", null);
+    }
 
     public ChalkClientImpl(BuilderImpl config) throws ChalkException {
         ResolvedConfig resolvedConfig = this.resolveConfig(config);
@@ -365,5 +391,69 @@ public class ChalkClientImpl implements ChalkClient {
     @Override
     public void close() {
         this.allocator.close();
+    }
+
+    @Override
+    public AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
+            throws ChalkException {
+        return AggregateBackfills.trigger(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
+    }
+
+    @Override
+    public AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
+            throws ChalkException {
+        return AggregateBackfills.get(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
+    }
+
+    /*
+     * Calls the API server's AggregateService over plain HTTP with the Connect protocol, which
+     * the server accepts alongside gRPC (the chalk CLI calls it this way).
+     */
+    private AggregateRpc aggregateRpc(@Nullable Duration timeout, @Nullable String environmentId) {
+        return new AggregateRpc() {
+            @Override
+            public <ReqT, RespT> RespT call(MethodDescriptor<ReqT, RespT> method, ReqT request)
+                    throws ChalkException {
+                byte[] body;
+                try (InputStream stream = method.streamRequest(request)) {
+                    body = stream.readAllBytes();
+                } catch (IOException e) {
+                    throw new ClientException("Failed to serialize " + method.getFullMethodName(), e);
+                }
+                HttpResponse<byte[]> response = handler.sendRequest(
+                        new SendRequestParams.Builder(timeout)
+                                .path("/" + method.getFullMethodName())
+                                .body(body)
+                                .method("POST")
+                                .isEngineRequest(false)
+                                .environmentOverride(environmentId)
+                                .headers(CONNECT_HEADERS)
+                                .returnErrorResponses(true)
+                                .build()
+                );
+                if (response.statusCode() != 200) {
+                    throw connectError(response);
+                }
+                return method.parseResponse(new ByteArrayInputStream(response.body()));
+            }
+        };
+    }
+
+    /*
+     * Decodes a Connect error body ({"code": "invalid_argument", "message": "..."}) into the
+     * StatusRuntimeException the gRPC client would throw, so AggregateBackfills handles both alike.
+     */
+    private static StatusRuntimeException connectError(HttpResponse<byte[]> response) {
+        Status status = Status.UNKNOWN.withDescription("HTTP " + response.statusCode());
+        try {
+            JsonNode error = new ObjectMapper().readTree(response.body());
+            // Connect codes are gRPC's in snake_case, except "canceled".
+            String code = error.path("code").asText().toUpperCase(Locale.ROOT).replace("CANCELED", "CANCELLED");
+            status = Status.fromCode(Status.Code.valueOf(code))
+                    .withDescription(error.path("message").asText(null));
+        } catch (IOException | IllegalArgumentException ignored) {
+            // Not a Connect error body (e.g. from a proxy), so keep the HTTP status.
+        }
+        return status.asRuntimeException();
     }
 }

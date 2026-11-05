@@ -6,6 +6,7 @@ import ai.chalk.exceptions.ClientException;
 import ai.chalk.exceptions.ServerError;
 import ai.chalk.models.AggregateBackfillParams;
 import ai.chalk.models.AggregateBackfillResponse;
+import ai.chalk.models.GetAggregateBackfillJobParams;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateBackfill;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillJob;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillMode;
@@ -29,7 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Triggers aggregate backfills against the API server's AggregateService. Mirrors
+ * Triggers and looks up aggregate backfills against the API server's AggregateService,
+ * over either client's {@link AggregateRpc}. Mirrors
  * {@code ChalkGRPCClient.trigger_aggregate_backfill} in the Python client.
  *
  * <p> A single CreateAggregateBackfillV2 call plans and creates every job server-side.
@@ -43,13 +45,13 @@ final class AggregateBackfills {
     private AggregateBackfills() {}
 
     static AggregateBackfillResponse trigger(
-            AggregateServiceGrpc.AggregateServiceBlockingStub stub,
+            AggregateRpc rpc,
             AggregateBackfillParams params
     ) throws ChalkException {
         validate(params);
 
         CreateAggregateBackfillV2Request request = buildV2Request(params);
-        CreateAggregateBackfillV2Response response = createV2(stub, request);
+        CreateAggregateBackfillV2Response response = createV2(rpc, request);
         if (response != null) {
             return AggregateBackfillConverter.responseDecode(response);
         }
@@ -75,7 +77,25 @@ final class AggregateBackfills {
                 "This Chalk server does not support server-side aggregate backfill planning. "
                         + "Falling back to client-side planning."
         );
-        return triggerLegacy(stub, params, request.getAllowEmptyTiles());
+        return triggerLegacy(rpc, params, request.getAllowEmptyTiles());
+    }
+
+    static @Nullable ai.chalk.models.AggregateBackfillJob get(
+            AggregateRpc rpc,
+            GetAggregateBackfillJobParams params
+    ) throws ChalkException {
+        if (params.getAggregateBackfillId() == null || params.getAggregateBackfillId().isEmpty()) {
+            throw new ClientException("aggregateBackfillId is required to get an aggregate backfill job.");
+        }
+        GetAggregateBackfillJobResponse response = rpc.call(
+                AggregateServiceGrpc.getGetAggregateBackfillJobMethod(),
+                GetAggregateBackfillJobRequest.newBuilder()
+                        .setAggregateBackfillId(params.getAggregateBackfillId())
+                        .build()
+        );
+        // An unset `job` reads back as an empty message, which would otherwise be returned
+        // as a job with no id.
+        return response.hasJob() ? AggregateBackfillConverter.jobDecode(response.getJob()) : null;
     }
 
     static void validate(AggregateBackfillParams params) throws ClientException {
@@ -145,11 +165,11 @@ final class AggregateBackfills {
      * mistaken for version skew.
      */
     private static @Nullable CreateAggregateBackfillV2Response createV2(
-            AggregateServiceGrpc.AggregateServiceBlockingStub stub,
+            AggregateRpc rpc,
             CreateAggregateBackfillV2Request request
-    ) throws AggregateBackfillException {
+    ) throws ChalkException {
         try {
-            return stub.createAggregateBackfillV2(request);
+            return rpc.call(AggregateServiceGrpc.getCreateAggregateBackfillV2Method(), request);
         } catch (StatusRuntimeException e) {
             Status.Code code = e.getStatus().getCode();
             if (code == Status.Code.UNIMPLEMENTED) {
@@ -189,10 +209,10 @@ final class AggregateBackfills {
      * cannot be read back.
      */
     private static AggregateBackfillResponse triggerLegacy(
-            AggregateServiceGrpc.AggregateServiceBlockingStub stub,
+            AggregateRpc rpc,
             AggregateBackfillParams params,
             boolean allowEmptyTiles
-    ) throws AggregateBackfillException {
+    ) throws ChalkException {
         List<String> queryTags = params.getQueryTags() == null ? List.of() : params.getQueryTags();
 
         var userParams = AggregateBackfillUserParams.newBuilder()
@@ -212,7 +232,8 @@ final class AggregateBackfills {
             userParams.setInputSql(params.getInputSql());
         }
 
-        PlanAggregateBackfillResponse planResponse = stub.planAggregateBackfill(
+        PlanAggregateBackfillResponse planResponse = rpc.call(
+                AggregateServiceGrpc.getPlanAggregateBackfillMethod(),
                 PlanAggregateBackfillRequest.newBuilder().setParams(userParams).build()
         );
         if (planResponse.getErrorsCount() > 0) {
@@ -252,7 +273,10 @@ final class AggregateBackfills {
                 createRequest.setResourceGroup(params.getResourceGroup());
             }
 
-            CreateAggregateBackfillJobResponse createResponse = stub.createAggregateBackfillJob(createRequest.build());
+            CreateAggregateBackfillJobResponse createResponse = rpc.call(
+                    AggregateServiceGrpc.getCreateAggregateBackfillJobMethod(),
+                    createRequest.build()
+            );
             if (createResponse.getErrorsCount() > 0) {
                 List<ServerError> errors = new ArrayList<>();
                 for (var error : createResponse.getErrorsList()) {
@@ -265,7 +289,8 @@ final class AggregateBackfills {
 
         AggregateBackfillJob job = null;
         try {
-            GetAggregateBackfillJobResponse getResponse = stub.getAggregateBackfillJob(
+            GetAggregateBackfillJobResponse getResponse = rpc.call(
+                    AggregateServiceGrpc.getGetAggregateBackfillJobMethod(),
                     GetAggregateBackfillJobRequest.newBuilder().setAggregateBackfillId(aggregateBackfillId).build()
             );
             // An unset `job` reads back as an empty message, which would otherwise be
