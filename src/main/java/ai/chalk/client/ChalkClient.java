@@ -296,8 +296,6 @@ public interface ChalkClient extends AutoCloseable {
      * operation as the {@code chalk aggregate backfill} CLI command.
      * <p> See {@link AggregateBackfillParams} for more details on the parameters.
      *
-     * <p> This is supported only by the gRPC client; see {@link ChalkClient#createGrpc()}.
-     *
      * <p>
      * Example usage:
      *     <pre>
@@ -329,13 +327,31 @@ public interface ChalkClient extends AutoCloseable {
      * @throws ChalkException if the parameters are invalid, or the server does not support a
      *         requested option
      */
-    default AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
-            throws ChalkException {
-        throw new ClientException(
-                "triggerAggregateBackfill is only supported by the gRPC client. Build one with "
-                        + "ChalkClient.builder().withGrpc().build() or ChalkClient.createGrpc()."
-        );
-    }
+    AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
+            throws ChalkException;
+
+    /**
+     * GetAggregateBackfillJob looks up an aggregate backfill by id, e.g. to poll the status
+     * of a backfill started with {@link #triggerAggregateBackfill}.
+     *
+     * <p>
+     * Example usage:
+     *     <pre>
+     *         {@code
+     *         AggregateBackfillJob job = client.getAggregateBackfillJob(
+     *             GetAggregateBackfillJobParams.builder()
+     *                 .withAggregateBackfillId(backfillId)
+     *                 .build()
+     *         );
+     *         AggregateBackfillStatus status = job.getStatus();
+     *         }
+     *     </pre>
+     * </p>
+     *
+     * @return {@link AggregateBackfillJob}, or null if the server returns no job
+     */
+    AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
+            throws ChalkException;
 
 
 

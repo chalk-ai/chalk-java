@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.annotation.Nullable;
 import java.time.Duration;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -23,6 +24,10 @@ public class SendRequestParams {
     private String queryName;
     private Boolean isEngineRequest;
     private Duration requestLevelTimeout;
+    /** Overrides the default headers. A null value removes that header. */
+    private Map<String, String> headers;
+    /** If true, non-200 responses are returned rather than thrown. */
+    private boolean returnErrorResponses;
 
     public static class Builder {
         private Object body;
@@ -35,6 +40,8 @@ public class SendRequestParams {
         private String queryName;
         private Boolean isEngineRequest;
         private @Nullable Duration requestLevelTimeout;
+        private @Nullable Map<String, String> headers;
+        private boolean returnErrorResponses;
 
         public Builder(Duration requestLevelTimeout) {
             this.requestLevelTimeout = requestLevelTimeout;
@@ -86,11 +93,21 @@ public class SendRequestParams {
             return this;
         }
 
+        public Builder headers(Map<String, String> headers) {
+            this.headers = headers;
+            return this;
+        }
+
+        public Builder returnErrorResponses(boolean returnErrorResponses) {
+            this.returnErrorResponses = returnErrorResponses;
+            return this;
+        }
+
         public SendRequestParams build() {
             return new SendRequestParams(
                     body, method, path, dontRefresh,
                     environmentOverride, previewDeploymentId, branch, queryName,
-                    isEngineRequest, requestLevelTimeout
+                    isEngineRequest, requestLevelTimeout, headers, returnErrorResponses
             );
         }
     }

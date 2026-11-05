@@ -206,7 +206,7 @@ public class TestAggregateBackfill {
     }
 
     private AggregateBackfillResponse trigger(AggregateBackfillParams.Builder params) throws Exception {
-        return AggregateBackfills.trigger(stub, params.build());
+        return AggregateBackfills.trigger(AggregateRpc.grpc(stub), params.build());
     }
 
     private static long seconds(ZonedDateTime value) {

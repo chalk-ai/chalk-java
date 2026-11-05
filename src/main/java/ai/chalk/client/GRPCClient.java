@@ -7,8 +7,10 @@ import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.models.AggregateBackfillJob;
 import ai.chalk.models.AggregateBackfillParams;
 import ai.chalk.models.AggregateBackfillResponse;
+import ai.chalk.models.GetAggregateBackfillJobParams;
 import ai.chalk.models.OnlineQueryMultiResult;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
@@ -795,10 +797,20 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
     @Override
     public AggregateBackfillResponse triggerAggregateBackfill(AggregateBackfillParams params)
             throws ChalkException {
-        return AggregateBackfills.trigger(
-                this.stubsProvider.getAggregateStub(Optional.ofNullable(params.getTimeout()))
-                        .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null)),
-                params
+        return AggregateBackfills.trigger(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
+    }
+
+    @Override
+    public AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
+            throws ChalkException {
+        return AggregateBackfills.get(aggregateRpc(params.getTimeout(), params.getEnvironmentId()), params);
+    }
+
+    private AggregateRpc aggregateRpc(@Nullable Duration timeout, @Nullable String environmentId)
+            throws ClientException {
+        return AggregateRpc.grpc(
+                this.stubsProvider.getAggregateStub(Optional.ofNullable(timeout))
+                        .withInterceptors(this.getRequestHeaderInterceptor(environmentId, null))
         );
     }
 
