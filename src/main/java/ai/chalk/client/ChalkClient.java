@@ -337,6 +337,36 @@ public interface ChalkClient extends AutoCloseable {
         );
     }
 
+    /**
+     * GetAggregateBackfillJob looks up an aggregate backfill by id, e.g. to poll the status
+     * of a backfill started with {@link #triggerAggregateBackfill}.
+     *
+     * <p> This is supported only by the gRPC client; see {@link ChalkClient#createGrpc()}.
+     *
+     * <p>
+     * Example usage:
+     *     <pre>
+     *         {@code
+     *         AggregateBackfillJob job = client.getAggregateBackfillJob(
+     *             GetAggregateBackfillJobParams.builder()
+     *                 .withAggregateBackfillId(backfillId)
+     *                 .build()
+     *         );
+     *         AggregateBackfillStatus status = job.getStatus();
+     *         }
+     *     </pre>
+     * </p>
+     *
+     * @return {@link AggregateBackfillJob}, or null if the server returns no job
+     */
+    default AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
+            throws ChalkException {
+        throw new ClientException(
+                "getAggregateBackfillJob is only supported by the gRPC client. Build one with "
+                        + "ChalkClient.builder().withGrpc().build() or ChalkClient.createGrpc()."
+        );
+    }
+
 
 
 

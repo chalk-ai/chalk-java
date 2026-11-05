@@ -7,14 +7,17 @@ import ai.chalk.internal.Utils;
 import ai.chalk.internal.arrow.FeatherProcessor;
 import ai.chalk.internal.config.Loader;
 import ai.chalk.internal.config.models.ProjectToken;
+import ai.chalk.models.AggregateBackfillJob;
 import ai.chalk.models.AggregateBackfillParams;
 import ai.chalk.models.AggregateBackfillResponse;
+import ai.chalk.models.GetAggregateBackfillJobParams;
 import ai.chalk.models.OnlineQueryMultiResult;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.UploadFeaturesParams;
 import ai.chalk.models.UploadFeaturesResult;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateServiceGrpc;
+import ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest;
 import ai.chalk.protos.chalk.common.v1.*;
 import ai.chalk.protos.chalk.engine.v1.PingRequest;
 import ai.chalk.protos.chalk.engine.v1.QueryServiceGrpc;
@@ -800,6 +803,24 @@ public class GRPCClient implements ChalkClient, AutoCloseable {
                         .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null)),
                 params
         );
+    }
+
+    @Override
+    public AggregateBackfillJob getAggregateBackfillJob(GetAggregateBackfillJobParams params)
+            throws ChalkException {
+        if (params.getAggregateBackfillId() == null || params.getAggregateBackfillId().isEmpty()) {
+            throw new ClientException("aggregateBackfillId is required to get an aggregate backfill job.");
+        }
+        var response = this.stubsProvider.getAggregateStub(Optional.ofNullable(params.getTimeout()))
+                .withInterceptors(this.getRequestHeaderInterceptor(params.getEnvironmentId(), null))
+                .getAggregateBackfillJob(
+                        GetAggregateBackfillJobRequest.newBuilder()
+                                .setAggregateBackfillId(params.getAggregateBackfillId())
+                                .build()
+                );
+        // An unset `job` reads back as an empty message, which would otherwise be returned
+        // as a job with no id.
+        return response.hasJob() ? AggregateBackfillConverter.jobDecode(response.getJob()) : null;
     }
 
     @Override

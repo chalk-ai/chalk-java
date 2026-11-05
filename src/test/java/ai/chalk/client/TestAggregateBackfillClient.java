@@ -3,10 +3,14 @@ package ai.chalk.client;
 import ai.chalk.exceptions.ClientException;
 import ai.chalk.models.AggregateBackfillParams;
 import ai.chalk.models.AggregateBackfillResponse;
+import ai.chalk.models.AggregateBackfillStatus;
+import ai.chalk.models.GetAggregateBackfillJobParams;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillJob;
 import ai.chalk.protos.chalk.aggregate.v1.AggregateServiceGrpc;
 import ai.chalk.protos.chalk.aggregate.v1.CreateAggregateBackfillV2Request;
 import ai.chalk.protos.chalk.aggregate.v1.CreateAggregateBackfillV2Response;
+import ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobRequest;
+import ai.chalk.protos.chalk.aggregate.v1.GetAggregateBackfillJobResponse;
 import ai.chalk.protos.chalk.server.v1.AuthServiceGrpc;
 import ai.chalk.protos.chalk.server.v1.GetTokenRequest;
 import ai.chalk.protos.chalk.server.v1.GetTokenResponse;
@@ -30,6 +34,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static ai.chalk.protos.chalk.aggregate.v1.AggregateBackfillStatus.AGGREGATE_BACKFILL_STATUS_WORKING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -79,6 +84,19 @@ public class TestAggregateBackfillClient {
                                         .build());
                                 observer.onCompleted();
                             }
+
+                            @Override
+                            public void getAggregateBackfillJob(
+                                    GetAggregateBackfillJobRequest request,
+                                    StreamObserver<GetAggregateBackfillJobResponse> observer
+                            ) {
+                                observer.onNext(GetAggregateBackfillJobResponse.newBuilder()
+                                        .setJob(AggregateBackfillJob.newBuilder()
+                                                .setId(request.getAggregateBackfillId())
+                                                .setStatus(AGGREGATE_BACKFILL_STATUS_WORKING))
+                                        .build());
+                                observer.onCompleted();
+                            }
                         },
                         new ServerInterceptor() {
                             @Override
@@ -122,6 +140,17 @@ public class TestAggregateBackfillClient {
                             .build()
             );
             assertEquals("other-environment", headers.get().get(ENVIRONMENT));
+
+            ai.chalk.models.AggregateBackfillJob job = client.getAggregateBackfillJob(
+                    GetAggregateBackfillJobParams.builder()
+                            .withAggregateBackfillId("agg-backfill-123")
+                            .withEnvironmentId("other-environment")
+                            .build()
+            );
+            assertEquals("agg-backfill-123", job.getId());
+            assertEquals(AggregateBackfillStatus.WORKING, job.getStatus());
+            assertEquals("Bearer test-token", headers.get().get(AUTHORIZATION));
+            assertEquals("other-environment", headers.get().get(ENVIRONMENT));
         } finally {
             server.shutdownNow();
         }
@@ -158,6 +187,14 @@ public class TestAggregateBackfillClient {
                     )
             );
             assertTrue(e.getMessage().contains("only supported by the gRPC client"));
+
+            var getError = assertThrows(
+                    ClientException.class,
+                    () -> client.getAggregateBackfillJob(
+                            GetAggregateBackfillJobParams.builder().withAggregateBackfillId("agg-backfill-123").build()
+                    )
+            );
+            assertTrue(getError.getMessage().contains("only supported by the gRPC client"));
         } finally {
             server.stop(0);
         }
