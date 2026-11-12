@@ -21,6 +21,10 @@ import ai.chalk.models.AggregateBackfillResponse;
 import ai.chalk.models.DeleteFeaturesParams;
 import ai.chalk.models.DeleteFeaturesResult;
 import ai.chalk.models.GetAggregateBackfillJobParams;
+import ai.chalk.models.GetOfflineQueryStatusParams;
+import ai.chalk.models.OfflineQueryParams;
+import ai.chalk.models.OfflineQueryResult;
+import ai.chalk.models.OfflineQueryStatus;
 import ai.chalk.models.OnlineQueryParamsComplete;
 import ai.chalk.models.OnlineQueryResult;
 import ai.chalk.models.QueryMeta;
@@ -118,6 +122,40 @@ public class ChalkClientImpl implements ChalkClient {
 
         HttpResponse<byte[]> response = this.handler.sendRequest(request);
         return this.handler.deserializeResponseBody(response.body(), PingResponse.class).num();
+    }
+
+    @Override
+    public OfflineQueryResult offlineQuery(OfflineQueryParams params) throws ChalkException {
+        Map<String, Object> body = OfflineQueries.request(params);
+        var request = new SendRequestParams.Builder(params.getTimeout())
+                .path("/v4/offline_query")
+                .method("POST")
+                .body(body)
+                .environmentOverride(params.getEnvironmentId())
+                .branch(params.getBranch())
+                // Submission must go through the API server, even with a query-server override.
+                .isEngineRequest(false)
+                .build();
+        var response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), OfflineQueryResult.class);
+    }
+
+    @Override
+    public OfflineQueryStatus getOfflineQueryStatus(GetOfflineQueryStatusParams params)
+            throws ChalkException {
+        if (params == null || params.getJobId() == null || params.getJobId().isBlank()) {
+            throw new ClientException("An offline query job id is required");
+        }
+        var request = new SendRequestParams.Builder(params.getTimeout())
+                .path("/v4/offline_query/status")
+                .method("POST")
+                .body(Map.of("job_id", params.getJobId()))
+                .environmentOverride(params.getEnvironmentId())
+                .branch(params.getBranch())
+                .isEngineRequest(true)
+                .build();
+        var response = this.handler.sendRequest(request);
+        return this.handler.deserializeResponseBody(response.body(), OfflineQueryStatus.class);
     }
 
     private OnlineQueryResult onlineQueryFeather(OnlineQueryParamsComplete params) throws ChalkException {

@@ -260,6 +260,26 @@ public interface ChalkClient extends AutoCloseable {
     UploadFeaturesResult uploadFeatures(UploadFeaturesParams params) throws ChalkException;
 
     /**
+     * Submit an offline query through the HTTP API. Returns dataset/revision metadata;
+     * use a revision id with {@link #getOfflineQueryStatus} to retrieve result URLs.
+     * Check errors on the response and revisions. Available on the HTTP client only.
+     */
+    default OfflineQueryResult offlineQuery(OfflineQueryParams params) throws ChalkException {
+        throw new ClientException("offlineQuery requires the HTTP client. Use ChalkClient.create() "
+                + "or ChalkClient.builder().build() without withGrpc().");
+    }
+
+    /**
+     * Get completion, errors and signed Parquet download URLs for an offline query.
+     * Available on the HTTP client only. Completion alone does not imply success.
+     */
+    default OfflineQueryStatus getOfflineQueryStatus(GetOfflineQueryStatusParams params)
+            throws ChalkException {
+        throw new ClientException("getOfflineQueryStatus requires the HTTP client. Use ChalkClient.create() "
+                + "or ChalkClient.builder().build() without withGrpc().");
+    }
+
+    /**
      * DeleteFeatures targets feature observation values for deletion and performs
      * deletion online and offline.
      * <p> See {@link DeleteFeaturesParams} for more details on the parameters.

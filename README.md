@@ -79,6 +79,58 @@ int echoed = client.ping(3); // 3
 int randomEcho = client.ping();
 ```
 
+## Offline Query
+
+The HTTP client supports offline query submission and status polling. Use
+`ChalkClient.create()` or `ChalkClient.builder().build()` without `withGrpc()`.
+
+Inputs may be a Chalk SQL query (`withInputSql`), an existing Parquet URI
+(`withInputUri`), or omitted to sample the offline store. Outputs are exported
+as Parquet. This API returns metadata and signed download URLs; it does not
+upload local inputs or load result files into Java tables.
+
+```java
+import ai.chalk.models.OfflineQueryParams;
+import ai.chalk.models.OfflineQueryResult;
+import ai.chalk.models.GetOfflineQueryStatusParams;
+import ai.chalk.models.OfflineQueryStatus;
+
+try (ChalkClient client = ChalkClient.create()) {
+    OfflineQueryResult result = client.offlineQuery(OfflineQueryParams.builder()
+            .withOutputs("user.id", "user.score")
+            .withInputSql("select user.id from user")
+            .withRunAsynchronously(true)
+            .build());
+    if (!result.getErrors().isEmpty()) {
+        throw new IllegalStateException(result.getErrors().toString());
+    }
+    OfflineQueryResult.Revision revision = result.getRevisions().get(0);
+    if (!revision.getErrors().isEmpty()) {
+        throw new IllegalStateException(revision.getErrors().toString());
+    }
+    GetOfflineQueryStatusParams statusParams = GetOfflineQueryStatusParams.builder()
+            .withJobId(revision.getRevisionId())
+            .withEnvironmentId(revision.getEnvironmentId())
+            .withBranch(revision.getBranch())
+            .build();
+    OfflineQueryStatus status = client.getOfflineQueryStatus(statusParams);
+    // Poll again with a bounded delay/deadline until status.isFinished().
+    // A finished job may have failed: always check getErrors().
+    if (!status.getErrors().isEmpty()) {
+        throw new IllegalStateException(status.getErrors().toString());
+    }
+    if (status.isFinished()) {
+        System.out.println(status.getUrls());
+    }
+}
+```
+
+Signed URLs expire; call `getOfflineQueryStatus` again for fresh URLs. Download
+them with a separate HTTP client without attaching Chalk credentials.
+`withTimeout(Duration)` bounds an individual HTTP call, not the lifetime of
+the offline job. Environment and branch overrides should be carried from
+submission to subsequent status calls.
+
 ## Memory management
 Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be
 closed to free up memory. 
