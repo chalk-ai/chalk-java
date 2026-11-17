@@ -20,7 +20,8 @@ def versions = [
     arrowVersion: '17.0.0',
     jacksonVersion: '2.18.12',
     protobufVersion: '3.25.9',
-    flinkVersion: '1.19.2'
+    flinkVersion: '1.19.2',
+    nettyVersion: '4.1.140.Final'
 ]
 
 dependencies {
@@ -41,10 +42,10 @@ dependencies {
     // Pinned above what gRPC/Arrow bring transitively, to clear CVEs (FDE-87):
     // guava CVE-2026-102554; netty-common CVE-2024-47535, CVE-2025-25193; commons-lang3 CVE-2025-48924.
     // netty-buffer is pinned with netty-common so Arrow's netty modules stay on one version.
-    implementation 'com.google.guava:guava:33.7.2-android'
-    implementation 'io.netty:netty-common:4.1.140.Final'
-    implementation 'io.netty:netty-buffer:4.1.140.Final'
-    implementation 'org.apache.commons:commons-lang3:3.18.0'
+    api 'com.google.guava:guava:33.7.2-android'
+    api "io.netty:netty-common:${versions.nettyVersion}"
+    api "io.netty:netty-buffer:${versions.nettyVersion}"
+    api 'org.apache.commons:commons-lang3:3.18.0'
 
     // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
     // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
