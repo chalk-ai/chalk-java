@@ -16,10 +16,10 @@ repositories {
 }
 
 def versions = [
-    grpcVersion: '1.64.0',
+    grpcVersion: '1.85.1',
     arrowVersion: '17.0.0',
-    jacksonVersion: '2.15.2',
-    protobufVersion: '3.25.1',
+    jacksonVersion: '2.22.4',
+    protobufVersion: '3.25.9',
     flinkVersion: '1.19.2'
 ]
 
@@ -36,6 +36,17 @@ dependencies {
     api "org.apache.arrow:arrow-memory-netty:${versions.arrowVersion}"
     api "org.apache.arrow:arrow-vector:${versions.arrowVersion}"
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+    // Force patched versions of vulnerable transitive deps (CVE remediation). These are bundled into
+    // the shaded jar and published as constraints/dependencyManagement for the unshaded artifact.
+    constraints {
+        api("com.fasterxml.jackson.core:jackson-core:${versions.jacksonVersion}") { because 'CVE fixes; arrow pulls an older jackson-core' }
+        api("com.fasterxml.jackson.core:jackson-annotations:${versions.jacksonVersion}") { because 'keep jackson modules aligned' }
+        api('io.netty:netty-common:4.1.141.Final') { because 'CVE-2024-47535, CVE-2025-25193 (via arrow-memory-netty)' }
+        api('io.netty:netty-buffer:4.1.141.Final') { because 'keep netty modules aligned with netty-common' }
+        api('com.google.guava:guava:33.8.0-jre') { because 'CVE-2026-102554 (via grpc)' }
+        api('org.apache.commons:commons-lang3:3.22.0') { because 'CVE-2025-48924 (via commons-compress)' }
+    }
 
     // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
     // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
