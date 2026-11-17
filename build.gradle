@@ -18,8 +18,8 @@ repositories {
 def versions = [
     grpcVersion: '1.85.1',
     arrowVersion: '17.0.0',
-    jacksonVersion: '2.15.2',
-    protobufVersion: '3.25.1',
+    jacksonVersion: '2.18.12',
+    protobufVersion: '3.25.9',
     flinkVersion: '1.19.2'
 ]
 
