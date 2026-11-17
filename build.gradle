@@ -16,7 +16,7 @@ repositories {
 }
 
 def versions = [
-    grpcVersion: '1.64.0',
+    grpcVersion: '1.85.1',
     arrowVersion: '17.0.0',
     jacksonVersion: '2.15.2',
     protobufVersion: '3.25.1',
@@ -36,6 +36,8 @@ dependencies {
     api "org.apache.arrow:arrow-memory-netty:${versions.arrowVersion}"
     api "org.apache.arrow:arrow-vector:${versions.arrowVersion}"
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    // Guava 33.x (via gRPC 1.85) no longer brings checker-qual; chalk-java uses its @Nullable annotations directly.
+    implementation 'org.checkerframework:checker-qual:3.37.0'
 
     // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
     // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
@@ -68,6 +70,7 @@ shadowJar {
     relocate 'org.apache.commons', 'ai.chalk.shaded.commons' // codec, io, compress, lang3
     relocate 'org.yaml.snakeyaml', 'ai.chalk.shaded.snakeyaml'
     relocate 'org.checkerframework', 'ai.chalk.shaded.checkerframework'
+    relocate 'org.jspecify', 'ai.chalk.shaded.jspecify'
     relocate 'org.codehaus.mojo', 'ai.chalk.shaded.mojo'
     // Intentionally NOT relocated:
     //   ai.chalk.*            -> the public API (consumers import these)
