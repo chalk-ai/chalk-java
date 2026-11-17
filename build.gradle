@@ -19,7 +19,7 @@ def versions = [
     grpcVersion: '1.64.0',
     arrowVersion: '17.0.0',
     jacksonVersion: '2.18.12',
-    protobufVersion: '3.25.8',
+    protobufVersion: '3.25.9',
     flinkVersion: '1.19.2'
 ]
 
