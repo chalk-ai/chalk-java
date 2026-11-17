@@ -38,6 +38,13 @@ dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     // Guava 33.4+ (via gRPC 1.85) no longer brings checker-qual; chalk-java uses its @Nullable/@NonNull annotations directly.
     implementation 'org.checkerframework:checker-qual:3.37.0'
+    // Pinned above what gRPC/Arrow bring transitively, to clear CVEs (FDE-87):
+    // guava CVE-2026-102554; netty-common CVE-2024-47535, CVE-2025-25193; commons-lang3 CVE-2025-48924.
+    // netty-buffer is pinned with netty-common so Arrow's netty modules stay on one version.
+    implementation 'com.google.guava:guava:33.7.2-android'
+    implementation 'io.netty:netty-common:4.1.140.Final'
+    implementation 'io.netty:netty-buffer:4.1.140.Final'
+    implementation 'org.apache.commons:commons-lang3:3.18.0'
 
     // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
     // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
