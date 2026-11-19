@@ -46,6 +46,8 @@ dependencies {
     api "io.netty:netty-common:${versions.nettyVersion}"
     api "io.netty:netty-buffer:${versions.nettyVersion}"
     api 'org.apache.commons:commons-lang3:3.18.0'
+    // zstd-jni (via arrow-compression): Snyk CVE-2026-87795, -87823, -87824, -87825, -87877, -89045, -89046, -90560, -90852
+    api 'com.github.luben:zstd-jni:1.5.7-28'
 
     // Flink connector (ai.chalk.flink.*). compileOnly => not bundled and NOT exposed transitively,
     // so plain chalk-java users get no Flink in their tree; the classes only resolve for callers who
