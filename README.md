@@ -133,7 +133,7 @@ submission to subsequent status calls.
 
 ### Result files
 
-Each Parquet file has one row per input row, with output columns named by feature.
+Results can span several Parquet files; together, they hold one row per input row, with output columns named by feature.
 The files also include `__ts__` (the input row's as-of time) and
 `<namespace>.__chalk_observed_at__`. You can ignore the internal `__index__` and
 `__chalk__.__metadata__.*` columns. Join results to your inputs on the primary key and `__ts__`, since the same key can appear at several as-of times.
@@ -211,6 +211,13 @@ public class Main {
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
+            if (result.getErrors() != null && result.getErrors().length > 0) {
+                System.err.println(Arrays.toString(result.getErrors()));
+                return;
+            }
+            if (result.getScalarsTable() == null) {
+                return; // no data came back
+            }
             for (Row row : result.getScalarsTable()) {
                 long userId = row.getBigInt("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
@@ -409,6 +416,13 @@ public class Main {
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
+            if (result.getErrors() != null && result.getErrors().length > 0) {
+                System.err.println(Arrays.toString(result.getErrors()));
+                return;
+            }
+            if (result.getScalarsTable() == null) {
+                return; // no data came back
+            }
             for (Row row : result.getScalarsTable()) {
                 long userId = row.getBigInt("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
@@ -447,10 +461,10 @@ Use these `OnlineQueryResult` getters to read the response.
 
 | Getter | Returns |
 | --- | --- |
-| `getScalarsTable()` | An Arrow `Table` with one row per input row and one column per scalar output, named by its fully qualified feature name (for example, `user.full_name`). Rows come back in input order. Include the primary key in `withOutputs` to match rows by key. |
+| `getScalarsTable()` | An Arrow `Table`, or `null` when no data comes back (for example, when the query fails), with one row per input row and one column per scalar output, named by its fully qualified feature name (for example, `user.full_name`). Rows come back in input order. Include the primary key in `withOutputs` to match rows by key. |
 | `getGroupsTables()` | A `Map<String, Table>` with one Arrow table per has-many output, keyed by feature name. The map is empty if none were requested, and on the HTTP client when any input is a has-many feature. |
 | `getErrors()` | A `ServerError[]` that is empty or `null` on success (the HTTP client can return `null`), so null-check it. |
-| `getMeta()` | `QueryMeta` with `queryId`, `deploymentId`, `environmentId`, `executionDurationS`, `queryTimestamp`, `queryHash`, and `traceId`. |
+| `getMeta()` | `QueryMeta` with `queryId`, `deploymentId`, `environmentId`, `executionDurationS`, `queryTimestamp`, `queryHash`, `traceId`, and `environmentName`. |
 
 For a request with `withInput("user.id", List.of(1, 2, 3))` and
 `withOutputs("user.id", "user.full_name")`, the scalars table contains the following rows.
