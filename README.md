@@ -207,7 +207,7 @@ public class Main {
         var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
-                    .withOutputs("card_user.spending_mean_30d")
+                    .withOutputs("card_user.id", "card_user.spending_mean_30d")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
@@ -405,7 +405,7 @@ public class Main {
         var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
-                    .withOutputs("card_user.spending_mean_30d", "card_user.transactions")
+                    .withOutputs("card_user.id", "card_user.spending_mean_30d", "card_user.transactions")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
