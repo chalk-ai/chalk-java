@@ -131,6 +131,16 @@ them with a separate HTTP client without attaching Chalk credentials.
 the offline job. Environment and branch overrides should be carried from
 submission to subsequent status calls.
 
+### Result files
+
+Results can span several Parquet files; together, they hold one row per input row, with output columns named by feature.
+The files also include `__ts__` (the input row's as-of time) and
+`<namespace>.__chalk_observed_at__`. You can ignore the internal `__index__` and
+`__chalk__.__metadata__.*` columns. Join results to your inputs on the primary key and `__ts__`, since the same key can appear at several as-of times.
+
+`OfflineQueryResult` contains metadata only, including `datasetId`, `revisions`, and `errors`.
+Each revision includes `revisionId`, `outputs`, `numRows`, `dashboardUrl`, and `errors`.
+
 ## Memory management
 Chalk uses Arrow objects during serialization of requests and deserialization of responses. These objects need to be
 closed to free up memory. 
@@ -197,12 +207,19 @@ public class Main {
         var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
-                    .withOutputs("card_user.full_name")
+                    .withOutputs("card_user.id", "card_user.spending_mean_30d")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
+            if (result.getErrors() != null && result.getErrors().length > 0) {
+                System.err.println(Arrays.toString(result.getErrors()));
+                return;
+            }
+            if (result.getScalarsTable() == null) {
+                return; // no data came back
+            }
             for (Row row : result.getScalarsTable()) {
-                long userId = row.getInt64("card_user.id");
+                long userId = row.getBigInt("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
                 System.out.println("User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days");
             }
@@ -395,12 +412,19 @@ public class Main {
         var userIds = Arrays.asList(1, 2, 3);
         var params = OnlineQueryParams.builder()
                     .withInput("card_user.id", userIds)
-                    .withOutputs("card_user.spending_mean_30d", "card_user.transactions")
+                    .withOutputs("card_user.id", "card_user.spending_mean_30d", "card_user.transactions")
                     .build();
         
         try (OnlineQueryResult result = client.onlineQuery(params)) {
+            if (result.getErrors() != null && result.getErrors().length > 0) {
+                System.err.println(Arrays.toString(result.getErrors()));
+                return;
+            }
+            if (result.getScalarsTable() == null) {
+                return; // no data came back
+            }
             for (Row row : result.getScalarsTable()) {
-                long userId = row.getVarCharObj("card_user.id");
+                long userId = row.getBigInt("card_user.id");
                 double meanSpent = row.getFloat8("card_user.spending_mean_30d");
                 System.out.println(
                     "User " + userId + " spent an average of $" + meanSpent + " per day in the last 30 days"
@@ -430,6 +454,40 @@ public class Main {
     }
 }
 ```
+
+### Reading results
+
+Use these `OnlineQueryResult` getters to read the response.
+
+| Getter | Returns |
+| --- | --- |
+| `getScalarsTable()` | An Arrow `Table`, or `null` when no data comes back (for example, when the query fails), with one row per input row and one column per scalar output, named by its fully qualified feature name (for example, `user.full_name`). Rows come back in input order. Include the primary key in `withOutputs` to match rows by key. |
+| `getGroupsTables()` | A `Map<String, Table>` with one Arrow table per has-many output, keyed by feature name. The map is empty if none were requested, and on the HTTP client when any input is a has-many feature. |
+| `getErrors()` | A `ServerError[]` that is empty or `null` on success (the HTTP client can return `null`), so null-check it. |
+| `getMeta()` | `QueryMeta` with `queryId`, `deploymentId`, `environmentId`, `executionDurationS`, `queryTimestamp`, `queryHash`, `traceId`, and `environmentName`. |
+
+For a request with `withInput("user.id", List.of(1, 2, 3))` and
+`withOutputs("user.id", "user.full_name")`, the scalars table contains the following rows.
+
+```text
+schema: [user.id: Int64, user.full_name: LargeUtf8]
+user.id   user.full_name
+1         Donna Davis
+2         William Johnson
+3         Jasmine Perry
+```
+
+A `ServerError` has `code` (for example, `RESOLVER_FAILED`), `category` (for
+example, `FIELD`), `message`, `resolver`, `feature`, and `exception` (with `kind`,
+`message`, and `stacktrace`).
+
+**Check errors first.** When a resolver fails for a row, the scalars table can
+contain nulls for that row, even for features that resolved successfully. The
+result reports one error per affected row. Check `getErrors()` before reading
+values, and query features separately when a failure in one should leave the
+others' results available.
+
+`onlineQuery` already batches inputs (pass many primary keys). See [Multi-query](#multi-query) for unrelated queries in one request.
 
 ### Multi-query
 
